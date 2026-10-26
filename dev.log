@@ -74,3 +74,20 @@ https://nextjs.org/telemetry
 ⨯ The requested resource isn't a valid image for /jobsonn-logo.png received null
  GET /jobsonn-logo.png 200 in 110ms (compile: 6ms, render: 104ms)
 ⨯ The requested resource isn't a valid image for /jobsonn-logo.png received null
+ GET / 200 in 50ms (compile: 8ms, render: 42ms)
+ GET /jobsonn-logo.png 200 in 89ms (compile: 52ms, render: 36ms)
+⨯ The requested resource isn't a valid image for /jobsonn-logo.png received null
+ GET /jobsonn-logo.png 200 in 137ms (compile: 68ms, render: 69ms)
+⨯ The requested resource isn't a valid image for /jobsonn-logo.png received null
+ GET /jobsonn-logo.png 200 in 87ms (compile: 4ms, render: 83ms)
+⨯ The requested resource isn't a valid image for /jobsonn-logo.png received null
+ GET / 200 in 61ms (compile: 11ms, render: 50ms)
+ GET /jobsonn-logo.png 200 in 108ms (compile: 58ms, render: 50ms)
+⨯ The requested resource isn't a valid image for /jobsonn-logo.png received null
+ GET /jobsonn-logo.png 200 in 115ms (compile: 55ms, render: 60ms)
+⨯ The requested resource isn't a valid image for /jobsonn-logo.png received null
+ GET / 200 in 52ms (compile: 12ms, render: 39ms)
+ GET / 200 in 56ms (compile: 10ms, render: 46ms)
+ GET /favicon.ico 200 in 245ms (compile: 122ms, render: 123ms)
+ GET /auth 200 in 204ms (compile: 82ms, render: 122ms)
+ GET /favicon.ico 200 in 235ms (compile: 6ms, render: 229ms)
