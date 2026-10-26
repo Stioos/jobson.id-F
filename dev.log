@@ -6,16 +6,10 @@
   · optimizePackageImports
 
 ✓ Starting...
-✓ Ready in 1833ms
+✓ Ready in 1543ms
 ○ Compiling / ...
- GET / 200 in 8.2s (compile: 8.0s, render: 179ms)
- GET / 200 in 12.9s (compile: 12.4s, render: 522ms)
- GET /pro-services/ai-powered-business-solutions/ai-customer-support-solutions 200 in 8.3s (compile: 8.2s, render: 111ms)
- GET /pro-services/digital-sales-ai-marketing/ai-lead-generation-prospecting 200 in 13.3s (compile: 13.2s, render: 112ms)
- GET / 200 in 78ms (compile: 11ms, render: 67ms)
- GET /favicon.ico 200 in 457ms (compile: 138ms, render: 319ms)
- GET /favicon.ico 200 in 118ms (compile: 70ms, render: 47ms)
- GET /favicon.ico 200 in 162ms (compile: 63ms, render: 99ms)
- GET / 200 in 120ms (compile: 17ms, render: 103ms)
- GET /favicon.ico 200 in 236ms (compile: 101ms, render: 136ms)
-236ms (compile: 101ms, render: 136ms)
+ GET / 200 in 13.0s (compile: 12.7s, render: 266ms)
+ GET / 200 in 666ms (compile: 51ms, render: 615ms)
+ GET /favicon.ico 200 in 2.3s (compile: 2.2s, render: 84ms)
+ GET / 200 in 70ms (compile: 11ms, render: 59ms)
+in 70ms (compile: 11ms, render: 59ms)

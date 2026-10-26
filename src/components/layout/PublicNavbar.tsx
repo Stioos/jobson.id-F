@@ -5,16 +5,15 @@ import Image from "next/image";
 import { useNav } from "@/lib/store";
 import { Button } from "@/components/ui/button";
 import {
-  Menu, Search, Sun, Moon, ChevronDown, Briefcase, Building2,
+  Menu, Search, ChevronDown, Briefcase, Building2,
   GraduationCap, Handshake,
   Newspaper, Target, Cpu, Rocket, Megaphone, BookOpen, Phone, Eye,
   Award, UserCheck, Layers, Globe, ClipboardCheck, Users, TrendingUp,
   Factory, Brain, Code2, Database, Cloud, Box, Bot, Compass,
   ChevronRight, CheckCircle2, type LucideIcon,
   Clock, Landmark, Star, ShieldCheck, Home, MapPin, BarChart3,
-  FileText, Mic, Sparkles, ArrowRight,
+  FileText, Mic, Sparkles, ArrowRight, LayoutGrid, Headset,
 } from "lucide-react";
-import { useTheme } from "next-themes";
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
@@ -501,7 +500,12 @@ const PRO_SERVICE_CATEGORIES = [
 
 function ProServicesDropdown({ go }: { go: (v: string) => void }) {
   const [open, setOpen] = React.useState(false);
-  const [hoveredKey, setHoveredKey] = React.useState<string | null>("ai-intelligence");
+
+  const handleCategoryClick = (cat: typeof PRO_SERVICE_CATEGORIES[0]) => {
+    if (cat.key === "career-services") go("professional-services");
+    else go(`services/${cat.services[0].catSlug}`);
+    setOpen(false);
+  };
 
   const handleServiceClick = (catSlug: string, svcSlug: string) => {
     if (catSlug === "professional") {
@@ -516,7 +520,7 @@ function ProServicesDropdown({ go }: { go: (v: string) => void }) {
     <div
       className="relative"
       onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => { setOpen(false); setHoveredKey("ai-intelligence"); }}
+      onMouseLeave={() => setOpen(false)}
     >
       <button
         onClick={() => go("professional-services")}
@@ -527,172 +531,176 @@ function ProServicesDropdown({ go }: { go: (v: string) => void }) {
         <ChevronDown className={cn("h-3.5 w-3.5 transition-transform", open && "rotate-180")} />
       </button>
       {open && (
-        <div className="absolute left-1/2 top-full z-50 flex -translate-x-1/2 pt-2" style={{ filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.18))" }}>
-          {/* ============== LEFT PANEL: category rail ============== */}
-          <div className="flex w-[400px] flex-col rounded-l-xl border border-r-0 bg-popover p-4">
+        <div className="absolute left-1/2 top-full z-50 -translate-x-1/2 pt-2" style={{ filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.18))" }}>
+          <div className="w-[760px] rounded-xl border bg-popover p-5">
             {/* Header */}
-            <div className="mb-3 flex items-center justify-between">
-              <div className="flex items-center gap-1.5">
-                <Sparkles className="h-3.5 w-3.5 text-brand" />
-                <span className="text-[10px] font-bold uppercase tracking-widest text-brand">All Pro Services</span>
+            <div className="mb-4 flex items-center justify-between border-b pb-3">
+              <div>
+                <div className="flex items-center gap-1.5">
+                  <Sparkles className="h-3.5 w-3.5 text-brand" />
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-brand">Pro Services Marketplace</span>
+                </div>
+                <p className="mt-1 text-sm font-bold text-foreground">68 services across 6 categories — pay after delivery</p>
               </div>
-              <span className="rounded-full bg-brand/10 px-2 py-0.5 text-[9px] font-bold text-brand">68 services</span>
+              <button
+                onClick={() => { go("tech-ai-services"); setOpen(false); }}
+                className="flex items-center gap-1.5 rounded-lg bg-brand px-3 py-2 text-xs font-bold text-brand-foreground transition-transform hover:scale-105"
+              >
+                View All Services <ArrowRight className="h-3 w-3" />
+              </button>
             </div>
 
-            {/* Category rail */}
-            <div className="grid grid-cols-1 gap-1">
+            {/* 3-column grid of category cards */}
+            <div className="grid grid-cols-3 gap-3">
               {PRO_SERVICE_CATEGORIES.map((cat) => {
                 const CatIcon = cat.icon;
-                const isHovered = hoveredKey === cat.key;
                 return (
-                  <button
+                  <div
                     key={cat.key}
-                    onMouseEnter={() => setHoveredKey(cat.key)}
-                    onClick={() => {
-                      if (cat.key === "career-services") go("professional-services");
-                      else go(`services/${cat.services[0].catSlug}`);
-                      setOpen(false);
-                    }}
-                    className="group flex items-center gap-3 rounded-lg border p-2.5 text-left transition-all duration-150"
-                    style={{
-                      background: isHovered ? `${cat.color}12` : "transparent",
-                      borderColor: isHovered ? `${cat.color}40` : "transparent",
-                    }}
+                    className="group cursor-pointer rounded-xl border border-border bg-card p-3 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
+                    style={{ borderTopColor: cat.color, borderTopWidth: 3 }}
+                    onClick={() => handleCategoryClick(cat)}
                   >
-                    {/* Icon tile */}
-                    <div
-                      className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg transition-transform group-hover:scale-105"
-                      style={{
-                        background: isHovered ? cat.color : `${cat.color}18`,
-                        color: isHovered ? "#fff" : cat.color,
-                      }}
-                    >
-                      <CatIcon className="h-4 w-4" />
-                    </div>
-                    {/* Label + tagline */}
-                    <div className="min-w-0 flex-1">
-                      <div className="flex items-center gap-1.5">
-                        <span
-                          className="text-xs font-bold transition-colors"
-                          style={{ color: isHovered ? cat.color : "hsl(var(--foreground))" }}
-                        >
-                          {cat.label}
-                        </span>
-                        <span
-                          className="flex-shrink-0 rounded-full px-1.5 py-0.5 text-[9px] font-bold"
-                          style={{
-                            background: `${cat.color}1A`,
-                            color: cat.color,
-                          }}
-                        >
-                          {cat.services.length}
-                        </span>
+                    {/* Icon + count badge */}
+                    <div className="mb-2 flex items-start justify-between">
+                      <div
+                        className="flex h-9 w-9 items-center justify-center rounded-lg transition-transform group-hover:scale-110"
+                        style={{ background: `linear-gradient(135deg, ${cat.color}, ${cat.color}CC)`, color: "#fff" }}
+                      >
+                        <CatIcon className="h-4 w-4" />
                       </div>
-                      <span className="mt-0.5 block truncate text-[11px] italic leading-tight text-muted-foreground">
-                        {cat.tagline}
+                      <span
+                        className="rounded-full px-1.5 py-0.5 text-[9px] font-bold"
+                        style={{ background: `${cat.color}1A`, color: cat.color }}
+                      >
+                        {cat.services.length}
                       </span>
                     </div>
-                    {/* Active arrow */}
-                    <ChevronRight
-                      className={cn("h-4 w-4 flex-shrink-0 transition-all duration-150", isHovered ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-1")}
+                    {/* Title */}
+                    <h3
+                      className="text-xs font-bold leading-tight transition-colors group-hover:text-brand"
                       style={{ color: cat.color }}
-                    />
-                  </button>
+                    >
+                      {cat.label}
+                    </h3>
+                    {/* Subtitle */}
+                    <p className="mt-0.5 line-clamp-1 text-[10px] italic text-muted-foreground">{cat.tagline}</p>
+                    {/* Top 3 services */}
+                    <div className="mt-2 space-y-0.5 border-t border-border pt-2">
+                      {cat.services.slice(0, 3).map((svc) => (
+                        <button
+                          key={svc.slug}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleServiceClick(svc.catSlug, svc.slug);
+                          }}
+                          className="block w-full truncate rounded px-1 py-0.5 text-left text-[10px] text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                        >
+                          {svc.name}
+                        </button>
+                      ))}
+                      <button
+                        onClick={(e) => { e.stopPropagation(); handleCategoryClick(cat); }}
+                        className="mt-0.5 block w-full rounded px-1 py-0.5 text-left text-[10px] font-semibold transition-colors hover:bg-accent"
+                        style={{ color: cat.color }}
+                      >
+                        + {cat.services.length - 3} more →
+                      </button>
+                    </div>
+                  </div>
                 );
               })}
             </div>
 
-            {/* Bottom footer */}
-            <div className="mt-3 flex items-center justify-between border-t pt-2.5">
-              <span className="text-[11px] text-muted-foreground">6 categories · 68 services</span>
+            {/* Bottom CTA strip */}
+            <div className="mt-4 flex items-center justify-between rounded-lg border border-brand/20 bg-brand/5 px-4 py-2.5">
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="h-4 w-4 text-brand" />
+                <span className="text-xs font-medium text-foreground">Senior architects · Milestone billing · NDA-ready in 24 hours</span>
+              </div>
               <button
-                onClick={() => { go("tech-ai-services"); setOpen(false); }}
-                className="flex items-center gap-1 rounded-md bg-brand/10 px-3 py-1.5 text-xs font-semibold text-brand transition-colors hover:bg-brand/20"
+                onClick={() => { go("contact"); setOpen(false); }}
+                className="flex items-center gap-1 text-xs font-bold text-brand transition-colors hover:underline"
               >
-                Explore all <ArrowRight className="h-3 w-3" />
+                Request a Consultation <ArrowRight className="h-3 w-3" />
               </button>
             </div>
           </div>
+        </div>
+      )}
+    </div>
+  );
+}
 
-          {/* ============== RIGHT PANEL: services of hovered category ============== */}
-          {hoveredKey && (() => {
-            const cat = PRO_SERVICE_CATEGORIES.find(c => c.key === hoveredKey);
-            if (!cat) return null;
-            const CatIcon = cat.icon;
-            const titleLines = cat.twoLineTitle.split("\n");
-            return (
-              <div className="flex w-[480px] flex-col rounded-r-xl border bg-popover p-4">
-                {/* Hero header */}
-                <div className="mb-3 rounded-xl p-3" style={{ background: `${cat.color}0A` }}>
-                  <div className="flex items-start gap-3">
+// ============================================================
+// APPS DROPDOWN — portal switcher grid (2x3)
+// ============================================================
+const APPS_ITEMS = [
+  { label: "Candidate", icon: Users, color: "#3B82F6", portal: "candidate" as const, desc: "Find jobs & track applications" },
+  { label: "Employer", icon: Building2, color: "#8B5CF6", portal: "employer" as const, desc: "Hire talent & manage postings" },
+  { label: "Recruiter", icon: Briefcase, color: "#F59E0B", portal: "recruiter" as const, desc: "Source candidates & earn commissions" },
+  { label: "Training", icon: GraduationCap, color: "#EF4444", portal: "training" as const, desc: "Upskill with programs & courses" },
+  { label: "Partner", icon: Handshake, color: "#10B981", portal: "partner" as const, desc: "Grow your business with us" },
+  { label: "Consultant", icon: Headset, color: "#D4A017", portal: "agency" as const, desc: "Manage projects & clients" },
+];
+
+function AppsDropdown() {
+  const [open, setOpen] = React.useState(false);
+  const { navigate } = useNav();
+
+  const handleClick = (portal: string) => {
+    navigate(portal as any, "overview");
+    setOpen(false);
+  };
+
+  return (
+    <div
+      className="relative"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
+      <button
+        onClick={() => setOpen(!open)}
+        className="flex h-7 w-7 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+        aria-label="Apps"
+      >
+        <LayoutGrid className="h-4 w-4" />
+      </button>
+      {open && (
+        <div className="absolute right-0 top-full z-50 pt-2" style={{ filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.18))" }}>
+          <div className="w-[320px] rounded-xl border bg-popover p-3">
+            {/* Header */}
+            <div className="mb-3 flex items-center justify-between border-b pb-2">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-brand">Switch Portal</span>
+              <span className="text-[9px] text-muted-foreground">6 portals</span>
+            </div>
+            {/* 2x3 grid */}
+            <div className="grid grid-cols-3 gap-2">
+              {APPS_ITEMS.map((item) => {
+                const Icon = item.icon;
+                return (
+                  <button
+                    key={item.label}
+                    onClick={() => handleClick(item.portal)}
+                    className="group flex flex-col items-center gap-1.5 rounded-lg border border-border bg-card p-3 text-center transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
+                    style={{ borderTopColor: item.color, borderTopWidth: 2 }}
+                  >
                     <div
-                      className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl shadow-sm"
-                      style={{ background: `linear-gradient(135deg, ${cat.color}, ${cat.color}CC)`, color: "#fff" }}
+                      className="flex h-9 w-9 items-center justify-center rounded-lg transition-transform group-hover:scale-110"
+                      style={{ background: `${item.color}18`, color: item.color }}
                     >
-                      <CatIcon className="h-5 w-5" />
+                      <Icon className="h-4 w-4" />
                     </div>
-                    <div className="min-w-0 flex-1">
-                      <span className="text-[10px] font-bold uppercase tracking-widest" style={{ color: cat.color }}>
-                        {cat.label}
-                      </span>
-                      <h3 className="mt-0.5 text-[15px] font-bold leading-tight" style={{ color: cat.color }}>
-                        {titleLines.map((line, i) => (
-                          <span key={i} className="block">{line}</span>
-                        ))}
-                      </h3>
-                      <p className="mt-1 text-[11px] font-medium italic text-muted-foreground">{cat.heroLine}</p>
-                    </div>
-                  </div>
-                  <p className="mt-2.5 text-xs leading-relaxed text-muted-foreground">{cat.desc}</p>
-                </div>
-
-                {/* Service list (scrollable) */}
-                <div className="grid grid-cols-1 gap-0.5 overflow-y-auto pr-1" style={{ maxHeight: "280px" }}>
-                  {cat.services.map((svc) => (
-                    <button
-                      key={svc.slug}
-                      onClick={() => handleServiceClick(svc.catSlug, svc.slug)}
-                      className="group flex items-start gap-2.5 rounded-lg border border-transparent p-2 text-left transition-all duration-150"
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.background = `${cat.color}0A`;
-                        e.currentTarget.style.borderColor = `${cat.color}25`;
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.background = "transparent";
-                        e.currentTarget.style.borderColor = "transparent";
-                      }}
-                    >
-                      {/* Bullet dot */}
-                      <div
-                        className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full transition-transform group-hover:scale-125"
-                        style={{ background: cat.color }}
-                      />
-                      <div className="min-w-0 flex-1">
-                        <span className="block truncate text-xs font-bold text-foreground transition-colors group-hover:text-brand">
-                          {svc.name}
-                        </span>
-                        <p className="line-clamp-1 text-[11px] text-muted-foreground">{svc.desc}</p>
-                      </div>
-                      <ChevronRight className="mt-1 h-3 w-3 flex-shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" style={{ color: cat.color }} />
-                    </button>
-                  ))}
-                </div>
-
-                {/* Full-width CTA */}
-                <button
-                  onClick={() => {
-                    if (cat.key === "career-services") go("professional-services");
-                    else go(`services/${cat.services[0].catSlug}`);
-                    setOpen(false);
-                  }}
-                  className="mt-2.5 flex items-center justify-center gap-1.5 rounded-lg px-3 py-2.5 text-xs font-bold text-white transition-transform hover:scale-[1.01]"
-                  style={{ background: `linear-gradient(90deg, ${cat.color}, ${cat.color}CC)` }}
-                >
-                  Explore {cat.label} <ArrowRight className="h-3.5 w-3.5" />
-                </button>
-              </div>
-            );
-          })()}
+                    <span className="text-[11px] font-bold text-foreground">{item.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+            {/* Footer */}
+            <div className="mt-3 border-t pt-2 text-center">
+              <p className="text-[10px] text-muted-foreground">Select a portal to switch your dashboard view</p>
+            </div>
+          </div>
         </div>
       )}
     </div>
@@ -1416,11 +1424,8 @@ function MobileNav({ go }: { go: (v: string) => void }) {
 // MAIN NAVBAR
 // ============================================================
 export function PublicNavbar() {
-  const { navigate, route, setCommandOpen } = useNav();
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = React.useState(false);
+  const { navigate } = useNav();
   const [scrolled, setScrolled] = React.useState(false);
-  React.useEffect(() => setMounted(true), []);
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -1464,12 +1469,7 @@ export function PublicNavbar() {
 
         {/* Right actions */}
         <div className="ml-auto flex items-center gap-2">
-          <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => setCommandOpen(true)}>
-            <Search className="h-3.5 w-3.5" />
-          </Button>
-          <Button variant="ghost" size="icon" className="h-7 w-7" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
-            {mounted && theme === "dark" ? <Sun className="h-3.5 w-3.5" /> : <Moon className="h-3.5 w-3.5" />}
-          </Button>
+          <AppsDropdown />
           <Button size="sm" className="h-7 px-3 text-xs" onClick={() => navigate("public", "partner-login")}>
             Sign In
           </Button>

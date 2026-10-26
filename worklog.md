@@ -2774,3 +2774,85 @@ Stage Summary:
   - Color-coded per category (blue, purple, green, orange, pink, red)
 - Mobile accordion also enhanced: each category in a bordered card with color dot, label, count badge, italic tagline, and full service list
 - Lint: 0 errors. Browser-verified: dropdown opens correctly with all 6 categories, engaging taglines, count badges, hero headers, service lists, and CTAs all rendering as expected.
+
+---
+Task ID: HEADER-REDESIGN-APPS-DROPDOWN
+Agent: Main (Z.ai Code)
+
+Task: 1) Remove current Pro Services dropdown content/titles and replace with a new grid-based view. 2) Remove search icon and theme/mode icon from the main header. 3) Add an Apps icon that opens a 2x3 grid dropdown with 6 portal options (Candidate, Employer, Recruiter, Training, Partner, Consultant — instead of Admin).
+
+Work Log:
+- Read /home/z/my-project/worklog.md to understand previous work
+- Analyzed both reference images using VLM:
+  - Image 1 (pasted_image_1793021727204.png): Shows current header with search + theme icons circled in red (to be removed)
+  - Image 2 (pasted_image_1793021883279.png): Shows a 2x3 grid dropdown with 6 portal items (Candidate, Employer, Recruiter, Training, Partner, Admin) — user wants Admin replaced with Consultant
+- Checked Portal type in /home/z/my-project/src/lib/types.ts — available portals: public, candidate, employer, recruiter, agency, enterprise, admin, training, learner, partner. No "consultant" portal exists, so mapped Consultant → agency portal (agencies are consultants)
+- Added LayoutGrid and Headset icons to lucide-react imports
+- Removed Sun, Moon icons from imports (no longer needed)
+- Removed `import { useTheme } from "next-themes"` (no longer needed)
+
+- REDESIGNED ProServicesDropdown — replaced two-panel master-detail with new 3-column grid view:
+  - Header: "Pro Services Marketplace" label + "68 services across 6 categories — pay after delivery" summary + "View All Services →" emerald CTA button
+  - 3x2 grid of 6 category cards, each with:
+    - Colored top border (category color)
+    - Gradient icon tile + count badge
+    - Bold colored category title
+    - Italic tagline subtitle
+    - Top 3 service previews (clickable, stopPropagation)
+    - "+N more →" link to category page
+    - Hover: lift + shadow
+  - Bottom CTA strip: "Senior architects · Milestone billing · NDA-ready in 24 hours" + "Request a Consultation →" link
+  - Width: 760px (was 880px two-panel)
+
+- CREATED AppsDropdown component — portal switcher:
+  - LayoutGrid icon button (h-7 w-7)
+  - 320px dropdown with "Switch Portal" header + "6 portals" count
+  - 2x3 grid of 6 portal cards:
+    1. Candidate (blue #3B82F6, Users icon, → candidate portal)
+    2. Employer (purple #8B5CF6, Building2 icon, → employer portal)
+    3. Recruiter (orange #F59E0B, Briefcase icon, → recruiter portal)
+    4. Training (red #EF4444, GraduationCap icon, → training portal)
+    5. Partner (green #10B981, Handshake icon, → partner portal)
+    6. Consultant (gold #D4A017, Headset icon, → agency portal) — REPLACED Admin
+  - Each card: colored top border, tinted icon tile (scales on hover), bold label
+  - Footer: "Select a portal to switch your dashboard view"
+  - Right-aligned dropdown (absolute right-0)
+
+- UPDATED main header right actions:
+  - REMOVED: Search icon button (setCommandOpen)
+  - REMOVED: Theme toggle button (Sun/Moon, setTheme)
+  - ADDED: AppsDropdown component
+  - KEPT: Sign In button
+  - Cleaned up: removed `route` from useNav destructuring, removed `theme`/`setTheme`/`mounted` state, removed `useTheme` import, removed `setCommandOpen` from destructuring
+
+- Ran `bun run lint` — 0 errors, only 6 pre-existing warnings in unrelated training files
+- Dev server restarted (was down), confirmed HTTP 200
+- Browser-verified all 3 changes:
+
+  1. HEADER ICONS — VLM confirmed:
+     - "No search icon in the header"
+     - "No theme toggle, moon, or sun icon visible"
+     - "Yes, there is a grid/apps icon (nine dots arranged in a 3x3 square)"
+     - "The only icon visible immediately to the left of the Sign In button is a grid/apps icon"
+
+  2. APPS DROPDOWN — VLM confirmed:
+     - "2x3 grid layout"
+     - 6 items: Candidate, Employer, Recruiter, Training, Partner, Consultant
+     - "No, there is no option named Admin visible"
+     - Color-coded icons: blue person, purple building, yellow briefcase, red graduation cap, green handshake, gold headset
+
+  3. PRO SERVICES DROPDOWN — VLM confirmed:
+     - "3x2 grid (three columns and two rows) containing six distinct category cards"
+     - All 6 categories: AI & Intelligence, Build & Engineer, Cloud & Deploy, Grow & Market, Transform & Strategize, Career Services
+     - Each card has: icon, count badge, title, subtitle, service preview, "+N more →" link
+     - "View All Services →" CTA in header
+     - "68 services across 6 categories — pay after delivery" summary
+
+- Checked console + errors — clean, no errors
+
+Stage Summary:
+- Pro Services dropdown: COMPLETELY redesigned from two-panel master-detail to clean 3x2 grid of category cards. Each card has gradient icon, count badge, colored title, italic tagline, top 3 service previews, and "+N more →" link. Header has "View All Services →" CTA. Bottom has trust signal CTA strip.
+- Main header: Removed search icon and theme/mode toggle icon. Added Apps icon (LayoutGrid) that opens a 2x3 grid portal switcher dropdown.
+- Apps dropdown: 6 portal options — Candidate, Employer, Recruiter, Training, Partner, Consultant (replaced Admin with Consultant, mapped to agency portal). Each has color-coded icon and label. Right-aligned dropdown.
+- Cleaned up unused imports: removed Sun, Moon, useTheme. Added LayoutGrid, Headset.
+- Lint: 0 errors. Browser-verified: all 3 changes confirmed working via VLM. Console: clean.
