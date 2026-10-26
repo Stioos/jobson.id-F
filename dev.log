@@ -6,11 +6,12 @@
   · optimizePackageImports
 
 ✓ Starting...
-✓ Ready in 1797ms
-○ Compiling / ...
- GET / 200 in 12.2s (compile: 12.0s, render: 264ms)
- GET / 200 in 424ms (compile: 21ms, render: 403ms)
- GET /favicon.ico 200 in 2.0s (compile: 1958ms, render: 63ms)
- GET / 200 in 120ms (compile: 11ms, render: 109ms)
- GET / 200 in 56ms (compile: 4ms, render: 52ms)
- in 56ms (compile: 4ms, render: 52ms)
+✓ Ready in 1560ms
+○ Compiling /[...slug] ...
+ GET / 200 in 8.0s (compile: 7.8s, render: 188ms)
+ GET / 200 in 11.7s (compile: 11.1s, render: 591ms)
+ GET /jobs 200 in 14.1s (compile: 14.0s, render: 59ms)
+ GET / 200 in 300ms (compile: 9ms, render: 291ms)
+ GET /favicon.ico 200 in 387ms (compile: 140ms, render: 247ms)
+ GET /favicon.ico 200 in 140ms (compile: 61ms, render: 80ms)
+n 140ms (compile: 61ms, render: 80ms)

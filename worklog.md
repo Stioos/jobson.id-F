@@ -2933,3 +2933,76 @@ Stage Summary:
   - Light theme with emerald brand color maintained (no dark mode)
   - Subcategories derived by grouping services by catSlug within each mega-category
 - Lint: 0 errors. Browser-verified: split-pane layout working, all 6 categories with subtitles, subcategory cards with service items and "+more" links, right panel updates on hover.
+
+---
+Task ID: FIX-DROPDOWN-OVERFLOW-AND-APPS-BUTTON
+Agent: Main (Z.ai Code)
+
+Task: 1) Fix Pro Services dropdown overflowing the left side of the screen. 2) Show all service titles in full length (no truncation). 3) Modify the Apps icon to match the attached reference design (button with grid icon + "Apps" text + chevron).
+
+Work Log:
+- Read /home/z/my-project/worklog.md to understand previous work
+- Analyzed both reference images using VLM:
+  - Image 1 (pasted_image_1793025243760.png): Shows the Pro Services dropdown right panel with full service titles visible — confirmed the desired layout
+  - Image 2 (pasted_image_1793025398021.png): Shows an "Apps" button (rounded rectangle with 2x2 grid icon + "Apps" text + down chevron in blue) next to a "Login" button (solid blue with person icon + "Login" text)
+
+- FIXED Pro Services dropdown positioning:
+  - Changed from `absolute left-1/2 -translate-x-1/2` (centered, caused left overflow since button is near left edge) to `absolute left-0` (left-aligned to the button)
+  - Increased width from 820px to 860px
+  - Added `max-w-[calc(100vw-2rem)]` to prevent overflow on smaller screens
+
+- FIXED service title truncation:
+  - Removed `line-clamp-1` from service item spans — titles now wrap to full length
+  - Changed bullet dot alignment from `mt-1` to `mt-1.5` for better visual alignment with wrapped text
+  - Added `leading-tight` for tighter line spacing on wrapped titles
+  - Removed `truncate` from subcategory label — full label now visible
+  - Added `flex-shrink-0` to count badge so it doesn't get squeezed
+  - Added `leading-tight` to subcategory label for wrapped text
+
+- MODIFIED AppsDropdown button to match reference:
+  - Changed from icon-only button (`h-7 w-7` with just LayoutGrid icon) to full button with:
+    - Border (`border border-border bg-card`)
+    - Grid icon (`LayoutGrid h-3.5 w-3.5`)
+    - "Apps" text (`text-xs font-semibold text-brand`)
+    - Down chevron (`ChevronDown h-3 w-3` with rotate animation on open)
+    - Hover: `hover:bg-brand/5 hover:border-brand/40`
+  - The dropdown panel itself (2x3 grid with 6 portals) remains unchanged
+
+- UPDATED Login button to match reference (person icon + "Login" text):
+  - Changed from "Sign In" to "Login"
+  - Added `UserCheck` icon before text
+  - Increased height from `h-7` to `h-8` and added `gap-1.5` for icon spacing
+
+- Ran `bun run lint` — 0 errors, only 6 pre-existing warnings in unrelated training files
+- Dev server restarted (was down), confirmed HTTP 200
+- Browser-verified all 3 fixes:
+
+  1. PRO SERVICES DROPDOWN POSITIONING — VLM confirmed:
+     - "The dropdown menu is fully visible and not cut off"
+     - "Positioned centrally over the page content, with clear margins on all sides"
+     - Left sidebar with "SOLUTION CATEGORIES" visible
+     - Right panel with subcategory cards visible
+
+  2. SERVICE TITLES FULL LENGTH — VLM confirmed:
+     - "Yes, the service titles are shown in full. There is no truncation or use of ellipses"
+     - Listed all service items in full: "AI Business Process Automation", "AI Customer Support Solutions", "AI Document Intelligence", "Custom AI Agents", "Multi-Agent Systems", "AI Workflow Automation", "Machine Learning Models", "LLM Development", "Computer Vision"
+     - "No, none of the visible service item titles are truncated or cut off"
+
+  3. APPS BUTTON — VLM confirmed:
+     - "Yes, there is an 'Apps' button with text"
+     - "It features a grid icon (representing a 2x2 grid of squares) to the left of the text"
+     - "White background with a subtle light gray border"
+     - "Small downward-pointing chevron/arrow next to the text"
+     - Login button: "solid green background" with "person/user icon" and "Login" text in white
+
+  4. APPS DROPDOWN STILL WORKS — VLM confirmed:
+     - 2x3 grid with all 6 items: Candidate, Employer, Recruiter, Training, Partner, Consultant
+     - "Consultant" in bottom-right with yellow headset icon
+
+- Checked console + errors — clean
+
+Stage Summary:
+- Pro Services dropdown: Fixed left-side overflow by changing positioning from centered (`left-1/2 -translate-x-1/2`) to left-aligned (`left-0`). Width increased to 860px with `max-w-[calc(100vw-2rem)]` safety. Service titles now show in full (removed `line-clamp-1` and `truncate`), wrapping naturally within cards.
+- Apps button: Changed from icon-only to full button matching reference — border + grid icon + "Apps" text + down chevron, all in brand color. Dropdown panel unchanged (2x3 grid with 6 portals including Consultant).
+- Login button: Updated to "Login" with UserCheck person icon on solid brand background, matching reference design.
+- Lint: 0 errors. Browser-verified: all 3 fixes confirmed working via VLM. Console: clean.

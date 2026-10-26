@@ -564,8 +564,8 @@ function ProServicesDropdown({ go }: { go: (v: string) => void }) {
         <ChevronDown className={cn("h-3.5 w-3.5 transition-transform", open && "rotate-180")} />
       </button>
       {open && (
-        <div className="absolute left-1/2 top-full z-50 flex -translate-x-1/2 pt-2" style={{ filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.18))" }}>
-          <div className="flex w-[820px] overflow-hidden rounded-xl border bg-popover">
+        <div className="absolute left-0 top-full z-50 pt-2" style={{ filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.18))" }}>
+          <div className="flex w-[860px] max-w-[calc(100vw-2rem)] overflow-hidden rounded-xl border bg-popover">
             {/* ============== LEFT SIDEBAR: solution categories ============== */}
             <div className="flex w-[260px] flex-col border-r bg-muted/30 p-3">
               {/* Sidebar header */}
@@ -701,11 +701,11 @@ function ProServicesDropdown({ go }: { go: (v: string) => void }) {
                         >
                           <SubIcon className="h-3 w-3" />
                         </div>
-                        <span className="flex-1 truncate text-[11px] font-bold text-foreground transition-colors group-hover:text-brand">
+                        <span className="flex-1 text-[11px] font-bold leading-tight text-foreground transition-colors group-hover:text-brand">
                           {sub.meta.label}
                         </span>
                         <span
-                          className="rounded-full px-1.5 py-0.5 text-[8px] font-bold"
+                          className="flex-shrink-0 rounded-full px-1.5 py-0.5 text-[8px] font-bold"
                           style={{ background: `${activeCat.color}1A`, color: activeCat.color }}
                         >
                           {sub.services.length}
@@ -720,10 +720,10 @@ function ProServicesDropdown({ go }: { go: (v: string) => void }) {
                             className="flex w-full items-start gap-1.5 rounded px-1 py-1 text-left transition-colors hover:bg-accent"
                           >
                             <span
-                              className="mt-1 h-1 w-1 flex-shrink-0 rounded-full"
+                              className="mt-1.5 h-1 w-1 flex-shrink-0 rounded-full"
                               style={{ background: activeCat.color }}
                             />
-                            <span className="line-clamp-1 text-[10px] text-muted-foreground transition-colors hover:text-foreground">
+                            <span className="text-[10px] leading-tight text-muted-foreground transition-colors hover:text-foreground">
                               {svc.name}
                             </span>
                           </button>
@@ -779,10 +779,12 @@ function AppsDropdown() {
     >
       <button
         onClick={() => setOpen(!open)}
-        className="flex h-7 w-7 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+        className="flex items-center gap-1.5 rounded-md border border-border bg-card px-2.5 py-1 text-xs font-semibold text-brand transition-colors hover:bg-brand/5 hover:border-brand/40"
         aria-label="Apps"
       >
-        <LayoutGrid className="h-4 w-4" />
+        <LayoutGrid className="h-3.5 w-3.5" />
+        <span>Apps</span>
+        <ChevronDown className={cn("h-3 w-3 transition-transform", open && "rotate-180")} />
       </button>
       {open && (
         <div className="absolute right-0 top-full z-50 pt-2" style={{ filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.18))" }}>
@@ -1588,8 +1590,9 @@ export function PublicNavbar() {
         {/* Right actions */}
         <div className="ml-auto flex items-center gap-2">
           <AppsDropdown />
-          <Button size="sm" className="h-7 px-3 text-xs" onClick={() => navigate("public", "partner-login")}>
-            Sign In
+          <Button size="sm" className="h-8 gap-1.5 px-3 text-xs" onClick={() => navigate("public", "partner-login")}>
+            <UserCheck className="h-3.5 w-3.5" />
+            Login
           </Button>
         </div>
       </div>
