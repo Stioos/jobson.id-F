@@ -12,7 +12,7 @@ import {
   Factory, Brain, Code2, Database, Cloud, Box, Bot, Compass,
   ChevronRight, CheckCircle2, type LucideIcon,
   Clock, Landmark, Star, ShieldCheck, Home, MapPin, BarChart3,
-  FileText, Mic, Sparkles, ArrowRight, LayoutGrid, Headset,
+  FileText, Mic, Sparkles, ArrowRight, LayoutGrid,
 } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import {
@@ -757,9 +757,7 @@ const APPS_ITEMS = [
   { label: "Candidate", icon: Users, color: "#3B82F6", portal: "candidate" as const, desc: "Find jobs & track applications" },
   { label: "Employer", icon: Building2, color: "#8B5CF6", portal: "employer" as const, desc: "Hire talent & manage postings" },
   { label: "Recruiter", icon: Briefcase, color: "#F59E0B", portal: "recruiter" as const, desc: "Source candidates & earn commissions" },
-  { label: "Training", icon: GraduationCap, color: "#EF4444", portal: "training" as const, desc: "Upskill with programs & courses" },
   { label: "Partner", icon: Handshake, color: "#10B981", portal: "partner" as const, desc: "Grow your business with us" },
-  { label: "Consultant", icon: Headset, color: "#D4A017", portal: "agency" as const, desc: "Manage projects & clients" },
 ];
 
 function AppsDropdown() {
@@ -788,14 +786,14 @@ function AppsDropdown() {
       </button>
       {open && (
         <div className="absolute right-0 top-full z-50 pt-2" style={{ filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.18))" }}>
-          <div className="w-[320px] rounded-xl border bg-popover p-3">
+          <div className="w-[300px] rounded-xl border bg-popover p-3">
             {/* Header */}
             <div className="mb-3 flex items-center justify-between border-b pb-2">
               <span className="text-[10px] font-bold uppercase tracking-widest text-brand">Switch Portal</span>
-              <span className="text-[9px] text-muted-foreground">6 portals</span>
+              <span className="text-[9px] text-muted-foreground">4 portals</span>
             </div>
-            {/* 2x3 grid */}
-            <div className="grid grid-cols-3 gap-2">
+            {/* 2x2 grid */}
+            <div className="grid grid-cols-2 gap-2">
               {APPS_ITEMS.map((item) => {
                 const Icon = item.icon;
                 return (

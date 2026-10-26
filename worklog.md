@@ -3085,3 +3085,37 @@ Stage Summary:
 - PublicJobs.tsx hydration logic updated to support all filter fields (workArrangements, salaryMin, postedWithinDays, employmentTypes)
 - Mobile accordion also updated with new filter categories
 - Lint: 0 errors. Browser-verified: all 12 filter sections visible, Remote filter correctly applies (3 remote jobs shown), Bangalore filter correctly applies (location input populated).
+
+---
+Task ID: APPS-DROPDOWN-REMOVE-TRAINING-CONSULTANT
+Agent: Main (Z.ai Code)
+
+Task: Remove "Training" and "Consultant" from the Apps dropdown in the main header.
+
+Work Log:
+- Read /home/z/my-project/worklog.md to understand previous work
+- Located APPS_ITEMS array in PublicNavbar.tsx (line 756) — had 6 items: Candidate, Employer, Recruiter, Training, Partner, Consultant
+- Removed "Training" entry (icon: GraduationCap, portal: training)
+- Removed "Consultant" entry (icon: Headset, portal: agency)
+- Updated dropdown header count from "6 portals" to "4 portals"
+- Changed grid layout from `grid-cols-3` (2x3) to `grid-cols-2` (2x2) for better visual balance with 4 items
+- Reduced dropdown width from 320px to 300px to fit the 2x2 grid
+- Removed unused `Headset` icon from lucide-react imports (GraduationCap still used 11x elsewhere, kept)
+- Updated comment from "2x3 grid" to "2x2 grid"
+
+- Ran `bun run lint` — 0 errors, only 6 pre-existing warnings in unrelated training files
+- Dev server restarted (was down), confirmed HTTP 200
+- Browser-verified the dropdown:
+  - VLM confirmed 4 items: Candidate, Employer, Recruiter, Partner
+  - "No, there is no 'Training' option visible"
+  - "No, there is no 'Consultant' option visible"
+  - "4 items (or portals) in total" with "4 portails" count in header
+  - "2x2 grid" layout
+- Checked console + errors — clean
+
+Stage Summary:
+- Apps dropdown now has 4 portal options: Candidate (blue), Employer (purple), Recruiter (orange), Partner (green)
+- Removed: Training (was red) and Consultant (was gold)
+- Layout changed from 2x3 grid to 2x2 grid, width reduced from 320px to 300px
+- Header count updated from "6 portals" to "4 portals"
+- Lint: 0 errors. Browser-verified: only 4 items visible, no Training/Consultant. Console: clean.
