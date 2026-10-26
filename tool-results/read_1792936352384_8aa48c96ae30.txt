@@ -1,0 +1,1199 @@
+     1→"use client";
+     2→
+     3→import * as React from "react";
+     4→import Image from "next/image";
+     5→import { useNav } from "@/lib/store";
+     6→import { Button } from "@/components/ui/button";
+     7→import {
+     8→  Menu, Search, Sun, Moon, ChevronDown, Briefcase, Building2,
+     9→  GraduationCap, Handshake,
+    10→  Newspaper, Target, Cpu, Rocket, Megaphone, BookOpen, Phone, Eye,
+    11→  Award, UserCheck, Layers, Globe, ClipboardCheck, Users, TrendingUp,
+    12→  Factory, Brain, Code2, Database, Cloud, Box, Bot, Compass,
+    13→  ChevronRight, CheckCircle2, type LucideIcon,
+    14→  Clock, Landmark, Star, ShieldCheck, Home, MapPin, BarChart3,
+    15→  FileText, Mic, Sparkles,
+    16→} from "lucide-react";
+    17→import { useTheme } from "next-themes";
+    18→import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+    19→import {
+    20→  Accordion, AccordionContent, AccordionItem, AccordionTrigger,
+    21→} from "@/components/ui/accordion";
+    22→import { cn } from "@/lib/utils";
+    23→import { serviceCategories } from "@/data/servicesData";
+    24→
+    25→// ============================================================
+    26→// NAVIGATION CONFIG DATA
+    27→// ============================================================
+    28→
+    29→interface NavRole { label: string; view: string; color: string; badge: string; motive: string[] }
+    30→interface NavProgram {
+    31→  label: string; view: string; tag: string; color: string; desc: string;
+    32→  icon: LucideIcon; highlights: string[]; roles: NavRole[];
+    33→}
+    34→
+    35→const PROGRAM_GROUPS: NavProgram[] = [
+    36→  {
+    37→    label: "Forward Deployed Engineer",
+    38→    view: "programs/fde-forward-deployment",
+    39→    tag: "FDE-FWD",
+    40→    color: "#F59E0B",
+    41→    desc: "24-week flagship. Build, deploy & operate production systems across web, mobile, cloud, AI & MLOps.",
+    42→    icon: Rocket,
+    43→    highlights: [
+    44→      "Ship real products to production, not just assignments",
+    45→      "Work on live client projects from week 4 onwards",
+    46→      "Master AI, cloud, DevOps & full-stack in one program",
+    47→      "Get placed with top tech companies across India",
+    48→      "Earn while you learn with paid internships built-in",
+    49→      "6 specialization tracks to match your career goals",
+    50→    ],
+    51→    roles: [
+    52→      { label: "Software Engineer", view: "programs/fde-software-engineer", color: "#0EA5E9", badge: "Fullstack + Deploy", motive: ["Build & ship full-stack apps to production.", "Master end-to-end deployment with real clients."] },
+    53→      { label: "AI Engineer", view: "programs/fde-ai-engineer", color: "#8B5CF6", badge: "AI + MLOps", motive: ["Design intelligent systems that power real products.", "Lead AI transformation from prototype to production."] },
+    54→      { label: "Data Engineer", view: "programs/fde-data-engineer", color: "#10B981", badge: "Data + Analytics", motive: ["Architect data pipelines that drive business decisions.", "Turn raw data into actionable intelligence."] },
+    55→      { label: "Platform Engineer", view: "programs/fde-platform-engineer", color: "#F97316", badge: "Infra + Cloud", motive: ["Build the infrastructure the world runs on.", "Design cloud-native platforms at enterprise scale."] },
+    56→      { label: "Solutions Engineer", view: "programs/fde-solutions-engineer", color: "#EF4444", badge: "Architecture + Design", motive: ["Solve complex business challenges with technology.", "Bridge the gap between problems and innovation."] },
+    57→      { label: "Security Engineer", view: "programs/fde-security-engineer", color: "#D4A017", badge: "Security + DevSecOps", motive: ["Protect critical systems from real-world threats.", "Become the guardian of digital infrastructure."] },
+    58→    ],
+    59→  },
+    60→  {
+    61→    label: "Fullstack Development Engineering",
+    62→    view: "programs/fde-program",
+    63→    tag: "FDE",
+    64→    color: "#0EA5E9",
+    65→    desc: "24-week intensive. Master React, Next.js, Node.js, PostgreSQL & production apps.",
+    66→    icon: GraduationCap,
+    67→    highlights: [
+    68→      "Go from zero to a production-ready full-stack developer",
+    69→      "Build 12+ real-world projects for your portfolio",
+    70→      "Master React, Next.js, Node.js, PostgreSQL & more",
+    71→      "Get direct placement support with 200+ hiring partners",
+    72→      "Learn product thinking, not just coding skills",
+    73→      "6 specialized paths: AI, SaaS, Cloud, Enterprise & more",
+    74→    ],
+    75→    roles: [
+    76→      { label: "Software Engineer", view: "programs/fse-software-engineer", color: "#0EA5E9", badge: "Frontend + Backend", motive: ["Craft beautiful, scalable applications from scratch.", "Build the skills top companies demand."] },
+    77→      { label: "AI Engineer", view: "programs/fse-ai-engineer", color: "#8B5CF6", badge: "AI Integration", motive: ["Integrate AI into real-world applications.", "Become the developer who bridges code and intelligence."] },
+    78→      { label: "Product Engineer", view: "programs/fse-product-engineer", color: "#10B981", badge: "Product Thinking", motive: ["Think like a PM, build like an engineer.", "Shape products that users love from ideation to launch."] },
+    79→      { label: "SaaS Engineer", view: "programs/fse-saas-engineer", color: "#F97316", badge: "SaaS + Multi-tenant", motive: ["Master multi-tenant architecture & SaaS products.", "Build applications that scale globally."] },
+    80→      { label: "Cloud Engineer", view: "programs/fse-cloud-engineer", color: "#EF4444", badge: "Cloud + DevOps", motive: ["Deploy & manage apps across AWS, GCP & Azure.", "Become the cloud expert every team needs."] },
+    81→      { label: "Enterprise Engineer", view: "programs/fse-enterprise-engineer", color: "#D4A017", badge: "Enterprise Scale", motive: ["Tackle large-scale systems serving millions of users.", "Build enterprise-grade applications that matter."] },
+    82→    ],
+    83→  },
+    84→  {
+    85→    label: "Digital Sales & AI Marketing / AI Engineering",
+    86→    view: "programs/dsai-program",
+    87→    tag: "DSAI",
+    88→    color: "#8B5CF6",
+    89→    desc: "20-week program. AI-powered marketing, automation & AI engineering.",
+    90→    icon: Megaphone,
+    91→    highlights: [
+    92→      "Master AI-powered sales, marketing & automation",
+    93→      "Build AI agents that sell and market autonomously",
+    94→      "Drive real revenue growth with data-driven strategies",
+    95→      "Get certified in the fastest-growing tech domain",
+    96→      "Hands-on with 10+ marketing automation tools & platforms",
+    97→      "6 career paths from sales to AI engineering",
+    98→    ],
+    99→    roles: [
+   100→      { label: "Digital Sales & AI Marketing Specialist", view: "programs/dsai-digital-sales-specialist", color: "#0EA5E9", badge: "Sales + AI Marketing", motive: ["Close deals faster with AI-powered sales strategies.", "Become a revenue-driving digital sales leader."] },
+   101→      { label: "AI Marketing Automation & Growth", view: "programs/dsai-ai-ma-growth-specialist", color: "#8B5CF6", badge: "Automation + Growth", motive: ["Automate growth with intelligent marketing systems.", "Scale campaigns that convert using AI."] },
+   102→      { label: "Marketing Solutions & Automation Engineer", view: "programs/dsai-marketing-automation-engineer", color: "#10B981", badge: "Marketing + Engineering", motive: ["Build the tools that power modern marketing.", "Engineer automation that drives measurable results."] },
+   103→      { label: "AI Sales, Marketing & Agents Engineer", view: "programs/dsai-sales-marketing-agents", color: "#F97316", badge: "Sales + AI Agents", motive: ["Create AI agents that sell & market autonomously.", "Build the future of intelligent business automation."] },
+   104→      { label: "AI Revenue & Growth Engineer", view: "programs/dsai-revenue-growth-engineer", color: "#EF4444", badge: "Revenue + Growth", motive: ["Engineer AI systems that maximize revenue.", "Drive explosive growth with data-driven strategies."] },
+   105→      { label: "AI Customer Solutions & Automation", view: "programs/dsai-customer-solutions-engineer", color: "#D4A017", badge: "Customer + AI + Auto", motive: ["Delight customers with AI-powered support systems.", "Build automated solutions that retain & grow users."] },
+   106→    ],
+   107→  },
+   108→  {
+   109→    label: "Cloud, DevOps & MLOps",
+   110→    view: "programs/cdm-program",
+   111→    tag: "CDM",
+   112→    color: "#10B981",
+   113→    desc: "22-week program. Master cloud infrastructure, DevOps automation, Kubernetes & MLOps — ship & scale production systems.",
+   114→    icon: Cloud,
+   115→    highlights: [
+   116→      "Master AWS, Azure & GCP cloud architectures end-to-end",
+   117→      "Build CI/CD pipelines that ship code with confidence",
+   118→      "Automate infrastructure with Terraform, Ansible & IaC",
+   119→      "Deploy & operate ML models in production with MLOps",
+   120→      "Run Kubernetes at scale — from clusters to service mesh",
+   121→      "6 career paths from cloud engineer to MLOps architect",
+   122→    ],
+   123→    roles: [
+   124→      { label: "Cloud Infrastructure Engineer", view: "programs/cdm-cloud-infrastructure-engineer", color: "#0EA5E9", badge: "Cloud + Arch", motive: ["Architect cloud-native systems on AWS, Azure & GCP.", "Design infrastructure that scales to millions of users."] },
+   125→      { label: "DevOps Engineer", view: "programs/cdm-devops-engineer", color: "#8B5CF6", badge: "CI/CD + Auto", motive: ["Automate the entire build-test-deploy lifecycle.", "Become the engineer who ships 10x faster."] },
+   126→      { label: "MLOps Engineer", view: "programs/cdm-mlops-engineer", color: "#10B981", badge: "ML + Ops", motive: ["Deploy, monitor & scale ML models in production.", "Bridge the gap between data science and engineering."] },
+   127→      { label: "Site Reliability Engineer", view: "programs/cdm-sre-engineer", color: "#F97316", badge: "Reliability + SRE", motive: ["Keep critical systems running at 99.99% uptime.", "Master observability, incident response & chaos engineering."] },
+   128→      { label: "Kubernetes & Container Engineer", view: "programs/cdm-kubernetes-engineer", color: "#EF4444", badge: "K8s + Containers", motive: ["Orchestrate containers at enterprise scale.", "Build self-healing, auto-scaling platforms on Kubernetes."] },
+   129→      { label: "Platform & CI/CD Engineer", view: "programs/cdm-platform-cicd-engineer", color: "#D4A017", badge: "Platform + Pipelines", motive: ["Build internal developer platforms that teams love.", "Design pipelines that make shipping effortless."] },
+   130→    ],
+   131→  },
+   132→];
+   133→
+   134→const TALENT_SEGMENTS: {
+   135→  segmentLabel: string; segmentColor: string; isHorizontal?: boolean;
+   136→  items: { label: string; view: string; icon: LucideIcon; desc: string; color: string; badge: string }[]
+   137→}[] = [
+   138→  {
+   139→    segmentLabel: "Talent Development",
+   140→    segmentColor: "#0EA5E9",
+   141→    items: [
+   142→      { label: "Train to Hire", view: "talent/talent-train-to-hire", icon: GraduationCap, desc: "Upskill fresh talent through industry-aligned training before they join your team.", color: "#0EA5E9", badge: "Training + Placement" },
+   143→      { label: "Hire to Train", view: "talent/talent-hire-to-train", icon: UserCheck, desc: "Hire promising candidates and we train them to meet your specific requirements.", color: "#8B5CF6", badge: "Hire + Upskill" },
+   144→      { label: "Corporate Training", view: "talent/talent-corporate-training", icon: Award, desc: "Custom corporate training programs designed to upskill your existing workforce.", color: "#F97316", badge: "Enterprise Training" },
+   145→    ],
+   146→  },
+   147→  {
+   148→    segmentLabel: "Workforce Solutions",
+   149→    segmentColor: "#10B981",
+   150→    items: [
+   151→      { label: "Sourcing & Recruitment", view: "talent/talent-sourcing-recruitment", icon: Search, desc: "AI-powered talent sourcing from 2M+ candidates. Find the right fit fast.", color: "#0EA5E9", badge: "Talent Sourcing" },
+   152→      { label: "Flexible Deployment", view: "talent/talent-flexible-deployment", icon: Layers, desc: "Deploy talent flexibly — contract, project-based, or on-demand staffing.", color: "#10B981", badge: "On-Demand Talent" },
+   153→      { label: "End-to-End Workforce", view: "talent/talent-end-to-end-workforce", icon: Globe, desc: "Complete workforce management from hiring to retention, one partner.", color: "#8B5CF6", badge: "Full Lifecycle" },
+   154→    ],
+   155→  },
+   156→  {
+   157→    segmentLabel: "Assessment & Placements",
+   158→    segmentColor: "#F97316",
+   159→    items: [
+   160→      { label: "Talent Assessment", view: "talent/talent-assessment", icon: ClipboardCheck, desc: "AI-powered assessments to evaluate technical skills, aptitude, and cultural fit.", color: "#EF4444", badge: "AI Assessment" },
+   161→      { label: "Staffing Solutions", view: "talent/talent-staffing", icon: Users, desc: "Flexible staffing models — contract, permanent, or project-based — to scale your team.", color: "#10B981", badge: "Flexible Staffing" },
+   162→      { label: "Placements", view: "placements", icon: TrendingUp, desc: "Explore placement opportunities and connect with top employers across industries.", color: "#D4A017", badge: "Career Placement" },
+   163→    ],
+   164→  },
+   165→  {
+   166→    segmentLabel: "Get Started",
+   167→    segmentColor: "#D4A017",
+   168→    isHorizontal: true,
+   169→    items: [
+   170→      { label: "Register as Candidate", view: "candidate/overview", icon: GraduationCap, desc: "Access 10,000+ job opportunities with AI-powered matching.", color: "#0EA5E9", badge: "Job Seeker" },
+   171→      { label: "Register as Employer", view: "employer/overview", icon: Building2, desc: "Start hiring from 50,000+ verified candidates.", color: "#8B5CF6", badge: "Hire Talent" },
+   172→      { label: "Professional Services", view: "professional-services", icon: BookOpen, desc: "Career assessment, resume building, interview coaching, and 8 professional services.", color: "#D4A017", badge: "8 Services" },
+   173→    ],
+   174→  },
+   175→];
+   176→
+   177→const RESOURCES_SUB: { label: string; view: string; icon: React.ReactNode; desc: string }[] = [
+   178→  { label: "About Us", view: "about", icon: <Building2 className="h-5 w-5" />, desc: "Learn about our mission, values, and the team driving innovation." },
+   179→  { label: "Contact", view: "contact", icon: <Phone className="h-5 w-5" />, desc: "Get in touch with our team for inquiries and support." },
+   180→  { label: "Vision & Mission", view: "vision-mission", icon: <Eye className="h-5 w-5" />, desc: "Discover our vision for the future and mission to transform industries." },
+   181→  { label: "Academy & Training", view: "academy-training", icon: <GraduationCap className="h-5 w-5" />, desc: "Comprehensive training programs for individuals and enterprises." },
+   182→  { label: "Become a Sales Agent", view: "become-sales-agent", icon: <Megaphone className="h-5 w-5" />, desc: "Join our sales network and earn attractive commissions." },
+   183→  { label: "Industries Experience", view: "industries-experience", icon: <Factory className="h-5 w-5" />, desc: "Explore our deep expertise across diverse industry verticals." },
+   184→  { label: "Partner with Us", view: "partner-with-us", icon: <Handshake className="h-5 w-5" />, desc: "Build strategic partnerships for mutual growth and innovation." },
+   185→  { label: "Become a Tech Consultant", view: "become-tech-consultant", icon: <Brain className="h-5 w-5" />, desc: "Leverage your expertise to solve complex challenges for enterprises." },
+   186→];
+   187→
+   188→const catIconMap: Record<string, LucideIcon> = {
+   189→  Brain, Megaphone, Bot, Box, Code2, Database, Cloud, Cpu, Compass,
+   190→};
+   191→
+   192→const TECH_AI_CAT_SEGMENTS: { segmentLabel: string; color: string; slugs: string[] }[] = [
+   193→  { segmentLabel: "AI & Intelligence", color: "#0EA5E9", slugs: ["ai-powered-business-solutions", "ai-agentic-automation", "ai-ml-model-development"] },
+   194→  { segmentLabel: "Digital & Engineering", color: "#8B5CF6", slugs: ["digital-sales-ai-marketing", "custom-software-development", "data-engineering-analytics"] },
+   195→  { segmentLabel: "Infrastructure & Strategy", color: "#10B981", slugs: ["cloud-infrastructure-devops", "open-source-deployment", "digital-transformation-consulting"] },
+   196→];
+   197→
+   198→// Helper: navigate to a public route
+   199→function useGo() {
+   200→  const { navigate } = useNav();
+   201→  return React.useCallback((view: string) => {
+   202→    // "candidate/overview" and "employer/overview" cross-portal links
+   203→    if (view.includes("/") && ["candidate", "employer", "recruiter", "training", "partner", "admin", "agency", "enterprise", "learner"].includes(view.split("/")[0])) {
+   204→      const [portal, ...rest] = view.split("/");
+   205→      navigate(portal as any, rest.join("/") || "overview");
+   206→    } else {
+   207→      navigate("public", view);
+   208→    }
+   209→  }, [navigate]);
+   210→}
+   211→
+   212→// ============================================================
+   213→// MEGA DROPDOWN: PROGRAMS (two-panel)
+   214→// ============================================================
+   215→function ProgramsDropdown({ go }: { go: (v: string) => void }) {
+   216→  const [open, setOpen] = React.useState(false);
+   217→  const [hoveredIdx, setHoveredIdx] = React.useState<number | null>(null);
+   218→  const activeViews = ["programs", ...PROGRAM_GROUPS.flatMap(p => [p.view, ...p.roles.map(r => r.view)])];
+   219→
+   220→  return (
+   221→    <div
+   222→      className="relative"
+   223→      onMouseEnter={() => setOpen(true)}
+   224→      onMouseLeave={() => { setOpen(false); setHoveredIdx(null); }}
+   225→    >
+   226→      <button
+   227→        onClick={() => go("programs")}
+   228→        className={cn(
+   229→          "flex items-center gap-1.5 rounded-md px-3 py-2 text-sm font-medium transition-colors",
+   230→          activeViews.some(v => v === "programs" + (hoveredIdx !== null ? "" : "")) ? "text-brand" : "text-muted-foreground hover:text-foreground"
+   231→        )}
+   232→      >
+   233→        <GraduationCap className="h-4 w-4 opacity-70" />
+   234→        <span>Programs</span>
+   235→        <ChevronDown className={cn("h-3.5 w-3.5 transition-transform", open && "rotate-180")} />
+   236→      </button>
+   237→      {open && (
+   238→        <div className="absolute left-0 top-full z-50 flex pt-2" style={{ filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.15))" }}>
+   239→          {/* Left panel: programs list */}
+   240→          <div className="w-[420px] rounded-l-xl border bg-popover p-4">
+   241→            <div className="grid grid-cols-1 gap-2">
+   242→              {PROGRAM_GROUPS.map((prog, idx) => {
+   243→                const ProgIcon = prog.icon;
+   244→                const isHovered = hoveredIdx === idx;
+   245→                return (
+   246→                  <button
+   247→                    key={prog.view}
+   248→                    onMouseEnter={() => setHoveredIdx(idx)}
+   249→                    onClick={() => { go(prog.view); setOpen(false); }}
+   250→                    className="flex items-center gap-3 rounded-lg border border-transparent p-3 text-left transition-all hover:shadow-sm"
+   251→                    style={{ background: isHovered ? `${prog.color}10` : "transparent", borderColor: isHovered ? `${prog.color}30` : "transparent" }}
+   252→                  >
+   253→                    <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg" style={{ background: `${prog.color}18`, color: prog.color }}>
+   254→                      <ProgIcon className="h-4 w-4" />
+   255→                    </div>
+   256→                    <div className="min-w-0 flex-1">
+   257→                      <div className="mb-0.5 flex items-center gap-2">
+   258→                        <span className="text-sm font-bold" style={{ color: isHovered ? prog.color : "hsl(var(--foreground))" }}>{prog.label}</span>
+   259→                        <span className="flex-shrink-0 rounded-full px-2 py-0.5 text-[10px] font-bold" style={{ background: `${prog.color}18`, color: prog.color }}>{prog.tag}</span>
+   260→                      </div>
+   261→                      <p className="line-clamp-2 text-xs leading-relaxed text-muted-foreground">{prog.desc}</p>
+   262→                    </div>
+   263→                    <ChevronRight className={cn("h-4 w-4 flex-shrink-0 transition-all", isHovered ? "translate-x-0.5 opacity-100" : "opacity-0")} style={{ color: prog.color }} />
+   264→                  </button>
+   265→                );
+   266→              })}
+   267→            </div>
+   268→            {hoveredIdx !== null && (
+   269→              <div className="mt-3 border-t pt-3" style={{ borderColor: `${PROGRAM_GROUPS[hoveredIdx].color}25` }}>
+   270→                <span className="mb-2 block text-[11px] font-bold uppercase tracking-wider" style={{ color: PROGRAM_GROUPS[hoveredIdx].color }}>
+   271→                  Why Join {PROGRAM_GROUPS[hoveredIdx].tag}?
+   272→                </span>
+   273→                <div className="grid grid-cols-1 gap-1.5">
+   274→                  {PROGRAM_GROUPS[hoveredIdx].highlights.map((h, i) => (
+   275→                    <div key={i} className="flex items-start gap-2">
+   276→                      <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 flex-shrink-0" style={{ color: PROGRAM_GROUPS[hoveredIdx].color }} />
+   277→                      <span className="text-xs leading-snug text-muted-foreground">{h}</span>
+   278→                    </div>
+   279→                  ))}
+   280→                </div>
+   281→              </div>
+   282→            )}
+   283→            <div className="mt-3 flex items-center justify-between border-t pt-2.5">
+   284→              <span className="text-xs text-muted-foreground">4 programs · 24 specializations</span>
+   285→              <button onClick={() => { go("programs"); setOpen(false); }} className="rounded-md bg-brand/10 px-3 py-1.5 text-xs font-semibold text-brand transition-colors hover:bg-brand/20">
+   286→                View All →
+   287→              </button>
+   288→            </div>
+   289→          </div>
+   290→          {/* Right panel: roles */}
+   291→          {hoveredIdx !== null && (() => {
+   292→            const prog = PROGRAM_GROUPS[hoveredIdx];
+   293→            return (
+   294→              <div className="flex w-[380px] flex-col rounded-r-xl border border-l-0 bg-popover p-4">
+   295→                <div className="mb-3 flex items-center gap-2.5">
+   296→                  <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg" style={{ background: `${prog.color}18`, color: prog.color }}>
+   297→                    <prog.icon className="h-4 w-4" />
+   298→                  </div>
+   299→                  <div className="min-w-0">
+   300→                    <h3 className="truncate text-sm font-bold">{prog.label}</h3>
+   301→                    <p className="text-xs text-muted-foreground">{prog.roles.length} specializations</p>
+   302→                  </div>
+   303→                </div>
+   304→                <div className="grid grid-cols-1 gap-1.5 overflow-y-auto pr-1" style={{ maxHeight: "340px" }}>
+   305→                  {prog.roles.map((role) => (
+   306→                    <button
+   307→                      key={role.view}
+   308→                      onClick={() => { go(role.view); setOpen(false); }}
+   309→                      className="flex items-start gap-2.5 rounded-lg border border-transparent p-2.5 text-left transition-all hover:shadow-sm"
+   310→                      style={{ background: `${role.color}08` }}
+   311→                      onMouseEnter={(e) => { e.currentTarget.style.background = `${role.color}12`; e.currentTarget.style.borderColor = `${role.color}25`; }}
+   312→                      onMouseLeave={(e) => { e.currentTarget.style.background = `${role.color}08`; e.currentTarget.style.borderColor = "transparent"; }}
+   313→                    >
+   314→                      <div className="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full" style={{ background: role.color }} />
+   315→                      <div className="min-w-0 flex-1">
+   316→                        <span className="block truncate text-xs font-semibold" style={{ color: role.color }}>{role.label}</span>
+   317→                        <p className="mt-0.5 line-clamp-2 text-[11px] leading-snug text-muted-foreground">{role.motive[0]}</p>
+   318→                        <p className="mt-0.5 truncate text-[11px] font-medium" style={{ color: role.color }}>{role.motive[1]}</p>
+   319→                      </div>
+   320→                    </button>
+   321→                  ))}
+   322→                </div>
+   323→                <button
+   324→                  onClick={() => { go(prog.view); setOpen(false); }}
+   325→                  className="mt-2.5 rounded-lg border px-3 py-2 text-xs font-semibold transition-colors"
+   326→                  style={{ background: `${prog.color}10`, color: prog.color, borderColor: `${prog.color}30` }}
+   327→                >
+   328→                  View Full Program →
+   329→                </button>
+   330→              </div>
+   331→            );
+   332→          })()}
+   333→        </div>
+   334→      )}
+   335→    </div>
+   336→  );
+   337→}
+   338→
+   339→// ============================================================
+   340→// MEGA DROPDOWN: PRO SERVICES (two-panel — 6 categories merging ALL 9 tech-ai + 8 professional services = 68 services)
+   341→// ============================================================
+   342→const PRO_SERVICE_CATEGORIES = [
+   343→  {
+   344→    key: "ai-intelligence",
+   345→    label: "AI & Intelligence",
+   346→    tagline: "Make machines work for you",
+   347→    desc: "AI business solutions, agentic automation & custom ML models that turn data into decisions.",
+   348→    icon: Brain,
+   349→    color: "#0EA5E9",
+   350→    services: [
+   351→      { catSlug: "ai-powered-business-solutions", slug: "ai-business-process-automation", name: "AI Business Process Automation", desc: "Automate repetitive workflows with AI." },
+   352→      { catSlug: "ai-powered-business-solutions", slug: "ai-customer-support-solutions", name: "AI Customer Support Solutions", desc: "24/7 intelligent support agents." },
+   353→      { catSlug: "ai-powered-business-solutions", slug: "ai-document-intelligence", name: "AI Document Intelligence", desc: "Extract & understand any document." },
+   354→      { catSlug: "ai-powered-business-solutions", slug: "ai-knowledge-management", name: "AI Knowledge Management", desc: "Turn scattered info into a brain." },
+   355→      { catSlug: "ai-powered-business-solutions", slug: "ai-voice-chat-assistants", name: "AI Voice & Chat Assistants", desc: "Conversational AI that feels human." },
+   356→      { catSlug: "ai-powered-business-solutions", slug: "enterprise-ai-integration", name: "Enterprise AI Integration", desc: "Embed AI into your stack, end-to-end." },
+   357→      { catSlug: "ai-agentic-automation", slug: "custom-ai-agents", name: "Custom AI Agents", desc: "Autonomous agents that get things done." },
+   358→      { catSlug: "ai-agentic-automation", slug: "multi-agent-systems", name: "Multi-Agent Systems", desc: "Swarm intelligence for complex tasks." },
+   359→      { catSlug: "ai-agentic-automation", slug: "ai-workflow-automation", name: "AI Workflow Automation", desc: "Connect tools, automate the busywork." },
+   360→      { catSlug: "ai-ml-model-development", slug: "machine-learning", name: "Machine Learning", desc: "Predictive models tailored to your data." },
+   361→      { catSlug: "ai-ml-model-development", slug: "llm-development", name: "LLM Development", desc: "Custom large-language-model solutions." },
+   362→      { catSlug: "ai-ml-model-development", slug: "computer-vision", name: "Computer Vision", desc: "See, detect & classify from images." },
+   363→      { catSlug: "ai-ml-model-development", slug: "nlp-solutions", name: "NLP Solutions", desc: "Understand & generate human language." },
+   364→      { catSlug: "ai-ml-model-development", slug: "model-fine-tuning", name: "Model Fine-Tuning", desc: "Tune foundation models for your domain." },
+   365→    ],
+   366→  },
+   367→  {
+   368→    key: "build-engineer",
+   369→    label: "Build & Engineer",
+   370→    tagline: "Ship products, not prototypes",
+   371→    desc: "Custom software, mobile apps, SaaS platforms & data pipelines engineered for scale.",
+   372→    icon: Code2,
+   373→    color: "#8B5CF6",
+   374→    services: [
+   375→      { catSlug: "custom-software-development", slug: "enterprise-web-applications", name: "Enterprise Web Applications", desc: "Robust web apps built for scale." },
+   376→      { catSlug: "custom-software-development", slug: "saas-development", name: "SaaS Development", desc: "Multi-tenant SaaS, end-to-end." },
+   377→      { catSlug: "custom-software-development", slug: "mobile-apps", name: "Mobile Apps", desc: "iOS + Android, one codebase." },
+   378→      { catSlug: "custom-software-development", slug: "erp-crm-development", name: "ERP & CRM Development", desc: "Custom ERPs & CRMs that fit you." },
+   379→      { catSlug: "custom-software-development", slug: "api-development-integration", name: "API Development & Integration", desc: "Connect everything, reliably." },
+   380→      { catSlug: "custom-software-development", slug: "legacy-modernization", name: "Legacy Modernization", desc: "Bring old systems into the modern era." },
+   381→      { catSlug: "data-engineering-analytics", slug: "data-warehousing", name: "Data Warehousing", desc: "A single source of truth." },
+   382→      { catSlug: "data-engineering-analytics", slug: "etl-elt", name: "ETL / ELT", desc: "Move & transform data at scale." },
+   383→      { catSlug: "data-engineering-analytics", slug: "bi-dashboards", name: "BI Dashboards", desc: "See your business in real time." },
+   384→      { catSlug: "data-engineering-analytics", slug: "real-time-analytics", name: "Real-Time Analytics", desc: "Decisions powered by live data." },
+   385→      { catSlug: "data-engineering-analytics", slug: "predictive-analytics", name: "Predictive Analytics", desc: "See what's coming before it arrives." },
+   386→    ],
+   387→  },
+   388→  {
+   389→    key: "cloud-deploy",
+   390→    label: "Cloud & Deploy",
+   391→    tagline: "Infrastructure that scales itself",
+   392→    desc: "Cloud migration, DevOps, Kubernetes & open-source platform deployment — built to scale.",
+   393→    icon: Cloud,
+   394→    color: "#10B981",
+   395→    services: [
+   396→      { catSlug: "cloud-infrastructure-devops", slug: "cloud-migration", name: "Cloud Migration", desc: "Move to the cloud, zero downtime." },
+   397→      { catSlug: "cloud-infrastructure-devops", slug: "kubernetes", name: "Kubernetes", desc: "Container orchestration done right." },
+   398→      { catSlug: "cloud-infrastructure-devops", slug: "ci-cd-automation", name: "CI/CD Automation", desc: "Ship code with confidence." },
+   399→      { catSlug: "cloud-infrastructure-devops", slug: "infrastructure-as-code", name: "Infrastructure as Code", desc: "Reproducible infra, every time." },
+   400→      { catSlug: "cloud-infrastructure-devops", slug: "cloud-security", name: "Cloud Security", desc: "Lock down your cloud, end-to-end." },
+   401→      { catSlug: "cloud-infrastructure-devops", slug: "managed-devops", name: "Managed DevOps", desc: "We run your DevOps, you ship." },
+   402→      { catSlug: "open-source-deployment", slug: "self-hosted-ai-platform-deployment", name: "Self-Hosted AI Platform", desc: "Your own AI, your own cloud." },
+   403→      { catSlug: "open-source-deployment", slug: "erp-portal-deployment", name: "ERP & Portal Deployment", desc: "Open-source ERPs, deployed fast." },
+   404→      { catSlug: "open-source-deployment", slug: "devops-platform-deployment", name: "DevOps Platform Deployment", desc: "Full DevOps stack, set up for you." },
+   405→      { catSlug: "open-source-deployment", slug: "private-cloud-deployment", name: "Private Cloud Deployment", desc: "Your cloud, your rules." },
+   406→    ],
+   407→  },
+   408→  {
+   409→    key: "grow-market",
+   410→    label: "Grow & Market",
+   411→    tagline: "Turn attention into revenue",
+   412→    desc: "AI-powered digital marketing, sales automation & lead intelligence that fills your pipeline.",
+   413→    icon: Megaphone,
+   414→    color: "#F59E0B",
+   415→    services: [
+   416→      { catSlug: "digital-sales-ai-marketing", slug: "ai-digital-marketing", name: "AI Digital Marketing", desc: "Marketing that learns & optimizes." },
+   417→      { catSlug: "digital-sales-ai-marketing", slug: "seo-geo-ai-content-marketing", name: "SEO & GEO AI Content", desc: "Rank higher with AI content." },
+   418→      { catSlug: "digital-sales-ai-marketing", slug: "search-engine-social-media-marketing", name: "Search & Social Media Marketing", desc: "Be everywhere your customers are." },
+   419→      { catSlug: "digital-sales-ai-marketing", slug: "ai-social-media-automation", name: "AI Social Media Automation", desc: "Post, engage & grow on autopilot." },
+   420→      { catSlug: "digital-sales-ai-marketing", slug: "ai-sales-funnel-automation", name: "AI Sales Funnel Automation", desc: "Funnels that convert themselves." },
+   421→      { catSlug: "digital-sales-ai-marketing", slug: "crm-lead-automation", name: "CRM & Lead Automation", desc: "Never let a lead go cold." },
+   422→      { catSlug: "digital-sales-ai-marketing", slug: "ai-market-research-customer-intelligence", name: "AI Market Research", desc: "Know your market before entering it." },
+   423→      { catSlug: "digital-sales-ai-marketing", slug: "ai-lead-generation-prospecting", name: "AI Lead Generation", desc: "Find buyers before they find you." },
+   424→      { catSlug: "digital-sales-ai-marketing", slug: "ai-outbound-sales-outreach", name: "AI Outbound Sales", desc: "Outreach that books meetings." },
+   425→      { catSlug: "digital-sales-ai-marketing", slug: "ai-account-based-marketing", name: "AI Account-Based Marketing", desc: "Win the accounts that matter." },
+   426→      { catSlug: "digital-sales-ai-marketing", slug: "ai-paid-advertising-campaign-strategy", name: "AI Paid Advertising", desc: "Ads that spend smarter." },
+   427→      { catSlug: "digital-sales-ai-marketing", slug: "ai-sales-enablement-revenue-intelligence", name: "AI Sales Enablement", desc: "Equip your team to close more." },
+   428→    ],
+   429→  },
+   430→  {
+   431→    key: "transform-strategize",
+   432→    label: "Transform & Strategize",
+   433→    tagline: "Future-proof your business",
+   434→    desc: "Digital transformation consulting, AI strategy & technology architecture that re-architects your business.",
+   435→    icon: Compass,
+   436→    color: "#EC4899",
+   437→    services: [
+   438→      { catSlug: "digital-transformation-consulting", slug: "ai-strategy", name: "AI Strategy", desc: "A roadmap for AI, not guesswork." },
+   439→      { catSlug: "digital-transformation-consulting", slug: "digital-transformation", name: "Digital Transformation", desc: "Rebuild how you operate." },
+   440→      { catSlug: "digital-transformation-consulting", slug: "process-reengineering", name: "Process Reengineering", desc: "Redesign workflows for the AI era." },
+   441→      { catSlug: "digital-transformation-consulting", slug: "technology-architecture", name: "Technology Architecture", desc: "A foundation built to last." },
+   442→      { catSlug: "digital-transformation-consulting", slug: "it-modernization", name: "IT Modernization", desc: "Bring your tech into today." },
+   443→      { catSlug: "digital-transformation-consulting", slug: "ai-governance", name: "AI Governance", desc: "AI that's safe, compliant & trusted." },
+   444→    ],
+   445→  },
+   446→  {
+   447→    key: "career-services",
+   448→    label: "Career Services",
+   449→    tagline: "From lost to hired, fast",
+   450→    desc: "8 professional services — career assessment, resume branding, skills, portfolio, AI job matching, mock interviews & more.",
+   451→    icon: GraduationCap,
+   452→    color: "#EF4444",
+   453→    services: [
+   454→      { catSlug: "professional", slug: "career-assessment", name: "Career Assessment & Role Matching", desc: "Find your true north with AI." },
+   455→      { catSlug: "professional", slug: "resume-branding", name: "Resume, LinkedIn & Personal Branding", desc: "Stand out before you speak." },
+   456→      { catSlug: "professional", slug: "skills-readiness", name: "Skills & Career Readiness", desc: "Become the candidate employers want." },
+   457→      { catSlug: "professional", slug: "portfolio-development", name: "Portfolio & Real-World Projects", desc: "Turn skills into proof." },
+   458→      { catSlug: "professional", slug: "ai-job-matching", name: "AI-Powered Job & Role Matching", desc: "Your AI co-pilot for the right job." },
+   459→      { catSlug: "professional", slug: "mock-interviews", name: "Mock Interviews & Interview Prep", desc: "Walk in calm. Walk out hired." },
+   460→      { catSlug: "professional", slug: "job-search-strategy", name: "Job Search & Application Strategy", desc: "Get hired faster, not just apply more." },
+   461→      { catSlug: "professional", slug: "talent-matching", name: "Talent Matching & Hiring Connections", desc: "Get in front of employers directly." },
+   462→    ],
+   463→  },
+   464→];
+   465→
+   466→function ProServicesDropdown({ go }: { go: (v: string) => void }) {
+   467→  const [open, setOpen] = React.useState(false);
+   468→  const [hoveredKey, setHoveredKey] = React.useState<string | null>("ai-intelligence");
+   469→
+   470→  const handleServiceClick = (catSlug: string, svcSlug: string) => {
+   471→    if (catSlug === "professional") {
+   472→      go(`professional-services/${svcSlug}`);
+   473→    } else {
+   474→      go(`services/${catSlug}/${svcSlug}`);
+   475→    }
+   476→    setOpen(false);
+   477→  };
+   478→
+   479→  return (
+   480→    <div
+   481→      className="relative"
+   482→      onMouseEnter={() => setOpen(true)}
+   483→      onMouseLeave={() => { setOpen(false); setHoveredKey("ai-intelligence"); }}
+   484→    >
+   485→      <button
+   486→        onClick={() => go("professional-services")}
+   487→        className="flex items-center gap-1.5 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+   488→      >
+   489→        <Sparkles className="h-4 w-4 opacity-70" />
+   490→        <span>Pro Services</span>
+   491→        <ChevronDown className={cn("h-3.5 w-3.5 transition-transform", open && "rotate-180")} />
+   492→      </button>
+   493→      {open && (
+   494→        <div className="absolute left-1/2 top-full z-50 flex -translate-x-1/2 pt-2" style={{ filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.15))" }}>
+   495→          {/* Left panel: 6 category cards */}
+   496→          <div className="w-[400px] rounded-l-xl border bg-popover p-4">
+   497→            <div className="mb-2 flex items-center justify-between">
+   498→              <span className="text-[10px] font-bold uppercase tracking-widest text-brand">All Pro Services</span>
+   499→              <span className="rounded-full bg-brand/10 px-2 py-0.5 text-[9px] font-bold text-brand">68 services</span>
+   500→            </div>
+   501→            <div className="grid grid-cols-1 gap-1">
+   502→              {PRO_SERVICE_CATEGORIES.map((cat) => {
+   503→                const CatIcon = cat.icon;
+   504→                const isHovered = hoveredKey === cat.key;
+   505→                return (
+   506→                  <button
+   507→                    key={cat.key}
+   508→                    onMouseEnter={() => setHoveredKey(cat.key)}
+   509→                    onClick={() => {
+   510→                      if (cat.key === "career-services") go("professional-services");
+   511→                      else go(`services/${cat.services[0].catSlug}`);
+   512→                      setOpen(false);
+   513→                    }}
+   514→                    className="flex items-center gap-3 rounded-lg border border-transparent p-2.5 text-left transition-all"
+   515→                    style={{ background: isHovered ? `${cat.color}10` : "transparent", borderColor: isHovered ? `${cat.color}30` : "transparent" }}
+   516→                  >
+   517→                    <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg" style={{ background: `${cat.color}18`, color: cat.color }}>
+   518→                      <CatIcon className="h-4 w-4" />
+   519→                    </div>
+   520→                    <div className="min-w-0 flex-1">
+   521→                      <div className="flex items-center gap-1.5">
+   522→                        <span className="text-xs font-bold" style={{ color: isHovered ? cat.color : undefined }}>{cat.label}</span>
+   523→                        <span className="flex-shrink-0 rounded-full px-1.5 py-0.5 text-[9px] font-semibold" style={{ background: `${cat.color}18`, color: cat.color }}>
+   524→                          {cat.services.length}
+   525→                        </span>
+   526→                      </div>
+   527→                      <span className="mt-0.5 block truncate text-[11px] italic text-muted-foreground">{cat.tagline}</span>
+   528→                    </div>
+   529→                    <ChevronRight className={cn("h-3.5 w-3.5 flex-shrink-0 transition-opacity", isHovered ? "opacity-100" : "opacity-0")} style={{ color: cat.color }} />
+   530→                  </button>
+   531→                );
+   532→              })}
+   533→            </div>
+   534→            <div className="mt-3 flex items-center justify-between border-t pt-2.5">
+   535→              <span className="text-xs text-muted-foreground">6 categories · 68 services</span>
+   536→              <button onClick={() => { go("tech-ai-services"); setOpen(false); }} className="rounded-md bg-brand/10 px-3 py-1.5 text-xs font-semibold text-brand transition-colors hover:bg-brand/20">
+   537→                Explore all →
+   538→              </button>
+   539→            </div>
+   540→          </div>
+   541→          {/* Right panel: services of hovered category */}
+   542→          {hoveredKey && (() => {
+   543→            const cat = PRO_SERVICE_CATEGORIES.find(c => c.key === hoveredKey);
+   544→            if (!cat) return null;
+   545→            const CatIcon = cat.icon;
+   546→            return (
+   547→              <div className="flex w-[460px] flex-col rounded-r-xl border border-l-0 bg-popover p-4">
+   548→                <div className="mb-2 flex items-start gap-2.5">
+   549→                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg" style={{ background: `${cat.color}18`, color: cat.color }}>
+   550→                    <CatIcon className="h-5 w-5" />
+   551→                  </div>
+   552→                  <div className="min-w-0 flex-1">
+   553→                    <h3 className="text-sm font-bold">{cat.label}</h3>
+   554→                    <p className="text-xs font-medium italic" style={{ color: cat.color }}>{cat.tagline}</p>
+   555→                  </div>
+   556→                </div>
+   557→                <p className="mb-2 text-xs leading-relaxed text-muted-foreground">{cat.desc}</p>
+   558→                <div className="grid grid-cols-1 gap-0.5 overflow-y-auto pr-1" style={{ maxHeight: "320px" }}>
+   559→                  {cat.services.map((svc) => (
+   560→                    <button
+   561→                      key={svc.slug}
+   562→                      onClick={() => handleServiceClick(svc.catSlug, svc.slug)}
+   563→                      className="flex items-start gap-2.5 rounded-lg border border-transparent p-2 text-left transition-all"
+   564→                      onMouseEnter={(e) => { e.currentTarget.style.background = `${cat.color}08`; e.currentTarget.style.borderColor = `${cat.color}20`; }}
+   565→                      onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "transparent"; }}
+   566→                    >
+   567→                      <div className="mt-0.5 h-1.5 w-1.5 flex-shrink-0 rounded-full" style={{ background: cat.color }} />
+   568→                      <div className="min-w-0 flex-1">
+   569→                        <span className="block truncate text-xs font-semibold">{svc.name}</span>
+   570→                        <p className="line-clamp-1 text-[11px] text-muted-foreground">{svc.desc}</p>
+   571→                      </div>
+   572→                    </button>
+   573→                  ))}
+   574→                </div>
+   575→                <button
+   576→                  onClick={() => {
+   577→                    if (cat.key === "career-services") go("professional-services");
+   578→                    else go(`services/${cat.services[0].catSlug}`);
+   579→                    setOpen(false);
+   580→                  }}
+   581→                  className="mt-2 rounded-lg border px-3 py-2 text-xs font-semibold transition-colors"
+   582→                  style={{ background: `${cat.color}10`, color: cat.color, borderColor: `${cat.color}30` }}
+   583→                >
+   584→                  Explore {cat.label} →
+   585→                </button>
+   586→              </div>
+   587→            );
+   588→          })()}
+   589→        </div>
+   590→      )}
+   591→    </div>
+   592→  );
+   593→}
+   594→
+   595→// ============================================================
+   596→// MEGA DROPDOWN: TALENT SOLUTIONS (single wide panel, 3-col + horizontal strip)
+   597→// ============================================================
+   598→function TalentSolutionsDropdown({ go }: { go: (v: string) => void }) {
+   599→  const [open, setOpen] = React.useState(false);
+   600→  return (
+   601→    <div
+   602→      className="relative"
+   603→      onMouseEnter={() => setOpen(true)}
+   604→      onMouseLeave={() => setOpen(false)}
+   605→    >
+   606→      <button
+   607→        onClick={() => go("talent-solutions")}
+   608→        className="flex items-center gap-1.5 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+   609→      >
+   610→        <Target className="h-4 w-4 opacity-70" />
+   611→        <span>Hire Talent</span>
+   612→        <ChevronDown className={cn("h-3.5 w-3.5 transition-transform", open && "rotate-180")} />
+   613→      </button>
+   614→      {open && (
+   615→        <div className="absolute left-1/2 top-full z-50 w-[840px] -translate-x-1/2 rounded-xl border bg-popover p-5 pt-2" style={{ filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.15))" }}>
+   616→          {/* 3-column grid */}
+   617→          <div className="grid grid-cols-3 gap-4">
+   618→            {TALENT_SEGMENTS.slice(0, 3).map((segment) => (
+   619→              <div key={segment.segmentLabel}>
+   620→                <span className="mb-2 block text-[10px] font-bold uppercase tracking-widest" style={{ color: segment.segmentColor }}>
+   621→                  {segment.segmentLabel}
+   622→                </span>
+   623→                <div className="grid grid-cols-1 gap-1.5">
+   624→                  {segment.items.map((item) => {
+   625→                    const ItemIcon = item.icon;
+   626→                    return (
+   627→                      <button
+   628→                        key={item.view}
+   629→                        onClick={() => { go(item.view); setOpen(false); }}
+   630→                        className="flex items-start gap-2.5 rounded-lg border border-transparent p-2.5 text-left transition-all hover:shadow-sm"
+   631→                        style={{ background: `${item.color}06` }}
+   632→                        onMouseEnter={(e) => { e.currentTarget.style.background = `${item.color}10`; e.currentTarget.style.borderColor = `${item.color}25`; }}
+   633→                        onMouseLeave={(e) => { e.currentTarget.style.background = `${item.color}06`; e.currentTarget.style.borderColor = "transparent"; }}
+   634→                      >
+   635→                        <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg" style={{ background: `${item.color}18`, color: item.color }}>
+   636→                          <ItemIcon className="h-4 w-4" />
+   637→                        </div>
+   638→                        <div className="min-w-0 flex-1">
+   639→                          <div className="flex items-center gap-1.5">
+   640→                            <span className="text-xs font-bold">{item.label}</span>
+   641→                            <span className="flex-shrink-0 rounded-full px-1.5 py-0.5 text-[9px] font-semibold" style={{ background: `${item.color}18`, color: item.color }}>{item.badge}</span>
+   642→                          </div>
+   643→                          <p className="mt-0.5 line-clamp-2 text-[11px] leading-snug text-muted-foreground">{item.desc}</p>
+   644→                        </div>
+   645→                      </button>
+   646→                    );
+   647→                  })}
+   648→                </div>
+   649→              </div>
+   650→            ))}
+   651→          </div>
+   652→          {/* Horizontal Get Started strip */}
+   653→          <div className="mt-4 border-t pt-3">
+   654→            <span className="mb-2 block text-[10px] font-bold uppercase tracking-widest text-brand">Get Started</span>
+   655→            <div className="grid grid-cols-3 gap-3">
+   656→              {TALENT_SEGMENTS[3].items.map((item) => {
+   657→                const ItemIcon = item.icon;
+   658→                return (
+   659→                  <button
+   660→                    key={item.view}
+   661→                    onClick={() => { go(item.view); setOpen(false); }}
+   662→                    className="flex items-center gap-2.5 rounded-lg border border-brand/20 bg-brand/5 p-2.5 text-left transition-all hover:border-brand hover:bg-brand/10"
+   663→                  >
+   664→                    <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-brand/15 text-brand">
+   665→                      <ItemIcon className="h-4 w-4" />
+   666→                    </div>
+   667→                    <div className="min-w-0 flex-1">
+   668→                      <span className="block text-xs font-bold">{item.label}</span>
+   669→                      <p className="line-clamp-1 text-[10px] text-muted-foreground">{item.desc}</p>
+   670→                    </div>
+   671→                  </button>
+   672→                );
+   673→              })}
+   674→            </div>
+   675→          </div>
+   676→          <div className="mt-3 flex items-center justify-between border-t pt-2.5">
+   677→            <span className="text-xs text-muted-foreground">12 solutions · 4 segments</span>
+   678→            <button onClick={() => { go("talent-solutions"); setOpen(false); }} className="rounded-md bg-brand/10 px-3 py-1.5 text-xs font-semibold text-brand transition-colors hover:bg-brand/20">
+   679→              View All →
+   680→            </button>
+   681→          </div>
+   682→        </div>
+   683→      )}
+   684→    </div>
+   685→  );
+   686→}
+   687→
+   688→// ============================================================
+   689→// DROPDOWN: RESOURCES (single panel, 2-col split)
+   690→// ============================================================
+   691→function ResourcesDropdown({ go }: { go: (v: string) => void }) {
+   692→  const [open, setOpen] = React.useState(false);
+   693→  const company = RESOURCES_SUB.slice(0, 4);
+   694→  const opportunities = RESOURCES_SUB.slice(4, 8);
+   695→  return (
+   696→    <div
+   697→      className="relative"
+   698→      onMouseEnter={() => setOpen(true)}
+   699→      onMouseLeave={() => setOpen(false)}
+   700→    >
+   701→      <button
+   702→        onClick={() => go("about")}
+   703→        className="flex items-center gap-1.5 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+   704→      >
+   705→        <BookOpen className="h-4 w-4 opacity-70" />
+   706→        <span>Resources</span>
+   707→        <ChevronDown className={cn("h-3.5 w-3.5 transition-transform", open && "rotate-180")} />
+   708→      </button>
+   709→      {open && (
+   710→        <div className="absolute right-0 top-full z-50 w-[640px] rounded-xl border bg-popover p-4 pt-2" style={{ filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.15))" }}>
+   711→          <div className="grid grid-cols-2 gap-4">
+   712→            {/* Company column */}
+   713→            <div>
+   714→              <span className="mb-2 block text-[10px] font-bold uppercase tracking-widest text-brand">Company</span>
+   715→              <div className="grid grid-cols-1 gap-1">
+   716→                {company.map((item) => (
+   717→                  <button
+   718→                    key={item.view}
+   719→                    onClick={() => { go(item.view); setOpen(false); }}
+   720→                    className="flex items-start gap-3 rounded-lg border border-transparent p-2.5 text-left transition-all hover:bg-muted/50"
+   721→                  >
+   722→                    <span className="flex-shrink-0 text-brand">{item.icon}</span>
+   723→                    <div className="min-w-0 flex-1">
+   724→                      <span className="block text-xs font-semibold">{item.label}</span>
+   725→                      <p className="line-clamp-2 text-[11px] text-muted-foreground">{item.desc}</p>
+   726→                    </div>
+   727→                  </button>
+   728→                ))}
+   729→              </div>
+   730→            </div>
+   731→            {/* Opportunities column */}
+   732→            <div className="border-l pl-4">
+   733→              <span className="mb-2 block text-[10px] font-bold uppercase tracking-widest" style={{ color: "#8B5CF6" }}>Opportunities</span>
+   734→              <div className="grid grid-cols-1 gap-1">
+   735→                {opportunities.map((item) => (
+   736→                  <button
+   737→                    key={item.view}
+   738→                    onClick={() => { go(item.view); setOpen(false); }}
+   739→                    className="flex items-start gap-3 rounded-lg border border-transparent p-2.5 text-left transition-all hover:bg-muted/50"
+   740→                  >
+   741→                    <span className="flex-shrink-0" style={{ color: "#8B5CF6" }}>{item.icon}</span>
+   742→                    <div className="min-w-0 flex-1">
+   743→                      <span className="block text-xs font-semibold">{item.label}</span>
+   744→                      <p className="line-clamp-2 text-[11px] text-muted-foreground">{item.desc}</p>
+   745→                    </div>
+   746→                  </button>
+   747→                ))}
+   748→              </div>
+   749→            </div>
+   750→          </div>
+   751→        </div>
+   752→      )}
+   753→    </div>
+   754→  );
+   755→}
+   756→
+   757→// ============================================================
+   758→// MEGA DROPDOWN: JOBS (3-column — categories, demand, locations)
+   759→// ============================================================
+   760→function JobsDropdown({ go }: { go: (v: string) => void }) {
+   761→  const [open, setOpen] = React.useState(false);
+   762→
+   763→  const popularCategories = [
+   764→    { label: "AI & ML Jobs", icon: Cpu, color: "#0EA5E9", count: "12,450+" },
+   765→    { label: "Growth & Sales Jobs", icon: TrendingUp, color: "#10B981", count: "8,320+" },
+   766→    { label: "Brand & Marketing Jobs", icon: Megaphone, color: "#F59E0B", count: "5,140+" },
+   767→    { label: "Data & Analytics Jobs", icon: BarChart3, color: "#8B5CF6", count: "3,890+" },
+   768→    { label: "People & Culture Jobs", icon: Users, color: "#EC4899", count: "4,260+" },
+   769→    { label: "Product Engineering Jobs", icon: Code2, color: "#EF4444", count: "9,750+" },
+   770→  ];
+   771→
+   772→  const jobsInDemand = [
+   773→    { label: "Launchpad Roles (0–2 yrs)", icon: GraduationCap, color: "#0EA5E9", count: "6,500+" },
+   774→    { label: "Global-First Companies", icon: Building2, color: "#8B5CF6", count: "4,200+" },
+   775→    { label: "Work-from-Anywhere", icon: Home, color: "#10B981", count: "3,100+" },
+   776→    { label: "Async-First Remote", icon: Home, color: "#14B8A6", count: "2,850+" },
+   777→    { label: "Instant-Interview Jobs", icon: UserCheck, color: "#F59E0B", count: "1,940+" },
+   778→    { label: "Flex & Gig Roles", icon: Clock, color: "#EC4899", count: "1,620+" },
+   779→  ];
+   780→
+   781→  const jobsByLocation = [
+   782→    { label: "Jobs in Delhi", count: "18,200+" },
+   783→    { label: "Jobs in Mumbai", count: "15,800+" },
+   784→    { label: "Jobs in Bangalore", count: "22,400+" },
+   785→    { label: "Jobs in Hyderabad", count: "12,600+" },
+   786→    { label: "Jobs in Chennai", count: "9,300+" },
+   787→    { label: "Jobs in Pune", count: "8,750+" },
+   788→  ];
+   789→
+   790→  const handleJobNav = (label: string) => {
+   791→    sessionStorage.setItem(
+   792→      "jobsonn_job_search",
+   793→      JSON.stringify({ keyword: label.replace("Jobs in ", "").replace(" Jobs", ""), location: "", experienceMin: 0 })
+   794→    );
+   795→    go("jobs");
+   796→    setOpen(false);
+   797→  };
+   798→
+   799→  return (
+   800→    <div
+   801→      className="relative"
+   802→      onMouseEnter={() => setOpen(true)}
+   803→      onMouseLeave={() => setOpen(false)}
+   804→    >
+   805→      <button
+   806→        onClick={() => go("jobs")}
+   807→        className={cn(
+   808→          "flex items-center gap-1.5 rounded-md px-3 py-2 text-sm font-medium transition-colors",
+   809→          open ? "text-brand" : "text-muted-foreground hover:text-foreground"
+   810→        )}
+   811→      >
+   812→        <Briefcase className="h-4 w-4 opacity-70" />
+   813→        <span>Jobs</span>
+   814→        <ChevronDown className={cn("h-3.5 w-3.5 transition-transform", open && "rotate-180")} />
+   815→      </button>
+   816→      {open && (
+   817→        <div className="absolute left-1/2 top-full z-50 w-[760px] -translate-x-1/2 rounded-xl border bg-popover p-5 pt-2" style={{ filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.15))" }}>
+   818→          <div className="grid grid-cols-3 gap-5">
+   819→            {/* Column 1: Popular categories */}
+   820→            <div>
+   821→              <span className="mb-2 block text-[10px] font-bold uppercase tracking-widest text-brand">Future-Ready Roles</span>
+   822→              <div className="grid grid-cols-1 gap-0.5">
+   823→                {popularCategories.map((item) => {
+   824→                  const ItemIcon = item.icon;
+   825→                  return (
+   826→                    <button
+   827→                      key={item.label}
+   828→                      onClick={() => handleJobNav(item.label)}
+   829→                      className="flex items-center gap-2.5 rounded-lg border border-transparent p-2 text-left transition-all hover:bg-muted/50"
+   830→                    >
+   831→                      <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md" style={{ background: `${item.color}18`, color: item.color }}>
+   832→                        <ItemIcon className="h-3.5 w-3.5" />
+   833→                      </span>
+   834→                      <span className="flex-1 text-xs font-semibold">{item.label}</span>
+   835→                      <span className="text-[10px] text-muted-foreground">{item.count}</span>
+   836→                    </button>
+   837→                  );
+   838→                })}
+   839→              </div>
+   840→            </div>
+   841→            {/* Column 2: Jobs in demand */}
+   842→            <div className="border-l pl-5">
+   843→              <span className="mb-2 block text-[10px] font-bold uppercase tracking-widest" style={{ color: "#F59E0B" }}>Trending Now</span>
+   844→              <div className="grid grid-cols-1 gap-0.5">
+   845→                {jobsInDemand.map((item) => {
+   846→                  const ItemIcon = item.icon;
+   847→                  return (
+   848→                    <button
+   849→                      key={item.label}
+   850→                      onClick={() => handleJobNav(item.label)}
+   851→                      className="flex items-center gap-2.5 rounded-lg border border-transparent p-2 text-left transition-all hover:bg-muted/50"
+   852→                    >
+   853→                      <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md" style={{ background: `${item.color}18`, color: item.color }}>
+   854→                        <ItemIcon className="h-3.5 w-3.5" />
+   855→                      </span>
+   856→                      <span className="flex-1 text-xs font-semibold">{item.label}</span>
+   857→                      <span className="text-[10px] text-muted-foreground">{item.count}</span>
+   858→                    </button>
+   859→                  );
+   860→                })}
+   861→              </div>
+   862→            </div>
+   863→            {/* Column 3: Jobs by location */}
+   864→            <div className="border-l pl-5">
+   865→              <span className="mb-2 block text-[10px] font-bold uppercase tracking-widest" style={{ color: "#10B981" }}>Hiring Hotspots</span>
+   866→              <div className="grid grid-cols-1 gap-0.5">
+   867→                {jobsByLocation.map((item) => (
+   868→                  <button
+   869→                    key={item.label}
+   870→                    onClick={() => {
+   871→                      sessionStorage.setItem("jobsonn_job_search", JSON.stringify({ keyword: "", location: item.label.replace("Jobs in ", ""), experienceMin: 0 }));
+   872→                      go("jobs");
+   873→                      setOpen(false);
+   874→                    }}
+   875→                    className="flex items-center gap-2.5 rounded-lg border border-transparent p-2 text-left transition-all hover:bg-muted/50"
+   876→                  >
+   877→                    <MapPin className="h-3.5 w-3.5 flex-shrink-0 text-muted-foreground" />
+   878→                    <span className="flex-1 text-xs font-semibold">{item.label}</span>
+   879→                    <span className="text-[10px] text-muted-foreground">{item.count}</span>
+   880→                  </button>
+   881→                ))}
+   882→              </div>
+   883→            </div>
+   884→          </div>
+   885→          {/* Footer CTA */}
+   886→          <div className="mt-3 flex items-center justify-between border-t pt-3">
+   887→            <span className="text-xs text-muted-foreground">50,000+ live roles refreshed daily</span>
+   888→            <button onClick={() => { go("jobs"); setOpen(false); }} className="rounded-md bg-brand/10 px-3 py-1.5 text-xs font-semibold text-brand transition-colors hover:bg-brand/20">
+   889→              Explore all opportunities →
+   890→            </button>
+   891→          </div>
+   892→        </div>
+   893→      )}
+   894→    </div>
+   895→  );
+   896→}
+   897→
+   898→// ============================================================
+   899→// MEGA DROPDOWN: EMPLOYERS (2-column — categories + collections)
+   900→// ============================================================
+   901→function EmployersDropdown({ go }: { go: (v: string) => void }) {
+   902→  const [open, setOpen] = React.useState(false);
+   903→
+   904→  const exploreCategories = [
+   905→    { label: "Unicorn Trailblazers", icon: Rocket, color: "#8B5CF6", desc: "Billion-dollar visionaries", count: "45+" },
+   906→    { label: "Global Powerhouses", icon: Building2, color: "#0EA5E9", desc: "Multi-national legends", count: "320+" },
+   907→    { label: "Hyper-Growth Startups", icon: Target, color: "#10B981", desc: "Scaling at warp speed", count: "1,200+" },
+   908→    { label: "Product-First Builders", icon: Code2, color: "#F59E0B", desc: "Craft-led engineering teams", count: "680+" },
+   909→    { label: "Digital-Native Disruptors", icon: Globe, color: "#EC4899", desc: "Born-on-the-internet brands", count: "540+" },
+   910→  ];
+   911→
+   912→  const exploreCollections = [
+   913→    { label: "Top-Rated Workplaces", icon: Award, color: "#F59E0B", desc: "Loved by their people", count: "100+" },
+   914→    { label: "Deep-Tech Innovators", icon: Cpu, color: "#0EA5E9", desc: "AI, cloud & frontier tech", count: "450+" },
+   915→    { label: "FinTech Pioneers", icon: Landmark, color: "#10B981", desc: "Reimagining money", count: "180+" },
+   916→    { label: "Spotlight Employers", icon: Star, color: "#8B5CF6", desc: "Actively scaling teams", count: "60+" },
+   917→    { label: "Verified & Trusted", icon: ShieldCheck, color: "#EF4444", desc: "Vetted for transparency", count: "220+" },
+   918→  ];
+   919→
+   920→  return (
+   921→    <div
+   922→      className="relative"
+   923→      onMouseEnter={() => setOpen(true)}
+   924→      onMouseLeave={() => setOpen(false)}
+   925→    >
+   926→      <button
+   927→        onClick={() => go("companies")}
+   928→        className={cn(
+   929→          "flex items-center gap-1.5 rounded-md px-3 py-2 text-sm font-medium transition-colors",
+   930→          open ? "text-brand" : "text-muted-foreground hover:text-foreground"
+   931→        )}
+   932→      >
+   933→        <Building2 className="h-4 w-4 opacity-70" />
+   934→        <span>Employers</span>
+   935→        <ChevronDown className={cn("h-3.5 w-3.5 transition-transform", open && "rotate-180")} />
+   936→      </button>
+   937→      {open && (
+   938→        <div className="absolute left-1/2 top-full z-50 w-[640px] -translate-x-1/2 rounded-xl border bg-popover p-5 pt-2" style={{ filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.15))" }}>
+   939→          <div className="grid grid-cols-2 gap-5">
+   940→            {/* Column 1: Explore categories */}
+   941→            <div>
+   942→              <span className="mb-2 block text-[10px] font-bold uppercase tracking-widest text-brand">Discover by DNA</span>
+   943→              <div className="grid grid-cols-1 gap-0.5">
+   944→                {exploreCategories.map((item) => {
+   945→                  const ItemIcon = item.icon;
+   946→                  return (
+   947→                    <button
+   948→                      key={item.label}
+   949→                      onClick={() => { go("companies"); setOpen(false); }}
+   950→                      className="flex items-center gap-2.5 rounded-lg border border-transparent p-2 text-left transition-all hover:bg-muted/50"
+   951→                    >
+   952→                      <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-md" style={{ background: `${item.color}18`, color: item.color }}>
+   953→                        <ItemIcon className="h-4 w-4" />
+   954→                      </span>
+   955→                      <div className="min-w-0 flex-1">
+   956→                        <span className="block text-xs font-semibold">{item.label}</span>
+   957→                        <span className="block truncate text-[10px] text-muted-foreground">{item.desc}</span>
+   958→                      </div>
+   959→                      <span className="text-[10px] text-muted-foreground">{item.count}</span>
+   960→                    </button>
+   961→                  );
+   962→                })}
+   963→              </div>
+   964→            </div>
+   965→            {/* Column 2: Explore collections */}
+   966→            <div className="border-l pl-5">
+   967→              <span className="mb-2 block text-[10px] font-bold uppercase tracking-widest" style={{ color: "#8B5CF6" }}>Curated Spotlights</span>
+   968→              <div className="grid grid-cols-1 gap-0.5">
+   969→                {exploreCollections.map((item) => {
+   970→                  const ItemIcon = item.icon;
+   971→                  return (
+   972→                    <button
+   973→                      key={item.label}
+   974→                      onClick={() => { go("companies"); setOpen(false); }}
+   975→                      className="flex items-center gap-2.5 rounded-lg border border-transparent p-2 text-left transition-all hover:bg-muted/50"
+   976→                    >
+   977→                      <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-md" style={{ background: `${item.color}18`, color: item.color }}>
+   978→                        <ItemIcon className="h-4 w-4" />
+   979→                      </span>
+   980→                      <div className="min-w-0 flex-1">
+   981→                        <span className="block text-xs font-semibold">{item.label}</span>
+   982→                        <span className="block truncate text-[10px] text-muted-foreground">{item.desc}</span>
+   983→                      </div>
+   984→                      <span className="text-[10px] text-muted-foreground">{item.count}</span>
+   985→                    </button>
+   986→                  );
+   987→                })}
+   988→              </div>
+   989→            </div>
+   990→          </div>
+   991→          {/* Footer CTA */}
+   992→          <div className="mt-3 flex items-center justify-between border-t pt-3">
+   993→            <span className="text-xs text-muted-foreground">12,000+ teams hiring right now</span>
+   994→            <button onClick={() => { go("companies"); setOpen(false); }} className="rounded-md bg-brand/10 px-3 py-1.5 text-xs font-semibold text-brand transition-colors hover:bg-brand/20">
+   995→              Meet the employers →
+   996→            </button>
+   997→          </div>
+   998→        </div>
+   999→      )}
+  1000→    </div>
+  1001→  );
+  1002→}
+  1003→
+  1004→// ============================================================
+  1005→// MOBILE NAV (Sheet with accordion)
+  1006→// ============================================================
+  1007→function MobileNav({ go }: { go: (v: string) => void }) {
+  1008→  const [open, setOpen] = React.useState(false);
+  1009→  return (
+  1010→    <Sheet open={open} onOpenChange={setOpen}>
+  1011→      <SheetTrigger asChild>
+  1012→        <Button variant="ghost" size="icon" className="h-9 w-9 lg:hidden">
+  1013→          <Menu className="h-5 w-5" />
+  1014→        </Button>
+  1015→      </SheetTrigger>
+  1016→      <SheetContent side="left" className="w-80 overflow-y-auto">
+  1017→        <SheetHeader>
+  1018→          <SheetTitle className="flex items-center">
+  1019→            <Image
+  1020→              src="/jobsonn-logo.png"
+  1021→              alt="JOBSONN"
+  1022→              width={130}
+  1023→              height={36}
+  1024→              className="h-7 w-auto object-contain"
+  1025→            />
+  1026→          </SheetTitle>
+  1027→        </SheetHeader>
+  1028→        <Accordion type="multiple" className="mt-4">
+  1029→          <AccordionItem value="programs">
+  1030→            <AccordionTrigger className="text-sm font-semibold">Programs</AccordionTrigger>
+  1031→            <AccordionContent>
+  1032→              <div className="flex flex-col gap-1 pl-2">
+  1033→                <button onClick={() => { go("programs"); setOpen(false); }} className="rounded-md px-3 py-1.5 text-left text-xs font-medium text-brand hover:bg-brand/10">View All Programs</button>
+  1034→                {PROGRAM_GROUPS.map(p => (
+  1035→                  <button key={p.view} onClick={() => { go(p.view); setOpen(false); }} className="rounded-md px-3 py-1.5 text-left text-xs hover:bg-muted">{p.label}</button>
+  1036→                ))}
+  1037→                <div className="mt-1 border-t pt-1">
+  1038→                  {PROGRAM_GROUPS.flatMap(p => p.roles).map(r => (
+  1039→                    <button key={r.view} onClick={() => { go(r.view); setOpen(false); }} className="rounded-md px-3 py-1 text-left text-[11px] text-muted-foreground hover:bg-muted">{r.label}</button>
+  1040→                  ))}
+  1041→                </div>
+  1042→              </div>
+  1043→            </AccordionContent>
+  1044→          </AccordionItem>
+  1045→          <AccordionItem value="pro">
+  1046→            <AccordionTrigger className="text-sm font-semibold">Pro Services</AccordionTrigger>
+  1047→            <AccordionContent>
+  1048→              <div className="flex flex-col gap-1 pl-2">
+  1049→                <button onClick={() => { go("tech-ai-services"); setOpen(false); }} className="rounded-md px-3 py-1.5 text-left text-xs font-medium text-brand hover:bg-brand/10">View All Pro Services</button>
+  1050→                {PRO_SERVICE_CATEGORIES.map(cat => (
+  1051→                  <div key={cat.key}>
+  1052→                    <span className="mt-1 block px-3 text-[10px] font-bold uppercase" style={{ color: cat.color }}>{cat.label}</span>
+  1053→                    {cat.services.map(svc => (
+  1054→                      <button
+  1055→                        key={svc.slug}
+  1056→                        onClick={() => {
+  1057→                          if (svc.catSlug === "professional") go(`professional-services/${svc.slug}`);
+  1058→                          else go(`services/${svc.catSlug}/${svc.slug}`);
+  1059→                          setOpen(false);
+  1060→                        }}
+  1061→                        className="rounded-md px-3 py-1.5 text-left text-xs hover:bg-muted"
+  1062→                      >
+  1063→                        {svc.name}
+  1064→                      </button>
+  1065→                    ))}
+  1066→                  </div>
+  1067→                ))}
+  1068→              </div>
+  1069→            </AccordionContent>
+  1070→          </AccordionItem>
+  1071→          <AccordionItem value="talent">
+  1072→            <AccordionTrigger className="text-sm font-semibold">Hire Talent</AccordionTrigger>
+  1073→            <AccordionContent>
+  1074→              <div className="flex flex-col gap-1 pl-2">
+  1075→                <button onClick={() => { go("talent-solutions"); setOpen(false); }} className="rounded-md px-3 py-1.5 text-left text-xs font-medium text-brand hover:bg-brand/10">View All Solutions</button>
+  1076→                {TALENT_SEGMENTS.flatMap(s => s.items).map(item => (
+  1077→                  <button key={item.view} onClick={() => { go(item.view); setOpen(false); }} className="rounded-md px-3 py-1.5 text-left text-xs hover:bg-muted">{item.label}</button>
+  1078→                ))}
+  1079→              </div>
+  1080→            </AccordionContent>
+  1081→          </AccordionItem>
+  1082→          <AccordionItem value="jobs">
+  1083→            <AccordionTrigger className="text-sm font-semibold">Jobs</AccordionTrigger>
+  1084→            <AccordionContent>
+  1085→              <div className="flex flex-col gap-1 pl-2">
+  1086→                <button onClick={() => { go("jobs"); setOpen(false); }} className="rounded-md px-3 py-1.5 text-left text-xs font-medium text-brand hover:bg-brand/10">Browse All Jobs</button>
+  1087→                <span className="mt-1 px-3 text-[10px] font-bold uppercase text-muted-foreground">Popular</span>
+  1088→                {["IT Jobs", "Sales Jobs", "Marketing Jobs", "Data Science Jobs", "HR Jobs", "Engineering Jobs"].map(j => (
+  1089→                  <button key={j} onClick={() => { go("jobs"); setOpen(false); }} className="rounded-md px-3 py-1.5 text-left text-xs hover:bg-muted">{j}</button>
+  1090→                ))}
+  1091→                <span className="mt-1 px-3 text-[10px] font-bold uppercase text-muted-foreground">In Demand</span>
+  1092→                {["Fresher Jobs", "MNC Jobs", "Remote Jobs", "Work from Home", "Walk-in Jobs", "Part-time Jobs"].map(j => (
+  1093→                  <button key={j} onClick={() => { go("jobs"); setOpen(false); }} className="rounded-md px-3 py-1.5 text-left text-xs hover:bg-muted">{j}</button>
+  1094→                ))}
+  1095→              </div>
+  1096→            </AccordionContent>
+  1097→          </AccordionItem>
+  1098→          <AccordionItem value="employers">
+  1099→            <AccordionTrigger className="text-sm font-semibold">Employers</AccordionTrigger>
+  1100→            <AccordionContent>
+  1101→              <div className="flex flex-col gap-1 pl-2">
+  1102→                <button onClick={() => { go("companies"); setOpen(false); }} className="rounded-md px-3 py-1.5 text-left text-xs font-medium text-brand hover:bg-brand/10">View All Employers</button>
+  1103→                <span className="mt-1 px-3 text-[10px] font-bold uppercase text-muted-foreground">Categories</span>
+  1104→                {["Unicorn", "MNC", "Startup", "Product based", "Internet"].map(c => (
+  1105→                  <button key={c} onClick={() => { go("companies"); setOpen(false); }} className="rounded-md px-3 py-1.5 text-left text-xs hover:bg-muted">{c}</button>
+  1106→                ))}
+  1107→                <span className="mt-1 px-3 text-[10px] font-bold uppercase text-muted-foreground">Collections</span>
+  1108→                {["Top companies", "IT companies", "Fintech companies", "Featured companies"].map(c => (
+  1109→                  <button key={c} onClick={() => { go("companies"); setOpen(false); }} className="rounded-md px-3 py-1.5 text-left text-xs hover:bg-muted">{c}</button>
+  1110→                ))}
+  1111→              </div>
+  1112→            </AccordionContent>
+  1113→          </AccordionItem>
+  1114→          <AccordionItem value="resources">
+  1115→            <AccordionTrigger className="text-sm font-semibold">Resources</AccordionTrigger>
+  1116→            <AccordionContent>
+  1117→              <div className="flex flex-col gap-1 pl-2">
+  1118→                {RESOURCES_SUB.map(item => (
+  1119→                  <button key={item.view} onClick={() => { go(item.view); setOpen(false); }} className="rounded-md px-3 py-1.5 text-left text-xs hover:bg-muted">{item.label}</button>
+  1120→                ))}
+  1121→              </div>
+  1122→            </AccordionContent>
+  1123→          </AccordionItem>
+  1124→        </Accordion>
+  1125→        <div className="mt-2 flex flex-col gap-1 border-t pt-2">
+  1126→          <button onClick={() => { go("placements"); setOpen(false); }} className="rounded-md px-3 py-2 text-left text-sm font-medium hover:bg-muted">Placements</button>
+  1127→          <button onClick={() => { go("professional-services"); setOpen(false); }} className="rounded-md px-3 py-2 text-left text-sm font-medium hover:bg-muted">Professional Services</button>
+  1128→        </div>
+  1129→      </SheetContent>
+  1130→    </Sheet>
+  1131→  );
+  1132→}
+  1133→
+  1134→// ============================================================
+  1135→// MAIN NAVBAR
+  1136→// ============================================================
+  1137→export function PublicNavbar() {
+  1138→  const { navigate, route, setCommandOpen } = useNav();
+  1139→  const { theme, setTheme } = useTheme();
+  1140→  const [mounted, setMounted] = React.useState(false);
+  1141→  const [scrolled, setScrolled] = React.useState(false);
+  1142→  React.useEffect(() => setMounted(true), []);
+  1143→  React.useEffect(() => {
+  1144→    const onScroll = () => setScrolled(window.scrollY > 20);
+  1145→    window.addEventListener("scroll", onScroll, { passive: true });
+  1146→    onScroll();
+  1147→    return () => window.removeEventListener("scroll", onScroll);
+  1148→  }, []);
+  1149→
+  1150→  const go = useGo();
+  1151→
+  1152→  return (
+  1153→    <header className={cn(
+  1154→      "sticky top-0 z-40 w-full border-b transition-all duration-300",
+  1155→      scrolled ? "bg-background/95 backdrop-blur-md shadow-sm" : "bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/70"
+  1156→    )}>
+  1157→      <div className="mx-auto flex h-16 max-w-7xl items-center gap-4 px-4 sm:px-6 lg:px-8">
+  1158→        {/* Mobile menu */}
+  1159→        <MobileNav go={go} />
+  1160→
+  1161→        {/* Logo */}
+  1162→        <button onClick={() => go("home")} className="flex items-center" aria-label="JOBSONN home">
+  1163→          <Image
+  1164→            src="/jobsonn-logo.png"
+  1165→            alt="JOBSONN"
+  1166→            width={140}
+  1167→            height={40}
+  1168→            className="h-8 w-auto object-contain sm:h-9"
+  1169→            priority
+  1170→          />
+  1171→        </button>
+  1172→
+  1173→        {/* Desktop nav with mega dropdowns */}
+  1174→        <nav className="hidden items-center gap-0.5 lg:flex" style={{ overflow: "visible" }}>
+  1175→          <ProgramsDropdown go={go} />
+  1176→          <ProServicesDropdown go={go} />
+  1177→          <TalentSolutionsDropdown go={go} />
+  1178→          <JobsDropdown go={go} />
+  1179→          <EmployersDropdown go={go} />
+  1180→          <ResourcesDropdown go={go} />
+  1181→        </nav>
+  1182→
+  1183→        {/* Right actions */}
+  1184→        <div className="ml-auto flex items-center gap-2">
+  1185→          <Button variant="ghost" size="icon" className="h-9 w-9" onClick={() => setCommandOpen(true)}>
+  1186→            <Search className="h-4 w-4" />
+  1187→          </Button>
+  1188→          <Button variant="ghost" size="icon" className="h-9 w-9" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
+  1189→            {mounted && theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+  1190→          </Button>
+  1191→          <Button size="sm" onClick={() => navigate("public", "partner-login")}>
+  1192→            Sign In
+  1193→          </Button>
+  1194→        </div>
+  1195→      </div>
+  1196→    </header>
+  1197→  );
+  1198→}
+  1199→

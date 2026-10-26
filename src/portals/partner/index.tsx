@@ -65,8 +65,32 @@ const PartnerRevenue = dynamic(() => import("./PartnerRevenue").then((m) => m.Pa
 const PartnerTalentSolutions = dynamic(() => import("./PartnerTalentSolutions").then((m) => m.PartnerTalentSolutions));
 const PartnerTsTransactions = dynamic(() => import("./PartnerTsTransactions").then((m) => m.PartnerTsTransactions));
 
+// --- 5 high-impact features (BUILD-PARTNER-FEATURES) ---
+const PartnerPlacements = dynamic(() => import("./PartnerPlacements").then((m) => m.PartnerPlacements));
+const PartnerReports = dynamic(() => import("./PartnerReports").then((m) => m.PartnerReports));
+const PartnerCommissions = dynamic(() => import("./PartnerCommissions").then((m) => m.PartnerCommissions));
+const PartnerTaxDocuments = dynamic(() => import("./PartnerTaxDocuments").then((m) => m.PartnerTaxDocuments));
+const PartnerClientMessaging = dynamic(() => import("./PartnerClientMessaging").then((m) => m.PartnerClientMessaging));
+
 // Cross-portal shared pages (SETTINGS-SUPPORT-SHARED)
 const TasksPage = dynamic(() => import("@/portals/_settings-support-shared/TasksPage").then((m) => m.TasksPage));
+
+// --- 3 profile features (WAVE1-PARTNER-PROFILE) ---
+const PartnerProfileEnhanced = dynamic(() => import("./PartnerProfileEnhanced").then((m) => m.PartnerProfileEnhanced));
+const PartnerCollegeProfiles = dynamic(() => import("./PartnerCollegeProfiles").then((m) => m.PartnerCollegeProfiles));
+const PartnerScorecard = dynamic(() => import("./PartnerScorecard").then((m) => m.PartnerScorecard));
+
+// Process & lifecycle pages (WAVE3-RECRUITER-TRAINING-PARTNER-PROCESS)
+const PartnerOnboardingWizard = dynamic(() => import("./PartnerOnboardingWizard").then((m) => m.PartnerOnboardingWizard));
+const PartnerRenewalForecast = dynamic(() => import("./PartnerRenewalForecast").then((m) => m.PartnerRenewalForecast));
+
+// Transaction & finance pages (WAVE4-TRANSACTIONS-ALL-PORTALS)
+const PartnerSplitSimulator = dynamic(() => import("./PartnerSplitSimulator").then((m) => m.PartnerSplitSimulator));
+const PartnerSettlementDisputes = dynamic(() => import("./PartnerSettlementDisputes").then((m) => m.PartnerSettlementDisputes));
+
+// Communication pages (WAVE5-COMMUNICATION-ALL-PORTALS)
+const PartnerCollegeWorkspace = dynamic(() => import("./PartnerCollegeWorkspace").then((m) => m.PartnerCollegeWorkspace));
+const PartnerMarketingMaterials = dynamic(() => import("./PartnerMarketingMaterials").then((m) => m.PartnerMarketingMaterials));
 
 export function PortalRouter() {
   const { route } = useNav();
@@ -83,7 +107,8 @@ export function render(route: string): React.ReactNode {
       return <PartnerOverview />;
     case "tasks": return <TasksPage portal="partner" route={route} />;
     case "analytics": return <PartnerAnalytics />;
-    case "reports": return <PartnerAnalytics />;
+    case "partner-scorecard": return <PartnerScorecard />;
+    case "reports": return <PartnerReports />;
     case "revenue": return <PartnerRevenue />;
     case "announcements": return <PartnerAnnouncements />;
     case "audit-logs": return <PartnerAuditLogs />;
@@ -96,11 +121,22 @@ export function render(route: string): React.ReactNode {
     case "applications": return <PartnerApplications />;
     // Partnership
     case "profile": return <PartnerProfile />;
+    case "partner-profile-enhanced": return <PartnerProfileEnhanced />;
+    case "college-profiles": return <PartnerCollegeProfiles />;
     case "college-applications": return <PartnerCollegeApplications />;
     case "colleges": return <PartnerColleges />;
     case "models": return <PartnerModels />;
     case "mou-agreements": return <PartnerMouAgreements />;
     case "renewals": return <PartnerRenewals />;
+    // Process & lifecycle (WAVE3-RECRUITER-TRAINING-PARTNER-PROCESS)
+    case "partner-onboarding": return <PartnerOnboardingWizard />;
+    case "renewal-forecast": return <PartnerRenewalForecast />;
+    // Transaction & finance (WAVE4-TRANSACTIONS-ALL-PORTALS)
+    case "split-simulator": return <PartnerSplitSimulator />;
+    case "settlement-disputes": return <PartnerSettlementDisputes />;
+    // Communication (WAVE5-COMMUNICATION-ALL-PORTALS)
+    case "college-workspace": return <PartnerCollegeWorkspace />;
+    case "marketing-materials": return <PartnerMarketingMaterials />;
     // Academics
     case "programs": return <PartnerPrograms />;
     case "centres": return <PartnerCentres />;
@@ -112,7 +148,7 @@ export function render(route: string): React.ReactNode {
     case "internships": return <PartnerInternships />;
     case "projects": return <PartnerProjects />;
     case "job-orders": return <PartnerJobOrders />;
-    case "placements": return <PartnerCompliance />;
+    case "placements": return <PartnerPlacements />;
     case "compliance": return <PartnerCompliance />;
     case "certificates": return <PartnerCertificates />;
     // Finance
@@ -122,12 +158,15 @@ export function render(route: string): React.ReactNode {
     case "accounts": return <PartnerAccounts />;
     case "tax-rates": return <PartnerTaxRates />;
     case "fees": return <PartnerFees />;
+    case "commissions": return <PartnerCommissions />;
+    case "tax-documents": return <PartnerTaxDocuments />;
     // Tools & Support
     case "online-tools": return <PartnerOnlineTools />;
     case "forms-assistance": return <PartnerForms />;
     case "guidelines": return <PartnerGuidelines />;
     case "service-catalog": return <PartnerServiceCatalog />;
     case "engagements": return <PartnerEngagements />;
+    case "client-messaging": return <PartnerClientMessaging />;
     case "support": return <PartnerSupport />;
     // Settings
     case "settings": return <PartnerSettings />;

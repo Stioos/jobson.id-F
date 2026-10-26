@@ -1,0 +1,708 @@
+     1→"use client";
+     2→
+     3→import * as React from "react";
+     4→import { useNav } from "@/lib/store";
+     5→import { Card, EmptyState } from "@/components/common";
+     6→import { AvatarLogo } from "@/components/common/AvatarLogo";
+     7→import { Button } from "@/components/ui/button";
+     8→import { Badge } from "@/components/ui/badge";
+     9→import {
+    10→  ArrowRight, ArrowLeft, CheckCircle2, Briefcase, Wallet, Quote,
+    11→  TrendingUp, Award, Layers, Rocket,
+    12→  Clock, Users,
+    13→} from "lucide-react";
+    14→import { toast } from "sonner";
+    15→import {
+    16→  getRoleRoute, getRolesForProgram, getProgramTrackByRoleView,
+    17→  getPublicProgram, roleRouteKey,
+    18→} from "./_programData";
+    19→import type { ProgramTrackInfo } from "@/data/programTracksData";
+    20→
+    21→// Per-specialization salary bands (LPA) — keyed by roleView.
+    22→const SALARY_BANDS: Record<string, { role: string; min: number; max: number }[]> = {
+    23→  "fde-software-engineer": [
+    24→    { role: "Forward Deployed SWE", min: 8, max: 18 },
+    25→    { role: "Product Engineer", min: 9, max: 19 },
+    26→    { role: "Full Stack Engineer", min: 7, max: 16 },
+    27→    { role: "Application Engineer", min: 8, max: 17 },
+    28→  ],
+    29→  "fde-ai-engineer": [
+    30→    { role: "AI Engineer", min: 10, max: 22 },
+    31→    { role: "ML Engineer", min: 10, max: 21 },
+    32→    { role: "LLM Engineer", min: 12, max: 24 },
+    33→    { role: "GenAI Engineer", min: 11, max: 23 },
+    34→  ],
+    35→  "fde-data-engineer": [
+    36→    { role: "Data Engineer", min: 9, max: 20 },
+    37→    { role: "Analytics Engineer", min: 9, max: 19 },
+    38→    { role: "Platform Data Engineer", min: 10, max: 21 },
+    39→    { role: "Pipeline Engineer", min: 8, max: 18 },
+    40→  ],
+    41→  "fde-platform-engineer": [
+    42→    { role: "Platform Engineer", min: 9, max: 19 },
+    43→    { role: "DevOps Engineer", min: 8, max: 18 },
+    44→    { role: "SRE / Infra Engineer", min: 10, max: 20 },
+    45→    { role: "Cloud Engineer", min: 9, max: 19 },
+    46→  ],
+    47→  "fde-solutions-engineer": [
+    48→    { role: "Solutions Engineer", min: 10, max: 20 },
+    49→    { role: "Solutions Architect", min: 12, max: 24 },
+    50→    { role: "Customer Engineer", min: 9, max: 18 },
+    51→    { role: "Pre-sales Engineer", min: 10, max: 19 },
+    52→  ],
+    53→  "fde-security-engineer": [
+    54→    { role: "Security Engineer", min: 10, max: 21 },
+    55→    { role: "DevSecOps Engineer", min: 10, max: 20 },
+    56→    { role: "AppSec Engineer", min: 11, max: 22 },
+    57→    { role: "Cloud Security Engineer", min: 11, max: 22 },
+    58→  ],
+    59→  "fse-software-engineer": [
+    60→    { role: "Full Stack Engineer", min: 6, max: 15 },
+    61→    { role: "Frontend Engineer", min: 6, max: 14 },
+    62→    { role: "Backend Engineer", min: 7, max: 16 },
+    63→    { role: "Web Application Engineer", min: 6, max: 14 },
+    64→  ],
+    65→  "fse-ai-engineer": [
+    66→    { role: "AI Engineer", min: 7, max: 17 },
+    67→    { role: "Full Stack AI Engineer", min: 8, max: 18 },
+    68→    { role: "AI Integration Engineer", min: 7, max: 16 },
+    69→    { role: "LLM Application Engineer", min: 8, max: 18 },
+    70→  ],
+    71→  "fse-product-engineer": [
+    72→    { role: "Product Engineer", min: 7, max: 16 },
+    73→    { role: "Founding Engineer", min: 8, max: 18 },
+    74→    { role: "Full Stack Engineer (Product)", min: 7, max: 15 },
+    75→    { role: "Growth Engineer", min: 7, max: 16 },
+    76→  ],
+    77→  "fse-saas-engineer": [
+    78→    { role: "SaaS Engineer", min: 7, max: 16 },
+    79→    { role: "Platform Engineer (SaaS)", min: 8, max: 17 },
+    80→    { role: "Multi-tenant Systems Engineer", min: 8, max: 18 },
+    81→    { role: "Billing/Payments Engineer", min: 7, max: 17 },
+    82→  ],
+    83→  "fse-cloud-engineer": [
+    84→    { role: "Cloud Engineer", min: 7, max: 17 },
+    85→    { role: "DevOps Engineer", min: 7, max: 16 },
+    86→    { role: "Cloud-Native Engineer", min: 8, max: 18 },
+    87→    { role: "Serverless Engineer", min: 7, max: 16 },
+    88→  ],
+    89→  "fse-enterprise-engineer": [
+    90→    { role: "Enterprise Engineer", min: 8, max: 18 },
+    91→    { role: "Systems Engineer", min: 8, max: 17 },
+    92→    { role: "Integration Engineer", min: 8, max: 18 },
+    93→    { role: "Platform Engineer (Enterprise)", min: 9, max: 19 },
+    94→  ],
+    95→  "dsai-digital-sales-specialist": [
+    96→    { role: "Digital Sales Specialist", min: 5, max: 13 },
+    97→    { role: "AI Marketing Specialist", min: 5, max: 12 },
+    98→    { role: "Growth Marketing Associate", min: 5, max: 11 },
+    99→    { role: "Performance Marketing Analyst", min: 5, max: 12 },
+   100→  ],
+   101→  "dsai-ai-ma-growth-specialist": [
+   102→    { role: "Growth Specialist", min: 6, max: 14 },
+   103→    { role: "Marketing Automation Specialist", min: 6, max: 13 },
+   104→    { role: "Lifecycle Marketing Lead", min: 6, max: 14 },
+   105→    { role: "Growth Hacker", min: 6, max: 13 },
+   106→  ],
+   107→  "dsai-marketing-automation-engineer": [
+   108→    { role: "Marketing Solutions Engineer", min: 7, max: 15 },
+   109→    { role: "Marketing Automation Engineer", min: 7, max: 15 },
+   110→    { role: "Mar-Tech Engineer", min: 7, max: 16 },
+   111→    { role: "Chatbot Developer", min: 6, max: 14 },
+   112→  ],
+   113→  "dsai-sales-marketing-agents": [
+   114→    { role: "AI Agents Engineer", min: 8, max: 16 },
+   115→    { role: "Sales Automation Engineer", min: 8, max: 17 },
+   116→    { role: "Conversational AI Engineer", min: 7, max: 15 },
+   117→    { role: "Multi-Agent Systems Engineer", min: 9, max: 18 },
+   118→  ],
+   119→  "dsai-revenue-growth-engineer": [
+   120→    { role: "Revenue Engineer", min: 8, max: 17 },
+   121→    { role: "Growth Engineer (ML)", min: 8, max: 18 },
+   122→    { role: "Pricing Engineer", min: 8, max: 17 },
+   123→    { role: "Revenue Operations Engineer", min: 8, max: 16 },
+   124→  ],
+   125→  "dsai-customer-solutions-engineer": [
+   126→    { role: "Customer Solutions Engineer", min: 7, max: 15 },
+   127→    { role: "AI Support Engineer", min: 7, max: 15 },
+   128→    { role: "Support Automation Engineer", min: 7, max: 14 },
+   129→    { role: "Conversational Support Engineer", min: 7, max: 15 },
+   130→  ],
+   131→  "cdm-cloud-infrastructure-engineer": [
+   132→    { role: "Cloud Infrastructure Engineer", min: 8, max: 20 },
+   133→    { role: "Cloud Architect", min: 12, max: 24 },
+   134→    { role: "Cloud Security Engineer", min: 9, max: 19 },
+   135→    { role: "FinOps Engineer", min: 8, max: 18 },
+   136→  ],
+   137→  "cdm-devops-engineer": [
+   138→    { role: "DevOps Engineer", min: 7, max: 18 },
+   139→    { role: "Release Engineer", min: 7, max: 16 },
+   140→    { role: "Build & Release Engineer", min: 7, max: 15 },
+   141→    { role: "Automation Engineer", min: 7, max: 16 },
+   142→  ],
+   143→  "cdm-mlops-engineer": [
+   144→    { role: "MLOps Engineer", min: 10, max: 22 },
+   145→    { role: "ML Platform Engineer", min: 11, max: 23 },
+   146→    { role: "ML Infrastructure Engineer", min: 10, max: 21 },
+   147→    { role: "Model Deployment Engineer", min: 9, max: 20 },
+   148→  ],
+   149→  "cdm-sre-engineer": [
+   150→    { role: "Site Reliability Engineer", min: 9, max: 21 },
+   151→    { role: "Production Engineer", min: 9, max: 20 },
+   152→    { role: "Observability Engineer", min: 8, max: 18 },
+   153→    { role: "Incident Response Engineer", min: 9, max: 19 },
+   154→  ],
+   155→  "cdm-kubernetes-engineer": [
+   156→    { role: "Kubernetes Engineer", min: 9, max: 20 },
+   157→    { role: "Container Platform Engineer", min: 9, max: 19 },
+   158→    { role: "Cloud-Native Engineer", min: 9, max: 20 },
+   159→    { role: "Cluster Admin", min: 8, max: 18 },
+   160→  ],
+   161→  "cdm-platform-cicd-engineer": [
+   162→    { role: "Platform Engineer", min: 10, max: 22 },
+   163→    { role: "Developer Experience Engineer", min: 9, max: 20 },
+   164→    { role: "CI/CD Engineer", min: 8, max: 18 },
+   165→    { role: "Internal Platform Engineer", min: 9, max: 19 },
+   166→  ],
+   167→};
+   168→
+   169→// "Who should join" — keyed by roleView.
+   170→const WHO_SHOULD_JOIN: Record<string, string[]> = {
+   171→  "fde-software-engineer": [
+   172→    "You have basic programming comfort (any language) and want to ship production software for real customers.",
+   173→    "You enjoy the full lifecycle — from UI to API to database — and want to own features end-to-end.",
+   174→    "You thrive in ambiguity and can navigate a live client engagement without step-by-step instructions.",
+   175→  ],
+   176→  "fde-ai-engineer": [
+   177→    "You have programming experience and want to specialize in deploying LLMs, RAG pipelines, and AI agents to production.",
+   178→    "You're comfortable with Python and basic ML concepts — or willing to invest 30+ hours/week to catch up.",
+   179→    "You want to build AI features that real users interact with, not just notebooks.",
+   180→  ],
+   181→  "fde-data-engineer": [
+   182→    "You enjoy building pipelines, transforming data, and making information flow reliably at scale.",
+   183→    "You have basic SQL and Python skills and want to specialize in modern data stack (dbt, Airflow, Kafka, Spark).",
+   184→    "You like the satisfaction of a clean dashboard powered by infrastructure you built yourself.",
+   185→  ],
+   186→  "fde-platform-engineer": [
+   187→    "You're fascinated by infrastructure, automation, and the systems that run other systems.",
+   188→    "You have basic Linux/programming comfort and want to master cloud, IaC, and Kubernetes.",
+   189→    "You like enabling other engineers to ship faster — the platform mindset.",
+   190→  ],
+   191→  "fde-solutions-engineer": [
+   192→    "You bridge technical and business worlds — you enjoy both coding and customer conversations.",
+   193→    "You have basic programming experience and strong communication skills.",
+   194→    "You want a customer-facing engineering role that combines architecture, integration, and pre-sales.",
+   195→  ],
+   196→  "fde-security-engineer": [
+   197→    "You're passionate about protecting systems and stay curious about new attack vectors.",
+   198→    "You have basic programming/scripting experience and want to specialize in AppSec, IAM, and DevSecOps.",
+   199→    "You enjoy thinking like an attacker to defend like a pro.",
+   200→  ],
+   201→  "fse-software-engineer": [
+   202→    "You're new to coding or self-taught and want a structured, intensive path to a fullstack engineering role.",
+   203→    "You can commit 30–40 hours/week for 24 weeks.",
+   204→    "You enjoy building features across the stack — UI, API, database.",
+   205→  ],
+   206→  "fse-ai-engineer": [
+   207→    "You have basic fullstack skills (React + Node) and want to specialize in AI-powered applications.",
+   208→    "You're excited about LLMs, RAG, and shipping AI features end-to-end.",
+   209→    "You want to be the engineer who bridges traditional web development and modern AI.",
+   210→  ],
+   211→  "fse-product-engineer": [
+   212→    "You want to build products, not just features — and want to think like a PM while coding.",
+   213→    "You have basic frontend or backend skills and want to own the full feature lifecycle.",
+   214→    "You're considering a future transition to founding your own company.",
+   215→  ],
+   216→  "fse-saas-engineer": [
+   217→    "You want to master multi-tenant architecture, subscription billing, and scalable SaaS patterns.",
+   218→    "You have basic fullstack skills and want to specialize in the most in-demand engineering category.",
+   219→    "You're aiming for roles at SaaS startups or building your own SaaS.",
+   220→  ],
+   221→  "fse-cloud-engineer": [
+   222→    "You're fascinated by cloud infrastructure and want to combine fullstack with DevOps.",
+   223→    "You have basic programming and Linux skills and want to master AWS/GCP, Docker, and Kubernetes.",
+   224→    "You want to be the engineer who can both build and deploy apps at scale.",
+   225→  ],
+   226→  "fse-enterprise-engineer": [
+   227→    "You want to build large-scale systems serving millions of users with complex integrations.",
+   228→    "You have basic fullstack skills and want to specialize in distributed systems and enterprise architecture.",
+   229→    "You're aiming for roles at large product companies or system integrators.",
+   230→  ],
+   231→  "dsai-digital-sales-specialist": [
+   232→    "You're a sales or marketing professional who wants to add AI tools to your toolkit.",
+   233→    "You're a beginner with no sales background but strong communication skills and a drive to drive revenue.",
+   234→    "You want a career that combines creativity, data, and people skills.",
+   235→  ],
+   236→  "dsai-ai-ma-growth-specialist": [
+   237→    "You're a marketer who wants to master AI-powered automation and growth tactics.",
+   238→    "You have basic analytics comfort and want to run experiments that move metrics.",
+   239→    "You want to scale your impact beyond manual campaigns.",
+   240→  ],
+   241→  "dsai-marketing-automation-engineer": [
+   242→    "You're an engineer or technical marketer who wants to build the tools that power marketing.",
+   243→    "You have basic Python and API skills and want to specialize in marketing engineering.",
+   244→    "You enjoy bridging code and campaigns.",
+   245→  ],
+   246→  "dsai-sales-marketing-agents": [
+   247→    "You're a developer who wants to build autonomous AI agents for sales and marketing.",
+   248→    "You have Python experience and are excited about LLMs, function calling, and multi-agent orchestration.",
+   249→    "You want to be at the frontier of applied AI.",
+   250→  ],
+   251→  "dsai-revenue-growth-engineer": [
+   252→    "You're a technical professional who wants to own revenue as an engineer.",
+   253→    "You have basic ML/Python skills and want to apply them to pricing, churn, and growth.",
+   254→    "You want a high-impact role that combines engineering, data, and business.",
+   255→  ],
+   256→  "dsai-customer-solutions-engineer": [
+   257→    "You want to build AI-powered customer service platforms that delight users.",
+   258→    "You have basic Python/API skills and are excited about NLP, chatbots, and support automation.",
+   259→    "You enjoy the intersection of engineering and customer experience.",
+   260→  ],
+   261→  "cdm-cloud-infrastructure-engineer": [
+   262→    "You want to architect cloud systems that scale to millions of users.",
+   263→    "You have basic IT/networking knowledge and want to master AWS, Azure & GCP.",
+   264→    "You enjoy infrastructure-as-code and want to automate everything.",
+   265→  ],
+   266→  "cdm-devops-engineer": [
+   267→    "You want to be the engineer who ships code 10x faster.",
+   268→    "You have basic Linux/Git skills and are excited about CI/CD and automation.",
+   269→    "You enjoy breaking down silos between dev and ops.",
+   270→  ],
+   271→  "cdm-mlops-engineer": [
+   272→    "You want to bridge the gap between data science and engineering.",
+   273→    "You have Python + basic ML knowledge and want to deploy models in production.",
+   274→    "You're excited about model versioning, monitoring and drift detection.",
+   275→  ],
+   276→  "cdm-sre-engineer": [
+   277→    "You want to keep critical systems running at 99.99% uptime.",
+   278→    "You have ops/debugging instincts and want to master observability and incident response.",
+   279→    "You enjoy chaos engineering and building self-healing systems.",
+   280→  ],
+   281→  "cdm-kubernetes-engineer": [
+   282→    "You want to orchestrate containers at enterprise scale.",
+   283→    "You have Docker basics and want to master Kubernetes, Helm and service mesh.",
+   284→    "You're excited about GitOps, ArgoCD and cloud-native architectures.",
+   285→  ],
+   286→  "cdm-platform-cicd-engineer": [
+   287→    "You want to build internal developer platforms that teams love.",
+   288→    "You have DevOps experience and want to level up to platform engineering.",
+   289→    "You're excited about Backstage, Crossplane and developer experience.",
+   290→  ],
+   291→};
+   292→
+   293→// Testimonials (one per roleView is overkill — use program-level testimonials as fallback).
+   294→const TESTIMONIALS: Record<string, { name: string; role: string; company: string; initials: string; quote: string; ctc: string }[]> = {
+   295→  "fde-software-engineer": [
+   296→    { name: "Aarav Kulkarni", role: "Forward Deployed Engineer", company: "Razorpay", initials: "AK", ctc: "₹16 LPA", quote: "The forward-deployment mindset was the unlock. I had real production war stories to tell in interviews — that's why I beat candidates from Tier-1 colleges." },
+   297→    { name: "Megha Rao", role: "Software Engineer", company: "PhonePe", initials: "MR", ctc: "₹14 LPA", quote: "By week 12 I was shipping features that real users clicked. The transition from assignments to production was scary at first but that's what hiring managers want." },
+   298→  ],
+   299→  "fse-software-engineer": [
+   300→    { name: "Pooja Reddy", role: "Full Stack Engineer", company: "Swiggy", initials: "PR", ctc: "₹12 LPA", quote: "From a non-CS background to a fullstack role at Swiggy in 24 weeks. The mentorship and project feedback were brutal but exactly what I needed." },
+   301→    { name: "Rahul Jain", role: "Full Stack Engineer", company: "Razorpay", initials: "RJ", ctc: "₹13 LPA", quote: "12 portfolio projects, 1:1 mentorship, and a placement cell that actually cares. Worth every rupee — and I only paid after I got the offer." },
+   302→  ],
+   303→  "dsai-digital-sales-specialist": [
+   304→    { name: "Karthik Iyer", role: "AI Marketing Engineer", company: "Zoho", initials: "KI", ctc: "₹11 LPA", quote: "I was a sales guy who couldn't code. Now I build AI agents that book meetings autonomously. My salary tripled in 6 months." },
+   305→    { name: "Ananya S", role: "Growth Specialist", company: "CRED", initials: "AS", ctc: "₹10 LPA", quote: "The AI marketing tooling I learned here saves me 15 hours a week. I run experiments now, not just campaigns." },
+   306→  ],
+   307→  "cdm-devops-engineer": [
+   308→    { name: "Arjun Reddy", role: "DevOps Engineer", company: "Razorpay", initials: "AR", ctc: "₹16 LPA", quote: "I was stuck in a support role for 3 years. The CDM program gave me the exact skills — Terraform, Kubernetes, CI/CD — that every product company was hiring for." },
+   309→    { name: "Neha Gupta", role: "DevOps Engineer", company: "PhonePe", initials: "NG", ctc: "₹15 LPA", quote: "The CI/CD capstone was my interview showpiece. I built a full pipeline with automated tests, security scans and zero-downtime deployment. Hiring managers were blown away." },
+   310→  ],
+   311→  "cdm-mlops-engineer": [
+   312→    { name: "Priya Nair", role: "MLOps Engineer", company: "Postman", initials: "PN", ctc: "₹20 LPA", quote: "The MLOps track is gold. I went from notebooks to deploying models on Kubernetes with full monitoring and drift detection. Highest-paying role in my cohort." },
+   313→    { name: "Rahul Verma", role: "ML Platform Engineer", company: "Groww", initials: "RV", ctc: "₹22 LPA", quote: "I bridged data science and engineering. The Kubeflow + MLflow + Evidently stack I learned here is exactly what production ML teams use. Rare skills, premium pay." },
+   314→  ],
+   315→  "cdm-sre-engineer": [
+   316→    { name: "Siddharth Verma", role: "Site Reliability Engineer", company: "Zerodha", initials: "SV", ctc: "₹18 LPA", quote: "The SRE specialization taught me to think in SLOs, error budgets and postmortems. I now run on-call for a system that processes millions of trades." },
+   317→    { name: "Anika Patel", role: "Production Engineer", company: "Swiggy", initials: "AP", ctc: "₹17 LPA", quote: "The chaos engineering labs were terrifying — and exactly what I needed. I now design systems that survive the failures I used to fear." },
+   318→  ],
+   319→  "cdm-kubernetes-engineer": [
+   320→    { name: "Vikram Singh", role: "Kubernetes Engineer", company: "Razorpay", initials: "VS", ctc: "₹19 LPA", quote: "K8s is the operating system of the cloud. The program took me from Docker basics to running multi-cluster service mesh. Every product company is hiring for this." },
+   321→    { name: "Divya Reddy", role: "Container Platform Engineer", company: "Freshworks", initials: "DR", ctc: "₹18 LPA", quote: "The GitOps with ArgoCD module changed how I think about deployments. Roll back with a PR, not a panic. Pure engineering joy." },
+   322→  ],
+   323→  "cdm-cloud-infrastructure-engineer": [
+   324→    { name: "Karan Mehta", role: "Cloud Infrastructure Engineer", company: "Postman", initials: "KM", ctc: "₹17 LPA", quote: "Multi-cloud architecture was the unlock. I now design systems that span AWS, Azure and GCP — and I cut my company's cloud bill by 40% with the FinOps skills I learned." },
+   325→    { name: "Sneha Iyer", role: "Cloud Architect", company: "Zoho", initials: "SI", ctc: "₹21 LPA", quote: "From a sysadmin to a cloud architect in 22 weeks. The Terraform modules I built during the capstone are now in production at Zoho. Real work, real impact." },
+   326→  ],
+   327→  "cdm-platform-cicd-engineer": [
+   328→    { name: "Aditya Rao", role: "Platform Engineer", company: "CRED", initials: "AR", ctc: "₹20 LPA", quote: "Building an internal developer platform with Backstage was the most satisfying project of my career. Developers at CRED now ship 3x faster because of the golden paths I built." },
+   329→    { name: "Meera Kapoor", role: "Developer Experience Engineer", company: "Groww", initials: "MK", ctc: "₹19 LPA", quote: "Platform engineering is the future of DevOps. The DORA metrics dashboard I built during the capstone is now used by our VP of Engineering every week. High visibility, high impact." },
+   330→  ],
+   331→};
+   332→
+   333→export function PublicProgramRole({ roleView }: { roleView: string }) {
+   334→  const { navigate } = useNav();
+   335→
+   336→  const roleRoute = getRoleRoute(roleView);
+   337→  const track: ProgramTrackInfo | null = getProgramTrackByRoleView(roleView);
+   338→
+   339→  if (!roleRoute || !track) {
+   340→    return (
+   341→      <div className="mx-auto max-w-3xl px-4 py-20">
+   342→        <EmptyState
+   343→          icon={<Award className="h-6 w-6" />}
+   344→          title="Specialization not found"
+   345→          description={`We couldn't find a specialization track for "${roleView}".`}
+   346→          action={
+   347→            <Button onClick={() => navigate("public", "programs")} className="gap-1.5">
+   348→              <ArrowLeft className="h-4 w-4" /> All programs
+   349→            </Button>
+   350→          }
+   351→        />
+   352→      </div>
+   353→    );
+   354→  }
+   355→
+   356→  const program = getPublicProgram(roleRoute.programId);
+   357→  const accent = roleRoute.color;
+   358→  const siblings = getRolesForProgram(roleRoute.programId).filter(
+   359→    (r) => r.roleView !== roleView,
+   360→  );
+   361→  const salaryBands = SALARY_BANDS[roleView] ?? [];
+   362→  const whoShouldJoin = WHO_SHOULD_JOIN[roleView] ?? [];
+   363→  const testimonials = TESTIMONIALS[roleView] ?? [];
+   364→
+   365→  return (
+   366→    <div className="bg-background">
+   367→      {/* ===================== HERO ===================== */}
+   368→      <section className="relative overflow-hidden border-b">
+   369→        <div className="absolute inset-0 bg-grid opacity-40" aria-hidden />
+   370→        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background" aria-hidden />
+   371→        <div className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+   372→          <button
+   373→            onClick={() => navigate("public", roleRoute.programId)}
+   374→            className="mb-6 inline-flex items-center gap-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-brand"
+   375→          >
+   376→            <ArrowLeft className="h-3.5 w-3.5" /> Back to {program?.label ?? "program"}
+   377→          </button>
+   378→
+   379→          <div className="grid gap-8 lg:grid-cols-[1.4fr_1fr]">
+   380→            <div>
+   381→              <div className="flex flex-wrap items-center gap-3">
+   382→                <Badge
+   383→                  variant="secondary"
+   384→                  className="border text-xs font-semibold"
+   385→                  style={{ color: accent, borderColor: accent, backgroundColor: `${accent}14` }}
+   386→                >
+   387→                  {track.badge}
+   388→                </Badge>
+   389→                <Badge variant="outline" className="gap-1 text-xs">
+   390→                  <Layers className="h-3 w-3" /> {program?.tag} · {program?.label.replace(/^(Forward Deployed|Fullstack Development|Digital Sales & AI Marketing \/ AI) /, "")}
+   391→                </Badge>
+   392→                <Badge variant="outline" className="gap-1 border-brand text-brand">
+   393→                  <Wallet className="h-3 w-3" /> Pay After Placement
+   394→                </Badge>
+   395→              </div>
+   396→              <h1 className="mt-4 text-3xl font-bold tracking-tight text-balance sm:text-4xl lg:text-5xl">
+   397→                {track.title}
+   398→              </h1>
+   399→              <p className="mt-3 text-base font-medium" style={{ color: accent }}>
+   400→                {track.subtitle}
+   401→              </p>
+   402→              <p className="mt-4 max-w-2xl text-base text-muted-foreground">
+   403→                {track.description}
+   404→              </p>
+   405→              <div className="mt-6 flex flex-wrap gap-3">
+   406→                <Button size="lg" onClick={() => toast.success("Application started!", {
+   407→                  description: `You're applying for the ${track.title} specialization. A counselor will reach out within 24 hours.`,
+   408→                })} className="gap-1.5">
+   409→                  <Rocket className="h-4 w-4" /> Apply for this specialization
+   410→                </Button>
+   411→                <Button size="lg" variant="outline" onClick={() => navigate("public", roleRoute.programId)} className="gap-1.5">
+   412→                  <Layers className="h-4 w-4" /> View full program
+   413→                </Button>
+   414→              </div>
+   415→            </div>
+   416→
+   417→            {/* Hero side card */}
+   418→            <Card className="p-6" style={{ borderColor: accent + "55" }}>
+   419→              <div className="flex items-center gap-3">
+   420→                <div
+   421→                  className="flex h-12 w-12 items-center justify-center rounded-xl"
+   422→                  style={{ backgroundColor: `${accent}1A`, color: accent }}
+   423→                >
+   424→                  <Award className="h-6 w-6" />
+   425→                </div>
+   426→                <div>
+   427→                  <p className="text-xs text-muted-foreground">Specialization</p>
+   428→                  <p className="text-sm font-semibold">{track.specialization}</p>
+   429→                </div>
+   430→              </div>
+   431→              <div className="mt-5 grid grid-cols-2 gap-4">
+   432→                <div>
+   433→                  <p className="text-xs text-muted-foreground">Duration</p>
+   434→                  <p className="text-sm font-semibold">{track.duration}</p>
+   435→                </div>
+   436→                <div>
+   437→                  <p className="text-xs text-muted-foreground">Weeks</p>
+   438→                  <p className="text-sm font-semibold">{track.weeks} weeks</p>
+   439→                </div>
+   440→                <div>
+   441→                  <p className="text-xs text-muted-foreground">Mode</p>
+   442→                  <p className="text-sm font-semibold">{track.mode}</p>
+   443→                </div>
+   444→                <div>
+   445→                  <p className="text-xs text-muted-foreground">Level</p>
+   446→                  <p className="text-sm font-semibold">{track.level}</p>
+   447→                </div>
+   448→              </div>
+   449→              {salaryBands.length > 0 && (
+   450→                <div className="mt-5 border-t pt-4">
+   451→                  <p className="text-xs text-muted-foreground">Starting salary band</p>
+   452→                  <p className="text-base font-bold text-brand">
+   453→                    ₹{salaryBands[0].min}–{salaryBands[0].max} LPA
+   454→                  </p>
+   455→                </div>
+   456→              )}
+   457→            </Card>
+   458→          </div>
+   459→        </div>
+   460→      </section>
+   461→
+   462→      {/* ===================== HIGHLIGHTS GRID ===================== */}
+   463→      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+   464→        <div className="mb-8">
+   465→          <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">What you&apos;ll master</h2>
+   466→          <p className="mt-2 text-sm text-muted-foreground">Four core competencies that define this specialization.</p>
+   467→        </div>
+   468→        <div className="grid gap-4 sm:grid-cols-2">
+   469→          {track.highlights.map((h, i) => (
+   470→            <Card key={i} className="p-5 transition-all hover:-translate-y-0.5 hover:shadow-md">
+   471→              <div className="flex items-start gap-3">
+   472→                <div
+   473→                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg"
+   474→                  style={{ backgroundColor: `${accent}1A`, color: accent }}
+   475→                >
+   476→                  <CheckCircle2 className="h-5 w-5" />
+   477→                </div>
+   478→                <div>
+   479→                  <h3 className="text-sm font-semibold leading-tight">{h.title}</h3>
+   480→                  <p className="mt-1.5 text-sm text-muted-foreground">{h.desc}</p>
+   481→                </div>
+   482→              </div>
+   483→            </Card>
+   484→          ))}
+   485→        </div>
+   486→      </section>
+   487→
+   488→      {/* ===================== CURRICULUM PHASES ===================== */}
+   489→      <section className="border-y bg-muted/30">
+   490→        <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+   491→          <div className="mb-8 flex flex-wrap items-end justify-between gap-3">
+   492→            <div>
+   493→              <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Curriculum</h2>
+   494→              <p className="mt-2 text-sm text-muted-foreground">
+   495→                {track.curriculum.length} phases across {track.weeks} weeks. Built and refreshed with hiring partners.
+   496→              </p>
+   497→            </div>
+   498→            <Badge variant="outline" className="gap-1">
+   499→              <Clock className="h-3 w-3" /> {track.weeks} weeks total
+   500→            </Badge>
+   501→          </div>
+   502→          <div className="grid gap-4 lg:grid-cols-2">
+   503→            {track.curriculum.map((phase, i) => (
+   504→              <Card key={i} className="p-5">
+   505→                <div className="flex items-start justify-between gap-3">
+   506→                  <div className="flex items-center gap-3">
+   507→                    <div
+   508→                      className="flex h-9 w-9 items-center justify-center rounded-full text-xs font-bold"
+   509→                      style={{ backgroundColor: `${accent}1A`, color: accent }}
+   510→                    >
+   511→                      {i + 1}
+   512→                    </div>
+   513→                    <div>
+   514→                      <h3 className="text-sm font-semibold">{phase.title}</h3>
+   515→                      <p className="text-xs text-muted-foreground">{phase.weeks}</p>
+   516→                    </div>
+   517→                  </div>
+   518→                </div>
+   519→                <ul className="mt-4 max-h-44 space-y-1.5 overflow-y-auto pr-2 scroll-thin">
+   520→                  {phase.topics.map((t, ti) => (
+   521→                    <li key={ti} className="flex items-start gap-2 text-xs text-muted-foreground">
+   522→                      <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0" style={{ color: accent }} />
+   523→                      <span>{t}</span>
+   524→                    </li>
+   525→                  ))}
+   526→                </ul>
+   527→              </Card>
+   528→            ))}
+   529→          </div>
+   530→        </div>
+   531→      </section>
+   532→
+   533→      {/* ===================== TECH STACK ===================== */}
+   534→      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+   535→        <div className="mb-6">
+   536→          <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Tech stack you&apos;ll master</h2>
+   537→          <p className="mt-2 text-sm text-muted-foreground">Hands-on with {track.techStack.length} production tools hiring partners use daily.</p>
+   538→        </div>
+   539→        <Card className="p-5">
+   540→          <div className="flex flex-wrap gap-2">
+   541→            {track.techStack.map((t) => (
+   542→              <Badge key={t} variant="secondary" className="border">
+   543→                {t}
+   544→              </Badge>
+   545→            ))}
+   546→          </div>
+   547→        </Card>
+   548→      </section>
+   549→
+   550→      {/* ===================== CAREER OUTCOMES ===================== */}
+   551→      {salaryBands.length > 0 && (
+   552→        <section className="border-y bg-muted/30">
+   553→          <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+   554→            <div className="mb-8">
+   555→              <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Career outcomes</h2>
+   556→              <p className="mt-2 text-sm text-muted-foreground">Roles graduates of this specialization typically land, with realistic salary bands.</p>
+   557→            </div>
+   558→            <Card className="overflow-hidden p-0">
+   559→              <div className="grid grid-cols-1 divide-y sm:grid-cols-2 sm:divide-x sm:divide-y-0">
+   560→                {salaryBands.map((o, i) => (
+   561→                  <div key={i} className="flex items-center justify-between gap-3 p-4 transition-colors hover:bg-muted/50">
+   562→                    <div className="flex items-center gap-3">
+   563→                      <div
+   564→                        className="flex h-9 w-9 items-center justify-center rounded-lg"
+   565→                        style={{ backgroundColor: `${accent}1A`, color: accent }}
+   566→                      >
+   567→                        <Briefcase className="h-4 w-4" />
+   568→                      </div>
+   569→                      <span className="text-sm font-medium">{o.role}</span>
+   570→                    </div>
+   571→                    <div className="text-right">
+   572→                      <p className="text-sm font-bold text-brand">₹{o.min}–{o.max} LPA</p>
+   573→                      <p className="text-[10px] text-muted-foreground">starting CTC</p>
+   574→                    </div>
+   575→                  </div>
+   576→                ))}
+   577→              </div>
+   578→            </Card>
+   579→            <p className="mt-3 text-xs text-muted-foreground">
+   580→              <TrendingUp className="mr-1 inline h-3 w-3" />
+   581→              Top 10% of graduates earn 30–60% above the upper band. Based on the last 3 cohorts of this specialization.
+   582→            </p>
+   583→          </div>
+   584→        </section>
+   585→      )}
+   586→
+   587→      {/* ===================== WHO SHOULD JOIN ===================== */}
+   588→      {whoShouldJoin.length > 0 && (
+   589→        <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+   590→          <div className="mb-8">
+   591→            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Who should join</h2>
+   592→            <p className="mt-2 text-sm text-muted-foreground">Is this specialization right for you? See if you match the profile.</p>
+   593→          </div>
+   594→          <div className="grid gap-4 lg:grid-cols-3">
+   595→            {whoShouldJoin.map((w, i) => (
+   596→              <Card key={i} className="p-5" style={{ borderColor: accent + "44" }}>
+   597→                <div
+   598→                  className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg"
+   599→                  style={{ backgroundColor: `${accent}1A`, color: accent }}
+   600→                >
+   601→                  <Users className="h-4 w-4" />
+   602→                </div>
+   603→                <p className="text-sm text-muted-foreground">{w}</p>
+   604→              </Card>
+   605→            ))}
+   606→          </div>
+   607→        </section>
+   608→      )}
+   609→
+   610→      {/* ===================== SIBLING ROLES ===================== */}
+   611→      {siblings.length > 0 && (
+   612→        <section className="border-y bg-muted/30">
+   613→          <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+   614→            <div className="mb-8 flex flex-wrap items-end justify-between gap-3">
+   615→              <div>
+   616→                <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Other specializations in this program</h2>
+   617→                <p className="mt-2 text-sm text-muted-foreground">Explore the {siblings.length} other tracks you can switch into during Phase 1.</p>
+   618→              </div>
+   619→              <Button variant="outline" size="sm" onClick={() => navigate("public", roleRoute.programId)} className="gap-1.5">
+   620→                View all <ArrowRight className="h-3.5 w-3.5" />
+   621→              </Button>
+   622→            </div>
+   623→            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+   624→              {siblings.map((r) => (
+   625→                <Card
+   626→                  key={r.roleView}
+   627→                  className="group cursor-pointer p-5 transition-all hover:-translate-y-0.5 hover:border-brand hover:shadow-md"
+   628→                  onClick={() => navigate("public", roleRouteKey(r.roleView))}
+   629→                >
+   630→                  <div className="flex items-start justify-between gap-3">
+   631→                    <div
+   632→                      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg"
+   633→                      style={{ backgroundColor: `${r.color}1A`, color: r.color }}
+   634→                    >
+   635→                      <Award className="h-5 w-5" />
+   636→                    </div>
+   637→                    <Badge variant="outline" className="border text-[10px]"
+   638→                      style={{ color: r.color, borderColor: r.color + "66" }}>
+   639→                      {r.badge}
+   640→                    </Badge>
+   641→                  </div>
+   642→                  <h3 className="mt-3 text-sm font-semibold leading-tight">{r.label}</h3>
+   643→                  <p className="mt-2 text-xs text-muted-foreground">{r.motive}</p>
+   644→                  <div className="mt-3 flex items-center gap-1 text-xs font-medium text-brand opacity-0 transition-opacity group-hover:opacity-100">
+   645→                    View details <ArrowRight className="h-3 w-3" />
+   646→                  </div>
+   647→                </Card>
+   648→              ))}
+   649→            </div>
+   650→          </div>
+   651→        </section>
+   652→      )}
+   653→
+   654→      {/* ===================== TESTIMONIALS ===================== */}
+   655→      {testimonials.length > 0 && (
+   656→        <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+   657→          <div className="mb-8 text-center">
+   658→            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Graduate stories</h2>
+   659→            <p className="mt-2 text-sm text-muted-foreground">From this specialization to offers at top companies.</p>
+   660→          </div>
+   661→          <div className="grid gap-5 lg:grid-cols-2">
+   662→            {testimonials.map((t) => (
+   663→              <Card key={t.name} className="flex h-full flex-col p-6">
+   664→                <Quote className="h-6 w-6 text-brand/40" />
+   665→                <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{t.quote}</p>
+   666→                <div className="mt-5 flex items-center gap-3 border-t pt-4">
+   667→                  <AvatarLogo text={t.initials} size="md" />
+   668→                  <div className="min-w-0">
+   669→                    <p className="truncate text-sm font-semibold">{t.name}</p>
+   670→                    <p className="truncate text-xs text-muted-foreground">{t.role} · {t.company}</p>
+   671→                  </div>
+   672→                  <Badge variant="secondary" className="ml-auto border border-brand/40 text-brand">{t.ctc}</Badge>
+   673→                </div>
+   674→              </Card>
+   675→            ))}
+   676→          </div>
+   677→        </section>
+   678→      )}
+   679→
+   680→      {/* ===================== CTA ===================== */}
+   681→      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+   682→        <Card className="overflow-hidden border-brand/30 bg-gradient-to-br from-brand/10 via-background to-background p-8 sm:p-12">
+   683→          <div className="grid items-center gap-6 lg:grid-cols-[1fr_auto]">
+   684→            <div>
+   685→              <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
+   686→                Ready to become a {track.specialization.toLowerCase()}?
+   687→              </h2>
+   688→              <p className="mt-3 max-w-xl text-sm text-muted-foreground">
+   689→                Apply now or talk to a counselor about whether this specialization fits your background and goals.
+   690→              </p>
+   691→            </div>
+   692→            <div className="flex flex-wrap gap-3 lg:justify-end">
+   693→              <Button size="lg" onClick={() => toast.success("Application started!", {
+   694→                description: `Applying for ${track.title}. A counselor will reach out within 24 hours.`,
+   695→              })} className="gap-1.5">
+   696→                <Rocket className="h-4 w-4" /> Apply Now
+   697→              </Button>
+   698→              <Button size="lg" variant="outline" onClick={() => navigate("public", roleRoute.programId)} className="gap-1.5">
+   699→                <Layers className="h-4 w-4" /> View Full Program
+   700→              </Button>
+   701→            </div>
+   702→          </div>
+   703→        </Card>
+   704→      </section>
+   705→    </div>
+   706→  );
+   707→}
+   708→

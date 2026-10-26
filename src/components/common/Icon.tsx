@@ -23,6 +23,16 @@ import {
   Code2, Bot, Box, Cloud, Compass, Zap, Workflow, Factory, Headphones,
   Mic, Newspaper, ChevronDown, ArrowRight, CheckCircle2, Lightbulb,
   Menu, ChevronLeft, ArrowUpRight, ArrowLeft, ExternalLink, Quote,
+  Columns3, UserPlus, MessageCircle, CheckCircle, CircleDot, Crown as CrownIcon,
+  Scale, ArrowDownToLine, FilePlus2, SearchCode, FileSearch, AlignLeft,
+  CalendarCheck, QrCode, Minus, Paperclip, FilePen, Wand2,
+  TrendingDown, CircleAlert, CircleCheck, PenLine, MailOpen, PhoneCall,
+  UserCircle, Palette, FileBox,
+  CalendarClock, DoorOpen, CalendarOff,
+  FileSignature, Milestone, MailX, UserCog,
+  Ticket, Settings2,
+  CalendarDays, AlarmClock,
+  Pin,
   type LucideIcon,
 } from "lucide-react";
 
@@ -48,6 +58,16 @@ const map: Record<string, LucideIcon> = {
   Code2, Bot, Box, Cloud, Compass, Zap, Workflow, Factory, Headphones,
   Mic, Newspaper, ChevronDown, ArrowRight, CheckCircle2, Lightbulb,
   Menu, ChevronLeft, ArrowUpRight, ArrowLeft, ExternalLink, Quote,
+  Columns3, UserPlus, MessageCircle, CheckCircle, CircleDot,
+  Scale, ArrowDownToLine, FilePlus2, SearchCode, FileSearch, AlignLeft,
+  CalendarCheck, QrCode, Minus, Paperclip, FilePen, Wand2,
+  TrendingDown, CircleAlert, CircleCheck, PenLine, MailOpen, PhoneCall,
+  UserCircle, Palette, FileBox,
+  CalendarClock, DoorOpen, CalendarOff,
+  FileSignature, Milestone, MailX, UserCog,
+  Ticket, Settings2,
+  CalendarDays, AlarmClock,
+  Pin,
 };
 
 export function Icon({ name, className }: { name: string; className?: string }) {

@@ -65,6 +65,42 @@ const RecruiterPartnerNetwork = dynamic(() => import("./RecruiterPartnerNetwork"
 const RecruiterTalentSolutions = dynamic(() => import("./RecruiterTalentSolutions").then((m) => m.RecruiterTalentSolutions));
 const RecruiterTsTransactions = dynamic(() => import("./RecruiterTsTransactions").then((m) => m.RecruiterTsTransactions));
 
+// High-impact missing features (BUILD-RECRUITER-FEATURES)
+const RecruiterBooleanSearch = dynamic(() => import("./RecruiterBooleanSearch").then((m) => m.RecruiterBooleanSearch));
+const RecruiterResumeParser = dynamic(() => import("./RecruiterResumeParser").then((m) => m.RecruiterResumeParser));
+const RecruiterPlacementVerification = dynamic(() => import("./RecruiterPlacementVerification").then((m) => m.RecruiterPlacementVerification));
+const RecruiterGuarantees = dynamic(() => import("./RecruiterGuarantees").then((m) => m.RecruiterGuarantees));
+const RecruiterPayouts = dynamic(() => import("./RecruiterPayouts").then((m) => m.RecruiterPayouts));
+const RecruiterWhatsApp = dynamic(() => import("./RecruiterWhatsApp").then((m) => m.RecruiterWhatsApp));
+const RecruiterSequences = dynamic(() => import("./RecruiterSequences").then((m) => m.RecruiterSequences));
+
+// Profile & branding pages (WAVE1-RECRUITER-TRAINING-PROFILE)
+const RecruiterPublicProfile = dynamic(() => import("./RecruiterPublicProfile").then((m) => m.RecruiterPublicProfile));
+const RecruiterAgencyBranding = dynamic(() => import("./RecruiterAgencyBranding").then((m) => m.RecruiterAgencyBranding));
+
+// Hiring & sourcing advanced pages (WAVE2-RECRUITER-TRAINING-SOURCING)
+const RecruiterAIMatchScoring = dynamic(() => import("./RecruiterAIMatchScoring").then((m) => m.RecruiterAIMatchScoring));
+const RecruiterDedupCenter = dynamic(() => import("./RecruiterDedupCenter").then((m) => m.RecruiterDedupCenter));
+const RecruiterTalentForecast = dynamic(() => import("./RecruiterTalentForecast").then((m) => m.RecruiterTalentForecast));
+
+// Process & lifecycle pages (WAVE3-RECRUITER-TRAINING-PARTNER-PROCESS)
+const RecruiterSubmissionTracker = dynamic(() => import("./RecruiterSubmissionTracker").then((m) => m.RecruiterSubmissionTracker));
+const RecruiterOfferEsign = dynamic(() => import("./RecruiterOfferEsign").then((m) => m.RecruiterOfferEsign));
+const RecruiterBillingMilestones = dynamic(() => import("./RecruiterBillingMilestones").then((m) => m.RecruiterBillingMilestones));
+const RecruiterRejectionAutomation = dynamic(() => import("./RecruiterRejectionAutomation").then((m) => m.RecruiterRejectionAutomation));
+
+// Transaction & finance pages (WAVE4-TRANSACTIONS-ALL-PORTALS)
+const RecruiterMultiCurrencyWallet = dynamic(() => import("./RecruiterMultiCurrencyWallet").then((m) => m.RecruiterMultiCurrencyWallet));
+const RecruiterEarningsForecast = dynamic(() => import("./RecruiterEarningsForecast").then((m) => m.RecruiterEarningsForecast));
+const RecruiterGstInvoiceGenerator = dynamic(() => import("./RecruiterGstInvoiceGenerator").then((m) => m.RecruiterGstInvoiceGenerator));
+const RecruiterClientPaymentAging = dynamic(() => import("./RecruiterClientPaymentAging").then((m) => m.RecruiterClientPaymentAging));
+
+// Communication pages (WAVE5-COMMUNICATION-ALL-PORTALS)
+const RecruiterSmsInbox = dynamic(() => import("./RecruiterSmsInbox").then((m) => m.RecruiterSmsInbox));
+const RecruiterAutoReminders = dynamic(() => import("./RecruiterAutoReminders").then((m) => m.RecruiterAutoReminders));
+const RecruiterFollowUpAutomation = dynamic(() => import("./RecruiterFollowUpAutomation").then((m) => m.RecruiterFollowUpAutomation));
+const RecruiterVoipLogging = dynamic(() => import("./RecruiterVoipLogging").then((m) => m.RecruiterVoipLogging));
+
 // Cross-portal shared pages (SETTINGS-SUPPORT-SHARED)
 const TasksPage = dynamic(() => import("@/portals/_settings-support-shared/TasksPage").then((m) => m.TasksPage));
 
@@ -144,6 +180,36 @@ export function render(route: string): React.ReactNode {
     // Talent Solutions (TS-CROSS)
     case "ts-hub": return <RecruiterTalentSolutions />;
     case "ts-transactions": return <RecruiterTsTransactions />;
+    // High-impact missing features (BUILD-RECRUITER-FEATURES)
+    case "boolean-search": return <RecruiterBooleanSearch />;
+    case "resume-parser": return <RecruiterResumeParser />;
+    case "placement-verification": return <RecruiterPlacementVerification />;
+    case "guarantees": return <RecruiterGuarantees />;
+    case "payouts": return <RecruiterPayouts />;
+    case "whatsapp": return <RecruiterWhatsApp />;
+    case "sequences": return <RecruiterSequences />;
+    // Profile & branding (WAVE1-RECRUITER-TRAINING-PROFILE)
+    case "recruiter-profile-public": return <RecruiterPublicProfile />;
+    case "agency-branding": return <RecruiterAgencyBranding />;
+    // Hiring & sourcing advanced (WAVE2-RECRUITER-TRAINING-SOURCING)
+    case "ai-match-scoring": return <RecruiterAIMatchScoring />;
+    case "dedup-center": return <RecruiterDedupCenter />;
+    case "talent-forecast": return <RecruiterTalentForecast />;
+    // Process & lifecycle (WAVE3-RECRUITER-TRAINING-PARTNER-PROCESS)
+    case "submission-tracker": return <RecruiterSubmissionTracker />;
+    case "offer-esign": return <RecruiterOfferEsign />;
+    case "billing-milestones": return <RecruiterBillingMilestones />;
+    case "rejection-automation": return <RecruiterRejectionAutomation />;
+    // Transaction & finance (WAVE4-TRANSACTIONS-ALL-PORTALS)
+    case "multi-currency-wallet": return <RecruiterMultiCurrencyWallet />;
+    case "earnings-forecast": return <RecruiterEarningsForecast />;
+    case "gst-invoice-generator": return <RecruiterGstInvoiceGenerator />;
+    case "client-payment-aging": return <RecruiterClientPaymentAging />;
+    // Communication (WAVE5-COMMUNICATION-ALL-PORTALS)
+    case "sms-inbox": return <RecruiterSmsInbox />;
+    case "auto-reminders": return <RecruiterAutoReminders />;
+    case "follow-up-automation": return <RecruiterFollowUpAutomation />;
+    case "voip-logging": return <RecruiterVoipLogging />;
     // Agency Management (merged from the former Agency Portal)
     case "ag-overview": return <AgencyOverview />;
     case "ag-profile": return <AgencyProfile />;

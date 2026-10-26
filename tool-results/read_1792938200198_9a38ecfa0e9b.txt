@@ -1,0 +1,602 @@
+   800→      { icon: Layers, title: "Multiple engagement models", desc: "Contract, project-based, hourly, weekly, monthly — pick what fits each role." },
+   801→      { icon: RefreshCw, title: "Elastic scale", desc: "Ramp up from 10 to 1,000+ in weeks, ramp down in days — no long-term commitments." },
+   802→      { icon: ShieldCheck, title: "Full compliance", desc: "PF, ESI, gratuity, labor law compliance across all Indian states — handled end-to-end." },
+   803→      { icon: Wallet, title: "Variable cost", desc: "Pay only for hours/days worked — no fixed salaries, no idle bench costs, no severance." },
+   804→      { icon: Headset, title: "Dedicated operations", desc: "Single point of contact for deployments, billing, replacements, and escalations." },
+   805→    ],
+   806→    processSteps: [
+   807→      { step: "01", title: "Demand forecast", desc: "We work with your team to forecast demand patterns — seasonal, project, or growth-driven." },
+   808→      { step: "02", title: "Talent pool pre-build", desc: "We pre-vet a pool of 50–500 candidates aligned to your roles, ready for activation." },
+   809→      { step: "03", title: "On-demand activation", desc: "When demand hits, we deploy from the pre-vetted pool within 5 business days." },
+   810→      { step: "04", title: "Daily operations", desc: "Attendance, performance, and replacement management — all handled by our ops team." },
+   811→      { step: "05", title: "Elastic ramp", desc: "Scale up or down weekly based on actual demand — no minimum commitments." },
+   812→      { step: "06", title: "Compliance & billing", desc: "Single monthly invoice per worker covering wages, PF, ESI, and statutory benefits." },
+   813→    ],
+   814→    benefits: [
+   815→      { icon: Wallet, title: "Variable cost structure", desc: "Pay per hour/day/week — no fixed salaries, no bench costs, no severance. Pure operating expense." },
+   816→      { icon: Zap, title: "5-day deployment SLA", desc: "From request to worker on the floor in 5 business days, with pre-vetted candidates." },
+   817→      { icon: RefreshCw, title: "Elastic scale", desc: "Ramp up 100× in weeks, ramp down in days — match workforce to actual demand, not forecasts." },
+   818→      { icon: ShieldCheck, title: "Zero compliance risk", desc: "We are the employer of record — all statutory compliance, payroll, and labor law handled by us." },
+   819→      { icon: Gauge, title: "Reduced admin overhead", desc: "One monthly invoice per worker — no payroll, no PF/ESI filings, no HR admin work for your team." },
+   820→      { icon: Network, title: "Pan-India coverage", desc: "120+ cities with on-ground ops teams for frontline, retail, manufacturing, and healthcare volume." },
+   821→    ],
+   822→    useCases: [
+   823→      {
+   824→        scenario: "E-commerce company needed 1,500 warehouse and delivery staff for festive season spike.",
+   825→        solution: "Flexible deployment with pre-vetted pool of 2,000 workers, ramped to 1,500 in 7 days across 14 cities.",
+   826→        metrics: [
+   827→          { label: "Workers deployed", value: "1,500" },
+   828→          { label: "Ramp time", value: "7 days" },
+   829→          { label: "Compliance gaps", value: "0" },
+   830→        ],
+   831→      },
+   832→      {
+   833→        scenario: "IT services company needed 80 contract developers for a 9-month client engagement.",
+   834→        solution: "Project-based deployment with ramp-up over 4 weeks and ramp-down at month 9 — no severance cost.",
+   835→        metrics: [
+   836→          { label: "Developers deployed", value: "82" },
+   837→          { label: "Ramp-up time", value: "4 wk" },
+   838→          { label: "Bench cost", value: "₹0" },
+   839→        ],
+   840→      },
+   841→      {
+   842→        scenario: "Healthcare chain needed flexible nursing staff across 14 hospitals for variable patient load.",
+   843→        solution: "On-demand nursing pool with weekly activation based on hospital-level patient census.",
+   844→        metrics: [
+   845→          { label: "Nurses in pool", value: "400" },
+   846→          { label: "Avg deploy time", value: "3 days" },
+   847→          { label: "Cost vs permanent", value: "−28%" },
+   848→        ],
+   849→      },
+   850→    ],
+   851→    industries: ["E-commerce", "Retail", "Manufacturing", "Healthcare", "Logistics", "IT & SaaS"],
+   852→    stats: [
+   853→      { label: "Talent pool", value: "150K+", icon: Users },
+   854→      { label: "Deployment SLA", value: "5 days", icon: Zap },
+   855→      { label: "Cities covered", value: "120+", icon: MapPin },
+   856→      { label: "Annual deployments", value: "12,000+", icon: Rocket },
+   857→    ],
+   858→    testimonials: [
+   859→      {
+   860→        quote: "1,500 warehouse and delivery staff in 7 days for festive season. Zero compliance gaps, zero bench cost afterward. GAMESS changer.",
+   861→        name: "Amitabh Sengupta",
+   862→        role: "Chief People Officer",
+   863→        company: "RetailMax",
+   864→        initials: "AS",
+   865→      },
+   866→      {
+   867→        quote: "82 contract developers for a 9-month engagement — ramp-up over 4 weeks, ramp-down at month 9, no severance. Perfect fit for project work.",
+   868→        name: "Pooja Reddy",
+   869→        role: "Resource Mgmt Head",
+   870→        company: "TechMahindra",
+   871→        initials: "PR",
+   872→      },
+   873→      {
+   874→        quote: "On-demand nursing pool across 14 hospitals means we match workforce to patient census weekly. Cost down 28% vs permanent model.",
+   875→        name: "Dr. Lakshmi Iyer",
+   876→        role: "COO",
+   877→        company: "MediCare Group",
+   878→        initials: "LI",
+   879→      },
+   880→    ],
+   881→    deliverables: [
+   882→      "Pre-vetted talent pool of 50–500 candidates aligned to your roles, ready for activation",
+   883→      "5-business-day deployment SLA with weekly elasticity (ramp up or down)",
+   884→      "Full statutory compliance — PF, ESI, gratuity, labor law — handled end-to-end",
+   885→      "Single monthly invoice per worker covering wages, benefits, and statutory contributions",
+   886→      "Dedicated operations manager with attendance, performance, and replacement management",
+   887→    ],
+   888→    faqs: [
+   889→      { q: "What's the minimum commitment?", a: "No minimum. You can deploy a single worker for a single day, or 1,000 workers for 12 months. The model is fully elastic — scale up or down weekly." },
+   890→      { q: "Who is the employer of record?", a: "JOBSONN is the employer of record for all contract and on-demand workers. We handle payroll, PF, ESI, gratuity, leave, and all statutory compliance — you receive a single monthly invoice per worker." },
+   891→      { q: "How fast can you deploy?", a: "From request to worker on the floor in 5 business days, assuming we have pre-vetted candidates in your geography. For new geographies or specialized roles, allow 7–10 days for first deployment." },
+   892→      { q: "What if a worker is underperforming?", a: "We replace underperforming workers within 3 business days at no additional cost. Our ops team manages attendance, performance, and replacements — your team focuses on the work, not the HR admin." },
+   893→    ],
+   894→    siblingRoles: [
+   895→      { key: "talent-staffing", label: "Staffing Solutions", icon: Users, color: "#10B981", desc: "Flexible staffing — contract, permanent, project." },
+   896→      { key: "talent-sourcing-recruitment", label: "Sourcing & Recruitment", icon: Search, color: "#0EA5E9", desc: "AI-powered talent sourcing from 2M+ candidates." },
+   897→      { key: "talent-end-to-end-workforce", label: "End-to-End Workforce", icon: Globe, color: "#8B5CF6", desc: "Full lifecycle workforce management." },
+   898→      { key: "talent-assessment", label: "Talent Assessment", icon: ClipboardCheck, color: "#EF4444", desc: "AI-powered skill and aptitude assessments." },
+   899→    ],
+   900→  },
+   901→
+   902→  "talent-end-to-end-workforce": {
+   903→    title: "End-to-End Workforce",
+   904→    subtitle: "Full lifecycle workforce management",
+   905→    description: "Complete workforce management from hiring to retention — one partner, one contract, one SLA. Sourcing, training, deployment, payroll, compliance, and retention tracking under a single master agreement.",
+   906→    color: "#8B5CF6",
+   907→    icon: Globe,
+   908→    heroStats: [
+   909→      { label: "Avg client tenure", value: "5+ yrs" },
+   910→      { label: "Workforce managed", value: "85,000+" },
+   911→      { label: "Cost reduction", value: "32%" },
+   912→    ],
+   913→    keyFeatures: [
+   914→      { icon: Workflow, title: "Single master agreement", desc: "One contract covering sourcing, training, staffing, deployment, payroll, compliance, and retention." },
+   915→      { icon: Network, title: "Dedicated workforce partner", desc: "A senior partner who owns your end-to-end workforce strategy, not just transactional req fulfillment." },
+   916→      { icon: BarChart3, title: "Workforce analytics", desc: "Real-time dashboards on cost-per-hire, time-to-fill, retention, productivity, and compliance posture." },
+   917→      { icon: RefreshCw, title: "Continuous optimization", desc: "Quarterly business reviews with optimization recommendations on cost, mix, and engagement models." },
+   918→      { icon: ShieldCheck, title: "Compliance umbrella", desc: "All statutory compliance — PF, ESI, gratuity, labor law — handled across all engagement types and geographies." },
+   919→      { icon: HeartHandshake, title: "Retention programs", desc: "Structured engagement, recognition, and growth programs for deployed workforce — 98% retention." },
+   920→    ],
+   921→    processSteps: [
+   922→      { step: "01", title: "Workforce audit", desc: "We audit your current workforce — cost, mix, engagement models, compliance, and retention metrics." },
+   923→      { step: "02", title: "Strategy design", desc: "Co-design a workforce strategy — role mix, engagement models, training pipeline, and cost targets." },
+   924→      { step: "03", title: "Transition & onboarding", desc: "Phased transition of existing workforce and recruitment processes to our managed model." },
+   925→      { step: "04", title: "Operations & delivery", desc: "Day-to-day sourcing, deployment, payroll, compliance, and retention — handled by our ops team." },
+   926→      { step: "05", title: "Analytics & reporting", desc: "Real-time dashboards + monthly business reviews + quarterly optimization recommendations." },
+   927→      { step: "06", title: "Continuous improvement", desc: "Annual strategy refresh based on business changes, market shifts, and engagement performance." },
+   928→    ],
+   929→    benefits: [
+   930→      { icon: Wallet, title: "32% cost reduction", desc: "Average cost reduction across workforce spend — through mix optimization, vendor consolidation, and process efficiency." },
+   931→      { icon: ShieldCheck, title: "Single-point accountability", desc: "One partner, one SLA, one invoice — no finger-pointing between vendors, payroll providers, and compliance consultants." },
+   932→      { icon: Gauge, title: "Workforce visibility", desc: "Real-time analytics on cost, mix, retention, productivity, and compliance across all roles and geographies." },
+   933→      { icon: Network, title: "Senior partner", desc: "A workforce strategist with 15+ years experience owns your account — not a transactional account manager." },
+   934→      { icon: RefreshCw, title: "Vendor consolidation", desc: "Replace 5–15 vendors with one partner — reduces admin overhead, billing complexity, and compliance risk." },
+   935→      { icon: HeartHandshake, title: "98% retention", desc: "Structured engagement, recognition, and growth programs deliver industry-leading retention rates." },
+   936→    ],
+   937→    useCases: [
+   938→      {
+   939→        scenario: "Healthcare chain scaling to 14 new hospitals needed end-to-end workforce management across clinical and admin roles.",
+   940→        solution: "End-to-End Workforce partnership covering sourcing, screening, credentialing, onboarding, payroll, and retention.",
+   941→        metrics: [
+   942→          { label: "Roles filled", value: "320+" },
+   943→          { label: "Cost per hire", value: "−42%" },
+   944→          { label: "Credentialing time", value: "−35%" },
+   945→        ],
+   946→      },
+   947→      {
+   948→        scenario: "Manufacturing conglomerate with 5,000+ contract workers across 12 plants wanted to consolidate 18 vendors.",
+   949→        solution: "End-to-End managed workforce — single partner, single SLA, real-time analytics across all plants.",
+   950→        metrics: [
+   951→          { label: "Vendors consolidated", value: "18→1" },
+   952→          { label: "Cost reduction", value: "28%" },
+   953→          { label: "Compliance incidents", value: "−92%" },
+   954→        ],
+   955→      },
+   956→      {
+   957→        scenario: "Retail chain with 12,000 frontline staff across 200 stores wanted workforce strategy partner for growth.",
+   958→        solution: "Strategic workforce partnership covering seasonal flex, permanent staffing, training, and retention.",
+   959→        metrics: [
+   960→          { label: "Workforce managed", value: "12,000" },
+   961→          { label: "Annual cost saving", value: "₹14 Cr" },
+   962→          { label: "Retention", value: "94%" },
+   963→        ],
+   964→      },
+   965→    ],
+   966→    industries: ["Healthcare", "Manufacturing", "Retail", "BFSI", "IT & SaaS", "Logistics"],
+   967→    stats: [
+   968→      { label: "Workforce managed", value: "85,000+", icon: Users },
+   969→      { label: "Avg cost reduction", value: "32%", icon: Wallet },
+   970→      { label: "Avg client tenure", value: "5+ yrs", icon: HeartHandshake },
+   971→      { label: "Vendor consolidation", value: "18→1", icon: Network },
+   972→    ],
+   973→    testimonials: [
+   974→      {
+   975→        quote: "End-to-End Workforce partnership scaled MediCare across 14 new hospitals — 320+ roles filled, cost-per-hire down 42%, credentialing time down 35%.",
+   976→        name: "Dr. Sridhar Rao",
+   977→        role: "CHRO",
+   978→        company: "MediCare Group",
+   979→        initials: "SR",
+   980→      },
+   981→      {
+   982→        quote: "We consolidated 18 vendors into 1 partner across 12 plants. Cost down 28%, compliance incidents down 92%, admin overhead reduced dramatically.",
+   983→        name: "Ramesh Iyer",
+   984→        role: "Plant Director",
+   985→        company: "Bharat Forge",
+   986→        initials: "RI",
+   987→      },
+   988→      {
+   989→        quote: "Strategic workforce partner for our 12,000-person retail operation. ₹14 Cr annual savings, 94% retention, and a true partner — not just another vendor.",
+   990→        name: "Amitabh Sengupta",
+   991→        role: "Chief People Officer",
+   992→        company: "RetailMax",
+   993→        initials: "AS",
+   994→      },
+   995→    ],
+   996→    deliverables: [
+   997→      "Single master agreement covering sourcing, training, deployment, payroll, compliance, and retention",
+   998→      "Dedicated senior workforce partner (15+ years experience) as your single point of accountability",
+   999→      "Real-time workforce analytics dashboard — cost, mix, retention, productivity, compliance",
+  1000→      "Quarterly business reviews with optimization recommendations on cost, mix, and engagement models",
+  1001→      "Annual strategy refresh aligned to your business plan and market conditions",
+  1002→    ],
+  1003→    faqs: [
+  1004→      { q: "What's the minimum engagement size?", a: "End-to-End Workforce partnerships typically start at 500+ workers or ₹5 Cr+ annual workforce spend. For smaller engagements, our Staffing or Flexible Deployment solutions are a better fit." },
+  1005→      { q: "How long is the typical contract?", a: "Initial 3-year master agreement with annual renewals. Average client tenure is 5+ years — we become a long-term workforce operating partner, not a transactional vendor." },
+  1006→      { q: "Do you take over our existing workforce?", a: "Yes — we handle TUPE-style transfers of existing contract staff to our payroll with full continuity of service, benefits, and seniority. Permanent employees typically stay on your payroll." },
+  1007→      { q: "How do you measure success?", a: "Quarterly business reviews track cost-per-hire, time-to-fill, retention, productivity, compliance posture, and overall workforce spend vs target. Every QBR ends with concrete optimization recommendations." },
+  1008→    ],
+  1009→    siblingRoles: [
+  1010→      { key: "talent-staffing", label: "Staffing Solutions", icon: Users, color: "#10B981", desc: "Flexible staffing at any scale." },
+  1011→      { key: "talent-flexible-deployment", label: "Flexible Deployment", icon: Layers, color: "#10B981", desc: "On-demand contract and project talent." },
+  1012→      { key: "talent-sourcing-recruitment", label: "Sourcing & Recruitment", icon: Search, color: "#0EA5E9", desc: "AI-powered talent sourcing from 2M+ candidates." },
+  1013→      { key: "talent-corporate-training", label: "Corporate Training", icon: Award, color: "#F97316", desc: "Upskill your existing workforce at scale." },
+  1014→    ],
+  1015→  },
+  1016→};
+  1017→
+  1018→function getRoleConfig(roleKey: string): RoleConfig | undefined {
+  1019→  return TALENT_ROLES[roleKey];
+  1020→}
+  1021→
+  1022→export function PublicTalentRole({ roleKey }: { roleKey: string }) {
+  1023→  const { navigate } = useNav();
+  1024→  const config = getRoleConfig(roleKey);
+  1025→  const learnMoreRef = React.useRef<HTMLDivElement>(null);
+  1026→
+  1027→  if (!config) {
+  1028→    return (
+  1029→      <div className="mx-auto max-w-3xl px-4 py-20">
+  1030→        <EmptyState
+  1031→          icon={<Search className="h-6 w-6" />}
+  1032→          title="Talent solution not found"
+  1033→          description={`We couldn't find a talent solution matching "${roleKey}". Browse all solutions to find the right one.`}
+  1034→          action={
+  1035→            <Button onClick={() => navigate("public", "talent-solutions")} className="gap-1.5">
+  1036→              <ArrowLeft className="h-4 w-4" /> View all solutions
+  1037→            </Button>
+  1038→          }
+  1039→        />
+  1040→      </div>
+  1041→    );
+  1042→  }
+  1043→
+  1044→  const scrollToDetails = () => {
+  1045→    learnMoreRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  1046→  };
+  1047→
+  1048→  return (
+  1049→    <div className="bg-background">
+  1050→      {/* Hero */}
+  1051→      <section className="relative overflow-hidden border-b">
+  1052→        <div
+  1053→          className="absolute inset-0 opacity-50"
+  1054→          style={{
+  1055→            background: `radial-gradient(circle at 30% 0%, ${config.color}15, transparent 60%)`,
+  1056→          }}
+  1057→          aria-hidden
+  1058→        />
+  1059→        <div className="absolute inset-0 bg-grid opacity-40" aria-hidden />
+  1060→        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background" aria-hidden />
+  1061→        <div className="relative mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-16 lg:px-8">
+  1062→          <button
+  1063→            onClick={() => navigate("public", "talent-solutions")}
+  1064→            className="inline-flex items-center gap-1 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+  1065→          >
+  1066→            <ArrowLeft className="h-3.5 w-3.5" /> Back to Talent Solutions
+  1067→          </button>
+  1068→          <div className="mt-4 grid gap-6 lg:grid-cols-[1.4fr_1fr]">
+  1069→            <div>
+  1070→              <div className="flex flex-wrap items-center gap-2">
+  1071→                <Badge
+  1072→                  variant="outline"
+  1073→                  className="gap-1"
+  1074→                  style={{ color: config.color, borderColor: `${config.color}40` }}
+  1075→                >
+  1076→                  <config.icon className="h-3 w-3" /> {config.subtitle}
+  1077→                </Badge>
+  1078→                <Badge variant="outline" className="gap-1 text-brand">
+  1079→                  <Sparkles className="h-3 w-3" /> Talent Solution
+  1080→                </Badge>
+  1081→              </div>
+  1082→              <h1 className="mt-4 text-3xl font-bold tracking-tight text-balance sm:text-4xl lg:text-5xl">
+  1083→                {config.title}
+  1084→              </h1>
+  1085→              <p className="mt-4 max-w-2xl text-base text-muted-foreground sm:text-lg">
+  1086→                {config.description}
+  1087→              </p>
+  1088→              <div className="mt-6 flex flex-wrap gap-3">
+  1089→                <Button size="lg" onClick={() => toast.success("Get Started", { description: `Our ${config.title} team will reach out within 1 business day.` })} className="gap-1.5">
+  1090→                  <Rocket className="h-4 w-4" /> Get Started
+  1091→                </Button>
+  1092→                <Button size="lg" variant="outline" onClick={scrollToDetails} className="gap-1.5">
+  1093→                  <ChevronRight className="h-4 w-4" /> Learn More
+  1094→                </Button>
+  1095→              </div>
+  1096→            </div>
+  1097→            <Card className="p-5">
+  1098→              <h3 className="text-sm font-semibold text-muted-foreground">At a glance</h3>
+  1099→              <dl className="mt-4 space-y-3">
+  1100→                {config.heroStats.map((s) => (
+  1101→                  <div key={s.label} className="flex items-center justify-between gap-3">
+  1102→                    <dt className="text-sm text-muted-foreground">{s.label}</dt>
+  1103→                    <dd className="text-lg font-bold" style={{ color: config.color }}>{s.value}</dd>
+  1104→                  </div>
+  1105→                ))}
+  1106→              </dl>
+  1107→              <div className="mt-5 border-t pt-4">
+  1108→                <p className="text-xs text-muted-foreground">
+  1109→                  Talk to a {config.title} specialist today.
+  1110→                </p>
+  1111→                <Button size="sm" className="mt-2 w-full gap-1.5" onClick={() => navigate("public", "contact")}>
+  1112→                  <Headset className="h-3.5 w-3.5" /> Talk to Sales
+  1113→                </Button>
+  1114→              </div>
+  1115→            </Card>
+  1116→          </div>
+  1117→        </div>
+  1118→      </section>
+  1119→
+  1120→      {/* Key features */}
+  1121→      <section ref={learnMoreRef} className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+  1122→        <div className="mb-10 text-center">
+  1123→          <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Key features</h2>
+  1124→          <p className="mt-2 text-sm text-muted-foreground">What makes our {config.title.toLowerCase()} program different.</p>
+  1125→        </div>
+  1126→        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+  1127→          {config.keyFeatures.map((f) => (
+  1128→            <Card key={f.title} className="h-full p-5">
+  1129→              <div
+  1130→                className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-lg"
+  1131→                style={{ backgroundColor: `${config.color}1A`, color: config.color }}
+  1132→              >
+  1133→                <f.icon className="h-5 w-5" />
+  1134→              </div>
+  1135→              <h3 className="font-semibold">{f.title}</h3>
+  1136→              <p className="mt-2 text-sm text-muted-foreground">{f.desc}</p>
+  1137→            </Card>
+  1138→          ))}
+  1139→        </div>
+  1140→      </section>
+  1141→
+  1142→      {/* Process steps */}
+  1143→      <section className="border-y bg-muted/30">
+  1144→        <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+  1145→          <div className="mb-10 text-center">
+  1146→            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">How it works</h2>
+  1147→            <p className="mt-2 text-sm text-muted-foreground">{config.processSteps.length} steps from kickoff to delivery.</p>
+  1148→          </div>
+  1149→          <div className="relative space-y-6 before:absolute before:left-3 before:h-full before:w-px before:bg-border sm:before:left-1/2">
+  1150→            {config.processSteps.map((p, i) => (
+  1151→              <div
+  1152→                key={p.step}
+  1153→                className={`relative pl-10 sm:w-1/2 sm:pl-0 ${i % 2 === 0 ? "sm:ml-0 sm:pr-10 sm:text-right" : "sm:ml-auto sm:pl-10"}`}
+  1154→              >
+  1155→                <div
+  1156→                  className={`absolute top-1 left-0 h-6 w-6 rounded-full border-2 bg-background sm:left-auto ${i % 2 === 0 ? "sm:-right-3" : "sm:-left-3"}`}
+  1157→                  style={{ borderColor: config.color }}
+  1158→                >
+  1159→                  <div
+  1160→                    className="absolute inset-1 rounded-full"
+  1161→                    style={{ backgroundColor: config.color }}
+  1162→                  />
+  1163→                </div>
+  1164→                <Card className="p-4">
+  1165→                  <div className="flex items-center gap-2">
+  1166→                    <span className="text-xs font-bold" style={{ color: config.color }}>{p.step}</span>
+  1167→                  </div>
+  1168→                  <h3 className="mt-1 text-sm font-semibold">{p.title}</h3>
+  1169→                  <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{p.desc}</p>
+  1170→                </Card>
+  1171→              </div>
+  1172→            ))}
+  1173→          </div>
+  1174→        </div>
+  1175→      </section>
+  1176→
+  1177→      {/* Benefits grid */}
+  1178→      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+  1179→        <div className="mb-10 text-center">
+  1180→          <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Benefits</h2>
+  1181→          <p className="mt-2 text-sm text-muted-foreground">Why teams choose our {config.title.toLowerCase()} program.</p>
+  1182→        </div>
+  1183→        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+  1184→          {config.benefits.map((b) => (
+  1185→            <Card key={b.title} className="h-full p-5">
+  1186→              <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-lg bg-brand/10 text-brand">
+  1187→                <b.icon className="h-5 w-5" />
+  1188→              </div>
+  1189→              <h3 className="font-semibold">{b.title}</h3>
+  1190→              <p className="mt-2 text-sm text-muted-foreground">{b.desc}</p>
+  1191→            </Card>
+  1192→          ))}
+  1193→        </div>
+  1194→      </section>
+  1195→
+  1196→      {/* Use cases */}
+  1197→      <section className="border-y bg-muted/30">
+  1198→        <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+  1199→          <div className="mb-10 text-center">
+  1200→            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Use cases</h2>
+  1201→            <p className="mt-2 text-sm text-muted-foreground">Real engagements and the outcomes they delivered.</p>
+  1202→          </div>
+  1203→          <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
+  1204→            {config.useCases.map((u, i) => (
+  1205→              <Card key={i} className="flex h-full flex-col p-6" style={{ borderTopColor: config.color, borderTopWidth: 4 }}>
+  1206→                <div className="space-y-3 text-sm">
+  1207→                  <div>
+  1208→                    <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Scenario</div>
+  1209→                    <p className="mt-1 text-foreground">{u.scenario}</p>
+  1210→                  </div>
+  1211→                  <div>
+  1212→                    <div className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Solution</div>
+  1213→                    <p className="mt-1 text-foreground">{u.solution}</p>
+  1214→                  </div>
+  1215→                </div>
+  1216→                <div className="mt-5 grid grid-cols-3 gap-2 border-t pt-4">
+  1217→                  {u.metrics.map((m) => (
+  1218→                    <div key={m.label} className="text-center">
+  1219→                      <div className="text-base font-bold text-brand">{m.value}</div>
+  1220→                      <div className="mt-0.5 text-[10px] text-muted-foreground">{m.label}</div>
+  1221→                    </div>
+  1222→                  ))}
+  1223→                </div>
+  1224→              </Card>
+  1225→            ))}
+  1226→          </div>
+  1227→        </div>
+  1228→      </section>
+  1229→
+  1230→      {/* Industries served */}
+  1231→      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+  1232→        <div className="mb-6 text-center">
+  1233→          <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Industries we serve</h2>
+  1234→          <p className="mt-2 text-sm text-muted-foreground">Specialized talent pools and domain-trained recruiters.</p>
+  1235→        </div>
+  1236→        <div className="flex flex-wrap justify-center gap-2">
+  1237→          {config.industries.map((ind) => (
+  1238→            <Badge
+  1239→              key={ind}
+  1240→              variant="outline"
+  1241→              className="bg-card px-3 py-1.5 text-xs"
+  1242→              style={{ color: config.color, borderColor: `${config.color}40` }}
+  1243→            >
+  1244→              {ind}
+  1245→            </Badge>
+  1246→          ))}
+  1247→        </div>
+  1248→      </section>
+  1249→
+  1250→      {/* Stats */}
+  1251→      <section className="border-y bg-muted/30">
+  1252→        <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+  1253→          <div className="mb-8 text-center">
+  1254→            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">By the numbers</h2>
+  1255→            <p className="mt-2 text-sm text-muted-foreground">Program metrics from the last 12 months.</p>
+  1256→          </div>
+  1257→          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+  1258→            {config.stats.map((s) => (
+  1259→              <StatCard
+  1260→                key={s.label}
+  1261→                label={s.label}
+  1262→                value={s.value}
+  1263→                icon={<s.icon className="h-5 w-5" />}
+  1264→                tone="brand"
+  1265→              />
+  1266→            ))}
+  1267→          </div>
+  1268→        </div>
+  1269→      </section>
+  1270→
+  1271→      {/* Deliverables */}
+  1272→      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+  1273→        <div className="mb-8 text-center">
+  1274→          <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">What you get</h2>
+  1275→          <p className="mt-2 text-sm text-muted-foreground">Every engagement includes these deliverables.</p>
+  1276→        </div>
+  1277→        <Card className="mx-auto max-w-2xl p-6">
+  1278→          <ul className="space-y-3">
+  1279→            {config.deliverables.map((d, i) => (
+  1280→              <li key={i} className="flex items-start gap-3">
+  1281→                <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-brand" />
+  1282→                <span className="text-sm leading-relaxed text-foreground">{d}</span>
+  1283→              </li>
+  1284→            ))}
+  1285→          </ul>
+  1286→        </Card>
+  1287→      </section>
+  1288→
+  1289→      {/* Testimonials */}
+  1290→      {config.testimonials.length > 0 && (
+  1291→        <section className="border-y bg-muted/30">
+  1292→          <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+  1293→            <div className="mb-10 text-center">
+  1294→              <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">What clients say</h2>
+  1295→              <p className="mt-2 text-sm text-muted-foreground">Hiring leaders on their {config.title.toLowerCase()} engagement.</p>
+  1296→            </div>
+  1297→            <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
+  1298→              {config.testimonials.map((t) => (
+  1299→                <Card key={t.name} className="flex h-full flex-col p-6">
+  1300→                  <Quote className="h-7 w-7 text-brand/40" />
+  1301→                  <p className="mt-3 flex-1 text-sm leading-relaxed text-foreground">&ldquo;{t.quote}&rdquo;</p>
+  1302→                  <div className="mt-5 flex items-center gap-3 border-t pt-4">
+  1303→                    <AvatarLogo text={t.initials} size="md" />
+  1304→                    <div className="min-w-0">
+  1305→                      <div className="text-sm font-semibold">{t.name}</div>
+  1306→                      <div className="text-xs text-muted-foreground">{t.role}, {t.company}</div>
+  1307→                    </div>
+  1308→                  </div>
+  1309→                </Card>
+  1310→              ))}
+  1311→            </div>
+  1312→          </div>
+  1313→        </section>
+  1314→      )}
+  1315→
+  1316→      {/* FAQ */}
+  1317→      <section className="mx-auto max-w-3xl px-4 py-14 sm:px-6 lg:px-8">
+  1318→        <div className="mb-10 text-center">
+  1319→          <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Frequently asked questions</h2>
+  1320→          <p className="mt-2 text-sm text-muted-foreground">Common questions about our {config.title.toLowerCase()} program.</p>
+  1321→        </div>
+  1322→        <Accordion type="single" collapsible className="space-y-3">
+  1323→          {config.faqs.map((f, i) => (
+  1324→            <AccordionItem key={i} value={`item-${i}`} className="rounded-lg border bg-card px-4">
+  1325→              <AccordionTrigger className="text-left text-sm font-medium hover:no-underline">
+  1326→                {f.q}
+  1327→              </AccordionTrigger>
+  1328→              <AccordionContent className="text-sm leading-relaxed text-muted-foreground">
+  1329→                {f.a}
+  1330→              </AccordionContent>
+  1331→            </AccordionItem>
+  1332→          ))}
+  1333→        </Accordion>
+  1334→      </section>
+  1335→
+  1336→      {/* Sibling roles */}
+  1337→      <section className="border-y bg-muted/30">
+  1338→        <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+  1339→          <div className="mb-8 text-center">
+  1340→            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Explore other talent solutions</h2>
+  1341→            <p className="mt-2 text-sm text-muted-foreground">Combine models or switch as your hiring plan evolves.</p>
+  1342→          </div>
+  1343→          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+  1344→            {config.siblingRoles.map((r) => {
+  1345→              const SiblingIcon = r.icon;
+  1346→              return (
+  1347→                <Card
+  1348→                  key={r.key}
+  1349→                  className="group h-full cursor-pointer p-5 transition-all hover:-translate-y-0.5 hover:shadow-md"
+  1350→                  onClick={() => navigate("public", `talent/${r.key}`)}
+  1351→                >
+  1352→                  <div
+  1353→                    className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-lg"
+  1354→                    style={{ backgroundColor: `${r.color}1A`, color: r.color }}
+  1355→                  >
+  1356→                    <SiblingIcon className="h-5 w-5" />
+  1357→                  </div>
+  1358→                  <h3 className="text-sm font-semibold group-hover:text-brand">{r.label}</h3>
+  1359→                  <p className="mt-1 line-clamp-2 text-xs text-muted-foreground">{r.desc}</p>
+  1360→                  <div
+  1361→                    className="mt-3 inline-flex items-center gap-1 text-xs font-medium"
+  1362→                    style={{ color: r.color }}
+  1363→                  >
+  1364→                    Explore <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+  1365→                  </div>
+  1366→                </Card>
+  1367→              );
+  1368→            })}
+  1369→          </div>
+  1370→        </div>
+  1371→      </section>
+  1372→
+  1373→      {/* CTA */}
+  1374→      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+  1375→        <Card className="overflow-hidden border-brand/30 bg-gradient-to-br from-brand/10 via-background to-background p-8 sm:p-12">
+  1376→          <div className="grid items-center gap-6 lg:grid-cols-2">
+  1377→            <div>
+  1378→              <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Ready to start with {config.title}?</h2>
+  1379→              <p className="mt-3 text-sm text-muted-foreground">
+  1380→                Tell us your hiring plan and our {config.title.toLowerCase()} team will propose a tailored engagement — typically within 1 business day.
+  1381→              </p>
+  1382→            </div>
+  1383→            <div className="flex flex-wrap gap-3 lg:justify-end">
+  1384→              <Button size="lg" onClick={() => toast.success("Get Started", { description: `Our ${config.title} team will reach out within 1 business day.` })} className="gap-1.5">
+  1385→                <Rocket className="h-4 w-4" /> Get Started
+  1386→              </Button>
+  1387→              <Button size="lg" variant="outline" onClick={() => navigate("public", "contact")} className="gap-1.5">
+  1388→                <Headset className="h-4 w-4" /> Talk to Sales
+  1389→              </Button>
+  1390→            </div>
+  1391→          </div>
+  1392→        </Card>
+  1393→      </section>
+  1394→    </div>
+  1395→  );
+  1396→}
+  1397→
+  1398→// Reserved for downstream consumers that may import the icon map.
+  1399→export const _TALENT_ROLE_ICONS = ICON_COMMON;
+
+[showing lines 800-1399 of 1400; use offset=1400 with limit to continue reading]

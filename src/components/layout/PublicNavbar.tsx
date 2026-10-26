@@ -1638,41 +1638,10 @@ function MobileNav({ go }: { go: (v: string) => void }) {
               </div>
             </AccordionContent>
           </AccordionItem>
-          <AccordionItem value="jobs">
-            <AccordionTrigger className="text-sm font-semibold">Jobs</AccordionTrigger>
-            <AccordionContent>
-              <div className="flex flex-col gap-1 pl-2">
-                <button onClick={() => { go("jobs"); setOpen(false); }} className="flex items-center justify-between rounded-md px-3 py-1.5 text-left text-xs font-medium text-brand hover:bg-brand/10">
-                  <span>Browse All Jobs</span>
-                  <span className="text-[9px] font-bold">150k+</span>
-                </button>
-                <span className="mt-2 px-3 text-[10px] font-bold uppercase text-muted-foreground">Work Mode</span>
-                {["On-site", "Hybrid", "Remote"].map(j => (
-                  <button key={j} onClick={() => { go("jobs"); setOpen(false); }} className="rounded-md px-3 py-1.5 text-left text-xs hover:bg-muted">{j}</button>
-                ))}
-                <span className="mt-2 px-3 text-[10px] font-bold uppercase text-muted-foreground">Location</span>
-                {["Bangalore", "Hyderabad", "Pune", "Kolkata"].map(j => (
-                  <button key={j} onClick={() => { go("jobs"); setOpen(false); }} className="rounded-md px-3 py-1.5 text-left text-xs hover:bg-muted">{j}</button>
-                ))}
-                <span className="mt-2 px-3 text-[10px] font-bold uppercase text-muted-foreground">Department</span>
-                {["Engineering / R&D", "IT & Software Dev.", "Customer Support", "Product & Marketing"].map(j => (
-                  <button key={j} onClick={() => { go("jobs"); setOpen(false); }} className="rounded-md px-3 py-1.5 text-left text-xs hover:bg-muted">{j}</button>
-                ))}
-                <span className="mt-2 px-3 text-[10px] font-bold uppercase text-muted-foreground">Company Type</span>
-                {["Foreign MNC", "Indian MNC", "Corporate", "Startup"].map(j => (
-                  <button key={j} onClick={() => { go("jobs"); setOpen(false); }} className="rounded-md px-3 py-1.5 text-left text-xs hover:bg-muted">{j}</button>
-                ))}
-                <span className="mt-2 px-3 text-[10px] font-bold uppercase text-muted-foreground">Industry</span>
-                {["IT Services & Consulting", "Internet/E-commerce", "Education/Training"].map(j => (
-                  <button key={j} onClick={() => { go("jobs"); setOpen(false); }} className="rounded-md px-3 py-1.5 text-left text-xs hover:bg-muted">{j}</button>
-                ))}
-                <span className="mt-2 px-3 text-[10px] font-bold uppercase text-muted-foreground">Education</span>
-                {["Any Graduation", "B.Tech/B.E.", "MBA/PGDM", "Doctorate Ph.D."].map(j => (
-                  <button key={j} onClick={() => { go("jobs"); setOpen(false); }} className="rounded-md px-3 py-1.5 text-left text-xs hover:bg-muted">{j}</button>
-                ))}
-              </div>
-            </AccordionContent>
-          </AccordionItem>
+          <button onClick={() => { go("jobs"); setOpen(false); }} className="flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-left text-sm font-semibold hover:bg-muted">
+            <Briefcase className="h-4 w-4 opacity-70" />
+            <span>Jobs</span>
+          </button>
           <AccordionItem value="employers">
             <AccordionTrigger className="text-sm font-semibold">Employers</AccordionTrigger>
             <AccordionContent>
@@ -1766,7 +1735,13 @@ export function PublicNavbar() {
           <ProgramsDropdown go={go} />
           <ProServicesDropdown go={go} />
           <TalentSolutionsDropdown go={go} />
-          <JobsDropdown go={go} />
+          <button
+            onClick={() => go("jobs")}
+            className="flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+          >
+            <Briefcase className="h-4 w-4 opacity-70" />
+            <span>Jobs</span>
+          </button>
           <EmployersDropdown go={go} />
           <PartnersDropdown go={go} />
           <ResourcesDropdown go={go} />

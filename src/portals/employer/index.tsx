@@ -6,6 +6,9 @@ import { useNav } from "@/lib/store";
 
 const EmployerOverview = dynamic(() => import("./EmployerOverview").then((m) => m.EmployerOverview));
 const EmployerCompanyProfile = dynamic(() => import("./EmployerCompanyProfile").then((m) => m.EmployerCompanyProfile));
+const EmployerCompanyPreview = dynamic(() => import("./EmployerCompanyPreview").then((m) => m.EmployerCompanyPreview));
+const EmployerBrandingScore = dynamic(() => import("./EmployerBrandingScore").then((m) => m.EmployerBrandingScore));
+const EmployerBenefitsManager = dynamic(() => import("./EmployerBenefitsManager").then((m) => m.EmployerBenefitsManager));
 const EmployerBranding = dynamic(() => import("./EmployerBranding").then((m) => m.EmployerBranding));
 const EmployerJobs = dynamic(() => import("./EmployerJobs").then((m) => m.EmployerJobs));
 const EmployerCreateJob = dynamic(() => import("./EmployerCreateJob").then((m) => m.EmployerCreateJob));
@@ -28,6 +31,13 @@ const EmployerSettings = dynamic(() => import("./EmployerSettings").then((m) => 
 const EmployerSupport = dynamic(() => import("./EmployerSupport").then((m) => m.EmployerSupport));
 
 // Settings & Support hub pages (SETTINGS-SUPPORT)
+const EmployerCandidateCompare = dynamic(() => import("./EmployerCandidateCompare").then((m) => m.EmployerCandidateCompare));
+const EmployerBGV = dynamic(() => import("./EmployerBGV").then((m) => m.EmployerBGV));
+const EmployerOnboarding = dynamic(() => import("./EmployerOnboarding").then((m) => m.EmployerOnboarding));
+const EmployerInvoices = dynamic(() => import("./EmployerInvoices").then((m) => m.EmployerInvoices));
+const EmployerTaxDocuments = dynamic(() => import("./EmployerTaxDocuments").then((m) => m.EmployerTaxDocuments));
+const EmployerCampaigns = dynamic(() => import("./EmployerCampaigns").then((m) => m.EmployerCampaigns));
+const EmployerWhatsAppSMS = dynamic(() => import("./EmployerWhatsAppSMS").then((m) => m.EmployerWhatsAppSMS));
 const EmployerSettingsHub = dynamic(() => import("./EmployerSettingsHub").then((m) => m.EmployerSettingsHub));
 const EmployerSecurityCenter = dynamic(() => import("./EmployerSecurityCenter").then((m) => m.EmployerSecurityCenter));
 const EmployerNotificationPrefs = dynamic(() => import("./EmployerNotificationPrefs").then((m) => m.EmployerNotificationPrefs));
@@ -68,6 +78,28 @@ const EnterpriseSSO = dynamic(() => import("@/portals/enterprise/EnterpriseSSO")
 const EnterpriseBilling = dynamic(() => import("@/portals/enterprise/EnterpriseBilling").then((m) => m.EnterpriseBilling));
 const EnterpriseSettings = dynamic(() => import("@/portals/enterprise/EnterpriseSettings").then((m) => m.EnterpriseSettings));
 
+// WAVE2-CANDIDATE-EMPLOYER-SOURCING pages
+const EmployerRequisitions = dynamic(() => import("./EmployerRequisitions").then((m) => m.EmployerRequisitions));
+const EmployerInterviewKits = dynamic(() => import("./EmployerInterviewKits").then((m) => m.EmployerInterviewKits));
+const EmployerDebriefs = dynamic(() => import("./EmployerDebriefs").then((m) => m.EmployerDebriefs));
+const EmployerReferralProgram = dynamic(() => import("./EmployerReferralProgram").then((m) => m.EmployerReferralProgram));
+
+// WAVE3-CANDIDATE-EMPLOYER-PROCESS pages
+const EmployerProbation = dynamic(() => import("./EmployerProbation").then((m) => m.EmployerProbation));
+const EmployerExitManagement = dynamic(() => import("./EmployerExitManagement").then((m) => m.EmployerExitManagement));
+const EmployerPerformanceReview = dynamic(() => import("./EmployerPerformanceReview").then((m) => m.EmployerPerformanceReview));
+const EmployerLeaveManagement = dynamic(() => import("./EmployerLeaveManagement").then((m) => m.EmployerLeaveManagement));
+
+// WAVE4-TRANSACTIONS-ALL-PORTALS pages
+const EmployerPurchaseOrders = dynamic(() => import("./EmployerPurchaseOrders").then((m) => m.EmployerPurchaseOrders));
+const EmployerCostPerHire = dynamic(() => import("./EmployerCostPerHire").then((m) => m.EmployerCostPerHire));
+const EmployerCredits = dynamic(() => import("./EmployerCredits").then((m) => m.EmployerCredits));
+
+// WAVE5-COMMUNICATION-ALL-PORTALS pages
+const EmployerHiringManagerPortal = dynamic(() => import("./EmployerHiringManagerPortal").then((m) => m.EmployerHiringManagerPortal));
+const EmployerCalendarSync = dynamic(() => import("./EmployerCalendarSync").then((m) => m.EmployerCalendarSync));
+const EmployerStatusNotifications = dynamic(() => import("./EmployerStatusNotifications").then((m) => m.EmployerStatusNotifications));
+
 // Cross-portal shared pages (SETTINGS-SUPPORT-SHARED)
 const TasksPage = dynamic(() => import("@/portals/_settings-support-shared/TasksPage").then((m) => m.TasksPage));
 
@@ -82,6 +114,9 @@ export function render(route: string): React.ReactNode {
     case "overview": return <EmployerOverview />;
     case "tasks": return <TasksPage portal="employer" route={route} />;
     case "company-profile": return <EmployerCompanyProfile />;
+    case "company-preview": return <EmployerCompanyPreview />;
+    case "branding-score": return <EmployerBrandingScore />;
+    case "benefits-manager": return <EmployerBenefitsManager />;
     case "branding": return <EmployerBranding />;
     case "jobs": return <EmployerJobs />;
     case "create-job": return <EmployerCreateJob />;
@@ -103,6 +138,13 @@ export function render(route: string): React.ReactNode {
     case "settings": return <EmployerSettings />;
     case "support": return <EmployerSupport />;
     // Settings & Support hub pages (SETTINGS-SUPPORT)
+    case "compare-candidates": return <EmployerCandidateCompare />;
+    case "background-verification": return <EmployerBGV />;
+    case "onboarding": return <EmployerOnboarding />;
+    case "invoices": return <EmployerInvoices />;
+    case "tax-documents": return <EmployerTaxDocuments />;
+    case "campaigns": return <EmployerCampaigns />;
+    case "whatsapp-sms": return <EmployerWhatsAppSMS />;
     case "settings-hub": return <EmployerSettingsHub />;
     case "security-center": return <EmployerSecurityCenter />;
     case "notification-preferences": return <EmployerNotificationPrefs />;
@@ -138,6 +180,24 @@ export function render(route: string): React.ReactNode {
     case "ent-sso": return <EnterpriseSSO />;
     case "ent-billing": return <EnterpriseBilling />;
     case "ent-settings": return <EnterpriseSettings />;
+    // WAVE2-CANDIDATE-EMPLOYER-SOURCING routes
+    case "requisitions": return <EmployerRequisitions />;
+    case "interview-kits": return <EmployerInterviewKits />;
+    case "debriefs": return <EmployerDebriefs />;
+    case "referral-program": return <EmployerReferralProgram />;
+    // WAVE3-CANDIDATE-EMPLOYER-PROCESS routes
+    case "probation": return <EmployerProbation />;
+    case "exit-management": return <EmployerExitManagement />;
+    case "performance-review": return <EmployerPerformanceReview />;
+    case "leave-management": return <EmployerLeaveManagement />;
+    // WAVE4-TRANSACTIONS-ALL-PORTALS routes
+    case "purchase-orders": return <EmployerPurchaseOrders />;
+    case "cost-per-hire": return <EmployerCostPerHire />;
+    case "credits": return <EmployerCredits />;
+    // WAVE5-COMMUNICATION-ALL-PORTALS routes
+    case "hiring-manager-portal": return <EmployerHiringManagerPortal />;
+    case "calendar-sync": return <EmployerCalendarSync />;
+    case "status-notifications": return <EmployerStatusNotifications />;
     default: return <EmployerOverview />;
   }
 }

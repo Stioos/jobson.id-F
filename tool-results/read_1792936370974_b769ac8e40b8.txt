@@ -1,0 +1,1989 @@
+     1→export interface ProgramPhase {
+     2→  phase: string;
+     3→  title: string;
+     4→  weeks: string;
+     5→  duration: string;
+     6→  topics: string[];
+     7→}
+     8→
+     9→export interface ProgramHighlight {
+    10→  title: string;
+    11→  desc: string;
+    12→}
+    13→
+    14→export interface ProgramTrackInfo {
+    15→  trackKey: string;
+    16→  mainProgramId: 'fde-fwd' | 'fde' | 'dsai' | 'cdm';
+    17→  mainProgramName: string;
+    18→  badge: string;
+    19→  title: string;
+    20→  subtitle: string;
+    21→  description: string;
+    22→  duration: string;
+    23→  weeks: number;
+    24→  mode: string;
+    25→  level: string;
+    26→  specialization: string;
+    27→  techStack: string[];
+    28→  highlights: ProgramHighlight[];
+    29→  curriculum: ProgramPhase[];
+    30→}
+    31→
+    32→export const PROGRAM_TRACKS: Record<string, ProgramTrackInfo> = {
+    33→  // ==========================================
+    34→  // 1. FORWARD DEPLOYED ENGINEER (FDE-FWD)
+    35→  // ==========================================
+    36→  'fde-fwd:data engineer': {
+    37→    trackKey: 'fde-fwd-data-engineer',
+    38→    mainProgramId: 'fde-fwd',
+    39→    mainProgramName: 'Forward Deployed Engineer (FDE-FWD)',
+    40→    badge: 'FDE-DE',
+    41→    title: 'Forward Deployed Data Engineer',
+    42→    subtitle: 'Build Data Pipelines, ETL Systems & Real-Time Analytics Platforms',
+    43→    description:
+    44→      'Become the engineer who turns raw data into reliable, actionable infrastructure. Learn to build robust data pipelines, design ETL/ELT workflows, integrate customer data platforms, and ship real-time analytics systems that power business decisions for real customers.',
+    45→    duration: '24 Weeks',
+    46→    weeks: 24,
+    47→    mode: 'Hybrid / Online Interactive',
+    48→    level: 'Beginner to Advanced',
+    49→    specialization: 'Data Engineer',
+    50→    techStack: ['Python', 'Apache Airflow', 'BigQuery', 'Snowflake', 'Apache Spark', 'dbt', 'Kafka', 'PostgreSQL', 'Delta Lake', 'AWS S3'],
+    51→    highlights: [
+    52→      { title: 'Data Pipelines', desc: 'Design and build end-to-end data pipelines that move, transform, and deliver data reliably — from ingestion to consumption at production scale.' },
+    53→      { title: 'ETL/ELT Architecture', desc: 'Master modern ETL and ELT patterns using tools like dbt, Airflow, and Spark. Build transformation logic that is testable, version-controlled, and production-ready.' },
+    54→      { title: 'Customer Data Integration', desc: 'Learn to unify data from dozens of customer sources — CRMs, APIs, databases, and event streams — into a single, reliable source of truth.' },
+    55→      { title: 'Real-Time Analytics', desc: 'Build streaming data systems that deliver insights in seconds, not hours. Master Kafka, Flink, and real-time dashboards that drive immediate business value.' },
+    56→    ],
+    57→    curriculum: [
+    58→      {
+    59→        phase: 'Phase 1: Data Foundations',
+    60→        title: 'Phase 1: Data Foundations',
+    61→        weeks: 'Weeks 1–4',
+    62→        duration: 'Weeks 1–4',
+    63→        topics: [
+    64→          'Python for Data Engineering',
+    65→          'Advanced SQL & Query Optimization',
+    66→          'Data Structures & Algorithms for Data',
+    67→          'Statistics & Exploratory Data Analysis',
+    68→          'Excel, Spreadsheets & Data Cleaning Basics',
+    69→        ],
+    70→      },
+    71→      {
+    72→        phase: 'Phase 2: Data Engineering Core',
+    73→        title: 'Phase 2: Data Engineering Core',
+    74→        weeks: 'Weeks 5–10',
+    75→        duration: 'Weeks 5–10',
+    76→        topics: [
+    77→          'ETL Pipeline Design & Implementation',
+    78→          'Data Warehousing Concepts & Modeling',
+    79→          'BigQuery & Cloud Data Warehouses',
+    80→          'Apache Spark Fundamentals',
+    81→          'Apache Airflow for Orchestration',
+    82→          'dbt for Data Transformations',
+    83→        ],
+    84→      },
+    85→      {
+    86→        phase: 'Phase 3: Advanced Data Systems',
+    87→        title: 'Phase 3: Advanced Data Systems',
+    88→        weeks: 'Weeks 11–18',
+    89→        duration: 'Weeks 11–18',
+    90→        topics: [
+    91→          'Real-Time Streaming with Kafka & Flink',
+    92→          'NoSQL Databases (MongoDB, Cassandra, Redis)',
+    93→          'Data Quality Testing & Validation',
+    94→          'Customer Data Platforms & Integration',
+    95→          'Data Lake Architecture (S3, Delta Lake)',
+    96→        ],
+    97→      },
+    98→      {
+    99→        phase: 'Phase 4: Production Data',
+   100→        title: 'Phase 4: Production Data',
+   101→        weeks: 'Weeks 19–24',
+   102→        duration: 'Weeks 19–24',
+   103→        topics: [
+   104→          'MLOps for Data: Feature Stores & ML Pipelines',
+   105→          'Data Governance, Security & Compliance',
+   106→          'Data Infrastructure Monitoring & Alerting',
+   107→          'Capstone: End-to-End Data Platform for a Real Customer',
+   108→        ],
+   109→      },
+   110→    ],
+   111→  },
+   112→
+   113→  'fde-fwd:ai engineer': {
+   114→    trackKey: 'fde-fwd-ai-engineer',
+   115→    mainProgramId: 'fde-fwd',
+   116→    mainProgramName: 'Forward Deployed Engineer (FDE-FWD)',
+   117→    badge: 'FDE-AIE',
+   118→    title: 'Forward Deployed AI Engineer',
+   119→    subtitle: 'Deploy LLMs, Build AI Agents & Ship Production AI Systems',
+   120→    description:
+   121→      'Become the engineer who bridges the gap between AI research and real-world impact. Learn to deploy LLMs, build autonomous AI agents, implement RAG pipelines, and ship AI systems that solve actual business problems for real customers.',
+   122→    duration: '24 Weeks',
+   123→    weeks: 24,
+   124→    mode: 'Hybrid / Online Interactive',
+   125→    level: 'Beginner to Advanced',
+   126→    specialization: 'AI Engineer',
+   127→    techStack: ['Python', 'LangChain', 'LlamaIndex', 'OpenAI API', 'Claude API', 'Pinecone', 'Vector Databases', 'Hugging Face', 'FastAPI', 'Docker'],
+   128→    highlights: [
+   129→      { title: 'LLM Deployment & Integration', desc: 'Go beyond prompts — learn to deploy, fine-tune, and integrate large language models into production systems used by real customers.' },
+   130→      { title: 'Autonomous AI Agents', desc: 'Build intelligent agents that reason, plan, and execute complex tasks. Master tool-use, function calling, and multi-agent orchestration.' },
+   131→      { title: 'RAG Pipeline Architecture', desc: 'Design and implement production RAG systems — from chunking strategies and embedding models to vector databases and retrieval optimization.' },
+   132→      { title: 'Production AI Systems', desc: 'Ship AI that actually works in production. Handle edge cases, optimize costs, monitor performance, and ensure reliability at scale.' },
+   133→    ],
+   134→    curriculum: [
+   135→      {
+   136→        phase: 'Phase 1: AI & ML Foundations',
+   137→        title: 'Phase 1: AI & ML Foundations',
+   138→        weeks: 'Weeks 1–4',
+   139→        duration: 'Weeks 1–4',
+   140→        topics: [
+   141→          'Python for AI/ML Development',
+   142→          'Machine Learning Fundamentals (Supervised & Unsupervised)',
+   143→          'Data Processing with Pandas & NumPy',
+   144→          'Statistics & Probability for AI Engineers',
+   145→          'Jupyter Notebooks & Experiment Tracking',
+   146→          'APIs & Environment Setup for AI Projects',
+   147→        ],
+   148→      },
+   149→      {
+   150→        phase: 'Phase 2: LLMs & Prompt Engineering',
+   151→        title: 'Phase 2: LLMs & Prompt Engineering',
+   152→        weeks: 'Weeks 5–10',
+   153→        duration: 'Weeks 5–10',
+   154→        topics: [
+   155→          'LLM Architecture (Transformers, Attention, Tokenization)',
+   156→          'Advanced Prompt Engineering & Chain-of-Thought',
+   157→          'Fine-Tuning Models (LoRA, QLoRA, PEFT)',
+   158→          'LangChain & LlamaIndex Frameworks',
+   159→          'OpenAI API, Claude API & Open-Source Models',
+   160→          'Embedding Models & Semantic Search Basics',
+   161→        ],
+   162→      },
+   163→      {
+   164→        phase: 'Phase 3: AI Agents & RAG',
+   165→        title: 'Phase 3: AI Agents & RAG',
+   166→        weeks: 'Weeks 11–18',
+   167→        duration: 'Weeks 11–18',
+   168→        topics: [
+   169→          'RAG Pipeline Design & Implementation',
+   170→          'Autonomous AI Agents with Tool-Use & Planning',
+   171→          'Vector Databases (Pinecone, Weaviate, ChromaDB)',
+   172→          'Multi-Modal AI (Vision, Audio, Text)',
+   173→          'Multi-Agent Systems & Orchestration Patterns',
+   174→          'Evaluation, Testing & Safety Guardrails for AI',
+   175→        ],
+   176→      },
+   177→      {
+   178→        phase: 'Phase 4: Production AI',
+   179→        title: 'Phase 4: Production AI',
+   180→        weeks: 'Weeks 19–24',
+   181→        duration: 'Weeks 19–24',
+   182→        topics: [
+   183→          'MLOps: Model Versioning, Tracking & Registry',
+   184→          'Model Deployment (API, Edge, Batch Inference)',
+   185→          'AI Application Monitoring & Observability',
+   186→          'Cost Optimization & Scaling Strategies',
+   187→          'Capstone: End-to-End AI Product Delivery',
+   188→          'AI Ethics, Compliance & Responsible AI Practices',
+   189→        ],
+   190→      },
+   191→    ],
+   192→  },
+   193→
+   194→  'fde-fwd:software engineer': {
+   195→    trackKey: 'fde-fwd-software-engineer',
+   196→    mainProgramId: 'fde-fwd',
+   197→    mainProgramName: 'Forward Deployed Engineer (FDE-FWD)',
+   198→    badge: 'FDE-SWE',
+   199→    title: 'Forward Deployed Software Engineer',
+   200→    subtitle: 'Build, Ship & Scale Production Software for Real Customers',
+   201→    description:
+   202→      'Master fullstack development by building real products for real customers. From HTML to cloud deployments, learn software engineering the way it\'s practiced at top tech companies — hands-on, production-first, and customer-facing.',
+   203→    duration: '24 Weeks',
+   204→    weeks: 24,
+   205→    mode: 'Hybrid / Online Interactive',
+   206→    level: 'Beginner to Advanced',
+   207→    specialization: 'Software Engineer',
+   208→    techStack: ['React', 'Next.js', 'Node.js', 'PostgreSQL', 'Docker', 'AWS', 'TypeScript', 'Prisma', 'REST APIs', 'CI/CD'],
+   209→    highlights: [
+   210→      { title: 'Software Engineering Mastery', desc: 'Deep-dive into software engineering principles — clean code, design patterns, system design, and scalable architecture used by top tech companies.' },
+   211→      { title: 'Customer Implementations', desc: 'Work on real customer projects from day one. Integrate with existing systems, handle edge cases, and deliver production-ready solutions.' },
+   212→      { title: 'Production-Grade Code', desc: 'Write code that runs in production. Learn CI/CD, testing, monitoring, and the practices that ensure reliability at scale.' },
+   213→      { title: 'Fullstack Delivery', desc: 'From frontend UI to backend APIs to database design — own the entire stack and deliver end-to-end features independently.' },
+   214→    ],
+   215→    curriculum: [
+   216→      {
+   217→        phase: 'Phase 1: Software Foundations',
+   218→        title: 'Phase 1: Software Foundations',
+   219→        weeks: 'Weeks 1–4',
+   220→        duration: 'Weeks 1–4',
+   221→        topics: [
+   222→          'HTML5, CSS3 & Modern JavaScript (ES6+)',
+   223→          'Git Version Control & GitHub Collaboration',
+   224→          'REST API Fundamentals & HTTP Protocols',
+   225→          'Data Structures & Algorithms Essentials',
+   226→          'Responsive Design & CSS Frameworks (Tailwind)',
+   227→          'Command Line & Development Tooling',
+   228→        ],
+   229→      },
+   230→      {
+   231→        phase: 'Phase 2: Application Development',
+   232→        title: 'Phase 2: Application Development',
+   233→        weeks: 'Weeks 5–10',
+   234→        duration: 'Weeks 5–10',
+   235→        topics: [
+   236→          'React 18 & Next.js App Router',
+   237→          'Node.js & Express.js Backend Development',
+   238→          'Database Design with PostgreSQL & Prisma ORM',
+   239→          'Authentication & Authorization (JWT, OAuth)',
+   240→          'State Management (Zustand, React Query)',
+   241→          'API Design Best Practices & Error Handling',
+   242→        ],
+   243→      },
+   244→      {
+   245→        phase: 'Phase 3: Customer Implementation',
+   246→        title: 'Phase 3: Customer Implementation',
+   247→        weeks: 'Weeks 11–18',
+   248→        duration: 'Weeks 11–18',
+   249→        topics: [
+   250→          'Third-Party API Integration Patterns',
+   251→          'RESTful & GraphQL API Development',
+   252→          'Production Deployment Strategies',
+   253→          'Testing: Unit, Integration & E2E (Jest, Cypress)',
+   254→          'Security Best Practices & Data Protection',
+   255→          'Customer Requirements Gathering & Technical Specs',
+   256→        ],
+   257→      },
+   258→      {
+   259→        phase: 'Phase 4: Production Engineering',
+   260→        title: 'Phase 4: Production Engineering',
+   261→        weeks: 'Weeks 19–24',
+   262→        duration: 'Weeks 19–24',
+   263→        topics: [
+   264→          'CI/CD Pipelines (GitHub Actions, Docker)',
+   265→          'Application Monitoring & Logging',
+   266→          'Performance Optimization & Profiling',
+   267→          'Cloud Services (AWS EC2, S3, RDS)',
+   268→          'Capstone: Fullstack Customer Project Delivery',
+   269→          'System Design Fundamentals & Architecture',
+   270→        ],
+   271→      },
+   272→    ],
+   273→  },
+   274→
+   275→  'fde-fwd:platform engineer': {
+   276→    trackKey: 'fde-fwd-platform-engineer',
+   277→    mainProgramId: 'fde-fwd',
+   278→    mainProgramName: 'Forward Deployed Engineer (FDE-FWD)',
+   279→    badge: 'FDE-PE',
+   280→    title: 'Forward Deployed Platform Engineer',
+   281→    subtitle: 'Build Cloud Infrastructure, APIs & Deployment Automation Systems',
+   282→    description:
+   283→      'Become the engineer who builds the platforms that other engineers depend on. Learn cloud architecture, API design, infrastructure as code, and deployment automation — then ship these systems to real customers who need reliable, scalable infrastructure.',
+   284→    duration: '24 Weeks',
+   285→    weeks: 24,
+   286→    mode: 'Hybrid / Online Interactive',
+   287→    level: 'Beginner to Advanced',
+   288→    specialization: 'Platform Engineer',
+   289→    techStack: ['AWS', 'Kubernetes', 'Docker', 'Terraform', 'GitHub Actions', 'Prometheus', 'Grafana', 'Linux', 'Istio', 'GCP'],
+   290→    highlights: [
+   291→      { title: 'Cloud Architecture', desc: 'Design and build cloud-native architectures on AWS and GCP — from compute and storage to networking and identity. Learn to make infrastructure decisions that scale.' },
+   292→      { title: 'API Design & Management', desc: 'Build robust, secure APIs that power entire platforms. Master REST, GraphQL, API gateways, rate limiting, authentication, and versioning at production scale.' },
+   293→      { title: 'Infrastructure as Code', desc: 'Define, provision, and manage infrastructure using Terraform and Pulumi. Treat infrastructure like software — version-controlled, tested, and repeatably deployed.' },
+   294→      { title: 'Deployment Automation', desc: 'Build CI/CD pipelines that enable teams to ship code safely and frequently. Master container orchestration, blue-green deployments, canary releases, and rollback strategies.' },
+   295→    ],
+   296→    curriculum: [
+   297→      {
+   298→        phase: 'Phase 1: Cloud Foundations',
+   299→        title: 'Phase 1: Cloud Foundations',
+   300→        weeks: 'Weeks 1–4',
+   301→        duration: 'Weeks 1–4',
+   302→        topics: [
+   303→          'Linux System Administration & Shell Scripting',
+   304→          'Networking Fundamentals (TCP/IP, DNS, Load Balancing)',
+   305→          'Cloud Fundamentals (AWS & GCP Core Services)',
+   306→          'CLI Tools & Automation (Bash, AWS CLI, gcloud)',
+   307→          'Git & Version Control for Infrastructure',
+   308→        ],
+   309→      },
+   310→      {
+   311→        phase: 'Phase 2: Platform Services',
+   312→        title: 'Phase 2: Platform Services',
+   313→        weeks: 'Weeks 5–10',
+   314→        duration: 'Weeks 5–10',
+   315→        topics: [
+   316→          'Container Fundamentals with Docker',
+   317→          'Kubernetes Architecture & Orchestration',
+   318→          'Terraform for Infrastructure as Code',
+   319→          'API Gateway Design & Management',
+   320→          'Service Mesh (Istio, Linkerd)',
+   321→          'Secrets Management & Configuration',
+   322→        ],
+   323→      },
+   324→      {
+   325→        phase: 'Phase 3: Infrastructure Automation',
+   326→        title: 'Phase 3: Infrastructure Automation',
+   327→        weeks: 'Weeks 11–18',
+   328→        duration: 'Weeks 11–18',
+   329→        topics: [
+   330→          'CI/CD Pipeline Design with GitHub Actions',
+   331→          'Advanced IaC: Modules, Workspaces & State Management',
+   332→          'Monitoring & Observability (Prometheus, Grafana)',
+   333→          'Centralized Logging & Tracing (ELK, Jaeger)',
+   334→          'Security Fundamentals (IAM, Network Policies, RBAC)',
+   335→        ],
+   336→      },
+   337→      {
+   338→        phase: 'Phase 4: Production Platform',
+   339→        title: 'Phase 4: Production Platform',
+   340→        weeks: 'Weeks 19–24',
+   341→        duration: 'Weeks 19–24',
+   342→        topics: [
+   343→          'SRE Practices: SLIs, SLOs, Error Budgets & Incident Response',
+   344→          'Multi-Cloud Strategy & Hybrid Deployments',
+   345→          'Cost Optimization & FinOps for Cloud Infrastructure',
+   346→          'Capstone: End-to-End Platform Build for a Real Customer',
+   347→        ],
+   348→      },
+   349→    ],
+   350→  },
+   351→
+   352→  'fde-fwd:solutions engineer': {
+   353→    trackKey: 'fde-fwd-solutions-engineer',
+   354→    mainProgramId: 'fde-fwd',
+   355→    mainProgramName: 'Forward Deployed Engineer (FDE-FWD)',
+   356→    badge: 'FDE-SE',
+   357→    title: 'Forward Deployed Solutions Engineer',
+   358→    subtitle: 'Design, Integrate & Deliver Technical Solutions for Enterprise Customers',
+   359→    description:
+   360→      'Master the art of bridging business requirements with technical solutions. Learn to design architectures, integrate complex systems, and deliver end-to-end solutions that solve real customer problems at scale.',
+   361→    duration: '24 Weeks',
+   362→    weeks: 24,
+   363→    mode: 'Hybrid / Online Interactive',
+   364→    level: 'Beginner to Advanced',
+   365→    specialization: 'Solutions Engineer',
+   366→    techStack: ['Postman', 'Figma', 'AWS', 'Docker', 'Lucidchart', 'Python', 'JavaScript', 'REST APIs', 'GraphQL', 'Jira'],
+   367→    highlights: [
+   368→      { title: 'Technical Solution Design', desc: 'Learn to translate complex business requirements into elegant technical architectures using industry-standard design patterns and frameworks.' },
+   369→      { title: 'System Integrations', desc: 'Master the art of connecting disparate systems — REST APIs, webhooks, message queues, and enterprise middleware — to build seamless data flows.' },
+   370→      { title: 'Customer Requirements Analysis', desc: 'Develop the critical skill of understanding what customers actually need, documenting specifications, and aligning technical solutions with business goals.' },
+   371→      { title: 'Solution Architecture', desc: 'Design scalable, maintainable, and secure solution architectures that can evolve with customer needs and handle production workloads.' },
+   372→    ],
+   373→    curriculum: [
+   374→      {
+   375→        phase: 'Phase 1: Technical Foundations',
+   376→        title: 'Phase 1: Technical Foundations',
+   377→        weeks: 'Weeks 1–4',
+   378→        duration: 'Weeks 1–4',
+   379→        topics: [
+   380→          'Programming Fundamentals (Python & JavaScript)',
+   381→          'System Design Basics & Architecture Patterns',
+   382→          'API Fundamentals: REST, GraphQL, Webhooks',
+   383→          'Database Fundamentals: SQL & NoSQL',
+   384→          'Cloud Computing Overview (AWS, GCP, Azure)',
+   385→        ],
+   386→      },
+   387→      {
+   388→        phase: 'Phase 2: Solution Design',
+   389→        title: 'Phase 2: Solution Design',
+   390→        weeks: 'Weeks 5–10',
+   391→        duration: 'Weeks 5–10',
+   392→        topics: [
+   393→          'Customer Requirements Gathering & Analysis',
+   394→          'Architecture Patterns: Microservices, Event-Driven, CQRS',
+   395→          'Integration Design: ESB, API Gateway, Message Queues',
+   396→          'API Design & Documentation (OpenAPI/Swagger)',
+   397→          'Solution Documentation & Technical Specifications',
+   398→          'Data Modeling & Migration Strategies',
+   399→        ],
+   400→      },
+   401→      {
+   402→        phase: 'Phase 3: Customer Implementation',
+   403→        title: 'Phase 3: Customer Implementation',
+   404→        weeks: 'Weeks 11–18',
+   405→        duration: 'Weeks 11–18',
+   406→        topics: [
+   407→          'Pre-Sales Engineering & Solution Presentations',
+   408→          'POC Development & Rapid Prototyping',
+   409→          'Demo Environment Setup & Management',
+   410→          'Stakeholder Management & Communication',
+   411→          'Customer Onboarding & Deployment Planning',
+   412→          'Integration Testing & UAT Coordination',
+   413→        ],
+   414→      },
+   415→      {
+   416→        phase: 'Phase 4: Production Solutions',
+   417→        title: 'Phase 4: Production Solutions',
+   418→        weeks: 'Weeks 19–24',
+   419→        duration: 'Weeks 19–24',
+   420→        topics: [
+   421→          'SLA Management & Service Reliability',
+   422→          'Solution Optimization & Performance Tuning',
+   423→          'Multi-Tenant Solution Design',
+   424→          'Monitoring, Alerting & Incident Management',
+   425→          'Capstone: End-to-End Enterprise Solution Delivery',
+   426→        ],
+   427→      },
+   428→    ],
+   429→  },
+   430→
+   431→  'fde-fwd:security engineer': {
+   432→    trackKey: 'fde-fwd-security-engineer',
+   433→    mainProgramId: 'fde-fwd',
+   434→    mainProgramName: 'Forward Deployed Engineer (FDE-FWD)',
+   435→    badge: 'FDE-SEC',
+   436→    title: 'Forward Deployed Security Engineer',
+   437→    subtitle: 'Secure, Defend & Harden Production Systems for Enterprise Customers',
+   438→    description:
+   439→      'Become a security engineer who protects real systems in production. Learn application security, identity management, compliance frameworks, and DevSecOps practices used by top tech companies to defend their infrastructure.',
+   440→    duration: '24 Weeks',
+   441→    weeks: 24,
+   442→    mode: 'Hybrid / Online Interactive',
+   443→    level: 'Beginner to Advanced',
+   444→    specialization: 'Security Engineer',
+   445→    techStack: ['AWS Security', 'Kubernetes Security', 'OWASP ZAP', 'HashiCorp Vault', 'Splunk', 'Terraform', 'Linux Hardening', 'OAuth / SAML', 'DevSecOps'],
+   446→    highlights: [
+   447→      { title: 'Application Security', desc: 'Master securing web and cloud applications — from OWASP Top 10 vulnerabilities to advanced threat modeling and secure coding practices.' },
+   448→      { title: 'Identity & Access Management', desc: 'Design and implement robust authentication, authorization, and identity systems using OAuth, SAML, RBAC, and zero trust principles.' },
+   449→      { title: 'Compliance & Audit', desc: 'Navigate complex regulatory landscapes — SOC 2, ISO 27001, GDPR, HIPAA — and implement security controls that satisfy auditors and protect data.' },
+   450→      { title: 'Secure DevOps', desc: 'Integrate security into every stage of the CI/CD pipeline. Learn SAST, DAST, container security, and infrastructure-as-code security scanning.' },
+   451→    ],
+   452→    curriculum: [
+   453→      {
+   454→        phase: 'Phase 1: Security Foundations',
+   455→        title: 'Phase 1: Security Foundations',
+   456→        weeks: 'Weeks 1–4',
+   457→        duration: 'Weeks 1–4',
+   458→        topics: [
+   459→          'Networking Fundamentals & TCP/IP',
+   460→          'Linux System Administration & Hardening',
+   461→          'Information Security Principles & CIA Triad',
+   462→          'Cryptography & PKI Fundamentals',
+   463→          'Risk Assessment & Threat Modeling',
+   464→        ],
+   465→      },
+   466→      {
+   467→        phase: 'Phase 2: Application Security',
+   468→        title: 'Phase 2: Application Security',
+   469→        weeks: 'Weeks 5–10',
+   470→        duration: 'Weeks 5–10',
+   471→        topics: [
+   472→          'OWASP Top 10 Deep Dive & Exploitation Labs',
+   473→          'SAST/DAST Tools & Vulnerability Scanning',
+   474→          'Secure Coding Practices in JavaScript & Python',
+   475→          'Authentication & Authorization Systems',
+   476→          'Penetration Testing Basics & Methodology',
+   477→          'Security Code Review & Remediation',
+   478→        ],
+   479→      },
+   480→      {
+   481→        phase: 'Phase 3: Cloud Security',
+   482→        title: 'Phase 3: Cloud Security',
+   483→        weeks: 'Weeks 11–18',
+   484→        duration: 'Weeks 11–18',
+   485→        topics: [
+   486→          'Identity & Access Management (AWS IAM, Azure AD)',
+   487→          'Cloud Security Posture Management',
+   488→          'Network Security: VPC, Firewalls, WAF',
+   489→          'Incident Response & Forensics',
+   490→          'Compliance Frameworks: SOC 2, ISO 27001, GDPR',
+   491→          'Security Monitoring & Log Analysis',
+   492→        ],
+   493→      },
+   494→      {
+   495→        phase: 'Phase 4: Production Security',
+   496→        title: 'Phase 4: Production Security',
+   497→        weeks: 'Weeks 19–24',
+   498→        duration: 'Weeks 19–24',
+   499→        topics: [
+   500→          'DevSecOps Pipeline Design & Implementation',
+   501→          'SIEM/SOAR: Splunk, Elastic Security',
+   502→          'Zero Trust Architecture Implementation',
+   503→          'Security Automation & Orchestration',
+   504→          'Capstone: Enterprise Security Assessment & Hardening',
+   505→        ],
+   506→      },
+   507→    ],
+   508→  },
+   509→
+   510→  // ==========================================
+   511→  // 2. FULLSTACK DEVELOPMENT ENGINEERING (FDE)
+   512→  // ==========================================
+   513→  'fde:software engineer': {
+   514→    trackKey: 'fse-software-engineer',
+   515→    mainProgramId: 'fde',
+   516→    mainProgramName: 'Fullstack Development Engineering (FDE)',
+   517→    badge: 'FSE-SWE',
+   518→    title: 'Full Stack Software Engineer',
+   519→    subtitle: 'Master end-to-end web development from frontend UI to backend APIs',
+   520→    description:
+   521→      'Build complete web applications with modern frontend frameworks, robust backend services, and production-ready deployment pipelines. 24-week intensive program designed for aspiring fullstack developers.',
+   522→    duration: '24 Weeks',
+   523→    weeks: 24,
+   524→    mode: 'Online Interactive',
+   525→    level: 'Beginner to Advanced',
+   526→    specialization: 'Software Engineer',
+   527→    techStack: ['React', 'Next.js', 'Node.js', 'PostgreSQL', 'Docker', 'AWS', 'TypeScript', 'Prisma', 'Express.js', 'Tailwind CSS'],
+   528→    highlights: [
+   529→      { title: 'Frontend Mastery', desc: 'Build responsive, accessible, and performant user interfaces with React, TypeScript, and Next.js. Master component architecture, state management, and modern CSS.' },
+   530→      { title: 'Backend Development', desc: 'Design and build scalable server-side applications with Node.js and Express. Learn API design, middleware patterns, error handling, and microservices architecture.' },
+   531→      { title: 'Database Design', desc: 'Master relational and NoSQL databases. Design efficient schemas, write optimized queries, handle migrations, and implement data caching strategies.' },
+   532→      { title: 'Production Deployment', desc: 'Deploy applications with Docker, configure CI/CD pipelines, set up cloud infrastructure on AWS, and implement monitoring for reliable production systems.' },
+   533→    ],
+   534→    curriculum: [
+   535→      {
+   536→        phase: 'Phase 1: Foundations',
+   537→        title: 'Phase 1: Foundations',
+   538→        weeks: 'Weeks 1–4',
+   539→        duration: 'Weeks 1–4',
+   540→        topics: [
+   541→          'HTML5, CSS3 & Modern JavaScript (ES6+)',
+   542→          'Git Version Control & GitHub Collaboration',
+   543→          'React Fundamentals & Component Architecture',
+   544→          'REST API Design & HTTP Protocols',
+   545→          'Responsive Design & Tailwind CSS',
+   546→        ],
+   547→      },
+   548→      {
+   549→        phase: 'Phase 2: Frontend Mastery',
+   550→        title: 'Phase 2: Frontend Mastery',
+   551→        weeks: 'Weeks 5–10',
+   552→        duration: 'Weeks 5–10',
+   553→        topics: [
+   554→          'Advanced React Patterns (Hooks, Context, Portals)',
+   555→          'TypeScript for Frontend Development',
+   556→          'Next.js App Router & Server Components',
+   557→          'State Management (Zustand, TanStack Query)',
+   558→          'Responsive Design & Accessibility (a11y)',
+   559→          'Performance Optimization & Code Splitting',
+   560→        ],
+   561→      },
+   562→      {
+   563→        phase: 'Phase 3: Backend & Databases',
+   564→        title: 'Phase 3: Backend & Databases',
+   565→        weeks: 'Weeks 11–18',
+   566→        duration: 'Weeks 11–18',
+   567→        topics: [
+   568→          'Node.js Event Loop & Streams',
+   569→          'Express.js REST API Development',
+   570→          'PostgreSQL & Prisma ORM',
+   571→          'Authentication & Authorization (JWT, OAuth 2.0)',
+   572→          'GraphQL API Development',
+   573→          'Testing: Unit, Integration & E2E (Jest, Cypress)',
+   574→        ],
+   575→      },
+   576→      {
+   577→        phase: 'Phase 4: Cloud & Deployment',
+   578→        title: 'Phase 4: Cloud & Deployment',
+   579→        weeks: 'Weeks 19–24',
+   580→        duration: 'Weeks 19–24',
+   581→        topics: [
+   582→          'Docker Containerization & Compose',
+   583→          'AWS Core Services (EC2, S3, RDS, CloudFront)',
+   584→          'CI/CD Pipelines with GitHub Actions',
+   585→          'Application Monitoring & Logging (Datadog, Sentry)',
+   586→          'Capstone: Full-Stack Application Deployment',
+   587→        ],
+   588→      },
+   589→    ],
+   590→  },
+   591→
+   592→  'fde:ai engineer': {
+   593→    trackKey: 'fse-ai-engineer',
+   594→    mainProgramId: 'fde',
+   595→    mainProgramName: 'Fullstack Development Engineering (FDE)',
+   596→    badge: 'FSE-AIE',
+   597→    title: 'Full Stack AI Engineer',
+   598→    subtitle: 'Build full-stack applications powered by AI, LLMs, and intelligent automation',
+   599→    description:
+   600→      'Combine fullstack development expertise with cutting-edge AI capabilities. Build production applications with LLM integration, RAG pipelines, and AI-powered features. 24-week program.',
+   601→    duration: '24 Weeks',
+   602→    weeks: 24,
+   603→    mode: 'Online Interactive',
+   604→    level: 'Beginner to Advanced',
+   605→    specialization: 'AI Engineer',
+   606→    techStack: ['React', 'Node.js', 'Python', 'FastAPI', 'LangChain', 'OpenAI', 'Pinecone', 'PostgreSQL', 'Docker', 'AWS'],
+   607→    highlights: [
+   608→      { title: 'AI-Powered Apps', desc: 'Build intelligent web applications that leverage AI for content generation, personalization, natural language understanding, and smart automation.' },
+   609→      { title: 'LLM Integration', desc: 'Master integration of large language models into fullstack applications. Handle streaming responses, function calling, and context management.' },
+   610→      { title: 'RAG Pipelines', desc: 'Design and implement Retrieval-Augmented Generation systems that connect LLMs to your data. Build knowledge bases that actually know your business.' },
+   611→      { title: 'Production AI Systems', desc: 'Deploy AI features to production with proper monitoring, cost optimization, rate limiting, and fallback strategies for reliable user experiences.' },
+   612→    ],
+   613→    curriculum: [
+   614→      {
+   615→        phase: 'Phase 1: Fullstack Foundations',
+   616→        title: 'Phase 1: Fullstack Foundations',
+   617→        weeks: 'Weeks 1–4',
+   618→        duration: 'Weeks 1–4',
+   619→        topics: [
+   620→          'React Fundamentals & Modern JavaScript',
+   621→          'Node.js & Express.js Backend Development',
+   622→          'Python for AI/ML & FastAPI Basics',
+   623→          'REST & GraphQL API Design',
+   624→          'Database Design (PostgreSQL & NoSQL)',
+   625→        ],
+   626→      },
+   627→      {
+   628→        phase: 'Phase 2: AI/ML Core',
+   629→        title: 'Phase 2: AI/ML Core',
+   630→        weeks: 'Weeks 5–10',
+   631→        duration: 'Weeks 5–10',
+   632→        topics: [
+   633→          'Machine Learning Fundamentals & scikit-learn',
+   634→          'Large Language Models (GPT, Claude, Gemini)',
+   635→          'Prompt Engineering & Chain-of-Thought',
+   636→          'LangChain Framework & LLM Chains',
+   637→          'Vector Databases (Pinecone, ChromaDB, Weaviate)',
+   638→          'Embeddings & Semantic Search',
+   639→        ],
+   640→      },
+   641→      {
+   642→        phase: 'Phase 3: Fullstack AI Apps',
+   643→        title: 'Phase 3: Fullstack AI Apps',
+   644→        weeks: 'Weeks 11–18',
+   645→        duration: 'Weeks 11–18',
+   646→        topics: [
+   647→          'Building AI Agents with Tool Use & Function Calling',
+   648→          'RAG Systems: Document Ingestion & Retrieval',
+   649→          'Multi-modal AI (Vision, Audio, Text)',
+   650→          'Real-time AI Features (Streaming, WebSocket)',
+   651→          'AI UI/UX: Loading States, Streaming Text, Chat Interfaces',
+   652→          'Memory Systems & Conversation Management',
+   653→        ],
+   654→      },
+   655→      {
+   656→        phase: 'Phase 4: Production AI',
+   657→        title: 'Phase 4: Production AI',
+   658→        weeks: 'Weeks 19–24',
+   659→        duration: 'Weeks 19–24',
+   660→        topics: [
+   661→          'MLOps: Model Versioning & Experiment Tracking',
+   662→          'Model Deployment & API Serving',
+   663→          'AI Application Monitoring & Cost Optimization',
+   664→          'Security: Prompt Injection, Rate Limiting, Guardrails',
+   665→          'Capstone: Production AI Application',
+   666→        ],
+   667→      },
+   668→    ],
+   669→  },
+   670→
+   671→  'fde:product engineer': {
+   672→    trackKey: 'fse-product-engineer',
+   673→    mainProgramId: 'fde',
+   674→    mainProgramName: 'Fullstack Development Engineering (FDE)',
+   675→    badge: 'FSE-PE',
+   676→    title: 'Full Stack Product Engineer',
+   677→    subtitle: 'Build and ship product features end-to-end, from ideation to production',
+   678→    description:
+   679→      'Learn to own product features from concept to deployment. Master frontend, backend, databases, and the product thinking skills needed to build features users love. 24-week program.',
+   680→    duration: '24 Weeks',
+   681→    weeks: 24,
+   682→    mode: 'Online Interactive',
+   683→    level: 'Beginner to Advanced',
+   684→    specialization: 'Product Engineer',
+   685→    techStack: ['React', 'Next.js', 'Node.js', 'PostgreSQL', 'Mixpanel', 'Amplitude', 'Tailwind CSS', 'Figma', 'AWS', 'GitHub Actions'],
+   686→    highlights: [
+   687→      { title: 'Product Thinking', desc: 'Learn to think like a product manager. Understand user needs, define requirements, prioritize features, and make data-driven decisions that ship impactful products.' },
+   688→      { title: 'Fullstack Execution', desc: 'Build complete features across the entire stack. From pixel-perfect UI components to robust APIs and database schemas, own every layer of the feature.' },
+   689→      { title: 'User-Centric Design', desc: 'Design interfaces that users love. Master UX principles, user research methods, A/B testing, and iterative design to create delightful product experiences.' },
+   690→      { title: 'Data-Driven Development', desc: 'Use analytics and metrics to guide product decisions. Implement tracking, build dashboards, run experiments, and measure the real impact of every feature you ship.' },
+   691→    ],
+   692→    curriculum: [
+   693→      {
+   694→        phase: 'Phase 1: Foundations',
+   695→        title: 'Phase 1: Foundations',
+   696→        weeks: 'Weeks 1–4',
+   697→        duration: 'Weeks 1–4',
+   698→        topics: [
+   699→          'HTML5, CSS3 & Modern JavaScript (ES6+)',
+   700→          'React Fundamentals & Component Architecture',
+   701→          'Product Thinking & User Story Writing',
+   702→          'Git Version Control & GitHub Collaboration',
+   703→          'Responsive Design & Tailwind CSS',
+   704→        ],
+   705→      },
+   706→      {
+   707→        phase: 'Phase 2: Frontend & UX',
+   708→        title: 'Phase 2: Frontend & UX',
+   709→        weeks: 'Weeks 5–10',
+   710→        duration: 'Weeks 5–10',
+   711→        topics: [
+   712→          'Advanced React Patterns (Hooks, Context, Portals)',
+   713→          'UX Principles & User Research Methods',
+   714→          'A/B Testing & Experimentation Frameworks',
+   715→          'Product Analytics with Mixpanel & Amplitude',
+   716→          'Responsive Design & Accessibility (a11y)',
+   717→          'Performance Optimization & Core Web Vitals',
+   718→        ],
+   719→      },
+   720→      {
+   721→        phase: 'Phase 3: Backend & Data',
+   722→        title: 'Phase 3: Backend & Data',
+   723→        weeks: 'Weeks 11–18',
+   724→        duration: 'Weeks 11–18',
+   725→        topics: [
+   726→          'Node.js & Express.js API Development',
+   727→          'PostgreSQL & Prisma ORM',
+   728→          'REST API Design & Authentication (JWT)',
+   729→          'Feature Flags & Progressive Rollouts',
+   730→          'Performance Optimization & Caching Strategies',
+   731→          'Testing: Unit, Integration & E2E',
+   732→        ],
+   733→      },
+   734→      {
+   735→        phase: 'Phase 4: Product Engineering',
+   736→        title: 'Phase 4: Product Engineering',
+   737→        weeks: 'Weeks 19–24',
+   738→        duration: 'Weeks 19–24',
+   739→        topics: [
+   740→          'CI/CD Pipelines with GitHub Actions',
+   741→          'Product Analytics Dashboards & Data Visualization',
+   742→          'Launch Strategy & Go-to-Market Execution',
+   743→          'Capstone: End-to-End Product Feature Launch',
+   744→        ],
+   745→      },
+   746→    ],
+   747→  },
+   748→
+   749→  'fde:saas engineer': {
+   750→    trackKey: 'fse-saas-engineer',
+   751→    mainProgramId: 'fde',
+   752→    mainProgramName: 'Fullstack Development Engineering (FDE)',
+   753→    badge: 'FSE-SSE',
+   754→    title: 'Full Stack SaaS Engineer',
+   755→    subtitle: 'Build scalable multi-tenant SaaS platforms from the ground up',
+   756→    description:
+   757→      'Master the architecture and development of multi-tenant SaaS applications. Learn subscription management, tenant isolation, scalable infrastructure, and SaaS business fundamentals. 24-week program.',
+   758→    duration: '24 Weeks',
+   759→    weeks: 24,
+   760→    mode: 'Online Interactive',
+   761→    level: 'Beginner to Advanced',
+   762→    specialization: 'SaaS Engineer',
+   763→    techStack: ['React', 'Next.js', 'Node.js', 'PostgreSQL', 'Stripe', 'Redis', 'Docker', 'AWS', 'Datadog', 'Tailwind CSS'],
+   764→    highlights: [
+   765→      { title: 'Multi-tenant Architecture', desc: 'Design and implement multi-tenant data models with proper tenant isolation. Learn shared-database, shared-schema, and database-per-tenant strategies for SaaS applications.' },
+   766→      { title: 'Subscription Systems', desc: 'Build subscription billing with Stripe, handle plan upgrades/downgrades, manage trials, and implement usage-based pricing models that power SaaS revenue.' },
+   767→      { title: 'Scalable Infrastructure', desc: 'Architect SaaS platforms that scale. Master horizontal scaling, load balancing, caching with Redis, and database optimization for thousands of concurrent tenants.' },
+   768→      { title: 'SaaS Business Logic', desc: 'Understand SaaS business fundamentals including metrics (MRR, churn, LTV), pricing strategies, customer onboarding flows, and the technical patterns behind successful SaaS products.' },
+   769→    ],
+   770→    curriculum: [
+   771→      {
+   772→        phase: 'Phase 1: SaaS Foundations',
+   773→        title: 'Phase 1: SaaS Foundations',
+   774→        weeks: 'Weeks 1–4',
+   775→        duration: 'Weeks 1–4',
+   776→        topics: [
+   777→          'React Fundamentals & Modern JavaScript',
+   778→          'Node.js & Express.js Backend Development',
+   779→          'SaaS Business Models & Concepts',
+   780→          'Multi-tenancy Basics & Data Isolation',
+   781→          'Authentication & Authorization (JWT, OAuth 2.0)',
+   782→        ],
+   783→      },
+   784→      {
+   785→        phase: 'Phase 2: Core SaaS',
+   786→        title: 'Phase 2: Core SaaS',
+   787→        weeks: 'Weeks 5–10',
+   788→        duration: 'Weeks 5–10',
+   789→        topics: [
+   790→          'Database Design for Multi-Tenant Apps',
+   791→          'Subscription Billing with Stripe Integration',
+   792→          'Tenant Isolation Strategies & Middleware',
+   793→          'REST API Design & Versioning',
+   794→          'Role-Based Access Control (RBAC)',
+   795→          'Invitation & Team Management Systems',
+   796→        ],
+   797→      },
+   798→      {
+   799→        phase: 'Phase 3: Advanced SaaS',
+   800→        title: 'Phase 3: Advanced SaaS',
+   801→        weeks: 'Weeks 11–18',
+   802→        duration: 'Weeks 11–18',
+   803→        topics: [
+   804→          'Admin Dashboards & Tenant Management',
+   805→          'SaaS Analytics & Tenant-Level Reporting',
+   806→          'Email Systems (Transactional & Marketing)',
+   807→          'Webhooks & Third-Party Integrations',
+   808→          'Rate Limiting & API Throttling',
+   809→          'Caching with Redis for Multi-Tenant Performance',
+   810→        ],
+   811→      },
+   812→      {
+   813→        phase: 'Phase 4: SaaS Production',
+   814→        title: 'Phase 4: SaaS Production',
+   815→        weeks: 'Weeks 19–24',
+   816→        duration: 'Weeks 19–24',
+   817→        topics: [
+   818→          'CI/CD Pipelines for Multi-Tenant Deployments',
+   819→          'Application Monitoring & Alerting (Datadog)',
+   820→          'Horizontal Scaling & Load Balancing',
+   821→          'Security: Data Encryption, Compliance, Audit Logs',
+   822→          'Capstone: Multi-Tenant SaaS Platform',
+   823→        ],
+   824→      },
+   825→    ],
+   826→  },
+   827→
+   828→  'fde:cloud engineer': {
+   829→    trackKey: 'fse-cloud-engineer',
+   830→    mainProgramId: 'fde',
+   831→    mainProgramName: 'Fullstack Development Engineering (FDE)',
+   832→    badge: 'FSE-CE',
+   833→    title: 'Full Stack Cloud Engineer',
+   834→    subtitle: 'Build and deploy fullstack applications with deep cloud infrastructure expertise',
+   835→    description:
+   836→      'Combine fullstack development with cloud architecture skills. Build applications and deploy them on AWS/GCP with Kubernetes, serverless, and infrastructure as code. 24-week program.',
+   837→    duration: '24 Weeks',
+   838→    weeks: 24,
+   839→    mode: 'Online Interactive',
+   840→    level: 'Beginner to Advanced',
+   841→    specialization: 'Cloud Engineer',
+   842→    techStack: ['React', 'Node.js', 'AWS', 'Docker', 'Kubernetes', 'Terraform', 'Lambda', 'PostgreSQL', 'Prometheus', 'ArgoCD'],
+   843→    highlights: [
+   844→      { title: 'Cloud Architecture', desc: 'Learn to design and architect applications for the cloud. Master AWS and GCP services, understand regions, availability zones, VPCs, and build systems that are inherently scalable and fault-tolerant.' },
+   845→      { title: 'Serverless Development', desc: 'Build event-driven, serverless applications using AWS Lambda, API Gateway, and DynamoDB. Eliminate server management, reduce costs, and achieve automatic scaling for any workload.' },
+   846→      { title: 'Container Orchestration', desc: 'Master Docker and Kubernetes to containerize applications and orchestrate deployments at scale. Learn Helm charts, service meshes, and production-grade container management.' },
+   847→      { title: 'Fullstack + DevOps', desc: 'Bridge the gap between development and operations. Build CI/CD pipelines, implement infrastructure as code with Terraform, and automate everything from testing to deployment.' },
+   848→    ],
+   849→    curriculum: [
+   850→      {
+   851→        phase: 'Phase 1: Fullstack Foundations',
+   852→        title: 'Phase 1: Fullstack Foundations',
+   853→        weeks: 'Weeks 1–4',
+   854→        duration: 'Weeks 1–4',
+   855→        topics: [
+   856→          'React Fundamentals & Modern JavaScript (ES6+)',
+   857→          'Node.js & Express.js Server-Side Development',
+   858→          'Linux Fundamentals & Command Line Proficiency',
+   859→          'Networking Concepts: TCP/IP, DNS, HTTP/HTTPS',
+   860→          'Cloud Computing Basics & Service Models (IaaS, PaaS, SaaS)',
+   861→        ],
+   862→      },
+   863→      {
+   864→        phase: 'Phase 2: Cloud Services',
+   865→        title: 'Phase 2: Cloud Services',
+   866→        weeks: 'Weeks 5–10',
+   867→        duration: 'Weeks 5–10',
+   868→        topics: [
+   869→          'AWS Core Services: EC2, S3, RDS, IAM',
+   870→          'Serverless Computing with AWS Lambda',
+   871→          'API Gateway & DynamoDB for Serverless Apps',
+   872→          'Cloud Storage Solutions & Content Delivery (CloudFront)',
+   873→          'Identity & Access Management with AWS IAM',
+   874→          'Cloud-Native Database Design & Optimization',
+   875→        ],
+   876→      },
+   877→      {
+   878→        phase: 'Phase 3: Container & Kubernetes',
+   879→        title: 'Phase 3: Container & Kubernetes',
+   880→        weeks: 'Weeks 11–18',
+   881→        duration: 'Weeks 11–18',
+   882→        topics: [
+   883→          'Docker Fundamentals: Images, Containers, Volumes',
+   884→          'Kubernetes Architecture: Pods, Services, Deployments',
+   885→          'Helm Charts & Kubernetes Package Management',
+   886→          'Service Mesh with Istio & Envoy Proxy',
+   887→          'Infrastructure as Code with Terraform',
+   888→          'Cloud Security & Network Policies',
+   889→        ],
+   890→      },
+   891→      {
+   892→        phase: 'Phase 4: Cloud-Native Apps',
+   893→        title: 'Phase 4: Cloud-Native Apps',
+   894→        weeks: 'Weeks 19–24',
+   895→        duration: 'Weeks 19–24',
+   896→        topics: [
+   897→          'CI/CD Pipelines with GitHub Actions & ArgoCD',
+   898→          'Cloud Monitoring with Prometheus & Grafana',
+   899→          'Multi-Cloud Strategies: AWS, GCP & Azure',
+   900→          'Cost Optimization & FinOps Best Practices',
+   901→          'Capstone: Deploy a Fullstack App on Kubernetes',
+   902→        ],
+   903→      },
+   904→    ],
+   905→  },
+   906→
+   907→  'fde:enterprise engineer': {
+   908→    trackKey: 'fse-enterprise-engineer',
+   909→    mainProgramId: 'fde',
+   910→    mainProgramName: 'Fullstack Development Engineering (FDE)',
+   911→    badge: 'FSE-EE',
+   912→    title: 'Full Stack Enterprise Engineer',
+   913→    subtitle: 'Architect and build large-scale enterprise applications with complex integrations',
+   914→    description:
+   915→      'Master enterprise-grade fullstack development. Build applications that handle millions of users, complex business logic, legacy integrations, and strict compliance requirements. 24-week program.',
+   916→    duration: '24 Weeks',
+   917→    weeks: 24,
+   918→    mode: 'Online Interactive',
+   919→    level: 'Beginner to Advanced',
+   920→    specialization: 'Enterprise Engineer',
+   921→    techStack: ['React', 'Node.js', 'Java', 'PostgreSQL', 'Kafka', 'Redis', 'Docker', 'AWS', 'GraphQL', 'Kubernetes'],
+   922→    highlights: [
+   923→      { title: 'Enterprise Architecture', desc: 'Learn to architect large-scale applications with microservices, event-driven patterns, and distributed systems. Design systems that handle millions of requests and complex business workflows.' },
+   924→      { title: 'Legacy Integration', desc: 'Master the art of integrating modern web applications with legacy systems, SOAP APIs, mainframes, and on-premise databases. Build bridges between old and new technology stacks.' },
+   925→      { title: 'Security & Compliance', desc: 'Implement enterprise-grade security with RBAC, audit logging, encryption, and compliance frameworks like SOC2 and GDPR. Build applications that meet the strictest regulatory requirements.' },
+   926→      { title: 'Scalable Systems', desc: 'Design and build applications that scale horizontally and vertically. Master caching strategies, database sharding, message queues, and performance optimization for enterprise workloads.' },
+   927→    ],
+   928→    curriculum: [
+   929→      {
+   930→        phase: 'Phase 1: Enterprise Foundations',
+   931→        title: 'Phase 1: Enterprise Foundations',
+   932→        weeks: 'Weeks 1–4',
+   933→        duration: 'Weeks 1–4',
+   934→        topics: [
+   935→          'Java/Node.js for Enterprise Applications',
+   936→          'Enterprise Design Patterns & SOLID Principles',
+   937→          'SQL Mastery & Complex Query Optimization',
+   938→          'REST API & GraphQL for Enterprise Services',
+   939→          'Security Fundamentals & Threat Modeling',
+   940→        ],
+   941→      },
+   942→      {
+   943→        phase: 'Phase 2: Enterprise Backend',
+   944→        title: 'Phase 2: Enterprise Backend',
+   945→        weeks: 'Weeks 5–10',
+   946→        duration: 'Weeks 5–10',
+   947→        topics: [
+   948→          'Microservices Architecture & Domain-Driven Design',
+   949→          'Message Queues with Kafka & RabbitMQ',
+   950→          'Event-Driven Architecture & CQRS Patterns',
+   951→          'Caching Strategies with Redis & Memcached',
+   952→          'Database Sharding & Replication Strategies',
+   953→          'API Gateway & Service Mesh Architecture',
+   954→        ],
+   955→      },
+   956→      {
+   957→        phase: 'Phase 3: Enterprise Frontend',
+   958→        title: 'Phase 3: Enterprise Frontend',
+   959→        weeks: 'Weeks 11–18',
+   960→        duration: 'Weeks 11–18',
+   961→        topics: [
+   962→          'React for Enterprise: Design Systems & Component Libraries',
+   963→          'Role-Based Access Control (RBAC) Implementation',
+   964→          'Audit Logging & Compliance Tracking in UI',
+   965→          'Internationalization (i18n) & Localization',
+   966→          'Enterprise State Management with Complex Workflows',
+   967→          'Accessibility Compliance (WCAG 2.1) for Enterprise',
+   968→        ],
+   969→      },
+   970→      {
+   971→        phase: 'Phase 4: Enterprise Production',
+   972→        title: 'Phase 4: Enterprise Production',
+   973→        weeks: 'Weeks 19–24',
+   974→        duration: 'Weeks 19–24',
+   975→        topics: [
+   976→          'CI/CD Pipelines & Blue-Green Deployments',
+   977→          'Application Monitoring & Distributed Tracing',
+   978→          'Compliance Frameworks: SOC2, GDPR, HIPAA',
+   979→          'Performance Engineering & Load Testing',
+   980→          'Capstone: Enterprise-Grade Application Launch',
+   981→        ],
+   982→      },
+   983→    ],
+   984→  },
+   985→
+   986→  // ==========================================
+   987→  // 3. DIGITAL SALES & AI MARKETING (DSAI)
+   988→  // ==========================================
+   989→  'dsai:digital sales & ai marketing specialist': {
+   990→    trackKey: 'dsai-digital-sales-specialist',
+   991→    mainProgramId: 'dsai',
+   992→    mainProgramName: 'Digital Sales & AI Marketing / AI Engineering (DSAI)',
+   993→    badge: 'DSAI-DS',
+   994→    title: 'Digital Sales & AI Marketing Specialist',
+   995→    subtitle: 'Master digital sales strategies and AI-powered marketing to drive revenue',
+   996→    description:
+   997→      'Combine digital sales expertise with AI marketing tools. Learn to generate leads, automate campaigns, and close deals using cutting-edge AI technology. 20-week intensive program.',
+   998→    duration: '20 Weeks',
+   999→    weeks: 20,
+  1000→    mode: 'Online Interactive',
+  1001→    level: 'Beginner to Advanced',
+  1002→    specialization: 'Digital Sales & AI Marketing Specialist',
+  1003→    techStack: ['ChatGPT', 'HubSpot', 'Meta Ads', 'Google Ads', 'LinkedIn Sales Nav', 'Google Analytics 4', 'Zapier', 'Mailchimp', 'Canva AI'],
+  1004→    highlights: [
+  1005→      { title: 'Digital Sales Mastery', desc: 'Master the complete digital sales cycle from prospecting to closing. Learn social selling, email outreach, CRM workflows, and consultative sales techniques adapted for the digital-first era.' },
+  1006→      { title: 'AI Marketing Tools', desc: 'Get hands-on with ChatGPT, AI copywriting tools, predictive analytics, and automated campaign platforms. Learn to leverage AI for personalized messaging, audience segmentation, and content creation at scale.' },
+  1007→      { title: 'Lead Generation', desc: 'Build high-converting lead generation engines using inbound strategies, paid ads, SEO, and AI-powered chatbots. Learn to create multi-channel lead funnels that consistently fill your pipeline.' },
+  1008→      { title: 'Revenue Analytics', desc: 'Track every rupee of marketing spend to revenue. Master dashboards, attribution models, cohort analysis, and AI-driven forecasting to optimize campaigns and maximize return on investment.' },
+  1009→    ],
+  1010→    curriculum: [
+  1011→      {
+  1012→        phase: 'Phase 1: Foundations',
+  1013→        title: 'Phase 1: Foundations',
+  1014→        weeks: 'Weeks 1–3',
+  1015→        duration: 'Weeks 1–3',
+  1016→        topics: [
+  1017→          'Digital Marketing Landscape & Sales Funnel Fundamentals',
+  1018→          'AI in Sales & Marketing: Concepts, Tools & Ethics',
+  1019→          'Customer Psychology & Buyer Journey Mapping',
+  1020→          'CRM Basics: HubSpot Setup, Contact Management & Pipelines',
+  1021→          'Content Marketing Foundations & SEO Principles',
+  1022→        ],
+  1023→      },
+  1024→      {
+  1025→        phase: 'Phase 2: Digital Sales',
+  1026→        title: 'Phase 2: Digital Sales',
+  1027→        weeks: 'Weeks 4–8',
+  1028→        duration: 'Weeks 4–8',
+  1029→        topics: [
+  1030→          'Social Selling: LinkedIn Strategy & Personal Branding',
+  1031→          'Cold Outreach Mastery: Email Sequences & AI Personalization',
+  1032→          'Sales Pitching, Objection Handling & Closing Techniques',
+  1033→          'Meta Ads & Google Ads: Campaign Setup & Optimization',
+  1034→          'Lead Scoring Models & Qualification Frameworks',
+  1035→          'Sales Analytics: Conversion Tracking & Pipeline Metrics',
+  1036→        ],
+  1037→      },
+  1038→      {
+  1039→        phase: 'Phase 3: AI Marketing',
+  1040→        title: 'Phase 3: AI Marketing',
+  1041→        weeks: 'Weeks 9–15',
+  1042→        duration: 'Weeks 9–15',
+  1043→        topics: [
+  1044→          'ChatGPT & AI Copywriting for Marketing Campaigns',
+  1045→          'Marketing Automation: Email Drip Campaigns & Workflows',
+  1046→          'AI-Powered Audience Segmentation & Predictive Analytics',
+  1047→          'A/B Testing, CRO & Data-Driven Campaign Optimization',
+  1048→          'Content at Scale: AI Blog Writing, Social Media & Video Scripts',
+  1049→          'Attribution Modeling & Multi-Touch Revenue Analysis',
+  1050→        ],
+  1051→      },
+  1052→      {
+  1053→        phase: 'Phase 4: Capstone',
+  1054→        title: 'Phase 4: Capstone',
+  1055→        weeks: 'Weeks 16–20',
+  1056→        duration: 'Weeks 16–20',
+  1057→        topics: [
+  1058→          'Integrated Digital Sales & AI Marketing Strategy',
+  1059→          'Building a Full Sales & Marketing Dashboard with Real Data',
+  1060→          'AI Chatbot Integration for Lead Qualification & Nurture',
+  1061→          'Capstone: End-to-End Digital Sales Campaign with AI Tools',
+  1062→        ],
+  1063→      },
+  1064→    ],
+  1065→  },
+  1066→
+  1067→  'dsai:ai marketing automation & growth': {
+  1068→    trackKey: 'dsai-ai-ma-growth-specialist',
+  1069→    mainProgramId: 'dsai',
+  1070→    mainProgramName: 'Digital Sales & AI Marketing / AI Engineering (DSAI)',
+  1071→    badge: 'DSAI-MAG',
+  1072→    title: 'AI Marketing Automation & Growth Specialist',
+  1073→    subtitle: 'Automate marketing at scale using AI for explosive business growth',
+  1074→    description:
+  1075→      'Master AI-powered marketing automation, growth hacking techniques, and data-driven strategies. Build automated funnels, AI content systems, and growth engines for modern businesses. 20-week program.',
+  1076→    duration: '20 Weeks',
+  1077→    weeks: 20,
+  1078→    mode: 'Online Interactive',
+  1079→    level: 'Beginner to Advanced',
+  1080→    specialization: 'AI Marketing Automation & Growth',
+  1081→    techStack: ['Zapier', 'Make (Integromat)', 'ChatGPT', 'HubSpot', 'Webflow', 'Google Analytics 4', 'Jasper AI', 'Python', 'Airtable'],
+  1082→    highlights: [
+  1083→      { title: 'Marketing Automation', desc: 'Build sophisticated multi-channel automation workflows using Zapier, Make, and custom integrations. Learn to trigger personalized emails, SMS, push notifications, and retargeting ads based on user behavior and lifecycle stages.' },
+  1084→      { title: 'AI Content Generation', desc: 'Harness ChatGPT, Jasper, and custom AI pipelines to produce blog posts, social media content, ad copy, and video scripts at scale. Learn prompt engineering, brand voice calibration, and quality control for AI-generated content.' },
+  1085→      { title: 'Growth Hacking', desc: 'Master viral loops, referral engines, product-led growth tactics, and creative acquisition strategies. Learn to run rapid experiments, optimize conversion funnels, and find unconventional channels that drive explosive user growth.' },
+  1086→      { title: 'Data-Driven Decisions', desc: 'Use analytics platforms, cohort analysis, and predictive models to guide every marketing decision. Build dashboards that track real-time KPIs, measure LTV, CAC, and churn, and use AI to forecast growth trajectories.' },
+  1087→    ],
+  1088→    curriculum: [
+  1089→      {
+  1090→        phase: 'Phase 1: Marketing Foundations',
+  1091→        title: 'Phase 1: Marketing Foundations',
+  1092→        weeks: 'Weeks 1–3',
+  1093→        duration: 'Weeks 1–3',
+  1094→        topics: [
+  1095→          'Modern Marketing Stack: Tools, Channels & Customer Lifecycle',
+  1096→          'Growth Marketing Mindset: Metrics, Experiments & North Star Framework',
+  1097→          'AI Fundamentals for Marketing: NLP, Predictive Models & Personalization',
+  1098→          'Automation Basics: Triggers, Actions, Conditions & Webhooks',
+  1099→          'Analytics Setup: Google Analytics 4, UTM Tracking & Event Architecture',
+  1100→        ],
+  1101→      },
+  1102→      {
+  1103→        phase: 'Phase 2: Automation Tools',
+  1104→        title: 'Phase 2: Automation Tools',
+  1105→        weeks: 'Weeks 4–8',
+  1106→        duration: 'Weeks 4–8',
+  1107→        topics: [
+  1108→          'Zapier Deep Dive: Multi-Step Zaps, Filters, Formatters & Paths',
+  1109→          'Make (Integromat): Advanced Scenarios, Routers & Error Handling',
+  1110→          'Email Automation: Drip Campaigns, Behavioral Triggers & Segmentation',
+  1111→          'HubSpot Marketing Hub: Workflows, Lists & Lead Scoring',
+  1112→          'CRM & Marketing Alignment: Sales-Marketing SLAs & Handoff Automation',
+  1113→          'No-Code Landing Page Builders: Webflow, Carrd & Conversion Optimization',
+  1114→        ],
+  1115→      },
+  1116→      {
+  1117→        phase: 'Phase 3: AI Growth Strategies',
+  1118→        title: 'Phase 3: AI Growth Strategies',
+  1119→        weeks: 'Weeks 9–15',
+  1120→        duration: 'Weeks 9–15',
+  1121→        topics: [
+  1122→          'ChatGPT Prompt Engineering for Marketing Content at Scale',
+  1123→          'AI-Powered SEO: Content Clusters, Keyword Research & Automated Optimization',
+  1124→          'Growth Hacking Playbook: Viral Loops, Referral Programs & Product-Led Growth',
+  1125→          'Paid Ads AI Optimization: Smart Bidding, Creative Testing & Budget Allocation',
+  1126→          'Predictive Analytics: Churn Prediction, LTV Modeling & Cohort Analysis',
+  1127→          'Building AI Content Pipelines: Blog, Social, Email & Ad Copy Automation',
+  1128→        ],
+  1129→      },
+  1130→      {
+  1131→        phase: 'Phase 4: Capstone',
+  1132→        title: 'Phase 4: Capstone',
+  1133→        weeks: 'Weeks 16–20',
+  1134→        duration: 'Weeks 16–20',
+  1135→        topics: [
+  1136→          'Designing a Full Marketing Automation Architecture for a Real Business',
+  1137→          'Building an AI-Powered Growth Dashboard with Live Metrics & Predictions',
+  1138→          'End-to-End Campaign: Strategy, Automation Setup, AI Content & Analytics',
+  1139→          'Capstone: Launch a Growth Engine with Measurable Revenue Impact',
+  1140→        ],
+  1141→      },
+  1142→    ],
+  1143→  },
+  1144→
+  1145→  'dsai:marketing solutions & automation engineer': {
+  1146→    trackKey: 'dsai-marketing-automation-engineer',
+  1147→    mainProgramId: 'dsai',
+  1148→    mainProgramName: 'Digital Sales & AI Marketing / AI Engineering (DSAI)',
+  1149→    badge: 'DSAI-MAE',
+  1150→    title: 'AI Marketing Solutions & Automation Engineer',
+  1151→    subtitle: 'Build AI-powered marketing solutions and automation systems for enterprises',
+  1152→    description:
+  1153→      'Engineer end-to-end AI marketing solutions. Build chatbots, recommendation engines, automated campaign systems, and AI-driven customer journey platforms. 20-week program.',
+  1154→    duration: '20 Weeks',
+  1155→    weeks: 20,
+  1156→    mode: 'Online Interactive',
+  1157→    level: 'Beginner to Advanced',
+  1158→    specialization: 'Marketing Solutions & Automation Engineer',
+  1159→    techStack: ['Python', 'Dialogflow', 'LangChain', 'TensorFlow', 'PostgreSQL', 'Redis', 'Node.js', 'FastAPI', 'Docker'],
+  1160→    highlights: [
+  1161→      { title: 'AI Solution Architecture', desc: 'Design scalable AI marketing architectures combining NLP, recommendation systems, and predictive models that power enterprise-grade marketing platforms.' },
+  1162→      { title: 'Marketing Engineering', desc: 'Bridge the gap between marketing strategy and engineering. Build robust data pipelines, campaign engines, and real-time personalization systems at scale.' },
+  1163→      { title: 'Chatbot Development', desc: 'Create intelligent conversational interfaces using Dialogflow, LangChain, and custom NLP models that handle customer queries, lead qualification, and support automation.' },
+  1164→      { title: 'Campaign Automation', desc: 'Engineer automated marketing workflows that trigger based on user behavior, segment audiences with ML, and optimize campaign performance using reinforcement learning.' },
+  1165→    ],
+  1166→    curriculum: [
+  1167→      {
+  1168→        phase: 'Phase 1: AI Foundations',
+  1169→        title: 'Phase 1: AI Foundations',
+  1170→        weeks: 'Weeks 1–3',
+  1171→        duration: 'Weeks 1–3',
+  1172→        topics: [
+  1173→          'Python for AI & Marketing Automation',
+  1174→          'Machine Learning Fundamentals & Data Pipelines',
+  1175→          'Natural Language Processing Basics',
+  1176→          'Marketing Technology Landscape & Integrations',
+  1177→          'Prompt Engineering for Marketing Use Cases',
+  1178→        ],
+  1179→      },
+  1180→      {
+  1181→        phase: 'Phase 2: Marketing Engineering',
+  1182→        title: 'Phase 2: Marketing Engineering',
+  1183→        weeks: 'Weeks 4–8',
+  1184→        duration: 'Weeks 4–8',
+  1185→        topics: [
+  1186→          'Customer Data Platforms & Segment Analysis',
+  1187→          'TensorFlow & scikit-learn for Marketing ML',
+  1188→          'Email & Push Notification Automation Engines',
+  1189→          'A/B Testing Frameworks & Experimentation',
+  1190→          'API Integrations: CRM, Analytics, Ad Platforms',
+  1191→          'Building Real-Time Recommendation Systems',
+  1192→        ],
+  1193→      },
+  1194→      {
+  1195→        phase: 'Phase 3: Solution Development',
+  1196→        title: 'Phase 3: Solution Development',
+  1197→        weeks: 'Weeks 9–15',
+  1198→        duration: 'Weeks 9–15',
+  1199→        topics: [
+  1200→          'Dialogflow Chatbot Design & Deployment',
+  1201→          'LangChain for Marketing Conversational AI',
+  1202→          'Marketing Attribution & Predictive Analytics',
+  1203→          'Node.js Microservices for Marketing Platforms',
+  1204→          'PostgreSQL & Redis for Campaign Data',
+  1205→          'CI/CD for AI Marketing Solutions',
+  1206→        ],
+  1207→      },
+  1208→      {
+  1209→        phase: 'Phase 4: Capstone',
+  1210→        title: 'Phase 4: Capstone',
+  1211→        weeks: 'Weeks 16–20',
+  1212→        duration: 'Weeks 16–20',
+  1213→        topics: [
+  1214→          'Enterprise AI Marketing Platform Architecture',
+  1215→          'Scalability, Monitoring & Performance Tuning',
+  1216→          'Capstone: Full AI Marketing Automation Suite',
+  1217→        ],
+  1218→      },
+  1219→    ],
+  1220→  },
+  1221→
+  1222→  'dsai:ai sales, marketing & agents engineer': {
+  1223→    trackKey: 'dsai-sales-marketing-agents',
+  1224→    mainProgramId: 'dsai',
+  1225→    mainProgramName: 'Digital Sales & AI Marketing / AI Engineering (DSAI)',
+  1226→    badge: 'DSAI-SMA',
+  1227→    title: 'AI Sales, Marketing & Agents Engineer',
+  1228→    subtitle: 'Build autonomous AI agents for sales outreach, marketing, and customer engagement',
+  1229→    description:
+  1230→      'Design and deploy AI agents that automate sales outreach, marketing campaigns, and customer conversations. Master LangChain, agent architectures, and multi-agent systems. 20-week program.',
+  1231→    duration: '20 Weeks',
+  1232→    weeks: 20,
+  1233→    mode: 'Online Interactive',
+  1234→    level: 'Beginner to Advanced',
+  1235→    specialization: 'AI Sales, Marketing & Agents Engineer',
+  1236→    techStack: ['Python', 'LangChain', 'CrewAI', 'OpenAI API', 'Pinecone', 'FastAPI', 'Redis', 'Docker', 'PostgreSQL'],
+  1237→    highlights: [
+  1238→      { title: 'AI Agent Development', desc: 'Master the full lifecycle of building autonomous AI agents — from designing tool-calling capabilities and memory systems to deploying agents that reason, plan, and execute tasks independently.' },
+  1239→      { title: 'Sales Automation', desc: 'Build AI agents that automate lead qualification, personalized outreach sequences, CRM updates, and follow-ups — reducing manual sales work by 70% while improving conversion rates.' },
+  1240→      { title: 'Conversational AI', desc: 'Design sophisticated conversational agents that handle multi-turn dialogs, understand intent and context, and deliver human-quality interactions across chat, email, and voice channels.' },
+  1241→      { title: 'Multi-Agent Systems', desc: 'Architect systems of collaborating AI agents that specialize and coordinate — a research agent, a writer agent, and an outreach agent working together to execute complex marketing campaigns.' },
+  1242→    ],
+  1243→    curriculum: [
+  1244→      {
+  1245→        phase: 'Phase 1: Agent Fundamentals',
+  1246→        title: 'Phase 1: Agent Fundamentals',
+  1247→        weeks: 'Weeks 1–3',
+  1248→        duration: 'Weeks 1–3',
+  1249→        topics: [
+  1250→          'Python for AI Agent Development',
+  1251→          'LLM Fundamentals & Prompt Engineering',
+  1252→          'LangChain Core: Chains, Memory & Tools',
+  1253→          'Agent Design Patterns & Architectures',
+  1254→          'Vector Databases & RAG Fundamentals',
+  1255→        ],
+  1256→      },
+  1257→      {
+  1258→        phase: 'Phase 2: Sales & Marketing Agents',
+  1259→        title: 'Phase 2: Sales & Marketing Agents',
+  1260→        weeks: 'Weeks 4–8',
+  1261→        duration: 'Weeks 4–8',
+  1262→        topics: [
+  1263→          'Building Lead Qualification Agents',
+  1264→          'OpenAI API: Function Calling & Structured Output',
+  1265→          'Email & Outreach Automation with AI',
+  1266→          'Pinecone for Semantic Search & Lead Matching',
+  1267→          'CRM Integration & Data Synchronization',
+  1268→          'A/B Testing AI-Generated Sales Copy',
+  1269→        ],
+  1270→      },
+  1271→      {
+  1272→        phase: 'Phase 3: Advanced Agent Systems',
+  1273→        title: 'Phase 3: Advanced Agent Systems',
+  1274→        weeks: 'Weeks 9–15',
+  1275→        duration: 'Weeks 9–15',
+  1276→        topics: [
+  1277→          'Multi-Agent Orchestration & CrewAI',
+  1278→          'FastAPI for Agent Endpoint Deployment',
+  1279→          'Redis for Agent State & Session Management',
+  1280→          'Agent Evaluation, Monitoring & Guardrails',
+  1281→          'Voice Agents & Telephony Integration',
+  1282→          'Scaling Agents with Async & Queue Systems',
+  1283→        ],
+  1284→      },
+  1285→      {
+  1286→        phase: 'Phase 4: Capstone',
+  1287→        title: 'Phase 4: Capstone',
+  1288→        weeks: 'Weeks 16–20',
+  1289→        duration: 'Weeks 16–20',
+  1290→        topics: [
+  1291→          'Enterprise Agent Platform Architecture',
+  1292→          'Security, Compliance & Rate Limiting',
+  1293→          'Capstone: Multi-Agent Sales & Marketing System',
+  1294→        ],
+  1295→      },
+  1296→    ],
+  1297→  },
+  1298→
+  1299→  'dsai:ai revenue & growth engineer': {
+  1300→    trackKey: 'dsai-revenue-growth-engineer',
+  1301→    mainProgramId: 'dsai',
+  1302→    mainProgramName: 'Digital Sales & AI Marketing / AI Engineering (DSAI)',
+  1303→    badge: 'DSAI-RGE',
+  1304→    title: 'AI Revenue & Growth Engineer',
+  1305→    subtitle: 'Engineer AI systems that automate revenue operations and drive scalable growth',
+  1306→    description:
+  1307→      'Build AI-powered revenue engines, pricing optimization systems, churn prediction models, and automated growth pipelines. Master the intersection of engineering, sales, marketing, and AI. 20-week program.',
+  1308→    duration: '20 Weeks',
+  1309→    weeks: 20,
+  1310→    mode: 'Online Interactive',
+  1311→    level: 'Beginner to Advanced',
+  1312→    specialization: 'AI Revenue & Growth Engineer',
+  1313→    techStack: ['Python', 'SQL', 'TensorFlow', 'Apache Airflow', 'Tableau', 'Stripe API', 'Pandas', 'FastAPI', 'PostgreSQL'],
+  1314→    highlights: [
+  1315→      { title: 'Revenue Engineering', desc: 'Design AI systems that track, predict, and maximize revenue across every customer touchpoint. Build real-time revenue dashboards, MRR/ARR forecasting models, and automated alerting for revenue anomalies.' },
+  1316→      { title: 'AI Pricing Systems', desc: 'Build dynamic pricing engines that use ML to optimize prices in real time based on demand elasticity, competitor data, customer segments, and willingness-to-pay signals.' },
+  1317→      { title: 'Churn Prediction', desc: 'Develop ML models that identify at-risk customers before they leave. Implement proactive retention workflows, segment-based risk scoring, and automated intervention triggers.' },
+  1318→      { title: 'Growth Pipelines', desc: 'Engineer automated growth loops using AI-driven experimentation, lifecycle marketing automation, expansion revenue playbooks, and data-driven activation sequences.' },
+  1319→    ],
+  1320→    curriculum: [
+  1321→      {
+  1322→        phase: 'Phase 1: Revenue Foundations',
+  1323→        title: 'Phase 1: Revenue Foundations',
+  1324→        weeks: 'Weeks 1–3',
+  1325→        duration: 'Weeks 1–3',
+  1326→        topics: [
+  1327→          'Revenue Operations & SaaS Metrics Deep Dive',
+  1328→          'SQL for Revenue Analytics & Cohort Analysis',
+  1329→          'Python for Data Analysis: Pandas & NumPy Fundamentals',
+  1330→          'Revenue Dashboarding with Tableau & Data Viz Best Practices',
+  1331→          'Business Mathematics: LTV, CAC, Payback Period & Unit Economics',
+  1332→        ],
+  1333→      },
+  1334→      {
+  1335→        phase: 'Phase 2: AI Revenue Systems',
+  1336→        title: 'Phase 2: AI Revenue Systems',
+  1337→        weeks: 'Weeks 4–8',
+  1338→        duration: 'Weeks 4–8',
+  1339→        topics: [
+  1340→          'Machine Learning Fundamentals for Business Applications',
+  1341→          'Churn Prediction: Logistic Regression & Random Forests',
+  1342→          'Dynamic Pricing with TensorFlow & Reinforcement Learning',
+  1343→          'Revenue Forecasting with Time Series Models (ARIMA, Prophet)',
+  1344→          'A/B Testing & Causal Inference for Growth Experiments',
+  1345→          'Building Revenue APIs with Stripe & Payment Gateway Integration',
+  1346→        ],
+  1347→      },
+  1348→      {
+  1349→        phase: 'Phase 3: Growth Engineering',
+  1350→        title: 'Phase 3: Growth Engineering',
+  1351→        weeks: 'Weeks 9–15',
+  1352→        duration: 'Weeks 9–15',
+  1353→        topics: [
+  1354→          'Growth Loops & Viral Coefficient Engineering',
+  1355→          'Customer Segmentation with Clustering Algorithms',
+  1356→          'Automated Email & Lifecycle Marketing Pipelines',
+  1357→          'Expansion Revenue: Upsell & Cross-sell ML Models',
+  1358→          'Orchestration with Apache Airflow for Revenue Workflows',
+  1359→          'Real-time Revenue Monitoring & Anomaly Detection Systems',
+  1360→        ],
+  1361→      },
+  1362→      {
+  1363→        phase: 'Phase 4: Capstone',
+  1364→        title: 'Phase 4: Capstone',
+  1365→        weeks: 'Weeks 16–20',
+  1366→        duration: 'Weeks 16–20',
+  1367→        topics: [
+  1368→          'End-to-End AI Revenue Engine Deployment',
+  1369→          'Production ML Pipelines with Monitoring & Retraining',
+  1370→          'Stakeholder Presentations & Revenue Impact Measurement',
+  1371→          'Capstone: Build a Complete AI Revenue & Growth Platform',
+  1372→        ],
+  1373→      },
+  1374→    ],
+  1375→  },
+  1376→
+  1377→  'dsai:ai customer solutions & automation': {
+  1378→    trackKey: 'dsai-customer-solutions-engineer',
+  1379→    mainProgramId: 'dsai',
+  1380→    mainProgramName: 'Digital Sales & AI Marketing / AI Engineering (DSAI)',
+  1381→    badge: 'DSAI-CSE',
+  1382→    title: 'AI Customer Solutions & Automation Engineer',
+  1383→    subtitle: 'Build AI-powered customer service solutions and automation platforms',
+  1384→    description:
+  1385→      'Design and deploy AI customer service platforms, intelligent ticketing systems, sentiment analysis tools, and automated support workflows. Transform how businesses serve their customers. 20-week program.',
+  1386→    duration: '20 Weeks',
+  1387→    weeks: 20,
+  1388→    mode: 'Online Interactive',
+  1389→    level: 'Beginner to Advanced',
+  1390→    specialization: 'AI Customer Solutions & Automation',
+  1391→    techStack: ['Python', 'Dialogflow', 'PostgreSQL', 'Redis', 'Zendesk API', 'Freshdesk API', 'React', 'FastAPI', 'Docker'],
+  1392→    highlights: [
+  1393→      { title: 'Customer AI Platforms', desc: 'Build end-to-end AI customer service platforms with chatbot integration, omnichannel support, knowledge base management, and intelligent routing that handle thousands of concurrent conversations.' },
+  1394→      { title: 'Sentiment Analysis', desc: 'Develop NLP-powered sentiment analysis systems that classify customer interactions in real time, detect frustration signals, and trigger proactive escalation before issues escalate.' },
+  1395→      { title: 'Automated Support', desc: 'Engineer automated support workflows using LLMs, decision trees, and RAG pipelines that resolve 60-80% of customer queries without human intervention while maintaining quality.' },
+  1396→      { title: 'Solution Design', desc: 'Master enterprise customer solution architecture. Design systems that integrate with CRM, ticketing, and communication platforms to create seamless support experiences at scale.' },
+  1397→    ],
+  1398→    curriculum: [
+  1399→      {
+  1400→        phase: 'Phase 1: Customer Service Foundations',
+  1401→        title: 'Phase 1: Customer Service Foundations',
+  1402→        weeks: 'Weeks 1–3',
+  1403→        duration: 'Weeks 1–3',
+  1404→        topics: [
+  1405→          'Customer Service Operations & Support Metrics (CSAT, NPS, CES)',
+  1406→          'Python Fundamentals for Support Automation Scripts',
+  1407→          'Database Design for Ticketing & Customer Data with PostgreSQL',
+  1408→          'REST APIs & Webhook Integration Patterns',
+  1409→          'Introduction to NLP & Text Processing with Python',
+  1410→        ],
+  1411→      },
+  1412→      {
+  1413→        phase: 'Phase 2: AI Customer Solutions',
+  1414→        title: 'Phase 2: AI Customer Solutions',
+  1415→        weeks: 'Weeks 4–8',
+  1416→        duration: 'Weeks 4–8',
+  1417→        topics: [
+  1418→          'Building Conversational AI with Dialogflow & LLM Integration',
+  1419→          'Sentiment Analysis: NLP Models for Customer Emotion Detection',
+  1420→          'RAG Pipelines for Knowledge Base-Powered Support Bots',
+  1421→          'Zendesk & Freshdesk API Integration for Ticket Orchestration',
+  1422→          'Redis Caching for Real-time Customer Context Management',
+  1423→          'Intent Classification & Entity Extraction for Automated Triage',
+  1424→        ],
+  1425→      },
+  1426→      {
+  1427→        phase: 'Phase 3: Enterprise Implementation',
+  1428→        title: 'Phase 3: Enterprise Implementation',
+  1429→        weeks: 'Weeks 9–15',
+  1430→        duration: 'Weeks 9–15',
+  1431→        topics: [
+  1432→          'Omnichannel Support Platform Architecture',
+  1433→          'AI Agent Routing & Escalation Engine Design',
+  1434→          'Customer Health Scoring & Predictive Support Models',
+  1435→          'React Dashboard for Support Team Performance Analytics',
+  1436→          'Real-time Notifications, Queues & Event-Driven Architecture',
+  1437→          'Security, Privacy & Compliance in Customer Data Handling',
+  1438→        ],
+  1439→      },
+  1440→      {
+  1441→        phase: 'Phase 4: Capstone',
+  1442→        title: 'Phase 4: Capstone',
+  1443→        weeks: 'Weeks 16–20',
+  1444→        duration: 'Weeks 16–20',
+  1445→        topics: [
+  1446→          'Production Deployment of AI Customer Support Platform',
+  1447→          'Load Testing, Monitoring & Performance Optimization',
+  1448→          'Stakeholder Demo & Solution Architecture Documentation',
+  1449→          'Capstone: Build an Enterprise AI Customer Solutions Platform',
+  1450→        ],
+  1451→      },
+  1452→    ],
+  1453→  },
+  1454→
+  1455→  // ==========================================
+  1456→  // 4. CLOUD, DEVOPS & MLOPS (CDM) — 6 specializations
+  1457→  // ==========================================
+  1458→  'cdm:cloud infrastructure': {
+  1459→    trackKey: 'cdm-cloud-infrastructure-engineer',
+  1460→    mainProgramId: 'cdm',
+  1461→    mainProgramName: 'Cloud, DevOps & MLOps (CDM)',
+  1462→    badge: 'CDM-CIE',
+  1463→    title: 'Cloud Infrastructure Engineer',
+  1464→    subtitle: 'Architect Cloud-Native Systems on AWS, Azure & GCP',
+  1465→    description:
+  1466→      'Become the engineer who designs and operates cloud infrastructure at scale. Master AWS, Azure & GCP, infrastructure-as-code, networking, security and cost optimization. Build systems that scale to millions of users without breaking the budget.',
+  1467→    duration: '22 Weeks',
+  1468→    weeks: 22,
+  1469→    mode: 'Online Interactive',
+  1470→    level: 'Beginner to Advanced',
+  1471→    specialization: 'Cloud Infrastructure Engineer',
+  1472→    techStack: ['AWS', 'Azure', 'GCP', 'Terraform', 'CloudFormation', 'VPC', 'IAM', 'Load Balancers', 'Auto Scaling', 'CloudWatch'],
+  1473→    highlights: [
+  1474→      { title: 'Multi-Cloud Architecture', desc: 'Design and deploy across AWS, Azure and GCP — pick the right tool for each workload and avoid vendor lock-in.' },
+  1475→      { title: 'Infrastructure as Code', desc: 'Master Terraform and CloudFormation to provision repeatable, version-controlled infrastructure in minutes, not days.' },
+  1476→      { title: 'Cloud Networking & Security', desc: 'Build secure VPCs, manage IAM roles, configure firewalls and encryption — defense-in-depth for production systems.' },
+  1477→      { title: 'Cost Optimization', desc: 'Learn FinOps practices to right-size resources, use reserved instances and cut cloud bills by 40-60% without sacrificing performance.' },
+  1478→    ],
+  1479→    curriculum: [
+  1480→      {
+  1481→        phase: 'Phase 1: Cloud Foundations',
+  1482→        title: 'Phase 1: Cloud Foundations',
+  1483→        weeks: 'Weeks 1–5',
+  1484→        duration: 'Weeks 1–5',
+  1485→        topics: [
+  1486→          'Linux & Shell Scripting for Cloud',
+  1487→          'Networking Fundamentals (TCP/IP, DNS, HTTP)',
+  1488→          'AWS Core Services (EC2, S3, RDS, VPC)',
+  1489→          'Azure & GCP Fundamentals',
+  1490→          'Cloud Security & IAM Basics',
+  1491→        ],
+  1492→      },
+  1493→      {
+  1494→        phase: 'Phase 2: Infrastructure as Code',
+  1495→        title: 'Phase 2: Infrastructure as Code',
+  1496→        weeks: 'Weeks 6–11',
+  1497→        duration: 'Weeks 6–11',
+  1498→        topics: [
+  1499→          'Terraform — from zero to production',
+  1500→          'AWS CloudFormation & CDK',
+  1501→          'VPC Design, Subnets & Routing',
+  1502→          'Load Balancers & Auto Scaling Groups',
+  1503→          'Route53, CDN & Edge Computing',
+  1504→        ],
+  1505→      },
+  1506→      {
+  1507→        phase: 'Phase 3: Advanced Cloud Engineering',
+  1508→        title: 'Phase 3: Advanced Cloud Engineering',
+  1509→        weeks: 'Weeks 12–18',
+  1510→        duration: 'Weeks 12–18',
+  1511→        topics: [
+  1512→          'Multi-Cloud & Hybrid Architectures',
+  1513→          'Cloud Security Deep Dive (WAF, GuardDuty, KMS)',
+  1514→          'Cost Optimization & FinOps',
+  1515→          'Disaster Recovery & Backup Strategies',
+  1516→          'Serverless (Lambda, Azure Functions, Cloud Run)',
+  1517→        ],
+  1518→      },
+  1519→      {
+  1520→        phase: 'Phase 4: Capstone & Deployment',
+  1521→        title: 'Phase 4: Capstone & Deployment',
+  1522→        weeks: 'Weeks 19–22',
+  1523→        duration: 'Weeks 19–22',
+  1524→        topics: [
+  1525→          'Capstone: Build a Multi-Region Highly-Available Infrastructure',
+  1526→          'IaC for the entire stack — Terraform modules',
+  1527→          'Security Audit & Cost Optimization Report',
+  1528→          'Production Deployment & Handover',
+  1529→        ],
+  1530→      },
+  1531→    ],
+  1532→  },
+  1533→  'cdm:devops': {
+  1534→    trackKey: 'cdm-devops-engineer',
+  1535→    mainProgramId: 'cdm',
+  1536→    mainProgramName: 'Cloud, DevOps & MLOps (CDM)',
+  1537→    badge: 'CDM-DOE',
+  1538→    title: 'DevOps Engineer',
+  1539→    subtitle: 'Automate the Build-Test-Deploy Lifecycle',
+  1540→    description:
+  1541→      'Become the engineer who ships 10x faster. Master CI/CD pipelines, configuration management, containerization and release automation. Break down silos between dev and ops to deliver software continuously, safely and reliably.',
+  1542→    duration: '22 Weeks',
+  1543→    weeks: 22,
+  1544→    mode: 'Online Interactive',
+  1545→    level: 'Beginner to Advanced',
+  1546→    specialization: 'DevOps Engineer',
+  1547→    techStack: ['Jenkins', 'GitLab CI', 'GitHub Actions', 'Docker', 'Ansible', 'Terraform', 'Prometheus', 'Grafana', 'Nexus', 'SonarQube'],
+  1548→    highlights: [
+  1549→      { title: 'CI/CD Pipeline Mastery', desc: 'Build end-to-end pipelines with Jenkins, GitLab CI and GitHub Actions — from commit to production in minutes, with automated tests and security scans.' },
+  1550→      { title: 'Configuration Management', desc: 'Master Ansible, Chef and Puppet to manage hundreds of servers declaratively. No more SSH-and-pray — just code.' },
+  1551→      { title: 'Containerization', desc: 'Dockerize any application, build multi-stage images and manage registries. Containers are the universal shipping unit of modern software.' },
+  1552→      { title: 'Release Automation', desc: 'Implement blue-green, canary and rolling deployments. Ship safely with automated rollbacks and zero-downtime releases.' },
+  1553→    ],
+  1554→    curriculum: [
+  1555→      {
+  1556→        phase: 'Phase 1: DevOps Foundations',
+  1557→        title: 'Phase 1: DevOps Foundations',
+  1558→        weeks: 'Weeks 1–5',
+  1559→        duration: 'Weeks 1–5',
+  1560→        topics: [
+  1561→          'DevOps Culture & Principles',
+  1562→          'Linux Administration & Bash Scripting',
+  1563→          'Git — Branching, Merge Strategies & PR Workflows',
+  1564→          'Docker — Images, Containers & Compose',
+  1565→          'Package Management & Artifact Repositories',
+  1566→        ],
+  1567→      },
+  1568→      {
+  1569→        phase: 'Phase 2: CI/CD Pipelines',
+  1570→        title: 'Phase 2: CI/CD Pipelines',
+  1571→        weeks: 'Weeks 6–11',
+  1572→        duration: 'Weeks 6–11',
+  1573→        topics: [
+  1574→          'Jenkins — Pipelines, Jobs & Plugins',
+  1575→          'GitLab CI & GitHub Actions',
+  1576→          'Automated Testing in Pipelines',
+  1577→          'Code Quality with SonarQube & ESLint',
+  1578→          'Artifact Management with Nexus',
+  1579→        ],
+  1580→      },
+  1581→      {
+  1582→        phase: 'Phase 3: Configuration & Release',
+  1583→        title: 'Phase 3: Configuration & Release',
+  1584→        weeks: 'Weeks 12–18',
+  1585→        duration: 'Weeks 12–18',
+  1586→        topics: [
+  1587→          'Ansible — Playbooks, Roles & Modules',
+  1588→          'Terraform for Infrastructure',
+  1589→          'Blue-Green, Canary & Rolling Deployments',
+  1590→          'Feature Flags & Progressive Delivery',
+  1591→          'Rollback Strategies & Incident Response',
+  1592→        ],
+  1593→      },
+  1594→      {
+  1595→        phase: 'Phase 4: Capstone',
+  1596→        title: 'Phase 4: Capstone',
+  1597→        weeks: 'Weeks 19–22',
+  1598→        duration: 'Weeks 19–22',
+  1599→        topics: [
+  1600→          'Capstone: Build a Full CI/CD Pipeline for a Microservices App',
+  1601→          'Automated Tests, Security Scans & Quality Gates',
+  1602→          'Zero-Downtime Production Deployment',
+  1603→          'Monitoring, Alerts & Post-Release Review',
+  1604→        ],
+  1605→      },
+  1606→    ],
+  1607→  },
+  1608→  'cdm:mlops': {
+  1609→    trackKey: 'cdm-mlops-engineer',
+  1610→    mainProgramId: 'cdm',
+  1611→    mainProgramName: 'Cloud, DevOps & MLOps (CDM)',
+  1612→    badge: 'CDM-MLE',
+  1613→    title: 'MLOps Engineer',
+  1614→    subtitle: 'Deploy, Monitor & Scale ML Models in Production',
+  1615→    description:
+  1616→      'Bridge the gap between data science and engineering. Master the tools and practices to take ML models from notebooks to production — versioning, deployment, monitoring and retraining. Become the engineer who makes AI reliable at scale.',
+  1617→    duration: '22 Weeks',
+  1618→    weeks: 22,
+  1619→    mode: 'Online Interactive',
+  1620→    level: 'Intermediate',
+  1621→    specialization: 'MLOps Engineer',
+  1622→    techStack: ['Python', 'MLflow', 'Kubeflow', 'Kubernetes', 'Docker', 'Airflow', 'BentoML', 'Seldon', 'Evidently', 'Prometheus'],
+  1623→    highlights: [
+  1624→      { title: 'Model Versioning & Registry', desc: 'Track every model version, dataset and experiment with MLflow and DVC. Reproducibility is not optional — it is the foundation.' },
+  1625→      { title: 'Model Deployment', desc: 'Deploy models as APIs with BentoML, Seldon Core and KServe. Serve predictions at scale with autoscaling and canary releases.' },
+  1626→      { title: 'ML Pipelines', desc: 'Build automated training pipelines with Kubeflow and Airflow — from data ingestion to retraining, on schedule.' },
+  1627→      { title: 'Monitoring & Drift Detection', desc: 'Detect data drift, concept drift and model degradation in real time with Evidently and Prometheus. Retrain before accuracy drops.' },
+  1628→    ],
+  1629→    curriculum: [
+  1630→      {
+  1631→        phase: 'Phase 1: ML & DevOps Foundations',
+  1632→        title: 'Phase 1: ML & DevOps Foundations',
+  1633→        weeks: 'Weeks 1–5',
+  1634→        duration: 'Weeks 1–5',
+  1635→        topics: [
+  1636→          'Python for ML & Data Science',
+  1637→          'Machine Learning Fundamentals',
+  1638→          'Docker & Containerization for ML',
+  1639→          'Git & CI/CD Basics',
+  1640→          'Linux & Shell Scripting',
+  1641→        ],
+  1642→      },
+  1643→      {
+  1644→        phase: 'Phase 2: Model Lifecycle',
+  1645→        title: 'Phase 2: Model Lifecycle',
+  1646→        weeks: 'Weeks 6–11',
+  1647→        duration: 'Weeks 6–11',
+  1648→        topics: [
+  1649→          'MLflow — Experiment Tracking & Model Registry',
+  1650→          'DVC — Data Version Control',
+  1651→          'Model Packaging with BentoML',
+  1652→          'Feature Stores & Data Pipelines',
+  1653→          'Model Evaluation & Validation',
+  1654→        ],
+  1655→      },
+  1656→      {
+  1657→        phase: 'Phase 3: Production MLOps',
+  1658→        title: 'Phase 3: Production MLOps',
+  1659→        weeks: 'Weeks 12–18',
+  1660→        duration: 'Weeks 12–18',
+  1661→        topics: [
+  1662→          'Kubeflow — End-to-End ML Pipelines',
+  1663→          'Airflow for Orchestration',
+  1664→          'Seldon Core & KServe for Model Serving',
+  1665→          'Data Drift & Model Monitoring with Evidently',
+  1666→          'Automated Retraining Strategies',
+  1667→        ],
+  1668→      },
+  1669→      {
+  1670→        phase: 'Phase 4: Capstone',
+  1671→        title: 'Phase 4: Capstone',
+  1672→        weeks: 'Weeks 19–22',
+  1673→        duration: 'Weeks 19–22',
+  1674→        topics: [
+  1675→          'Capstone: Build an End-to-End MLOps Platform',
+  1676→          'Automated Training Pipeline & Model Registry',
+  1677→          'Production Model Serving with Canary Releases',
+  1678→          'Monitoring Dashboard & Drift Alerts',
+  1679→        ],
+  1680→      },
+  1681→    ],
+  1682→  },
+  1683→  'cdm:sre': {
+  1684→    trackKey: 'cdm-sre-engineer',
+  1685→    mainProgramId: 'cdm',
+  1686→    mainProgramName: 'Cloud, DevOps & MLOps (CDM)',
+  1687→    badge: 'CDM-SRE',
+  1688→    title: 'Site Reliability Engineer',
+  1689→    subtitle: 'Keep Critical Systems Running at 99.99% Uptime',
+  1690→    description:
+  1691→      'Become the engineer who keeps the lights on. Master observability, incident response, chaos engineering and SLO/SLI design. Build systems that self-heal and teams that learn from every incident.',
+  1692→    duration: '22 Weeks',
+  1693→    weeks: 22,
+  1694→    mode: 'Online Interactive',
+  1695→    level: 'Intermediate to Advanced',
+  1696→    specialization: 'Site Reliability Engineer',
+  1697→    techStack: ['Prometheus', 'Grafana', 'Datadog', 'PagerDuty', 'ELK Stack', 'Jaeger', 'Kubernetes', 'Terraform', 'Ansible', 'Python'],
+  1698→    highlights: [
+  1699→      { title: 'Observability Stack', desc: 'Build metrics, logs and traces with Prometheus, Grafana, ELK and Jaeger. See inside your systems — know about issues before users do.' },
+  1700→      { title: 'Incident Response', desc: 'Master on-call rotations, incident command, postmortems and blameless retrospectives. Turn every outage into a learning opportunity.' },
+  1701→      { title: 'SLOs & Error Budgets', desc: 'Define Service Level Objectives, track error budgets and make data-driven decisions about when to ship vs. when to stabilize.' },
+  1702→      { title: 'Chaos Engineering', desc: 'Run controlled experiments with Chaos Mesh and Gremlin to find weaknesses before they cause outages. Resilience is built, not hoped for.' },
+  1703→    ],
+  1704→    curriculum: [
+  1705→      {
+  1706→        phase: 'Phase 1: SRE Foundations',
+  1707→        title: 'Phase 1: SRE Foundations',
+  1708→        weeks: 'Weeks 1–5',
+  1709→        duration: 'Weeks 1–5',
+  1710→        topics: [
+  1711→          'SRE Principles & Culture',
+  1712→          'Linux & System Administration',
+  1713→          'Networking & TCP/IP Deep Dive',
+  1714→          'Python for Automation & Scripting',
+  1715→          'Cloud Fundamentals (AWS/GCP)',
+  1716→        ],
+  1717→      },
+  1718→      {
+  1719→        phase: 'Phase 2: Observability',
+  1720→        title: 'Phase 2: Observability',
+  1721→        weeks: 'Weeks 6–11',
+  1722→        duration: 'Weeks 6–11',
+  1723→        topics: [
+  1724→          'Prometheus — Metrics & Alerting',
+  1725→          'Grafana — Dashboards & Visualization',
+  1726→          'ELK Stack — Centralized Logging',
+  1727→          'Jaeger — Distributed Tracing',
+  1728→          'Datadog & APM Tools',
+  1729→        ],
+  1730→      },
+  1731→      {
+  1732→        phase: 'Phase 3: Reliability Engineering',
+  1733→        title: 'Phase 3: Reliability Engineering',
+  1734→        weeks: 'Weeks 12–18',
+  1735→        duration: 'Weeks 12–18',
+  1736→        topics: [
+  1737→          'SLOs, SLIs & Error Budgets',
+  1738→          'Incident Response & On-Call',
+  1739→          'Postmortems & Blameless Retrospectives',
+  1740→          'Chaos Engineering with Chaos Mesh',
+  1741→          'Capacity Planning & Autoscaling',
+  1742→        ],
+  1743→      },
+  1744→      {
+  1745→        phase: 'Phase 4: Capstone',
+  1746→        title: 'Phase 4: Capstone',
+  1747→        weeks: 'Weeks 19–22',
+  1748→        duration: 'Weeks 19–22',
+  1749→        topics: [
+  1750→          'Capstone: Build a Full Observability Stack',
+  1751→          'SLO Design & Error Budget Tracking',
+  1752→          'Chaos Experiment & Incident Response Drill',
+  1753→          'Production Readiness Review',
+  1754→        ],
+  1755→      },
+  1756→    ],
+  1757→  },
+  1758→  'cdm:kubernetes': {
+  1759→    trackKey: 'cdm-kubernetes-engineer',
+  1760→    mainProgramId: 'cdm',
+  1761→    mainProgramName: 'Cloud, DevOps & MLOps (CDM)',
+  1762→    badge: 'CDM-K8S',
+  1763→    title: 'Kubernetes & Container Engineer',
+  1764→    subtitle: 'Orchestrate Containers at Enterprise Scale',
+  1765→    description:
+  1766→      'Master Kubernetes — the operating system of the cloud. From clusters to service mesh, learn to deploy, scale and manage containerized applications at enterprise scale. Build self-healing, auto-scaling platforms that run themselves.',
+  1767→    duration: '22 Weeks',
+  1768→    weeks: 22,
+  1769→    mode: 'Online Interactive',
+  1770→    level: 'Intermediate',
+  1771→    specialization: 'Kubernetes & Container Engineer',
+  1772→    techStack: ['Kubernetes', 'Docker', 'Helm', 'Istio', 'ArgoCD', 'Kustomize', 'Cilium', 'Prometheus', 'etcd', 'containerd'],
+  1773→    highlights: [
+  1774→      { title: 'Cluster Architecture', desc: 'Design, provision and manage Kubernetes clusters — from kubeadm to managed services (EKS, GKE, AKS). Understand control plane, worker nodes and etcd.' },
+  1775→      { title: 'Workload Management', desc: 'Deploy Deployments, StatefulSets, DaemonSets, Jobs and CronJobs. Master pods, services, ingress and config — the building blocks of K8s apps.' },
+  1776→      { title: 'GitOps & ArgoCD', desc: 'Implement GitOps with ArgoCD — declarative deployments where Git is the single source of truth. Roll back with a PR, not a panic.' },
+  1777→      { title: 'Service Mesh & Security', desc: 'Master Istio for traffic management, mTLS and observability. Secure clusters with RBAC, network policies and Pod Security Standards.' },
+  1778→    ],
+  1779→    curriculum: [
+  1780→      {
+  1781→        phase: 'Phase 1: Container & K8s Foundations',
+  1782→        title: 'Phase 1: Container & K8s Foundations',
+  1783→        weeks: 'Weeks 1–5',
+  1784→        duration: 'Weeks 1–5',
+  1785→        topics: [
+  1786→          'Docker Deep Dive — Images, Multi-stage, Security',
+  1787→          'containerd & OCI Runtimes',
+  1788→          'Kubernetes Architecture — Control Plane & Worker Nodes',
+  1789→          'Pods, Deployments, Services & Ingress',
+  1790→          'ConfigMaps, Secrets & Volumes',
+  1791→        ],
+  1792→      },
+  1793→      {
+  1794→        phase: 'Phase 2: Cluster Operations',
+  1795→        title: 'Phase 2: Cluster Operations',
+  1796→        weeks: 'Weeks 6–11',
+  1797→        duration: 'Weeks 6–11',
+  1798→        topics: [
+  1799→          'Cluster Provisioning (kubeadm, EKS, GKE, AKS)',
+  1800→          'Helm — Package Management & Charts',
+  1801→          'Kustomize for Environment Management',
+  1802→          'RBAC, Network Policies & Pod Security',
+  1803→          'Storage — CSI, PVCs, Storage Classes',
+  1804→        ],
+  1805→      },
+  1806→      {
+  1807→        phase: 'Phase 3: Advanced K8s',
+  1808→        title: 'Phase 3: Advanced K8s',
+  1809→        weeks: 'Weeks 12–18',
+  1810→        duration: 'Weeks 12–18',
+  1811→        topics: [
+  1812→          'GitOps with ArgoCD',
+  1813→          'Service Mesh with Istio',
+  1814→          'Autoscaling — HPA, VPA & Cluster Autoscaler',
+  1815→          'Multi-Cluster & Federation',
+  1816→          'K8s Observability with Prometheus & Grafana',
+  1817→        ],
+  1818→      },
+  1819→      {
+  1820→        phase: 'Phase 4: Capstone',
+  1821→        title: 'Phase 4: Capstone',
+  1822→        weeks: 'Weeks 19–22',
+  1823→        duration: 'Weeks 19–22',
+  1824→        topics: [
+  1825→          'Capstone: Build a Multi-Service K8s Platform',
+  1826→          'GitOps Deployment Pipeline with ArgoCD',
+  1827→          'Service Mesh, mTLS & Traffic Splitting',
+  1828→          'Production Hardening & Handover',
+  1829→        ],
+  1830→      },
+  1831→    ],
+  1832→  },
+  1833→  'cdm:platform cicd': {
+  1834→    trackKey: 'cdm-platform-cicd-engineer',
+  1835→    mainProgramId: 'cdm',
+  1836→    mainProgramName: 'Cloud, DevOps & MLOps (CDM)',
+  1837→    badge: 'CDM-PCE',
+  1838→    title: 'Platform & CI/CD Engineer',
+  1839→    subtitle: 'Build Internal Developer Platforms That Teams Love',
+  1840→    description:
+  1841→      'Become the engineer who makes other engineers 10x more productive. Build internal developer platforms (IDPs), self-service pipelines and golden paths that let teams ship faster without sacrificing safety. Platform engineering is the future of DevOps.',
+  1842→    duration: '22 Weeks',
+  1843→    weeks: 22,
+  1844→    mode: 'Online Interactive',
+  1845→    level: 'Intermediate to Advanced',
+  1846→    specialization: 'Platform & CI/CD Engineer',
+  1847→    techStack: ['Backstage', 'ArgoCD', 'Crossplane', 'Terraform', 'Kubernetes', 'GitHub Actions', 'Jenkins', 'Helm', 'Vault', 'Port'],
+  1848→    highlights: [
+  1849→      { title: 'Internal Developer Platform', desc: 'Build IDPs with Backstage and Port — give developers a self-service portal to spin up environments, databases and pipelines in minutes.' },
+  1850→      { title: 'Golden Path Pipelines', desc: 'Design opinionated CI/CD templates that encode best practices — security, testing and compliance built-in. Teams just plug in and ship.' },
+  1851→      { title: 'Self-Service Infrastructure', desc: 'Use Crossplane and Terraform to let developers provision infrastructure via PRs — no tickets, no waiting, full governance.' },
+  1852→      { title: 'Developer Experience', desc: 'Measure and improve DORA metrics, developer satisfaction and time-to-first-PR. A great platform is invisible — developers just work faster.' },
+  1853→    ],
+  1854→    curriculum: [
+  1855→      {
+  1856→        phase: 'Phase 1: Platform Thinking',
+  1857→        title: 'Phase 1: Platform Thinking',
+  1858→        weeks: 'Weeks 1–5',
+  1859→        duration: 'Weeks 1–5',
+  1860→        topics: [
+  1861→          'Platform Engineering Principles',
+  1862→          'DevEx & DORA Metrics',
+  1863→          'Linux, Git & Docker Refresher',
+  1864→          'Kubernetes Fundamentals',
+  1865→          'CI/CD Basics with GitHub Actions',
+  1866→        ],
+  1867→      },
+  1868→      {
+  1869→        phase: 'Phase 2: IDP & Portals',
+  1870→        title: 'Phase 2: IDP & Portals',
+  1871→        weeks: 'Weeks 6–11',
+  1872→        duration: 'Weeks 6–11',
+  1873→        topics: [
+  1874→          'Backstage — Developer Portal',
+  1875→          'Port & Humanitec — Self-Service Platforms',
+  1876→          'Service Catalog & Ownership',
+  1877→          'Software Templates & Golden Paths',
+  1878→          'Tech Docs & API References',
+  1879→        ],
+  1880→      },
+  1881→      {
+  1882→        phase: 'Phase 3: Platform Automation',
+  1883→        title: 'Phase 3: Platform Automation',
+  1884→        weeks: 'Weeks 12–18',
+  1885→        duration: 'Weeks 12–18',
+  1886→        topics: [
+  1887→          'Crossplane — Infrastructure as K8s CRDs',
+  1888→          'Terraform Modules & Registries',
+  1889→          'ArgoCD — GitOps for the Platform',
+  1890→          'Secret Management with Vault',
+  1891→          'Policy as Code with OPA & Kyverno',
+  1892→        ],
+  1893→      },
+  1894→      {
+  1895→        phase: 'Phase 4: Capstone',
+  1896→        title: 'Phase 4: Capstone',
+  1897→        weeks: 'Weeks 19–22',
+  1898→        duration: 'Weeks 19–22',
+  1899→        topics: [
+  1900→          'Capstone: Build an Internal Developer Platform',
+  1901→          'Self-Service Portal with Backstage/Port',
+  1902→          'Golden-Path CI/CD Templates',
+  1903→          'DORA Metrics Dashboard & Platform Handover',
+  1904→        ],
+  1905→      },
+  1906→    ],
+  1907→  },
+  1908→};
+  1909→
+  1910→/**
+  1911→ * Helper to resolve the exact program and subprogram track data.
+  1912→ */
+  1913→export function getProgramTrackData(
+  1914→  mainProgramOrPreferred?: string | null,
+  1915→  subProgramParam?: string | null
+  1916→): ProgramTrackInfo | null {
+  1917→  if (!mainProgramOrPreferred) return null;
+  1918→
+  1919→  let mainProg = mainProgramOrPreferred.trim();
+  1920→  let subProg = subProgramParam ? subProgramParam.trim() : '';
+  1921→
+  1922→  // Handle strings like "Forward Deployed Engineer (FDE-FWD) — Data Engineer"
+  1923→  if (mainProg.includes('—')) {
+  1924→    const parts = mainProg.split('—').map((s) => s.trim());
+  1925→    mainProg = parts[0];
+  1926→    if (!subProg && parts[1]) {
+  1927→      subProg = parts[1];
+  1928→    }
+  1929→  } else if (mainProg.includes(' - ')) {
+  1930→    const parts = mainProg.split(' - ').map((s) => s.trim());
+  1931→    mainProg = parts[0];
+  1932→    if (!subProg && parts[1]) {
+  1933→      subProg = parts[1];
+  1934→    }
+  1935→  }
+  1936→
+  1937→  // Determine main program ID
+  1938→  let mainProgId: 'fde-fwd' | 'fde' | 'dsai' | 'cdm' = 'fde-fwd';
+  1939→  const lowerMain = mainProg.toLowerCase();
+  1940→  if (lowerMain.includes('fde-fwd') || lowerMain.includes('forward deployed')) {
+  1941→    mainProgId = 'fde-fwd';
+  1942→  } else if (lowerMain.includes('dsai') || lowerMain.includes('digital sales') || lowerMain.includes('sales & ai')) {
+  1943→    mainProgId = 'dsai';
+  1944→  } else if (lowerMain.includes('cdm') || lowerMain.includes('cloud, devops') || lowerMain.includes('cloud devops') || lowerMain.includes('mlops')) {
+  1945→    mainProgId = 'cdm';
+  1946→  } else if (lowerMain.includes('fullstack') || lowerMain.includes('fse') || lowerMain.includes('fde')) {
+  1947→    mainProgId = 'fde';
+  1948→  }
+  1949→
+  1950→  const lowerSub = (subProg || '').toLowerCase().trim();
+  1951→
+  1952→  // Try exact composite key lookup
+  1953→  const exactKey = `${mainProgId}:${lowerSub}`;
+  1954→  if (PROGRAM_TRACKS[exactKey]) {
+  1955→    return PROGRAM_TRACKS[exactKey];
+  1956→  }
+  1957→
+  1958→  // Fuzzy match on subprogram
+  1959→  for (const [key, track] of Object.entries(PROGRAM_TRACKS)) {
+  1960→    if (key.startsWith(`${mainProgId}:`)) {
+  1961→      const trackSub = key.replace(`${mainProgId}:`, '');
+  1962→      if (
+  1963→        (lowerSub && trackSub.includes(lowerSub)) ||
+  1964→        (lowerSub && lowerSub.includes(trackSub)) ||
+  1965→        (track.specialization && track.specialization.toLowerCase() === lowerSub)
+  1966→      ) {
+  1967→        return track;
+  1968→      }
+  1969→    }
+  1970→  }
+  1971→
+  1972→  // Check any track matching subprogram name directly if main program match wasn't found
+  1973→  if (lowerSub) {
+  1974→    for (const track of Object.values(PROGRAM_TRACKS)) {
+  1975→      if (
+  1976→        track.specialization.toLowerCase() === lowerSub ||
+  1977→        track.title.toLowerCase().includes(lowerSub) ||
+  1978→        track.trackKey.toLowerCase().includes(lowerSub)
+  1979→      ) {
+  1980→        return track;
+  1981→      }
+  1982→    }
+  1983→  }
+  1984→
+  1985→  // Default fallback to the first track of that main program
+  1986→  const defaultTrackForMain = Object.values(PROGRAM_TRACKS).find((t) => t.mainProgramId === mainProgId);
+  1987→  return defaultTrackForMain || null;
+  1988→}
+  1989→

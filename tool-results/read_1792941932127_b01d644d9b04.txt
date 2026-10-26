@@ -1,0 +1,2002 @@
+     1→"use client";
+     2→
+     3→import * as React from "react";
+     4→import { useNav } from "@/lib/store";
+     5→import { Card } from "@/components/common";
+     6→import { StatCard } from "@/components/common";
+     7→import { EmptyState } from "@/components/common";
+     8→import { AvatarLogo } from "@/components/common/AvatarLogo";
+     9→import { Button } from "@/components/ui/button";
+    10→import { Badge } from "@/components/ui/badge";
+    11→import {
+    12→  Accordion,
+    13→  AccordionItem,
+    14→  AccordionTrigger,
+    15→  AccordionContent,
+    16→} from "@/components/ui/accordion";
+    17→import {
+    18→  ArrowRight, ArrowLeft, ChevronRight, Sparkles, Briefcase, Search, Clock,
+    19→  ShieldCheck, GraduationCap, UserCheck, Award, ClipboardCheck, Layers,
+    20→  Globe, Users, TrendingUp, BrainCircuit, Database, Gauge, Wallet, Target,
+    21→  FileCheck2, Workflow, BarChart3, CheckCircle2, Zap, Headset, Rocket,
+    22→  Quote, BookOpen, Network, RefreshCw, Lightbulb, Microscope, Cog, Server,
+    23→  Code2, Cloud, MapPin, Calendar, Wrench, Boxes, PenTool, Megaphone,
+    24→  Handshake, GitBranch, Building2, LineChart, Cpu, Stethoscope, Factory,
+    25→  Banknote, ShoppingBag, Truck, Home, UserPlus, FileSignature,
+    26→  HeartHandshake, MessagesSquare, Phone, Mail, Bell, Filter, PieChart,
+    27→  Activity, Eye, Lock, FileText, Send, CalendarClock, ListChecks,
+    28→  CircleDollarSign, Receipt, BadgeCheck, Users2, PhoneCall,
+    29→  CreditCard, Smartphone, ClipboardList,
+    30→} from "lucide-react";
+    31→import { toast } from "sonner";
+    32→import type { LucideIcon } from "lucide-react";
+    33→
+    34→// ─────────────────────────────────────────────────────────────────────────────
+    35→// Type definitions
+    36→// ─────────────────────────────────────────────────────────────────────────────
+    37→interface KeyFeature {
+    38→  icon: LucideIcon;
+    39→  title: string;
+    40→  desc: string;
+    41→}
+    42→interface ProcessStep {
+    43→  step: string;
+    44→  title: string;
+    45→  desc: string;
+    46→}
+    47→interface Benefit {
+    48→  icon: LucideIcon;
+    49→  title: string;
+    50→  desc: string;
+    51→}
+    52→interface UseCase {
+    53→  scenario: string;
+    54→  solution: string;
+    55→  metrics: { label: string; value: string }[];
+    56→}
+    57→interface ComparisonRow {
+    58→  feature: string;
+    59→  traditional: string;
+    60→  ours: string;
+    61→}
+    62→interface Integration {
+    63→  name: string;
+    64→  type: string;
+    65→  icon: LucideIcon;
+    66→  desc: string;
+    67→}
+    68→interface Metric {
+    69→  label: string;
+    70→  value: string;
+    71→  icon: LucideIcon;
+    72→}
+    73→interface CaseStudy {
+    74→  company: string;
+    75→  industry: string;
+    76→  challenge: string;
+    77→  solution: string;
+    78→  metrics: { label: string; value: string }[];
+    79→}
+    80→interface Testimonial {
+    81→  quote: string;
+    82→  name: string;
+    83→  role: string;
+    84→  company: string;
+    85→  initials: string;
+    86→}
+    87→interface PricingTier {
+    88→  name: string;
+    89→  price: string;
+    90→  period: string;
+    91→  desc: string;
+    92→  features: string[];
+    93→  cta: string;
+    94→  popular?: boolean;
+    95→}
+    96→interface RelatedSubPage {
+    97→  key: string;
+    98→  label: string;
+    99→  icon: LucideIcon;
+   100→  desc: string;
+   101→}
+   102→interface SubPageConfig {
+   103→  key: string;
+   104→  label: string;
+   105→  shortLabel: string;
+   106→  accent: string;
+   107→  hero: {
+   108→    icon: LucideIcon;
+   109→    title: string;
+   110→    badge: string;
+   111→    description: string;
+   112→    ctaPrimary: string;
+   113→    ctaSecondary: string;
+   114→    stats: { label: string; value: string }[];
+   115→  };
+   116→  overview: {
+   117→    what: string;
+   118→    why: string[];
+   119→  };
+   120→  keyFeatures: KeyFeature[];
+   121→  howItWorks: ProcessStep[];
+   122→  benefits: Benefit[];
+   123→  useCases: UseCase[];
+   124→  comparison: {
+   125→    columns: [string, string, string];
+   126→    rows: ComparisonRow[];
+   127→  };
+   128→  techStack: string[];
+   129→  integrations: Integration[];
+   130→  metrics: Metric[];
+   131→  caseStudies: CaseStudy[];
+   132→  testimonials: Testimonial[];
+   133→  pricing: PricingTier[];
+   134→  faqs: { q: string; a: string }[];
+   135→  cta: {
+   136→    title: string;
+   137→    desc: string;
+   138→    primaryLabel: string;
+   139→    secondaryLabel: string;
+   140→  };
+   141→  related: RelatedSubPage[];
+   142→}
+   143→
+   144→// ─────────────────────────────────────────────────────────────────────────────
+   145→// Sub-page metadata (used by sidebar / tab bar inside the sub-page template)
+   146→// ─────────────────────────────────────────────────────────────────────────────
+   147→const ALL_SUB_PAGES: { key: string; label: string; shortLabel: string; icon: LucideIcon }[] = [
+   148→  { key: "ai-sourcing-engine", label: "AI Sourcing Engine", shortLabel: "AI Sourcing Engine", icon: BrainCircuit },
+   149→  { key: "talent-pool-benchmarks", label: "Talent Pool & Benchmarks", shortLabel: "Talent Pool & Benchmarks", icon: Database },
+   150→  { key: "48-hour-shortlist", label: "48-Hour Shortlist SLA", shortLabel: "48-Hour Shortlist", icon: Clock },
+   151→  { key: "screening-assessment", label: "Screening & Assessment", shortLabel: "Screening & Assessment", icon: ClipboardCheck },
+   152→  { key: "sourcing-plans-pricing", label: "Sourcing Plans & Pricing", shortLabel: "Sourcing Plans & Pricing", icon: Wallet },
+   153→  { key: "hiring-workflow", label: "Hiring Workflow", shortLabel: "Hiring Workflow", icon: Workflow },
+   154→  { key: "candidate-engagement", label: "Candidate Engagement", shortLabel: "Candidate Engagement", icon: Sparkles },
+   155→  { key: "analytics-reporting", label: "Analytics & Reporting", shortLabel: "Analytics & Reporting", icon: BarChart3 },
+   156→];
+   157→
+   158→const EMERALD = "#10B981";
+   159→
+   160→// ─────────────────────────────────────────────────────────────────────────────
+   161→// CONFIG — 8 sub-pages, each with all 16 sections of rich content
+   162→// ─────────────────────────────────────────────────────────────────────────────
+   163→const SUB_PAGE_CONFIG: Record<string, SubPageConfig> = {
+   164→  // ═══════════════════════════════════════════════════════════════════════════
+   165→  // 1. AI Sourcing Engine
+   166→  // ═══════════════════════════════════════════════════════════════════════════
+   167→  "ai-sourcing-engine": {
+   168→    key: "ai-sourcing-engine",
+   169→    label: "AI Sourcing Engine",
+   170→    shortLabel: "AI Sourcing Engine",
+   171→    accent: EMERALD,
+   172→    hero: {
+   173→      icon: BrainCircuit,
+   174→      title: "AI Sourcing Engine",
+   175→      badge: "AI-POWERED SEARCH",
+   176→      description:
+   177→        "Semantic talent search with skill-graph ranking and predictive analytics. Find the right fit in seconds — no black boxes, just explainable AI that surfaces candidates your recruiters would have missed.",
+   178→      ctaPrimary: "Try AI Sourcing",
+   179→      ctaSecondary: "Watch demo",
+   180→      stats: [
+   181→        { label: "Search time", value: "12s" },
+   182→        { label: "Fit-score validity", value: "0.78" },
+   183→        { label: "Pool coverage", value: "2M+" },
+   184→        { label: "Search precision", value: "92%" },
+   185→      ],
+   186→    },
+   187→    overview: {
+   188→      what:
+   189→        "The AI Sourcing Engine is the brain behind our talent pool. It indexes 2M+ candidate profiles into a semantic skill-graph, understands the meaning of job requirements (not just keywords), and ranks candidates by predicted role-fit. Every score comes with a plain-English explanation — no opaque ranking algorithms.",
+   190→      why: [
+   191→        "Keyword boolean queries miss 60% of qualified candidates whose resumes use different terminology. Semantic search fixes this by understanding that 'React' and 'frontend JS framework' mean the same role.",
+   192→        "Skill-graph ranking achieves 0.78 predictive validity against 1-year performance ratings — published in our validation whitepaper. That's 2.4× higher than resume-keyword matching.",
+   193→        "Predictive analytics forecast candidate availability (likelihood to move in next 90 days), expected salary band, and culture-fit signals — before you reach out. Stop wasting outreach on passive candidates who won't move.",
+   194→      ],
+   195→    },
+   196→    keyFeatures: [
+   197→      { icon: BrainCircuit, title: "Semantic skill-graph search", desc: "Type a job description in plain English; our skill-graph maps it to 40+ alternative skill names and surfaces candidates with equivalent experience." },
+   198→      { icon: Gauge, title: "Predictive role-fit scoring", desc: "0.78 validity against 1-year performance — scores correlate with actual on-the-job outcomes, not just resume matches." },
+   199→      { icon: Zap, title: "Auto-expanded boolean queries", desc: "Our AI expands 'Python developer' to include Django, Flask, FastAPI, Pandas, NumPy, PyTorch — automatically, no manual boolean writing." },
+   200→      { icon: Calendar, title: "Availability prediction", desc: "We predict candidate likelihood to move in the next 90 days based on job-change signals, market activity, and tenure — focus outreach on movers." },
+   201→      { icon: Wallet, title: "Salary band forecasting", desc: "Expected salary band predicted from role, location, experience, and stack — so you don't waste cycles on candidates outside your budget." },
+   202→      { icon: ShieldCheck, title: "Explainable ranking", desc: "Every candidate scorecard shows the 5 reasons why this candidate ranked here — skills match, experience relevance, salary fit, location, culture signals." },
+   203→    ],
+   204→    howItWorks: [
+   205→      { step: "01", title: "Build skill-graph", desc: "We index 2M+ verified candidate profiles into a Neo4j knowledge graph mapping skills, roles, projects, and companies." },
+   206→      { step: "02", title: "Parse job requirement", desc: "Our NLP pipeline parses your job description into structured requirements — must-have skills, nice-to-haves, seniority, domain." },
+   207→      { step: "03", title: "Semantic candidate match", desc: "The engine scores every candidate against the parsed requirement using semantic similarity — not keyword overlap." },
+   208→      { step: "04", title: "Predictive scoring", desc: "We layer on availability prediction, salary band forecast, and culture-fit signals to produce a composite fit score." },
+   209→      { step: "05", title: "Explainable shortlist", desc: "Top 5-10 candidates are packaged with explainable scorecards — you see exactly why each candidate ranked where they did." },
+   210→    ],
+   211→    benefits: [
+   212→      { icon: Zap, title: "12× faster sourcing", desc: "What took recruiters 3 days of boolean writing and resume scrolling now takes 12 seconds of AI search." },
+   213→      { icon: Target, title: "Higher quality matches", desc: "Semantic search finds candidates keyword searches miss — 40% more qualified candidates per search." },
+   214→      { icon: ShieldCheck, title: "Reduced bias", desc: "AI evaluates skills and experience, not resume names, photos, or addresses — structured scoring on defined rubrics." },
+   215→      { icon: FileCheck2, title: "Explainable decisions", desc: "Every shortlist comes with a plain-English rationale. Hiring managers trust the AI because they can audit it." },
+   216→      { icon: BrainCircuit, title: "Predictive hiring", desc: "Forecast candidate availability, salary expectations, and culture-fit before outreach — focus effort where it pays." },
+   217→      { icon: Wallet, title: "Lower cost-per-hire", desc: "Recruiters spend time on interviews, not sourcing. Cost-per-hire drops 32% on AI-sourced roles." },
+   218→    ],
+   219→    useCases: [
+   220→      {
+   221→        scenario: "Series B fintech needed 25 senior engineers in 4 months for product expansion.",
+   222→        solution: "AI sourcing engine scanned 2M+ pool, ranked candidates by predicted fit + availability, and surfaced 80 high-fit passive candidates for outreach.",
+   223→        metrics: [
+   224→          { label: "Search time", value: "12 sec" },
+   225→          { label: "Outreach response", value: "47%" },
+   226→          { label: "Hires delivered", value: "27" },
+   227→        ],
+   228→      },
+   229→      {
+   230→        scenario: "Healthcare chain needed 80+ specialized clinical roles across 12 cities.",
+   231→        solution: "Semantic search matched niche credentials (e.g., 'cath lab technician') to equivalent skill names across our verified pool.",
+   232→        metrics: [
+   233→          { label: "Roles filled", value: "84" },
+   234→          { label: "Time-to-hire", value: "−38%" },
+   235→          { label: "Submittal-to-offer", value: "32%" },
+   236→        ],
+   237→      },
+   238→      {
+   239→        scenario: "Manufacturing company needed 40 plant managers across 6 new factories.",
+   240→        solution: "AI matched plant-manager profile across industry competitors and predicted who was likely to move in next 90 days.",
+   241→        metrics: [
+   242→          { label: "Shortlists/role", value: "8" },
+   243→          { label: "Offer-accept rate", value: "82%" },
+   244→          { label: "Time-to-fill", value: "45 days" },
+   245→        ],
+   246→      },
+   247→      {
+   248→        scenario: "BFSI captive needed 15 mainframe engineers — a skill most modern recruiters can't source.",
+   249→        solution: "Skill-graph understood 'mainframe' maps to Cobol, DB2, JCL, CICS — and surfaced candidates with these skills under different titles.",
+   250→        metrics: [
+   251→          { label: "Sourcing time", value: "8 sec" },
+   252→          { label: "Qualified pool", value: "120" },
+   253→          { label: "Hires delivered", value: "15" },
+   254→        ],
+   255→      },
+   256→    ],
+   257→    comparison: {
+   258→      columns: ["Capability", "Traditional keyword search", "JOBSONN AI Sourcing"],
+   259→      rows: [
+   260→        { feature: "Query language", traditional: "Boolean operators (AND, OR, NOT)", ours: "Plain-English job description" },
+   261→        { feature: "Match method", traditional: "Exact keyword overlap", ours: "Semantic skill-graph similarity" },
+   262→        { feature: "Skill synonyms", traditional: "Manual boolean expansion", ours: "Auto-expanded to 40+ variants" },
+   263→        { feature: "Scoring", traditional: "Resume keyword count", ours: "Predictive role-fit (0.78 validity)" },
+   264→        { feature: "Explainability", traditional: "Black box — no rationale", ours: "Plain-English scorecard per candidate" },
+   265→        { feature: "Time-to-shortlist", traditional: "3-5 days of recruiter effort", ours: "12 seconds of compute" },
+   266→        { feature: "Predictive signals", traditional: "None — reactive sourcing", ours: "Availability, salary, culture-fit forecast" },
+   267→        { feature: "Quality of match", traditional: "60% of qualified candidates missed", ours: "92% precision on top-10 shortlist" },
+   268→      ],
+   269→    },
+   270→    techStack: [
+   271→      "OpenAI GPT-4", "sentence-transformers", "FAISS", "Neo4j", "PyTorch",
+   272→      "LangChain", "Redis", "FastAPI", "Elasticsearch", "PostgreSQL",
+   273→      "Snowflake", "Apache Airflow",
+   274→    ],
+   275→    integrations: [
+   276→      { name: "Greenhouse", type: "ATS", icon: FileText, desc: "Sync candidates, jobs, and applications two-way with Greenhouse ATS." },
+   277→      { name: "Lever", type: "ATS", icon: FileText, desc: "Push AI-ranked shortlists directly into Lever pipeline stages." },
+   278→      { name: "Workday", type: "HRIS", icon: Building2, desc: "Sync candidate profiles and requisitions with Workday HCM." },
+   279→      { name: "SAP SuccessFactors", type: "HRIS", icon: Server, desc: "Two-way sync with SAP SuccessFactors for enterprise clients." },
+   280→      { name: "Oracle HCM", type: "HRIS", icon: Database, desc: "Integrate with Oracle HCM Cloud for requisitions and candidates." },
+   281→      { name: "BambooHR", type: "HRIS", icon: Cpu, desc: "Lightweight HRIS sync for SMB clients on BambooHR." },
+   282→    ],
+   283→    metrics: [
+   284→      { label: "Avg search time", value: "12 sec", icon: Zap },
+   285→      { label: "Fit-score validity", value: "0.78", icon: Target },
+   286→      { label: "Pool coverage", value: "2M+", icon: Database },
+   287→      { label: "Search precision", value: "92%", icon: Gauge },
+   288→    ],
+   289→    caseStudies: [
+   290→      {
+   291→        company: "FinEdge",
+   292→        industry: "Fintech",
+   293→        challenge: "Series B fintech needed 25 senior backend engineers in 4 months for payments platform launch — internal TA team of 3 was overwhelmed.",
+   294→        solution: "AI sourcing engine scanned 2M+ pool, ranked candidates by fit + availability, and surfaced 80 high-fit passive candidates. Outreach response rate 47%.",
+   295→        metrics: [
+   296→          { label: "Hires delivered", value: "27" },
+   297→          { label: "Time-to-hire", value: "−42%" },
+   298→          { label: "Cost-per-hire", value: "−32%" },
+   299→        ],
+   300→      },
+   301→      {
+   302→        company: "MediCare Group",
+   303→        industry: "Healthcare",
+   304→        challenge: "Hospital chain needed 84 specialized clinical roles across 12 cities — niche credentials impossible to source via traditional job boards.",
+   305→        solution: "Semantic search matched niche credentials ('cath lab tech', 'ICU specialist') to equivalent skill names across verified pool of healthcare workers.",
+   306→        metrics: [
+   307→          { label: "Roles filled", value: "84" },
+   308→          { label: "Time-to-hire", value: "−38%" },
+   309→          { label: "90-day retention", value: "97%" },
+   310→        ],
+   311→      },
+   312→      {
+   313→        company: "Bharat Forge",
+   314→        industry: "Manufacturing",
+   315→        challenge: "Manufacturing company setting up 6 new plants needed 40 plant managers — niche role with limited talent supply in tier-2 cities.",
+   316→        solution: "AI matched plant-manager profile across industry competitors and predicted who was likely to move in next 90 days based on tenure and market signals.",
+   317→        metrics: [
+   318→          { label: "Shortlists/role", value: "8" },
+   319→          { label: "Offer-accept", value: "82%" },
+   320→          { label: "Time-to-fill", value: "45 days" },
+   321→        ],
+   322→      },
+   323→    ],
+   324→    testimonials: [
+   325→      {
+   326→        quote: "JOBSONN's AI sourcing engine cut our senior-engineer search time from 3 weeks to 3 days. The fit-scorecards are gold — hiring managers actually trust the AI now.",
+   327→        name: "Karan Bhatia",
+   328→        role: "VP Engineering",
+   329→        company: "FinEdge",
+   330→        initials: "KB",
+   331→      },
+   332→      {
+   333→        quote: "We found 84 specialized clinical roles across 12 cities — niche credentials no traditional job board could surface. Semantic search just works.",
+   334→        name: "Nisha Sharma",
+   335→        role: "Talent Acquisition Lead",
+   336→        company: "MediCare Group",
+   337→        initials: "NS",
+   338→      },
+   339→      {
+   340→        quote: "The explainable scorecards changed how our hiring managers view AI sourcing. Every shortlist explains why this candidate, why this score — no black boxes.",
+   341→        name: "Sridhar Rao",
+   342→        role: "CHRO",
+   343→        company: "RetailMax",
+   344→        initials: "SR",
+   345→      },
+   346→    ],
+   347→    pricing: [
+   348→      {
+   349→        name: "Basic",
+   350→        price: "₹0",
+   351→        period: "per role",
+   352→        desc: "Pay-per-role AI search for one-off hires.",
+   353→        features: ["10 AI searches / month", "Top-10 shortlist per search", "Email-only support", "Standard fit-scorecard"],
+   354→        cta: "Start free",
+   355→      },
+   356→      {
+   357→        name: "Pro",
+   358→        price: "₹4,999",
+   359→        period: "per month",
+   360→        desc: "For teams hiring 5+ roles per quarter.",
+   361→        features: ["Unlimited AI searches", "Top-25 shortlist per search", "Predictive availability + salary forecast", "Greenhouse / Lever integration", "Priority email + chat support", "Weekly sourcing analytics"],
+   362→        cta: "Start 14-day trial",
+   363→        popular: true,
+   364→      },
+   365→      {
+   366→        name: "Enterprise",
+   367→        price: "Custom",
+   368→        period: "annual contract",
+   369→        desc: "For high-volume hiring (50+ roles/quarter).",
+   370→        features: ["Custom AI model training on your roles", "Full pipeline integration", "Dedicated sourcing architect", "Custom SLAs with money-back", "Quarterly business reviews", "On-prem / VPC deployment option"],
+   371→        cta: "Contact sales",
+   372→      },
+   373→    ],
+   374→    faqs: [
+   375→      { q: "How does the AI sourcing engine work?", a: "We index 2M+ verified candidate profiles into a Neo4j skill-graph. When you enter a job description, our NLP pipeline parses requirements, scores every candidate on semantic similarity (not keyword overlap), layers in predictive signals (availability, salary, culture-fit), and returns a top-10 shortlist with explainable scorecards." },
+   376→      { q: "Is the AI biased against any group?", a: "We audit for bias quarterly. The AI evaluates skills, experience, and project relevance — not resume names, photos, addresses, or schools. Bias audits show our scoring is gender-neutral and region-neutral within 2% variance. Full audit reports available on request." },
+   377→      { q: "Can the AI explain its scores?", a: "Yes. Every candidate scorecard shows the 5 reasons why this candidate ranked here: skills match %, experience relevance, salary fit, location alignment, and culture-fit signals. Hiring managers can audit and override any score." },
+   378→      { q: "What data sources feed the AI?", a: "Our 2M+ verified candidate pool (identity-verified, skill-tested, consent-driven), public professional profiles (LinkedIn, GitHub), and partner college databases. All data is GDPR-compliant and candidate-consented." },
+   379→      { q: "Is the AI GDPR and DPDP compliant?", a: "Yes. We're GDPR-compliant for EU candidates and DPDP-compliant for India. Candidates can request data deletion at any time. All candidate data is encrypted at rest (AES-256) and in transit (TLS 1.3)." },
+   380→      { q: "Can we train the AI on our own roles and historical hires?", a: "Enterprise tier includes custom model fine-tuning on your historical hires — so the AI learns your team's actual fit patterns. Typical fine-tuning takes 2-4 weeks and 500+ historical hire records." },
+   381→    ],
+   382→    cta: {
+   383→      title: "Try the AI Sourcing Engine today",
+   384→      desc: "Run your first AI search in 12 seconds. See why hiring managers trust our explainable scorecards.",
+   385→      primaryLabel: "Start free search",
+   386→      secondaryLabel: "Book a demo",
+   387→    },
+   388→    related: [
+   389→      { key: "talent-pool-benchmarks", label: "Talent Pool & Benchmarks", icon: Database, desc: "Market intelligence on pool sizes, salary bands, and availability heatmaps." },
+   390→      { key: "48-hour-shortlist", label: "48-Hour Shortlist SLA", icon: Clock, desc: "Guaranteed shortlist delivery within 48 business hours." },
+   391→      { key: "screening-assessment", label: "Screening & Assessment", icon: ClipboardCheck, desc: "AI technical screens and proctored assessments." },
+   392→      { key: "analytics-reporting", label: "Analytics & Reporting", icon: BarChart3, desc: "Real-time dashboards on sourcing funnel and quality." },
+   393→    ],
+   394→  },
+   395→
+   396→  // ═══════════════════════════════════════════════════════════════════════════
+   397→  // 2. Talent Pool & Benchmarks
+   398→  // ═══════════════════════════════════════════════════════════════════════════
+   399→  "talent-pool-benchmarks": {
+   400→    key: "talent-pool-benchmarks",
+   401→    label: "Talent Pool & Benchmarks",
+   402→    shortLabel: "Talent Pool & Benchmarks",
+   403→    accent: EMERALD,
+   404→    hero: {
+   405→      icon: Database,
+   406→      title: "Talent Pool & Benchmarks",
+   407→      badge: "MARKET INTELLIGENCE",
+   408→      description:
+   409→        "Curated talent pools by role, salary band data refreshed quarterly from real offers, and geographic availability heatmaps. Plan sourcing with data, not guesses.",
+   410→      ctaPrimary: "Explore benchmarks",
+   411→      ctaSecondary: "Get sample report",
+   412→      stats: [
+   413→        { label: "Pool size", value: "2M+" },
+   414→        { label: "Roles benchmarked", value: "200+" },
+   415→        { label: "Cities mapped", value: "120+" },
+   416→        { label: "Salary refresh", value: "90 days" },
+   417→      ],
+   418→    },
+   419→    overview: {
+   420→      what:
+   421→        "Talent Pool & Benchmarks gives you a real-time view of the talent market — pool sizes by role and city, salary band distributions validated against actual offer acceptances, and geographic availability heatmaps so you can plan sourcing with data, not guesses.",
+   422→      why: [
+   423→        "Sourcing plans fail when you don't know the supply. We benchmark pool sizes for 200+ roles across 120+ Indian cities, refreshed quarterly from our 2M+ verified candidate pool.",
+   424→        "Salary bands shift quarterly. Our compensation data is refreshed every 90 days from real offer acceptances in our system — not from annual industry surveys that lag the market by 6-12 months.",
+   425→        "Availability heatmaps reveal where talent actually lives, so you can decide between remote, hybrid, or relocate. Don't waste sourcing cycles on cities with no supply.",
+   426→      ],
+   427→    },
+   428→    keyFeatures: [
+   429→      { icon: Database, title: "2M+ verified pool", desc: "Identity-verified, skill-tested candidates with consent-driven data and active job-seeking signals." },
+   430→      { icon: Users, title: "Role-specific sub-pools", desc: "200+ role-specific talent pools — frontend, backend, data, DevOps, clinical, retail, manufacturing, and more." },
+   431→      { icon: Wallet, title: "Salary band data", desc: "Quarterly salary bands by role, city, and experience — validated against real offer acceptances, not surveys." },
+   432→      { icon: MapPin, title: "Geographic heatmaps", desc: "Availability heatmaps showing where talent actually lives — by role, by city, by neighborhood." },
+   433→      { icon: Activity, title: "Availability signals", desc: "Active job-seeking signals: profile updates, application activity, interview attendance — refreshed weekly." },
+   434→      { icon: Users2, title: "Diversity metrics", desc: "Gender, age, and region diversity metrics per sub-pool — track and improve inclusion with audit-ready data." },
+   435→    ],
+   436→    howItWorks: [
+   437→      { step: "01", title: "Pool curation", desc: "We curate role-specific sub-pools from our 2M+ master pool using skill, experience, and intent filters." },
+   438→      { step: "02", title: "Profile verification", desc: "Identity, education, employment, and skill verified through automated checks + manual review." },
+   439→      { step: "03", title: "Salary data refresh", desc: "Salary bands refreshed every 90 days from real offer acceptances in our system — never from surveys." },
+   440→      { step: "04", title: "Heatmap generation", desc: "Geographic availability heatmaps generated weekly from candidate location + activity signals." },
+   441→      { step: "05", title: "Sub-pool delivery", desc: "Custom sub-pools delivered as CSV/JSON or via API — yours to source from, on demand." },
+   442→    ],
+   443→    benefits: [
+   444→      { icon: BrainCircuit, title: "Data-driven sourcing", desc: "Plan sourcing cycles with pool-size and supply data — no more 'we need 50, let's see' guesswork." },
+   445→      { icon: Clock, title: "Reduced time-to-hire", desc: "Pre-curated sub-pools cut sourcing time by 60% — recruiters start with qualified candidates, not raw searches." },
+   446→      { icon: Wallet, title: "Better budget planning", desc: "Salary band data lets you set realistic budgets before opening reqs — no mid-cycle budget shocks." },
+   447→      { icon: MapPin, title: "Geographic strategy", desc: "Decide between remote, hybrid, or relocate based on actual supply — not gut feel or recruiter preference." },
+   448→      { icon: Users2, title: "Diversity planning", desc: "Track diversity of your sourcing pool against hiring goals with audit-ready reports for compliance." },
+   449→      { icon: Network, title: "Competitive intelligence", desc: "See where competitors hire from, salary bands they pay, and supply trends — competitive intel on tap." },
+   450→    ],
+   451→    useCases: [
+   452→      {
+   453→        scenario: "Plan quarterly hiring for 50 engineering roles across 3 cities.",
+   454→        solution: "Talent pool benchmarks revealed Bangalore had 8K active backend engineers, Pune 2K, Chennai 1.5K — informed city strategy + budget allocation.",
+   455→        metrics: [
+   456→          { label: "Plan accuracy", value: "+42%" },
+   457→          { label: "Budget variance", value: "−18%" },
+   458→          { label: "Time-to-plan", value: "2 days" },
+   459→        ],
+   460→      },
+   461→      {
+   462→        scenario: "Decide city strategy for new R&D center — Bangalore vs Hyderabad vs Pune.",
+   463→        solution: "Heatmaps showed Pune had 3× more senior data engineers than Hyderabad at 22% lower salary — chose Pune.",
+   464→        metrics: [
+   465→          { label: "Cost savings", value: "₹4.2 Cr/yr" },
+   466→          { label: "Talent depth", value: "+3×" },
+   467→          { label: "Ramp time", value: "−30%" },
+   468→        ],
+   469→      },
+   470→      {
+   471→        scenario: "Set salary bands for 12 new specialist roles in healthcare.",
+   472→        solution: "Salary benchmark data from real offers showed market band was 18% above industry survey — adjusted bands, hit 92% offer-accept.",
+   473→        metrics: [
+   474→          { label: "Offer-accept rate", value: "92%" },
+   475→          { label: "Budget variance", value: "−4%" },
+   476→          { label: "Survey lag avoided", value: "9 mo" },
+   477→        ],
+   478→      },
+   479→      {
+   480→        scenario: "Diversity hiring goals — 40% women in tech hires.",
+   481→        solution: "Diversity metrics per sub-pool identified frontend (38% women) and QA (44%) as high-supply; reweighted sourcing mix to hit 42% women hires.",
+   482→        metrics: [
+   483→          { label: "Women hires", value: "42%" },
+   484→          { label: "Goal attainment", value: "105%" },
+   485→          { label: "Sourcing cost", value: "−12%" },
+   486→        ],
+   487→      },
+   488→    ],
+   489→    comparison: {
+   490→      columns: ["Capability", "Traditional market research", "JOBSONN Talent Benchmarks"],
+   491→      rows: [
+   492→        { feature: "Data freshness", traditional: "Annual industry surveys (6-12 mo lag)", ours: "Quarterly refresh from real offers" },
+   493→        { feature: "Pool coverage", traditional: "Self-reported job-board profiles", ours: "2M+ identity-verified candidates" },
+   494→        { feature: "Salary data source", traditional: "Survey self-reports", ours: "Actual offer acceptances in our system" },
+   495→        { feature: "Geographic granularity", traditional: "National / metro averages", ours: "City + neighborhood heatmaps" },
+   496→        { feature: "Diversity metrics", traditional: "Rarely available", ours: "Gender, age, region per sub-pool" },
+   497→        { feature: "Refresh cadence", traditional: "Annual or bi-annual", ours: "Quarterly + weekly availability signals" },
+   498→        { feature: "Role specificity", traditional: "Generic role families", ours: "200+ specific roles benchmarked" },
+   499→        { feature: "Format", traditional: "PDF reports", ours: "CSV/JSON export + API access" },
+   500→      ],
+   501→    },
+   502→    techStack: [
+   503→      "PostgreSQL", "Elasticsearch", "Redis", "Python", "Pandas", "Mapbox",
+   504→      "D3.js", "Snowflake", "dbt", "Apache Airflow", "Looker", "FastAPI",
+   505→    ],
+   506→    integrations: [
+   507→      { name: "LinkedIn Talent Insights", type: "Market data", icon: Network, desc: "Cross-reference our pool data with LinkedIn Talent Insights for benchmark validation." },
+   508→      { name: "Talent.com", type: "Job board", icon: Briefcase, desc: "Aggregate salary data from Talent.com job postings for cross-validation." },
+   509→      { name: "Naukrm Resdex", type: "Resume database", icon: FileText, desc: "Sync candidate profiles with Naukrm Resdex for India-specific sourcing." },
+   510→      { name: "Shine", type: "Job board", icon: Sparkles, desc: "Cross-pollinate salary benchmarks with Shine.com job postings." },
+   511→      { name: "Foundit", type: "Job board", icon: Search, desc: "Integrate with Foundit (Monster India) for additional salary benchmarks." },
+   512→      { name: "iCIMS", type: "ATS", icon: FileText, desc: "Push curated sub-pools into iCIMS ATS for one-click sourcing." },
+   513→    ],
+   514→    metrics: [
+   515→      { label: "Pool size", value: "2M+", icon: Database },
+   516→      { label: "Roles benchmarked", value: "200+", icon: Target },
+   517→      { label: "Cities mapped", value: "120+", icon: MapPin },
+   518→      { label: "Salary refresh", value: "90 days", icon: RefreshCw },
+   519→    ],
+   520→    caseStudies: [
+   521→      {
+   522→        company: "CloudPeak SaaS",
+   523→        industry: "IT & SaaS",
+   524→        challenge: "Engineering scaling from 200 to 500 in 18 months; needed city strategy for new R&D center.",
+   525→        solution: "Talent benchmarks revealed Pune had 3× more senior data engineers than Hyderabad at 22% lower salary band — chose Pune for new R&D.",
+   526→        metrics: [
+   527→          { label: "Cost savings", value: "₹4.2 Cr/yr" },
+   528→          { label: "Talent depth", value: "+3×" },
+   529→          { label: "Ramp time", value: "−30%" },
+   530→        ],
+   531→      },
+   532→      {
+   533→        company: "MediCare Group",
+   534→        industry: "Healthcare",
+   535→        challenge: "Hospital chain expanding to 12 cities needed salary bands for 25 specialist clinical roles — no industry survey existed.",
+   536→        solution: "Salary benchmark from real offers in our system revealed market band was 18% above generic surveys — adjusted bands, hit 92% offer-accept.",
+   537→        metrics: [
+   538→          { label: "Offer-accept rate", value: "92%" },
+   539→          { label: "Budget variance", value: "−4%" },
+   540→          { label: "Survey lag avoided", value: "9 mo" },
+   541→        ],
+   542→      },
+   543→      {
+   544→        company: "Bharat Forge",
+   545→        industry: "Manufacturing",
+   546→        challenge: "Setting up 6 new plants across tier-2 cities; needed to know where plant-manager talent actually lived.",
+   547→        solution: "Availability heatmaps revealed tier-2 hubs (Coimbatore, Indore, Jamshedpur) had untapped supply — sourced 40 managers across these cities.",
+   548→        metrics: [
+   549→          { label: "Plant mgrs hired", value: "40" },
+   550→          { label: "Avg salary savings", value: "28%" },
+   551→          { label: "Local hiring %", value: "82%" },
+   552→        ],
+   553→      },
+   554→    ],
+   555→    testimonials: [
+   556→      {
+   557→        quote: "Talent benchmarks revealed Pune had 3× more senior data engineers at 22% lower salary than Hyderabad. We saved ₹4.2 Cr/yr on the new R&D center.",
+   558→        name: "Sneha Iyer",
+   559→        role: "Head of Talent",
+   560→        company: "CloudPeak SaaS",
+   561→        initials: "SI",
+   562→      },
+   563→      {
+   564→        quote: "Salary data from real offer acceptances is gold — we hit 92% offer-accept on 25 specialist clinical roles by setting bands at the actual market, not stale surveys.",
+   565→        name: "Deepa Subramanian",
+   566→        role: "VP HR",
+   567→        company: "MediCare Group",
+   568→        initials: "DS",
+   569→      },
+   570→      {
+   571→        quote: "Availability heatmaps changed our plant-location strategy. We found tier-2 hubs with untapped plant-manager talent — saved 28% on salaries and 82% local hiring.",
+   572→        name: "Ramesh Iyer",
+   573→        role: "Plant Director",
+   574→        company: "Bharat Forge",
+   575→        initials: "RI",
+   576→      },
+   577→    ],
+   578→    pricing: [
+   579→      {
+   580→        name: "Insights",
+   581→        price: "Free",
+   582→        period: "forever",
+   583→        desc: "Basic market intelligence for one-off checks.",
+   584→        features: ["Public role + city benchmarks", "Top-3 cities per role", "Salary band ranges", "Monthly refresh"],
+   585→        cta: "View free insights",
+   586→      },
+   587→      {
+   588→        name: "Pro",
+   589→        price: "₹9,999",
+   590→        period: "per month",
+   591→        desc: "For TA teams planning quarterly hiring.",
+   592→        features: ["200+ role benchmarks", "120+ city heatmaps", "Quarterly salary refresh", "Custom sub-pool exports", "Diversity metrics", "API access (10K calls/mo)"],
+   593→        cta: "Start 14-day trial",
+   594→        popular: true,
+   595→      },
+   596→      {
+   597→        name: "Enterprise",
+   598→        price: "Custom",
+   599→        period: "annual contract",
+   600→        desc: "For high-volume or multi-location hiring.",
+   601→        features: ["Custom benchmarks for niche roles", "Real-time data feed", "Dedicated data analyst", "Quarterly strategy review", "On-prem deployment option", "Unlimited API calls"],
+   602→        cta: "Contact sales",
+   603→      },
+   604→    ],
+   605→    faqs: [
+   606→      { q: "How fresh is the salary data?", a: "Salary bands are refreshed every 90 days from real offer acceptances in our system — not from industry surveys. You see the market as it is today, not 9 months ago." },
+   607→      { q: "What cities do you cover?", a: "120+ Indian cities including all metros, tier-1, tier-2, and emerging tier-3 hubs. We also have limited coverage of remote-first talent pools." },
+   608→      { q: "Can I export the data?", a: "Yes — Pro and Enterprise tiers support CSV/JSON exports and API access. Free tier is view-only on the dashboard." },
+   609→      { q: "Do you track diversity metrics?", a: "Yes — gender, age band, and region diversity per sub-pool. All diversity data is candidate-consented and audit-ready for compliance reporting." },
+   610→      { q: "Can you benchmark niche roles not in your standard list?", a: "Enterprise tier includes custom benchmark research for niche roles. Typical turnaround: 2-3 weeks for a new role benchmark report." },
+   611→      { q: "Is there an API?", a: "Yes — Pro tier includes 10K API calls/month, Enterprise includes unlimited. REST API with role, city, salary band, and availability heatmap endpoints." },
+   612→    ],
+   613→    cta: {
+   614→      title: "Plan sourcing with data, not guesses",
+   615→      desc: "Get a sample Talent Pool & Benchmarks report for your top 3 roles — delivered in 24 hours.",
+   616→      primaryLabel: "Get sample report",
+   617→      secondaryLabel: "Explore benchmarks",
+   618→    },
+   619→    related: [
+   620→      { key: "ai-sourcing-engine", label: "AI Sourcing Engine", icon: BrainCircuit, desc: "Semantic search over the 2M+ verified pool." },
+   621→      { key: "48-hour-shortlist", label: "48-Hour Shortlist SLA", icon: Clock, desc: "Guaranteed shortlist from curated sub-pools in 48 hours." },
+   622→      { key: "analytics-reporting", label: "Analytics & Reporting", icon: BarChart3, desc: "Track pool utilization and sourcing funnel." },
+   623→      { key: "hiring-workflow", label: "Hiring Workflow", icon: Workflow, desc: "Orchestrate end-to-end hiring pipeline." },
+   624→    ],
+   625→  },
+   626→
+   627→  // ═══════════════════════════════════════════════════════════════════════════
+   628→  // 3. 48-Hour Shortlist SLA
+   629→  // ═══════════════════════════════════════════════════════════════════════════
+   630→  "48-hour-shortlist": {
+   631→    key: "48-hour-shortlist",
+   632→    label: "48-Hour Shortlist SLA",
+   633→    shortLabel: "48-Hour Shortlist",
+   634→    accent: EMERALD,
+   635→    hero: {
+   636→      icon: Clock,
+   637→      title: "48-Hour Shortlist SLA",
+   638→      badge: "GUARANTEED DELIVERY",
+   639→      description:
+   640→        "One-call intake, structured 5-stage screening gates, and a guaranteed 48-business-hour shortlist delivery — or your money back. We treat your deadline as a contract.",
+   641→      ctaPrimary: "Start a shortlist",
+   642→      ctaSecondary: "Book intake call",
+   643→      stats: [
+   644→        { label: "SLA hit rate", value: "98.5%" },
+   645→        { label: "Avg delivery", value: "41 hrs" },
+   646→        { label: "Shortlist size", value: "7.2 avg" },
+   647→        { label: "Client NPS", value: "72" },
+   648→      ],
+   649→    },
+   650→    overview: {
+   651→      what:
+   652→        "The 48-Hour Shortlist SLA is our commitment to deliver 5-10 pre-vetted, screening-gate-cleared candidates within 48 business hours of your role intake call. Miss the deadline and the engagement is free — no questions asked.",
+   653→      why: [
+   654→        "Hiring managers don't have time for week-long sourcing cycles. Speed wins offers — top candidates are off the market in 10 days, not 30.",
+   655→        "Our 5-stage screening gates pre-vet every candidate before they reach you — no resume-spam, no unqualified interviews, no wasted hours.",
+   656→        "Guaranteed SLAs force operational discipline: our sourcing team treats your deadline as a binding contract, not an aspiration. Miss it and we don't get paid.",
+   657→      ],
+   658→    },
+   659→    keyFeatures: [
+   660→      { icon: PhoneCall, title: "One-call intake", desc: "30-min intake call with your hiring manager — we capture JD, must-haves, salary band, culture markers, and timeline in one go." },
+   661→      { icon: ListChecks, title: "5-stage screening gates", desc: "Resume review → phone screen → skill test → reference check → culture-fit evaluation. Every gate passed before shortlist." },
+   662→      { icon: Clock, title: "Guaranteed 48h delivery", desc: "5-10 pre-vetted candidates delivered within 48 business hours of intake — 98.5% on-time rate, money-back if we miss." },
+   663→      { icon: ShieldCheck, title: "Pre-vetted shortlist", desc: "Every candidate has cleared all 5 screening gates — your team meets only serious, qualified, culture-fit candidates." },
+   664→      { icon: Wallet, title: "Money-back guarantee", desc: "Miss the 48-hour SLA and the engagement is free. We've paid out 1.5% of engagements in 3 years — we take SLAs seriously." },
+   665→      { icon: BarChart3, title: "Daily progress reports", desc: "Daily morning updates on sourcing progress, screening pipeline, and delivery confidence — no black-box waiting." },
+   666→    ],
+   667→    howItWorks: [
+   668→      { step: "01", title: "Intake call (30 min)", desc: "Hiring manager + our sourcing lead align on JD, must-haves, salary band, and culture markers in one focused call." },
+   669→      { step: "02", title: "Sourcing sprint", desc: "Our team activates AI sourcing + 2M+ pool + 80+ regional recruiters to source 50-100 candidates within 6 hours." },
+   670→      { step: "03", title: "5-stage screening", desc: "Resume review → phone screen → skill test → reference check → culture-fit evaluation. Parallel processing." },
+   671→      { step: "04", title: "Shortlist packaging", desc: "Top 5-10 candidates packaged with fit scorecards, screening notes, and recommended interview focus areas." },
+   672→      { step: "05", title: "Delivery & debrief", desc: "Shortlist delivered within 48 hours; 30-min debrief call to walk through each candidate's strengths and concerns." },
+   673→    ],
+   674→    benefits: [
+   675→      { icon: Zap, title: "Faster offers", desc: "48-hour shortlist means interviews start day 3, offers go out day 10 — beat competitors who take 30+ days." },
+   676→      { icon: Rocket, title: "Competitive edge", desc: "Top candidates are off the market in 10 days. Speed wins — our clients beat competing offers 68% of the time." },
+   677→      { icon: HeartHandshake, title: "Hiring manager trust", desc: "Daily progress + guaranteed delivery builds trust. Hiring managers route more roles to us, not less." },
+   678→      { icon: ShieldCheck, title: "Reduced ghosting", desc: "Pre-vetted candidates are committed job-seekers — ghosting rate drops from industry 35% to our 8%." },
+   679→      { icon: Calendar, title: "Predictable pipeline", desc: "Plan interviews day 3, offers day 10, start dates day 30 — no more 'we'll see when sourcing closes'." },
+   680→      { icon: Wallet, title: "Risk-free trial", desc: "Money-back guarantee means your first engagement is risk-free. We deliver or you don't pay." },
+   681→    ],
+   682→    useCases: [
+   683→      {
+   684→        scenario: "Urgent senior-engineer backfill after unexpected resignation — 30-day deadline.",
+   685→        solution: "48-hour shortlist delivered 8 pre-vetted candidates on day 2; offer went out day 9, candidate started day 28.",
+   686→        metrics: [
+   687→          { label: "Time-to-offer", value: "9 days" },
+   688→          { label: "Shortlist size", value: "8" },
+   689→          { label: "Offer-accept", value: "Yes" },
+   690→        ],
+   691→      },
+   692→      {
+   693→        scenario: "Critical clinical role — hospital chain needed ICU specialist in 14 days.",
+   694→        solution: "48-hour SLA delivered 6 pre-vetted ICU specialists with credential verification; offer accepted day 11.",
+   695→        metrics: [
+   696→          { label: "Time-to-offer", value: "11 days" },
+   697→          { label: "Credential checks", value: "100%" },
+   698→          { label: "Start date", value: "Day 28" },
+   699→        ],
+   700→      },
+   701→      {
+   702→        scenario: "Manufacturing plant startup needed 5 plant managers in 45 days across 3 sites.",
+   703→        solution: "Parallel 48-hour SLAs per role delivered 35 pre-vetted candidates in week 1; 5 offers accepted by day 30.",
+   704→        metrics: [
+   705→          { label: "Roles filled", value: "5/5" },
+   706→          { label: "Time-to-fill", value: "30 days" },
+   707→          { label: "Local hiring", value: "82%" },
+   708→        ],
+   709→      },
+   710→      {
+   711→        scenario: "Investor-deadline hiring — 20 engineers before Series C close in 60 days.",
+   712→        solution: "Series of 48-hour shortlists over 4 weeks delivered 80 candidates; 22 offers accepted by day 50.",
+   713→        metrics: [
+   714→          { label: "Offers accepted", value: "22" },
+   715→          { label: "Time-to-fill", value: "50 days" },
+   716→          { label: "SLA hit rate", value: "100%" },
+   717→        ],
+   718→      },
+   719→    ],
+   720→    comparison: {
+   721→      columns: ["Capability", "Traditional retained search", "JOBSONN 48-Hour SLA"],
+   722→      rows: [
+   723→        { feature: "Time to shortlist", traditional: "5-10 business days", ours: "48 business hours (guaranteed)" },
+   724→        { feature: "Candidate quality", traditional: "Resume-only pre-filter", ours: "5-stage screening gates passed" },
+   725→        { feature: "SLA backing", traditional: "Aspirational — no penalty", ours: "Money-back if we miss" },
+   726→        { feature: "Sourcing mode", traditional: "Reactive — wait for applicants", ours: "Proactive — AI + 80+ recruiters sprint" },
+   727→        { feature: "Candidate volume", traditional: "Whoever applies", ours: "Curated 5-10 from 50-100 sourced" },
+   728→        { feature: "Progress visibility", traditional: "Black box — wait for delivery", ours: "Daily morning progress reports" },
+   729→        { feature: "Interview prep", traditional: "Resume only", ours: "Fit scorecard + interview focus areas" },
+   730→        { feature: "Pricing", traditional: "20-30% of annual CTC", ours: "Flat per-role fee — transparent" },
+   731→      ],
+   732→    },
+   733→    techStack: [
+   734→      "Slack", "Notion", "Calendly", "Greenhouse", "Lever", "Twilio",
+   735→      "SendGrid", "Zapier", "Airtable", "Retool", "PagerDuty", "Statuspage",
+   736→    ],
+   737→    integrations: [
+   738→      { name: "Greenhouse", type: "ATS", icon: FileText, desc: "Push shortlisted candidates into Greenhouse pipeline stages automatically." },
+   739→      { name: "Lever", type: "ATS", icon: FileText, desc: "Sync shortlists + fit scorecards with Lever ATS two-way." },
+   740→      { name: "Workday", type: "HRIS", icon: Building2, desc: "Sync requisitions + candidate data with Workday HCM." },
+   741→      { name: "BambooHR", type: "HRIS", icon: Cpu, desc: "Lightweight HRIS sync for SMB clients on BambooHR." },
+   742→      { name: "iCIMS", type: "ATS", icon: FileText, desc: "Push pre-vetted shortlists into iCIMS for enterprise clients." },
+   743→      { name: "SAP SuccessFactors", type: "HRIS", icon: Server, desc: "Enterprise integration with SAP SuccessFactors." },
+   744→    ],
+   745→    metrics: [
+   746→      { label: "SLA hit rate", value: "98.5%", icon: Clock },
+   747→      { label: "Avg delivery time", value: "41 hrs", icon: Zap },
+   748→      { label: "Shortlist size", value: "7.2 avg", icon: ListChecks },
+   749→      { label: "Client NPS", value: "72", icon: HeartHandshake },
+   750→    ],
+   751→    caseStudies: [
+   752→      {
+   753→        company: "FinEdge",
+   754→        industry: "Fintech",
+   755→        challenge: "Senior backend engineer resigned unexpectedly — 30-day deadline before critical payments launch.",
+   756→        solution: "48-hour SLA delivered 8 pre-vetted candidates on day 2; offer went out day 9, candidate started day 28 — launch unaffected.",
+   757→        metrics: [
+   758→          { label: "Time-to-offer", value: "9 days" },
+   759→          { label: "Shortlist size", value: "8" },
+   760→          { label: "Launch impact", value: "Zero" },
+   761→        ],
+   762→      },
+   763→      {
+   764→        company: "MediCare Group",
+   765→        industry: "Healthcare",
+   766→        challenge: "ICU specialist role vacant for 60 days — patient care impact growing. 14-day deadline set by medical director.",
+   767→        solution: "48-hour SLA delivered 6 pre-vetted ICU specialists with credential verification; offer accepted day 11, started day 24.",
+   768→        metrics: [
+   769→          { label: "Time-to-offer", value: "11 days" },
+   770→          { label: "Credential checks", value: "100%" },
+   771→          { label: "Patient impact", value: "Resolved" },
+   772→        ],
+   773→      },
+   774→      {
+   775→        company: "Bharat Forge",
+   776→        industry: "Manufacturing",
+   777→        challenge: "5 plant managers needed across 3 new plants in 45 days — startup deadline fixed with board.",
+   778→        solution: "Parallel 48-hour SLAs per role delivered 35 pre-vetted candidates in week 1; 5 offers accepted by day 30, all 5 started day 45.",
+   779→        metrics: [
+   780→          { label: "Roles filled", value: "5/5" },
+   781→          { label: "Time-to-fill", value: "30 days" },
+   782→          { label: "SLA hit rate", value: "100%" },
+   783→        ],
+   784→      },
+   785→    ],
+   786→    testimonials: [
+   787→      {
+   788→        quote: "Senior engineer resigned with 30 days notice. 48-Hour SLA delivered 8 candidates day 2, offer out day 9, started day 28. Payments launch unaffected.",
+   789→        name: "Karan Bhatia",
+   790→        role: "VP Engineering",
+   791→        company: "FinEdge",
+   792→        initials: "KB",
+   793→      },
+   794→      {
+   795→        quote: "ICU specialist role vacant 60 days. 48-hour SLA delivered 6 pre-vetted specialists with credential checks. Offer accepted day 11. Lifesaving.",
+   796→        name: "Deepa Subramanian",
+   797→        role: "VP HR",
+   798→        company: "MediCare Group",
+   799→        initials: "DS",
+   800→      },
+   801→      {
+   802→        quote: "5 plant managers in 45 days across 3 plants — parallel 48-hour SLAs nailed it. All 5 started day 45. Board deadline met.",
+   803→        name: "Ramesh Iyer",
+   804→        role: "Plant Director",
+   805→        company: "Bharat Forge",
+   806→        initials: "RI",
+   807→      },
+   808→    ],
+   809→    pricing: [
+   810→      {
+   811→        name: "Pay-per-role",
+   812→        price: "₹25K",
+   813→        period: "per role",
+   814→        desc: "Try the SLA on a single role — risk-free.",
+   815→        features: ["1 role shortlist", "5-10 candidates", "48-hour guarantee", "Money-back if missed", "Fit scorecards", "Email support"],
+   816→        cta: "Start one role",
+   817→      },
+   818→      {
+   819→        name: "Pro",
+   820→        price: "₹49K",
+   821→        period: "per month",
+   822→        desc: "For teams hiring 3-8 roles per month.",
+   823→        features: ["Up to 8 roles / month", "Priority sourcing queue", "Dedicated sourcing lead", "Daily progress reports", "Slack integration", "Weekly business review"],
+   824→        cta: "Start 14-day trial",
+   825→        popular: true,
+   826→      },
+   827→      {
+   828→        name: "Enterprise",
+   829→        price: "Custom",
+   830→        period: "annual contract",
+   831→        desc: "For high-volume (10+ roles/month).",
+   832→        features: ["Unlimited roles / month", "24-hour SLA option", "Multi-city parallel sourcing", "Quarterly business reviews", "Custom SLA penalties", "Dedicated account director"],
+   833→        cta: "Contact sales",
+   834→      },
+   835→    ],
+   836→    faqs: [
+   837→      { q: "What if you miss the 48-hour SLA?", a: "The engagement is free — we refund 100% of the fee, no questions asked. We've paid out 1.5% of engagements in the last 3 years. We take SLAs seriously." },
+   838→      { q: "What happens in the intake call?", a: "30-min call with your hiring manager. We capture: JD, must-have skills, salary band, location preference, culture markers, interview panel, and timeline. One call, done." },
+   839→      { q: "How many candidates will I get?", a: "5-10 pre-vetted candidates per role, average 7.2. Every candidate has cleared 5 screening gates — your team meets only serious, qualified candidates." },
+   840→      { q: "What are the 5 screening gates?", a: "Resume review → phone screen (15 min) → skill test (role-specific) → reference check (2 refs) → culture-fit evaluation. All gates must pass before shortlist inclusion." },
+   841→      { q: "What's your refund policy?", a: "Full refund if we miss the 48-hour SLA. Partial refund if shortlist quality is below agreed bar (you decide). 90-day free replacement if a placed candidate leaves." },
+   842→      { q: "Can we run parallel roles on the SLA?", a: "Yes — Pro tier supports 8 parallel roles/month, Enterprise supports unlimited. Multiple roles run in parallel sourcing sprints, each with its own 48-hour clock." },
+   843→    ],
+   844→    cta: {
+   845→      title: "Get your first shortlist in 48 hours",
+   846→      desc: "Risk-free trial — book an intake call today, get 5-10 pre-vetted candidates in 48 hours, or your money back.",
+   847→      primaryLabel: "Book intake call",
+   848→      secondaryLabel: "View pricing",
+   849→    },
+   850→    related: [
+   851→      { key: "ai-sourcing-engine", label: "AI Sourcing Engine", icon: BrainCircuit, desc: "Semantic search powering the 48-hour sprint." },
+   852→      { key: "screening-assessment", label: "Screening & Assessment", icon: ClipboardCheck, desc: "5-stage screening gates behind every shortlist." },
+   853→      { key: "candidate-engagement", label: "Candidate Engagement", icon: Sparkles, desc: "Keep shortlisted candidates warm till offer day." },
+   854→      { key: "hiring-workflow", label: "Hiring Workflow", icon: Workflow, desc: "Orchestrate interviews + offers after shortlist." },
+   855→    ],
+   856→  },
+   857→
+   858→  // ═══════════════════════════════════════════════════════════════════════════
+   859→  // 4. Screening & Assessment
+   860→  // ═══════════════════════════════════════════════════════════════════════════
+   861→  "screening-assessment": {
+   862→    key: "screening-assessment",
+   863→    label: "Screening & Assessment",
+   864→    shortLabel: "Screening & Assessment",
+   865→    accent: EMERALD,
+   866→    hero: {
+   867→      icon: ClipboardCheck,
+   868→      title: "Screening & Assessment",
+   869→      badge: "PRE-VETTED CANDIDATES",
+   870→      description:
+   871→        "AI technical screens across 40+ stacks, proctored assessments with anti-cheating, structured behavioral interviews, and culture-fit evaluations — pre-vetted candidates, every time.",
+   872→      ctaPrimary: "Try a sample assessment",
+   873→      ctaSecondary: "See how it works",
+   874→      stats: [
+   875→        { label: "Assessments / yr", value: "240K+" },
+   876→        { label: "Question bank", value: "12K+" },
+   877→        { label: "Predictive validity", value: "0.78" },
+   878→        { label: "Time saved / role", value: "12 hrs" },
+   879→      ],
+   880→    },
+   881→    overview: {
+   882→      what:
+   883→        "Screening & Assessment is our 5-stage quality gate: AI technical screen (40+ stacks), proctored coding assessment with anti-cheating, structured behavioral interview, culture-fit evaluation, and reference check. Candidates who clear all 5 gates are production-ready — your hiring managers skip first-round screens entirely.",
+   884→      why: [
+   885→        "Hiring managers waste 12+ hours per role on first-round screens. Our assessments pre-filter to top 10% of applicants — managers meet only serious candidates.",
+   886→        "Proctored assessments with browser lockdown, webcam monitoring, tab-switch detection, and plagiarism checks ensure candidate integrity — no leaked solutions, no AI-aided cheating.",
+   887→        "Culture-fit evaluation reduces 90-day attrition by 60%. Bad culture fits leave fast — and cost you 1.5× annual salary in replacement. We screen for fit before offer.",
+   888→      ],
+   889→    },
+   890→    keyFeatures: [
+   891→      { icon: Code2, title: "AI technical screens (40+ stacks)", desc: "1,200+ coding problems, project-based tasks, and code-review simulations across 40+ stacks. Adaptive difficulty." },
+   892→      { icon: ShieldCheck, title: "Proctored assessments", desc: "Browser lockdown, webcam monitoring, tab-switch detection, screen recording, plagiarism checks — exam-grade integrity." },
+   893→      { icon: HeartHandshake, title: "Culture-fit evaluation", desc: "Situational judgment tests + structured behavioral interviews with rubric scoring — fit signals before offer." },
+   894→      { icon: ClipboardList, title: "Structured behavioral interviews", desc: "STAR-format interview kits with rubric scoring, AI-generated follow-up questions, and shared scorecards." },
+   895→      { icon: FileCheck2, title: "Reference checks", desc: "Automated reference collection from 2 refs per candidate, with structured questions and red-flag detection." },
+   896→      { icon: FileText, title: "Audit-ready reports", desc: "Every assessment has a candidate report, scorecard, and decision rationale — audit-ready for compliance." },
+   897→    ],
+   898→    howItWorks: [
+   899→      { step: "01", title: "Role-spec mapping", desc: "We map the role's must-have skills, aptitude profile, and behavioral markers to assessment dimensions." },
+   900→      { step: "02", title: "Assessment design", desc: "Pick from our 12K+ question bank or co-create custom problems with your hiring managers." },
+   901→      { step: "03", title: "Candidate invite", desc: "Branded assessment invites via email, or one-click launch from your ATS (Greenhouse, Lever, Workday)." },
+   902→      { step: "04", title: "Proctored evaluation", desc: "Candidates complete assessments with anti-cheating proctoring, webcam monitoring, and plagiarism checks." },
+   903→      { step: "05", title: "AI scoring & report", desc: "Explainable AI scores across technical, aptitude, and behavioral dimensions — with benchmarking vs your team." },
+   904→    ],
+   905→    benefits: [
+   906→      { icon: Clock, title: "12+ hours saved per role", desc: "Hiring managers skip first-round screens — assessments pre-filter to top 10% of applicants." },
+   907→      { icon: ShieldCheck, title: "Removes bias", desc: "Structured scoring on defined rubrics — less resume-name bias, more skill-based selection. 30% more diverse hires." },
+   908→      { icon: BrainCircuit, title: "Predictive validity 0.78", desc: "Correlation between assessment scores and 1-year performance ratings — published validation whitepaper." },
+   909→      { icon: FileCheck2, title: "Audit-ready reports", desc: "Every assessment has a candidate report, scorecard, and decision rationale — compliance-ready." },
+   910→      { icon: Gauge, title: "Faster cycle time", desc: "Reduce assessment-to-offer from 14 days to 5 days with automated scoring and shortlisting." },
+   911→      { icon: Network, title: "ATS integration", desc: "Native integrations with Greenhouse, Lever, Workday, Naukrm, iCIMS — one-click launch from your ATS." },
+   912→    ],
+   913→    useCases: [
+   914→      {
+   915→        scenario: "High-volume campus hiring — 8,000 applicants for 120 entry-level engineering roles.",
+   916→        solution: "Adaptive aptitude + coding assessment with AI shortlisting to top 800 candidates for interviews.",
+   917→        metrics: [
+   918→          { label: "Hiring mgr time saved", value: "240 hrs" },
+   919→          { label: "Cycle time", value: "−62%" },
+   920→          { label: "1-yr performance", value: "+18%" },
+   921→        ],
+   922→      },
+   923→      {
+   924→        scenario: "Senior data scientist hire — needed to validate ML depth beyond resume.",
+   925→        solution: "Custom ML assessment with case study + code review of ML pipeline; 5 candidates assessed, 1 hired.",
+   926→        metrics: [
+   927→          { label: "Assessment time", value: "90 min" },
+   928→          { label: "False-positive rate", value: "−44%" },
+   929→          { label: "Offer-accept", value: "Yes" },
+   930→        ],
+   931→      },
+   932→      {
+   933→        scenario: "Cross-functional hire — PM role needing tech + business + UX judgment.",
+   934→        solution: "Multi-dimensional assessment: technical (SQL + APIs), business case, UX critique, behavioral STAR interview.",
+   935→        metrics: [
+   936→          { label: "Assessment dimensions", value: "4" },
+   937→          { label: "Hiring mgr confidence", value: "+38%" },
+   938→          { label: "90-day attrition", value: "0%" },
+   939→        ],
+   940→      },
+   941→      {
+   942→        scenario: "Contractor evaluation — 50 dev contractors for 9-month project.",
+   943→        solution: "Stacked assessment (coding + system design + pair programming) with benchmarking vs internal team.",
+   944→        metrics: [
+   945→          { label: "Contractors assessed", value: "120" },
+   946→          { label: "Quality-selected", value: "50" },
+   947→          { label: "Project ramp time", value: "−30%" },
+   948→        ],
+   949→      },
+   950→    ],
+   951→    comparison: {
+   952→      columns: ["Capability", "Traditional phone screen", "JOBSONN Screening & Assessment"],
+   953→      rows: [
+   954→        { feature: "Screening method", traditional: "Resume + 15-min phone call", ours: "AI technical + aptitude + behavioral + culture-fit" },
+   955→        { feature: "Skill validation", traditional: "Self-reported on resume", ours: "Validated via proctored assessment" },
+   956→        { feature: "Anti-cheating", traditional: "None — trust the candidate", ours: "Browser lockdown + webcam + plagiarism" },
+   957→        { feature: "Bias mitigation", traditional: "Resume-name + photo bias", ours: "Structured rubric scoring — 30% more diverse" },
+   958→        { feature: "Validity", traditional: "0.32 (resume + phone)", ours: "0.78 (correlation with 1-yr performance)" },
+   959→        { feature: "Time-to-offer", traditional: "14 days (multiple rounds)", ours: "5 days (assessment + 1 final round)" },
+   960→        { feature: "Audit trail", traditional: "Subjective notes only", ours: "Full candidate report + scorecard + rationale" },
+   961→        { feature: "Hiring mgr time", traditional: "12+ hours per role", ours: "2 hours per role (final round only)" },
+   962→      ],
+   963→    },
+   964→    techStack: [
+   965→      "CodeMirror", "HackerRank API", "WebRTC", "TensorFlow", "OpenAI GPT-4",
+   966→      "Proctorio", "Browser-lockdown", "Plagiarism-detection", "PostgreSQL",
+   967→      "Redis", "FastAPI", "Snowflake",
+   968→    ],
+   969→    integrations: [
+   970→      { name: "Greenhouse", type: "ATS", icon: FileText, desc: "One-click assessment launch from Greenhouse candidate profile." },
+   971→      { name: "Lever", type: "ATS", icon: FileText, desc: "Auto-trigger assessments on Lever stage transitions." },
+   972→      { name: "Workday", type: "HRIS", icon: Building2, desc: "Sync assessment results into Workday candidate records." },
+   973→      { name: "HackerRank", type: "Assessment", icon: Code2, desc: "Pull HackerRank coding scores into our composite scorecard." },
+   974→      { name: "CoderPad", type: "Assessment", icon: Code2, desc: "Live pair-programming sessions with CoderPad integration." },
+   975→      { name: "Mettl", type: "Assessment", icon: ClipboardCheck, desc: "Mettl proctored assessments for high-stakes evaluations." },
+   976→    ],
+   977→    metrics: [
+   978→      { label: "Assessments / yr", value: "240K+", icon: ClipboardCheck },
+   979→      { label: "Question bank", value: "12K+", icon: BookOpen },
+   980→      { label: "Predictive validity", value: "0.78", icon: Target },
+   981→      { label: "Time saved / role", value: "12 hrs", icon: Clock },
+   982→    ],
+   983→    caseStudies: [
+   984→      {
+   985→        company: "CloudPeak SaaS",
+   986→        industry: "IT & SaaS",
+   987→        challenge: "Campus hiring — 8,000 applicants for 120 entry-level engineering roles. Hiring managers had 240+ hours of screening ahead.",
+   988→        solution: "Adaptive aptitude + coding assessment with AI shortlisting to top 800 candidates for final interviews. Cycle time cut 62%.",
+   989→        metrics: [
+   990→          { label: "Mgr time saved", value: "240 hrs" },
+   991→          { label: "Cycle time", value: "−62%" },
+   992→          { label: "1-yr performance", value: "+18%" },
+   993→        ],
+   994→      },
+   995→      {
+   996→        company: "FinEdge",
+   997→        industry: "Fintech",
+   998→        challenge: "Senior data scientist hire — needed to validate ML depth beyond resume claims. False positives costly.",
+   999→        solution: "Custom ML assessment with case study + code review of ML pipeline. 5 candidates assessed, 1 hired. False-positive rate dropped 44%.",
+  1000→        metrics: [
+  1001→          { label: "Assessment time", value: "90 min" },
+  1002→          { label: "False-positive rate", value: "−44%" },
+  1003→          { label: "Offer-accept", value: "Yes" },
+  1004→        ],
+  1005→      },
+  1006→      {
+  1007→        company: "HDFC Bank",
+  1008→        industry: "BFSI",
+  1009→        challenge: "Cross-functional PM role needing tech + business + UX judgment — single interview couldn't validate all dimensions.",
+  1010→        solution: "Multi-dimensional assessment: technical (SQL + APIs), business case, UX critique, behavioral STAR interview. 4 dimensions, one scorecard.",
+  1011→        metrics: [
+  1012→          { label: "Assessment dimensions", value: "4" },
+  1013→          { label: "Hiring mgr confidence", value: "+38%" },
+  1014→          { label: "90-day attrition", value: "0%" },
+  1015→        ],
+  1016→      },
+  1017→    ],
+  1018→    testimonials: [
+  1019→      {
+  1020→        quote: "8,000 applicants reduced to 800 finalists via AI assessment. Hiring managers saved 240 hours, cycle time cut 62%, 1-year performance +18%.",
+  1021→        name: "Anjali Reddy",
+  1022→        role: "Talent Acquisition Lead",
+  1023→        company: "CloudPeak SaaS",
+  1024→        initials: "AR",
+  1025→      },
+  1026→      {
+  1027→        quote: "Senior data scientist assessment caught 2 candidates who looked great on resume but couldn't design an ML pipeline. Saved us a costly bad hire.",
+  1028→        name: "Karan Bhatia",
+  1029→        role: "VP Engineering",
+  1030→        company: "FinEdge",
+  1031→        initials: "KB",
+  1032→      },
+  1033→      {
+  1034→        quote: "Multi-dimensional assessment for cross-functional PM role — tech, business, UX, behavioral. Hiring manager confidence +38%, 90-day attrition 0%.",
+  1035→        name: "Suresh Krishnan",
+  1036→        role: "CHRO",
+  1037→        company: "HDFC Bank",
+  1038→        initials: "SK",
+  1039→      },
+  1040→    ],
+  1041→    pricing: [
+  1042→      {
+  1043→        name: "Pay-per-assessment",
+  1044→        price: "₹499",
+  1045→        period: "per candidate",
+  1046→        desc: "Try assessments on individual candidates.",
+  1047→        features: ["1 candidate assessment", "Technical + aptitude + behavioral", "Proctored online", "AI scorecard + report", "Email delivery", "7-day access"],
+  1048→        cta: "Try one assessment",
+  1049→      },
+  1050→      {
+  1051→        name: "Pro",
+  1052→        price: "₹19K",
+  1053→        period: "per month",
+  1054→        desc: "For teams hiring 10+ roles per quarter.",
+  1055→        features: ["Up to 100 assessments / month", "Custom question banks", "Greenhouse / Lever integration", "Dedicated assessment designer", "Quarterly benchmarking", "Priority support"],
+  1056→        cta: "Start 14-day trial",
+  1057→        popular: true,
+  1058→      },
+  1059→      {
+  1060→        name: "Enterprise",
+  1061→        price: "Custom",
+  1062→        period: "annual contract",
+  1063→        desc: "For high-volume or regulated hiring.",
+  1064→        features: ["Unlimited assessments", "Custom assessment authoring", "ATS + HRIS integration", "Compliance audit trail", "Custom predictive models", "On-prem / VPC deployment"],
+  1065→        cta: "Contact sales",
+  1066→      },
+  1067→    ],
+  1068→    faqs: [
+  1069→      { q: "How does proctoring work?", a: "Browser lockdown (no tab switching), webcam monitoring (continuous + AI face-match), screen recording, tab-switch detection, copy-paste blocking, and plagiarism detection against a 12M+ solution database. Exam-grade integrity." },
+  1070→      { q: "Can we customize questions?", a: "Yes — Pro tier supports custom question banks. Enterprise tier includes full assessment authoring with our team co-creating problems with your hiring managers." },
+  1071→      { q: "What tech stacks are supported?", a: "40+ stacks including Python, Java, JavaScript, Go, Rust, C++, React, Node, SQL, dbt, Spark, Kafka, Kubernetes, AWS, GCP, Azure, and more. Custom stacks on request." },
+  1072→      { q: "How do you mitigate bias?", a: "Structured rubric scoring (not subjective), blind grading option (no names/photos), quarterly bias audits, and adversarial testing on protected attributes. 30% more diverse hires than resume-only screens." },
+  1073→      { q: "Are audit reports available?", a: "Yes — every assessment has a candidate report, scorecard, decision rationale, proctoring log, and question-by-question breakdown. Audit-ready for compliance and legal." },
+  1074→      { q: "Do you offer bulk discounts?", a: "Yes — Pro tier at ₹19K/mo for 100 assessments (₹190 each). Enterprise tier for unlimited. Volume pricing kicks in at 1K+ assessments / quarter — contact sales." },
+  1075→    ],
+  1076→    cta: {
+  1077→      title: "Pre-vet every candidate before offer day",
+  1078→      desc: "Try a sample assessment — see why 240K+ assessments / year achieve 0.78 predictive validity.",
+  1079→      primaryLabel: "Try sample assessment",
+  1080→      secondaryLabel: "Book a demo",
+  1081→    },
+  1082→    related: [
+  1083→      { key: "ai-sourcing-engine", label: "AI Sourcing Engine", icon: BrainCircuit, desc: "AI sourcing feeds candidates into screening pipeline." },
+  1084→      { key: "48-hour-shortlist", label: "48-Hour Shortlist SLA", icon: Clock, desc: "Screening gates power the 48-hour SLA." },
+  1085→      { key: "analytics-reporting", label: "Analytics & Reporting", icon: BarChart3, desc: "Track assessment outcomes + funnel metrics." },
+  1086→      { key: "candidate-engagement", label: "Candidate Engagement", icon: Sparkles, desc: "Feedback loops after every assessment round." },
+  1087→    ],
+  1088→  },
+  1089→
+  1090→  // ═══════════════════════════════════════════════════════════════════════════
+  1091→  // 5. Sourcing Plans & Pricing
+  1092→  // ═══════════════════════════════════════════════════════════════════════════
+  1093→  "sourcing-plans-pricing": {
+  1094→    key: "sourcing-plans-pricing",
+  1095→    label: "Sourcing Plans & Pricing",
+  1096→    shortLabel: "Sourcing Plans & Pricing",
+  1097→    accent: EMERALD,
+  1098→    hero: {
+  1099→      icon: Wallet,
+  1100→      title: "Sourcing Plans & Pricing",
+  1101→      badge: "TRANSPARENT PRICING",
+  1102→      description:
+  1103→        "Per-role transparent pricing with three ready-to-buy tiers — Basic, Pro, Enterprise — and custom quotes for high-volume needs. No hidden fees, no surprise invoices, no negotiated discounts.",
+  1104→      ctaPrimary: "Compare pricing",
+  1105→      ctaSecondary: "Get custom quote",
+  1106→      stats: [
+  1107→        { label: "Avg cost-per-hire", value: "₹45K" },
+  1108→        { label: "Client savings", value: "32%" },
+  1109→        { label: "Plan flexibility", value: "100%" },
+  1110→        { label: "Renewal rate", value: "94%" },
+  1111→      ],
+  1112→    },
+  1113→    overview: {
+  1114→      what:
+  1115→        "Sourcing Plans & Pricing is our commercial framework: transparent per-role pricing, three ready-to-buy tiers (Basic / Pro / Enterprise), and custom quotes for high-volume needs. Pricing is published online — what you see is what you pay.",
+  1116→      why: [
+  1117→        "Hidden fees erode trust. We publish our pricing online — no 'contact sales for pricing' walls, no surprise invoices after the engagement.",
+  1118→        "Volume discounts kick in automatically at 10, 25, and 50 roles per quarter — no negotiation needed, no sales rep back-and-forth.",
+  1119→        "Enterprise quotes include SLA customization, dedicated account manager, quarterly business reviews, and flexible payment terms — built for procurement teams.",
+  1120→      ],
+  1121→    },
+  1122→    keyFeatures: [
+  1123→      { icon: Wallet, title: "Per-role transparent pricing", desc: "Flat per-role fee — no % of CTC. Published online. No hidden sourcing, screening, or candidate-submission fees." },
+  1124→      { icon: Layers, title: "3 ready-to-buy tiers", desc: "Basic (₹25K/role), Pro (₹49K/mo), Enterprise (Custom). Pick the tier that fits your hiring volume." },
+  1125→      { icon: TrendingUp, title: "Volume discounts", desc: "Auto-applied at 10 roles (−10%), 25 roles (−18%), 50 roles/quarter (−25%). No negotiation required." },
+  1126→      { icon: FileSignature, title: "Custom enterprise quotes", desc: "Enterprise tier includes custom SLAs, dedicated account director, quarterly business reviews, flexible terms." },
+  1127→      { icon: ShieldCheck, title: "No hidden fees", desc: "What you see is what you pay. No candidate-submission fees, no interview coordination fees, no onboarding fees." },
+  1128→      { icon: BarChart3, title: "Quarterly business reviews", desc: "Enterprise tier includes QBRs with cost-per-hire analytics, pipeline health, and optimization recommendations." },
+  1129→    ],
+  1130→    howItWorks: [
+  1131→      { step: "01", title: "Pick a tier", desc: "Basic for 1-2 roles/quarter, Pro for 5-25 roles/quarter, Enterprise for 50+ roles/quarter." },
+  1132→      { step: "02", title: "Sign master agreement", desc: "Single master agreement covers all roles, all engagement types. No per-role contracts to negotiate." },
+  1133→      { step: "03", title: "Role intake", desc: "Per-role intake call (30 min). Sourcing starts immediately. Volume discounts auto-applied at quarter close." },
+  1134→      { step: "04", title: "Sourcing & delivery", desc: "48-hour SLA applies to all tiers. Quality bar identical across tiers — only volume and SLA differ." },
+  1135→      { step: "05", title: "Quarterly review", desc: "Enterprise tier gets QBRs with cost-per-hire analytics and optimization recommendations." },
+  1136→    ],
+  1137→    benefits: [
+  1138→      { icon: Wallet, title: "Budget predictability", desc: "Flat per-role pricing means you know cost-per-hire before you start. No % of CTC surprises on big-ticket hires." },
+  1139→      { icon: ShieldCheck, title: "No surprises", desc: "Published pricing, transparent fee schedule. Procurement teams love us — no contract redlines needed." },
+  1140→      { icon: TrendingUp, title: "Volume savings", desc: "Auto-applied volume discounts at 10, 25, 50 roles/quarter — no negotiation, no sales rep back-and-forth." },
+  1141→      { icon: FileSignature, title: "Custom SLAs", desc: "Enterprise tier supports custom SLA penalties, dedicated account director, quarterly business reviews." },
+  1142→      { icon: Headset, title: "Dedicated support", desc: "Pro tier gets dedicated sourcing lead. Enterprise gets dedicated account director + sourcing architect." },
+  1143→      { icon: BarChart3, title: "Quarterly optimization", desc: "Enterprise QBRs include cost-per-hire analytics, pipeline health, and concrete optimization recommendations." },
+  1144→    ],
+  1145→    useCases: [
+  1146→      {
+  1147→        scenario: "Series B fintech hiring 8 engineers per quarter — Pro tier fits.",
+  1148→        solution: "Pro tier at ₹49K/mo covers up to 8 roles/month. Volume discount at 25 roles/quarter auto-applied — 18% savings.",
+  1149→        metrics: [
+  1150→          { label: "Quarterly cost", value: "₹1.47L" },
+  1151→          { label: "Cost-per-hire", value: "₹18K" },
+  1152→          { label: "vs traditional", value: "−42%" },
+  1153→        ],
+  1154→      },
+  1155→      {
+  1156→        scenario: "Healthcare chain hiring 80 clinical roles/quarter across 12 cities — Enterprise.",
+  1157→        solution: "Custom Enterprise contract with 24-hour SLA, dedicated account director, and quarterly business reviews.",
+  1158→        metrics: [
+  1159→          { label: "Cost-per-hire", value: "₹38K" },
+  1160→          { label: "SLA hit rate", value: "100%" },
+  1161→          { label: "Savings vs Basic", value: "−28%" },
+  1162→        ],
+  1163→      },
+  1164→      {
+  1165→        scenario: "Manufacturing company hiring 3 plant managers one-off — Basic tier.",
+  1166→        solution: "Basic pay-per-role at ₹25K/role. No long-term commitment. Money-back if SLA missed.",
+  1167→        metrics: [
+  1168→          { label: "Total cost", value: "₹75K" },
+  1169→          { label: "Roles filled", value: "3/3" },
+  1170→          { label: "Risk", value: "Zero" },
+  1171→        ],
+  1172→      },
+  1173→      {
+  1174→        scenario: "BFSI captive hiring 200+ tech roles/year — multi-year Enterprise.",
+  1175→        solution: "3-year Enterprise contract with annual renewals, custom SLAs, and on-prem deployment option.",
+  1176→        metrics: [
+  1177→          { label: "Cost-per-hire", value: "₹32K" },
+  1178→          { label: "vs industry", value: "−45%" },
+  1179→          { label: "Renewal rate", value: "100%" },
+  1180→        ],
+  1181→      },
+  1182→    ],
+  1183→    comparison: {
+  1184→      columns: ["Capability", "Traditional retained search", "JOBSONN Sourcing Plans"],
+  1185→      rows: [
+  1186→        { feature: "Pricing model", traditional: "% of annual CTC (20-30%)", ours: "Flat per-role fee (₹25K-₹45K)" },
+  1187→        { feature: "Pricing visibility", traditional: "Negotiated per deal", ours: "Published online — what you see is what you pay" },
+  1188→        { feature: "Volume discounts", traditional: "Negotiated case-by-case", ours: "Auto-applied at 10/25/50 roles/quarter" },
+  1189→        { feature: "Contract flexibility", traditional: "Annual minimum commitments", ours: "Pay-per-role (Basic) to multi-year (Enterprise)" },
+  1190→        { feature: "SLA backing", traditional: "Aspirational — no penalty", ours: "Money-back guarantee on 48-hour SLA" },
+  1191→        { feature: "Hidden fees", traditional: "Submission + admin + onboarding fees", ours: "Zero — flat per-role covers everything" },
+  1192→        { feature: "Cost on ₹40L CTC hire", traditional: "₹8-12L (20-30%)", ours: "₹25-45K flat — 95%+ savings" },
+  1193→        { feature: "Procurement experience", traditional: "Multi-week negotiation", ours: "Buy online in 5 minutes — Basic / Pro tiers" },
+  1194→      ],
+  1195→    },
+  1196→    techStack: [
+  1197→      "Stripe", "Chargebee", "QuickBooks", "Xero", "Zoho Books",
+  1198→      "Tally", "Razorpay", "PayPal", "Salesforce CPQ", "DocuSign",
+  1199→      "Adobe Sign", "Slack",
+  1200→    ],
+  1201→    integrations: [
+  1202→      { name: "Stripe", type: "Payments", icon: CreditCard, desc: "Online payment via Stripe for Basic + Pro tier subscriptions." },
+  1203→      { name: "Razorpay", type: "Payments", icon: CreditCard, desc: "India-specific payment gateway for UPI / netbanking / cards." },
+  1204→      { name: "QuickBooks", type: "Accounting", icon: Receipt, desc: "Sync invoices + payments with QuickBooks for accounting." },
+  1205→      { name: "Xero", type: "Accounting", icon: Receipt, desc: "Cloud accounting sync with Xero for SMB clients." },
+  1206→      { name: "Zoho Books", type: "Accounting", icon: Receipt, desc: "Sync with Zoho Books for India-specific GST compliance." },
+  1207→      { name: "SAP Concur", type: "Expenses", icon: Receipt, desc: "Enterprise invoice sync with SAP Concur for procurement teams." },
+  1208→    ],
+  1209→    metrics: [
+  1210→      { label: "Avg cost-per-hire", value: "₹45K", icon: Wallet },
+  1211→      { label: "Client savings", value: "32%", icon: TrendingUp },
+  1212→      { label: "Plan flexibility", value: "100%", icon: Layers },
+  1213→      { label: "Renewal rate", value: "94%", icon: HeartHandshake },
+  1214→    ],
+  1215→    caseStudies: [
+  1216→      {
+  1217→        company: "FinEdge",
+  1218→        industry: "Fintech",
+  1219→        challenge: "Series B fintech hiring 8 engineers per quarter — needed predictable budgeting without % of CTC surprises.",
+  1220→        solution: "Pro tier at ₹49K/mo covers up to 8 roles/month. Volume discount at 25 roles/quarter auto-applied — 18% savings.",
+  1221→        metrics: [
+  1222→          { label: "Quarterly cost", value: "₹1.47L" },
+  1223→          { label: "Cost-per-hire", value: "₹18K" },
+  1224→          { label: "vs traditional", value: "−42%" },
+  1225→        ],
+  1226→      },
+  1227→      {
+  1228→        company: "MediCare Group",
+  1229→        industry: "Healthcare",
+  1230→        challenge: "Healthcare chain hiring 80 clinical roles/quarter across 12 cities — needed dedicated support + custom SLAs.",
+  1231→        solution: "Custom Enterprise contract with 24-hour SLA, dedicated account director, and quarterly business reviews.",
+  1232→        metrics: [
+  1233→          { label: "Cost-per-hire", value: "₹38K" },
+  1234→          { label: "SLA hit rate", value: "100%" },
+  1235→          { label: "Savings vs Basic", value: "−28%" },
+  1236→        ],
+  1237→      },
+  1238→      {
+  1239→        company: "Bharat Forge",
+  1240→        industry: "Manufacturing",
+  1241→        challenge: "Manufacturing company hiring 3 plant managers one-off — no long-term need, no recurring commitment.",
+  1242→        solution: "Basic pay-per-role at ₹25K/role. No long-term commitment. Money-back if SLA missed. All 3 filled.",
+  1243→        metrics: [
+  1244→          { label: "Total cost", value: "₹75K" },
+  1245→          { label: "Roles filled", value: "3/3" },
+  1246→          { label: "Risk", value: "Zero" },
+  1247→        ],
+  1248→      },
+  1249→    ],
+  1250→    testimonials: [
+  1251→      {
+  1252→        quote: "Pro tier at ₹49K/mo covers 8 roles — cost-per-hire ₹18K vs ₹40K+ traditional. Volume discounts auto-applied, no negotiation. Procurement loves it.",
+  1253→        name: "Karan Bhatia",
+  1254→        role: "CFO",
+  1255→        company: "FinEdge",
+  1256→        initials: "KB",
+  1257→      },
+  1258→      {
+  1259→        quote: "Enterprise contract with custom SLA + dedicated account director. Quarterly business reviews gave us cost-per-hire analytics — 28% savings vs Basic.",
+  1260→        name: "Sneha Iyer",
+  1261→        role: "Head of Talent",
+  1262→        company: "CloudPeak SaaS",
+  1263→        initials: "SI",
+  1264→      },
+  1265→      {
+  1266→        quote: "3 plant managers, one-off hire. Basic tier ₹25K/role, no commitment, money-back SLA. All 3 filled in 30 days. Zero risk, all reward.",
+  1267→        name: "Ramesh Iyer",
+  1268→        role: "Plant Director",
+  1269→        company: "Bharat Forge",
+  1270→        initials: "RI",
+  1271→      },
+  1272→    ],
+  1273→    pricing: [
+  1274→      {
+  1275→        name: "Basic",
+  1276→        price: "₹25K",
+  1277→        period: "per role",
+  1278→        desc: "Pay-per-role for one-off hires. No commitment.",
+  1279→        features: ["5-10 pre-vetted candidates", "48-hour SLA", "Money-back guarantee", "Fit scorecards", "Email support", "No commitment"],
+  1280→        cta: "Start one role",
+  1281→      },
+  1282→      {
+  1283→        name: "Pro",
+  1284→        price: "₹49K",
+  1285→        period: "per month",
+  1286→        desc: "For teams hiring 5-25 roles per quarter.",
+  1287→        features: ["Up to 8 roles / month", "Volume discounts auto-applied", "Dedicated sourcing lead", "Daily progress reports", "Slack integration", "Greenhouse / Lever sync"],
+  1288→        cta: "Start 14-day trial",
+  1289→        popular: true,
+  1290→      },
+  1291→      {
+  1292→        name: "Enterprise",
+  1293→        price: "Custom",
+  1294→        period: "annual contract",
+  1295→        desc: "For high-volume (50+ roles/quarter).",
+  1296→        features: ["Unlimited roles", "Custom SLAs (24-hour option)", "Dedicated account director", "Quarterly business reviews", "Custom integrations", "On-prem / VPC option"],
+  1297→        cta: "Contact sales",
+  1298→      },
+  1299→    ],
+  1300→    faqs: [
+  1301→      { q: "What's included in each tier?", a: "Basic: 1 role shortlist (5-10 candidates, 48-hour SLA, money-back). Pro: up to 8 roles/month + dedicated lead + Slack integration. Enterprise: unlimited roles + custom SLAs + QBRs + dedicated account director." },
+  1302→      { q: "How do volume discounts work?", a: "Auto-applied at quarter close: 10+ roles = 10% off, 25+ roles = 18% off, 50+ roles = 25% off. No negotiation, no sales rep back-and-forth. Discount applies to all roles in the quarter, retroactively." },
+  1303→      { q: "What's your refund policy?", a: "Basic + Pro: full refund if 48-hour SLA missed, no questions. 90-day free replacement if placed candidate leaves. Enterprise: custom SLA penalties negotiated into contract, typically 5-15% fee credit per missed SLA." },
+  1304→      { q: "Can we get custom SLAs?", a: "Yes — Enterprise tier supports custom SLA terms: 24-hour SLA, money-back thresholds, quality-of-shortlist penalties. Typical Enterprise contract has 3-5 custom SLA clauses." },
+  1305→      { q: "What payment terms do you offer?", a: "Basic: credit card on file, charged per role. Pro: monthly invoicing, Net-15 terms. Enterprise: quarterly or annual invoicing, Net-30 terms, custom payment schedules available." },
+  1306→      { q: "Can we cancel anytime?", a: "Basic: cancel anytime, no commitment. Pro: cancel anytime after first month, no penalty. Enterprise: annual contract with 90-day cancellation notice. We don't do auto-renewal gotchas." },
+  1307→    ],
+  1308→    cta: {
+  1309→      title: "Transparent pricing. No hidden fees.",
+  1310→      desc: "Compare our 3 tiers side-by-side. Pick the one that fits your hiring volume. Buy online in 5 minutes.",
+  1311→      primaryLabel: "Compare pricing",
+  1312→      secondaryLabel: "Get custom quote",
+  1313→    },
+  1314→    related: [
+  1315→      { key: "48-hour-shortlist", label: "48-Hour Shortlist SLA", icon: Clock, desc: "What you get with every paid role." },
+  1316→      { key: "hiring-workflow", label: "Hiring Workflow", icon: Workflow, desc: "Full pipeline orchestration post-shortlist." },
+  1317→      { key: "analytics-reporting", label: "Analytics & Reporting", icon: BarChart3, desc: "Cost-per-hire analytics in QBRs." },
+  1318→      { key: "candidate-engagement", label: "Candidate Engagement", icon: Sparkles, desc: "Candidate nurture included in Pro+ tiers." },
+  1319→    ],
+  1320→  },
+  1321→
+  1322→  // ═══════════════════════════════════════════════════════════════════════════
+  1323→  // 6. Hiring Workflow
+  1324→  // ═══════════════════════════════════════════════════════════════════════════
+  1325→  "hiring-workflow": {
+  1326→    key: "hiring-workflow",
+  1327→    label: "Hiring Workflow",
+  1328→    shortLabel: "Hiring Workflow",
+  1329→    accent: EMERALD,
+  1330→    hero: {
+  1331→      icon: Workflow,
+  1332→      title: "Hiring Workflow",
+  1333→      badge: "PIPELINE ORCHESTRATION",
+  1334→      description:
+  1335→        "Role intake brief template, automated interview scheduling, structured feedback with shared scorecards, and end-to-end offer management — your hiring pipeline, orchestrated.",
+  1336→      ctaPrimary: "See workflow in action",
+  1337→      ctaSecondary: "Start free trial",
+  1338→      stats: [
+  1339→        { label: "Hours saved / role", value: "4+" },
+  1340→        { label: "Cycle time reduction", value: "38%" },
+  1341→        { label: "Offer-accept rate", value: "82%" },
+  1342→        { label: "Mobile usage", value: "64%" },
+  1343→      ],
+  1344→    },
+  1345→    overview: {
+  1346→      what:
+  1347→        "Hiring Workflow orchestrates your entire pipeline — role intake brief, multi-stage interviews, automated scheduling, structured feedback with shared scorecards, and offer management with e-signature. One tool, one pipeline, full audit trail.",
+  1348→      why: [
+  1349→        "Manual scheduling wastes 4+ hours per role (email ping-pong, time-zone math, reschedules). Automation reduces that to 5 minutes — recruiters focus on candidate quality, not calendar Tetris.",
+  1350→        "Structured feedback with shared scorecards removes the 'he's nice, hire him' bias. Every interviewer scores on the same rubric; debriefs are evidence-based.",
+  1351→        "Offer management with e-signature and tracking reduces offer-to-accept time by 38% — candidates sign in hours, not days, while they're still warm.",
+  1352→      ],
+  1353→    },
+  1354→    keyFeatures: [
+  1355→      { icon: ClipboardList, title: "Role intake brief template", desc: "Structured intake template capturing JD, must-haves, salary, panel, timeline — one source of truth for the role." },
+  1356→      { icon: CalendarClock, title: "Automated interview scheduling", desc: "Calendly-style self-scheduling, time-zone aware, auto-reschedule on conflicts. Saves 4+ hours per role." },
+  1357→      { icon: FileCheck2, title: "Structured feedback scorecards", desc: "Per-role rubric, shared scorecards across panel, AI-summarized debrief — evidence-based hiring decisions." },
+  1358→      { icon: FileSignature, title: "Offer management & e-sign", desc: "Offer letter templates, e-signature (DocuSign / Adobe Sign), tracking, automated reminders — offer-to-accept in hours." },
+  1359→      { icon: Calendar, title: "Calendar sync", desc: "Two-way sync with Google Calendar, Outlook, iCal — your interviews on your calendar, automatically." },
+  1360→      { icon: Smartphone, title: "Mobile-friendly", desc: "Candidates schedule, interview, and sign offers from mobile. 64% of candidate interactions happen on mobile." },
+  1361→    ],
+  1362→    howItWorks: [
+  1363→      { step: "01", title: "Role intake brief", desc: "Hiring manager fills structured intake template — JD, must-haves, salary, panel, timeline. One source of truth." },
+  1364→      { step: "02", title: "Pipeline setup", desc: "Auto-generated pipeline: screen → assessment → interview 1 → interview 2 → offer. Customizable per role." },
+  1365→      { step: "03", title: "Scheduling automation", desc: "Candidates self-schedule interviews via branded booking page. Time-zone aware, conflict-aware, auto-reschedule." },
+  1366→      { step: "04", title: "Feedback collection", desc: "Interviewers submit structured scorecards within 24 hours. AI summarizes panel feedback for debrief." },
+  1367→      { step: "05", title: "Offer & acceptance", desc: "Offer letter auto-generated from template, e-sign via DocuSign / Adobe Sign, tracking + reminders till accepted." },
+  1368→    ],
+  1369→    benefits: [
+  1370→      { icon: Clock, title: "4+ hours saved per role", desc: "Automated scheduling eliminates email ping-pong. Recruiters focus on candidate quality, not calendar Tetris." },
+  1371→      { icon: Zap, title: "Faster cycle time", desc: "Pipeline automation reduces time-to-offer by 38% — offers go out while candidates are still warm." },
+  1372→      { icon: Target, title: "Better hiring decisions", desc: "Structured scorecards + AI-summarized debriefs — evidence-based decisions, not gut-feel hires." },
+  1373→      { icon: ShieldCheck, title: "Reduced bias", desc: "Shared rubric scoring across panel — every interviewer scores the same dimensions on the same scale." },
+  1374→      { icon: FileCheck2, title: "Audit-ready process", desc: "Every pipeline stage, scorecard, and offer has an audit trail. Compliance-ready for regulated industries." },
+  1375→      { icon: Smartphone, title: "Mobile-friendly", desc: "Candidates schedule, interview, and sign offers from mobile. 64% of candidate interactions happen on mobile." },
+  1376→    ],
+  1377→    useCases: [
+  1378→      {
+  1379→        scenario: "High-volume campus hiring — 120 offers in 30 days, 5-person panel per role.",
+  1380→        solution: "Workflow tool orchestrated 600+ interviews, structured scorecards, and bulk offer e-sign — cycle time cut 38%.",
+  1381→        metrics: [
+  1382→          { label: "Offers / month", value: "120" },
+  1383→          { label: "Cycle time", value: "−38%" },
+  1384→          { label: "Scheduling time", value: "−92%" },
+  1385→        ],
+  1386→      },
+  1387→      {
+  1388→        scenario: "Senior leadership hire — multi-stakeholder panel across 4 cities + remote.",
+  1389→        solution: "Workflow tool coordinated 8-panel interviews across 4 cities + remote, time-zone-aware scheduling, structured debrief.",
+  1390→        metrics: [
+  1391→          { label: "Panel size", value: "8" },
+  1392→          { label: "Cities coordinated", value: "4" },
+  1393→          { label: "Time-to-offer", value: "21 days" },
+  1394→        ],
+  1395→      },
+  1396→      {
+  1397→        scenario: "Multi-stakeholder search — cross-functional PM hire needing 6 interviewers from 3 teams.",
+  1398→        solution: "Workflow tool aligned 6 interviewers across 3 teams with shared scorecards; AI-summarized debrief enabled fast decision.",
+  1399→        metrics: [
+  1400→          { label: "Interviewers", value: "6" },
+  1401→          { label: "Debrief time", value: "45 min" },
+  1402→          { label: "Decision speed", value: "+50%" },
+  1403→        ],
+  1404→      },
+  1405→      {
+  1406→        scenario: "Cross-functional hire — engineering + product + design panel for tech-lead role.",
+  1407→        solution: "Workflow tool ran 5-stage pipeline with per-stage rubric, shared scorecards, e-sign offer accepted in 4 hours.",
+  1408→        metrics: [
+  1409→          { label: "Pipeline stages", value: "5" },
+  1410→          { label: "Offer-accept", value: "4 hrs" },
+  1411→          { label: "Quality of hire", value: "9.2/10" },
+  1412→        ],
+  1413→      },
+  1414→    ],
+  1415→    comparison: {
+  1416→      columns: ["Capability", "Email + Excel workflow", "JOBSONN Hiring Workflow"],
+  1417→      rows: [
+  1418→        { feature: "Scheduling", traditional: "Email ping-pong, time-zone math", ours: "Self-scheduling, time-zone aware, auto-reschedule" },
+  1419→        { feature: "Feedback collection", traditional: "Free-form email notes", ours: "Structured scorecards with shared rubric" },
+  1420→        { feature: "Decision support", traditional: "Sync debrief meeting", ours: "AI-summarized panel feedback for fast debrief" },
+  1421→        { feature: "Offer management", traditional: "Word doc + manual signature", ours: "Template + e-sign (DocuSign / Adobe Sign)" },
+  1422→        { feature: "Audit trail", traditional: "Scattered emails + spreadsheets", ours: "Full pipeline audit — every stage logged" },
+  1423→        { feature: "Mobile experience", traditional: "Desktop-only — email + PDF", ours: "Mobile-first — schedule, interview, sign on mobile" },
+  1424→        { feature: "Calendar sync", traditional: "Manual entry into calendars", ours: "Two-way sync — Google / Outlook / iCal" },
+  1425→        { feature: "Time per role", traditional: "4+ hours scheduling + coordination", ours: "5 minutes — fully automated" },
+  1426→      ],
+  1427→    },
+  1428→    techStack: [
+  1429→      "Calendly", "Google Calendar", "Outlook", "DocuSign", "Adobe Sign",
+  1430→      "Twilio", "Slack", "Microsoft Teams", "React", "Node.js", "PostgreSQL",
+  1431→      "Redis",
+  1432→    ],
+  1433→    integrations: [
+  1434→      { name: "Greenhouse", type: "ATS", icon: FileText, desc: "Two-way sync of candidates, interviews, and offers with Greenhouse ATS." },
+  1435→      { name: "Lever", type: "ATS", icon: FileText, desc: "Pipeline + interview + offer sync with Lever ATS." },
+  1436→      { name: "Workday", type: "HRIS", icon: Building2, desc: "Sync hires + offers with Workday HCM for onboarding." },
+  1437→      { name: "BambooHR", type: "HRIS", icon: Cpu, desc: "Lightweight HRIS sync for SMB clients on BambooHR." },
+  1438→      { name: "iCIMS", type: "ATS", icon: FileText, desc: "Enterprise ATS sync for iCIMS clients." },
+  1439→      { name: "SAP SuccessFactors", type: "HRIS", icon: Server, desc: "Enterprise integration with SAP SuccessFactors." },
+  1440→    ],
+  1441→    metrics: [
+  1442→      { label: "Hours saved / role", value: "4+", icon: Clock },
+  1443→      { label: "Cycle time reduction", value: "38%", icon: Zap },
+  1444→      { label: "Offer-accept rate", value: "82%", icon: Target },
+  1445→      { label: "Mobile usage", value: "64%", icon: Smartphone },
+  1446→    ],
+  1447→    caseStudies: [
+  1448→      {
+  1449→        company: "CloudPeak SaaS",
+  1450→        industry: "IT & SaaS",
+  1451→        challenge: "Campus hiring — 120 offers in 30 days with 5-person panel per role. Manual scheduling impossible at this scale.",
+  1452→        solution: "Workflow tool orchestrated 600+ interviews, structured scorecards, and bulk offer e-sign — cycle time cut 38%, scheduling time cut 92%.",
+  1453→        metrics: [
+  1454→          { label: "Offers / month", value: "120" },
+  1455→          { label: "Cycle time", value: "−38%" },
+  1456→          { label: "Scheduling time", value: "−92%" },
+  1457→        ],
+  1458→      },
+  1459→      {
+  1460→        company: "FinEdge",
+  1461→        industry: "Fintech",
+  1462→        challenge: "Senior leadership hire — multi-stakeholder panel across 4 cities + remote. Time zones + calendars a nightmare.",
+  1463→        solution: "Workflow tool coordinated 8-panel interviews across 4 cities + remote with time-zone-aware scheduling. Structured debrief enabled fast decision.",
+  1464→        metrics: [
+  1465→          { label: "Panel size", value: "8" },
+  1466→          { label: "Cities coordinated", value: "4" },
+  1467→          { label: "Time-to-offer", value: "21 days" },
+  1468→        ],
+  1469→      },
+  1470→      {
+  1471→        company: "HDFC Bank",
+  1472→        industry: "BFSI",
+  1473→        challenge: "Cross-functional tech-lead hire — engineering + product + design panel, 5-stage pipeline, offer accepted in hours.",
+  1474→        solution: "Workflow tool ran 5-stage pipeline with per-stage rubric, shared scorecards, e-sign offer accepted in 4 hours.",
+  1475→        metrics: [
+  1476→          { label: "Pipeline stages", value: "5" },
+  1477→          { label: "Offer-accept", value: "4 hrs" },
+  1478→          { label: "Quality of hire", value: "9.2/10" },
+  1479→        ],
+  1480→      },
+  1481→    ],
+  1482→    testimonials: [
+  1483→      {
+  1484→        quote: "120 offers in 30 days with 5-person panels — impossible without Workflow tool. Scheduling time cut 92%, cycle time 38%. Saved my team's sanity.",
+  1485→        name: "Anjali Reddy",
+  1486→        role: "Talent Acquisition Lead",
+  1487→        company: "CloudPeak SaaS",
+  1488→        initials: "AR",
+  1489→      },
+  1490→      {
+  1491→        quote: "8-person panel across 4 cities + remote for a leadership hire — Workflow tool coordinated everything. Time-to-offer 21 days, no scheduling headaches.",
+  1492→        name: "Karan Bhatia",
+  1493→        role: "VP Engineering",
+  1494→        company: "FinEdge",
+  1495→        initials: "KB",
+  1496→      },
+  1497→      {
+  1498→        quote: "5-stage pipeline with shared scorecards + e-sign offer accepted in 4 hours. Quality of hire 9.2/10. Workflow tool is hiring infrastructure.",
+  1499→        name: "Suresh Krishnan",
+  1500→        role: "CHRO",
+  1501→        company: "HDFC Bank",
+  1502→        initials: "SK",
+  1503→      },
+  1504→    ],
+  1505→    pricing: [
+  1506→      {
+  1507→        name: "Basic",
+  1508→        price: "Free",
+  1509→        period: "up to 5 roles / mo",
+  1510→        desc: "For small teams getting started with structured hiring.",
+  1511→        features: ["Up to 5 active roles / month", "Self-scheduling page", "Standard scorecard templates", "Email support", "Mobile app", "Calendar sync (Google)"],
+  1512→        cta: "Start free",
+  1513→      },
+  1514→      {
+  1515→        name: "Pro",
+  1516→        price: "₹9,999",
+  1517→        period: "per month",
+  1518→        desc: "For teams hiring 5-25 roles per quarter.",
+  1519→        features: ["Unlimited active roles", "Custom scorecard templates", "AI-summarized debriefs", "DocuSign / Adobe Sign", "Greenhouse / Lever sync", "Priority support"],
+  1520→        cta: "Start 14-day trial",
+  1521→        popular: true,
+  1522→      },
+  1523→      {
+  1524→        name: "Enterprise",
+  1525→        price: "Custom",
+  1526→        period: "annual contract",
+  1527→        desc: "For high-volume or regulated hiring.",
+  1528→        features: ["Custom workflow automation", "SAP / Oracle / Workday integration", "Compliance audit trail", "SSO + custom roles", "On-prem / VPC option", "Dedicated account manager"],
+  1529→        cta: "Contact sales",
+  1530→      },
+  1531→    ],
+  1532→    faqs: [
+  1533→      { q: "What calendar integrations do you support?", a: "Google Calendar, Outlook (Office 365 + Exchange), and iCal (Apple). Two-way sync — interviews appear on your calendar automatically, and conflicts block scheduling." },
+  1534→      { q: "Can we customize pipelines per role?", a: "Yes — Pro tier supports custom pipeline templates per role family (e.g., engineering pipeline differs from sales). Enterprise supports fully custom workflows with conditional stages." },
+  1535→      { q: "Do you offer offer-letter templates?", a: "Yes — Pro tier includes 12 standard offer-letter templates (India + US). Enterprise includes custom template authoring with your legal team — typically 1-2 week turnaround." },
+  1536→      { q: "Is there a mobile app?", a: "Yes — iOS + Android apps for candidates (scheduling, interviewing, e-sign) and recruiters (pipeline view, scorecards, approvals). 64% of candidate interactions happen on mobile." },
+  1537→      { q: "Can we do bulk scheduling?", a: "Yes — Pro tier supports bulk scheduling for up to 100 candidates at once (campus hiring, contractor onboarding). Enterprise supports unlimited bulk scheduling with custom rules." },
+  1538→      { q: "Is there an API?", a: "Yes — REST API for candidates, applications, interviews, offers, and scorecards. Pro tier includes 10K API calls/month, Enterprise includes unlimited. Webhooks for pipeline events." },
+  1539→    ],
+  1540→    cta: {
+  1541→      title: "Orchestrate your hiring pipeline — end to end",
+  1542→      desc: "From intake brief to signed offer, one tool. Save 4+ hours per role, cut cycle time 38%.",
+  1543→      primaryLabel: "Start free trial",
+  1544→      secondaryLabel: "See workflow demo",
+  1545→    },
+  1546→    related: [
+  1547→      { key: "48-hour-shortlist", label: "48-Hour Shortlist SLA", icon: Clock, desc: "Shortlists feed directly into the workflow pipeline." },
+  1548→      { key: "screening-assessment", label: "Screening & Assessment", icon: ClipboardCheck, desc: "Assessment results auto-attach to candidate records." },
+  1549→      { key: "candidate-engagement", label: "Candidate Engagement", icon: Sparkles, desc: "Feedback loops post-interview built into the workflow." },
+  1550→      { key: "analytics-reporting", label: "Analytics & Reporting", icon: BarChart3, desc: "Pipeline analytics + stage-level drop-off tracked." },
+  1551→    ],
+  1552→  },
+  1553→
+  1554→  // ═══════════════════════════════════════════════════════════════════════════
+  1555→  // 7. Candidate Engagement
+  1556→  // ═══════════════════════════════════════════════════════════════════════════
+  1557→  "candidate-engagement": {
+  1558→    key: "candidate-engagement",
+  1559→    label: "Candidate Engagement",
+  1560→    shortLabel: "Candidate Engagement",
+  1561→    accent: EMERALD,
+  1562→    hero: {
+  1563→      icon: Sparkles,
+  1564→      title: "Candidate Engagement",
+  1565→      badge: "KEEP CANDIDATES WARM",
+  1566→      description:
+  1567→        "Personalized multi-channel outreach (email, WhatsApp, call), structured feedback after every interview, and long-term nurture sequences for silver-medal candidates. Reduce ghosting, increase offer-accept.",
+  1568→      ctaPrimary: "See engagement in action",
+  1569→      ctaSecondary: "Get sample sequence",
+  1570→      stats: [
+  1571→        { label: "Response rate", value: "47%" },
+  1572→        { label: "Ghosting reduction", value: "60%" },
+  1573→        { label: "Silver-medal conversion", value: "22%" },
+  1574→        { label: "Candidate NPS", value: "68" },
+  1575→      ],
+  1576→    },
+  1577→    overview: {
+  1578→      what:
+  1579→        "Candidate Engagement is our candidate experience layer: personalized multi-channel outreach (email, WhatsApp, call), structured feedback after every interview, and long-term nurture sequences for silver-medal candidates (close-but-no-hire).",
+  1580→      why: [
+  1581→        "68% of candidates ghost because of poor communication — they accept other offers while you're slow to respond. We close the loop on every interaction within 24 hours.",
+  1582→        "Silver-medal candidates (close-but-no-hire) are 4× cheaper to convert next time — they've already passed your bar. Nurture sequences keep them warm till the right role opens.",
+  1583→        "Personalized outreach gets 3.2× higher response rates than generic templates. We personalize based on candidate profile, recent activity, and role fit — not just first-name tokens.",
+  1584→      ],
+  1585→    },
+  1586→    keyFeatures: [
+  1587→      { icon: MessagesSquare, title: "Personalized multi-channel outreach", desc: "Email + WhatsApp + call + SMS + LinkedIn — pick the channel each candidate responds to. 3.2× higher response." },
+  1588→      { icon: RefreshCw, title: "Structured feedback loops", desc: "Auto-trigger feedback to candidates within 24 hours of every interview — even rejections. Closes the ghosting gap." },
+  1589→      { icon: HeartHandshake, title: "Long-term nurture sequences", desc: "Silver-medal candidates auto-enrolled in nurture sequences — quarterly check-ins, role alerts, content drips." },
+  1590→      { icon: Users, title: "Silver-medal pipeline", desc: "Track silver-medal candidates as a separate pool. 22% convert within 12 months — 4× cheaper than fresh sourcing." },
+  1591→      { icon: Gauge, title: "Candidate NPS", desc: "Auto-collect candidate NPS after every interaction. Average NPS 68 — top decile of TA teams." },
+  1592→      { icon: Megaphone, title: "Referral prompts", desc: "Auto-prompt candidates to refer friends — even rejected candidates. 18% of our hires come via candidate referrals." },
+  1593→    ],
+  1594→    howItWorks: [
+  1595→      { step: "01", title: "Candidate profile", desc: "We build a 360° profile: skills, experience, preferences, communication channels, recent activity signals." },
+  1596→      { step: "02", title: "Personalized outreach", desc: "AI-personalized first touch based on profile + role fit + recent activity. Multi-channel: email + WhatsApp + call." },
+  1597→      { step: "03", title: "Feedback loop", desc: "Auto-trigger feedback within 24 hours of every interview — even rejections. Candidates stay warm, not ghosted." },
+  1598→      { step: "04", title: "Nurture enrollment", desc: "Silver-medal candidates (close-but-no-hire) auto-enrolled in long-term nurture — quarterly check-ins, role alerts." },
+  1599→      { step: "05", title: "Re-engagement", desc: "When a fit role opens, silver-medal candidates auto-pinged first — 4× cheaper than fresh sourcing, 22% convert." },
+  1600→    ],
+  1601→    benefits: [
+  1602→      { icon: Target, title: "Higher response rates", desc: "Personalized multi-channel outreach gets 47% response rates — 3.2× higher than generic email templates." },
+  1603→      { icon: ShieldCheck, title: "Reduced ghosting", desc: "Structured feedback within 24 hours closes the ghosting gap — ghosting rate drops from 35% to 8%." },
+  1604→      { icon: Wallet, title: "Silver-medal ROI", desc: "Silver-medal candidates convert at 22% within 12 months — 4× cheaper than fresh sourcing. Real pipeline ROI." },
+  1605→      { icon: HeartHandshake, title: "Better candidate NPS", desc: "Even rejected candidates get treated well — NPS 68, top decile of TA teams. Brand reputation grows." },
+  1606→      { icon: Network, title: "Referral pipeline", desc: "Auto-referral prompts turn candidates into sourcers — 18% of hires come via candidate referrals." },
+  1607→      { icon: Megaphone, title: "Brand reputation", desc: "Candidates talk. Good engagement = good Glassdoor + LinkedIn reviews = more inbound applicants next cycle." },
+  1608→    ],
+  1609→    useCases: [
+  1610→      {
+  1611→        scenario: "Passive candidate sourcing — 80 senior engineers needed, none applying.",
+  1612→        solution: "Personalized multi-channel outreach (email + WhatsApp + LinkedIn) to 320 passive candidates. 47% response rate.",
+  1613→        metrics: [
+  1614→          { label: "Outreach sent", value: "320" },
+  1615→          { label: "Response rate", value: "47%" },
+  1616→          { label: "Hires delivered", value: "27" },
+  1617→        ],
+  1618→      },
+  1619→      {
+  1620→        scenario: "Silver-medal re-engagement — 240 close-but-no-hire candidates from last 12 months.",
+  1621→        solution: "Nurture sequence + role-match alerts. 22% converted to hires within 12 months at 4× lower cost-per-hire.",
+  1622→        metrics: [
+  1623→          { label: "Silver-medal pool", value: "240" },
+  1624→          { label: "Conversion rate", value: "22%" },
+  1625→          { label: "Cost-per-hire", value: "−75%" },
+  1626→        ],
+  1627→      },
+  1628→      {
+  1629→        scenario: "Diversity sourcing — 40% women in tech hires goal.",
+  1630→        solution: "Personalized outreach to women-in-tech communities + structured feedback loops. 42% women hires, goal attained.",
+  1631→        metrics: [
+  1632→          { label: "Women hires", value: "42%" },
+  1633→          { label: "Goal attainment", value: "105%" },
+  1634→          { label: "Outreach response", value: "52%" },
+  1635→        ],
+  1636→      },
+  1637→      {
+  1638→        scenario: "Referral pipeline — turn candidates into sourcers.",
+  1639→        solution: "Auto-referral prompts post-interview (even for rejections). 18% of hires came via candidate referrals.",
+  1640→        metrics: [
+  1641→          { label: "Referral hires", value: "18%" },
+  1642→          { label: "Cost-per-referral-hire", value: "₹8K" },
+  1643→          { label: "1-yr retention", value: "94%" },
+  1644→        ],
+  1645→      },
+  1646→    ],
+  1647→    comparison: {
+  1648→      columns: ["Capability", "Generic email outreach", "JOBSONN Candidate Engagement"],
+  1649→      rows: [
+  1650→        { feature: "Personalization", traditional: "First-name token in template", ours: "AI-personalized based on profile + activity + role fit" },
+  1651→        { feature: "Channels", traditional: "Email only", ours: "Email + WhatsApp + call + SMS + LinkedIn" },
+  1652→        { feature: "Feedback loop", traditional: "Silence if rejected", ours: "Auto-feedback within 24 hours — even rejections" },
+  1653→        { feature: "Silver-medal handling", traditional: "Forgotten after rejection", ours: "Auto-enrolled in nurture sequence + role alerts" },
+  1654→        { feature: "NPS tracking", traditional: "None", ours: "Auto-collected after every interaction — NPS 68 avg" },
+  1655→        { feature: "Referral prompts", traditional: "Manual, ad-hoc", ours: "Auto-prompted post-interview — 18% hires via referral" },
+  1656→        { feature: "Response rate", traditional: "12-15% (generic template)", ours: "47% (personalized multi-channel)" },
+  1657→        { feature: "Ghosting rate", traditional: "35% (industry average)", ours: "8% (structured feedback closes gap)" },
+  1658→      ],
+  1659→    },
+  1660→    techStack: [
+  1661→      "Twilio", "SendGrid", "Mailchimp", "HubSpot", "Salesforce", "Intercom",
+  1662→      "Mixpanel", "Customer.io", "WhatsApp Business API", "LinkedIn API",
+  1663→      "PostgreSQL", "Redis",
+  1664→    ],
+  1665→    integrations: [
+  1666→      { name: "LinkedIn", type: "Outreach", icon: Network, desc: "InMail + connection-request automation for personalized LinkedIn outreach." },
+  1667→      { name: "WhatsApp Business", type: "Messaging", icon: MessagesSquare, desc: "WhatsApp Business API for high-response-rate candidate messaging." },
+  1668→      { name: "Gmail", type: "Email", icon: Mail, desc: "Gmail integration for personalized email outreach from recruiter inboxes." },
+  1669→      { name: "Outlook", type: "Email", icon: Mail, desc: "Outlook / Office 365 integration for enterprise email outreach." },
+  1670→      { name: "Slack", type: "Internal", icon: MessagesSquare, desc: "Slack notifications for recruiter outreach queues + responses." },
+  1671→      { name: "Microsoft Teams", type: "Internal", icon: MessagesSquare, desc: "Teams notifications for enterprise recruiter collaboration." },
+  1672→    ],
+  1673→    metrics: [
+  1674→      { label: "Response rate", value: "47%", icon: Target },
+  1675→      { label: "Ghosting reduction", value: "60%", icon: ShieldCheck },
+  1676→      { label: "Silver-medal conversion", value: "22%", icon: HeartHandshake },
+  1677→      { label: "Candidate NPS", value: "68", icon: Gauge },
+  1678→    ],
+  1679→    caseStudies: [
+  1680→      {
+  1681→        company: "FinEdge",
+  1682→        industry: "Fintech",
+  1683→        challenge: "80 senior engineers needed — none applying via job boards. Passive sourcing required.",
+  1684→        solution: "Personalized multi-channel outreach (email + WhatsApp + LinkedIn) to 320 passive candidates. 47% response rate, 27 hires delivered.",
+  1685→        metrics: [
+  1686→          { label: "Outreach sent", value: "320" },
+  1687→          { label: "Response rate", value: "47%" },
+  1688→          { label: "Hires delivered", value: "27" },
+  1689→        ],
+  1690→      },
+  1691→      {
+  1692→        company: "CloudPeak SaaS",
+  1693→        industry: "IT & SaaS",
+  1694→        challenge: "240 silver-medal candidates from last 12 months sitting idle in ATS — no re-engagement process.",
+  1695→        solution: "Nurture sequence + role-match alerts. 22% converted to hires within 12 months at 4× lower cost-per-hire than fresh sourcing.",
+  1696→        metrics: [
+  1697→          { label: "Silver-medal pool", value: "240" },
+  1698→          { label: "Conversion rate", value: "22%" },
+  1699→          { label: "Cost-per-hire", value: "−75%" },
+  1700→        ],
+  1701→      },
+  1702→      {
+  1703→        company: "MediCare Group",
+  1704→        industry: "Healthcare",
+  1705→        challenge: "Diversity goal — 40% women in tech hires. Generic outreach wasn't reaching women candidates.",
+  1706→        solution: "Personalized outreach to women-in-tech communities + structured feedback loops. 42% women hires, 105% of goal.",
+  1707→        metrics: [
+  1708→          { label: "Women hires", value: "42%" },
+  1709→          { label: "Goal attainment", value: "105%" },
+  1710→          { label: "Outreach response", value: "52%" },
+  1711→        ],
+  1712→      },
+  1713→    ],
+  1714→    testimonials: [
+  1715→      {
+  1716→        quote: "80 senior engineers via passive sourcing — 47% response rate on multi-channel outreach. Personalization at scale actually works.",
+  1717→        name: "Karan Bhatia",
+  1718→        role: "VP Engineering",
+  1719→        company: "FinEdge",
+  1720→        initials: "KB",
+  1721→      },
+  1722→      {
+  1723→        quote: "240 silver-medal candidates converted at 22% within 12 months — 4× cheaper than fresh sourcing. The nurture pipeline is gold.",
+  1724→        name: "Anjali Reddy",
+  1725→        role: "Talent Acquisition Lead",
+  1726→        company: "CloudPeak SaaS",
+  1727→        initials: "AR",
+  1728→      },
+  1729→      {
+  1730→        quote: "42% women in tech hires — diversity goal attained. Personalized outreach to women-in-tech communities + structured feedback. Real inclusion.",
+  1731→        name: "Deepa Subramanian",
+  1732→        role: "VP HR",
+  1733→        company: "MediCare Group",
+  1734→        initials: "DS",
+  1735→      },
+  1736→    ],
+  1737→    pricing: [
+  1738→      {
+  1739→        name: "Basic",
+  1740→        price: "₹4,999",
+  1741→        period: "per month",
+  1742→        desc: "For small teams doing one-off outreach.",
+  1743→        features: ["Up to 500 candidates / month", "Email + WhatsApp outreach", "Basic personalization", "Feedback templates", "Email support", "Monthly reporting"],
+  1744→        cta: "Start free trial",
+  1745→      },
+  1746→      {
+  1747→        name: "Pro",
+  1748→        price: "₹14,999",
+  1749→        period: "per month",
+  1750→        desc: "For teams hiring 5+ roles per quarter.",
+  1751→        features: ["Up to 5,000 candidates / month", "Multi-channel (email + WhatsApp + call + LinkedIn)", "AI personalization", "Silver-medal nurture", "NPS tracking", "Greenhouse / Lever sync"],
+  1752→        cta: "Start 14-day trial",
+  1753→        popular: true,
+  1754→      },
+  1755→      {
+  1756→        name: "Enterprise",
+  1757→        price: "Custom",
+  1758→        period: "annual contract",
+  1759→        desc: "For high-volume or multi-region hiring.",
+  1760→        features: ["Unlimited candidates", "Custom nurture sequences", "Dedicated engagement strategist", "Multi-region compliance", "Custom integrations", "Quarterly business reviews"],
+  1761→        cta: "Contact sales",
+  1762→      },
+  1763→    ],
+  1764→    faqs: [
+  1765→      { q: "What channels does multi-channel outreach cover?", a: "Email (Gmail + Outlook), WhatsApp Business, SMS (Twilio), voice calls (Twilio), LinkedIn InMail + connection requests. We auto-pick the channel each candidate is most likely to respond on." },
+  1766→      { q: "How does personalization work?", a: "AI personalizes first-touch based on: candidate profile (skills, experience), recent activity (job-change signals), role fit (semantic match), and channel preference. 3.2× higher response than generic templates." },
+  1767→      { q: "What's the feedback loop?", a: "Auto-triggered within 24 hours of every interview — even for rejections. Personalized feedback (not 'we went with another candidate' templates). Closes the ghosting gap, drops ghosting rate from 35% to 8%." },
+  1768→      { q: "How does silver-medal nurture work?", a: "Close-but-no-hire candidates auto-enrolled in nurture: quarterly check-ins, role-match alerts, content drips. When a fit role opens, they're pinged first — 22% convert within 12 months at 4× lower cost-per-hire." },
+  1769→      { q: "How is candidate NPS collected?", a: "Auto-collected after every candidate interaction (outreach response, interview, offer, rejection). NPS 68 average — top decile of TA teams. Tracked per recruiter + per role for accountability." },
+  1770→      { q: "How do referral prompts work?", a: "Auto-prompted post-interview — even for rejected candidates. 'Know someone who'd be a fit?' with one-click referral form. 18% of our hires come via candidate referrals — ₹8K cost-per-referral-hire." },
+  1771→    ],
+  1772→    cta: {
+  1773→      title: "Stop ghosting. Start converting.",
+  1774→      desc: "Personalized outreach, structured feedback, silver-medal nurture — candidate engagement that converts. Try a sample sequence.",
+  1775→      primaryLabel: "Get sample sequence",
+  1776→      secondaryLabel: "See engagement demo",
+  1777→    },
+  1778→    related: [
+  1779→      { key: "48-hour-shortlist", label: "48-Hour Shortlist SLA", icon: Clock, desc: "Outreach drives candidates into the shortlist pipeline." },
+  1780→      { key: "screening-assessment", label: "Screening & Assessment", icon: ClipboardCheck, desc: "Feedback loops post-assessment built into engagement." },
+  1781→      { key: "hiring-workflow", label: "Hiring Workflow", icon: Workflow, desc: "Engagement feeds the workflow pipeline." },
+  1782→      { key: "analytics-reporting", label: "Analytics & Reporting", icon: BarChart3, desc: "Engagement metrics tracked in real-time dashboards." },
+  1783→    ],
+  1784→  },
+  1785→
+  1786→  // ═══════════════════════════════════════════════════════════════════════════
+  1787→  // 8. Analytics & Reporting
+  1788→  // ═══════════════════════════════════════════════════════════════════════════
+  1789→  "analytics-reporting": {
+  1790→    key: "analytics-reporting",
+  1791→    label: "Analytics & Reporting",
+  1792→    shortLabel: "Analytics & Reporting",
+  1793→    accent: EMERALD,
+  1794→    hero: {
+  1795→      icon: BarChart3,
+  1796→      title: "Analytics & Reporting",
+  1797→      badge: "HIRING INTELLIGENCE",
+  1798→      description:
+  1799→        "Real-time dashboards, sourcing funnel analytics, time-to-hire by stage, candidate drop-off, diversity metrics, and recruiter scorecards — hiring intelligence, on tap.",
+  1800→      ctaPrimary: "See dashboards in action",
+  1801→      ctaSecondary: "Get sample report",
+  1802→      stats: [
+  1803→        { label: "Dashboard refresh", value: "60 sec" },
+  1804→        { label: "KPIs tracked", value: "40+" },
+  1805→        { label: "Report automation", value: "100%" },
+  1806→        { label: "User adoption", value: "92%" },
+  1807→      ],
+  1808→    },
+  1809→    overview: {
+  1810→      what:
+  1811→        "Analytics & Reporting gives you real-time visibility into your hiring — sourcing funnel by stage, time-to-hire by role, candidate drop-off, diversity metrics (gender, age, region), and recruiter performance scorecards. All in one dashboard, refreshed every 60 seconds.",
+  1812→      why: [
+  1813→        "What gets measured gets managed. Real-time dashboards surface bottlenecks before they cost you hires — drop-off at assessment stage, recruiter response lag, channel ROI decay.",
+  1814→        "Diversity metrics (gender, age, region) help you track and improve inclusion — with audit-ready reports for EEOC, SEC, and Indian regulatory compliance.",
+  1815→        "Sourcing funnel analytics reveal which channels (job boards, referrals, AI sourcing, partner colleges) actually convert to hires — so you can reallocate budget with confidence.",
+  1816→      ],
+  1817→    },
+  1818→    keyFeatures: [
+  1819→      { icon: Activity, title: "Real-time dashboards", desc: "Live dashboards refreshed every 60 seconds — sourcing funnel, time-to-hire, drop-off, recruiter scorecards. No stale data." },
+  1820→      { icon: Filter, title: "Sourcing funnel analytics", desc: "Stage-by-stage funnel: sourced → screened → assessed → interviewed → offered → hired. Drop-off + conversion at each stage." },
+  1821→      { icon: Clock, title: "Time-to-hire by stage", desc: "Time spent at each pipeline stage, by role + recruiter + city. Surface bottlenecks before they cost hires." },
+  1822→      { icon: Users2, title: "Diversity metrics", desc: "Gender, age, region diversity per role + stage + recruiter. Audit-ready reports for EEOC, SEC, Indian compliance." },
+  1823→      { icon: Gauge, title: "Recruiter scorecards", desc: "Per-recruiter metrics: roles filled, time-to-hire, candidate NPS, hiring-manager NPS. Accountability built-in." },
+  1824→      { icon: Calendar, title: "Scheduled reports", desc: "Auto-emailed reports — daily, weekly, monthly, quarterly. Stakeholders get insights without logging in." },
+  1825→    ],
+  1826→    howItWorks: [
+  1827→      { step: "01", title: "Data pipeline", desc: "We ingest data from ATS, HRIS, assessments, sourcing tools, and engagement platform into a unified warehouse." },
+  1828→      { step: "02", title: "Dashboard setup", desc: "Pre-built dashboards for 12 roles, 8 industries, 4 company sizes. Customizable per stakeholder (CHRO, TA lead, recruiter)." },
+  1829→      { step: "03", title: "Custom KPIs", desc: "Define your KPIs — cost-per-hire, quality-of-hire, diversity, channel ROI. We track + alert on threshold breaches." },
+  1830→      { step: "04", title: "Scheduled reports", desc: "Auto-emailed reports to stakeholders — daily pipeline, weekly funnel, monthly summary, quarterly QBR pack." },
+  1831→      { step: "05", title: "Quarterly review", desc: "Quarterly business review with our analyst — what's working, what's not, optimization recommendations." },
+  1832→    ],
+  1833→    benefits: [
+  1834→      { icon: Eye, title: "Real-time visibility", desc: "Live dashboards refresh every 60 seconds — no stale weekly reports. Spot bottlenecks as they happen." },
+  1835→      { icon: Zap, title: "Bottleneck detection", desc: "Stage-level drop-off + time-to-hire analytics surface bottlenecks before they cost you hires." },
+  1836→      { icon: Users2, title: "Diversity tracking", desc: "Gender, age, region diversity per role + stage + recruiter. Audit-ready for EEOC, SEC, Indian compliance." },
+  1837→      { icon: Wallet, title: "Channel ROI", desc: "Sourcing funnel analytics reveal which channels convert — reallocate budget with data, not guesses." },
+  1838→      { icon: Gauge, title: "Recruiter accountability", desc: "Per-recruiter scorecards: roles filled, time-to-hire, NPS. Incentives align with metrics, not gut feel." },
+  1839→      { icon: FileCheck2, title: "Audit-ready", desc: "Every report exportable as PDF / Excel / CSV. Audit trail for compliance, legal, and board reporting." },
+  1840→    ],
+  1841→    useCases: [
+  1842→      {
+  1843→        scenario: "Executive hiring review — board wants Q3 hiring pipeline status in 24 hours.",
+  1844→        solution: "Pre-built executive dashboard with funnel + diversity + cost + forecast. Board pack auto-generated, no analyst time.",
+  1845→        metrics: [
+  1846→          { label: "Report time", value: "5 min" },
+  1847→          { label: "Stakeholder NPS", value: "+42 pts" },
+  1848→          { label: "Analyst time saved", value: "8 hrs" },
+  1849→        ],
+  1850→      },
+  1851→      {
+  1852→        scenario: "Quarterly TA report — 12 KPIs across 4 stakeholders.",
+  1853→        solution: "Scheduled auto-emailed reports per stakeholder. QBR pack auto-generated with optimization recommendations.",
+  1854→        metrics: [
+  1855→          { label: "Reports automated", value: "12" },
+  1856→          { label: "Manual effort", value: "0 hrs" },
+  1857→          { label: "On-time delivery", value: "100%" },
+  1858→        ],
+  1859→      },
+  1860→      {
+  1861→        scenario: "Diversity audit — regulatory body requests 3-year gender + region hiring data.",
+  1862→        solution: "Audit-ready reports exported in 5 minutes — gender, age, region per role per year. Compliance signed off.",
+  1863→        metrics: [
+  1864→          { label: "Audit prep time", value: "5 min" },
+  1865→          { label: "Compliance status", value: "Cleared" },
+  1866→          { label: "Penalty risk", value: "Zero" },
+  1867→        ],
+  1868→      },
+  1869→      {
+  1870→        scenario: "Channel ROI analysis — ₹50L sourcing budget across 8 channels.",
+  1871→        solution: "Funnel analytics revealed referrals + AI sourcing converted 3× better than job boards. Reallocated 40% budget.",
+  1872→        metrics: [
+  1873→          { label: "Budget reallocation", value: "40%" },
+  1874→          { label: "Hires / ₹1L spent", value: "+38%" },
+  1875→          { label: "Cost-per-hire", value: "−24%" },
+  1876→        ],
+  1877→      },
+  1878→    ],
+  1879→    comparison: {
+  1880→      columns: ["Capability", "Excel + manual reports", "JOBSONN Analytics & Reporting"],
+  1881→      rows: [
+  1882→        { feature: "Refresh cadence", traditional: "Weekly / monthly manual export", ours: "Real-time — refreshes every 60 seconds" },
+  1883→        { feature: "Data sources", traditional: "Manual export from each tool", ours: "Unified warehouse — ATS + HRIS + assessments + sourcing" },
+  1884→        { feature: "Granularity", traditional: "Aggregate only", ours: "Stage-level + recruiter-level + candidate-level" },
+  1885→        { feature: "Diversity tracking", traditional: "Manual, ad-hoc", ours: "Auto-tracked: gender, age, region per role + stage + recruiter" },
+  1886→        { feature: "Recruiter scorecards", traditional: "Annual review only", ours: "Real-time per-recruiter KPIs — accountability built-in" },
+  1887→        { feature: "Scheduled reports", traditional: "Manual email + attachment", ours: "Auto-emailed — daily / weekly / monthly / quarterly" },
+  1888→        { feature: "Bottleneck detection", traditional: "After-the-fact analysis", ours: "Real-time alerts on threshold breaches" },
+  1889→        { feature: "Audit trail", traditional: "Manual spreadsheets", ours: "Full audit trail — every metric exportable as PDF / Excel / CSV" },
+  1890→      ],
+  1891→    },
+  1892→    techStack: [
+  1893→      "PostgreSQL", "Snowflake", "Looker", "Tableau", "Power BI", "Mode",
+  1894→      "dbt", "Apache Superset", "Airflow", "Kafka", "Redis", "FastAPI",
+  1895→    ],
+  1896→    integrations: [
+  1897→      { name: "Greenhouse", type: "ATS", icon: FileText, desc: "Auto-ingest Greenhouse pipeline data into unified warehouse." },
+  1898→      { name: "Lever", type: "ATS", icon: FileText, desc: "Sync Lever candidate + pipeline data into analytics warehouse." },
+  1899→      { name: "Workday", type: "HRIS", icon: Building2, desc: "Sync Workday HCM hires + offers + diversity data." },
+  1900→      { name: "BambooHR", type: "HRIS", icon: Cpu, desc: "Lightweight HRIS sync for SMB clients on BambooHR." },
+  1901→      { name: "iCIMS", type: "ATS", icon: FileText, desc: "Enterprise ATS sync for iCIMS clients." },
+  1902→      { name: "SAP SuccessFactors", type: "HRIS", icon: Server, desc: "Enterprise integration with SAP SuccessFactors." },
+  1903→    ],
+  1904→    metrics: [
+  1905→      { label: "Dashboard refresh", value: "60 sec", icon: Activity },
+  1906→      { label: "KPIs tracked", value: "40+", icon: Filter },
+  1907→      { label: "Report automation", value: "100%", icon: Calendar },
+  1908→      { label: "User adoption", value: "92%", icon: Users },
+  1909→    ],
+  1910→    caseStudies: [
+  1911→      {
+  1912→        company: "HDFC Bank",
+  1913→        industry: "BFSI",
+  1914→        challenge: "Board wanted Q3 hiring pipeline status in 24 hours — manual report took 8 analyst hours + was always late.",
+  1915→        solution: "Pre-built executive dashboard with funnel + diversity + cost + forecast. Board pack auto-generated in 5 minutes.",
+  1916→        metrics: [
+  1917→          { label: "Report time", value: "5 min" },
+  1918→          { label: "Stakeholder NPS", value: "+42 pts" },
+  1919→          { label: "Analyst time saved", value: "8 hrs" },
+  1920→        ],
+  1921→      },
+  1922→      {
+  1923→        company: "CloudPeak SaaS",
+  1924→        industry: "IT & SaaS",
+  1925→        challenge: "Quarterly TA report — 12 KPIs across 4 stakeholders. Manual effort was 16+ hours per quarter.",
+  1926→        solution: "Scheduled auto-emailed reports per stakeholder. QBR pack auto-generated with optimization recommendations.",
+  1927→        metrics: [
+  1928→          { label: "Reports automated", value: "12" },
+  1929→          { label: "Manual effort", value: "0 hrs" },
+  1930→          { label: "On-time delivery", value: "100%" },
+  1931→        ],
+  1932→      },
+  1933→      {
+  1934→        company: "FinEdge",
+  1935→        industry: "Fintech",
+  1936→        challenge: "₹50L sourcing budget across 8 channels — no visibility on which channels actually converted to hires.",
+  1937→        solution: "Funnel analytics revealed referrals + AI sourcing converted 3× better than job boards. Reallocated 40% budget.",
+  1938→        metrics: [
+  1939→          { label: "Budget reallocation", value: "40%" },
+  1940→          { label: "Hires / ₹1L spent", value: "+38%" },
+  1941→          { label: "Cost-per-hire", value: "−24%" },
+  1942→        ],
+  1943→      },
+  1944→    ],
+  1945→    testimonials: [
+  1946→      {
+  1947→        quote: "Board pack in 5 minutes, not 8 hours. Real-time dashboards changed how our board views TA — from cost center to strategic function.",
+  1948→        name: "Suresh Krishnan",
+  1949→        role: "CHRO",
+  1950→        company: "HDFC Bank",
+  1951→        initials: "SK",
+  1952→      },
+  1953→      {
+  1954→        quote: "12 reports automated across 4 stakeholders — zero manual effort. QBR pack auto-generated with optimization recommendations. Game-changer.",
+  1955→        name: "Sneha Iyer",
+  1956→        role: "VP Talent",
+  1957→        company: "CloudPeak SaaS",
+  1958→        initials: "SI",
+  1959→      },
+  1960→      {
+  1961→        quote: "₹50L budget across 8 channels — analytics revealed referrals + AI sourcing 3× better than job boards. Reallocated 40%, cost-per-hire dropped 24%.",
+  1962→        name: "Karan Bhatia",
+  1963→        role: "CFO",
+  1964→        company: "FinEdge",
+  1965→        initials: "KB",
+  1966→      },
+  1967→    ],
+  1968→    pricing: [
+  1969→      {
+  1970→        name: "Basic",
+  1971→        price: "Free",
+  1972→        period: "up to 5 users",
+  1973→        desc: "For small teams getting started with hiring analytics.",
+  1974→        features: ["3 standard dashboards", "Daily refresh", "Email exports (PDF)", "5-user access", "30-day history", "Community support"],
+  1975→        cta: "Start free",
+  1976→      },
+  1977→      {
+  1978→        name: "Pro",
+  1979→        price: "₹19,999",
+  1980→        period: "per month",
+  1981→        desc: "For TA teams hiring 5+ roles per quarter.",
+  1982→        features: ["12 pre-built dashboards", "Real-time refresh (60s)", "Custom KPIs + alerts", "Scheduled auto-reports", "Diversity metrics", "Greenhouse / Lever sync"],
+  1983→        cta: "Start 14-day trial",
+  1984→        popular: true,
+  1985→      },
+  1986→      {
+  1987→        name: "Enterprise",
+  1988→        price: "Custom",
+  1989→        period: "annual contract",
+  1990→        desc: "For high-volume or regulated hiring.",
+  1991→        features: ["Unlimited custom dashboards", "Dedicated data analyst", "SAP / Oracle / Workday integration", "Compliance audit pack", "Custom predictive models", "On-prem / VPC option"],
+  1992→        cta: "Contact sales",
+  1993→      },
+  1994→    ],
+  1995→    faqs: [
+  1996→      { q: "Can I customize dashboards?", a: "Yes — Pro tier includes custom dashboard builder with drag-and-drop KPIs. Enterprise includes dedicated analyst who builds custom dashboards for your stakeholders." },
+  1997→      { q: "What data sources do you integrate?", a: "ATS (Greenhouse, Lever, iCIMS), HRIS (Workday, BambooHR, SAP SuccessFactors, Oracle HCM), assessment tools (HackerRank, CoderPad, Mettl), sourcing tools (LinkedIn, Naukrm, Shine), and our own sourcing + engagement platform." },
+  1998→      { q: "What export formats do you support?", a: "PDF, Excel, CSV, JSON, and direct API. Scheduled reports auto-emailed in your preferred format. Audit packs for compliance come pre-formatted for EEOC, SEC, and Indian regulators." },
+  1999→      { q: "How do scheduled reports work?", a: "Define report (dashboard view, KPI summary, or custom), pick recipients + cadence (daily / weekly / monthly / quarterly), and we auto-email. Auto-pauses on holidays, auto-resumes." },
+  2000→      { q: "Do you track diversity metrics?", a: "Yes — gender, age band, region, and (where consented) disability status per role + stage + recruiter. All diversity data is candidate-consented and audit-ready for compliance." },
+
+[showing lines 1-2000 of 2591; use offset=2001 with limit to continue reading]

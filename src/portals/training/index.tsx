@@ -29,6 +29,20 @@ const TrainingSkillGaps = dynamic(() => import("./TrainingSkillGaps").then((m) =
 const TrainingCompliance = dynamic(() => import("./TrainingCompliance").then((m) => m.TrainingCompliance));
 const TrainingEnrollments = dynamic(() => import("./TrainingEnrollments").then((m) => m.TrainingEnrollments));
 const TrainingSurveys = dynamic(() => import("./TrainingSurveys").then((m) => m.TrainingSurveys));
+// BUILD-TRAINING-FEATURES: 6 new high-impact training pages
+const TrainingAttendance = dynamic(() => import("./TrainingAttendance").then((m) => m.TrainingAttendance));
+const TrainingGradebook = dynamic(() => import("./TrainingGradebook").then((m) => m.TrainingGradebook));
+const TrainingFeeCollection = dynamic(() => import("./TrainingFeeCollection").then((m) => m.TrainingFeeCollection));
+const TrainingRefunds = dynamic(() => import("./TrainingRefunds").then((m) => m.TrainingRefunds));
+const TrainingScholarships = dynamic(() => import("./TrainingScholarships").then((m) => m.TrainingScholarships));
+const TrainingStudentMessaging = dynamic(() => import("./TrainingStudentMessaging").then((m) => m.TrainingStudentMessaging));
+
+// Profile & 360° pages (WAVE1-RECRUITER-TRAINING-PROFILE)
+const TrainingProviderProfile = dynamic(() => import("./TrainingProviderProfile").then((m) => m.TrainingProviderProfile));
+const TrainingStudentProfile360 = dynamic(() => import("./TrainingStudentProfile360").then((m) => m.TrainingStudentProfile360));
+
+// Curriculum & content authoring pages (WAVE2-RECRUITER-TRAINING-SOURCING)
+const TrainingCurriculumDesigner = dynamic(() => import("./TrainingCurriculumDesigner").then((m) => m.TrainingCurriculumDesigner));
 const TrainingGamification = dynamic(() => import("./TrainingGamification").then((m) => m.TrainingGamification));
 const TrainingAutomation = dynamic(() => import("./TrainingAutomation").then((m) => m.TrainingAutomation));
 const TrainingAiAssistant = dynamic(() => import("./TrainingAiAssistant").then((m) => m.TrainingAiAssistant));
@@ -38,6 +52,20 @@ const TrainingInvoices = dynamic(() => import("./TrainingInvoices").then((m) => 
 const TrainingIntegrations = dynamic(() => import("./TrainingIntegrations").then((m) => m.TrainingIntegrations));
 const TrainingSettings = dynamic(() => import("./TrainingSettings").then((m) => m.TrainingSettings));
 const TrainingSupport = dynamic(() => import("./TrainingSupport").then((m) => m.TrainingSupport));
+
+// Process & lifecycle pages (WAVE3-RECRUITER-TRAINING-PARTNER-PROCESS)
+const TrainingEnrollmentApproval = dynamic(() => import("./TrainingEnrollmentApproval").then((m) => m.TrainingEnrollmentApproval));
+const TrainingTrainerAllocation = dynamic(() => import("./TrainingTrainerAllocation").then((m) => m.TrainingTrainerAllocation));
+const TrainingCompletionTracker = dynamic(() => import("./TrainingCompletionTracker").then((m) => m.TrainingCompletionTracker));
+
+// Transaction & finance pages (WAVE4-TRANSACTIONS-ALL-PORTALS)
+const TrainingInvoiceRules = dynamic(() => import("./TrainingInvoiceRules").then((m) => m.TrainingInvoiceRules));
+const TrainingCorporateSponsorship = dynamic(() => import("./TrainingCorporateSponsorship").then((m) => m.TrainingCorporateSponsorship));
+
+// Communication pages (WAVE5-COMMUNICATION-ALL-PORTALS)
+const TrainingParentPortal = dynamic(() => import("./TrainingParentPortal").then((m) => m.TrainingParentPortal));
+const TrainingDiscussionForums = dynamic(() => import("./TrainingDiscussionForums").then((m) => m.TrainingDiscussionForums));
+const TrainingAnnouncements = dynamic(() => import("./TrainingAnnouncements").then((m) => m.TrainingAnnouncements));
 
 // Settings & Support hub pages (SETTINGS-SUPPORT)
 const TrainingSettingsHub = dynamic(() => import("./TrainingSettingsHub").then((m) => m.TrainingSettingsHub));
@@ -179,6 +207,8 @@ export function render(route: string): React.ReactNode {
       return <TrainingAssessments />;
     }
     case "question-bank": return <TrainingQuestionBank />;
+    // Curriculum & content authoring (WAVE2-RECRUITER-TRAINING-SOURCING)
+    case "curriculum-designer": return <TrainingCurriculumDesigner />;
     case "certifications": return <TrainingCertifications />;
     case "cert-templates": return <TrainingCertTemplates />;
     case "skills": return <TrainingSkills />;
@@ -186,6 +216,27 @@ export function render(route: string): React.ReactNode {
     case "compliance": return <TrainingCompliance />;
     case "enrollments": return <TrainingEnrollments />;
     case "surveys": return <TrainingSurveys />;
+    // Process & lifecycle (WAVE3-RECRUITER-TRAINING-PARTNER-PROCESS)
+    case "enrollment-approval": return <TrainingEnrollmentApproval />;
+    case "trainer-allocation": return <TrainingTrainerAllocation />;
+    case "completion-tracker": return <TrainingCompletionTracker />;
+    // Transaction & finance (WAVE4-TRANSACTIONS-ALL-PORTALS)
+    case "invoice-rules": return <TrainingInvoiceRules />;
+    case "corporate-sponsorship": return <TrainingCorporateSponsorship />;
+    // Communication (WAVE5-COMMUNICATION-ALL-PORTALS)
+    case "parent-portal": return <TrainingParentPortal />;
+    case "discussion-forums": return <TrainingDiscussionForums />;
+    case "announcements": return <TrainingAnnouncements />;
+    // BUILD-TRAINING-FEATURES routes
+    case "attendance": return <TrainingAttendance />;
+    case "gradebook": return <TrainingGradebook />;
+    case "fee-collection": return <TrainingFeeCollection />;
+    case "refunds": return <TrainingRefunds />;
+    case "scholarships": return <TrainingScholarships />;
+    case "student-messaging": return <TrainingStudentMessaging />;
+    // Profile & 360° pages (WAVE1-RECRUITER-TRAINING-PROFILE)
+    case "training-profile": return <TrainingProviderProfile />;
+    case "student-profile-360": return <TrainingStudentProfile360 />;
     case "gamification": return <TrainingGamification />;
     case "automation": return <TrainingAutomation />;
     case "ai-assistant": return <TrainingAiAssistant />;
