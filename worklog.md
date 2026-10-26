@@ -3421,3 +3421,59 @@ Stage Summary:
   - Follow-ups → shows only follow-up-type tasks with "All follow-up tasks" subtitle
 - The sub-sidebar auto-expands when Tasks is active (via PortalSidebar's existing auto-open logic)
 - Lint: 0 errors. Browser-verified: sub-sidebar expands, filtering works correctly for each category. Console: clean.
+
+---
+Task ID: TASKS-CARDS-ENHANCED
+Agent: Main (Z.ai Code)
+
+Task: Enhance the task list cards in the Tasks sidebar to match the attached reference image — with data cards showing left color accent bars, colored type icon tiles, bold titles, metadata rows, and priority badges.
+
+Work Log:
+- Read /home/z/my-project/worklog.md to understand previous work
+- Analyzed reference image at /home/z/my-project/upload/pasted_image_1793032740015.png using VLM
+- Reference showed task cards with:
+  - Left color accent bar (type-colored)
+  - Status circle (hollow for incomplete, green checkmark for completed)
+  - Colored type icon tile (phone=orange, email=blue, meeting=purple, follow-up=green)
+  - Bold task title
+  - Metadata row (type label + separator + calendar + date)
+  - Priority badge on the right (High=red, Medium=amber, Low=slate)
+  - Selected card: light green background with green border
+
+- Enhanced the task list cards in TasksPage.tsx:
+  1. Added left color accent bar (`absolute left-0 top-0 h-full w-1` with TYPE_COLOR)
+  2. Added colored type icon tile (8x8 rounded-lg with TYPE_COLOR background + icon)
+  3. Increased checkbox size from h-4 to h-5 for better visibility
+  4. Made title font-bold (was font-semibold)
+  5. Reorganized layout: checkbox → type icon tile → content → priority badge
+  6. Type label now uses type color (font-medium)
+  7. Priority badge positioned at top right with px-2 padding
+  8. Changed card border-radius from rounded-lg to rounded-xl
+  9. Added overflow-hidden for the accent bar
+  10. Increased gap between cards from gap-1.5 to gap-2
+
+- Ran `bun run lint` — 0 errors, only 6 pre-existing warnings
+- Dev server restarted, confirmed HTTP 200
+- Browser-verified in Candidate portal → Tasks → All Tasks:
+  VLM confirmed all 6 elements present:
+  1. ✅ Left color accent bar: "selected card has thick green bar; unselected card has thinner blue bar"
+  2. ✅ Status circle: "empty circle checkbox on the far left of each card"
+  3. ✅ Colored type icon tile: "phone icon is yellow/orange; email icon is blue" inside "light yellow/blue square tile"
+  4. ✅ Bold title: "task names are in bold text"
+  5. ✅ Metadata with type label and date: "type label (Call, Email) and date (Today, Tomorrow)"
+  6. ✅ Priority badge on the right: "red High badge on the far right"
+  7. ✅ Selected card highlighted: "green background and green left border"
+- Console: clean, no errors
+
+Stage Summary:
+- Task list cards in the Tasks sidebar enhanced to match reference image:
+  - Left color accent bar (type-colored: orange for calls, blue for emails, purple for meetings, green for follow-ups)
+  - Larger status circle (h-5) with green checkmark when completed
+  - Colored type icon tile (8x8 rounded-lg with tinted background)
+  - Bold task title
+  - Metadata row with colored type label + separator + calendar icon + date
+  - Priority badge at top right (High=rose, Medium=amber, Low=slate)
+  - Selected card: light green background with green border + shadow
+  - Unselected card: white background, hover green border + shadow
+  - Rounded-xl cards with overflow-hidden for accent bar
+- Lint: 0 errors. Browser-verified: all 6 card elements confirmed visible. Console: clean.

@@ -371,7 +371,7 @@ export function TasksPage({ portal, route = "tasks" }: { portal: Portal; route?:
               <span className="h-1.5 w-1.5 rounded-full bg-brand" /> Active
             </Badge>
           </div>
-          <div className="flex flex-col gap-1.5">
+          <div className="flex flex-col gap-2">
             {filtered.length === 0 ? (
               <EmptyState
                 icon={<Circle className="h-5 w-5" />}
@@ -389,12 +389,17 @@ export function TasksPage({ portal, route = "tasks" }: { portal: Portal; route?:
                     key={task.id}
                     onClick={() => setSelectedId(task.id)}
                     className={cn(
-                      "group flex items-start gap-2.5 rounded-lg border p-3 text-left transition-all cursor-pointer",
+                      "group relative flex items-start gap-3 overflow-hidden rounded-xl border p-3 text-left transition-all cursor-pointer",
                       isSelected
                         ? "border-brand bg-brand/5 shadow-sm"
                         : "border-border bg-card hover:border-brand/40 hover:shadow-sm"
                     )}
                   >
+                    {/* Left color accent bar (type color) */}
+                    <span
+                      className="absolute left-0 top-0 h-full w-1"
+                      style={{ background: TYPE_COLOR[task.type] }}
+                    />
                     {/* Checkbox */}
                     <button
                       onClick={(e) => { e.stopPropagation(); handleToggleComplete(task.id); }}
@@ -402,34 +407,41 @@ export function TasksPage({ portal, route = "tasks" }: { portal: Portal; route?:
                       title={isDone ? "Mark as pending" : "Mark complete"}
                     >
                       {isDone ? (
-                        <CheckCircle2 className="h-4 w-4 text-brand" />
+                        <CheckCircle2 className="h-5 w-5 text-brand" />
                       ) : (
-                        <Circle className="h-4 w-4 text-muted-foreground hover:text-brand" />
+                        <Circle className="h-5 w-5 text-muted-foreground hover:text-brand" />
                       )}
                     </button>
+                    {/* Type icon tile */}
+                    <div
+                      className="mt-0.5 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg"
+                      style={{ background: `${TYPE_COLOR[task.type]}15`, color: TYPE_COLOR[task.type] }}
+                    >
+                      <TypeIcon className="h-4 w-4" />
+                    </div>
                     {/* Content */}
                     <div className="min-w-0 flex-1">
                       <p className={cn(
-                        "text-sm font-semibold leading-tight",
+                        "text-sm font-bold leading-tight",
                         isDone ? "text-muted-foreground line-through" : "text-foreground"
                       )}>
                         {task.title}
                       </p>
-                      <div className="mt-1 flex items-center gap-2 text-[11px] text-muted-foreground">
+                      <div className="mt-1.5 flex items-center gap-2 text-[11px] text-muted-foreground">
                         <span
-                          className="inline-flex items-center gap-1"
+                          className="inline-flex items-center gap-1 font-medium"
                           style={{ color: TYPE_COLOR[task.type] }}
                         >
-                          <TypeIcon className="h-3 w-3" /> {task.category}
+                          {task.category}
                         </span>
-                        <span>·</span>
+                        <span className="text-border">·</span>
                         <span className="inline-flex items-center gap-1">
                           <Calendar className="h-3 w-3" /> {task.dueLabel}
                         </span>
                       </div>
                     </div>
-                    {/* Priority badge */}
-                    <span className={cn("flex-shrink-0 rounded-full px-1.5 py-0.5 text-[9px] font-bold", prio.bg, prio.text)}>
+                    {/* Priority badge — top right */}
+                    <span className={cn("flex-shrink-0 rounded-full px-2 py-0.5 text-[9px] font-bold", prio.bg, prio.text)}>
                       {prio.label}
                     </span>
                   </div>
