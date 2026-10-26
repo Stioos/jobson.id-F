@@ -2623,3 +2623,56 @@ Sidebar Solutions (10 distinct, listed in landing page sidebar):
 10. Professional Services → professional-services (Briefcase)
 
 Total: ~2,410 lines of new code across 2 new page files + 1 router update.
+
+---
+Task ID: PRO-SERVICES-LIGHT-THEME
+Agent: Main (Z.ai Code)
+
+Task: Remove dark mode from Pro Services page; maintain the theme view (emerald brand color). Remove all dark colors and make it use the theme color.
+
+Work Log:
+- Read /home/z/my-project/worklog.md to understand previous work
+- Read existing PublicTechAIServices.tsx (706 lines) — confirmed it used dark theme (bg-slate-950, text-white, amber-500 accents)
+- Checked globals.css to confirm brand color is emerald (oklch 0.45 0.11 165) with bg-brand, text-brand, bg-card, bg-background, border-border, text-foreground, text-muted-foreground tokens available
+- Referenced PublicTalentSolutionSubPage.tsx for the light theme pattern (bg-background, bg-brand/10, text-brand, border-border)
+- Rewrote PublicTechAIServices.tsx (Pro Services landing page) — converted ALL dark classes to light theme:
+  - Root: bg-slate-950 text-white → bg-background text-foreground
+  - Hero: from-slate-950 via-slate-900 → from-brand/5 via-background; glow accents bg-amber-500/10 → bg-brand/10
+  - Badges: amber-500/10 text-amber-400 → brand/10 text-brand
+  - Headline gradient text-amber → text-brand
+  - Hero CTAs: bg-amber-500 → bg-brand text-brand-foreground
+  - Stat strip: text-amber-400 → text-brand
+  - Sticky search bar: bg-slate-950/90 → bg-background/90; input bg-slate-900 → bg-card; focus ring amber → brand
+  - Search dropdown: bg-slate-900 → bg-card; divide-slate-800 → divide-border; hover:bg-slate-800 → hover:bg-accent
+  - Category pills: active amber → active brand; inactive slate → border-border bg-card
+  - Category cards: bg-slate-900 border-slate-800 → bg-card border-border; hover:border-slate-700 → hover:border-brand/40; title hover text-amber-400 → text-brand; star fill-amber → fill-brand; CTA bg-amber-500 → bg-brand
+  - Tech stack strip: bg-slate-900/40 → bg-muted/40; badges bg-slate-900 → bg-card
+  - Bottom CTA banner: from-slate-900 via-slate-900 to-slate-950 → from-brand/10 via-brand/5 to-background; checkmarks text-amber-500 → text-brand; CTA bg-amber-500 → bg-brand
+- Read PublicServiceDetail.tsx (388 lines) — confirmed it also used dark theme
+- Converted PublicServiceDetail.tsx to light theme using MultiEdit (9 sequential edits):
+  - Hero section: bg-slate-950 → bg-background; gradient from-slate-950 via-slate-900 → from-brand/5 via-background; badge styling from inline accent → brand/10 text-brand; CTA bg-amber-500 → bg-brand text-brand-foreground
+  - Overview section: text-slate-400 → text-muted-foreground; bg-slate-900 border-slate-800 → bg-card border-border
+  - Features grid: bg-slate-900/40 → bg-muted/40; added rounded-xl border border-border bg-card to feature cards
+  - Technologies: removed inline accent styling, used border-border bg-card text-foreground
+  - Industries: bg-slate-900/40 → bg-muted/40; cards got rounded-xl border bg-card
+  - Related services: added card borders; chevron hover text-brand
+  - FAQ: bg-slate-900/40 → bg-muted/40; accordion wrapper bg-card border-border; text-slate-400 → text-muted-foreground
+  - Testimonials: added card styling; text-slate-400 → text-muted-foreground; border-t pt-4 → border-t border-border
+  - CTA: added rounded-2xl border; bg-brand text-brand-foreground on primary CTA; checkmarks text-foreground
+- Verified PublicServiceCategory.tsx and PublicProfessionalServiceDetail.tsx — already light themed (no dark classes), no changes needed
+- Ran `bun run lint` — 0 errors, only 6 pre-existing warnings in unrelated training files
+- Verified dev server running cleanly via dev.log tail
+- Used agent-browser to open http://localhost:3000/pro-services — page loaded successfully (HTTP 200)
+- Took full-page screenshot and used VLM to verify theme:
+  - VLM confirmed: "The theme is predominantly LIGHT. It uses a very pale, off-white or light gray background"
+  - VLM confirmed: "The primary accent color is Emerald/Green (specifically a deep forest green)"
+  - VLM confirmed: "There is NO amber or orange used on this page; the palette is strictly monochromatic with greens and grays"
+  - Hero: green "deploy one in 14 days" highlight, green "Get a Free Quote" button, ghost "Schedule Consultation"
+  - Cards: 3-column grid, green star ratings, green "Get a Quote" CTAs, tag pills with border
+- Verified service detail page (/pro-services/custom-software-development/saas-development) — VLM confirmed "light color theme with a clean white background" and "accent color is green"
+- Checked console — no errors, only HMR/Fast Refresh logs
+
+Stage Summary:
+- Pro Services landing page (PublicTechAIServices.tsx): FULLY converted from dark to light theme with emerald brand color. All slate-950/900/800 backgrounds → bg-background/bg-card/bg-muted. All amber-500/400 accents → bg-brand/text-brand. All text-white/text-slate-300/400 → text-foreground/text-muted-foreground. All border-slate-700/800 → border-border.
+- Service detail page (PublicServiceDetail.tsx): FULLY converted from dark to light theme with same emerald brand color scheme. All 9 sections (Hero, Overview, Features, Technologies, Industries, Related, FAQ, Testimonials, CTA) now use light cards with border-border, bg-card, bg-muted/40 alternating sections, bg-brand CTAs.
+- Lint: 0 errors. Dev server: running clean. Browser-verified: VLM confirms both pages are light-themed with emerald green accents, no amber/dark colors remain.

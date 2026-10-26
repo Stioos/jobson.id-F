@@ -94,12 +94,12 @@ export function PublicServiceDetail({
   const startingPrice = ILLUSTRATIVE_PRICE[category.slug] ?? 200000;
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white">
-      {/* ===================== HERO — dark, clean, single column (no breadcrumb, no split) ===================== */}
-      <section className="relative overflow-hidden border-b border-slate-800 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
-        <div aria-hidden className="pointer-events-none absolute -top-24 left-1/4 h-72 w-72 rounded-full blur-3xl" style={{ background: `${accent}15` }} />
+    <div className="min-h-screen bg-background text-foreground">
+      {/* ===================== HERO — light, clean, single column (no breadcrumb, no split) ===================== */}
+      <section className="relative overflow-hidden border-b border-border bg-gradient-to-b from-brand/5 via-background to-background">
+        <div aria-hidden className="pointer-events-none absolute -top-24 left-1/4 h-72 w-72 rounded-full bg-brand/10 blur-3xl" />
         <div className="relative mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-          <Badge className="mb-4 border text-xs font-semibold" style={{ color: accent, borderColor: `${accent}40`, backgroundColor: `${accent}15` }}>
+          <Badge className="mb-4 border border-brand/30 bg-brand/10 text-brand text-xs font-semibold hover:bg-brand/15">
             <CatIcon className="mr-1 h-3 w-3" /> {category.name}
           </Badge>
           <div className="flex items-start gap-4">
@@ -107,19 +107,19 @@ export function PublicServiceDetail({
               <SvcIcon className="h-7 w-7" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl lg:text-4xl">
+              <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl lg:text-4xl">
                 {service.name}
               </h1>
-              <p className="mt-3 max-w-2xl text-base text-slate-400">
+              <p className="mt-3 max-w-2xl text-base text-muted-foreground">
                 {service.shortDesc}
               </p>
             </div>
           </div>
           <div className="mt-6 flex flex-wrap gap-3">
-            <Button onClick={() => toast.success("Quote requested", { description: "A senior architect will reach out within 24 hours." })} className="gap-1.5 bg-amber-500 text-white hover:bg-amber-600">
+            <Button onClick={() => toast.success("Quote requested", { description: "A senior architect will reach out within 24 hours." })} className="gap-1.5 bg-brand text-brand-foreground hover:bg-brand/90">
               <Sparkles className="h-4 w-4" /> Get Quote
             </Button>
-            <Button variant="outline" onClick={() => navigate("public", "contact")} className="gap-1.5 border-slate-700 bg-slate-900 text-white hover:bg-slate-800 hover:text-white">
+            <Button variant="outline" onClick={() => navigate("public", "contact")} className="gap-1.5 border-border bg-card text-foreground hover:bg-accent hover:text-foreground">
               Talk to an expert <ArrowRight className="h-4 w-4" />
             </Button>
           </div>
@@ -130,32 +130,32 @@ export function PublicServiceDetail({
       <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid gap-8 lg:grid-cols-[1.4fr_1fr]">
           <div>
-            <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">Overview</h2>
-            <p className="mt-3 text-base leading-relaxed text-slate-400">
+            <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">Overview</h2>
+            <p className="mt-3 text-base leading-relaxed text-muted-foreground">
               {service.shortDesc}
             </p>
-            <p className="mt-3 text-base leading-relaxed text-slate-400">
+            <p className="mt-3 text-base leading-relaxed text-muted-foreground">
               {category.description}
             </p>
           </div>
-          <div className="rounded-xl border border-slate-800 bg-slate-900 p-5">
-            <h3 className="text-sm font-semibold text-white">At a glance</h3>
+          <div className="rounded-xl border border-border bg-card p-5">
+            <h3 className="text-sm font-semibold text-foreground">At a glance</h3>
             <dl className="mt-3 space-y-3 text-sm">
               <div className="flex items-center justify-between">
-                <dt className="text-slate-400">Category</dt>
-                <dd className="font-medium text-white">{category.name}</dd>
+                <dt className="text-muted-foreground">Category</dt>
+                <dd className="font-medium text-foreground">{category.name}</dd>
               </div>
               <div className="flex items-center justify-between">
-                <dt className="text-slate-400">Industries served</dt>
-                <dd className="font-medium">{category.industries.length}</dd>
+                <dt className="text-muted-foreground">Industries served</dt>
+                <dd className="font-medium text-foreground">{category.industries.length}</dd>
               </div>
               <div className="flex items-center justify-between">
-                <dt className="text-slate-400">Tech in stack</dt>
-                <dd className="font-medium">{category.techStack.length}</dd>
+                <dt className="text-muted-foreground">Tech in stack</dt>
+                <dd className="font-medium text-foreground">{category.techStack.length}</dd>
               </div>
               <div className="flex items-center justify-between">
-                <dt className="text-slate-400">Delivery steps</dt>
-                <dd className="font-medium">{category.processSteps.length}</dd>
+                <dt className="text-muted-foreground">Delivery steps</dt>
+                <dd className="font-medium text-foreground">{category.processSteps.length}</dd>
               </div>
             </dl>
           </div>
@@ -163,11 +163,11 @@ export function PublicServiceDetail({
       </section>
 
       {/* ===================== FEATURES GRID ===================== */}
-      <section className="border-y bg-slate-900/40">
+      <section className="border-y border-border bg-muted/40">
         <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
           <div className="mb-8">
-            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">What you get</h2>
-            <p className="mt-2 text-sm text-slate-400">
+            <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">What you get</h2>
+            <p className="mt-2 text-sm text-muted-foreground">
               Key capabilities and outcomes included with {service.name}.
             </p>
           </div>
@@ -175,15 +175,15 @@ export function PublicServiceDetail({
             {derivedFeatures.map((f, i) => {
               const FIcon = (ICON_MAP[f.icon] ?? Sparkles);
               return (
-                <div key={i} className="p-5">
+                <div key={i} className="rounded-xl border border-border bg-card p-5">
                   <div
                     className="flex h-10 w-10 items-center justify-center rounded-lg"
                     style={{ backgroundColor: `${accent}1A`, color: accent }}
                   >
                     <FIcon className="h-5 w-5" />
                   </div>
-                  <h3 className="mt-3 text-base font-semibold">{f.title}</h3>
-                  <p className="mt-1.5 text-sm text-slate-400">{f.desc}</p>
+                  <h3 className="mt-3 text-base font-semibold text-foreground">{f.title}</h3>
+                  <p className="mt-1.5 text-sm text-muted-foreground">{f.desc}</p>
                 </div>
               );
             })}
@@ -194,8 +194,8 @@ export function PublicServiceDetail({
       {/* ===================== TECHNOLOGIES ===================== */}
       <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="mb-6">
-          <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Technologies</h2>
-          <p className="mt-2 text-sm text-slate-400">
+          <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">Technologies</h2>
+          <p className="mt-2 text-sm text-muted-foreground">
             Tech we&apos;d typically deploy for this engagement.
           </p>
         </div>
@@ -204,8 +204,7 @@ export function PublicServiceDetail({
             <Badge
               key={tech}
               variant="outline"
-              className="border bg-background px-3 py-1.5 text-sm"
-              style={{ borderColor: `${accent}30`, color: accent }}
+              className="border-border bg-card px-3 py-1.5 text-sm text-foreground"
             >
               {tech}
             </Badge>
@@ -214,24 +213,24 @@ export function PublicServiceDetail({
       </section>
 
       {/* ===================== INDUSTRIES SERVED ===================== */}
-      <section className="border-t bg-slate-900/40">
+      <section className="border-t border-border bg-muted/40">
         <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
           <div className="mb-8">
-            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Industries we serve</h2>
-            <p className="mt-2 text-sm text-slate-400">
+            <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">Industries we serve</h2>
+            <p className="mt-2 text-sm text-muted-foreground">
               We&apos;ve delivered {service.name.toLowerCase()} across these verticals.
             </p>
           </div>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-3">
             {category.industries.map((ind, i) => (
-              <div key={i} className="flex items-center gap-3 p-4">
+              <div key={i} className="flex items-center gap-3 rounded-xl border border-border bg-card p-4">
                 <div
                   className="flex h-9 w-9 items-center justify-center rounded-lg"
                   style={{ backgroundColor: `${accent}1A`, color: accent }}
                 >
                   <Factory className="h-4 w-4" />
                 </div>
-                <span className="text-sm font-medium">{ind}</span>
+                <span className="text-sm font-medium text-foreground">{ind}</span>
               </div>
             ))}
           </div>
@@ -243,8 +242,8 @@ export function PublicServiceDetail({
         <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
           <div className="mb-6 flex items-end justify-between gap-4">
             <div>
-              <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Related services</h2>
-              <p className="mt-2 text-sm text-slate-400">
+              <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">Related services</h2>
+              <p className="mt-2 text-sm text-muted-foreground">
                 Other {category.name.toLowerCase()} services you may want to explore.
               </p>
             </div>
@@ -252,7 +251,7 @@ export function PublicServiceDetail({
               variant="outline"
               size="sm"
               onClick={() => navigate("public", `services/${category.slug}`)}
-              className="gap-1.5"
+              className="gap-1.5 border-border bg-card text-foreground hover:bg-accent hover:text-foreground"
             >
               View all <ChevronRight className="h-4 w-4" />
             </Button>
@@ -263,7 +262,7 @@ export function PublicServiceDetail({
               return (
                 <div
                   key={s.id}
-                  className="group cursor-pointer p-5 transition-all hover:-translate-y-0.5 hover:shadow-md"
+                  className="group cursor-pointer rounded-xl border border-border bg-card p-5 transition-all hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-md"
                   onClick={() => navigate("public", `services/${category.slug}/${s.slug}`)}
                 >
                   <div className="flex items-start justify-between gap-3">
@@ -273,10 +272,10 @@ export function PublicServiceDetail({
                     >
                       <RIcon className="h-5 w-5" />
                     </div>
-                    <ChevronRight className="h-4 w-4 text-slate-400 transition-transform group-hover:translate-x-0.5" />
+                    <ChevronRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-brand" />
                   </div>
-                  <h3 className="mt-3 text-sm font-semibold leading-tight">{s.name}</h3>
-                  <p className="mt-1.5 line-clamp-2 text-xs text-slate-400">{s.shortDesc}</p>
+                  <h3 className="mt-3 text-sm font-semibold leading-tight text-foreground">{s.name}</h3>
+                  <p className="mt-1.5 line-clamp-2 text-xs text-muted-foreground">{s.shortDesc}</p>
                 </div>
               );
             })}
@@ -285,22 +284,22 @@ export function PublicServiceDetail({
       )}
 
       {/* ===================== FAQ ===================== */}
-      <section className="border-t bg-slate-900/40">
+      <section className="border-t border-border bg-muted/40">
         <div className="mx-auto max-w-3xl px-4 py-14 sm:px-6 lg:px-8">
           <div className="mb-8 text-center">
-            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">FAQ</h2>
-            <p className="mt-2 text-sm text-slate-400">
+            <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">FAQ</h2>
+            <p className="mt-2 text-sm text-muted-foreground">
               Common questions about this service.
             </p>
           </div>
-          <div className="p-2">
+          <div className="rounded-xl border border-border bg-card p-2">
             <Accordion type="single" collapsible className="w-full">
               {category.faqs.slice(0, 4).map((f, i) => (
                 <AccordionItem key={i} value={`item-${i}`} className="px-4">
-                  <AccordionTrigger className="text-left text-sm font-medium hover:no-underline">
+                  <AccordionTrigger className="text-left text-sm font-medium text-foreground hover:no-underline">
                     {f.q}
                   </AccordionTrigger>
-                  <AccordionContent className="text-sm text-slate-400">
+                  <AccordionContent className="text-sm text-muted-foreground">
                     {f.a}
                   </AccordionContent>
                 </AccordionItem>
@@ -313,21 +312,21 @@ export function PublicServiceDetail({
       {/* ===================== TESTIMONIALS ===================== */}
       <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="mb-8">
-          <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">What clients say</h2>
-          <p className="mt-2 text-sm text-slate-400">
+          <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">What clients say</h2>
+          <p className="mt-2 text-sm text-muted-foreground">
             Real outcomes from teams who engaged {category.name}.
           </p>
         </div>
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           {category.testimonials.slice(0, 2).map((t, i) => (
-            <div key={i} className="flex h-full flex-col p-6">
+            <div key={i} className="flex h-full flex-col rounded-xl border border-border bg-card p-6">
               <Quote className="h-6 w-6" style={{ color: accent }} />
-              <p className="mt-3 flex-1 text-sm leading-relaxed text-slate-400">
+              <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
                 &ldquo;{t.text}&rdquo;
               </p>
-              <div className="mt-4 border-t pt-4">
-                <p className="text-sm font-semibold">{t.name}</p>
-                <p className="text-xs text-slate-400">
+              <div className="mt-4 border-t border-border pt-4">
+                <p className="text-sm font-semibold text-foreground">{t.name}</p>
+                <p className="text-xs text-muted-foreground">
                   {t.role} · {t.company}
                 </p>
               </div>
@@ -339,21 +338,21 @@ export function PublicServiceDetail({
       {/* ===================== CTA ===================== */}
       <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
         <div
-          className="overflow-hidden p-8 sm:p-12"
+          className="overflow-hidden rounded-2xl border p-8 sm:p-12"
           style={{ borderColor: `${accent}40`, background: `linear-gradient(135deg, ${accent}10, transparent)` }}
         >
           <div className="grid items-center gap-6 lg:grid-cols-2">
             <div>
-              <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
+              <h2 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
                 Engage us for {service.name}
               </h2>
-              <p className="mt-3 text-sm text-slate-400">
+              <p className="mt-3 text-sm text-muted-foreground">
                 Tell us your goals, current stack, and timeline. We&apos;ll come back with a fixed-scope
                 proposal or a flexible retainer plan within one business day.
               </p>
               <ul className="mt-5 grid gap-2 text-sm sm:grid-cols-2">
                 {["Free 45-min consultation", "Senior-led team", "NDA-ready in 24 hours", "Milestone-based billing"].map((b) => (
-                  <li key={b} className="flex items-center gap-2 text-slate-400">
+                  <li key={b} className="flex items-center gap-2 text-foreground">
                     <CheckCircle2 className="h-4 w-4" style={{ color: accent }} /> {b}
                   </li>
                 ))}
@@ -367,7 +366,7 @@ export function PublicServiceDetail({
                     description: "A senior architect will reach out within 24 hours.",
                   })
                 }
-                className="gap-1.5"
+                className="gap-1.5 bg-brand text-brand-foreground hover:bg-brand/90"
               >
                 <Sparkles className="h-4 w-4" /> Get Quote
               </Button>
@@ -375,7 +374,7 @@ export function PublicServiceDetail({
                 size="lg"
                 variant="outline"
                 onClick={() => navigate("public", "contact")}
-                className="gap-1.5"
+                className="gap-1.5 border-border bg-card text-foreground hover:bg-accent hover:text-foreground"
               >
                 Contact Sales <ArrowRight className="h-4 w-4" />
               </Button>

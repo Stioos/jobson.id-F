@@ -1,18 +1,38 @@
 ▲ Next.js 16.1.3 (Turbopack)
 - Local:         http://localhost:3000
-- Network:       http://21.0.2.82:3000
+- Network:       http://21.0.5.120:3000
 - Environments: .env
 - Experiments (use with caution):
   · optimizePackageImports
 
 ✓ Starting...
-✓ Ready in 2.2s
+Attention: Next.js now collects completely anonymous telemetry regarding usage.
+This information is used to shape Next.js' roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+https://nextjs.org/telemetry
+
+✓ Ready in 663ms
 ○ Compiling / ...
- GET / 200 in 15.9s (compile: 15.5s, render: 410ms)
- GET /pro-services/custom-software-development/enterprise-web-applications 200 in 16.1s (compile: 16.1s, render: 86ms)
- GET /favicon.ico 200 in 334ms (compile: 168ms, render: 165ms)
- GET /pro-services 200 in 173ms (compile: 73ms, render: 101ms)
- GET /favicon.ico 200 in 246ms (compile: 8ms, render: 237ms)
- GET /pro-services/custom-software-development/enterprise-web-applications 200 in 275ms (compile: 70ms, render: 205ms)
- GET /favicon.ico 200 in 365ms (compile: 95ms, render: 270ms)
+ GET / 200 in 5.0s (compile: 3.8s, render: 1246ms)
+ GET / 200 in 29.1s (compile: 28.1s, render: 962ms)
+ GET /programs/forward-deployed-engineer 200 in 29.1s (compile: 28.9s, render: 154ms)
+ GET /pro-services/custom-software-development/saas-development 200 in 29.1s (compile: 29.0s, render: 155ms)
+ GET / 200 in 59ms (compile: 7ms, render: 52ms)
+ GET / 200 in 40ms (compile: 6ms, render: 34ms)
+ GET /favicon.ico 200 in 828ms (compile: 706ms, render: 122ms)
+ GET /favicon.ico 200 in 298ms (compile: 64ms, render: 233ms)
+ GET /favicon.ico 200 in 148ms (compile: 61ms, render: 87ms)
+ GET /favicon.ico 200 in 142ms (compile: 6ms, render: 136ms)
+ GET /pro-services/custom-software-development/saas-development 200 in 314ms (compile: 74ms, render: 240ms)
+ GET /favicon.ico 200 in 92ms (compile: 43ms, render: 48ms)
+ GET /favicon.ico 200 in 103ms (compile: 50ms, render: 53ms)
  GET / 200 in 52ms (compile: 5ms, render: 47ms)
+ GET /favicon.ico 200 in 127ms (compile: 46ms, render: 80ms)
+ GET / 200 in 60ms (compile: 5ms, render: 55ms)
+✓ Compiled in 455ms
+✓ Compiled in 660ms
+ GET /pro-services 200 in 446ms (compile: 152ms, render: 294ms)
+ GET /favicon.ico 200 in 234ms (compile: 15ms, render: 219ms)
+ GET /pro-services/custom-software-development/saas-development 200 in 138ms (compile: 58ms, render: 81ms)
+ GET /favicon.ico 200 in 141ms (compile: 4ms, render: 137ms)
+✓ Compiled in 473ms

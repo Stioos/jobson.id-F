@@ -140,7 +140,7 @@ const CATEGORY_META: Record<string, CategoryMeta> = {
 };
 
 // ============================================================
-// MAIN PAGE
+// MAIN PAGE — light theme, emerald brand accent
 // ============================================================
 export function PublicTechAIServices() {
   const { navigate } = useNav();
@@ -178,37 +178,37 @@ export function PublicTechAIServices() {
       : serviceCategories.find((c) => c.slug === activeCategory)?.name ?? "All Categories";
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white">
+    <div className="min-h-screen bg-background text-foreground">
       {/* ============================================================
-          HERO — dark navy with value prop
+          HERO — light theme with brand emerald accents
           ============================================================ */}
-      <section className="relative overflow-hidden border-b border-slate-800 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+      <section className="relative overflow-hidden border-b border-border bg-gradient-to-b from-brand/5 via-background to-background">
         {/* Background glow accents */}
         <div
           aria-hidden
-          className="pointer-events-none absolute -top-24 left-1/4 h-72 w-72 rounded-full bg-amber-500/10 blur-3xl"
+          className="pointer-events-none absolute -top-24 left-1/4 h-72 w-72 rounded-full bg-brand/10 blur-3xl"
         />
         <div
           aria-hidden
-          className="pointer-events-none absolute -top-32 right-1/4 h-80 w-80 rounded-full bg-emerald-500/10 blur-3xl"
+          className="pointer-events-none absolute -top-32 right-1/4 h-80 w-80 rounded-full bg-brand/5 blur-3xl"
         />
 
         <div className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
           {/* Headline */}
           <div className="max-w-3xl">
             <div className="mb-5 flex flex-wrap items-center gap-2">
-              <Badge className="gap-1 border border-amber-500/30 bg-amber-500/10 text-amber-400 hover:bg-amber-500/15">
+              <Badge className="gap-1 border border-brand/30 bg-brand/10 text-brand hover:bg-brand/15">
                 <Sparkles className="h-3 w-3" /> Pro Services Marketplace
               </Badge>
               <Badge
                 variant="outline"
-                className="gap-1 border-slate-700 bg-slate-900/60 text-slate-300"
+                className="gap-1 border-border bg-card text-muted-foreground"
               >
                 <Briefcase className="h-3 w-3" /> {totalServices} Services
               </Badge>
               <Badge
                 variant="outline"
-                className="gap-1 border-slate-700 bg-slate-900/60 text-slate-300"
+                className="gap-1 border-border bg-card text-muted-foreground"
               >
                 <ShieldCheck className="h-3 w-3" /> Pay After Delivery
               </Badge>
@@ -216,11 +216,9 @@ export function PublicTechAIServices() {
 
             <h1 className="text-3xl font-bold tracking-tight text-balance sm:text-4xl lg:text-5xl">
               Don&apos;t build a team —{" "}
-              <span className="bg-gradient-to-r from-amber-400 to-amber-500 bg-clip-text text-transparent">
-                deploy one in 14 days
-              </span>
+              <span className="text-brand">deploy one in 14 days</span>
             </h1>
-            <p className="mt-5 max-w-2xl text-base text-slate-300 sm:text-lg">
+            <p className="mt-5 max-w-2xl text-base text-muted-foreground sm:text-lg">
               Nine specialized categories. {totalServices} production-ready services.
               Senior architects who ship in weeks — with milestone pricing and pay-after-delivery terms.
             </p>
@@ -234,7 +232,7 @@ export function PublicTechAIServices() {
                     description: "Our solutions team will reach out within 24 hours.",
                   })
                 }
-                className="gap-1.5 bg-amber-500 text-white hover:bg-amber-600"
+                className="gap-1.5 bg-brand text-brand-foreground hover:bg-brand/90"
               >
                 Get a Free Quote <ArrowRight className="h-4 w-4" />
               </Button>
@@ -242,7 +240,7 @@ export function PublicTechAIServices() {
                 size="lg"
                 variant="outline"
                 onClick={() => navigate("public", "contact")}
-                className="gap-1.5 border-slate-700 bg-slate-900/60 text-white hover:bg-slate-800 hover:text-white"
+                className="gap-1.5 border-border bg-card text-foreground hover:bg-accent hover:text-foreground"
               >
                 Schedule Consultation
               </Button>
@@ -250,7 +248,7 @@ export function PublicTechAIServices() {
           </div>
 
           {/* Bottom stat strip */}
-          <div className="mt-12 grid grid-cols-2 gap-4 border-t border-slate-800 pt-8 sm:grid-cols-4">
+          <div className="mt-12 grid grid-cols-2 gap-4 border-t border-border pt-8 sm:grid-cols-4">
             <HeroStat value={`${totalServices}+`} label="Specialized services" />
             <HeroStat value="14 days" label="To first deployment" />
             <HeroStat value="25+" label="Countries served" />
@@ -262,12 +260,12 @@ export function PublicTechAIServices() {
       {/* ============================================================
           SEARCH + CATEGORY FILTER BAR
           ============================================================ */}
-      <section className="sticky top-0 z-40 border-b border-slate-800 bg-slate-950/90 backdrop-blur supports-[backdrop-filter]:bg-slate-950/70">
+      <section className="sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/70">
         <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
           <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:gap-4">
             {/* Live search */}
             <div className="relative w-full lg:max-w-md" ref={searchRef}>
-              <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+              <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <Input
                 value={query}
                 onChange={(e) => {
@@ -276,16 +274,16 @@ export function PublicTechAIServices() {
                 }}
                 onFocus={() => setShowResults(true)}
                 placeholder={`Search all ${totalServices} services — try 'AI agents', 'React', 'data engineering'…`}
-                className="border-slate-700 bg-slate-900 pl-9 text-white placeholder:text-slate-500 focus-visible:border-amber-500 focus-visible:ring-amber-500/20"
+                className="border-border bg-card pl-9 text-foreground placeholder:text-muted-foreground focus-visible:border-brand focus-visible:ring-brand/20"
               />
               {showResults && query.trim() && (
-                <div className="absolute left-0 right-0 top-full z-50 mt-2 max-h-96 overflow-y-auto rounded-xl border border-slate-800 bg-slate-900 shadow-2xl shadow-black/40">
+                <div className="absolute left-0 right-0 top-full z-50 mt-2 max-h-96 overflow-y-auto rounded-xl border border-border bg-card shadow-xl">
                   {searchResults.length === 0 ? (
-                    <div className="p-4 text-sm text-slate-400">
+                    <div className="p-4 text-sm text-muted-foreground">
                       No services match &ldquo;{query}&rdquo;.
                     </div>
                   ) : (
-                    <ul className="divide-y divide-slate-800">
+                    <ul className="divide-y divide-border">
                       {searchResults.map(({ service, category }) => {
                         const SvcIcon = ICON_MAP[service.icon] ?? Sparkles;
                         return (
@@ -296,7 +294,7 @@ export function PublicTechAIServices() {
                                 setQuery("");
                                 setShowResults(false);
                               }}
-                              className="flex w-full items-start gap-3 px-4 py-3 text-left transition-colors hover:bg-slate-800/60"
+                              className="flex w-full items-start gap-3 px-4 py-3 text-left transition-colors hover:bg-accent"
                             >
                               <span
                                 className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg"
@@ -308,10 +306,10 @@ export function PublicTechAIServices() {
                                 <SvcIcon className="h-4 w-4" />
                               </span>
                               <div className="min-w-0 flex-1">
-                                <p className="truncate text-sm font-medium text-white">
+                                <p className="truncate text-sm font-medium text-foreground">
                                   {service.name}
                                 </p>
-                                <p className="mt-0.5 line-clamp-1 text-xs text-slate-400">
+                                <p className="mt-0.5 line-clamp-1 text-xs text-muted-foreground">
                                   {service.shortDesc}
                                 </p>
                                 <p
@@ -321,7 +319,7 @@ export function PublicTechAIServices() {
                                   {category.name}
                                 </p>
                               </div>
-                              <ChevronRight className="mt-2 h-4 w-4 shrink-0 text-slate-500" />
+                              <ChevronRight className="mt-2 h-4 w-4 shrink-0 text-muted-foreground" />
                             </button>
                           </li>
                         );
@@ -367,7 +365,7 @@ export function PublicTechAIServices() {
                 ? "Explore our 9 service categories"
                 : activeCatName}
             </h2>
-            <p className="mt-2 text-sm text-slate-400">
+            <p className="mt-2 text-sm text-muted-foreground">
               Each category contains specialized services, real tech stacks, and proven delivery processes.
             </p>
           </div>
@@ -376,7 +374,7 @@ export function PublicTechAIServices() {
               variant="outline"
               size="sm"
               onClick={() => setActiveCategory("all")}
-              className="gap-1.5 border-slate-700 bg-slate-900 text-white hover:bg-slate-800 hover:text-white"
+              className="gap-1.5 border-border bg-card text-foreground hover:bg-accent hover:text-foreground"
             >
               <ChevronLeft className="h-4 w-4" /> All categories
             </Button>
@@ -384,13 +382,13 @@ export function PublicTechAIServices() {
         </div>
 
         {visibleCategories.length === 0 ? (
-          <div className="rounded-xl border border-slate-800 bg-slate-900 p-12 text-center">
-            <p className="text-sm text-slate-400">No categories match.</p>
+          <div className="rounded-xl border border-border bg-card p-12 text-center">
+            <p className="text-sm text-muted-foreground">No categories match.</p>
             <Button
               size="sm"
               variant="outline"
               onClick={() => setActiveCategory("all")}
-              className="mt-3 border-slate-700 bg-slate-900 text-white hover:bg-slate-800 hover:text-white"
+              className="mt-3 border-border bg-card text-foreground hover:bg-accent hover:text-foreground"
             >
               Reset filter
             </Button>
@@ -428,21 +426,21 @@ export function PublicTechAIServices() {
           BOTTOM CTA BANNER
           ============================================================ */}
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="relative overflow-hidden rounded-2xl border border-slate-800 bg-gradient-to-br from-slate-900 via-slate-900 to-slate-950 p-8 sm:p-12">
+        <div className="relative overflow-hidden rounded-2xl border border-brand/20 bg-gradient-to-br from-brand/10 via-brand/5 to-background p-8 sm:p-12">
           <div
             aria-hidden
-            className="pointer-events-none absolute -top-16 right-0 h-64 w-64 rounded-full bg-amber-500/15 blur-3xl"
+            className="pointer-events-none absolute -top-16 right-0 h-64 w-64 rounded-full bg-brand/15 blur-3xl"
           />
           <div
             aria-hidden
-            className="pointer-events-none absolute -bottom-20 left-0 h-64 w-64 rounded-full bg-emerald-500/10 blur-3xl"
+            className="pointer-events-none absolute -bottom-20 left-0 h-64 w-64 rounded-full bg-brand/10 blur-3xl"
           />
           <div className="relative grid items-center gap-6 lg:grid-cols-[1.5fr_1fr]">
             <div>
               <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
                 Need something bespoke? Our architects scope custom solutions within 24 hours.
               </h2>
-              <p className="mt-3 text-sm text-slate-300 sm:text-base">
+              <p className="mt-3 text-sm text-muted-foreground sm:text-base">
                 Tell us your goals, current stack, and timeline. We&apos;ll recommend the right
                 combination of services — and a delivery plan that fits your budget.
               </p>
@@ -453,8 +451,8 @@ export function PublicTechAIServices() {
                   "Senior architects, not juniors",
                   "NDA-ready in 24 hours",
                 ].map((b) => (
-                  <li key={b} className="flex items-center gap-2 text-slate-300">
-                    <CheckCircle2 className="h-4 w-4 flex-shrink-0 text-amber-500" /> {b}
+                  <li key={b} className="flex items-center gap-2 text-foreground">
+                    <CheckCircle2 className="h-4 w-4 flex-shrink-0 text-brand" /> {b}
                   </li>
                 ))}
               </ul>
@@ -467,7 +465,7 @@ export function PublicTechAIServices() {
                     description: "We'll reach out within one business day.",
                   })
                 }
-                className="gap-1.5 bg-amber-500 text-white hover:bg-amber-600"
+                className="gap-1.5 bg-brand text-brand-foreground hover:bg-brand/90"
               >
                 <Sparkles className="h-4 w-4" /> Request a Consultation
               </Button>
@@ -475,7 +473,7 @@ export function PublicTechAIServices() {
                 size="lg"
                 variant="outline"
                 onClick={() => navigate("public", "contact")}
-                className="gap-1.5 border-slate-700 bg-slate-900/60 text-white hover:bg-slate-800 hover:text-white"
+                className="gap-1.5 border-border bg-card text-foreground hover:bg-accent hover:text-foreground"
               >
                 Contact Sales <ArrowRight className="h-4 w-4" />
               </Button>
@@ -493,8 +491,8 @@ export function PublicTechAIServices() {
 function HeroStat({ value, label }: { value: string; label: string }) {
   return (
     <div className="text-center sm:text-left">
-      <div className="text-3xl font-bold text-amber-400 sm:text-4xl">{value}</div>
-      <div className="mt-1 text-[10px] font-semibold uppercase tracking-widest text-slate-400 sm:text-xs">
+      <div className="text-3xl font-bold text-brand sm:text-4xl">{value}</div>
+      <div className="mt-1 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground sm:text-xs">
         {label}
       </div>
     </div>
@@ -523,16 +521,16 @@ function CategoryPill({
       className={[
         "flex shrink-0 items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-medium transition-all",
         active
-          ? "border-amber-500 bg-amber-500 text-white"
-          : "border-slate-700 bg-slate-900 text-slate-300 hover:border-slate-600 hover:bg-slate-800 hover:text-white",
+          ? "border-brand bg-brand text-brand-foreground"
+          : "border-border bg-card text-muted-foreground hover:border-brand hover:bg-accent hover:text-foreground",
       ].join(" ")}
-      style={active && accent ? { backgroundColor: accent, borderColor: accent } : undefined}
+      style={active && accent ? { backgroundColor: accent, borderColor: accent, color: "#fff" } : undefined}
     >
       <span>{label}</span>
       <span
         className={[
           "rounded-full px-1.5 py-0.5 text-[9px] font-bold",
-          active ? "bg-white/20 text-white" : "bg-slate-800 text-slate-400",
+          active ? "bg-white/20 text-white" : "bg-muted text-muted-foreground",
         ].join(" ")}
       >
         {count}
@@ -543,7 +541,7 @@ function CategoryPill({
 
 // ============================================================
 // CATEGORY CARD — marketplace-style card with image, two-line title,
-// metadata, tag pills, and amber CTA + outline CTA
+// metadata, tag pills, and brand CTA + outline CTA
 // ============================================================
 function CategoryCard({
   cat,
@@ -562,13 +560,13 @@ function CategoryCard({
   const titleLines = meta.attractiveTitle.split("\n");
 
   return (
-    <article className="group flex h-full flex-col rounded-xl border border-slate-800 bg-slate-900 p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-slate-700 hover:shadow-xl hover:shadow-black/40">
+    <article className="group flex h-full flex-col rounded-xl border border-border bg-card p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-xl hover:shadow-brand/5">
       {/* Top row: image + count badge */}
       <div className="mb-4 flex items-start justify-between gap-3">
         <button
           onClick={onExplore}
           aria-label={`Explore ${cat.name}`}
-          className="relative h-16 w-16 shrink-0 overflow-hidden rounded-xl ring-1 ring-slate-700 transition-transform group-hover:scale-105"
+          className="relative h-16 w-16 shrink-0 overflow-hidden rounded-xl ring-1 ring-border transition-transform group-hover:scale-105"
           style={{ backgroundColor: `${cat.color}22` }}
         >
           <Image
@@ -581,7 +579,7 @@ function CategoryCard({
         </button>
         <Badge
           variant="outline"
-          className="border-slate-700 bg-slate-800/60 text-xs font-semibold text-slate-300"
+          className="border-border bg-muted text-xs font-semibold text-muted-foreground"
         >
           {cat.services.length} services
         </Badge>
@@ -590,7 +588,7 @@ function CategoryCard({
       {/* Two-line attractive title */}
       <button
         onClick={onExplore}
-        className="text-left text-lg font-bold leading-tight text-white transition-colors group-hover:text-amber-400"
+        className="text-left text-lg font-bold leading-tight text-foreground transition-colors group-hover:text-brand"
       >
         {titleLines.map((line, i) => (
           <span key={i} className="block">
@@ -600,26 +598,26 @@ function CategoryCard({
       </button>
 
       {/* Short description */}
-      <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-slate-400">
+      <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-muted-foreground">
         {meta.shortDesc}
       </p>
 
       {/* Metadata row: project type · duration · rating */}
-      <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs text-slate-400">
+      <div className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs text-muted-foreground">
         <span className="inline-flex items-center gap-1">
-          <Briefcase className="h-3.5 w-3.5 text-slate-500" />
+          <Briefcase className="h-3.5 w-3.5 text-muted-foreground" />
           {meta.projectType}
         </span>
-        <span className="text-slate-600">·</span>
+        <span className="text-border">·</span>
         <span className="inline-flex items-center gap-1">
-          <Clock className="h-3.5 w-3.5 text-slate-500" />
+          <Clock className="h-3.5 w-3.5 text-muted-foreground" />
           {meta.duration}
         </span>
-        <span className="text-slate-600">·</span>
+        <span className="text-border">·</span>
         <span className="inline-flex items-center gap-1">
-          <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
-          <span className="font-semibold text-amber-400">{meta.rating.toFixed(1)}</span>
-          <span className="text-slate-500">({meta.reviews} reviews)</span>
+          <Star className="h-3.5 w-3.5 fill-brand text-brand" />
+          <span className="font-semibold text-brand">{meta.rating.toFixed(1)}</span>
+          <span className="text-muted-foreground">({meta.reviews} reviews)</span>
         </span>
       </div>
 
@@ -628,7 +626,7 @@ function CategoryCard({
         {meta.tags.map((tag) => (
           <span
             key={tag}
-            className="rounded-full border border-slate-700 bg-slate-800/60 px-2.5 py-0.5 text-[11px] font-medium text-slate-300"
+            className="rounded-full border border-border bg-muted px-2.5 py-0.5 text-[11px] font-medium text-muted-foreground"
           >
             {tag}
           </span>
@@ -640,7 +638,7 @@ function CategoryCard({
         <Button
           onClick={onQuote}
           size="sm"
-          className="flex-1 gap-1.5 bg-amber-500 text-white hover:bg-amber-600"
+          className="flex-1 gap-1.5 bg-brand text-brand-foreground hover:bg-brand/90"
         >
           Get a Quote <ArrowRight className="h-4 w-4" />
         </Button>
@@ -648,7 +646,7 @@ function CategoryCard({
           onClick={onConsult}
           size="sm"
           variant="outline"
-          className="flex-1 gap-1.5 border-slate-700 bg-transparent text-white hover:bg-slate-800 hover:text-white"
+          className="flex-1 gap-1.5 border-border bg-transparent text-foreground hover:bg-accent hover:text-foreground"
         >
           <Clock className="h-3.5 w-3.5" /> Consultation
         </Button>
@@ -667,13 +665,13 @@ function TechStackStrip() {
     []
   );
   return (
-    <section className="border-y border-slate-800 bg-slate-900/40">
+    <section className="border-y border-border bg-muted/40">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="mb-6 text-center">
           <h2 className="text-xl font-bold tracking-tight sm:text-2xl">
             Tech stacks we work with
           </h2>
-          <p className="mt-2 text-sm text-slate-400">
+          <p className="mt-2 text-sm text-muted-foreground">
             A snapshot of the frameworks, platforms, and tools our delivery teams use every day.
           </p>
         </div>
@@ -682,13 +680,13 @@ function TechStackStrip() {
             <Badge
               key={tech}
               variant="outline"
-              className="border-slate-700 bg-slate-900 px-3 py-1 text-xs font-medium text-slate-300"
+              className="border-border bg-card px-3 py-1 text-xs font-medium text-muted-foreground"
             >
               {tech}
             </Badge>
           ))}
         </div>
-        <p className="mt-6 text-center text-xs text-slate-500">
+        <p className="mt-6 text-center text-xs text-muted-foreground">
           + many more across {serviceCategories.length} categories
         </p>
       </div>
