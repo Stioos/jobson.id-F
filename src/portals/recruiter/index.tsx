@@ -90,7 +90,7 @@ export function render(route: string): React.ReactNode {
   const top = route.split("/")[0] || "overview";
   switch (top) {
     case "overview": return <RecruiterOverview />;
-    case "tasks": return <TasksPage portal="recruiter" />;
+    case "tasks": return <TasksPage portal="recruiter" route={route} />;
     case "clients": return <RecruiterClients />;
     case "requisitions": return <RecruiterRequisitions />;
     case "candidates": return <RecruiterCandidates />;

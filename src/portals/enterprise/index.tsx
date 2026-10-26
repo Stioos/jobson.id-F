@@ -33,7 +33,7 @@ export function render(route: string): React.ReactNode {
     case "home":
     case "":
       return <EnterpriseOverview />;
-    case "tasks": return <TasksPage portal="enterprise" />;
+    case "tasks": return <TasksPage portal="enterprise" route={route} />;
     case "entities": return <EnterpriseEntities />;
     case "teams": return <EnterpriseTeams />;
     case "headcount": return <EnterpriseHeadcount />;

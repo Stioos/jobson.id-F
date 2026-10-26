@@ -217,7 +217,7 @@ const PORTAL_CONTEXT: Record<Portal, { title: string; subtitle: string; newLabel
 // ============================================================
 // MAIN COMPONENT — TasksPage
 // ============================================================
-export function TasksPage({ portal }: { portal: Portal }) {
+export function TasksPage({ portal, route = "tasks" }: { portal: Portal; route?: string }) {
   const ctx = PORTAL_CONTEXT[portal] ?? PORTAL_CONTEXT.candidate;
   const [tasks, setTasks] = React.useState<Task[]>(TASKS);
   const [statusFilter, setStatusFilter] = React.useState<TaskStatus | "all">("all");
@@ -225,14 +225,36 @@ export function TasksPage({ portal }: { portal: Portal }) {
   const [search, setSearch] = React.useState("");
   const [selectedId, setSelectedId] = React.useState<number | null>(TASKS[0].id);
 
+  // Derive the task type filter from the route (e.g., "tasks/calls" → "call")
+  const typeFilter = React.useMemo<TaskType | "all">(() => {
+    const sub = route.split("/")[1];
+    if (sub === "calls") return "call";
+    if (sub === "emails") return "email";
+    if (sub === "meetings") return "meeting";
+    if (sub === "follow-ups") return "follow-up";
+    return "all";
+  }, [route]);
+
+  // Sub-title based on the type filter
+  const typeLabel = React.useMemo(() => {
+    switch (typeFilter) {
+      case "call": return "All call tasks";
+      case "email": return "All email tasks";
+      case "meeting": return "All meeting tasks";
+      case "follow-up": return "All follow-up tasks";
+      default: return ctx.subtitle;
+    }
+  }, [typeFilter, ctx.subtitle]);
+
   const filtered = React.useMemo(() => {
     return tasks.filter((t) => {
+      if (typeFilter !== "all" && t.type !== typeFilter) return false;
       if (statusFilter !== "all" && t.status !== statusFilter) return false;
       if (priorityFilter !== "all" && t.priority !== priorityFilter) return false;
       if (search.trim() && !t.title.toLowerCase().includes(search.toLowerCase())) return false;
       return true;
     });
-  }, [tasks, statusFilter, priorityFilter, search]);
+  }, [tasks, typeFilter, statusFilter, priorityFilter, search]);
 
   const selected = tasks.find((t) => t.id === selectedId) ?? null;
 
@@ -291,7 +313,7 @@ export function TasksPage({ portal }: { portal: Portal }) {
             <h1 className="text-xl font-bold tracking-tight sm:text-2xl">{ctx.title}</h1>
             <Badge className="bg-brand/10 text-brand">{tasks.length}</Badge>
           </div>
-          <p className="mt-1 text-sm text-muted-foreground">{ctx.subtitle}</p>
+          <p className="mt-1 text-sm text-muted-foreground">{typeLabel}</p>
         </div>
         <div className="flex items-center gap-2">
           <div className="relative">

@@ -81,7 +81,7 @@ export function render(route: string): React.ReactNode {
     case "home":
     case "":
       return <PartnerOverview />;
-    case "tasks": return <TasksPage portal="partner" />;
+    case "tasks": return <TasksPage portal="partner" route={route} />;
     case "analytics": return <PartnerAnalytics />;
     case "reports": return <PartnerAnalytics />;
     case "revenue": return <PartnerRevenue />;

@@ -73,7 +73,7 @@ export function render(route: string): React.ReactNode {
   const head = (route ?? "overview").split("/")[0];
   switch (head) {
     case "overview": return <CandidateOverview />;
-    case "tasks": return <TasksPage portal="candidate" />;
+    case "tasks": return <TasksPage portal="candidate" route={route} />;
     case "profile": return <CandidateProfile />;
     case "resume": return <CandidateResume />;
     case "find-jobs": return <CandidateFindJobs />;

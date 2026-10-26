@@ -80,7 +80,7 @@ export function render(route: string): React.ReactNode {
   const root = route.split("/")[0] ?? "overview";
   switch (root) {
     case "overview": return <EmployerOverview />;
-    case "tasks": return <TasksPage portal="employer" />;
+    case "tasks": return <TasksPage portal="employer" route={route} />;
     case "company-profile": return <EmployerCompanyProfile />;
     case "branding": return <EmployerBranding />;
     case "jobs": return <EmployerJobs />;

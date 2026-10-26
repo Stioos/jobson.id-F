@@ -67,8 +67,16 @@ export const portalConfigs: Record<Portal, PortalConfig> = {
         items: [
           //Dashboard—LEAF(nosub-itemsdirectlink),
           { key: "overview", label: "Dashboard", icon: "LayoutDashboard" },
-          //Tasks—LEAF(sharedtaskmanagementforallportals),
-          { key: "tasks", label: "Tasks", icon: "CheckSquare", badge: "6" },
+          //Tasks—MAIN(sharedtaskmanagementwithsub-sidebarforallportals),
+          {
+            key: "tasks-grp", label: "Tasks", icon: "CheckSquare", badge: "6", children: [
+              { key: "tasks", label: "All Tasks", icon: "ListChecks" },
+              { key: "tasks/calls", label: "Calls", icon: "Phone" },
+              { key: "tasks/emails", label: "Emails", icon: "Mail" },
+              { key: "tasks/meetings", label: "Meetings", icon: "Video" },
+              { key: "tasks/follow-ups", label: "Follow-ups", icon: "ArrowUpRight" },
+            ],
+          },
           //Profile—NEWMAIN(profile-relatedpagesmovedherefromDashboard),
           {
             key: "profile-grp", label: "Profile", icon: "User", children: [
@@ -158,8 +166,16 @@ export const portalConfigs: Record<Portal, PortalConfig> = {
         items: [
           //Dashboard—LEAF(nosub-itemsdirectlink),
           { key: "overview", label: "Dashboard", icon: "LayoutDashboard" },
-          //Tasks—LEAF(sharedtaskmanagementforallportals),
-          { key: "tasks", label: "Tasks", icon: "CheckSquare", badge: "6" },
+          //Tasks—MAIN(sharedtaskmanagementwithsub-sidebarforallportals),
+          {
+            key: "tasks-grp", label: "Tasks", icon: "CheckSquare", badge: "6", children: [
+              { key: "tasks", label: "All Tasks", icon: "ListChecks" },
+              { key: "tasks/calls", label: "Calls", icon: "Phone" },
+              { key: "tasks/emails", label: "Emails", icon: "Mail" },
+              { key: "tasks/meetings", label: "Meetings", icon: "Video" },
+              { key: "tasks/follow-ups", label: "Follow-ups", icon: "ArrowUpRight" },
+            ],
+          },
           {
             key: "hiring", label: "Hiring", icon: "Briefcase", children: [
               { key: "jobs", label: "Jobs", icon: "Briefcase" },
@@ -260,8 +276,16 @@ export const portalConfigs: Record<Portal, PortalConfig> = {
         items: [
           //Dashboard—LEAF(nosub-itemsdirectlink),
           { key: "overview", label: "Dashboard", icon: "LayoutDashboard" },
-          //Tasks—LEAF(sharedtaskmanagementforallportals),
-          { key: "tasks", label: "Tasks", icon: "CheckSquare", badge: "6" },
+          //Tasks—MAIN(sharedtaskmanagementwithsub-sidebarforallportals),
+          {
+            key: "tasks-grp", label: "Tasks", icon: "CheckSquare", badge: "6", children: [
+              { key: "tasks", label: "All Tasks", icon: "ListChecks" },
+              { key: "tasks/calls", label: "Calls", icon: "Phone" },
+              { key: "tasks/emails", label: "Emails", icon: "Mail" },
+              { key: "tasks/meetings", label: "Meetings", icon: "Video" },
+              { key: "tasks/follow-ups", label: "Follow-ups", icon: "ArrowUpRight" },
+            ],
+          },
           {
             key: "overview-grp", label: "Analytics & Intel", icon: "Gauge", children: [
               { key: "analytics", label: "Analytics Hub", icon: "Gauge" },
@@ -384,8 +408,16 @@ export const portalConfigs: Record<Portal, PortalConfig> = {
         items: [
           //Dashboard—LEAF(nosub-itemsdirectlink),
           { key: "overview", label: "Dashboard", icon: "LayoutDashboard" },
-          //Tasks—LEAF(sharedtaskmanagementforallportals),
-          { key: "tasks", label: "Tasks", icon: "CheckSquare", badge: "6" },
+          //Tasks—MAIN(sharedtaskmanagementwithsub-sidebarforallportals),
+          {
+            key: "tasks-grp", label: "Tasks", icon: "CheckSquare", badge: "6", children: [
+              { key: "tasks", label: "All Tasks", icon: "ListChecks" },
+              { key: "tasks/calls", label: "Calls", icon: "Phone" },
+              { key: "tasks/emails", label: "Emails", icon: "Mail" },
+              { key: "tasks/meetings", label: "Meetings", icon: "Video" },
+              { key: "tasks/follow-ups", label: "Follow-ups", icon: "ArrowUpRight" },
+            ],
+          },
           //1.Training(overviewremoved—it'snowtheDashboardleafabove),
           {
             key: "training-ops", label: "Training", icon: "GraduationCap", children: [
@@ -505,7 +537,15 @@ export const portalConfigs: Record<Portal, PortalConfig> = {
     accent: "bg-brand",
     sections: [{ title: "Main", items: [
       { key: "overview", label: "Overview", icon: "LayoutDashboard" },
-      { key: "tasks", label: "Tasks", icon: "CheckSquare", badge: "6" },
+      {
+        key: "tasks-grp", label: "Tasks", icon: "CheckSquare", badge: "6", children: [
+          { key: "tasks", label: "All Tasks", icon: "ListChecks" },
+          { key: "tasks/calls", label: "Calls", icon: "Phone" },
+          { key: "tasks/emails", label: "Emails", icon: "Mail" },
+          { key: "tasks/meetings", label: "Meetings", icon: "Video" },
+          { key: "tasks/follow-ups", label: "Follow-ups", icon: "ArrowUpRight" },
+        ],
+      },
     ] }],
   },
   enterprise: {
@@ -516,7 +556,15 @@ export const portalConfigs: Record<Portal, PortalConfig> = {
     accent: "bg-brand",
     sections: [{ title: "Main", items: [
       { key: "overview", label: "Overview", icon: "LayoutDashboard" },
-      { key: "tasks", label: "Tasks", icon: "CheckSquare", badge: "6" },
+      {
+        key: "tasks-grp", label: "Tasks", icon: "CheckSquare", badge: "6", children: [
+          { key: "tasks", label: "All Tasks", icon: "ListChecks" },
+          { key: "tasks/calls", label: "Calls", icon: "Phone" },
+          { key: "tasks/emails", label: "Emails", icon: "Mail" },
+          { key: "tasks/meetings", label: "Meetings", icon: "Video" },
+          { key: "tasks/follow-ups", label: "Follow-ups", icon: "ArrowUpRight" },
+        ],
+      },
     ] }],
   },
   admin: {
@@ -527,7 +575,15 @@ export const portalConfigs: Record<Portal, PortalConfig> = {
     accent: "bg-brand",
     sections: [{ title: "Main", items: [
       { key: "overview", label: "Overview", icon: "LayoutDashboard" },
-      { key: "tasks", label: "Tasks", icon: "CheckSquare", badge: "6" },
+      {
+        key: "tasks-grp", label: "Tasks", icon: "CheckSquare", badge: "6", children: [
+          { key: "tasks", label: "All Tasks", icon: "ListChecks" },
+          { key: "tasks/calls", label: "Calls", icon: "Phone" },
+          { key: "tasks/emails", label: "Emails", icon: "Mail" },
+          { key: "tasks/meetings", label: "Meetings", icon: "Video" },
+          { key: "tasks/follow-ups", label: "Follow-ups", icon: "ArrowUpRight" },
+        ],
+      },
     ] }],
   },
   learner: {
@@ -538,7 +594,15 @@ export const portalConfigs: Record<Portal, PortalConfig> = {
     accent: "bg-brand",
     sections: [{ title: "Main", items: [
       { key: "overview", label: "Overview", icon: "LayoutDashboard" },
-      { key: "tasks", label: "Tasks", icon: "CheckSquare", badge: "6" },
+      {
+        key: "tasks-grp", label: "Tasks", icon: "CheckSquare", badge: "6", children: [
+          { key: "tasks", label: "All Tasks", icon: "ListChecks" },
+          { key: "tasks/calls", label: "Calls", icon: "Phone" },
+          { key: "tasks/emails", label: "Emails", icon: "Mail" },
+          { key: "tasks/meetings", label: "Meetings", icon: "Video" },
+          { key: "tasks/follow-ups", label: "Follow-ups", icon: "ArrowUpRight" },
+        ],
+      },
     ] }],
   },
   // ============================================================
@@ -557,8 +621,16 @@ export const portalConfigs: Record<Portal, PortalConfig> = {
         items: [
           //Dashboard—LEAF(nosub-itemsdirectlink),
           { key: "overview", label: "Dashboard", icon: "LayoutDashboard" },
-          //Tasks—LEAF(sharedtaskmanagementforallportals),
-          { key: "tasks", label: "Tasks", icon: "CheckSquare", badge: "6" },
+          //Tasks—MAIN(sharedtaskmanagementwithsub-sidebarforallportals),
+          {
+            key: "tasks-grp", label: "Tasks", icon: "CheckSquare", badge: "6", children: [
+              { key: "tasks", label: "All Tasks", icon: "ListChecks" },
+              { key: "tasks/calls", label: "Calls", icon: "Phone" },
+              { key: "tasks/emails", label: "Emails", icon: "Mail" },
+              { key: "tasks/meetings", label: "Meetings", icon: "Video" },
+              { key: "tasks/follow-ups", label: "Follow-ups", icon: "ArrowUpRight" },
+            ],
+          },
           {
             key: "overview-grp", label: "Analytics & Reports", icon: "Gauge", children: [
               { key: "analytics", label: "Analytics Hub", icon: "Gauge" },

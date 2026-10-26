@@ -3316,3 +3316,108 @@ Stage Summary:
 - All 9 portal routers wired with `case "tasks"` route → shared TasksPage
 - Fixed nested button hydration error (outer button → div)
 - Lint: 0 errors. Browser-verified: Tasks page renders correctly in candidate portal with all sections visible. Console: clean.
+
+---
+Task ID: PASS-ROUTE-TO-TASKSPAGE
+Agent: Subagent (Pass Route to TasksPage)
+
+Task: Update all 9 portal router files to pass the `route` prop to the shared `TasksPage` component. TasksPage now accepts an optional `route` prop used to filter tasks by type (e.g., "tasks/calls" shows only call tasks).
+
+Work Log:
+- Read /home/z/my-project/worklog.md to understand previous work (TasksPage component + WIRE-TASKS-ROUTE task wired `case "tasks"` in all 9 routers)
+- Verified TasksPage component signature accepts `route?: string` prop:
+    `export function TasksPage({ portal, route = "tasks" }: { portal: Portal; route?: string })` (TasksPage.tsx:220)
+- Confirmed `route` variable is in scope in each portal's `render(route: string)` function
+- Updated all 9 portal router files — only the `case "tasks"` line in each file was modified:
+  1. candidate/index.tsx:76      `<TasksPage portal="candidate" />` → `<TasksPage portal="candidate" route={route} />`
+  2. employer/index.tsx:83      `<TasksPage portal="employer" />` → `<TasksPage portal="employer" route={route} />`
+  3. recruiter/index.tsx:93     `<TasksPage portal="recruiter" />` → `<TasksPage portal="recruiter" route={route} />`
+  4. training/index.tsx:150     `<TasksPage portal="training" />` → `<TasksPage portal="training" route={route} />`
+  5. partner/index.tsx:84       `<TasksPage portal="partner" />` → `<TasksPage portal="partner" route={route} />`
+  6. admin/index.tsx:48         `<TasksPage portal="admin" />` → `<TasksPage portal="admin" route={route} />`
+  7. agency/index.tsx:31        `<TasksPage portal="agency" />` → `<TasksPage portal="agency" route={route} />`
+  8. enterprise/index.tsx:36    `<TasksPage portal="enterprise" />` → `<TasksPage portal="enterprise" route={route} />`
+  9. learner/index.tsx:43       `<TasksPage portal="learner" />` → `<TasksPage portal="learner" route={route} />`
+
+- Verification: grep confirms all 9 lines now contain `route={route}` with the correct matching portal name
+- No other code was modified in any file
+
+LINT RESULT:
+  - Ran `bun run lint` — final result: `✖ 6 problems (0 errors, 6 warnings)`
+  - `bun run lint 2>&1 | grep -E "error" | head -10` returned only the pre-existing `formState: { errors, isSubmitting }` warning text inside TrainingPlacements.tsx/TrainingSourcingRequests.tsx — no actual lint errors. 0 errors confirmed.
+  - All 6 warnings are pre-existing react-hooks/incompatible-library warnings in Training* files (unrelated to this task).
+
+DEV SERVER:
+  - Initial curl returned `000` (server was down)
+  - Restarted with `cd /home/z/my-project && (nohup bun run dev > dev.log 2>&1 &) && sleep 8`
+  - Confirmed `curl -s -o /dev/null -w "%{http_code}" http://localhost:3000/` → `200`
+
+Stage Summary:
+- All 9 portal routers now pass `route={route}` to the shared `TasksPage` component, enabling per-type task filtering (e.g., "tasks/calls", "tasks/emails", "tasks/meetings", "tasks/follow-ups").
+- Each portal name in the prop matches its portal (candidate, employer, recruiter, training, partner, admin, agency, enterprise, learner).
+- Only the `case "tasks"` line was modified in each file — no other code touched.
+- Lint: 0 errors. Dev server: HTTP 200.
+
+---
+Task ID: TASKS-SUBSIDEBAR-ALL-PORTALS
+Agent: Main (Z.ai Code) + Subagent (Pass Route to TasksPage)
+
+Task: Convert the "Tasks" leaf item in all portal sidebars into a main item with a sub-sidebar showing all task categories (All Tasks, Calls, Emails, Meetings, Follow-ups), referencing the previously attached task view images.
+
+Work Log:
+- Read /home/z/my-project/worklog.md to understand previous work (TasksPage component already created, Tasks leaf item added to all 9 portals)
+- Reviewed reference images: task list showed tasks organized by type (Call, Email, Meeting, Follow-up) — these became the sub-sidebar items
+
+- UPDATED portal-config.ts — converted "Tasks" from leaf item to main item with children in ALL 9 portals:
+  - candidate: tasks-grp → [All Tasks, Calls, Emails, Meetings, Follow-ups]
+  - employer: tasks-grp → [All Tasks, Calls, Emails, Meetings, Follow-ups]
+  - recruiter: tasks-grp → [All Tasks, Calls, Emails, Meetings, Follow-ups]
+  - training: tasks-grp → [All Tasks, Calls, Emails, Meetings, Follow-ups]
+  - partner: tasks-grp → [All Tasks, Calls, Emails, Meetings, Follow-ups]
+  - agency: tasks-grp → [All Tasks, Calls, Emails, Meetings, Follow-ups]
+  - enterprise: tasks-grp → [All Tasks, Calls, Emails, Meetings, Follow-ups]
+  - admin: tasks-grp → [All Tasks, Calls, Emails, Meetings, Follow-ups]
+  - learner: tasks-grp → [All Tasks, Calls, Emails, Meetings, Follow-ups]
+
+  Route keys used (all start with "tasks" so head="tasks" matches the router case):
+  - tasks (All Tasks) → route "tasks"
+  - tasks/calls (Calls) → route "tasks/calls"
+  - tasks/emails (Emails) → route "tasks/emails"
+  - tasks/meetings (Meetings) → route "tasks/meetings"
+  - tasks/follow-ups (Follow-ups) → route "tasks/follow-ups"
+
+  Icons: CheckSquare (main), ListChecks (All Tasks), Phone (Calls), Mail (Emails), Video (Meetings), ArrowUpRight (Follow-ups)
+
+- UPDATED TasksPage.tsx to accept `route` prop and auto-filter by task type:
+  - Added `route = "tasks"` optional prop to TasksPage component
+  - Added `typeFilter` useMemo that parses route to determine filter: "tasks/calls" → "call", "tasks/emails" → "email", "tasks/meetings" → "meeting", "tasks/follow-ups" → "follow-up", default → "all"
+  - Added `typeLabel` useMemo that shows type-specific subtitle: "All call tasks", "All email tasks", "All meeting tasks", "All follow-up tasks", or default portal subtitle
+  - Updated `filtered` useMemo to also filter by `typeFilter`
+  - Updated header subtitle to use `typeLabel` instead of `ctx.subtitle`
+
+- DELEGATED router update to subagent (Task ID: PASS-ROUTE-TO-TASKSPAGE):
+  - Updated all 9 portal routers to pass `route={route}` to TasksPage: `case "tasks": return <TasksPage portal="X" route={route} />;`
+  - Lint: 0 errors
+
+- Browser-verified in Candidate portal:
+  1. Navigated to Candidate portal → clicked "Tasks" in sidebar → sub-sidebar expanded showing 5 items: All Tasks, Calls, Emails, Meetings, Follow-ups
+  2. VLM confirmed: "Tasks section is expanded showing sub-sidebar with All Tasks, Calls, Emails, Meetings, Follow-ups"
+  3. Clicked "Calls" → subtitle changed to "All call tasks", only call-type tasks shown (phone icon)
+  4. Clicked "Emails" → subtitle changed to "All email tasks", only email-type tasks shown (envelope icon)
+  5. Console: no errors
+
+Stage Summary:
+- "Tasks" is now a MAIN item (not leaf) in all 9 portal sidebars with a sub-sidebar containing 5 task categories:
+  - All Tasks (ListChecks icon)
+  - Calls (Phone icon)
+  - Emails (Mail icon)
+  - Meetings (Video icon)
+  - Follow-ups (ArrowUpRight icon)
+- Clicking any sub-item navigates to the TasksPage with the route-based type filter applied:
+  - All Tasks → shows all tasks
+  - Calls → shows only call-type tasks with "All call tasks" subtitle
+  - Emails → shows only email-type tasks with "All email tasks" subtitle
+  - Meetings → shows only meeting-type tasks with "All meeting tasks" subtitle
+  - Follow-ups → shows only follow-up-type tasks with "All follow-up tasks" subtitle
+- The sub-sidebar auto-expands when Tasks is active (via PortalSidebar's existing auto-open logic)
+- Lint: 0 errors. Browser-verified: sub-sidebar expands, filtering works correctly for each category. Console: clean.

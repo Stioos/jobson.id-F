@@ -28,7 +28,7 @@ export function render(route: string): React.ReactNode {
   const top = route.split("/")[0] || "overview";
   switch (top) {
     case "overview": return <AgencyOverview />;
-    case "tasks": return <TasksPage portal="agency" />;
+    case "tasks": return <TasksPage portal="agency" route={route} />;
     case "profile": return <AgencyProfile />;
     case "recruiters": return <AgencyRecruiters />;
     case "clients": return <AgencyClients />;

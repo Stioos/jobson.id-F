@@ -45,7 +45,7 @@ export function render(route: string): React.ReactNode {
     case "home":
     case "":
       return <AdminOverview />;
-    case "tasks": return <TasksPage portal="admin" />;
+    case "tasks": return <TasksPage portal="admin" route={route} />;
     case "users": return <AdminUsers />;
     case "organizations": return <AdminOrganizations />;
     case "verification": return <AdminVerification />;

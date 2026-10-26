@@ -6,17 +6,17 @@
   · optimizePackageImports
 
 ✓ Starting...
-✓ Ready in 1639ms
+⚠ Turbopack's filesystem cache has been deleted because we previously detected an internal error in Turbopack. Builds or page loads may be slower as a result.
+✓ Ready in 1171ms
 ○ Compiling / ...
- GET / 200 in 5.4s (compile: 5.2s, render: 133ms)
- GET / 200 in 12.8s (compile: 12.4s, render: 383ms)
- GET / 200 in 874ms (compile: 298ms, render: 576ms)
+ GET / 200 in 25.9s (compile: 25.5s, render: 390ms)
+ GET / 200 in 25.3s (compile: 24.6s, render: 685ms)
+ GET / 200 in 25.4s (compile: 24.7s, render: 612ms)
+ GET / 200 in 4.0s (compile: 3.7s, render: 316ms)
 ○ Compiling /[...slug] ...
-
-thread 'tokio-runtime-worker' (7497) panicked at /build/turbopack/crates/turbo-tasks-backend/src/backend/operation/aggregation_update.rs:1664:17:
-inner_of_uppers_lost_follower is not able to remove follower TaskId 626374 (<DiskFileSystem as FileSystem>::read) from TaskId 543895 (all_server_paths) as they don't exist as upper or follower edges
-note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
- GET / 200 in 13.9s (compile: 13.4s, render: 532ms)
- GET / 200 in 657ms (compile: 340ms, render: 317ms)
- GET / 200 in 86ms (compile: 5ms, render: 82ms)
- in 86ms (compile: 5ms, render: 82ms)
+ GET /favicon.ico 200 in 4.3s (compile: 4.1s, render: 135ms)
+ GET /favicon.ico 200 in 8.6s (compile: 8.4s, render: 138ms)
+ GET / 200 in 73ms (compile: 12ms, render: 61ms)
+ GET / 200 in 387ms (compile: 56ms, render: 332ms)
+ GET /favicon.ico 200 in 282ms (compile: 81ms, render: 201ms)
+ 282ms (compile: 81ms, render: 201ms)

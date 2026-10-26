@@ -40,7 +40,7 @@ export function render(route: string): React.ReactNode {
     case "home":
     case "":
       return <LearnerOverview />;
-    case "tasks": return <TasksPage portal="learner" />;
+    case "tasks": return <TasksPage portal="learner" route={route} />;
     case "catalog": {
       const parts = (route || "catalog").split("/");
       if (parts[1]) return <LearnerCourseDetail courseId={parts[1]} />;
