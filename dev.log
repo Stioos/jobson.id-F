@@ -6,52 +6,16 @@
   · optimizePackageImports
 
 ✓ Starting...
-Attention: Next.js now collects completely anonymous telemetry regarding usage.
-This information is used to shape Next.js' roadmap and prioritize features.
-You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
-https://nextjs.org/telemetry
-
-✓ Ready in 1127ms
-○ Compiling /[...slug] ...
- GET / 200 in 31.3s (compile: 30.5s, render: 805ms)
- GET /pro-services/ai-powered-business-solutions/ai-business-process-automation 200 in 35.0s (compile: 34.8s, render: 240ms)
- GET /hire-talent/staffing-solutions 200 in 36.8s (compile: 36.6s, render: 242ms)
- GET /pro-services/custom-software-development/saas-development 200 in 14.6s (compile: 14.4s, render: 243ms)
- GET /hire-talent/staffing-solutions 200 in 669ms (compile: 87ms, render: 582ms)
- GET /pro-services/ai-powered-business-solutions/ai-business-process-automation 200 in 506ms (compile: 16ms, render: 490ms)
- GET /favicon.ico 200 in 663ms (compile: 404ms, render: 258ms)
- GET /pro-services/custom-software-development/saas-development 200 in 1069ms (compile: 507ms, render: 562ms)
- GET /favicon.ico 200 in 429ms (compile: 270ms, render: 159ms)
- GET /favicon.ico 200 in 381ms (compile: 143ms, render: 238ms)
- GET /favicon.ico 200 in 102ms (compile: 49ms, render: 52ms)
- GET / 200 in 49ms (compile: 7ms, render: 42ms)
- GET /favicon.ico 200 in 335ms (compile: 100ms, render: 235ms)
- GET /favicon.ico 200 in 128ms (compile: 66ms, render: 62ms)
- GET /favicon.ico 200 in 133ms (compile: 65ms, render: 68ms)
- GET /pro-services/ai-agentic-automation/custom-ai-agent-development 200 in 369ms (compile: 52ms, render: 317ms)
- GET /favicon.ico 200 in 113ms (compile: 4ms, render: 109ms)
- GET /pro-services/ai-agentic-automation/custom-ai-agent-development 200 in 296ms (compile: 50ms, render: 245ms)
- GET /favicon.ico 200 in 241ms (compile: 7ms, render: 235ms)
- GET /pro-services/ai-agentic-automation/custom-ai-agent-development 200 in 119ms (compile: 51ms, render: 68ms)
- GET /pro-services/ai-agentic-automation/custom-ai-agent-development 200 in 106ms (compile: 54ms, render: 52ms)
- GET /pro-services/ai-agentic-automation/custom-ai-agent-development 200 in 708ms (compile: 138ms, render: 570ms)
- GET /favicon.ico 200 in 309ms (compile: 108ms, render: 201ms)
-✓ Compiled in 360ms
- GET /pro-services/ai-agentic-automation/custom-ai-agents 200 in 162ms (compile: 74ms, render: 87ms)
- GET /favicon.ico 200 in 172ms (compile: 7ms, render: 165ms)
- GET /pro-services/cloud-infrastructure-devops/kubernetes 200 in 131ms (compile: 54ms, render: 76ms)
- GET /favicon.ico 200 in 290ms (compile: 4ms, render: 285ms)
- GET / 200 in 67ms (compile: 14ms, render: 53ms)
- GET / 200 in 56ms (compile: 9ms, render: 47ms)
- GET /favicon.ico 200 in 271ms (compile: 55ms, render: 216ms)
- GET /favicon.ico 200 in 122ms (compile: 55ms, render: 67ms)
- GET /favicon.ico 200 in 151ms (compile: 66ms, render: 85ms)
- GET /favicon.ico 200 in 193ms (compile: 62ms, render: 131ms)
- GET /favicon.ico 200 in 131ms (compile: 68ms, render: 63ms)
- GET /favicon.ico 200 in 194ms (compile: 62ms, render: 132ms)
- GET /pro-services/ai-powered-business-solutions/ai-business-process-automation 200 in 81ms (compile: 6ms, render: 75ms)
- GET /favicon.ico 200 in 120ms (compile: 60ms, render: 60ms)
- GET /favicon.ico 200 in 125ms (compile: 70ms, render: 56ms)
- GET /favicon.ico 200 in 140ms (compile: 63ms, render: 77ms)
- GET /favicon.ico 200 in 250ms (compile: 69ms, render: 180ms)
- 250ms (compile: 69ms, render: 180ms)
+✓ Ready in 1833ms
+○ Compiling / ...
+ GET / 200 in 8.2s (compile: 8.0s, render: 179ms)
+ GET / 200 in 12.9s (compile: 12.4s, render: 522ms)
+ GET /pro-services/ai-powered-business-solutions/ai-customer-support-solutions 200 in 8.3s (compile: 8.2s, render: 111ms)
+ GET /pro-services/digital-sales-ai-marketing/ai-lead-generation-prospecting 200 in 13.3s (compile: 13.2s, render: 112ms)
+ GET / 200 in 78ms (compile: 11ms, render: 67ms)
+ GET /favicon.ico 200 in 457ms (compile: 138ms, render: 319ms)
+ GET /favicon.ico 200 in 118ms (compile: 70ms, render: 47ms)
+ GET /favicon.ico 200 in 162ms (compile: 63ms, render: 99ms)
+ GET / 200 in 120ms (compile: 17ms, render: 103ms)
+ GET /favicon.ico 200 in 236ms (compile: 101ms, render: 136ms)
+236ms (compile: 101ms, render: 136ms)

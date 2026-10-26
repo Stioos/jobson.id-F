@@ -12,7 +12,7 @@ import {
   Factory, Brain, Code2, Database, Cloud, Box, Bot, Compass,
   ChevronRight, CheckCircle2, type LucideIcon,
   Clock, Landmark, Star, ShieldCheck, Home, MapPin, BarChart3,
-  FileText, Mic, Sparkles,
+  FileText, Mic, Sparkles, ArrowRight,
 } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
@@ -368,21 +368,22 @@ const PRO_SERVICE_CATEGORIES = [
     key: "ai-intelligence",
     label: "AI & Intelligence",
     twoLineTitle: "Make Machines Work\nFor Your Business",
-    tagline: "Make machines work for you",
-    desc: "AI business solutions, agentic automation & custom ML models that turn data into decisions.",
+    tagline: "Put AI to work — so you don't have to",
+    heroLine: "Automate the busywork. Amplify every team.",
+    desc: "AI agents, business automation, custom ML models & LLMs that turn scattered data into decisions — shipped in weeks.",
     icon: Brain,
     color: "#0EA5E9",
     services: [
-      { catSlug: "ai-powered-business-solutions", slug: "ai-business-process-automation", name: "AI Business Process Automation", desc: "Automate repetitive workflows with AI." },
-      { catSlug: "ai-powered-business-solutions", slug: "ai-customer-support-solutions", name: "AI Customer Support Solutions", desc: "24/7 intelligent support agents." },
-      { catSlug: "ai-powered-business-solutions", slug: "ai-document-intelligence", name: "AI Document Intelligence", desc: "Extract & understand any document." },
-      { catSlug: "ai-powered-business-solutions", slug: "ai-knowledge-management", name: "AI Knowledge Management", desc: "Turn scattered info into a brain." },
-      { catSlug: "ai-powered-business-solutions", slug: "ai-voice-chat-assistants", name: "AI Voice & Chat Assistants", desc: "Conversational AI that feels human." },
+      { catSlug: "ai-powered-business-solutions", slug: "ai-business-process-automation", name: "AI Business Process Automation", desc: "Automate repetitive workflows 24/7 with AI." },
+      { catSlug: "ai-powered-business-solutions", slug: "ai-customer-support-solutions", name: "AI Customer Support Solutions", desc: "24/7 intelligent support that never sleeps." },
+      { catSlug: "ai-powered-business-solutions", slug: "ai-document-intelligence", name: "AI Document Intelligence", desc: "Extract, classify & understand any document." },
+      { catSlug: "ai-powered-business-solutions", slug: "ai-knowledge-management", name: "AI Knowledge Management", desc: "Turn scattered info into a company brain." },
+      { catSlug: "ai-powered-business-solutions", slug: "ai-voice-chat-assistants", name: "AI Voice & Chat Assistants", desc: "Conversational AI that feels truly human." },
       { catSlug: "ai-powered-business-solutions", slug: "enterprise-ai-integration", name: "Enterprise AI Integration", desc: "Embed AI into your stack, end-to-end." },
       { catSlug: "ai-agentic-automation", slug: "custom-ai-agents", name: "Custom AI Agents", desc: "Autonomous agents that get things done." },
       { catSlug: "ai-agentic-automation", slug: "multi-agent-systems", name: "Multi-Agent Systems", desc: "Swarm intelligence for complex tasks." },
       { catSlug: "ai-agentic-automation", slug: "ai-workflow-automation", name: "AI Workflow Automation", desc: "Connect tools, automate the busywork." },
-      { catSlug: "ai-ml-model-development", slug: "machine-learning", name: "Machine Learning", desc: "Predictive models tailored to your data." },
+      { catSlug: "ai-ml-model-development", slug: "machine-learning", name: "Machine Learning Models", desc: "Predictive models tuned to your data." },
       { catSlug: "ai-ml-model-development", slug: "llm-development", name: "LLM Development", desc: "Custom large-language-model solutions." },
       { catSlug: "ai-ml-model-development", slug: "computer-vision", name: "Computer Vision", desc: "See, detect & classify from images." },
       { catSlug: "ai-ml-model-development", slug: "nlp-solutions", name: "NLP Solutions", desc: "Understand & generate human language." },
@@ -393,20 +394,21 @@ const PRO_SERVICE_CATEGORIES = [
     key: "build-engineer",
     label: "Build & Engineer",
     twoLineTitle: "Ship Products,\nNot Prototypes",
-    tagline: "Ship products, not prototypes",
-    desc: "Custom software, mobile apps, SaaS platforms & data pipelines engineered for scale.",
+    tagline: "From idea to production — engineered to scale",
+    heroLine: "Software your users love. Code your team trusts.",
+    desc: "Custom web apps, mobile, SaaS platforms, ERPs & data pipelines — engineered by senior architects who ship at scale.",
     icon: Code2,
     color: "#8B5CF6",
     services: [
-      { catSlug: "custom-software-development", slug: "enterprise-web-applications", name: "Enterprise Web Applications", desc: "Robust web apps built for scale." },
-      { catSlug: "custom-software-development", slug: "saas-development", name: "SaaS Development", desc: "Multi-tenant SaaS, end-to-end." },
-      { catSlug: "custom-software-development", slug: "mobile-apps", name: "Mobile Apps", desc: "iOS + Android, one codebase." },
-      { catSlug: "custom-software-development", slug: "erp-crm-development", name: "ERP & CRM Development", desc: "Custom ERPs & CRMs that fit you." },
-      { catSlug: "custom-software-development", slug: "api-development-integration", name: "API Development & Integration", desc: "Connect everything, reliably." },
+      { catSlug: "custom-software-development", slug: "enterprise-web-applications", name: "Enterprise Web Applications", desc: "Robust web apps built for millions of users." },
+      { catSlug: "custom-software-development", slug: "saas-development", name: "SaaS Product Development", desc: "Multi-tenant SaaS, end-to-end." },
+      { catSlug: "custom-software-development", slug: "mobile-apps", name: "Mobile App Development", desc: "iOS + Android from one codebase." },
+      { catSlug: "custom-software-development", slug: "erp-crm-development", name: "ERP & CRM Development", desc: "Custom ERPs & CRMs that fit you perfectly." },
+      { catSlug: "custom-software-development", slug: "api-development-integration", name: "API Development & Integration", desc: "Connect everything, reliably & fast." },
       { catSlug: "custom-software-development", slug: "legacy-modernization", name: "Legacy Modernization", desc: "Bring old systems into the modern era." },
-      { catSlug: "data-engineering-analytics", slug: "data-warehousing", name: "Data Warehousing", desc: "A single source of truth." },
-      { catSlug: "data-engineering-analytics", slug: "etl-elt", name: "ETL / ELT", desc: "Move & transform data at scale." },
-      { catSlug: "data-engineering-analytics", slug: "bi-dashboards", name: "BI Dashboards", desc: "See your business in real time." },
+      { catSlug: "data-engineering-analytics", slug: "data-warehousing", name: "Data Warehousing", desc: "A single source of truth for all teams." },
+      { catSlug: "data-engineering-analytics", slug: "etl-elt", name: "ETL / ELT Pipelines", desc: "Move & transform data at scale." },
+      { catSlug: "data-engineering-analytics", slug: "bi-dashboards", name: "BI Dashboards", desc: "See your business in real-time." },
       { catSlug: "data-engineering-analytics", slug: "real-time-analytics", name: "Real-Time Analytics", desc: "Decisions powered by live data." },
       { catSlug: "data-engineering-analytics", slug: "predictive-analytics", name: "Predictive Analytics", desc: "See what's coming before it arrives." },
     ],
@@ -415,76 +417,80 @@ const PRO_SERVICE_CATEGORIES = [
     key: "cloud-deploy",
     label: "Cloud & Deploy",
     twoLineTitle: "Scale Infra That\nScales Itself",
-    tagline: "Infrastructure that scales itself",
-    desc: "Cloud migration, DevOps, Kubernetes & open-source platform deployment — built to scale.",
+    tagline: "Infrastructure that never sleeps or breaks",
+    heroLine: "Cloud that scales itself. DevOps that ships itself.",
+    desc: "Cloud migration, Kubernetes, CI/CD, IaC & self-hosted platforms — infrastructure engineered for zero downtime.",
     icon: Cloud,
     color: "#10B981",
     services: [
-      { catSlug: "cloud-infrastructure-devops", slug: "cloud-migration", name: "Cloud Migration", desc: "Move to the cloud, zero downtime." },
-      { catSlug: "cloud-infrastructure-devops", slug: "kubernetes", name: "Kubernetes", desc: "Container orchestration done right." },
-      { catSlug: "cloud-infrastructure-devops", slug: "ci-cd-automation", name: "CI/CD Automation", desc: "Ship code with confidence." },
-      { catSlug: "cloud-infrastructure-devops", slug: "infrastructure-as-code", name: "Infrastructure as Code", desc: "Reproducible infra, every time." },
+      { catSlug: "cloud-infrastructure-devops", slug: "cloud-migration", name: "Cloud Migration", desc: "Move to the cloud with zero downtime." },
+      { catSlug: "cloud-infrastructure-devops", slug: "kubernetes", name: "Kubernetes Orchestration", desc: "Container orchestration done right." },
+      { catSlug: "cloud-infrastructure-devops", slug: "ci-cd-automation", name: "CI/CD Automation", desc: "Ship code with confidence, daily." },
+      { catSlug: "cloud-infrastructure-devops", slug: "infrastructure-as-code", name: "Infrastructure as Code", desc: "Reproducible infra, every single time." },
       { catSlug: "cloud-infrastructure-devops", slug: "cloud-security", name: "Cloud Security", desc: "Lock down your cloud, end-to-end." },
-      { catSlug: "cloud-infrastructure-devops", slug: "managed-devops", name: "Managed DevOps", desc: "We run your DevOps, you ship." },
-      { catSlug: "open-source-deployment", slug: "self-hosted-ai-platform-deployment", name: "Self-Hosted AI Platform", desc: "Your own AI, your own cloud." },
+      { catSlug: "cloud-infrastructure-devops", slug: "managed-devops", name: "Managed DevOps", desc: "We run your DevOps, you ship product." },
+      { catSlug: "open-source-deployment", slug: "self-hosted-ai-platform-deployment", name: "Self-Hosted AI Platform", desc: "Your own AI, your own cloud, your rules." },
       { catSlug: "open-source-deployment", slug: "erp-portal-deployment", name: "ERP & Portal Deployment", desc: "Open-source ERPs, deployed fast." },
       { catSlug: "open-source-deployment", slug: "devops-platform-deployment", name: "DevOps Platform Deployment", desc: "Full DevOps stack, set up for you." },
-      { catSlug: "open-source-deployment", slug: "private-cloud-deployment", name: "Private Cloud Deployment", desc: "Your cloud, your rules." },
+      { catSlug: "open-source-deployment", slug: "private-cloud-deployment", name: "Private Cloud Deployment", desc: "Your cloud, your sovereignty, your control." },
     ],
   },
   {
     key: "grow-market",
     label: "Grow & Market",
     twoLineTitle: "Turn Attention\nInto Revenue",
-    tagline: "Turn attention into revenue",
-    desc: "AI-powered digital marketing, sales automation & lead intelligence that fills your pipeline.",
+    tagline: "Pipeline on autopilot, revenue on repeat",
+    heroLine: "Attention in. Revenue out. On autopilot.",
+    desc: "AI-powered digital marketing, sales automation & lead intelligence that fills your pipeline — and books meetings while you sleep.",
     icon: Megaphone,
     color: "#F59E0B",
     services: [
-      { catSlug: "digital-sales-ai-marketing", slug: "ai-digital-marketing", name: "AI Digital Marketing", desc: "Marketing that learns & optimizes." },
-      { catSlug: "digital-sales-ai-marketing", slug: "seo-geo-ai-content-marketing", name: "SEO & GEO AI Content", desc: "Rank higher with AI content." },
+      { catSlug: "digital-sales-ai-marketing", slug: "ai-digital-marketing", name: "AI Digital Marketing", desc: "Marketing that learns & optimizes itself." },
+      { catSlug: "digital-sales-ai-marketing", slug: "seo-geo-ai-content-marketing", name: "SEO & GEO AI Content", desc: "Rank higher with AI-crafted content." },
       { catSlug: "digital-sales-ai-marketing", slug: "search-engine-social-media-marketing", name: "Search & Social Media Marketing", desc: "Be everywhere your customers are." },
       { catSlug: "digital-sales-ai-marketing", slug: "ai-social-media-automation", name: "AI Social Media Automation", desc: "Post, engage & grow on autopilot." },
       { catSlug: "digital-sales-ai-marketing", slug: "ai-sales-funnel-automation", name: "AI Sales Funnel Automation", desc: "Funnels that convert themselves." },
-      { catSlug: "digital-sales-ai-marketing", slug: "crm-lead-automation", name: "CRM & Lead Automation", desc: "Never let a lead go cold." },
-      { catSlug: "digital-sales-ai-marketing", slug: "ai-market-research-customer-intelligence", name: "AI Market Research", desc: "Know your market before entering it." },
+      { catSlug: "digital-sales-ai-marketing", slug: "crm-lead-automation", name: "CRM & Lead Automation", desc: "Never let a single lead go cold." },
+      { catSlug: "digital-sales-ai-marketing", slug: "ai-market-research-customer-intelligence", name: "AI Market Research", desc: "Know your market before you enter it." },
       { catSlug: "digital-sales-ai-marketing", slug: "ai-lead-generation-prospecting", name: "AI Lead Generation", desc: "Find buyers before they find you." },
-      { catSlug: "digital-sales-ai-marketing", slug: "ai-outbound-sales-outreach", name: "AI Outbound Sales", desc: "Outreach that books meetings." },
-      { catSlug: "digital-sales-ai-marketing", slug: "ai-account-based-marketing", name: "AI Account-Based Marketing", desc: "Win the accounts that matter." },
-      { catSlug: "digital-sales-ai-marketing", slug: "ai-paid-advertising-campaign-strategy", name: "AI Paid Advertising", desc: "Ads that spend smarter." },
-      { catSlug: "digital-sales-ai-marketing", slug: "ai-sales-enablement-revenue-intelligence", name: "AI Sales Enablement", desc: "Equip your team to close more." },
+      { catSlug: "digital-sales-ai-marketing", slug: "ai-outbound-sales-outreach", name: "AI Outbound Sales Outreach", desc: "Outreach that books meetings while you sleep." },
+      { catSlug: "digital-sales-ai-marketing", slug: "ai-account-based-marketing", name: "AI Account-Based Marketing", desc: "Win the enterprise accounts that matter." },
+      { catSlug: "digital-sales-ai-marketing", slug: "ai-paid-advertising-campaign-strategy", name: "AI Paid Advertising", desc: "Ads that spend smarter, not harder." },
+      { catSlug: "digital-sales-ai-marketing", slug: "ai-sales-enablement-revenue-intelligence", name: "AI Sales Enablement", desc: "Equip your team to close more, faster." },
     ],
   },
   {
     key: "transform-strategize",
     label: "Transform & Strategize",
     twoLineTitle: "Future-Proof\nYour Business",
-    tagline: "Future-proof your business",
-    desc: "Digital transformation consulting, AI strategy & technology architecture that re-architects your business.",
+    tagline: "Re-architect for the AI era — end to end",
+    heroLine: "A roadmap that future-proofs every department.",
+    desc: "Digital transformation consulting, AI strategy & technology architecture that re-architects your business for the AI era.",
     icon: Compass,
     color: "#EC4899",
     services: [
-      { catSlug: "digital-transformation-consulting", slug: "ai-strategy", name: "AI Strategy", desc: "A roadmap for AI, not guesswork." },
-      { catSlug: "digital-transformation-consulting", slug: "digital-transformation", name: "Digital Transformation", desc: "Rebuild how you operate." },
+      { catSlug: "digital-transformation-consulting", slug: "ai-strategy", name: "AI Strategy & Roadmap", desc: "A roadmap for AI, not guesswork." },
+      { catSlug: "digital-transformation-consulting", slug: "digital-transformation", name: "Digital Transformation", desc: "Rebuild how you operate, end-to-end." },
       { catSlug: "digital-transformation-consulting", slug: "process-reengineering", name: "Process Reengineering", desc: "Redesign workflows for the AI era." },
-      { catSlug: "digital-transformation-consulting", slug: "technology-architecture", name: "Technology Architecture", desc: "A foundation built to last." },
-      { catSlug: "digital-transformation-consulting", slug: "it-modernization", name: "IT Modernization", desc: "Bring your tech into today." },
-      { catSlug: "digital-transformation-consulting", slug: "ai-governance", name: "AI Governance", desc: "AI that's safe, compliant & trusted." },
+      { catSlug: "digital-transformation-consulting", slug: "technology-architecture", name: "Technology Architecture", desc: "A foundation built to last a decade." },
+      { catSlug: "digital-transformation-consulting", slug: "it-modernization", name: "IT Modernization", desc: "Bring your tech stack into today." },
+      { catSlug: "digital-transformation-consulting", slug: "ai-governance", name: "AI Governance & Risk", desc: "AI that's safe, compliant & trusted." },
     ],
   },
   {
     key: "career-services",
     label: "Career Services",
     twoLineTitle: "From Lost to Hired,\nFast",
-    tagline: "From lost to hired, fast",
+    tagline: "Land the job you actually deserve",
+    heroLine: "Stand out before you speak. Get hired, not just apply.",
     desc: "8 professional services — career assessment, resume branding, skills, portfolio, AI job matching, mock interviews & more.",
     icon: GraduationCap,
     color: "#EF4444",
     services: [
-      { catSlug: "professional", slug: "career-assessment", name: "Career Assessment & Role Matching", desc: "Find your true north with AI." },
-      { catSlug: "professional", slug: "resume-branding", name: "Resume, LinkedIn & Personal Branding", desc: "Stand out before you speak." },
+      { catSlug: "professional", slug: "career-assessment", name: "Career Assessment & Role Matching", desc: "Find your true north with AI precision." },
+      { catSlug: "professional", slug: "resume-branding", name: "Resume, LinkedIn & Personal Branding", desc: "Stand out before you even speak." },
       { catSlug: "professional", slug: "skills-readiness", name: "Skills & Career Readiness", desc: "Become the candidate employers want." },
-      { catSlug: "professional", slug: "portfolio-development", name: "Portfolio & Real-World Projects", desc: "Turn skills into proof." },
+      { catSlug: "professional", slug: "portfolio-development", name: "Portfolio & Real-World Projects", desc: "Turn skills into undeniable proof." },
       { catSlug: "professional", slug: "ai-job-matching", name: "AI-Powered Job & Role Matching", desc: "Your AI co-pilot for the right job." },
       { catSlug: "professional", slug: "mock-interviews", name: "Mock Interviews & Interview Prep", desc: "Walk in calm. Walk out hired." },
       { catSlug: "professional", slug: "job-search-strategy", name: "Job Search & Application Strategy", desc: "Get hired faster, not just apply more." },
@@ -521,13 +527,19 @@ function ProServicesDropdown({ go }: { go: (v: string) => void }) {
         <ChevronDown className={cn("h-3.5 w-3.5 transition-transform", open && "rotate-180")} />
       </button>
       {open && (
-        <div className="absolute left-1/2 top-full z-50 flex -translate-x-1/2 pt-2" style={{ filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.15))" }}>
-          {/* Left panel: 6 category cards */}
-          <div className="w-[400px] rounded-l-xl border bg-popover p-4">
-            <div className="mb-2 flex items-center justify-between">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-brand">All Pro Services</span>
+        <div className="absolute left-1/2 top-full z-50 flex -translate-x-1/2 pt-2" style={{ filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.18))" }}>
+          {/* ============== LEFT PANEL: category rail ============== */}
+          <div className="flex w-[400px] flex-col rounded-l-xl border border-r-0 bg-popover p-4">
+            {/* Header */}
+            <div className="mb-3 flex items-center justify-between">
+              <div className="flex items-center gap-1.5">
+                <Sparkles className="h-3.5 w-3.5 text-brand" />
+                <span className="text-[10px] font-bold uppercase tracking-widest text-brand">All Pro Services</span>
+              </div>
               <span className="rounded-full bg-brand/10 px-2 py-0.5 text-[9px] font-bold text-brand">68 services</span>
             </div>
+
+            {/* Category rail */}
             <div className="grid grid-cols-1 gap-1">
               {PRO_SERVICE_CATEGORIES.map((cat) => {
                 const CatIcon = cat.icon;
@@ -541,84 +553,142 @@ function ProServicesDropdown({ go }: { go: (v: string) => void }) {
                       else go(`services/${cat.services[0].catSlug}`);
                       setOpen(false);
                     }}
-                    className="flex items-center gap-3 rounded-lg border border-transparent p-2.5 text-left transition-all"
-                    style={{ background: isHovered ? `${cat.color}10` : "transparent", borderColor: isHovered ? `${cat.color}30` : "transparent" }}
+                    className="group flex items-center gap-3 rounded-lg border p-2.5 text-left transition-all duration-150"
+                    style={{
+                      background: isHovered ? `${cat.color}12` : "transparent",
+                      borderColor: isHovered ? `${cat.color}40` : "transparent",
+                    }}
                   >
-                    <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg" style={{ background: `${cat.color}18`, color: cat.color }}>
+                    {/* Icon tile */}
+                    <div
+                      className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg transition-transform group-hover:scale-105"
+                      style={{
+                        background: isHovered ? cat.color : `${cat.color}18`,
+                        color: isHovered ? "#fff" : cat.color,
+                      }}
+                    >
                       <CatIcon className="h-4 w-4" />
                     </div>
+                    {/* Label + tagline */}
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-1.5">
-                        <span className="text-xs font-bold" style={{ color: isHovered ? cat.color : undefined }}>{cat.label}</span>
-                        <span className="flex-shrink-0 rounded-full px-1.5 py-0.5 text-[9px] font-semibold" style={{ background: `${cat.color}18`, color: cat.color }}>
+                        <span
+                          className="text-xs font-bold transition-colors"
+                          style={{ color: isHovered ? cat.color : "hsl(var(--foreground))" }}
+                        >
+                          {cat.label}
+                        </span>
+                        <span
+                          className="flex-shrink-0 rounded-full px-1.5 py-0.5 text-[9px] font-bold"
+                          style={{
+                            background: `${cat.color}1A`,
+                            color: cat.color,
+                          }}
+                        >
                           {cat.services.length}
                         </span>
                       </div>
-                      <span className="mt-0.5 block truncate text-[11px] italic text-muted-foreground">{cat.tagline}</span>
+                      <span className="mt-0.5 block truncate text-[11px] italic leading-tight text-muted-foreground">
+                        {cat.tagline}
+                      </span>
                     </div>
-                    <ChevronRight className={cn("h-3.5 w-3.5 flex-shrink-0 transition-opacity", isHovered ? "opacity-100" : "opacity-0")} style={{ color: cat.color }} />
+                    {/* Active arrow */}
+                    <ChevronRight
+                      className={cn("h-4 w-4 flex-shrink-0 transition-all duration-150", isHovered ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-1")}
+                      style={{ color: cat.color }}
+                    />
                   </button>
                 );
               })}
             </div>
+
+            {/* Bottom footer */}
             <div className="mt-3 flex items-center justify-between border-t pt-2.5">
-              <span className="text-xs text-muted-foreground">6 categories · 68 services</span>
-              <button onClick={() => { go("tech-ai-services"); setOpen(false); }} className="rounded-md bg-brand/10 px-3 py-1.5 text-xs font-semibold text-brand transition-colors hover:bg-brand/20">
-                Explore all →
+              <span className="text-[11px] text-muted-foreground">6 categories · 68 services</span>
+              <button
+                onClick={() => { go("tech-ai-services"); setOpen(false); }}
+                className="flex items-center gap-1 rounded-md bg-brand/10 px-3 py-1.5 text-xs font-semibold text-brand transition-colors hover:bg-brand/20"
+              >
+                Explore all <ArrowRight className="h-3 w-3" />
               </button>
             </div>
           </div>
-          {/* Right panel: services of hovered category */}
+
+          {/* ============== RIGHT PANEL: services of hovered category ============== */}
           {hoveredKey && (() => {
             const cat = PRO_SERVICE_CATEGORIES.find(c => c.key === hoveredKey);
             if (!cat) return null;
             const CatIcon = cat.icon;
+            const titleLines = cat.twoLineTitle.split("\n");
             return (
-              <div className="flex w-[460px] flex-col rounded-r-xl border border-l-0 bg-popover p-4">
-                <div className="mb-2 flex items-start gap-2.5">
-                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg" style={{ background: `${cat.color}18`, color: cat.color }}>
-                    <CatIcon className="h-5 w-5" />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <h3 className="text-sm font-bold leading-tight">{cat.label}</h3>
-                    {cat.twoLineTitle && (
-                      <p className="mt-0.5 text-[13px] font-bold leading-tight" style={{ color: cat.color }}>
-                        {cat.twoLineTitle.split("\n").map((line, i) => (
+              <div className="flex w-[480px] flex-col rounded-r-xl border bg-popover p-4">
+                {/* Hero header */}
+                <div className="mb-3 rounded-xl p-3" style={{ background: `${cat.color}0A` }}>
+                  <div className="flex items-start gap-3">
+                    <div
+                      className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl shadow-sm"
+                      style={{ background: `linear-gradient(135deg, ${cat.color}, ${cat.color}CC)`, color: "#fff" }}
+                    >
+                      <CatIcon className="h-5 w-5" />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <span className="text-[10px] font-bold uppercase tracking-widest" style={{ color: cat.color }}>
+                        {cat.label}
+                      </span>
+                      <h3 className="mt-0.5 text-[15px] font-bold leading-tight" style={{ color: cat.color }}>
+                        {titleLines.map((line, i) => (
                           <span key={i} className="block">{line}</span>
                         ))}
-                      </p>
-                    )}
-                    <p className="mt-0.5 text-xs font-medium italic text-muted-foreground">{cat.tagline}</p>
+                      </h3>
+                      <p className="mt-1 text-[11px] font-medium italic text-muted-foreground">{cat.heroLine}</p>
+                    </div>
                   </div>
+                  <p className="mt-2.5 text-xs leading-relaxed text-muted-foreground">{cat.desc}</p>
                 </div>
-                <p className="mb-2 text-xs leading-relaxed text-muted-foreground">{cat.desc}</p>
-                <div className="grid grid-cols-1 gap-0.5 overflow-y-auto pr-1" style={{ maxHeight: "320px" }}>
+
+                {/* Service list (scrollable) */}
+                <div className="grid grid-cols-1 gap-0.5 overflow-y-auto pr-1" style={{ maxHeight: "280px" }}>
                   {cat.services.map((svc) => (
                     <button
                       key={svc.slug}
                       onClick={() => handleServiceClick(svc.catSlug, svc.slug)}
-                      className="flex items-start gap-2.5 rounded-lg border border-transparent p-2 text-left transition-all"
-                      onMouseEnter={(e) => { e.currentTarget.style.background = `${cat.color}08`; e.currentTarget.style.borderColor = `${cat.color}20`; }}
-                      onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "transparent"; }}
+                      className="group flex items-start gap-2.5 rounded-lg border border-transparent p-2 text-left transition-all duration-150"
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = `${cat.color}0A`;
+                        e.currentTarget.style.borderColor = `${cat.color}25`;
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = "transparent";
+                        e.currentTarget.style.borderColor = "transparent";
+                      }}
                     >
-                      <div className="mt-0.5 h-1.5 w-1.5 flex-shrink-0 rounded-full" style={{ background: cat.color }} />
+                      {/* Bullet dot */}
+                      <div
+                        className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full transition-transform group-hover:scale-125"
+                        style={{ background: cat.color }}
+                      />
                       <div className="min-w-0 flex-1">
-                        <span className="block truncate text-xs font-semibold">{svc.name}</span>
+                        <span className="block truncate text-xs font-bold text-foreground transition-colors group-hover:text-brand">
+                          {svc.name}
+                        </span>
                         <p className="line-clamp-1 text-[11px] text-muted-foreground">{svc.desc}</p>
                       </div>
+                      <ChevronRight className="mt-1 h-3 w-3 flex-shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" style={{ color: cat.color }} />
                     </button>
                   ))}
                 </div>
+
+                {/* Full-width CTA */}
                 <button
                   onClick={() => {
                     if (cat.key === "career-services") go("professional-services");
                     else go(`services/${cat.services[0].catSlug}`);
                     setOpen(false);
                   }}
-                  className="mt-2 rounded-lg border px-3 py-2 text-xs font-semibold transition-colors"
-                  style={{ background: `${cat.color}10`, color: cat.color, borderColor: `${cat.color}30` }}
+                  className="mt-2.5 flex items-center justify-center gap-1.5 rounded-lg px-3 py-2.5 text-xs font-bold text-white transition-transform hover:scale-[1.01]"
+                  style={{ background: `linear-gradient(90deg, ${cat.color}, ${cat.color}CC)` }}
                 >
-                  Explore {cat.label} →
+                  Explore {cat.label} <ArrowRight className="h-3.5 w-3.5" />
                 </button>
               </div>
             );
@@ -1224,23 +1294,40 @@ function MobileNav({ go }: { go: (v: string) => void }) {
             <AccordionTrigger className="text-sm font-semibold">Pro Services</AccordionTrigger>
             <AccordionContent>
               <div className="flex flex-col gap-1 pl-2">
-                <button onClick={() => { go("tech-ai-services"); setOpen(false); }} className="rounded-md px-3 py-1.5 text-left text-xs font-medium text-brand hover:bg-brand/10">View All Pro Services</button>
+                <button onClick={() => { go("tech-ai-services"); setOpen(false); }} className="flex items-center justify-between rounded-md px-3 py-1.5 text-left text-xs font-medium text-brand hover:bg-brand/10">
+                  <span>View All Pro Services</span>
+                  <span className="text-[9px] font-bold">68 services</span>
+                </button>
                 {PRO_SERVICE_CATEGORIES.map(cat => (
-                  <div key={cat.key}>
-                    <span className="mt-1 block px-3 text-[10px] font-bold uppercase" style={{ color: cat.color }}>{cat.label}</span>
-                    {cat.services.map(svc => (
-                      <button
-                        key={svc.slug}
-                        onClick={() => {
-                          if (svc.catSlug === "professional") go(`professional-services/${svc.slug}`);
-                          else go(`services/${svc.catSlug}/${svc.slug}`);
-                          setOpen(false);
-                        }}
-                        className="rounded-md px-3 py-1.5 text-left text-xs hover:bg-muted"
-                      >
-                        {svc.name}
-                      </button>
-                    ))}
+                  <div key={cat.key} className="mt-1 rounded-md border border-border/60 bg-muted/30 p-2">
+                    <button
+                      onClick={() => {
+                        if (cat.key === "career-services") go("professional-services");
+                        else go(`services/${cat.services[0].catSlug}`);
+                        setOpen(false);
+                      }}
+                      className="flex w-full items-center gap-1.5 px-1 pb-1 text-left"
+                    >
+                      <span className="h-2 w-2 rounded-full" style={{ background: cat.color }} />
+                      <span className="text-[10px] font-bold uppercase tracking-wide" style={{ color: cat.color }}>{cat.label}</span>
+                      <span className="ml-auto rounded-full px-1.5 py-0.5 text-[9px] font-bold" style={{ background: `${cat.color}1A`, color: cat.color }}>{cat.services.length}</span>
+                    </button>
+                    <p className="px-2 pb-1 text-[10px] italic text-muted-foreground">{cat.tagline}</p>
+                    <div className="mt-0.5 grid grid-cols-1">
+                      {cat.services.map(svc => (
+                        <button
+                          key={svc.slug}
+                          onClick={() => {
+                            if (svc.catSlug === "professional") go(`professional-services/${svc.slug}`);
+                            else go(`services/${svc.catSlug}/${svc.slug}`);
+                            setOpen(false);
+                          }}
+                          className="rounded-md px-2 py-1 text-left text-[11px] text-foreground hover:bg-background"
+                        >
+                          {svc.name}
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 ))}
               </div>

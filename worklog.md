@@ -2725,3 +2725,52 @@ Stage Summary:
 - CATEGORY_HERO_META map provides project type/duration/rating/tags per category
 - Maintained light theme with emerald brand color (bg-background, bg-card, text-brand, bg-brand) — NO dark colors, NO amber
 - Lint: 0 errors. Browser-verified: 3 different services confirmed rendering correctly with two-column hero, two-line green headlines, and preview card.
+
+---
+Task ID: PRO-SERVICES-HEADER-DROPDOWN
+Agent: Main (Z.ai Code)
+
+Task: Modify the Pro Services dropdown in the main header with more engaging titles and subtitles, and modify the view to match the attached reference image (two-panel master-detail with hero header, count badges, full-width CTA).
+
+Work Log:
+- Read /home/z/my-project/worklog.md to understand previous work
+- Read attached reference image at /home/z/my-project/upload/pasted_image_1793013886729.png using VLM
+- Reference analysis: two-column master-detail dropdown with:
+  - LEFT rail: 6 categories, each with title + italic subtitle + colored count badge + chevron arrow on active
+  - RIGHT detail panel: hero header (icon + category name + bold colored two-line headline + italic hero line + description), scrollable service list (bullet dots + title + subtitle), full-width gradient "Explore [Category] →" CTA
+  - Bottom of left: "68 services" + "Explore all →" link
+- Read existing ProServicesDropdown in PublicNavbar.tsx (lines 364-630) — confirmed it had the two-panel structure but needed more engaging copy and visual refinement
+- Updated PRO_SERVICE_CATEGORIES data with more engaging titles, taglines, heroLines, and descriptions:
+  1. AI & Intelligence: tagline "Put AI to work — so you don't have to" / heroLine "Automate the busywork. Amplify every team." (14 services)
+  2. Build & Engineer: tagline "From idea to production — engineered to scale" / heroLine "Software your users love. Code your team trusts." (11 services)
+  3. Cloud & Deploy: tagline "Infrastructure that never sleeps or breaks" / heroLine "Cloud that scales itself. DevOps that ships itself." (10 services)
+  4. Grow & Market: tagline "Pipeline on autopilot, revenue on repeat" / heroLine "Attention in. Revenue out. On autopilot." (12 services)
+  5. Transform & Strategize: tagline "Re-architect for the AI era — end to end" / heroLine "A roadmap that future-proofs every department." (6 services)
+  6. Career Services: tagline "Land the job you actually deserve" / heroLine "Stand out before you speak. Get hired, not just apply." (8 services)
+- Updated all 68 service descriptions to be more engaging and benefit-driven (e.g., "Automate repetitive workflows with AI" → "Automate repetitive workflows 24/7 with AI")
+- Redesigned the dropdown view (ProServicesDropdown component):
+  - LEFT panel (400px): Sparkles icon + "All Pro Services" header + "68 services" badge; category rail with icon tiles (solid color when active, tinted when inactive), bold label + count badge + italic tagline, animated chevron arrow that slides in on hover; footer with "6 categories · 68 services" + "Explore all →" emerald button
+  - RIGHT panel (480px): hero header card with gradient icon tile + uppercase category label + bold colored two-line headline + italic hero line + description; scrollable service list (max-h-280px) with bullet dots that scale on hover, bold service names that turn emerald on hover, subtitle descriptions, chevron arrows that fade in on hover; full-width gradient CTA button "Explore [Category] →" with hover scale animation
+- Added `ArrowRight` to the lucide-react imports
+- Enhanced the mobile accordion version (AccordionItem value="pro") to match:
+  - "View All Pro Services" button with "68 services" badge
+  - Each category in a bordered card with color dot + uppercase label + count badge + italic tagline + full service list
+- Ran `bun run lint` — 0 errors, only 6 pre-existing warnings in unrelated training files
+- Dev server crashed during testing (ERR_CONNECTION_REFUSED) — restarted with `nohup bun run dev`
+- Browser-verified the dropdown:
+  - Hovered Pro Services button on homepage → dropdown opened
+  - VLM confirmed: two-panel layout, 6 categories with engaging taglines (all 6 listed correctly), hero header with icon + "AI & INTELLIGENCE" + "Make Machines Work For Your Business" headline + "Automate the busywork. Amplify every team." hero line + description, service list with bullet dots, full-width blue "Explore AI & Intelligence →" CTA
+  - VLM confirmed count badges: AI & Intelligence 14, Build & Engineer 11, Cloud & Deploy 10, Grow & Market 12, Transform & Strategize 6, Career Services 8
+  - VLM confirmed color coding per category: blue/cyan, purple, green/teal, orange/yellow, pink/magenta, dark grey/red
+- Verified homepage still renders correctly after changes (header + hero visible, no blank screen, no errors)
+- Checked console + errors — clean
+
+Stage Summary:
+- Pro Services dropdown in PublicNavbar.tsx fully redesigned with engaging titles/subtitles and refined view matching reference image:
+  - LEFT rail: 6 categories with colored icon tiles, bold labels, count badges, italic engaging taglines, animated chevron arrows, "Explore all →" footer
+  - RIGHT detail panel: gradient hero header card (icon + category label + two-line colored headline + italic hero line + description), scrollable service list with bullet dots + bold service names + subtitles, full-width gradient "Explore [Category] →" CTA
+  - All 6 categories have unique engaging taglines and heroLines
+  - All 68 service descriptions enhanced to be more benefit-driven
+  - Color-coded per category (blue, purple, green, orange, pink, red)
+- Mobile accordion also enhanced: each category in a bordered card with color dot, label, count badge, italic tagline, and full service list
+- Lint: 0 errors. Browser-verified: dropdown opens correctly with all 6 categories, engaging taglines, count badges, hero headers, service lists, and CTAs all rendering as expected.
