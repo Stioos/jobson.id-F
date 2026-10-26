@@ -2676,3 +2676,52 @@ Stage Summary:
 - Pro Services landing page (PublicTechAIServices.tsx): FULLY converted from dark to light theme with emerald brand color. All slate-950/900/800 backgrounds → bg-background/bg-card/bg-muted. All amber-500/400 accents → bg-brand/text-brand. All text-white/text-slate-300/400 → text-foreground/text-muted-foreground. All border-slate-700/800 → border-border.
 - Service detail page (PublicServiceDetail.tsx): FULLY converted from dark to light theme with same emerald brand color scheme. All 9 sections (Hero, Overview, Features, Technologies, Industries, Related, FAQ, Testimonials, CTA) now use light cards with border-border, bg-card, bg-muted/40 alternating sections, bg-brand CTAs.
 - Lint: 0 errors. Dev server: running clean. Browser-verified: VLM confirms both pages are light-themed with emerald green accents, no amber/dark colors remain.
+
+---
+Task ID: PRO-SERVICES-HERO-REDESIGN
+Agent: Main (Z.ai Code)
+
+Task: Modify the hero section design of all Pro Services detail pages to match the attached reference image (two-column layout with left content + right preview card, two-line attractive titles).
+
+Work Log:
+- Read /home/z/my-project/worklog.md to understand previous light-theme conversion work
+- Read attached reference image at /home/z/my-project/upload/pasted_image_1793011427319.png using VLM
+- Reference image analysis (two-column hero):
+  - LEFT (~60%): breadcrumbs at top, category tags, large two-line headline, description, metadata row (Project type/duration/rating), category tag pills, two CTAs (Get a Quote, Schedule Consultation)
+  - RIGHT (~40%): preview card with gradient icon tile, "JOBSONN Enterprise Service" badge, truncated headline + description, mini meta (Type/Timeline/Rating), trust checklist, full-width "Hire a Specialist" CTA
+- Read existing PublicServiceDetail.tsx hero (single-column, max-w-4xl, simple badge + icon + title + desc + 2 CTAs)
+- Extracted all 60 actual service slugs + names from /home/z/my-project/src/data/servicesData.ts (9 categories × 6-12 services each)
+- Added CATEGORY_HERO_META map (project type, duration, rating, reviews, tags per category) — reusing marketplace metadata
+- Added ATTRACTIVE_TITLES map with correct slugs for all 60 services across 9 categories:
+  - AI-Powered Business Solutions (6): ai-business-process-automation, ai-customer-support-solutions, ai-document-intelligence, ai-knowledge-management, ai-voice-chat-assistants, enterprise-ai-integration
+  - Digital Sales & AI Marketing (12): ai-digital-marketing, seo-geo-ai-content-marketing, search-engine-social-media-marketing, ai-social-media-automation, ai-sales-funnel-automation, crm-lead-automation, ai-market-research-customer-intelligence, ai-lead-generation-prospecting, ai-outbound-sales-outreach, ai-account-based-marketing, ai-paid-advertising-campaign-strategy, ai-sales-enablement-revenue-intelligence
+  - AI Agentic & Automation (6): custom-ai-agents, multi-agent-systems, ai-workflow-automation, ai-manufacturing-process-automation, ai-recruitment-automation, ai-operations-automation
+  - Open Source Deployment (6): self-hosted-ai-platform-deployment, erp-portal-deployment, custom-apps-platforms-deployment, devops-platform-deployment, monitoring-observability, private-cloud-deployment
+  - Custom Software Development (6): enterprise-web-applications, saas-development, mobile-apps, erp-crm-development, api-development-integration, legacy-modernization
+  - Data Engineering & Analytics (6): data-warehousing, etl-elt, bi-dashboards, real-time-analytics, data-lakes, predictive-analytics
+  - Cloud Infrastructure & DevOps (6): cloud-migration, kubernetes, ci-cd-automation, infrastructure-as-code, cloud-security, managed-devops
+  - AI / ML Model Development (6): machine-learning, llm-development, computer-vision, nlp-solutions, mlops, model-fine-tuning
+  - Digital Transformation Consulting (6): ai-strategy, digital-transformation, process-reengineering, technology-architecture, it-modernization, ai-governance
+- Each title = [punchy first line, supporting second line in emerald green]
+- Replaced the entire hero section with new two-column design:
+  - LEFT column: breadcrumb nav (Pro Services > Category > Service), top-right tag pills (Professional Service / Enterprise), gradient icon tile + two-line headline (line 2 in text-brand), description, metadata row (project type · duration · rating with icons), category tag pills + Fixed Scope + Senior Team, two CTAs (Get a Quote emerald, Schedule Consultation outline)
+  - RIGHT column: sticky preview card with gradient top strip, gradient icon tile + JOBSONN Enterprise Service badge, truncated headline + description, 3-column mini meta (Type/Timeline/Rating), trust checklist (3 items with CheckCircle2), full-width emerald "Hire a Specialist" CTA, subtext "Free 45-min consultation · No commitment"
+- Removed unused CatIcon variable (was only in hero, now removed)
+- Kept formatINR + ILLUSTRATIVE_PRICE at module scope (void startingPrice to suppress unused)
+- Ran `bun run lint` — 0 errors, only 6 pre-existing warnings in unrelated training files
+- Dev server crashed during testing (ERR_CONNECTION_REFUSED) — restarted with `rm -rf .next && nohup bun run dev`
+- Browser-verified 3 different service detail pages:
+  1. /pro-services/custom-software-development/saas-development → VLM confirmed: two-column, breadcrumbs, two-line headline "Launch Your SaaS Product with / Multi-Tenant Architecture Built to Scale" (2nd line green), preview card with JOBSONN badge + Hire a Specialist button
+  2. /pro-services/ai-agentic-automation/custom-ai-agents → VLM confirmed: "Build Autonomous AI Agents / That Get Things Done Without You" (2nd line green)
+  3. /pro-services/cloud-infrastructure-devops/kubernetes → VLM confirmed: "Orchestrate Containers at Scale / with Kubernetes Done Right" (2nd line green), preview card with Hire a Specialist button
+- Checked console + errors — clean, no errors
+
+Stage Summary:
+- PublicServiceDetail.tsx hero section completely redesigned to match reference image:
+  - Two-column layout (lg:grid-cols-[1.5fr_1fr])
+  - Left: breadcrumbs, tags, gradient icon, two-line headline (2nd line emerald), description, metadata row, tag pills, 2 CTAs
+  - Right: sticky preview card with gradient strip, icon, JOBSONN badge, truncated content, mini meta grid, trust checklist, full-width Hire a Specialist CTA
+- ATTRACTIVE_TITLES map covers all 60 services with correct slugs (verified against servicesData.ts)
+- CATEGORY_HERO_META map provides project type/duration/rating/tags per category
+- Maintained light theme with emerald brand color (bg-background, bg-card, text-brand, bg-brand) — NO dark colors, NO amber
+- Lint: 0 errors. Browser-verified: 3 different services confirmed rendering correctly with two-column hero, two-line green headlines, and preview card.

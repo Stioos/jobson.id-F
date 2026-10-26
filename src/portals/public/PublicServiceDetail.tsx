@@ -52,6 +52,105 @@ function formatINR(amount: number) {
   return `₹${amount.toLocaleString("en-IN")}`;
 }
 
+// ============================================================
+// CATEGORY-LEVEL META — shared with the marketplace page so the
+// service-detail hero can show project type / duration / rating.
+// ============================================================
+const CATEGORY_HERO_META: Record<string, {
+  projectType: string;
+  duration: string;
+  rating: number;
+  reviews: number;
+  tags: string[];
+}> = {
+  "ai-powered-business-solutions": { projectType: "Engagement", duration: "8-12 weeks", rating: 4.9, reviews: 175, tags: ["AI Agents", "Process Automation", "Enterprise AI"] },
+  "digital-sales-ai-marketing": { projectType: "Retainer", duration: "Ongoing", rating: 4.8, reviews: 142, tags: ["SEO & GEO", "Outbound AI", "Revenue Ops"] },
+  "ai-agentic-automation": { projectType: "Project", duration: "6-10 weeks", rating: 4.9, reviews: 98, tags: ["Custom Agents", "Multi-Agent", "Workflow AI"] },
+  "open-source-deployment": { projectType: "Project", duration: "4-8 weeks", rating: 4.7, reviews: 86, tags: ["Self-Hosted", "Private Cloud", "DevOps"] },
+  "custom-software-development": { projectType: "Project", duration: "8-12 weeks", rating: 4.9, reviews: 211, tags: ["Web Apps", "SaaS", "Mobile"] },
+  "data-engineering-analytics": { projectType: "Project", duration: "8-14 weeks", rating: 4.8, reviews: 124, tags: ["Warehousing", "BI Dashboards", "Predictive AI"] },
+  "cloud-infrastructure-devops": { projectType: "Engagement", duration: "6-12 weeks", rating: 4.9, reviews: 167, tags: ["Kubernetes", "CI/CD", "IaC"] },
+  "ai-ml-model-development": { projectType: "Project", duration: "8-14 weeks", rating: 4.9, reviews: 134, tags: ["LLMs", "Computer Vision", "MLOps"] },
+  "digital-transformation-consulting": { projectType: "Retainer", duration: "12-24 weeks", rating: 4.8, reviews: 92, tags: ["AI Strategy", "Transformation", "Governance"] },
+};
+
+// ============================================================
+// TWO-LINE ATTRACTIVE TITLES per service slug.
+// First line = the punchy outcome; second line = the "how/what".
+// Falls back to the service name if no entry.
+// ============================================================
+const ATTRACTIVE_TITLES: Record<string, [string, string]> = {
+  // ---- AI-Powered Business Solutions (6) ----
+  "ai-business-process-automation": ["Automate Your Business Processes", "with AI That Works 24/7"],
+  "ai-customer-support-solutions": ["Delight Every Customer with", "AI Support That Never Sleeps"],
+  "ai-document-intelligence": ["Turn Documents into Data", "with AI That Reads & Extracts"],
+  "ai-knowledge-management": ["Build a Brain for Your Company", "with AI Knowledge Management"],
+  "ai-voice-chat-assistants": ["Deploy AI Voice & Chat Assistants", "That Feel Human to Every Caller"],
+  "enterprise-ai-integration": ["Integrate AI into Your Enterprise", "Stack End-to-End, Production-Ready"],
+  // ---- Digital Sales & AI Marketing (12) ----
+  "ai-digital-marketing": ["Scale Your Marketing with AI", "That Learns, Optimizes & Converts"],
+  "seo-geo-ai-content-marketing": ["Rank Higher with AI-Powered SEO", "& Content Search Engines Love"],
+  "search-engine-social-media-marketing": ["Be Everywhere Your Customers Are", "with AI-Driven Search & Social"],
+  "ai-social-media-automation": ["Grow Your Social Presence", "on Autopilot with AI Engagement"],
+  "ai-sales-funnel-automation": ["Build Funnels That Convert Themselves", "with AI-Powered Sales Automation"],
+  "crm-lead-automation": ["Never Let a Lead Go Cold Again", "with AI-Powered CRM & Lead Automation"],
+  "ai-market-research-customer-intelligence": ["Know Your Market Before You Enter", "with AI-Powered Research & Intel"],
+  "ai-lead-generation-prospecting": ["Find Buyers Before They Find You", "with AI-Powered Lead Generation"],
+  "ai-outbound-sales-outreach": ["Book More Meetings with AI Outbound", "That Books While You Sleep"],
+  "ai-account-based-marketing": ["Win the Accounts That Matter", "with AI-Powered ABM Strategies"],
+  "ai-paid-advertising-campaign-strategy": ["Make Every Ad Dollar Count", "with AI-Powered Advertising Strategy"],
+  "ai-sales-enablement-revenue-intelligence": ["Equip Your Team to Close More", "with AI Sales Enablement"],
+  // ---- AI Agentic & Automation (6) ----
+  "custom-ai-agents": ["Build Autonomous AI Agents", "That Get Things Done Without You"],
+  "multi-agent-systems": ["Deploy Multi-Agent AI Swarms", "That Solve Complex Tasks Together"],
+  "ai-workflow-automation": ["Connect Your Tools & Automate", "the Busywork with AI Workflows"],
+  "ai-manufacturing-process-automation": ["Automate Your Factory Floor", "with AI That Optimizes in Real-Time"],
+  "ai-recruitment-automation": ["Automate Your Hiring Pipeline", "with AI That Screens & Shortlists"],
+  "ai-operations-automation": ["Run Your Operations on Autopilot", "with AI That Monitors 24/7"],
+  // ---- Open Source Deployment (6) ----
+  "self-hosted-ai-platform-deployment": ["Deploy Your Own AI Platform", "with Zero Vendor Lock-In"],
+  "erp-portal-deployment": ["Deploy ERPs & Portals That", "Your Team Actually Wants to Use"],
+  "custom-apps-platforms-deployment": ["Ship Custom Apps & Platforms", "Deployed by Senior Architects"],
+  "devops-platform-deployment": ["Deploy a Complete DevOps Platform", "Stack in Under a Week"],
+  "monitoring-observability": ["See Everything, Miss Nothing", "with AI-Powered Monitoring"],
+  "private-cloud-deployment": ["Deploy Your Own Private Cloud", "with Security & Control"],
+  // ---- Custom Software Development (6) ----
+  "enterprise-web-applications": ["Build Enterprise Web Apps", "That Scale to Millions of Users"],
+  "saas-development": ["Launch Your SaaS Product with", "Multi-Tenant Architecture Built to Scale"],
+  "mobile-apps": ["Ship Mobile Apps for iOS & Android", "from One Codebase, Built to Scale"],
+  "erp-crm-development": ["Build Custom ERPs & CRMs", "That Fit Your Business Perfectly"],
+  "api-development-integration": ["Connect Everything with APIs", "That Are Fast, Reliable & Secure"],
+  "legacy-modernization": ["Modernize Your Legacy Systems", "Without Downtime or Data Loss"],
+  // ---- Data Engineering & Analytics (6) ----
+  "data-warehousing": ["Build a Single Source of Truth", "with Modern Data Warehousing"],
+  "etl-elt": ["Move & Transform Data at Scale", "with Production-Grade ETL/ELT Pipelines"],
+  "bi-dashboards": ["See Your Business in Real-Time", "with BI Dashboards That Actually Work"],
+  "real-time-analytics": ["Make Decisions Powered by Live Data", "with Real-Time Analytics"],
+  "data-lakes": ["Build Data Lakes That Store", "Everything, Query Anything"],
+  "predictive-analytics": ["See What's Coming Before It Arrives", "with AI-Powered Predictive Analytics"],
+  // ---- Cloud Infrastructure & DevOps (6) ----
+  "cloud-migration": ["Move to the Cloud with", "Zero Downtime & Full Data Integrity"],
+  "kubernetes": ["Orchestrate Containers at Scale", "with Kubernetes Done Right"],
+  "ci-cd-automation": ["Ship Code with Confidence", "with CI/CD Pipelines That Just Work"],
+  "infrastructure-as-code": ["Provision Infrastructure in Minutes", "with Terraform & IaC"],
+  "cloud-security": ["Lock Down Your Cloud End-to-End", "with Enterprise-Grade Security"],
+  "managed-devops": ["We Run Your DevOps, You Ship", "with Managed DevOps 24/7"],
+  // ---- AI / ML Model Development (6) ----
+  "machine-learning": ["Deploy ML Models That Predict,", "Recommend & Drive Decisions"],
+  "llm-development": ["Build Custom Large Language Models", "Tuned to Your Domain & Data"],
+  "computer-vision": ["See, Detect & Classify from Images", "with Production-Grade Vision AI"],
+  "nlp-solutions": ["Understand & Generate Human Language", "with AI-Powered NLP"],
+  "mlops": ["Deploy, Monitor & Scale ML Models", "with MLOps Built for Production"],
+  "model-fine-tuning": ["Fine-Tune Foundation Models", "for Your Specific Domain & Use Case"],
+  // ---- Digital Transformation Consulting (6) ----
+  "ai-strategy": ["Get a Roadmap for AI", "Not Guesswork, a Real Strategy"],
+  "digital-transformation": ["Re-Architect Your Business", "for the AI Era — End to End"],
+  "process-reengineering": ["Redesign Your Workflows for the AI Era", "with Proven Methodology"],
+  "technology-architecture": ["Build a Technology Foundation", "That Lasts for the Next Decade"],
+  "it-modernization": ["Bring Your Tech Stack into Today", "with IT Modernization"],
+  "ai-governance": ["Deploy AI That's Safe, Compliant", "& Trusted with Proper Governance"],
+};
+
 export function PublicServiceDetail({
   catSlug, svcSlug,
 }: { catSlug: string; svcSlug: string }) {
@@ -67,7 +166,7 @@ export function PublicServiceDetail({
           title="Service not found"
           description={`We couldn't find a service matching "${svcSlug}" under "${catSlug}".`}
           action={
-            <Button onClick={() => navigate("public", "tech-ai-services")} className="gap-1.5">
+            <Button onClick={() => navigate("public", "tech-ai-services")} className="gap-1.5 bg-brand text-brand-foreground hover:bg-brand/90">
               <ArrowRight className="h-4 w-4" /> Back to services
             </Button>
           }
@@ -76,9 +175,16 @@ export function PublicServiceDetail({
     );
   }
 
-  const CatIcon = (ICON_MAP[category.icon] ?? Sparkles);
   const SvcIcon = (ICON_MAP[service.icon] ?? Sparkles);
   const accent = category.color;
+
+  // Hero meta for this category (project type, duration, rating, tags)
+  const heroMeta = CATEGORY_HERO_META[category.slug] ?? {
+    projectType: "Project", duration: "8-12 weeks", rating: 4.9, reviews: 120, tags: ["Enterprise", "Senior Team"],
+  };
+
+  // Two-line attractive title (falls back to service name on line 1)
+  const titleParts = ATTRACTIVE_TITLES[service.slug] ?? [service.name, ""];
 
   // Derive 6 feature cards from service name + category keyBenefits
   const derivedFeatures = category.keyBenefits.slice(0, 6).map((b, i) => ({
@@ -92,36 +198,210 @@ export function PublicServiceDetail({
 
   // Pricing
   const startingPrice = ILLUSTRATIVE_PRICE[category.slug] ?? 200000;
+  void startingPrice;
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      {/* ===================== HERO — light, clean, single column (no breadcrumb, no split) ===================== */}
+      {/* ===================== HERO — two-column (left: content, right: preview card) ===================== */}
       <section className="relative overflow-hidden border-b border-border bg-gradient-to-b from-brand/5 via-background to-background">
         <div aria-hidden className="pointer-events-none absolute -top-24 left-1/4 h-72 w-72 rounded-full bg-brand/10 blur-3xl" />
-        <div className="relative mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-          <Badge className="mb-4 border border-brand/30 bg-brand/10 text-brand text-xs font-semibold hover:bg-brand/15">
-            <CatIcon className="mr-1 h-3 w-3" /> {category.name}
-          </Badge>
-          <div className="flex items-start gap-4">
-            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl" style={{ backgroundColor: `${accent}1A`, color: accent }}>
-              <SvcIcon className="h-7 w-7" />
-            </div>
-            <div>
-              <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl lg:text-4xl">
-                {service.name}
-              </h1>
-              <p className="mt-3 max-w-2xl text-base text-muted-foreground">
+        <div aria-hidden className="pointer-events-none absolute top-10 right-1/4 h-64 w-64 rounded-full blur-3xl" style={{ background: `${accent}10` }} />
+
+        <div className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+          <div className="grid gap-8 lg:grid-cols-[1.5fr_1fr] lg:gap-12">
+            {/* ---------------- LEFT: main content ---------------- */}
+            <div className="flex flex-col">
+              {/* Breadcrumbs + top tags */}
+              <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
+                <nav className="flex flex-wrap items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
+                  <button
+                    onClick={() => navigate("public", "tech-ai-services")}
+                    className="transition-colors hover:text-brand"
+                  >
+                    Pro Services
+                  </button>
+                  <ChevronRight className="h-3 w-3 text-border" />
+                  <button
+                    onClick={() => navigate("public", `services/${category.slug}`)}
+                    className="transition-colors hover:text-brand"
+                  >
+                    {category.name}
+                  </button>
+                  <ChevronRight className="h-3 w-3 text-border" />
+                  <span className="text-foreground">{service.slug}</span>
+                </nav>
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <span className="rounded-full border border-brand/30 bg-brand/10 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-brand">
+                    Professional Service
+                  </span>
+                  <span className="rounded-full border border-border bg-card px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+                    Enterprise
+                  </span>
+                </div>
+              </div>
+
+              {/* Icon tile + headline */}
+              <div className="flex items-start gap-4">
+                <div
+                  className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl shadow-sm"
+                  style={{ background: `linear-gradient(135deg, ${accent}, ${accent}CC)`, color: "#fff" }}
+                >
+                  <SvcIcon className="h-7 w-7" />
+                </div>
+                <div className="min-w-0">
+                  <h1 className="text-2xl font-bold leading-tight tracking-tight text-foreground sm:text-3xl lg:text-[2.1rem] lg:leading-[1.15]">
+                    <span className="block">{titleParts[0]}</span>
+                    {titleParts[1] && (
+                      <span className="block text-brand">{titleParts[1]}</span>
+                    )}
+                  </h1>
+                </div>
+              </div>
+
+              {/* Description */}
+              <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground">
                 {service.shortDesc}
               </p>
+
+              {/* Metadata row: project type · duration · rating */}
+              <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-muted-foreground">
+                <span className="inline-flex items-center gap-1.5">
+                  <Briefcase className="h-4 w-4" style={{ color: accent }} />
+                  <span className="font-medium text-foreground">{heroMeta.projectType}</span>
+                </span>
+                <span className="text-border">·</span>
+                <span className="inline-flex items-center gap-1.5">
+                  <Clock className="h-4 w-4" style={{ color: accent }} />
+                  <span className="font-medium text-foreground">{heroMeta.duration}</span>
+                </span>
+                <span className="text-border">·</span>
+                <span className="inline-flex items-center gap-1.5">
+                  <Star className="h-4 w-4 fill-brand text-brand" />
+                  <span className="font-semibold text-brand">{heroMeta.rating.toFixed(1)}</span>
+                  <span className="text-muted-foreground">({heroMeta.reviews} reviews)</span>
+                </span>
+              </div>
+
+              {/* Category tag pills */}
+              <div className="mt-5 flex flex-wrap gap-1.5">
+                {heroMeta.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="rounded-full border border-border bg-card px-2.5 py-1 text-[11px] font-medium text-muted-foreground"
+                  >
+                    {tag}
+                  </span>
+                ))}
+                <span className="rounded-full border border-border bg-card px-2.5 py-1 text-[11px] font-medium text-muted-foreground">
+                  Fixed Scope
+                </span>
+                <span className="rounded-full border border-border bg-card px-2.5 py-1 text-[11px] font-medium text-muted-foreground">
+                  Senior Team
+                </span>
+              </div>
+
+              {/* CTAs */}
+              <div className="mt-7 flex flex-wrap gap-3">
+                <Button
+                  size="lg"
+                  onClick={() =>
+                    toast.success("Quote requested", {
+                      description: "A senior architect will reach out within 24 hours.",
+                    })
+                  }
+                  className="gap-1.5 bg-brand text-brand-foreground hover:bg-brand/90"
+                >
+                  <Sparkles className="h-4 w-4" /> Get a Quote <ArrowRight className="h-4 w-4" />
+                </Button>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  onClick={() => navigate("public", "contact")}
+                  className="gap-1.5 border-border bg-card text-foreground hover:bg-accent hover:text-foreground"
+                >
+                  Schedule Consultation
+                </Button>
+              </div>
             </div>
-          </div>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Button onClick={() => toast.success("Quote requested", { description: "A senior architect will reach out within 24 hours." })} className="gap-1.5 bg-brand text-brand-foreground hover:bg-brand/90">
-              <Sparkles className="h-4 w-4" /> Get Quote
-            </Button>
-            <Button variant="outline" onClick={() => navigate("public", "contact")} className="gap-1.5 border-border bg-card text-foreground hover:bg-accent hover:text-foreground">
-              Talk to an expert <ArrowRight className="h-4 w-4" />
-            </Button>
+
+            {/* ---------------- RIGHT: preview card ---------------- */}
+            <div className="lg:pl-2">
+              <div className="sticky top-24 overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+                {/* Card header strip */}
+                <div
+                  className="h-1.5 w-full"
+                  style={{ background: `linear-gradient(90deg, ${accent}, ${accent}66)` }}
+                />
+                <div className="p-6">
+                  {/* Icon + badge */}
+                  <div className="mb-4 flex items-center justify-between gap-3">
+                    <div
+                      className="flex h-12 w-12 items-center justify-center rounded-xl shadow-sm"
+                      style={{ background: `linear-gradient(135deg, ${accent}, ${accent}CC)`, color: "#fff" }}
+                    >
+                      <SvcIcon className="h-6 w-6" />
+                    </div>
+                    <Badge className="border border-brand/30 bg-brand/10 text-[10px] font-semibold uppercase tracking-wide text-brand hover:bg-brand/15">
+                      <ShieldCheck className="mr-1 h-3 w-3" /> JOBSONN Enterprise Service
+                    </Badge>
+                  </div>
+
+                  {/* Truncated headline */}
+                  <h2 className="text-base font-bold leading-snug text-foreground line-clamp-3">
+                    {titleParts[0]}{titleParts[1] ? ` ${titleParts[1]}` : ""}
+                  </h2>
+
+                  {/* Truncated description */}
+                  <p className="mt-2 line-clamp-3 text-xs leading-relaxed text-muted-foreground">
+                    {service.shortDesc}
+                  </p>
+
+                  {/* Mini meta */}
+                  <div className="mt-4 grid grid-cols-3 gap-2 border-y border-border py-3 text-center">
+                    <div>
+                      <div className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Type</div>
+                      <div className="mt-0.5 text-xs font-bold text-foreground">{heroMeta.projectType}</div>
+                    </div>
+                    <div className="border-x border-border">
+                      <div className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Timeline</div>
+                      <div className="mt-0.5 text-xs font-bold text-foreground">{heroMeta.duration}</div>
+                    </div>
+                    <div>
+                      <div className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Rating</div>
+                      <div className="mt-0.5 text-xs font-bold text-brand">{heroMeta.rating.toFixed(1)}★</div>
+                    </div>
+                  </div>
+
+                  {/* Trust signals */}
+                  <ul className="mt-4 space-y-1.5">
+                    {[
+                      "Senior architects, not juniors",
+                      "Milestone-based billing",
+                      "NDA-ready in 24 hours",
+                    ].map((b) => (
+                      <li key={b} className="flex items-center gap-2 text-xs text-muted-foreground">
+                        <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-brand" /> {b}
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* Big CTA */}
+                  <Button
+                    onClick={() =>
+                      toast.success("Specialist request received", {
+                        description: "We'll match you with a senior specialist within 1 business day.",
+                      })
+                    }
+                    className="mt-5 w-full gap-1.5 bg-brand text-brand-foreground hover:bg-brand/90"
+                  >
+                    <Zap className="h-4 w-4" /> Hire a Specialist
+                  </Button>
+                  <p className="mt-2 text-center text-[10px] text-muted-foreground">
+                    Free 45-min consultation · No commitment
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
