@@ -6,7 +6,7 @@ import { useNav } from "@/lib/store";
 import { portalConfigs } from "./portal-config";
 import { Icon } from "@/components/common/Icon";
 import { cn } from "@/lib/utils";
-import { X, ChevronLeft, ChevronRight, PanelLeftClose, PanelLeftOpen } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, PanelLeftClose, PanelLeftOpen, Route, ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { NavItem } from "@/lib/types";
 
@@ -178,9 +178,28 @@ export function PortalSidebar({ portal }: { portal: ReturnType<typeof useNav.get
                 <Icon name={activeMainItem.icon} className="h-4 w-4 text-brand" />
                 <span className="text-sm font-semibold tracking-tight">{activeMainItem.label}</span>
               </div>
-              <Button variant="ghost" size="icon" className="lg:hidden h-8 w-8" onClick={() => setSidebarOpen(false)}>
-                <X className="h-4 w-4" />
-              </Button>
+              <div className="flex items-center gap-0.5">
+                {/* Page router icon — navigates to portal overview */}
+                <button
+                  onClick={() => { navigate(portal, "overview"); setSidebarOpen(false); }}
+                  className="flex h-7 w-7 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-sidebar-accent hover:text-foreground"
+                  title="Page Router — Go to overview"
+                >
+                  <Route className="h-3.5 w-3.5" />
+                </button>
+                {/* Collapse panel icon */}
+                <button
+                  onClick={() => setPanelCollapsed(true)}
+                  className="flex h-7 w-7 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-sidebar-accent hover:text-foreground"
+                  title="Collapse panel"
+                >
+                  <ChevronUp className="h-3.5 w-3.5" />
+                </button>
+                {/* Mobile close */}
+                <Button variant="ghost" size="icon" className="lg:hidden h-7 w-7" onClick={() => setSidebarOpen(false)}>
+                  <X className="h-4 w-4" />
+                </Button>
+              </div>
             </div>
 
             {/* Sub-items list */}

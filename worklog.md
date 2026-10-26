@@ -3119,3 +3119,48 @@ Stage Summary:
 - Layout changed from 2x3 grid to 2x2 grid, width reduced from 320px to 300px
 - Header count updated from "6 portals" to "4 portals"
 - Lint: 0 errors. Browser-verified: only 4 items visible, no Training/Consultant. Console: clean.
+
+---
+Task ID: SUBSIDEBAR-COLLAPSE-AND-PAGE-ROUTER-ICONS
+Agent: Main (Z.ai Code)
+
+Task: Add a collapse icon (with function) and a page router icon behind it at the top right side of the sub-sidebar header in the portal sidebar.
+
+Work Log:
+- Read /home/z/my-project/worklog.md to understand previous work
+- Analyzed reference image at /home/z/my-project/upload/pasted_image_1793029347126.png — showed red annotations at the top right of the sub-sidebar header indicating where the two icons should be added
+- Read PortalSidebar.tsx structure:
+  - Icon rail (64px) on the left with all nav items
+  - Contextual sub-sidebar panel (240px) that appears when a main item with children is active
+  - Panel header (h-14) had only the item icon + label on the left, and a mobile-only X close button on the right
+  - `panelCollapsed` state already existed (toggled via footer button at bottom of icon rail)
+- Added `Route` and `ChevronUp` icons to the lucide-react imports
+- Updated the sub-sidebar panel header to add two icons at the top right:
+  1. **Page Router icon** (Route icon) — navigates to the portal's overview route when clicked. Title: "Page Router — Go to overview". Positioned behind (to the left of) the collapse icon.
+  2. **Collapse icon** (ChevronUp) — collapses the sub-sidebar panel by setting `panelCollapsed` to `true`. Title: "Collapse panel". Positioned at the rightmost.
+  3. **Mobile close** (X icon) — kept the existing mobile-only close button, reduced size from h-8 w-8 to h-7 w-7 for consistency.
+- Both icons use the same styling: `h-7 w-7` button, `text-muted-foreground`, hover `bg-sidebar-accent hover:text-foreground`
+
+- Ran `bun run lint` — 0 errors, only 6 pre-existing warnings in unrelated training files
+- Dev server restarted (was down), confirmed HTTP 200
+- Browser-verified all 3 functions:
+
+  1. ICONS VISIBLE — Navigated to Candidate portal → clicked Profile (main item with children) → sub-sidebar panel opened. VLM confirmed:
+     - "A Route/Page-Router Icon: two connected nodes or a branching path"
+     - "A Collapse Icon (Chevron Up): chevron pointing upwards (^)"
+     - "You see the router/branching icon followed immediately by the upward-pointing chevron (collapse icon)"
+
+  2. COLLAPSE FUNCTION — Clicked the collapse icon → VLM confirmed sub-sidebar panel content ("My Profile", "Resume & CV") disappeared → only icon rail remained. Clicked the footer "Expand panel" button → sub-sidebar content returned. Collapse/expand cycle works correctly.
+
+  3. PAGE ROUTER FUNCTION — Clicked the page router icon → VLM confirmed navigation to "overview/dashboard page of the Candidate Portal" with "Welcome back, Priya" message, KPI cards, and dashboard elements visible.
+
+- Checked console + errors — clean
+
+Stage Summary:
+- Sub-sidebar panel header now has two action icons at the top right:
+  1. Page Router icon (Route) — navigates to portal overview/dashboard
+  2. Collapse icon (ChevronUp) — collapses the sub-sidebar panel (icon rail remains)
+- Both icons are `h-7 w-7` buttons with muted-foreground color, hover highlight
+- Mobile X close button kept (lg:hidden), reduced to h-7 w-7 for consistency
+- Existing footer collapse/expand toggle in the icon rail remains as a secondary control
+- Lint: 0 errors. Browser-verified: both icons visible, collapse function works, page router navigates to overview. Console: clean.
