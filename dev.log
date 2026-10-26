@@ -6,115 +6,12 @@
   · optimizePackageImports
 
 ✓ Starting...
-Attention: Next.js now collects completely anonymous telemetry regarding usage.
-This information is used to shape Next.js' roadmap and prioritize features.
-You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
-https://nextjs.org/telemetry
-
-✓ Ready in 736ms
-○ Compiling / ...
- GET / 200 in 18.8s (compile: 18.4s, render: 474ms)
- GET / 200 in 31.0s (compile: 30.6s, render: 409ms)
- GET / 200 in 33.8s (compile: 32.6s, render: 1216ms)
- GET /auth 200 in 31.0s (compile: 30.9s, render: 111ms)
- GET / 200 in 8.7s (compile: 8.2s, render: 532ms)
- GET / 200 in 212ms (compile: 5ms, render: 207ms)
- GET /auth 200 in 168ms (compile: 36ms, render: 133ms)
- GET / 200 in 95ms (compile: 6ms, render: 89ms)
- GET /jobsonn-logo.png 200 in 87ms (compile: 34ms, render: 53ms)
-⨯ The requested resource isn't a valid image for /jobsonn-logo.png received null
- GET /jobsonn-logo.png 200 in 179ms (compile: 34ms, render: 145ms)
-⨯ The requested resource isn't a valid image for /jobsonn-logo.png received null
- GET /jobsonn-logo.png 200 in 161ms (compile: 44ms, render: 117ms)
-⨯ The requested resource isn't a valid image for /jobsonn-logo.png received null
- GET /auth 200 in 699ms (compile: 99ms, render: 600ms)
- GET /jobsonn-logo.png 200 in 101ms (compile: 9ms, render: 92ms)
-⨯ The requested resource isn't a valid image for /jobsonn-logo.png received null
- GET /jobsonn-logo.png 200 in 112ms (compile: 9ms, render: 103ms)
-⨯ The requested resource isn't a valid image for /jobsonn-logo.png received null
- GET /favicon.ico 200 in 491ms (compile: 166ms, render: 325ms)
- GET /jobsonn-logo.png 200 in 849ms (compile: 675ms, render: 174ms)
-⨯ The requested resource isn't a valid image for /jobsonn-logo.png received null
- GET /jobsonn-logo.png 200 in 172ms (compile: 98ms, render: 74ms)
-⨯ The requested resource isn't a valid image for /jobsonn-logo.png received null
- GET /jobsonn-logo.png 200 in 87ms (compile: 7ms, render: 80ms)
-⨯ The requested resource isn't a valid image for /jobsonn-logo.png received null
- GET /register/candidate 200 in 86ms (compile: 5ms, render: 81ms)
- GET /register/employer 200 in 76ms (compile: 5ms, render: 71ms)
- GET /register/recruiter 200 in 55ms (compile: 4ms, render: 51ms)
- GET /register/training 200 in 73ms (compile: 6ms, render: 67ms)
- GET /register/partner 200 in 106ms (compile: 54ms, render: 51ms)
- GET /register/admin 200 in 93ms (compile: 5ms, render: 88ms)
- GET /jobsonn-logo.png 200 in 108ms (compile: 13ms, render: 95ms)
-⨯ The requested resource isn't a valid image for /jobsonn-logo.png received null
- GET /register/candidate 200 in 353ms (compile: 5ms, render: 348ms)
- GET /jobsonn-logo.png 200 in 224ms (compile: 59ms, render: 165ms)
-⨯ The requested resource isn't a valid image for /jobsonn-logo.png received null
- GET /favicon.ico 200 in 187ms (compile: 7ms, render: 180ms)
- GET /jobsonn-logo.png 200 in 106ms (compile: 4ms, render: 102ms)
-⨯ The requested resource isn't a valid image for /jobsonn-logo.png received null
- GET /register/employer 200 in 205ms (compile: 68ms, render: 137ms)
- GET /jobsonn-logo.png 200 in 190ms (compile: 38ms, render: 153ms)
-⨯ The requested resource isn't a valid image for /jobsonn-logo.png received null
- GET /jobsonn-logo.png 200 in 168ms (compile: 17ms, render: 151ms)
-⨯ The requested resource isn't a valid image for /jobsonn-logo.png received null
- GET /favicon.ico 200 in 529ms (compile: 149ms, render: 380ms)
- GET /jobsonn-logo.png 200 in 121ms (compile: 7ms, render: 115ms)
-⨯ The requested resource isn't a valid image for /jobsonn-logo.png received null
- GET /jobsonn-logo.png 200 in 109ms (compile: 47ms, render: 62ms)
-⨯ The requested resource isn't a valid image for /jobsonn-logo.png received null
- GET /sitemap.xml 200 in 660ms (compile: 646ms, render: 15ms)
- GET /jobsonn-logo.png 200 in 98ms (compile: 58ms, render: 40ms)
-⨯ The requested resource isn't a valid image for /jobsonn-logo.png received null
- GET /jobsonn-logo.png 200 in 42ms (compile: 4ms, render: 38ms)
-⨯ The requested resource isn't a valid image for /jobsonn-logo.png received null
- GET /jobsonn-logo.png 200 in 84ms (compile: 46ms, render: 38ms)
-⨯ The requested resource isn't a valid image for /jobsonn-logo.png received null
- GET /jobsonn-logo.png 200 in 107ms (compile: 55ms, render: 52ms)
-⨯ The requested resource isn't a valid image for /jobsonn-logo.png received null
- GET /jobsonn-logo.png 200 in 110ms (compile: 6ms, render: 104ms)
-⨯ The requested resource isn't a valid image for /jobsonn-logo.png received null
- GET / 200 in 50ms (compile: 8ms, render: 42ms)
- GET /jobsonn-logo.png 200 in 89ms (compile: 52ms, render: 36ms)
-⨯ The requested resource isn't a valid image for /jobsonn-logo.png received null
- GET /jobsonn-logo.png 200 in 137ms (compile: 68ms, render: 69ms)
-⨯ The requested resource isn't a valid image for /jobsonn-logo.png received null
- GET /jobsonn-logo.png 200 in 87ms (compile: 4ms, render: 83ms)
-⨯ The requested resource isn't a valid image for /jobsonn-logo.png received null
- GET / 200 in 61ms (compile: 11ms, render: 50ms)
- GET /jobsonn-logo.png 200 in 108ms (compile: 58ms, render: 50ms)
-⨯ The requested resource isn't a valid image for /jobsonn-logo.png received null
- GET /jobsonn-logo.png 200 in 115ms (compile: 55ms, render: 60ms)
-⨯ The requested resource isn't a valid image for /jobsonn-logo.png received null
- GET / 200 in 52ms (compile: 12ms, render: 39ms)
- GET / 200 in 56ms (compile: 10ms, render: 46ms)
- GET /favicon.ico 200 in 245ms (compile: 122ms, render: 123ms)
- GET /auth 200 in 204ms (compile: 82ms, render: 122ms)
- GET /favicon.ico 200 in 235ms (compile: 6ms, render: 229ms)
- GET / 200 in 45ms (compile: 5ms, render: 40ms)
- GET / 200 in 51ms (compile: 8ms, render: 43ms)
- GET /partners/recruitment-partner 200 in 131ms (compile: 60ms, render: 71ms)
- GET /partners/recruitment-partner 200 in 117ms (compile: 59ms, render: 58ms)
- GET / 200 in 56ms (compile: 10ms, render: 47ms)
-✓ Compiled in 6s
- GET /register/candidate 200 in 531ms (compile: 185ms, render: 346ms)
- GET /favicon.ico 200 in 160ms (compile: 14ms, render: 146ms)
- GET /blogs/fullstack-development-roadmap.png 200 in 548ms (compile: 65ms, render: 483ms)
- GET /blogs/future-of-ai-india.png 200 in 547ms (compile: 54ms, render: 494ms)
- GET /blogs/digital-marketing-ai-playbook.png 200 in 577ms (compile: 27ms, render: 550ms)
- GET /blogs/crack-faang-interviews.png 200 in 417ms (compile: 6ms, render: 411ms)
- GET /blogs/scalable-apis-nodejs-typescript.png 200 in 416ms (compile: 153ms, render: 263ms)
- GET /blogs/pay-after-placement-revolutionizing-education.png 200 in 271ms (compile: 59ms, render: 211ms)
- GET /blogs/rise-of-generative-ai-development.png 200 in 132ms (compile: 79ms, render: 52ms)
- GET /blogs/mastering-react-19-new-features.png 200 in 158ms (compile: 5ms, render: 153ms)
- GET /blogs/content-marketing-10x-organic-traffic.png 200 in 82ms (compile: 5ms, render: 77ms)
- GET /register/employer 200 in 302ms (compile: 60ms, render: 242ms)
- GET /favicon.ico 200 in 195ms (compile: 5ms, render: 190ms)
- GET /register/recruiter 200 in 133ms (compile: 71ms, render: 62ms)
- GET /favicon.ico 200 in 85ms (compile: 4ms, render: 80ms)
- GET /register/candidate 200 in 122ms (compile: 54ms, render: 67ms)
- GET /register/employer 200 in 103ms (compile: 5ms, render: 98ms)
- GET /register/recruiter 200 in 50ms (compile: 5ms, render: 45ms)
- GET /register/training 200 in 136ms (compile: 27ms, render: 108ms)
- GET /register/partner 200 in 111ms (compile: 71ms, render: 40ms)
- GET /register/admin 200 in 64ms (compile: 4ms, render: 60ms)
+✓ Ready in 2.2s
+○ Compiling /[...slug] ...
+ GET / 200 in 5.4s (compile: 5.2s, render: 250ms)
+ GET / 200 in 14.2s (compile: 13.3s, render: 869ms)
+ GET / 200 in 13.1s (compile: 12.6s, render: 485ms)
+ GET /register/candidate 200 in 15.9s (compile: 15.7s, render: 142ms)
+ GET /favicon.ico 200 in 369ms (compile: 200ms, render: 169ms)
+ GET / 200 in 355ms (compile: 8ms, render: 347ms)
+ GET /favicon.ico 200 in 438ms (compile: 209ms, render: 229ms)

@@ -803,12 +803,16 @@ function JobsDropdown({ go }: { go: (v: string) => void }) {
   ];
 
   const jobsByLocation = [
-    { label: "Jobs in Delhi", count: "18,200+" },
-    { label: "Jobs in Mumbai", count: "15,800+" },
-    { label: "Jobs in Bangalore", count: "22,400+" },
-    { label: "Jobs in Hyderabad", count: "12,600+" },
-    { label: "Jobs in Chennai", count: "9,300+" },
-    { label: "Jobs in Pune", count: "8,750+" },
+    { label: "Jobs in India", count: "45,000+" },
+    { label: "Jobs in United States", count: "32,000+" },
+    { label: "Jobs in United Kingdom", count: "18,500+" },
+    { label: "Jobs in Canada", count: "14,200+" },
+    { label: "Jobs in Australia", count: "11,800+" },
+    { label: "Jobs in Germany", count: "9,600+" },
+    { label: "Jobs in Singapore", count: "8,400+" },
+    { label: "Jobs in UAE", count: "7,200+" },
+    { label: "Jobs in Saudi Arabia", count: "5,800+" },
+    { label: "Jobs in Qatar", count: "3,500+" },
   ];
 
   const handleJobNav = (label: string) => {
@@ -886,7 +890,7 @@ function JobsDropdown({ go }: { go: (v: string) => void }) {
             </div>
             {/* Column 3: Jobs by location */}
             <div className="border-l pl-5">
-              <span className="mb-2 block text-[10px] font-bold uppercase tracking-widest" style={{ color: "#10B981" }}>Hiring Hotspots</span>
+              <span className="mb-2 block text-[10px] font-bold uppercase tracking-widest" style={{ color: "#10B981" }}>Global Hiring Hotspots</span>
               <div className="grid grid-cols-1 gap-0.5">
                 {jobsByLocation.map((item) => (
                   <button
@@ -908,7 +912,7 @@ function JobsDropdown({ go }: { go: (v: string) => void }) {
           </div>
           {/* Footer CTA */}
           <div className="mt-3 flex items-center justify-between border-t pt-3">
-            <span className="text-xs text-muted-foreground">50,000+ live roles refreshed daily</span>
+            <span className="text-xs text-muted-foreground">150,000+ live roles across 10+ countries</span>
             <button onClick={() => { go("jobs"); setOpen(false); }} className="rounded-md bg-brand/10 px-3 py-1.5 text-xs font-semibold text-brand transition-colors hover:bg-brand/20">
               Explore all opportunities →
             </button>
