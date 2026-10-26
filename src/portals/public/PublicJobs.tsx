@@ -63,18 +63,31 @@ export function PublicJobs() {
   const [savedJobs, setSavedJobs] = React.useState<Set<string>>(new Set());
   const [hydrated, setHydrated] = React.useState(false);
 
-  // Hydrate from sessionStorage (set by home page search)
+  // Hydrate from sessionStorage (set by home page search or header dropdown filters)
   React.useEffect(() => {
     try {
       const raw = sessionStorage.getItem("jobsonn_job_search");
       if (raw) {
-        const data = JSON.parse(raw) as Partial<FilterState> & { keyword?: string; location?: string; category?: string; experienceMin?: number };
+        const data = JSON.parse(raw) as Partial<FilterState> & {
+          keyword?: string;
+          location?: string;
+          category?: string;
+          experienceMin?: number;
+          salaryMin?: number;
+          postedWithinDays?: number;
+          workArrangements?: WorkArrangement[];
+          employmentTypes?: EmploymentType[];
+        };
         setFilters((f) => ({
           ...f,
           keyword: data.keyword ?? f.keyword,
           location: data.location ?? f.location,
           category: data.category ?? f.category,
           experienceMin: data.experienceMin ?? f.experienceMin,
+          salaryMin: data.salaryMin ?? f.salaryMin,
+          postedWithinDays: data.postedWithinDays ?? f.postedWithinDays,
+          workArrangements: data.workArrangements ?? f.workArrangements,
+          employmentTypes: data.employmentTypes ?? f.employmentTypes,
         }));
         sessionStorage.removeItem("jobsonn_job_search");
       }

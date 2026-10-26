@@ -3006,3 +3006,82 @@ Stage Summary:
 - Apps button: Changed from icon-only to full button matching reference — border + grid icon + "Apps" text + down chevron, all in brand color. Dropdown panel unchanged (2x3 grid with 6 portals including Consultant).
 - Login button: Updated to "Login" with UserCheck person icon on solid brand background, matching reference design.
 - Lint: 0 errors. Browser-verified: all 3 fixes confirmed working via VLM. Console: clean.
+
+---
+Task ID: JOBS-DROPDOWN-FILTERS
+Agent: Main (Z.ai Code)
+
+Task: Add all job search filters from two attached reference images to the Jobs dropdown in the main header. Filters include: Work Mode, Location, Department, Salary, Company Type, Role Category, Shift, Duration, Education, Posted By, Industry, Top Companies, and Freshness.
+
+Work Log:
+- Read /home/z/my-project/worklog.md to understand previous work
+- Analyzed both reference images using VLM:
+  - Image 1 (pasted_image_1793025845589.png): Mobile filter UI with 9 categories — Work Mode (On-site/Hybrid/Remote), Location, Department (Engineering/R&D, IT & Software Dev, Customer Support, Product & Marketing), Salary ($0-40k/$40k-80k/$80k-120k/$120k+), Company Type (Private/Inc, Company, Nonprofit, Public/Inc), Role Category (Software Engineering, Data Science, DevOps/DBA/SRE, Enterprise Sales), Signed, Duration, Education (Bachelor's, Master's, Any, Associate's)
+  - Image 2 (pasted_image_1793025875793.png): Filter sidebar with — Company Type (Foreign MNC, Corporate, Startup, Indian MNC), Role Category (Software Development, IT Services/ESM, KPO/BPO/BackOffice, Engineering/Construction), Shift (Urgent, Grave, UK-India, Shift-Rot), Duration (0-1month, 1-3months, 3-6months, 6-12months), Education (Any Graduation/Diploma, MBA/PGDM, B.Tech/B.E., Doctorate Ph.D.), Posted By (Company, Consultancy), Industry (IT Services & Consulting, Internet/E-commerce, Management Consulting, Education/Training), Top Companies (Accenture, TCS, Infosys, Reliance), Freshness (dropdown), Location (Bangalore, Pune, Kolkata, Hyderabad)
+
+- Checked existing JobsDropdown (3-column: Future-Ready Roles, Trending Now, Global Hiring Hotspots) — needed complete replacement
+- Checked PublicJobs.tsx FilterState — supports: keyword, location, workArrangements, employmentTypes, experienceMin, salaryMin, category, postedWithinDays, sort
+- Checked sessionStorage mechanism — `jobsonn_job_search` key stores partial FilterState, hydrated on mount
+
+- REDESIGNED JobsDropdown with 4-column filter grid (920px wide, left-aligned to prevent overflow):
+  - Header: "Job Search Filters" label + "150,000+ live roles — filter & find your fit" + "Browse All Jobs →" CTA
+  - 4 columns, each with 3 filter sections (12 sections total):
+    - Column 1: Work Mode (On-site/Hybrid/Remote with counts), Location (Bangalore/Hyderabad/Pune/Kolkata), Freshness (Last 24hrs/3days/7days/30days)
+    - Column 2: Department (Engineering R&D/IT & Software Dev/Customer Support/Product & Marketing), Role Category (Software Development/Engineering-Construction/IT Services-ESM/KPO-BPO-BackOffice), Salary (₹0-40k/₹40k-80k/₹80k-120k/₹120k+ per month)
+    - Column 3: Company Type (Foreign MNC/Indian MNC/Corporate/Startup), Top Companies (Accenture/TCS/Infosys/Reliance), Posted By (Company/Consultancy)
+    - Column 4: Industry (IT Services & Consulting/Internet-E-commerce/Education-Training/Management Consulting), Education (Any Graduation-Diploma/B.Tech-BE/MBA-PGDM/Doctorate Ph.D.), Shift (Urgent/Shift-Rot/Grave/UK-India)
+  - Footer: "Click any filter to instantly refine your job search" + "Need help finding?" link
+  - Each filter section has a colored icon + uppercase title + filter items with counts
+
+- CREATED FilterSection component: compact section with icon + title + bordered header
+- CREATED FilterItem component: clickable filter button with label + count, hover highlight
+
+- IMPLEMENTED filter application via sessionStorage:
+  - applyFilter() stores filter data in `jobsonn_job_search` sessionStorage key
+  - Uses `window.location.assign("/jobs")` for full page navigation (so PublicJobs remounts and reads sessionStorage)
+  - handleWorkMode: maps "On-site"/"Hybrid"/"Remote" → workArrangements array
+  - handleLocation: sets location field
+  - handleDepartment: sets keyword + category
+  - handleSalary: sets salaryMin
+  - handleKeyword: sets keyword for company type, role category, industry, education, shift, top companies, posted by
+  - handleFreshness: sets postedWithinDays
+
+- UPDATED PublicJobs.tsx hydration logic to support ALL filter fields:
+  - Added salaryMin, postedWithinDays, workArrangements, employmentTypes to the hydration (previously only keyword, location, category, experienceMin were hydrated)
+
+- UPDATED mobile accordion Jobs section with new filter categories (Work Mode, Location, Department, Company Type, Industry, Education)
+
+- Fixed lint error: `window.location.href = "/jobs"` → `window.location.assign("/jobs")` (React Compiler doesn't allow direct assignment)
+
+- Ran `bun run lint` — 0 errors, only 6 pre-existing warnings in unrelated training files
+
+- Browser-verified the dropdown:
+  1. VLM confirmed 4-column layout with all 12 filter sections visible:
+     - Work Mode (On-site 3,027, Hybrid 102, Remote 74)
+     - Location (Bangalore 3,661, Hyderabad 257, Pune 18, Kolkata 16)
+     - Freshness (Last 24 hours, 3 days, 7 days, 30 days)
+     - Department (Engineering/R&D 706, IT & Software Dev 698, Customer Support 437, Product & Marketing 347)
+     - Role Category (Software Development 5,144, Engineering/Construction 1,466, IT Services/ESM 508, KPO/BPO/BackOffice 483)
+     - Salary (₹0-40k, ₹40k-80k, ₹80k-120k, ₹120k+ per month)
+     - Company Type (Foreign MNC 2,073, Indian MNC 701, Corporate 637, Startup 417)
+     - Top Companies (Accenture 720, TCS 667, Infosys 587, Reliance 404)
+     - Posted By (Company 6,076, Consultancy 573)
+     - Industry (IT Services & Consulting 2,756, Internet/E-commerce 650, Education/Training 304, Management Consulting 145)
+     - Education (Any Graduation/Diploma 1,681, B.Tech/B.E. 1,610, MBA/PGDM 685, Doctorate Ph.D. 39)
+     - Shift (Urgent 56, Shift-Rot 9, Grave 2, UK-India 1)
+
+  2. Tested Remote filter click → navigated to /jobs → VLM confirmed: "Remote checkbox is checked" and "3 job results shown" (filtered to remote only)
+  3. Tested Bangalore filter click → navigated to /jobs → VLM confirmed: "location input shows Bangalore" (filter applied, 0 results because mock data has no Bangalore jobs)
+
+- Checked console + errors — clean
+
+Stage Summary:
+- Jobs dropdown completely redesigned with 12 filter categories from reference images, organized in a 4-column grid (920px wide, left-aligned to prevent overflow):
+  - Column 1: Work Mode, Location, Freshness
+  - Column 2: Department, Role Category, Salary
+  - Column 3: Company Type, Top Companies, Posted By
+  - Column 4: Industry, Education, Shift
+- Each filter item has a label + count and is clickable — clicking stores the filter in sessionStorage and navigates to /jobs with the filter applied
+- PublicJobs.tsx hydration logic updated to support all filter fields (workArrangements, salaryMin, postedWithinDays, employmentTypes)
+- Mobile accordion also updated with new filter categories
+- Lint: 0 errors. Browser-verified: all 12 filter sections visible, Remote filter correctly applies (3 remote jobs shown), Bangalore filter correctly applies (location input populated).

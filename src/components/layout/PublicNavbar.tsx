@@ -995,44 +995,119 @@ function ResourcesDropdown({ go }: { go: (v: string) => void }) {
 function JobsDropdown({ go }: { go: (v: string) => void }) {
   const [open, setOpen] = React.useState(false);
 
-  const popularCategories = [
-    { label: "AI & ML Jobs", icon: Cpu, color: "#0EA5E9", count: "12,450+" },
-    { label: "Growth & Sales Jobs", icon: TrendingUp, color: "#10B981", count: "8,320+" },
-    { label: "Brand & Marketing Jobs", icon: Megaphone, color: "#F59E0B", count: "5,140+" },
-    { label: "Data & Analytics Jobs", icon: BarChart3, color: "#8B5CF6", count: "3,890+" },
-    { label: "People & Culture Jobs", icon: Users, color: "#EC4899", count: "4,260+" },
-    { label: "Product Engineering Jobs", icon: Code2, color: "#EF4444", count: "9,750+" },
+  // ===================== FILTER DATA (from reference images) =====================
+  const workModeFilters = [
+    { label: "On-site", count: "3,027" },
+    { label: "Hybrid", count: "102" },
+    { label: "Remote", count: "74" },
   ];
 
-  const jobsInDemand = [
-    { label: "Launchpad Roles (0–2 yrs)", icon: GraduationCap, color: "#0EA5E9", count: "6,500+" },
-    { label: "Global-First Companies", icon: Building2, color: "#8B5CF6", count: "4,200+" },
-    { label: "Work-from-Anywhere", icon: Home, color: "#10B981", count: "3,100+" },
-    { label: "Async-First Remote", icon: Home, color: "#14B8A6", count: "2,850+" },
-    { label: "Instant-Interview Jobs", icon: UserCheck, color: "#F59E0B", count: "1,940+" },
-    { label: "Flex & Gig Roles", icon: Clock, color: "#EC4899", count: "1,620+" },
+  const locationFilters = [
+    { label: "Bangalore", count: "3,661" },
+    { label: "Hyderabad", count: "257" },
+    { label: "Pune", count: "18" },
+    { label: "Kolkata", count: "16" },
   ];
 
-  const jobsByLocation = [
-    { label: "Jobs in India", count: "45,000+" },
-    { label: "Jobs in United States", count: "32,000+" },
-    { label: "Jobs in United Kingdom", count: "18,500+" },
-    { label: "Jobs in Canada", count: "14,200+" },
-    { label: "Jobs in Australia", count: "11,800+" },
-    { label: "Jobs in Germany", count: "9,600+" },
-    { label: "Jobs in Singapore", count: "8,400+" },
-    { label: "Jobs in UAE", count: "7,200+" },
-    { label: "Jobs in Saudi Arabia", count: "5,800+" },
-    { label: "Jobs in Qatar", count: "3,500+" },
+  const departmentFilters = [
+    { label: "Engineering / R&D", count: "706" },
+    { label: "IT & Software Dev.", count: "698" },
+    { label: "Customer Support", count: "437" },
+    { label: "Product & Marketing", count: "347" },
   ];
 
-  const handleJobNav = (label: string) => {
-    sessionStorage.setItem(
-      "jobsonn_job_search",
-      JSON.stringify({ keyword: label.replace("Jobs in ", "").replace(" Jobs", ""), location: "", experienceMin: 0 })
-    );
-    go("jobs");
+  const salaryFilters = [
+    { label: "₹0-40k / mo", value: 0 },
+    { label: "₹40k-80k / mo", value: 40000 },
+    { label: "₹80k-120k / mo", value: 80000 },
+    { label: "₹120k+ / mo", value: 120000 },
+  ];
+
+  const companyTypeFilters = [
+    { label: "Foreign MNC", count: "2,073" },
+    { label: "Indian MNC", count: "701" },
+    { label: "Corporate", count: "637" },
+    { label: "Startup", count: "417" },
+  ];
+
+  const roleCategoryFilters = [
+    { label: "Software Development", count: "5,144" },
+    { label: "Engineering/Construction", count: "1,466" },
+    { label: "IT Services/ESM", count: "508" },
+    { label: "KPO/BPO/BackOffice", count: "483" },
+  ];
+
+  const educationFilters = [
+    { label: "Any Graduation/Diploma", count: "1,681" },
+    { label: "B.Tech/B.E.", count: "1,610" },
+    { label: "MBA/PGDM", count: "685" },
+    { label: "Doctorate Ph.D.", count: "39" },
+  ];
+
+  const industryFilters = [
+    { label: "IT Services & Consulting", count: "2,756" },
+    { label: "Internet/E-commerce", count: "650" },
+    { label: "Education/Training", count: "304" },
+    { label: "Management Consulting", count: "145" },
+  ];
+
+  const topCompaniesFilters = [
+    { label: "Accenture", count: "720" },
+    { label: "TCS", count: "667" },
+    { label: "Infosys", count: "587" },
+    { label: "Reliance", count: "404" },
+  ];
+
+  const postedByFilters = [
+    { label: "Company", count: "6,076" },
+    { label: "Consultancy", count: "573" },
+  ];
+
+  const shiftFilters = [
+    { label: "Urgent", count: "56" },
+    { label: "Shift-Rot", count: "9" },
+    { label: "Grave", count: "2" },
+    { label: "UK-India", count: "1" },
+  ];
+
+  const freshnessFilters = [
+    { label: "Last 24 hours", value: 1 },
+    { label: "Last 3 days", value: 3 },
+    { label: "Last 7 days", value: 7 },
+    { label: "Last 30 days", value: 30 },
+  ];
+
+  // ===================== NAVIGATION HANDLERS =====================
+  const applyFilter = (filterData: Record<string, unknown>) => {
+    sessionStorage.setItem("jobsonn_job_search", JSON.stringify(filterData));
+    // Use full page navigation so PublicJobs remounts and reads sessionStorage
+    window.location.assign("/jobs");
     setOpen(false);
+  };
+
+  const handleWorkMode = (label: string) => {
+    const map: Record<string, string> = { "On-site": "onsite", "Hybrid": "hybrid", "Remote": "remote" };
+    applyFilter({ workArrangements: [map[label]], keyword: "", location: "" });
+  };
+
+  const handleLocation = (label: string) => {
+    applyFilter({ keyword: "", location: label, experienceMin: 0 });
+  };
+
+  const handleDepartment = (label: string) => {
+    applyFilter({ keyword: label, location: "", category: label });
+  };
+
+  const handleSalary = (value: number) => {
+    applyFilter({ keyword: "", location: "", salaryMin: value });
+  };
+
+  const handleKeyword = (label: string) => {
+    applyFilter({ keyword: label, location: "" });
+  };
+
+  const handleFreshness = (value: number) => {
+    applyFilter({ keyword: "", location: "", postedWithinDays: value });
   };
 
   return (
@@ -1053,84 +1128,177 @@ function JobsDropdown({ go }: { go: (v: string) => void }) {
         <ChevronDown className={cn("h-3.5 w-3.5 transition-transform", open && "rotate-180")} />
       </button>
       {open && (
-        <div className="absolute left-1/2 top-full z-50 w-[760px] -translate-x-1/2 rounded-xl border bg-popover p-5 pt-2" style={{ filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.15))" }}>
-          <div className="grid grid-cols-3 gap-5">
-            {/* Column 1: Popular categories */}
-            <div>
-              <span className="mb-2 block text-[10px] font-bold uppercase tracking-widest text-brand">Future-Ready Roles</span>
-              <div className="grid grid-cols-1 gap-0.5">
-                {popularCategories.map((item) => {
-                  const ItemIcon = item.icon;
-                  return (
-                    <button
-                      key={item.label}
-                      onClick={() => handleJobNav(item.label)}
-                      className="flex items-center gap-2.5 rounded-lg border border-transparent p-2 text-left transition-all hover:bg-muted/50"
-                    >
-                      <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md" style={{ background: `${item.color}18`, color: item.color }}>
-                        <ItemIcon className="h-3.5 w-3.5" />
-                      </span>
-                      <span className="flex-1 text-xs font-semibold">{item.label}</span>
-                      <span className="text-[10px] text-muted-foreground">{item.count}</span>
-                    </button>
-                  );
-                })}
+        <div className="absolute left-0 top-full z-50 pt-2" style={{ filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.18))" }}>
+          <div className="w-[920px] max-w-[calc(100vw-2rem)] rounded-xl border bg-popover">
+            {/* Header */}
+            <div className="flex items-center justify-between border-b p-4">
+              <div>
+                <div className="flex items-center gap-1.5">
+                  <Briefcase className="h-3.5 w-3.5 text-brand" />
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-brand">Job Search Filters</span>
+                </div>
+                <p className="mt-0.5 text-sm font-bold text-foreground">150,000+ live roles — filter & find your fit</p>
+              </div>
+              <button
+                onClick={() => { go("jobs"); setOpen(false); }}
+                className="flex items-center gap-1.5 rounded-lg bg-brand px-3 py-2 text-xs font-bold text-brand-foreground transition-transform hover:scale-105"
+              >
+                Browse All Jobs <ArrowRight className="h-3 w-3" />
+              </button>
+            </div>
+
+            {/* Filter grid — 4 columns */}
+            <div className="grid grid-cols-4 gap-0">
+              {/* ===== Column 1: Work Mode + Location + Freshness ===== */}
+              <div className="border-r p-3">
+                {/* Work Mode */}
+                <FilterSection title="Work Mode" icon={Home} color="#10B981">
+                  {workModeFilters.map((f) => (
+                    <FilterItem key={f.label} label={f.label} count={f.count} onClick={() => handleWorkMode(f.label)} />
+                  ))}
+                </FilterSection>
+                {/* Location */}
+                <FilterSection title="Location" icon={MapPin} color="#0EA5E9">
+                  {locationFilters.map((f) => (
+                    <FilterItem key={f.label} label={f.label} count={f.count} onClick={() => handleLocation(f.label)} />
+                  ))}
+                </FilterSection>
+                {/* Freshness */}
+                <FilterSection title="Freshness" icon={Clock} color="#F59E0B">
+                  {freshnessFilters.map((f) => (
+                    <FilterItem key={f.label} label={f.label} onClick={() => handleFreshness(f.value)} />
+                  ))}
+                </FilterSection>
+              </div>
+
+              {/* ===== Column 2: Department + Role Category + Salary ===== */}
+              <div className="border-r p-3">
+                {/* Department */}
+                <FilterSection title="Department" icon={Briefcase} color="#8B5CF6">
+                  {departmentFilters.map((f) => (
+                    <FilterItem key={f.label} label={f.label} count={f.count} onClick={() => handleDepartment(f.label)} />
+                  ))}
+                </FilterSection>
+                {/* Role Category */}
+                <FilterSection title="Role Category" icon={Users} color="#EC4899">
+                  {roleCategoryFilters.map((f) => (
+                    <FilterItem key={f.label} label={f.label} count={f.count} onClick={() => handleKeyword(f.label)} />
+                  ))}
+                </FilterSection>
+                {/* Salary */}
+                <FilterSection title="Salary" icon={TrendingUp} color="#10B981">
+                  {salaryFilters.map((f) => (
+                    <FilterItem key={f.label} label={f.label} onClick={() => handleSalary(f.value)} />
+                  ))}
+                </FilterSection>
+              </div>
+
+              {/* ===== Column 3: Company Type + Top Companies + Posted By ===== */}
+              <div className="border-r p-3">
+                {/* Company Type */}
+                <FilterSection title="Company Type" icon={Building2} color="#0EA5E9">
+                  {companyTypeFilters.map((f) => (
+                    <FilterItem key={f.label} label={f.label} count={f.count} onClick={() => handleKeyword(f.label)} />
+                  ))}
+                </FilterSection>
+                {/* Top Companies */}
+                <FilterSection title="Top Companies" icon={Star} color="#F59E0B">
+                  {topCompaniesFilters.map((f) => (
+                    <FilterItem key={f.label} label={f.label} count={f.count} onClick={() => handleKeyword(f.label)} />
+                  ))}
+                </FilterSection>
+                {/* Posted By */}
+                <FilterSection title="Posted By" icon={UserCheck} color="#8B5CF6">
+                  {postedByFilters.map((f) => (
+                    <FilterItem key={f.label} label={f.label} count={f.count} onClick={() => handleKeyword(f.label)} />
+                  ))}
+                </FilterSection>
+              </div>
+
+              {/* ===== Column 4: Industry + Education + Shift ===== */}
+              <div className="p-3">
+                {/* Industry */}
+                <FilterSection title="Industry" icon={Factory} color="#EF4444">
+                  {industryFilters.map((f) => (
+                    <FilterItem key={f.label} label={f.label} count={f.count} onClick={() => handleKeyword(f.label)} />
+                  ))}
+                </FilterSection>
+                {/* Education */}
+                <FilterSection title="Education" icon={GraduationCap} color="#D4A017">
+                  {educationFilters.map((f) => (
+                    <FilterItem key={f.label} label={f.label} count={f.count} onClick={() => handleKeyword(f.label)} />
+                  ))}
+                </FilterSection>
+                {/* Shift */}
+                <FilterSection title="Shift" icon={Clock} color="#14B8A6">
+                  {shiftFilters.map((f) => (
+                    <FilterItem key={f.label} label={f.label} count={f.count} onClick={() => handleKeyword(f.label)} />
+                  ))}
+                </FilterSection>
               </div>
             </div>
-            {/* Column 2: Jobs in demand */}
-            <div className="border-l pl-5">
-              <span className="mb-2 block text-[10px] font-bold uppercase tracking-widest" style={{ color: "#F59E0B" }}>Trending Now</span>
-              <div className="grid grid-cols-1 gap-0.5">
-                {jobsInDemand.map((item) => {
-                  const ItemIcon = item.icon;
-                  return (
-                    <button
-                      key={item.label}
-                      onClick={() => handleJobNav(item.label)}
-                      className="flex items-center gap-2.5 rounded-lg border border-transparent p-2 text-left transition-all hover:bg-muted/50"
-                    >
-                      <span className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md" style={{ background: `${item.color}18`, color: item.color }}>
-                        <ItemIcon className="h-3.5 w-3.5" />
-                      </span>
-                      <span className="flex-1 text-xs font-semibold">{item.label}</span>
-                      <span className="text-[10px] text-muted-foreground">{item.count}</span>
-                    </button>
-                  );
-                })}
+
+            {/* Footer CTA */}
+            <div className="flex items-center justify-between border-t bg-muted/30 px-4 py-2.5">
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="h-4 w-4 text-brand" />
+                <span className="text-[11px] font-medium text-muted-foreground">Click any filter to instantly refine your job search</span>
               </div>
+              <button
+                onClick={() => { go("contact"); setOpen(false); }}
+                className="flex items-center gap-1 text-[11px] font-bold text-brand transition-colors hover:underline"
+              >
+                Need help finding? <ArrowRight className="h-3 w-3" />
+              </button>
             </div>
-            {/* Column 3: Jobs by location */}
-            <div className="border-l pl-5">
-              <span className="mb-2 block text-[10px] font-bold uppercase tracking-widest" style={{ color: "#10B981" }}>Global Hiring Hotspots</span>
-              <div className="grid grid-cols-1 gap-0.5">
-                {jobsByLocation.map((item) => (
-                  <button
-                    key={item.label}
-                    onClick={() => {
-                      sessionStorage.setItem("jobsonn_job_search", JSON.stringify({ keyword: "", location: item.label.replace("Jobs in ", ""), experienceMin: 0 }));
-                      go("jobs");
-                      setOpen(false);
-                    }}
-                    className="flex items-center gap-2.5 rounded-lg border border-transparent p-2 text-left transition-all hover:bg-muted/50"
-                  >
-                    <MapPin className="h-3.5 w-3.5 flex-shrink-0 text-muted-foreground" />
-                    <span className="flex-1 text-xs font-semibold">{item.label}</span>
-                    <span className="text-[10px] text-muted-foreground">{item.count}</span>
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-          {/* Footer CTA */}
-          <div className="mt-3 flex items-center justify-between border-t pt-3">
-            <span className="text-xs text-muted-foreground">150,000+ live roles across 10+ countries</span>
-            <button onClick={() => { go("jobs"); setOpen(false); }} className="rounded-md bg-brand/10 px-3 py-1.5 text-xs font-semibold text-brand transition-colors hover:bg-brand/20">
-              Explore all opportunities →
-            </button>
           </div>
         </div>
       )}
     </div>
+  );
+}
+
+// ============================================================
+// FILTER SECTION + ITEM — compact filter UI for Jobs dropdown
+// ============================================================
+function FilterSection({
+  title, icon: Icon, color, children,
+}: {
+  title: string;
+  icon: LucideIcon;
+  color: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="mb-3">
+      <div className="mb-1.5 flex items-center gap-1.5 border-b border-border pb-1">
+        <Icon className="h-3 w-3" style={{ color }} />
+        <span className="text-[10px] font-bold uppercase tracking-wide text-foreground">{title}</span>
+      </div>
+      <div className="space-y-0.5">{children}</div>
+    </div>
+  );
+}
+
+function FilterItem({
+  label, count, onClick,
+}: {
+  label: string;
+  count?: string;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className="flex w-full items-center justify-between rounded px-1.5 py-1 text-left transition-colors hover:bg-accent"
+    >
+      <span className="flex-1 truncate text-[11px] text-muted-foreground transition-colors hover:text-foreground">
+        {label}
+      </span>
+      {count && (
+        <span className="ml-1 flex-shrink-0 text-[9px] text-muted-foreground/70">{count}</span>
+      )}
+    </button>
   );
 }
 
@@ -1476,13 +1644,32 @@ function MobileNav({ go }: { go: (v: string) => void }) {
             <AccordionTrigger className="text-sm font-semibold">Jobs</AccordionTrigger>
             <AccordionContent>
               <div className="flex flex-col gap-1 pl-2">
-                <button onClick={() => { go("jobs"); setOpen(false); }} className="rounded-md px-3 py-1.5 text-left text-xs font-medium text-brand hover:bg-brand/10">Browse All Jobs</button>
-                <span className="mt-1 px-3 text-[10px] font-bold uppercase text-muted-foreground">Popular</span>
-                {["IT Jobs", "Sales Jobs", "Marketing Jobs", "Data Science Jobs", "HR Jobs", "Engineering Jobs"].map(j => (
+                <button onClick={() => { go("jobs"); setOpen(false); }} className="flex items-center justify-between rounded-md px-3 py-1.5 text-left text-xs font-medium text-brand hover:bg-brand/10">
+                  <span>Browse All Jobs</span>
+                  <span className="text-[9px] font-bold">150k+</span>
+                </button>
+                <span className="mt-2 px-3 text-[10px] font-bold uppercase text-muted-foreground">Work Mode</span>
+                {["On-site", "Hybrid", "Remote"].map(j => (
                   <button key={j} onClick={() => { go("jobs"); setOpen(false); }} className="rounded-md px-3 py-1.5 text-left text-xs hover:bg-muted">{j}</button>
                 ))}
-                <span className="mt-1 px-3 text-[10px] font-bold uppercase text-muted-foreground">In Demand</span>
-                {["Fresher Jobs", "MNC Jobs", "Remote Jobs", "Work from Home", "Walk-in Jobs", "Part-time Jobs"].map(j => (
+                <span className="mt-2 px-3 text-[10px] font-bold uppercase text-muted-foreground">Location</span>
+                {["Bangalore", "Hyderabad", "Pune", "Kolkata"].map(j => (
+                  <button key={j} onClick={() => { go("jobs"); setOpen(false); }} className="rounded-md px-3 py-1.5 text-left text-xs hover:bg-muted">{j}</button>
+                ))}
+                <span className="mt-2 px-3 text-[10px] font-bold uppercase text-muted-foreground">Department</span>
+                {["Engineering / R&D", "IT & Software Dev.", "Customer Support", "Product & Marketing"].map(j => (
+                  <button key={j} onClick={() => { go("jobs"); setOpen(false); }} className="rounded-md px-3 py-1.5 text-left text-xs hover:bg-muted">{j}</button>
+                ))}
+                <span className="mt-2 px-3 text-[10px] font-bold uppercase text-muted-foreground">Company Type</span>
+                {["Foreign MNC", "Indian MNC", "Corporate", "Startup"].map(j => (
+                  <button key={j} onClick={() => { go("jobs"); setOpen(false); }} className="rounded-md px-3 py-1.5 text-left text-xs hover:bg-muted">{j}</button>
+                ))}
+                <span className="mt-2 px-3 text-[10px] font-bold uppercase text-muted-foreground">Industry</span>
+                {["IT Services & Consulting", "Internet/E-commerce", "Education/Training"].map(j => (
+                  <button key={j} onClick={() => { go("jobs"); setOpen(false); }} className="rounded-md px-3 py-1.5 text-left text-xs hover:bg-muted">{j}</button>
+                ))}
+                <span className="mt-2 px-3 text-[10px] font-bold uppercase text-muted-foreground">Education</span>
+                {["Any Graduation", "B.Tech/B.E.", "MBA/PGDM", "Doctorate Ph.D."].map(j => (
                   <button key={j} onClick={() => { go("jobs"); setOpen(false); }} className="rounded-md px-3 py-1.5 text-left text-xs hover:bg-muted">{j}</button>
                 ))}
               </div>
