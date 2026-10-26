@@ -498,13 +498,36 @@ const PRO_SERVICE_CATEGORIES = [
   },
 ];
 
+// Subcategory metadata — maps catSlug to display label + icon
+const SUBCATEGORY_META: Record<string, { label: string; icon: LucideIcon }> = {
+  "ai-powered-business-solutions": { label: "AI-Powered Business Solutions", icon: Brain },
+  "ai-agentic-automation": { label: "AI Agentic & Automation", icon: Bot },
+  "ai-ml-model-development": { label: "AI / ML Model Development", icon: Cpu },
+  "custom-software-development": { label: "Custom Software Development", icon: Code2 },
+  "data-engineering-analytics": { label: "Data Engineering & Analytics", icon: Database },
+  "cloud-infrastructure-devops": { label: "Cloud Infrastructure & DevOps", icon: Cloud },
+  "open-source-deployment": { label: "Open Source Deployment", icon: Box },
+  "digital-sales-ai-marketing": { label: "Digital Sales & AI Marketing", icon: Megaphone },
+  "digital-transformation-consulting": { label: "Digital Transformation Consulting", icon: Compass },
+  "professional": { label: "Professional Career Services", icon: GraduationCap },
+};
+
 function ProServicesDropdown({ go }: { go: (v: string) => void }) {
   const [open, setOpen] = React.useState(false);
+  const [activeKey, setActiveKey] = React.useState<string>("ai-intelligence");
 
-  const handleCategoryClick = (cat: typeof PRO_SERVICE_CATEGORIES[0]) => {
-    if (cat.key === "career-services") go("professional-services");
-    else go(`services/${cat.services[0].catSlug}`);
-    setOpen(false);
+  // Derive subcategory groups for a given mega-category
+  const getSubcategories = (cat: typeof PRO_SERVICE_CATEGORIES[0]) => {
+    const groups: Record<string, typeof cat.services> = {};
+    cat.services.forEach((svc) => {
+      if (!groups[svc.catSlug]) groups[svc.catSlug] = [];
+      groups[svc.catSlug].push(svc);
+    });
+    return Object.entries(groups).map(([catSlug, services]) => ({
+      catSlug,
+      meta: SUBCATEGORY_META[catSlug] ?? { label: catSlug, icon: Layers },
+      services,
+    }));
   };
 
   const handleServiceClick = (catSlug: string, svcSlug: string) => {
@@ -516,11 +539,21 @@ function ProServicesDropdown({ go }: { go: (v: string) => void }) {
     setOpen(false);
   };
 
+  const handleSubcategoryClick = (catSlug: string) => {
+    if (catSlug === "professional") go("professional-services");
+    else go(`services/${catSlug}`);
+    setOpen(false);
+  };
+
+  const activeCat = PRO_SERVICE_CATEGORIES.find(c => c.key === activeKey) ?? PRO_SERVICE_CATEGORIES[0];
+  const subcats = getSubcategories(activeCat);
+  const ActiveIcon = activeCat.icon;
+
   return (
     <div
       className="relative"
       onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
+      onMouseLeave={() => { setOpen(false); setActiveKey("ai-intelligence"); }}
     >
       <button
         onClick={() => go("professional-services")}
@@ -531,99 +564,184 @@ function ProServicesDropdown({ go }: { go: (v: string) => void }) {
         <ChevronDown className={cn("h-3.5 w-3.5 transition-transform", open && "rotate-180")} />
       </button>
       {open && (
-        <div className="absolute left-1/2 top-full z-50 -translate-x-1/2 pt-2" style={{ filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.18))" }}>
-          <div className="w-[760px] rounded-xl border bg-popover p-5">
-            {/* Header */}
-            <div className="mb-4 flex items-center justify-between border-b pb-3">
-              <div>
-                <div className="flex items-center gap-1.5">
-                  <Sparkles className="h-3.5 w-3.5 text-brand" />
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-brand">Pro Services Marketplace</span>
-                </div>
-                <p className="mt-1 text-sm font-bold text-foreground">68 services across 6 categories — pay after delivery</p>
+        <div className="absolute left-1/2 top-full z-50 flex -translate-x-1/2 pt-2" style={{ filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.18))" }}>
+          <div className="flex w-[820px] overflow-hidden rounded-xl border bg-popover">
+            {/* ============== LEFT SIDEBAR: solution categories ============== */}
+            <div className="flex w-[260px] flex-col border-r bg-muted/30 p-3">
+              {/* Sidebar header */}
+              <div className="mb-2 flex items-center justify-between px-1">
+                <span className="text-[9px] font-bold uppercase tracking-widest text-muted-foreground">Solution Categories</span>
+                <span className="rounded-full bg-brand/10 px-1.5 py-0.5 text-[8px] font-bold text-brand">68</span>
               </div>
-              <button
-                onClick={() => { go("tech-ai-services"); setOpen(false); }}
-                className="flex items-center gap-1.5 rounded-lg bg-brand px-3 py-2 text-xs font-bold text-brand-foreground transition-transform hover:scale-105"
-              >
-                View All Services <ArrowRight className="h-3 w-3" />
-              </button>
+              {/* Category list */}
+              <div className="flex flex-col gap-0.5 overflow-y-auto" style={{ maxHeight: "400px" }}>
+                {PRO_SERVICE_CATEGORIES.map((cat) => {
+                  const CatIcon = cat.icon;
+                  const isActive = activeKey === cat.key;
+                  const subcatCount = new Set(cat.services.map(s => s.catSlug)).size;
+                  return (
+                    <button
+                      key={cat.key}
+                      onMouseEnter={() => setActiveKey(cat.key)}
+                      onClick={() => {
+                        if (cat.key === "career-services") go("professional-services");
+                        else go(`services/${cat.services[0].catSlug}`);
+                        setOpen(false);
+                      }}
+                      className="group relative flex items-start gap-2.5 rounded-lg p-2 text-left transition-all duration-150"
+                      style={{
+                        background: isActive ? `${cat.color}12` : "transparent",
+                      }}
+                    >
+                      {/* Active left border */}
+                      <span
+                        className="absolute left-0 top-1.5 bottom-1.5 w-0.5 rounded-full transition-opacity"
+                        style={{ background: cat.color, opacity: isActive ? 1 : 0 }}
+                      />
+                      {/* Icon */}
+                      <div
+                        className="mt-0.5 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-md transition-transform group-hover:scale-105"
+                        style={{
+                          background: isActive ? cat.color : `${cat.color}18`,
+                          color: isActive ? "#fff" : cat.color,
+                        }}
+                      >
+                        <CatIcon className="h-3.5 w-3.5" />
+                      </div>
+                      {/* Label + subtitle */}
+                      <div className="min-w-0 flex-1">
+                        <span
+                          className="block truncate text-[11px] font-bold transition-colors"
+                          style={{ color: isActive ? cat.color : "hsl(var(--foreground))" }}
+                        >
+                          {cat.label}
+                        </span>
+                        <span className="mt-0.5 block truncate text-[9px] text-muted-foreground">
+                          {cat.services.length} services · {subcatCount} {subcatCount === 1 ? "subcategory" : "subcategories"}
+                        </span>
+                      </div>
+                      {isActive && (
+                        <ChevronRight className="mt-1 h-3 w-3 flex-shrink-0" style={{ color: cat.color }} />
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+              {/* Sidebar footer */}
+              <div className="mt-2 border-t pt-2">
+                <button
+                  onClick={() => { go("tech-ai-services"); setOpen(false); }}
+                  className="flex w-full items-center justify-center gap-1 rounded-md bg-brand px-2 py-1.5 text-[10px] font-bold text-brand-foreground transition-colors hover:bg-brand/90"
+                >
+                  View All Services <ArrowRight className="h-3 w-3" />
+                </button>
+              </div>
             </div>
 
-            {/* 3-column grid of category cards */}
-            <div className="grid grid-cols-3 gap-3">
-              {PRO_SERVICE_CATEGORIES.map((cat) => {
-                const CatIcon = cat.icon;
-                return (
-                  <div
-                    key={cat.key}
-                    className="group cursor-pointer rounded-xl border border-border bg-card p-3 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md"
-                    style={{ borderTopColor: cat.color, borderTopWidth: 3 }}
-                    onClick={() => handleCategoryClick(cat)}
-                  >
-                    {/* Icon + count badge */}
-                    <div className="mb-2 flex items-start justify-between">
-                      <div
-                        className="flex h-9 w-9 items-center justify-center rounded-lg transition-transform group-hover:scale-110"
-                        style={{ background: `linear-gradient(135deg, ${cat.color}, ${cat.color}CC)`, color: "#fff" }}
-                      >
-                        <CatIcon className="h-4 w-4" />
-                      </div>
-                      <span
-                        className="rounded-full px-1.5 py-0.5 text-[9px] font-bold"
-                        style={{ background: `${cat.color}1A`, color: cat.color }}
-                      >
-                        {cat.services.length}
-                      </span>
-                    </div>
-                    {/* Title */}
-                    <h3
-                      className="text-xs font-bold leading-tight transition-colors group-hover:text-brand"
-                      style={{ color: cat.color }}
+            {/* ============== RIGHT PANEL: active category detail ============== */}
+            <div className="flex flex-1 flex-col p-4">
+              {/* Category header */}
+              <div
+                className="mb-3 rounded-lg p-3"
+                style={{ background: `${activeCat.color}0A`, borderLeft: `3px solid ${activeCat.color}` }}
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex items-start gap-2.5">
+                    <div
+                      className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg shadow-sm"
+                      style={{ background: `linear-gradient(135deg, ${activeCat.color}, ${activeCat.color}CC)`, color: "#fff" }}
                     >
-                      {cat.label}
-                    </h3>
-                    {/* Subtitle */}
-                    <p className="mt-0.5 line-clamp-1 text-[10px] italic text-muted-foreground">{cat.tagline}</p>
-                    {/* Top 3 services */}
-                    <div className="mt-2 space-y-0.5 border-t border-border pt-2">
-                      {cat.services.slice(0, 3).map((svc) => (
-                        <button
-                          key={svc.slug}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleServiceClick(svc.catSlug, svc.slug);
-                          }}
-                          className="block w-full truncate rounded px-1 py-0.5 text-left text-[10px] text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
-                        >
-                          {svc.name}
-                        </button>
-                      ))}
-                      <button
-                        onClick={(e) => { e.stopPropagation(); handleCategoryClick(cat); }}
-                        className="mt-0.5 block w-full rounded px-1 py-0.5 text-left text-[10px] font-semibold transition-colors hover:bg-accent"
-                        style={{ color: cat.color }}
-                      >
-                        + {cat.services.length - 3} more →
-                      </button>
+                      <ActiveIcon className="h-4 w-4" />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <span className="text-[9px] font-bold uppercase tracking-widest" style={{ color: activeCat.color }}>
+                        {activeCat.label}
+                      </span>
+                      <h3 className="mt-0.5 text-sm font-bold leading-tight text-foreground">
+                        {activeCat.twoLineTitle.split("\n").map((line, i) => (
+                          <span key={i} className="block">{line}</span>
+                        ))}
+                      </h3>
+                      <p className="mt-1 line-clamp-2 text-[10px] leading-relaxed text-muted-foreground">
+                        {activeCat.desc}
+                      </p>
                     </div>
                   </div>
-                );
-              })}
-            </div>
-
-            {/* Bottom CTA strip */}
-            <div className="mt-4 flex items-center justify-between rounded-lg border border-brand/20 bg-brand/5 px-4 py-2.5">
-              <div className="flex items-center gap-2">
-                <ShieldCheck className="h-4 w-4 text-brand" />
-                <span className="text-xs font-medium text-foreground">Senior architects · Milestone billing · NDA-ready in 24 hours</span>
+                  <button
+                    onClick={() => {
+                      if (activeCat.key === "career-services") go("professional-services");
+                      else go(`services/${activeCat.services[0].catSlug}`);
+                      setOpen(false);
+                    }}
+                    className="flex flex-shrink-0 items-center gap-1 rounded-md border px-2.5 py-1.5 text-[10px] font-bold transition-colors"
+                    style={{ borderColor: activeCat.color, color: activeCat.color, background: "transparent" }}
+                  >
+                    Explore category <ArrowRight className="h-3 w-3" />
+                  </button>
+                </div>
               </div>
-              <button
-                onClick={() => { go("contact"); setOpen(false); }}
-                className="flex items-center gap-1 text-xs font-bold text-brand transition-colors hover:underline"
-              >
-                Request a Consultation <ArrowRight className="h-3 w-3" />
-              </button>
+
+              {/* Subcategory cards — 2-column grid */}
+              <div className="grid grid-cols-2 gap-2.5 overflow-y-auto pr-1" style={{ maxHeight: "300px" }}>
+                {subcats.map((sub) => {
+                  const SubIcon = sub.meta.icon;
+                  return (
+                    <div
+                      key={sub.catSlug}
+                      className="group rounded-lg border border-border bg-card p-2.5 transition-all duration-150 hover:border-brand/40 hover:shadow-sm"
+                    >
+                      {/* Subcategory header */}
+                      <button
+                        onClick={() => handleSubcategoryClick(sub.catSlug)}
+                        className="mb-1.5 flex w-full items-center gap-1.5 border-b border-border pb-1.5 text-left"
+                      >
+                        <div
+                          className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded"
+                          style={{ background: `${activeCat.color}18`, color: activeCat.color }}
+                        >
+                          <SubIcon className="h-3 w-3" />
+                        </div>
+                        <span className="flex-1 truncate text-[11px] font-bold text-foreground transition-colors group-hover:text-brand">
+                          {sub.meta.label}
+                        </span>
+                        <span
+                          className="rounded-full px-1.5 py-0.5 text-[8px] font-bold"
+                          style={{ background: `${activeCat.color}1A`, color: activeCat.color }}
+                        >
+                          {sub.services.length}
+                        </span>
+                      </button>
+                      {/* Service items */}
+                      <div className="space-y-0.5">
+                        {sub.services.slice(0, 3).map((svc) => (
+                          <button
+                            key={svc.slug}
+                            onClick={() => handleServiceClick(svc.catSlug, svc.slug)}
+                            className="flex w-full items-start gap-1.5 rounded px-1 py-1 text-left transition-colors hover:bg-accent"
+                          >
+                            <span
+                              className="mt-1 h-1 w-1 flex-shrink-0 rounded-full"
+                              style={{ background: activeCat.color }}
+                            />
+                            <span className="line-clamp-1 text-[10px] text-muted-foreground transition-colors hover:text-foreground">
+                              {svc.name}
+                            </span>
+                          </button>
+                        ))}
+                        {sub.services.length > 3 && (
+                          <button
+                            onClick={() => handleSubcategoryClick(sub.catSlug)}
+                            className="mt-0.5 flex w-full items-center gap-1 rounded px-1 py-0.5 text-left text-[10px] font-semibold transition-colors hover:bg-accent"
+                            style={{ color: activeCat.color }}
+                          >
+                            +{sub.services.length - 3} more services <ArrowRight className="h-2.5 w-2.5" />
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>

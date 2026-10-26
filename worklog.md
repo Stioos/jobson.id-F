@@ -2856,3 +2856,80 @@ Stage Summary:
 - Apps dropdown: 6 portal options — Candidate, Employer, Recruiter, Training, Partner, Consultant (replaced Admin with Consultant, mapped to agency portal). Each has color-coded icon and label. Right-aligned dropdown.
 - Cleaned up unused imports: removed Sun, Moon, useTheme. Added LayoutGrid, Headset.
 - Lint: 0 errors. Browser-verified: all 3 changes confirmed working via VLM. Console: clean.
+
+---
+Task ID: PRO-SERVICES-DROPDOWN-MASTER-DETAIL
+Agent: Main (Z.ai Code)
+
+Task: Modify the Pro Services dropdown to match the attached reference image — a split-pane (master-detail) layout with a left sidebar of solution categories and a right detail panel showing a category header + 2-column grid of subcategory cards.
+
+Work Log:
+- Read /home/z/my-project/worklog.md to understand previous work
+- Analyzed reference image at /home/z/my-project/upload/pasted_image_1793024756233.png using VLM
+- Reference design (dark theme with gold accents):
+  - LEFT SIDEBAR: "SOLUTION CATEGORIES" header + scrollable list of categories. Each item: icon + title + "N services · N subcategories" subtitle. Active item: colored left border + tinted bg.
+  - RIGHT PANEL: Category header (icon + title + description + "Explore category →" outlined button) + 2-column grid of subcategory cards. Each card: icon + title + count badge + 3 service items + "+N more services" link.
+- Adapted to light theme with emerald brand color (per user's earlier request to maintain theme color, no dark mode)
+- Added SUBCATEGORY_META map: maps each catSlug to { label, icon }:
+  - ai-powered-business-solutions → Brain
+  - ai-agentic-automation → Bot
+  - ai-ml-model-development → Cpu
+  - custom-software-development → Code2
+  - data-engineering-analytics → Database
+  - cloud-infrastructure-devops → Cloud
+  - open-source-deployment → Box
+  - digital-sales-ai-marketing → Megaphone
+  - digital-transformation-consulting → Compass
+  - professional → GraduationCap
+- Replaced entire ProServicesDropdown with new master-detail design:
+  - LEFT SIDEBAR (260px, bg-muted/30, border-r):
+    - "Solution Categories" header + "68" count badge
+    - 6 category buttons, each with:
+      - Colored left border (active only, opacity transition)
+      - Icon tile (solid color when active, tinted when inactive)
+      - Bold label (colored when active)
+      - "N services · M subcategories" subtitle (derived from service count + unique catSlug count)
+      - ChevronRight arrow when active
+    - Footer: "View All Services →" emerald button
+  - RIGHT PANEL (flex-1):
+    - Category header card (tinted bg, colored left border):
+      - Gradient icon tile + uppercase category label + two-line bold headline + description
+      - "Explore category →" outlined button (category-colored border + text)
+    - 2-column grid of subcategory cards (scrollable, max-h-300px):
+      - Each card: icon + subcategory label + count badge (in header row with border-b)
+      - Top 3 service items with bullet dots
+      - "+N more services →" link (category-colored) if >3 services
+      - Hover: border-brand/40 + shadow
+
+- getSubcategories() function groups a mega-category's services by catSlug to create subcategory groups dynamically
+- handleSubcategoryClick() navigates to the subcategory's category page
+- handleServiceClick() navigates to individual service detail page
+
+- Ran `bun run lint` — 0 errors, only 6 pre-existing warnings in unrelated training files
+- Dev server restarted (was down), confirmed HTTP 200
+- Browser-verified the dropdown:
+  1. Hovered Pro Services → dropdown opened
+  2. VLM confirmed split-pane layout (left sidebar + right detail panel)
+  3. VLM confirmed all 6 categories in left sidebar with correct subtitles:
+     - AI & Intelligence: 14 services · 3 subcategories
+     - Build & Engineer: 11 services · 2 subcategories
+     - Cloud & Deploy: 10 services · 2 subcategories
+     - Grow & Market: 12 services · 1 subcategory
+     - Transform & Strategize: 6 services · 1 subcategory
+     - Career Services: 8 services · 1 subcategory
+  4. VLM confirmed right panel for AI & Intelligence:
+     - Header: blue icon + "AI & INTELLIGENCE" + "Make Machines Work For Your Business" headline + description + "Explore category →" button
+     - 3 subcategory cards: AI-Powered Business Solutions (6, +3 more), AI Agentic & Automation (3), AI/ML Model Development (5, +2 more)
+  5. Hovered Cloud & Deploy → right panel updated correctly:
+     - Headline: "Scale Infra That Scales Itself"
+     - 2 subcategory cards: Cloud Infrastructure & DevOps (6, +3 more), Open Source Deployment (4, +1 more)
+- Checked console + errors — clean
+
+Stage Summary:
+- Pro Services dropdown completely redesigned to match reference image's master-detail structure:
+  - LEFT SIDEBAR (260px): "Solution Categories" header + 6 category buttons with icon + label + "N services · M subcategories" subtitle + colored left border on active + "View All Services →" footer button
+  - RIGHT PANEL: Category header card (gradient icon + label + two-line headline + description + "Explore category →" outlined button) + 2-column scrollable grid of subcategory cards (each with icon + label + count badge + top 3 services + "+N more services →" link)
+  - Hovering a category in the left sidebar dynamically updates the right panel
+  - Light theme with emerald brand color maintained (no dark mode)
+  - Subcategories derived by grouping services by catSlug within each mega-category
+- Lint: 0 errors. Browser-verified: split-pane layout working, all 6 categories with subtitles, subcategory cards with service items and "+more" links, right panel updates on hover.

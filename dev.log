@@ -1,15 +1,16 @@
 ▲ Next.js 16.1.3 (Turbopack)
 - Local:         http://localhost:3000
-- Network:       http://21.0.5.120:3000
+- Network:       http://21.0.4.165:3000
 - Environments: .env
 - Experiments (use with caution):
   · optimizePackageImports
 
 ✓ Starting...
-✓ Ready in 1543ms
+✓ Ready in 1797ms
 ○ Compiling / ...
- GET / 200 in 13.0s (compile: 12.7s, render: 266ms)
- GET / 200 in 666ms (compile: 51ms, render: 615ms)
- GET /favicon.ico 200 in 2.3s (compile: 2.2s, render: 84ms)
- GET / 200 in 70ms (compile: 11ms, render: 59ms)
-in 70ms (compile: 11ms, render: 59ms)
+ GET / 200 in 12.2s (compile: 12.0s, render: 264ms)
+ GET / 200 in 424ms (compile: 21ms, render: 403ms)
+ GET /favicon.ico 200 in 2.0s (compile: 1958ms, render: 63ms)
+ GET / 200 in 120ms (compile: 11ms, render: 109ms)
+ GET / 200 in 56ms (compile: 4ms, render: 52ms)
+ in 56ms (compile: 4ms, render: 52ms)
