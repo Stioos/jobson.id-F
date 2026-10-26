@@ -40,7 +40,6 @@ const RecruiterScheduling = dynamic(() => import("./RecruiterScheduling").then((
 const RecruiterOffers = dynamic(() => import("./RecruiterOffers").then((m) => m.RecruiterOffers));
 const RecruiterAssessments = dynamic(() => import("./RecruiterAssessments").then((m) => m.RecruiterAssessments));
 const RecruiterFeedback = dynamic(() => import("./RecruiterFeedback").then((m) => m.RecruiterFeedback));
-const RecruiterTasks = dynamic(() => import("./RecruiterTasks").then((m) => m.RecruiterTasks));
 const RecruiterReferrals = dynamic(() => import("./RecruiterReferrals").then((m) => m.RecruiterReferrals));
 const RecruiterSourcingCampaigns = dynamic(() => import("./RecruiterSourcingCampaigns").then((m) => m.RecruiterSourcingCampaigns));
 const RecruiterNetworkSourcing = dynamic(() => import("./RecruiterNetworkSourcing").then((m) => m.RecruiterNetworkSourcing));
@@ -66,6 +65,9 @@ const RecruiterPartnerNetwork = dynamic(() => import("./RecruiterPartnerNetwork"
 const RecruiterTalentSolutions = dynamic(() => import("./RecruiterTalentSolutions").then((m) => m.RecruiterTalentSolutions));
 const RecruiterTsTransactions = dynamic(() => import("./RecruiterTsTransactions").then((m) => m.RecruiterTsTransactions));
 
+// Cross-portal shared pages (SETTINGS-SUPPORT-SHARED)
+const TasksPage = dynamic(() => import("@/portals/_settings-support-shared/TasksPage").then((m) => m.TasksPage));
+
 // Agency Management pages (merged from the former Agency Portal)
 const AgencyOverview = dynamic(() => import("@/portals/agency/AgencyOverview").then((m) => m.AgencyOverview));
 const AgencyProfile = dynamic(() => import("@/portals/agency/AgencyProfile").then((m) => m.AgencyProfile));
@@ -88,6 +90,7 @@ export function render(route: string): React.ReactNode {
   const top = route.split("/")[0] || "overview";
   switch (top) {
     case "overview": return <RecruiterOverview />;
+    case "tasks": return <TasksPage portal="recruiter" />;
     case "clients": return <RecruiterClients />;
     case "requisitions": return <RecruiterRequisitions />;
     case "candidates": return <RecruiterCandidates />;
@@ -120,7 +123,6 @@ export function render(route: string): React.ReactNode {
     case "offers": return <RecruiterOffers />;
     case "assessments": return <RecruiterAssessments />;
     case "feedback": return <RecruiterFeedback />;
-    case "tasks": return <RecruiterTasks />;
     case "referrals": return <RecruiterReferrals />;
     case "sourcing-campaigns": return <RecruiterSourcingCampaigns />;
     case "network-sourcing": return <RecruiterNetworkSourcing />;

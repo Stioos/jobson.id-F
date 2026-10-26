@@ -30,6 +30,9 @@ const AdminPrivacy = dynamic(() => import("./AdminPrivacy").then((m) => m.AdminP
 const AdminSupport = dynamic(() => import("./AdminSupport").then((m) => m.AdminSupport));
 const AdminSettings = dynamic(() => import("./AdminSettings").then((m) => m.AdminSettings));
 
+// Cross-portal shared pages (SETTINGS-SUPPORT-SHARED)
+const TasksPage = dynamic(() => import("@/portals/_settings-support-shared/TasksPage").then((m) => m.TasksPage));
+
 export function PortalRouter() {
   const { route } = useNav();
   return <>{render(route)}</>;
@@ -42,6 +45,7 @@ export function render(route: string): React.ReactNode {
     case "home":
     case "":
       return <AdminOverview />;
+    case "tasks": return <TasksPage portal="admin" />;
     case "users": return <AdminUsers />;
     case "organizations": return <AdminOrganizations />;
     case "verification": return <AdminVerification />;

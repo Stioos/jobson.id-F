@@ -68,6 +68,9 @@ const EnterpriseSSO = dynamic(() => import("@/portals/enterprise/EnterpriseSSO")
 const EnterpriseBilling = dynamic(() => import("@/portals/enterprise/EnterpriseBilling").then((m) => m.EnterpriseBilling));
 const EnterpriseSettings = dynamic(() => import("@/portals/enterprise/EnterpriseSettings").then((m) => m.EnterpriseSettings));
 
+// Cross-portal shared pages (SETTINGS-SUPPORT-SHARED)
+const TasksPage = dynamic(() => import("@/portals/_settings-support-shared/TasksPage").then((m) => m.TasksPage));
+
 export function PortalRouter() {
   const { route } = useNav();
   return <>{render(route)}</>;
@@ -77,6 +80,7 @@ export function render(route: string): React.ReactNode {
   const root = route.split("/")[0] ?? "overview";
   switch (root) {
     case "overview": return <EmployerOverview />;
+    case "tasks": return <TasksPage portal="employer" />;
     case "company-profile": return <EmployerCompanyProfile />;
     case "branding": return <EmployerBranding />;
     case "jobs": return <EmployerJobs />;

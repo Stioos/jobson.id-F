@@ -3164,3 +3164,155 @@ Stage Summary:
 - Mobile X close button kept (lg:hidden), reduced to h-7 w-7 for consistency
 - Existing footer collapse/expand toggle in the icon rail remains as a secondary control
 - Lint: 0 errors. Browser-verified: both icons visible, collapse function works, page router navigates to overview. Console: clean.
+
+---
+Task ID: WIRE-TASKS-ROUTE
+Agent: Subagent (Wire Tasks Route)
+
+Task: Wire up the "tasks" route in all 9 portal routers to render the shared TasksPage component at `/home/z/my-project/src/portals/_settings-support-shared/TasksPage.tsx` (which exports `TasksPage` taking a `portal` prop).
+
+Work Log:
+- Read /home/z/my-project/worklog.md to understand previous work
+- Read shared `TasksPage.tsx` to confirm the export signature: `TasksPage` taking a `portal: Portal` prop
+- Read all 9 portal router index.tsx files to understand each switch structure:
+  - Single-line `case "overview": return <X />;` pattern: candidate, employer, agency
+  - Multi-line fall-through pattern (overview/home/""):
+    - training, partner, admin, enterprise, learner
+  - Recruiter had an existing `case "tasks": return <RecruiterTasks />;` — handled as a special case (see below)
+- Confirmed all 9 portal names (candidate, employer, recruiter, training, partner, admin, agency, enterprise, learner) are valid `Portal` type members in `src/lib/types.ts`
+
+- WIRING (9 portals, each received the same two changes):
+
+  1. candidate/index.tsx
+     - Added TasksPage dynamic import after the Talent Solutions block
+     - Added `case "tasks": return <TasksPage portal="candidate" />;` right after `case "overview":`
+
+  2. employer/index.tsx
+     - Added TasksPage dynamic import after the Enterprise Governance block
+     - Added `case "tasks": return <TasksPage portal="employer" />;` right after `case "overview":`
+
+  3. recruiter/index.tsx  ← special case (existing tasks route)
+     - This portal already had `case "tasks": return <RecruiterTasks />;` (line 123) pointing to its own RecruiterTasks page.
+     - To wire the shared TasksPage instead (and avoid a duplicate-case-label lint error), I:
+       - Added TasksPage dynamic import after the Talent Solutions block
+       - Added `case "tasks": return <TasksPage portal="recruiter" />;` right after `case "overview":`
+       - Removed the old `case "tasks": return <RecruiterTasks />;` line
+       - Removed the now-unused `const RecruiterTasks = dynamic(...)` import line (to avoid unused-import lint error)
+     - Net effect: the recruiter's "tasks" route now renders the shared TasksPage instead of the legacy RecruiterTasks page.
+
+  4. training/index.tsx
+     - Added TasksPage dynamic import after the Transaction & Communication block
+     - Added `case "tasks": return <TasksPage portal="training" />;` right after the multi-line overview/home/"" fall-through block (after the `return <TrainingOverview />;` line)
+
+  5. partner/index.tsx
+     - Added TasksPage dynamic import after the Talent Solutions block
+     - Added `case "tasks": return <TasksPage portal="partner" />;` right after the multi-line overview/home/"" fall-through block
+
+  6. admin/index.tsx
+     - Added TasksPage dynamic import after the AdminSettings import
+     - Added `case "tasks": return <TasksPage portal="admin" />;` right after the multi-line overview/home/"" fall-through block
+
+  7. agency/index.tsx
+     - Added TasksPage dynamic import after the AgencySettings import
+     - Added `case "tasks": return <TasksPage portal="agency" />;` right after `case "overview":`
+
+  8. enterprise/index.tsx
+     - Added TasksPage dynamic import after the EnterpriseSettings import
+     - Added `case "tasks": return <TasksPage portal="enterprise" />;` right after the multi-line overview/home/"" fall-through block
+
+  9. learner/index.tsx
+     - Added TasksPage dynamic import after the LearnerSupport import
+     - Added `case "tasks": return <TasksPage portal="learner" />;` right after the multi-line overview/home/"" fall-through block
+
+- All import lines were added under a `// Cross-portal shared pages (SETTINGS-SUPPORT-SHARED)` comment header for discoverability.
+
+- LINT RESULT:
+  - Ran `bun run lint` — final result: `✖ 6 problems (0 errors, 6 warnings)`
+  - All 6 warnings are pre-existing and unrelated to this task (they're `react-hooks/incompatible-library` warnings in `TrainingPartnerClients.tsx`, `TrainingPlacements.tsx`, and `TrainingSourcingRequests.tsx` regarding React Hook Form's `watch()` API)
+  - Verified via `bun run lint 2>&1 | grep -E "error" | head -10` — the only matches were inside the warning text (e.g. `formState: { errors, ... }`), not actual lint errors. 0 errors confirmed.
+
+- DEV SERVER:
+  - Initial curl returned `000` (server was down)
+  - Restarted with `cd /home/z/my-project && (nohup bun run dev > dev.log 2>&1 &) && sleep 8`
+  - Confirmed `curl -s -o /dev/null -w "%{http_code}" http://localhost:3000/` → `200`
+  - Verified portal routes load: `/candidate` → 200, `/recruiter?route=tasks` → 200
+  - dev.log shows clean Next.js 16.1.3 (Turbopack) startup with no compile errors
+
+Stage Summary:
+- All 9 portal routers now wire the `tasks` route to the shared `TasksPage` component (`@/portals/_settings-support-shared/TasksPage`) with the correct `portal` prop value (candidate, employer, recruiter, training, partner, admin, agency, enterprise, learner).
+- Each portal's TasksPage dynamic import was added with a `// Cross-portal shared pages (SETTINGS-SUPPORT-SHARED)` comment header near the other dynamic imports.
+- Each portal's switch statement received `case "tasks": return <TasksPage portal="<name>" />;` immediately after the overview case (handling both single-line and multi-line fall-through variants).
+- Recruiter portal: removed the legacy `RecruiterTasks` route + import to avoid duplicate-case-label errors and unused-import warnings. The recruiter's tasks route now renders the shared TasksPage.
+- No other routes or logic were modified.
+- Lint: 0 errors, 6 pre-existing warnings (unrelated). Dev server: HTTP 200.
+
+---
+Task ID: TASKS-PAGE-ALL-PORTALS
+Agent: Main (Z.ai Code) + Subagent (Wire Tasks Route)
+
+Task: Create a "Tasks" main option in all portal sidebars and build a task management page (referencing two attached images showing a CRM task list view and task detail view) that works across all portals.
+
+Work Log:
+- Read /home/z/my-project/worklog.md to understand previous work
+- Analyzed both reference images using VLM:
+  - Image 1 (pasted_image_1793030424909.png): Task list view with task queue, summary stats (Total/Due Today/High Priority/Completed), filter tabs (All/Pending/Completed + priority filters), task cards with type icons (Call/Email/Meeting/Follow-up), priority badges (High/Medium/Low), due dates, checkboxes, "+ New Task" button
+  - Image 2 (pasted_image_1793030517041.png): Task detail view with breadcrumb, pagination (1 of 6), title + status/priority badges, metadata (Due/Assigned/Type), "Mark as Completed" + "Edit" buttons, 4 info cards (Category/SLA/Checklist Progress/Related Opportunity), Action Execution Suite for calls with "Start Dialing" button + talking points, subtask checklist with progress + add input, right sidebar panels (Linked Contact/Linked Deal/Audit & SLA Telemetry)
+
+- CREATED shared TasksPage component at /home/z/my-project/src/portals/_settings-support-shared/TasksPage.tsx (~450 lines):
+  - Portal context map (PORTAL_CONTEXT) customizes title/subtitle per portal (e.g., candidate → "My Tasks / Job search tasks...", recruiter → "CRM Tasks / Client calls, candidate follow-ups...")
+  - 6 mock tasks with full data (title, type, due date, priority, status, assignedTo, category, subtasks, contactPhone, talkingPoints)
+  - TYPE_ICON + TYPE_COLOR maps for Call/Email/Meeting/Follow-up
+  - PRIORITY_STYLE map for High (rose)/Medium (amber)/Low (slate)
+  - Main layout: header (title + badge + search + New Task button) → 4 stat cards → filter bar (status + priority) → 2-column grid (task list 320px + task detail flex-1)
+  - Task list: clickable cards with checkbox (toggle complete), type icon, title, category, due date, priority badge; selected card highlighted with brand border
+  - Task detail: breadcrumb + pagination (Prev/Next, "X of Y"), title + status/priority/metadata badges, "Mark as Completed"/"Edit" buttons, 4 info cards, Action Execution Suite (for calls only — with contact phone, "Start Dialing" button, talking points), 2-column grid (subtask checklist with progress bar + add input | right sidebar with Linked Contact/Linked Deal/Audit telemetry)
+  - Interactive: toggle task complete, toggle subtask checkboxes, add new subtask (Enter or button), filter by status/priority, search, navigate between tasks with pagination
+  - Toast notifications for task completion, subtask addition
+
+- ADDED "Tasks" leaf item (key: "tasks", icon: "CheckSquare", badge: "6") to all 10 portal configs in portal-config.ts:
+  - candidate (after overview, before profile-grp)
+  - employer (after overview, before hiring)
+  - recruiter (after overview, before overview-grp)
+  - training (after overview, before training-ops)
+  - partner (after overview, before overview-grp)
+  - agency (after overview)
+  - enterprise (after overview)
+  - admin (after overview)
+  - learner (after overview)
+  - (public portal doesn't need tasks — it's the public website)
+
+- DELEGATED router wiring to subagent (Task ID: WIRE-TASKS-ROUTE):
+  - Wired `case "tasks": return <TasksPage portal="X" />;` in all 9 portal routers
+  - Added `const TasksPage = dynamic(...)` import to each portal's index.tsx
+  - Subagent found and resolved a conflict in recruiter portal: pre-existing `case "tasks": return <RecruiterTasks />;` was replaced with the shared TasksPage (removed unused RecruiterTasks import)
+  - Lint: 0 errors
+
+- FIXED nested button hydration error in TasksPage.tsx:
+  - Task list items were `<button>` containing a checkbox `<button>` → changed outer to `<div onClick>` with `cursor-pointer`
+  - Verified: console errors cleared after fix
+
+- Browser-verified the Tasks page in Candidate portal:
+  1. Navigated to Candidate portal via Apps dropdown → clicked "Tasks" in sidebar
+  2. VLM confirmed: "My Tasks" title with badge "6", subtitle "Job search tasks, interview prep & follow-ups"
+  3. VLM confirmed 4 stat cards: Total Tasks 6, Due Today 1, High Priority 3, Completed 1
+  4. VLM confirmed filter bar: All/Pending/Completed + All Priorities/High/Medium/Low
+  5. VLM confirmed task list (Task Queue) with 6 tasks, each with checkbox, type icon, title, due date, priority badge
+  6. VLM confirmed task detail view: breadcrumb, pagination (1 of 6), title, status/priority badges, metadata, "Mark as Completed" + "Edit" buttons
+  7. After scrolling: VLM confirmed Subtask Checklist with 2 completed (green checkmarks) + 2 incomplete (empty circles) + "Add a new subtask" input
+  8. VLM confirmed Linked Contact, Linked Deal, and Audit & SLA Telemetry panels
+  9. DOM verification confirmed "Subtask Checklist" and "Start Dialing" text present in DOM
+  10. Console: no errors after nested button fix
+
+Stage Summary:
+- "Tasks" main option added to all 9 portal sidebars (candidate, employer, recruiter, training, partner, admin, agency, enterprise, learner) with CheckSquare icon and "6" badge
+- Shared TasksPage component created at _settings-support-shared/TasksPage.tsx — renders task management UI with:
+  - Header with title, search, New Task button
+  - 4 summary stat cards (Total/Due Today/High Priority/Completed)
+  - Filter bar (status: All/Pending/Completed + priority: All/High/Medium/Low)
+  - 2-column layout: task list (left, 320px) + task detail (right, flex-1)
+  - Task list with checkboxes, type icons, priority badges, due dates
+  - Task detail with breadcrumb, pagination, metadata, info cards, Action Execution Suite (for calls with Start Dialing + talking points), subtask checklist with progress + add input, right sidebar panels (Linked Contact/Deal/Audit)
+  - Portal-aware: title/subtitle customized per portal (e.g., "My Tasks" for candidate, "CRM Tasks" for recruiter, "Hiring Tasks" for employer)
+- All 9 portal routers wired with `case "tasks"` route → shared TasksPage
+- Fixed nested button hydration error (outer button → div)
+- Lint: 0 errors. Browser-verified: Tasks page renders correctly in candidate portal with all sections visible. Console: clean.

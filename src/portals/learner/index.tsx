@@ -25,6 +25,9 @@ const LearnerCommunity = dynamic(() => import("./LearnerCommunity").then((m) => 
 const LearnerSettings = dynamic(() => import("./LearnerSettings").then((m) => m.LearnerSettings));
 const LearnerSupport = dynamic(() => import("./LearnerSupport").then((m) => m.LearnerSupport));
 
+// Cross-portal shared pages (SETTINGS-SUPPORT-SHARED)
+const TasksPage = dynamic(() => import("@/portals/_settings-support-shared/TasksPage").then((m) => m.TasksPage));
+
 export function PortalRouter() {
   const { route } = useNav();
   return <>{render(route)}</>;
@@ -37,6 +40,7 @@ export function render(route: string): React.ReactNode {
     case "home":
     case "":
       return <LearnerOverview />;
+    case "tasks": return <TasksPage portal="learner" />;
     case "catalog": {
       const parts = (route || "catalog").split("/");
       if (parts[1]) return <LearnerCourseDetail courseId={parts[1]} />;

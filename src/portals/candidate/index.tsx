@@ -45,6 +45,9 @@ const CandidateTalentSolutions = dynamic(() => import("./CandidateTalentSolution
 const CandidateMyPrograms = dynamic(() => import("./CandidateMyPrograms").then((m) => m.CandidateMyPrograms));
 const CandidateTsTransactions = dynamic(() => import("./CandidateTsTransactions").then((m) => m.CandidateTsTransactions));
 
+// Cross-portal shared pages (SETTINGS-SUPPORT-SHARED)
+const TasksPage = dynamic(() => import("@/portals/_settings-support-shared/TasksPage").then((m) => m.TasksPage));
+
 // Learner pages (merged from the former Learner Portal — SkillForge Academy)
 const LearnerCatalog = dynamic(() => import("@/portals/learner/LearnerCatalog").then((m) => m.LearnerCatalog));
 const LearnerCourseDetail = dynamic(() => import("@/portals/learner/LearnerCourseDetail").then((m) => m.LearnerCourseDetail));
@@ -70,6 +73,7 @@ export function render(route: string): React.ReactNode {
   const head = (route ?? "overview").split("/")[0];
   switch (head) {
     case "overview": return <CandidateOverview />;
+    case "tasks": return <TasksPage portal="candidate" />;
     case "profile": return <CandidateProfile />;
     case "resume": return <CandidateResume />;
     case "find-jobs": return <CandidateFindJobs />;

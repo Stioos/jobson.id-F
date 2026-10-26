@@ -16,6 +16,9 @@ const AgencyInvoices = dynamic(() => import("./AgencyInvoices").then((m) => m.Ag
 const AgencyAnalytics = dynamic(() => import("./AgencyAnalytics").then((m) => m.AgencyAnalytics));
 const AgencySettings = dynamic(() => import("./AgencySettings").then((m) => m.AgencySettings));
 
+// Cross-portal shared pages (SETTINGS-SUPPORT-SHARED)
+const TasksPage = dynamic(() => import("@/portals/_settings-support-shared/TasksPage").then((m) => m.TasksPage));
+
 export function PortalRouter() {
   const { route } = useNav();
   return <>{render(route)}</>;
@@ -25,6 +28,7 @@ export function render(route: string): React.ReactNode {
   const top = route.split("/")[0] || "overview";
   switch (top) {
     case "overview": return <AgencyOverview />;
+    case "tasks": return <TasksPage portal="agency" />;
     case "profile": return <AgencyProfile />;
     case "recruiters": return <AgencyRecruiters />;
     case "clients": return <AgencyClients />;

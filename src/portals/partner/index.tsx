@@ -65,6 +65,9 @@ const PartnerRevenue = dynamic(() => import("./PartnerRevenue").then((m) => m.Pa
 const PartnerTalentSolutions = dynamic(() => import("./PartnerTalentSolutions").then((m) => m.PartnerTalentSolutions));
 const PartnerTsTransactions = dynamic(() => import("./PartnerTsTransactions").then((m) => m.PartnerTsTransactions));
 
+// Cross-portal shared pages (SETTINGS-SUPPORT-SHARED)
+const TasksPage = dynamic(() => import("@/portals/_settings-support-shared/TasksPage").then((m) => m.TasksPage));
+
 export function PortalRouter() {
   const { route } = useNav();
   return <>{render(route)}</>;
@@ -78,6 +81,7 @@ export function render(route: string): React.ReactNode {
     case "home":
     case "":
       return <PartnerOverview />;
+    case "tasks": return <TasksPage portal="partner" />;
     case "analytics": return <PartnerAnalytics />;
     case "reports": return <PartnerAnalytics />;
     case "revenue": return <PartnerRevenue />;

@@ -67,6 +67,8 @@ export const portalConfigs: Record<Portal, PortalConfig> = {
         items: [
           //Dashboard—LEAF(nosub-itemsdirectlink),
           { key: "overview", label: "Dashboard", icon: "LayoutDashboard" },
+          //Tasks—LEAF(sharedtaskmanagementforallportals),
+          { key: "tasks", label: "Tasks", icon: "CheckSquare", badge: "6" },
           //Profile—NEWMAIN(profile-relatedpagesmovedherefromDashboard),
           {
             key: "profile-grp", label: "Profile", icon: "User", children: [
@@ -156,6 +158,8 @@ export const portalConfigs: Record<Portal, PortalConfig> = {
         items: [
           //Dashboard—LEAF(nosub-itemsdirectlink),
           { key: "overview", label: "Dashboard", icon: "LayoutDashboard" },
+          //Tasks—LEAF(sharedtaskmanagementforallportals),
+          { key: "tasks", label: "Tasks", icon: "CheckSquare", badge: "6" },
           {
             key: "hiring", label: "Hiring", icon: "Briefcase", children: [
               { key: "jobs", label: "Jobs", icon: "Briefcase" },
@@ -256,6 +260,8 @@ export const portalConfigs: Record<Portal, PortalConfig> = {
         items: [
           //Dashboard—LEAF(nosub-itemsdirectlink),
           { key: "overview", label: "Dashboard", icon: "LayoutDashboard" },
+          //Tasks—LEAF(sharedtaskmanagementforallportals),
+          { key: "tasks", label: "Tasks", icon: "CheckSquare", badge: "6" },
           {
             key: "overview-grp", label: "Analytics & Intel", icon: "Gauge", children: [
               { key: "analytics", label: "Analytics Hub", icon: "Gauge" },
@@ -378,6 +384,8 @@ export const portalConfigs: Record<Portal, PortalConfig> = {
         items: [
           //Dashboard—LEAF(nosub-itemsdirectlink),
           { key: "overview", label: "Dashboard", icon: "LayoutDashboard" },
+          //Tasks—LEAF(sharedtaskmanagementforallportals),
+          { key: "tasks", label: "Tasks", icon: "CheckSquare", badge: "6" },
           //1.Training(overviewremoved—it'snowtheDashboardleafabove),
           {
             key: "training-ops", label: "Training", icon: "GraduationCap", children: [
@@ -495,7 +503,10 @@ export const portalConfigs: Record<Portal, PortalConfig> = {
     short: "Agency",
     description: "Manage your agency",
     accent: "bg-brand",
-    sections: [{ title: "Main", items: [{ key: "overview", label: "Overview", icon: "LayoutDashboard" }] }],
+    sections: [{ title: "Main", items: [
+      { key: "overview", label: "Overview", icon: "LayoutDashboard" },
+      { key: "tasks", label: "Tasks", icon: "CheckSquare", badge: "6" },
+    ] }],
   },
   enterprise: {
     id: "enterprise",
@@ -503,7 +514,10 @@ export const portalConfigs: Record<Portal, PortalConfig> = {
     short: "Enterprise",
     description: "Govern hiring at scale",
     accent: "bg-brand",
-    sections: [{ title: "Main", items: [{ key: "overview", label: "Overview", icon: "LayoutDashboard" }] }],
+    sections: [{ title: "Main", items: [
+      { key: "overview", label: "Overview", icon: "LayoutDashboard" },
+      { key: "tasks", label: "Tasks", icon: "CheckSquare", badge: "6" },
+    ] }],
   },
   admin: {
     id: "admin",
@@ -511,7 +525,10 @@ export const portalConfigs: Record<Portal, PortalConfig> = {
     short: "Admin",
     description: "Platform governance",
     accent: "bg-brand",
-    sections: [{ title: "Main", items: [{ key: "overview", label: "Overview", icon: "LayoutDashboard" }] }],
+    sections: [{ title: "Main", items: [
+      { key: "overview", label: "Overview", icon: "LayoutDashboard" },
+      { key: "tasks", label: "Tasks", icon: "CheckSquare", badge: "6" },
+    ] }],
   },
   learner: {
     id: "learner",
@@ -519,7 +536,10 @@ export const portalConfigs: Record<Portal, PortalConfig> = {
     short: "Learner",
     description: "Learn, get certified, grow",
     accent: "bg-brand",
-    sections: [{ title: "Main", items: [{ key: "overview", label: "Overview", icon: "LayoutDashboard" }] }],
+    sections: [{ title: "Main", items: [
+      { key: "overview", label: "Overview", icon: "LayoutDashboard" },
+      { key: "tasks", label: "Tasks", icon: "CheckSquare", badge: "6" },
+    ] }],
   },
   // ============================================================
   // PARTNER PORTAL (Franchise model — 8 mains × 6 subs = 42 routes)
@@ -537,6 +557,8 @@ export const portalConfigs: Record<Portal, PortalConfig> = {
         items: [
           //Dashboard—LEAF(nosub-itemsdirectlink),
           { key: "overview", label: "Dashboard", icon: "LayoutDashboard" },
+          //Tasks—LEAF(sharedtaskmanagementforallportals),
+          { key: "tasks", label: "Tasks", icon: "CheckSquare", badge: "6" },
           {
             key: "overview-grp", label: "Analytics & Reports", icon: "Gauge", children: [
               { key: "analytics", label: "Analytics Hub", icon: "Gauge" },

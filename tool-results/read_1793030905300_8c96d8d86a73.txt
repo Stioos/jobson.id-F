@@ -1,0 +1,793 @@
+     1→"use client";
+     2→
+     3→import * as React from "react";
+     4→import { toast } from "sonner";
+     5→import { cn } from "@/lib/utils";
+     6→import {
+     7→  Card,
+     8→  CardContent,
+     9→  CardHeader,
+    10→  CardTitle,
+    11→  EmptyState,
+    12→  SectionCard,
+    13→} from "@/components/common";
+    14→import { Button } from "@/components/ui/button";
+    15→import { Input } from "@/components/ui/input";
+    16→import { Badge } from "@/components/ui/badge";
+    17→import { Progress } from "@/components/ui/progress";
+    18→import { Separator } from "@/components/ui/separator";
+    19→import {
+    20→  Phone, Mail, Video, ArrowUpRight, Plus, Search, CheckCircle2,
+    21→  Circle, Clock, AlertCircle, Calendar, User, ChevronLeft,
+    22→  ChevronRight, Pencil, Flag, Bell, ShieldCheck, PhoneCall,
+    23→  type LucideIcon,
+    24→} from "lucide-react";
+    25→import type { Portal } from "@/lib/types";
+    26→
+    27→// ============================================================
+    28→// TYPES
+    29→// ============================================================
+    30→type TaskType = "call" | "email" | "meeting" | "follow-up";
+    31→type TaskPriority = "high" | "medium" | "low";
+    32→type TaskStatus = "pending" | "completed";
+    33→
+    34→interface SubTask {
+    35→  id: string;
+    36→  title: string;
+    37→  done: boolean;
+    38→}
+    39→
+    40→interface Task {
+    41→  id: number;
+    42→  title: string;
+    43→  type: TaskType;
+    44→  dueDate: string;
+    45→  dueLabel: string;
+    46→  priority: TaskPriority;
+    47→  status: TaskStatus;
+    48→  assignedTo: string;
+    49→  category: string;
+    50→  subCategory: string;
+    51→  description: string;
+    52→  subtasks: SubTask[];
+    53→  contactName?: string;
+    54→  contactPhone?: string;
+    55→  dealName?: string;
+    56→  dealType?: string;
+    57→  talkingPoints?: string[];
+    58→}
+    59→
+    60→// ============================================================
+    61→// TASK DATA — shared mock data for all portals
+    62→// ============================================================
+    63→const TASKS: Task[] = [
+    64→  {
+    65→    id: 51,
+    66→    title: "Follow up with Sarah on pricing",
+    67→    type: "call",
+    68→    dueDate: "today",
+    69→    dueLabel: "Today",
+    70→    priority: "high",
+    71→    status: "pending",
+    72→    assignedTo: "You",
+    73→    category: "Call",
+    74→    subCategory: "CRM Core",
+    75→    description: "Standard touchpoint — confirm Q2 budget allocation and address compliance feedback.",
+    76→    subtasks: [
+    77→      { id: "s1", title: "Review current ANS spend and contract dates", done: true },
+    78→      { id: "s2", title: "Prepare benchmark comparison sheet against CloudComp", done: true },
+    79→      { id: "s3", title: "Confirm multi-year commitment discount tier approval", done: false },
+    80→      { id: "s4", title: "Send revised quotation PDF and calendar invite for call", done: false },
+    81→    ],
+    82→    contactPhone: "+1 (555) 014-2900",
+    83→    talkingPoints: [
+    84→      "Confirm Q2 budget allocation and decision timeline",
+    85→      "Address SOC2 compliance questionnaire feedback submitted yesterday",
+    86→      "Propose scheduling 45-min technical deep-dive with sales engineering",
+    87→    ],
+    88→  },
+    89→  {
+    90→    id: 52,
+    91→    title: "Send proposal to Marcus",
+    92→    type: "email",
+    93→    dueDate: "tomorrow",
+    94→    dueLabel: "Tomorrow",
+    95→    priority: "high",
+    96→    status: "pending",
+    97→    assignedTo: "You",
+    98→    category: "Email",
+    99→    subCategory: "Outreach",
+   100→    description: "Send the revised proposal document with pricing tiers and onboarding timeline.",
+   101→    subtasks: [
+   102→      { id: "s1", title: "Finalize pricing tier options", done: false },
+   103→      { id: "s2", title: "Attach onboarding timeline PDF", done: false },
+   104→      { id: "s3", title: "CC the account executive for visibility", done: false },
+   105→    ],
+   106→  },
+   107→  {
+   108→    id: 53,
+   109→    title: "Schedule demo with NovaTech",
+   110→    type: "meeting",
+   111→    dueDate: "jan-18",
+   112→    dueLabel: "Jan 18",
+   113→    priority: "medium",
+   114→    status: "pending",
+   115→    assignedTo: "Alex",
+   116→    category: "Meeting",
+   117→    subCategory: "Demo",
+   118→    description: "Product demo for NovaTech leadership team — showcase analytics module.",
+   119→    subtasks: [
+   120→      { id: "s1", title: "Prepare demo environment with NovaTech branding", done: false },
+   121→      { id: "s2", title: "Send calendar invite to 4 stakeholders", done: false },
+   122→    ],
+   123→  },
+   124→  {
+   125→    id: 54,
+   126→    title: "Update CRM notes for Apex",
+   127→    type: "follow-up",
+   128→    dueDate: "jan-19",
+   129→    dueLabel: "Jan 19",
+   130→    priority: "low",
+   131→    status: "completed",
+   132→    assignedTo: "You",
+   133→    category: "Follow-up",
+   134→    subCategory: "Documentation",
+   135→    description: "Log all conversation points and next steps from the Apex discovery call.",
+   136→    subtasks: [
+   137→      { id: "s1", title: "Update account record with meeting notes", done: true },
+   138→      { id: "s2", title: "Set reminder for 2-week follow-up", done: true },
+   139→    ],
+   140→  },
+   141→  {
+   142→    id: 55,
+   143→    title: "Review contract terms",
+   144→    type: "follow-up",
+   145→    dueDate: "jan-20",
+   146→    dueLabel: "Jan 20",
+   147→    priority: "medium",
+   148→    status: "pending",
+   149→    assignedTo: "You",
+   150→    category: "Follow-up",
+   151→    subCategory: "Legal",
+   152→    description: "Review redlined contract from legal team and flag any concerns.",
+   153→    subtasks: [
+   154→      { id: "s1", title: "Compare redlines against original MSA", done: false },
+   155→      { id: "s2", title: "Schedule call with legal counsel if needed", done: false },
+   156→    ],
+   157→  },
+   158→  {
+   159→    id: 56,
+   160→    title: "Quarterly business review prep",
+   161→    type: "meeting",
+   162→    dueDate: "jan-22",
+   163→    dueLabel: "Jan 22",
+   164→    priority: "high",
+   165→    status: "pending",
+   166→    assignedTo: "You",
+   167→    category: "Meeting",
+   168→    subCategory: "QBR",
+   169→    description: "Prepare QBR deck with Q1 metrics, wins, and roadmap alignment.",
+   170→    subtasks: [
+   171→      { id: "s1", title: "Pull Q1 usage analytics from dashboard", done: false },
+   172→      { id: "s2", title: "Draft 3-slide wins summary", done: false },
+   173→      { id: "s3", title: "Align roadmap section with product team", done: false },
+   174→    ],
+   175→  },
+   176→];
+   177→
+   178→// ============================================================
+   179→// HELPERS
+   180→// ============================================================
+   181→const TYPE_ICON: Record<TaskType, LucideIcon> = {
+   182→  call: Phone,
+   183→  email: Mail,
+   184→  meeting: Video,
+   185→  "follow-up": ArrowUpRight,
+   186→};
+   187→
+   188→const TYPE_COLOR: Record<TaskType, string> = {
+   189→  call: "#F59E0B",
+   190→  email: "#3B82F6",
+   191→  meeting: "#8B5CF6",
+   192→  "follow-up": "#10B981",
+   193→};
+   194→
+   195→const PRIORITY_STYLE: Record<TaskPriority, { bg: string; text: string; label: string }> = {
+   196→  high: { bg: "bg-rose-500/10", text: "text-rose-600", label: "High" },
+   197→  medium: { bg: "bg-amber-500/10", text: "text-amber-600", label: "Medium" },
+   198→  low: { bg: "bg-slate-500/10", text: "text-slate-600", label: "Low" },
+   199→};
+   200→
+   201→// ============================================================
+   202→// PORTAL CONTEXT — customizes the page per portal
+   203→// ============================================================
+   204→const PORTAL_CONTEXT: Record<Portal, { title: string; subtitle: string; newLabel: string }> = {
+   205→  public: { title: "My Tasks", subtitle: "Your personal tasks, reminders & follow-ups", newLabel: "New Task" },
+   206→  candidate: { title: "My Tasks", subtitle: "Job search tasks, interview prep & follow-ups", newLabel: "New Task" },
+   207→  employer: { title: "Hiring Tasks", subtitle: "Recruitment activities, interviews & follow-ups", newLabel: "New Task" },
+   208→  recruiter: { title: "CRM Tasks", subtitle: "Client calls, candidate follow-ups & placement activities", newLabel: "New Task" },
+   209→  training: { title: "Training Tasks", subtitle: "Cohort sessions, student follow-ups & admin tasks", newLabel: "New Task" },
+   210→  partner: { title: "Partner Tasks", subtitle: "Deals, student follow-ups & partnership activities", newLabel: "New Task" },
+   211→  agency: { title: "Agency Tasks", subtitle: "Client tasks & project activities", newLabel: "New Task" },
+   212→  enterprise: { title: "Enterprise Tasks", subtitle: "Organizational tasks & approvals", newLabel: "New Task" },
+   213→  admin: { title: "Admin Tasks", subtitle: "Platform admin tasks & approvals", newLabel: "New Task" },
+   214→  learner: { title: "My Tasks", subtitle: "Learning tasks & course activities", newLabel: "New Task" },
+   215→};
+   216→
+   217→// ============================================================
+   218→// MAIN COMPONENT — TasksPage
+   219→// ============================================================
+   220→export function TasksPage({ portal }: { portal: Portal }) {
+   221→  const ctx = PORTAL_CONTEXT[portal] ?? PORTAL_CONTEXT.candidate;
+   222→  const [tasks, setTasks] = React.useState<Task[]>(TASKS);
+   223→  const [statusFilter, setStatusFilter] = React.useState<TaskStatus | "all">("all");
+   224→  const [priorityFilter, setPriorityFilter] = React.useState<TaskPriority | "all">("all");
+   225→  const [search, setSearch] = React.useState("");
+   226→  const [selectedId, setSelectedId] = React.useState<number | null>(TASKS[0].id);
+   227→
+   228→  const filtered = React.useMemo(() => {
+   229→    return tasks.filter((t) => {
+   230→      if (statusFilter !== "all" && t.status !== statusFilter) return false;
+   231→      if (priorityFilter !== "all" && t.priority !== priorityFilter) return false;
+   232→      if (search.trim() && !t.title.toLowerCase().includes(search.toLowerCase())) return false;
+   233→      return true;
+   234→    });
+   235→  }, [tasks, statusFilter, priorityFilter, search]);
+   236→
+   237→  const selected = tasks.find((t) => t.id === selectedId) ?? null;
+   238→
+   239→  const stats = React.useMemo(() => {
+   240→    const total = tasks.length;
+   241→    const dueToday = tasks.filter((t) => t.dueDate === "today" && t.status === "pending").length;
+   242→    const highPriority = tasks.filter((t) => t.priority === "high" && t.status === "pending").length;
+   243→    const completed = tasks.filter((t) => t.status === "completed").length;
+   244→    return { total, dueToday, highPriority, completed };
+   245→  }, [tasks]);
+   246→
+   247→  const handleToggleComplete = (id: number) => {
+   248→    setTasks((prev) => prev.map((t) =>
+   249→      t.id === id ? { ...t, status: t.status === "completed" ? "pending" : "completed" } : t
+   250→    ));
+   251→    const task = tasks.find((t) => t.id === id);
+   252→    if (task) {
+   253→      toast.success(task.status === "completed" ? "Task reopened" : "Task marked complete", {
+   254→        description: task.title,
+   255→      });
+   256→    }
+   257→  };
+   258→
+   259→  const handleToggleSubtask = (taskId: number, subtaskId: string) => {
+   260→    setTasks((prev) => prev.map((t) =>
+   261→      t.id === taskId
+   262→        ? { ...t, subtasks: t.subtasks.map((s) => s.id === subtaskId ? { ...s, done: !s.done } : s) }
+   263→        : t
+   264→    ));
+   265→  };
+   266→
+   267→  const handleAddSubtask = (taskId: number, title: string) => {
+   268→    if (!title.trim()) return;
+   269→    setTasks((prev) => prev.map((t) =>
+   270→      t.id === taskId
+   271→        ? { ...t, subtasks: [...t.subtasks, { id: `s${Date.now()}`, title, done: false }] }
+   272→        : t
+   273→    ));
+   274→    toast.success("Subtask added");
+   275→  };
+   276→
+   277→  const selectedIndex = filtered.findIndex((t) => t.id === selectedId);
+   278→  const goPrev = () => {
+   279→    if (selectedIndex > 0) setSelectedId(filtered[selectedIndex - 1].id);
+   280→  };
+   281→  const goNext = () => {
+   282→    if (selectedIndex < filtered.length - 1) setSelectedId(filtered[selectedIndex + 1].id);
+   283→  };
+   284→
+   285→  return (
+   286→    <div className="flex flex-col gap-4 p-4 sm:p-6">
+   287→      {/* ===================== HEADER ===================== */}
+   288→      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+   289→        <div>
+   290→          <div className="flex items-center gap-2">
+   291→            <h1 className="text-xl font-bold tracking-tight sm:text-2xl">{ctx.title}</h1>
+   292→            <Badge className="bg-brand/10 text-brand">{tasks.length}</Badge>
+   293→          </div>
+   294→          <p className="mt-1 text-sm text-muted-foreground">{ctx.subtitle}</p>
+   295→        </div>
+   296→        <div className="flex items-center gap-2">
+   297→          <div className="relative">
+   298→            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+   299→            <Input
+   300→              value={search}
+   301→              onChange={(e) => setSearch(e.target.value)}
+   302→              placeholder="Search..."
+   303→              className="h-9 w-40 pl-9 sm:w-56"
+   304→            />
+   305→          </div>
+   306→          <Button
+   307→            size="sm"
+   308→            onClick={() => toast.success("New task", { description: "Task editor will open here." })}
+   309→            className="gap-1.5 bg-brand text-brand-foreground hover:bg-brand/90"
+   310→          >
+   311→            <Plus className="h-4 w-4" /> {ctx.newLabel}
+   312→          </Button>
+   313→        </div>
+   314→      </div>
+   315→
+   316→      {/* ===================== STATS CARDS ===================== */}
+   317→      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+   318→        <StatCard icon={CheckCircle2} label="Total Tasks" value={stats.total} sublabel="In schedule" color="#3B82F6" />
+   319→        <StatCard icon={Clock} label="Due Today" value={stats.dueToday} sublabel="Immediate priority" color="#F59E0B" />
+   320→        <StatCard icon={AlertCircle} label="High Priority" value={stats.highPriority} sublabel="Urgent items" color="#EF4444" />
+   321→        <StatCard icon={CheckCircle2} label="Completed" value={stats.completed} sublabel="Resolved items" color="#10B981" />
+   322→      </div>
+   323→
+   324→      {/* ===================== FILTER BAR ===================== */}
+   325→      <div className="flex flex-wrap items-center gap-2 border-b pb-3">
+   326→        <div className="flex items-center gap-1">
+   327→          <FilterPill active={statusFilter === "all"} onClick={() => setStatusFilter("all")} label="All" />
+   328→          <FilterPill active={statusFilter === "pending"} onClick={() => setStatusFilter("pending")} label="Pending" />
+   329→          <FilterPill active={statusFilter === "completed"} onClick={() => setStatusFilter("completed")} label="Completed" />
+   330→        </div>
+   331→        <Separator orientation="vertical" className="h-5" />
+   332→        <div className="flex items-center gap-1">
+   333→          <FilterPill active={priorityFilter === "all"} onClick={() => setPriorityFilter("all")} label="All Priorities" />
+   334→          <FilterPill active={priorityFilter === "high"} onClick={() => setPriorityFilter("high")} label="High" color="rose" />
+   335→          <FilterPill active={priorityFilter === "medium"} onClick={() => setPriorityFilter("medium")} label="Medium" color="amber" />
+   336→          <FilterPill active={priorityFilter === "low"} onClick={() => setPriorityFilter("low")} label="Low" color="slate" />
+   337→        </div>
+   338→      </div>
+   339→
+   340→      {/* ===================== MAIN GRID: list + detail ===================== */}
+   341→      <div className="grid gap-4 lg:grid-cols-[320px_1fr]">
+   342→        {/* ===== LEFT: Task list ===== */}
+   343→        <div className="flex flex-col gap-2">
+   344→          <div className="flex items-center justify-between">
+   345→            <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
+   346→              Task Queue
+   347→            </span>
+   348→            <Badge variant="outline" className="gap-1 text-[10px]">
+   349→              <span className="h-1.5 w-1.5 rounded-full bg-brand" /> Active
+   350→            </Badge>
+   351→          </div>
+   352→          <div className="flex flex-col gap-1.5">
+   353→            {filtered.length === 0 ? (
+   354→              <EmptyState
+   355→                icon={<Circle className="h-5 w-5" />}
+   356→                title="No tasks match"
+   357→                description="Try adjusting your filters."
+   358→              />
+   359→            ) : (
+   360→              filtered.map((task) => {
+   361→                const TypeIcon = TYPE_ICON[task.type];
+   362→                const prio = PRIORITY_STYLE[task.priority];
+   363→                const isSelected = task.id === selectedId;
+   364→                const isDone = task.status === "completed";
+   365→                return (
+   366→                  <button
+   367→                    key={task.id}
+   368→                    onClick={() => setSelectedId(task.id)}
+   369→                    className={cn(
+   370→                      "group flex items-start gap-2.5 rounded-lg border p-3 text-left transition-all",
+   371→                      isSelected
+   372→                        ? "border-brand bg-brand/5 shadow-sm"
+   373→                        : "border-border bg-card hover:border-brand/40 hover:shadow-sm"
+   374→                    )}
+   375→                  >
+   376→                    {/* Checkbox */}
+   377→                    <button
+   378→                      onClick={(e) => { e.stopPropagation(); handleToggleComplete(task.id); }}
+   379→                      className="mt-0.5 flex-shrink-0"
+   380→                      title={isDone ? "Mark as pending" : "Mark complete"}
+   381→                    >
+   382→                      {isDone ? (
+   383→                        <CheckCircle2 className="h-4 w-4 text-brand" />
+   384→                      ) : (
+   385→                        <Circle className="h-4 w-4 text-muted-foreground hover:text-brand" />
+   386→                      )}
+   387→                    </button>
+   388→                    {/* Content */}
+   389→                    <div className="min-w-0 flex-1">
+   390→                      <p className={cn(
+   391→                        "text-sm font-semibold leading-tight",
+   392→                        isDone ? "text-muted-foreground line-through" : "text-foreground"
+   393→                      )}>
+   394→                        {task.title}
+   395→                      </p>
+   396→                      <div className="mt-1 flex items-center gap-2 text-[11px] text-muted-foreground">
+   397→                        <span
+   398→                          className="inline-flex items-center gap-1"
+   399→                          style={{ color: TYPE_COLOR[task.type] }}
+   400→                        >
+   401→                          <TypeIcon className="h-3 w-3" /> {task.category}
+   402→                        </span>
+   403→                        <span>·</span>
+   404→                        <span className="inline-flex items-center gap-1">
+   405→                          <Calendar className="h-3 w-3" /> {task.dueLabel}
+   406→                        </span>
+   407→                      </div>
+   408→                    </div>
+   409→                    {/* Priority badge */}
+   410→                    <span className={cn("flex-shrink-0 rounded-full px-1.5 py-0.5 text-[9px] font-bold", prio.bg, prio.text)}>
+   411→                      {prio.label}
+   412→                    </span>
+   413→                  </button>
+   414→                );
+   415→              })
+   416→            )}
+   417→          </div>
+   418→        </div>
+   419→
+   420→        {/* ===== RIGHT: Task detail ===== */}
+   421→        {selected ? (
+   422→          <TaskDetail
+   423→            task={selected}
+   424→            onToggleComplete={() => handleToggleComplete(selected.id)}
+   425→            onToggleSubtask={(sid) => handleToggleSubtask(selected.id, sid)}
+   426→            onAddSubtask={(title) => handleAddSubtask(selected.id, title)}
+   427→            onPrev={goPrev}
+   428→            onNext={goNext}
+   429→            prevDisabled={selectedIndex <= 0}
+   430→            nextDisabled={selectedIndex >= filtered.length - 1}
+   431→            index={selectedIndex + 1}
+   432→            total={filtered.length}
+   433→          />
+   434→        ) : (
+   435→          <EmptyState
+   436→            icon={<CheckCircle2 className="h-6 w-6" />}
+   437→            title="No task selected"
+   438→            description="Select a task from the list to view details."
+   439→          />
+   440→        )}
+   441→      </div>
+   442→    </div>
+   443→  );
+   444→}
+   445→
+   446→// ============================================================
+   447→// STAT CARD
+   448→// ============================================================
+   449→function StatCard({
+   450→  icon: Icon, label, value, sublabel, color,
+   451→}: {
+   452→  icon: LucideIcon;
+   453→  label: string;
+   454→  value: number;
+   455→  sublabel: string;
+   456→  color: string;
+   457→}) {
+   458→  return (
+   459→    <Card className="p-4">
+   460→      <div className="flex items-start justify-between">
+   461→        <div>
+   462→          <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{label}</p>
+   463→          <p className="mt-1 text-2xl font-bold text-foreground">{value}</p>
+   464→          <p className="mt-0.5 text-[10px] text-muted-foreground">{sublabel}</p>
+   465→        </div>
+   466→        <div
+   467→          className="flex h-9 w-9 items-center justify-center rounded-lg"
+   468→          style={{ background: `${color}15`, color }}
+   469→        >
+   470→          <Icon className="h-4 w-4" />
+   471→        </div>
+   472→      </div>
+   473→    </Card>
+   474→  );
+   475→}
+   476→
+   477→// ============================================================
+   478→// FILTER PILL
+   479→// ============================================================
+   480→function FilterPill({
+   481→  active, onClick, label, color,
+   482→}: {
+   483→  active: boolean;
+   484→  onClick: () => void;
+   485→  label: string;
+   486→  color?: "rose" | "amber" | "slate";
+   487→}) {
+   488→  const colorMap = {
+   489→    rose: active ? "bg-rose-500 text-white" : "",
+   490→    amber: active ? "bg-amber-500 text-white" : "",
+   491→    slate: active ? "bg-slate-500 text-white" : "",
+   492→  };
+   493→  const baseActive = !color && active ? "bg-brand text-brand-foreground" : "";
+   494→  const colorClass = color ? colorMap[color] : baseActive;
+   495→
+   496→  return (
+   497→    <button
+   498→      onClick={onClick}
+   499→      className={cn(
+   500→        "rounded-full px-3 py-1 text-xs font-medium transition-colors",
+   501→        active ? colorClass : "text-muted-foreground hover:bg-accent hover:text-foreground"
+   502→      )}
+   503→    >
+   504→      {label}
+   505→    </button>
+   506→  );
+   507→}
+   508→
+   509→// ============================================================
+   510→// TASK DETAIL VIEW
+   511→// ============================================================
+   512→function TaskDetail({
+   513→  task, onToggleComplete, onToggleSubtask, onAddSubtask,
+   514→  onPrev, onNext, prevDisabled, nextDisabled, index, total,
+   515→}: {
+   516→  task: Task;
+   517→  onToggleComplete: () => void;
+   518→  onToggleSubtask: (subtaskId: string) => void;
+   519→  onAddSubtask: (title: string) => void;
+   520→  onPrev: () => void;
+   521→  onNext: () => void;
+   522→  prevDisabled: boolean;
+   523→  nextDisabled: boolean;
+   524→  index: number;
+   525→  total: number;
+   526→}) {
+   527→  const [newSubtask, setNewSubtask] = React.useState("");
+   528→  const TypeIcon = TYPE_ICON[task.type];
+   529→  const prio = PRIORITY_STYLE[task.priority];
+   530→  const isDone = task.status === "completed";
+   531→  const completedSubtasks = task.subtasks.filter((s) => s.done).length;
+   532→  const progress = task.subtasks.length > 0 ? (completedSubtasks / task.subtasks.length) * 100 : 0;
+   533→
+   534→  return (
+   535→    <Card className="flex flex-col">
+   536→      {/* ===== Header ===== */}
+   537→      <CardHeader className="border-b pb-4">
+   538→        {/* Breadcrumb + pagination */}
+   539→        <div className="flex items-center justify-between">
+   540→          <div className="flex items-center gap-1 text-xs text-muted-foreground">
+   541→            <span>Tasks Directory</span>
+   542→            <ChevronRight className="h-3 w-3" />
+   543→            <span className="font-medium text-foreground">{task.title}</span>
+   544→          </div>
+   545→          <div className="flex items-center gap-1">
+   546→            <Button variant="ghost" size="icon" className="h-7 w-7" onClick={onPrev} disabled={prevDisabled}>
+   547→              <ChevronLeft className="h-4 w-4" />
+   548→            </Button>
+   549→            <span className="text-xs text-muted-foreground">{index} of {total}</span>
+   550→            <Button variant="ghost" size="icon" className="h-7 w-7" onClick={onNext} disabled={nextDisabled}>
+   551→              <ChevronRight className="h-4 w-4" />
+   552→            </Button>
+   553→          </div>
+   554→        </div>
+   555→
+   556→        {/* Title + badges */}
+   557→        <div className="mt-3 flex flex-wrap items-start justify-between gap-3">
+   558→          <div className="flex items-start gap-3">
+   559→            <div
+   560→              className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg"
+   561→              style={{ background: `${TYPE_COLOR[task.type]}15`, color: TYPE_COLOR[task.type] }}
+   562→            >
+   563→              <TypeIcon className="h-5 w-5" />
+   564→            </div>
+   565→            <div>
+   566→              <h2 className={cn("text-lg font-bold leading-tight", isDone && "text-muted-foreground line-through")}>
+   567→                {task.title}
+   568→              </h2>
+   569→              <div className="mt-1.5 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
+   570→                <Badge variant="outline" className="gap-1 border-amber-500/30 bg-amber-500/10 text-amber-600">
+   571→                  <Clock className="h-3 w-3" /> {isDone ? "Completed" : "Pending Actions"}
+   572→                </Badge>
+   573→                <Badge variant="outline" className={cn("gap-1", prio.bg, prio.text, "border-transparent")}>
+   574→                  <Flag className="h-3 w-3" /> {prio.label} Priority
+   575→                </Badge>
+   576→                <span className="inline-flex items-center gap-1">
+   577→                  <Calendar className="h-3 w-3" /> Due: {task.dueLabel}
+   578→                </span>
+   579→                <span className="inline-flex items-center gap-1">
+   580→                  <User className="h-3 w-3" /> Assigned to: {task.assignedTo}
+   581→                </span>
+   582→                <span className="inline-flex items-center gap-1">
+   583→                  <TypeIcon className="h-3 w-3" /> Type: {task.category}
+   584→                </span>
+   585→              </div>
+   586→            </div>
+   587→          </div>
+   588→          <div className="flex items-center gap-2">
+   589→            <Button
+   590→              size="sm"
+   591→              onClick={onToggleComplete}
+   592→              className="gap-1.5 bg-brand text-brand-foreground hover:bg-brand/90"
+   593→            >
+   594→              <CheckCircle2 className="h-4 w-4" />
+   595→              {isDone ? "Reopen" : "Mark as Completed"}
+   596→            </Button>
+   597→            <Button
+   598→              size="sm"
+   599→              variant="outline"
+   600→              onClick={() => toast.info("Edit task", { description: "Task editor will open here." })}
+   601→              className="gap-1.5"
+   602→            >
+   603→              <Pencil className="h-3.5 w-3.5" /> Edit
+   604→            </Button>
+   605→          </div>
+   606→        </div>
+   607→      </CardHeader>
+   608→
+   609→      <CardContent className="flex flex-col gap-4 pt-4">
+   610→        {/* ===== Info cards row ===== */}
+   611→        <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+   612→          <InfoCard label="Task Category" value={task.category} sublabel={task.subCategory} desc="Standard touchpoint" />
+   613→          <InfoCard label="Execution SLA" value={task.dueLabel} sublabel={task.priority === "high" ? "Urgent action required" : "On track"} valueColor={task.priority === "high" ? "text-rose-600" : "text-foreground"} />
+   614→          <div className="rounded-lg border border-border bg-card p-3">
+   615→            <p className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Checklist Progress</p>
+   616→            <p className="mt-1 text-sm font-bold text-foreground">{Math.round(progress)}% <span className="text-xs font-normal text-muted-foreground">({completedSubtasks} of {task.subtasks.length})</span></p>
+   617→            <Progress value={progress} className="mt-2 h-1.5" />
+   618→          </div>
+   619→          <InfoCard label="Related Opportunity" value={task.dealName ?? "Direct Account"} sublabel={task.dealType ?? "General Outreach"} valueColor="text-brand" />
+   620→        </div>
+   621→
+   622→        {/* ===== Action execution suite (only for calls) ===== */}
+   623→        {task.type === "call" && task.contactPhone && (
+   624→          <div className="rounded-lg border border-amber-500/30 bg-amber-500/5 p-4">
+   625→            <div className="mb-3 flex items-center justify-between">
+   626→              <div className="flex items-center gap-2">
+   627→                <PhoneCall className="h-4 w-4 text-amber-600" />
+   628→                <h3 className="text-sm font-bold text-foreground">Action Execution Suite (Call)</h3>
+   629→              </div>
+   630→              <Badge className="bg-amber-500/15 text-amber-600">Active Module</Badge>
+   631→            </div>
+   632→            <div className="flex items-center justify-between gap-3">
+   633→              <div>
+   634→                <p className="text-xs text-muted-foreground">Call Prospect</p>
+   635→                <p className="text-sm font-bold text-foreground">{task.contactPhone}</p>
+   636→                <p className="mt-0.5 text-[10px] text-muted-foreground">Direct VoIP integration with auto-rated transcription</p>
+   637→              </div>
+   638→              <Button
+   639→                size="sm"
+   640→                onClick={() => toast.success("Dialing...", { description: task.contactPhone })}
+   641→                className="gap-1.5 bg-brand text-brand-foreground hover:bg-brand/90"
+   642→              >
+   643→                <PhoneCall className="h-4 w-4" /> Start Dialing
+   644→              </Button>
+   645→            </div>
+   646→            {task.talkingPoints && (
+   647→              <div className="mt-3 border-t border-amber-500/20 pt-3">
+   648→                <p className="mb-1.5 text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Recommended Talking Points</p>
+   649→                <ul className="space-y-1">
+   650→                  {task.talkingPoints.map((point, i) => (
+   651→                    <li key={i} className="flex items-start gap-1.5 text-xs text-foreground">
+   652→                      <ArrowUpRight className="mt-0.5 h-3 w-3 flex-shrink-0 text-amber-600" />
+   653→                      {point}
+   654→                    </li>
+   655→                  ))}
+   656→                </ul>
+   657→              </div>
+   658→            )}
+   659→          </div>
+   660→        )}
+   661→
+   662→        {/* ===== Two-column: checklist + right panels ===== */}
+   663→        <div className="grid gap-4 lg:grid-cols-[1.5fr_1fr]">
+   664→          {/* Subtask checklist */}
+   665→          <div className="rounded-lg border border-border bg-card p-4">
+   666→            <div className="mb-3 flex items-center justify-between">
+   667→              <h3 className="text-sm font-bold text-foreground">Subtask Checklist & Execution Steps</h3>
+   668→              <Badge variant="outline" className="text-[10px]">{completedSubtasks} completed</Badge>
+   669→            </div>
+   670→            <div className="space-y-1.5">
+   671→              {task.subtasks.map((sub) => (
+   672→                <button
+   673→                  key={sub.id}
+   674→                  onClick={() => onToggleSubtask(sub.id)}
+   675→                  className="flex w-full items-start gap-2.5 rounded-md p-2 text-left transition-colors hover:bg-accent"
+   676→                >
+   677→                  {sub.done ? (
+   678→                    <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-brand" />
+   679→                  ) : (
+   680→                    <Circle className="mt-0.5 h-4 w-4 flex-shrink-0 text-muted-foreground hover:text-brand" />
+   681→                  )}
+   682→                  <span className={cn("text-sm", sub.done ? "text-muted-foreground line-through" : "text-foreground")}>
+   683→                    {sub.title}
+   684→                  </span>
+   685→                </button>
+   686→              ))}
+   687→            </div>
+   688→            {/* Add subtask */}
+   689→            <div className="mt-3 flex items-center gap-2 border-t pt-3">
+   690→              <Input
+   691→                value={newSubtask}
+   692→                onChange={(e) => setNewSubtask(e.target.value)}
+   693→                onKeyDown={(e) => {
+   694→                  if (e.key === "Enter") {
+   695→                    onAddSubtask(newSubtask);
+   696→                    setNewSubtask("");
+   697→                  }
+   698→                }}
+   699→                placeholder="Add a new subtask or milestone..."
+   700→                className="h-8 text-xs"
+   701→              />
+   702→              <Button
+   703→                size="sm"
+   704→                variant="outline"
+   705→                onClick={() => {
+   706→                  onAddSubtask(newSubtask);
+   707→                  setNewSubtask("");
+   708→                }}
+   709→                className="h-8 gap-1"
+   710→              >
+   711→                <Plus className="h-3 w-3" /> Add
+   712→              </Button>
+   713→            </div>
+   714→          </div>
+   715→
+   716→          {/* Right sidebar panels */}
+   717→          <div className="flex flex-col gap-3">
+   718→            {/* Linked contact */}
+   719→            <div className="rounded-lg border border-border bg-card p-3">
+   720→              <div className="mb-1.5 flex items-center gap-1.5">
+   721→                <User className="h-3.5 w-3.5 text-muted-foreground" />
+   722→                <h4 className="text-xs font-bold uppercase tracking-wide text-muted-foreground">Linked Contact</h4>
+   723→              </div>
+   724→              <p className="text-xs text-muted-foreground">
+   725→                {task.contactName ? task.contactName : "No specific contact attached directly to this action item."}
+   726→              </p>
+   727→            </div>
+   728→            {/* Linked deal */}
+   729→            <div className="rounded-lg border border-border bg-card p-3">
+   730→              <div className="mb-1.5 flex items-center gap-1.5">
+   731→                <ArrowUpRight className="h-3.5 w-3.5 text-muted-foreground" />
+   732→                <h4 className="text-xs font-bold uppercase tracking-wide text-muted-foreground">Linked Deal</h4>
+   733→              </div>
+   734→              <p className="text-xs text-muted-foreground">
+   735→                {task.dealName ? task.dealName : "General client relation activity. No single deal primed."}
+   736→              </p>
+   737→            </div>
+   738→            {/* Audit telemetry */}
+   739→            <div className="rounded-lg border border-border bg-card p-3">
+   740→              <div className="mb-2 flex items-center gap-1.5">
+   741→                <ShieldCheck className="h-3.5 w-3.5 text-muted-foreground" />
+   742→                <h4 className="text-xs font-bold uppercase tracking-wide text-muted-foreground">Audit & SLA Telemetry</h4>
+   743→              </div>
+   744→              <dl className="space-y-1.5 text-xs">
+   745→                <div className="flex items-center justify-between">
+   746→                  <dt className="text-muted-foreground">Task ID</dt>
+   747→                  <dd className="font-mono font-semibold text-foreground">{task.id}</dd>
+   748→                </div>
+   749→                <div className="flex items-center justify-between">
+   750→                  <dt className="text-muted-foreground">Urgency</dt>
+   751→                  <dd className={cn("font-semibold", prio.text)}>{prio.label} Priority SLA</dd>
+   752→                </div>
+   753→                <div className="flex items-center justify-between">
+   754→                  <dt className="text-muted-foreground">Notifications</dt>
+   755→                  <dd className="flex items-center gap-1 font-semibold text-brand">
+   756→                    <Bell className="h-3 w-3" /> Push & Email
+   757→                  </dd>
+   758→                </div>
+   759→                <div className="flex items-center justify-between">
+   760→                  <dt className="text-muted-foreground">Assigned Rep</dt>
+   761→                  <dd className="font-semibold text-foreground">{task.assignedTo}</dd>
+   762→                </div>
+   763→              </dl>
+   764→            </div>
+   765→          </div>
+   766→        </div>
+   767→      </CardContent>
+   768→    </Card>
+   769→  );
+   770→}
+   771→
+   772→// ============================================================
+   773→// INFO CARD (small stat card for detail view)
+   774→// ============================================================
+   775→function InfoCard({
+   776→  label, value, sublabel, desc, valueColor,
+   777→}: {
+   778→  label: string;
+   779→  value: string;
+   780→  sublabel: string;
+   781→  desc?: string;
+   782→  valueColor?: string;
+   783→}) {
+   784→  return (
+   785→    <div className="rounded-lg border border-border bg-card p-3">
+   786→      <p className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">{label}</p>
+   787→      <p className={cn("mt-1 text-sm font-bold", valueColor ?? "text-foreground")}>{value}</p>
+   788→      <p className="text-[10px] text-muted-foreground">{sublabel}</p>
+   789→      {desc && <p className="mt-1 text-[10px] italic text-muted-foreground">{desc}</p>}
+   790→    </div>
+   791→  );
+   792→}
+   793→
