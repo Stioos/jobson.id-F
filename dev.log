@@ -6,17 +6,9 @@
   · optimizePackageImports
 
 ✓ Starting...
-✓ Ready in 1772ms
+✓ Ready in 2000ms
 ○ Compiling / ...
- GET / 200 in 18.9s (compile: 18.7s, render: 273ms)
- GET /pro-services 200 in 2.3s (compile: 2.2s, render: 79ms)
- GET /pro-services/ai-powered-business-solutions/ai-business-process-automation 200 in 168ms (compile: 102ms, render: 65ms)
- GET /register/candidate 200 in 355ms (compile: 110ms, render: 245ms)
- GET /favicon.ico 200 in 412ms (compile: 129ms, render: 283ms)
- GET /pro-services 200 in 179ms (compile: 66ms, render: 113ms)
- GET /favicon.ico 200 in 246ms (compile: 5ms, render: 241ms)
- GET / 200 in 49ms (compile: 9ms, render: 40ms)
- GET / 200 in 81ms (compile: 21ms, render: 60ms)
- GET /sitemap.xml 200 in 676ms (compile: 600ms, render: 76ms)
- GET /pro-services 200 in 185ms (compile: 83ms, render: 102ms)
- GET /pro-services/ai-powered-business-solutions 200 in 80ms (compile: 7ms, render: 73ms)
+ GET / 200 in 11.0s (compile: 10.4s, render: 579ms)
+ GET / 200 in 8.3s (compile: 8.1s, render: 198ms)
+ GET / 200 in 85ms (compile: 9ms, render: 76ms)
+ GET /programs/forward-deployed-engineer 200 in 9.3s (compile: 9.2s, render: 75ms)
