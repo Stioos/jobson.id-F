@@ -43,7 +43,7 @@ export const serviceCategories: ServiceCategory[] = [
     services: [
       {
         id: 'cat1-svc1',
-        name: 'AI Business Process Automation',
+        name: 'Automate Your Business Processes with AI That Works 24/7',
         slug: 'ai-business-process-automation',
         shortDesc:
           'Automate repetitive business processes with intelligent AI workflows that reduce manual effort, minimize errors, and accelerate operations across your organization.',
@@ -52,7 +52,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat1-svc2',
-        name: 'AI Customer Support Solutions',
+        name: 'Delight Every Customer with AI-Powered Support That Never Sleeps',
         slug: 'ai-customer-support-solutions',
         shortDesc:
           'Deploy AI-powered support systems that handle customer queries 24/7 with natural conversations, intelligent routing, and sentiment-aware responses.',
@@ -61,7 +61,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat1-svc3',
-        name: 'AI Document Intelligence',
+        name: 'Turn Documents into Data with AI That Reads, Understands & Extracts',
         slug: 'ai-document-intelligence',
         shortDesc:
           'Extract, classify, and process information from documents at scale using advanced OCR, NLP, and machine learning for intelligent document management.',
@@ -70,7 +70,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat1-svc4',
-        name: 'AI Knowledge Management',
+        name: 'Build a Brain for Your Company with AI Knowledge Management',
         slug: 'ai-knowledge-management',
         shortDesc:
           'Build intelligent knowledge bases that automatically organize, retrieve, and recommend information to empower your teams with instant expertise.',
@@ -79,7 +79,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat1-svc5',
-        name: 'AI Voice & Chat Assistants',
+        name: 'Deploy AI Voice & Chat Assistants That Feel Human to Every Caller',
         slug: 'ai-voice-chat-assistants',
         shortDesc:
           'Create conversational AI assistants for voice and text that understand context, handle complex queries, and integrate seamlessly with your existing systems.',
@@ -88,7 +88,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat1-svc6',
-        name: 'Enterprise AI Integration',
+        name: 'Integrate AI into Your Enterprise Stack End-to-End, Production-Ready',
         slug: 'enterprise-ai-integration',
         shortDesc:
           'Seamlessly integrate AI capabilities into your existing enterprise systems, ERP, CRM, and workflows to unlock intelligent automation at scale.',
@@ -144,7 +144,7 @@ export const serviceCategories: ServiceCategory[] = [
     services: [
       {
         id: 'cat2-svc1',
-        name: 'AI Digital Marketing',
+        name: 'Scale Your Marketing with AI That Learns, Optimizes & Converts',
         slug: 'ai-digital-marketing',
         shortDesc:
           'AI-powered digital marketing strategies that use predictive analytics, audience segmentation, and automated campaign optimization for maximum ROI.',
@@ -153,7 +153,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat2-svc2',
-        name: 'SEO & GEO AI Content Marketing',
+        name: 'Rank Higher with AI-Powered SEO & Content That Search Engines Love',
         slug: 'seo-geo-ai-content-marketing',
         shortDesc:
           'Generate and optimize content with AI for search engines and generative engine optimization (GEO) to dominate organic rankings and AI search results.',
@@ -162,7 +162,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat2-svc3',
-        name: 'Search Engine & Social Media Marketing',
+        name: 'Be Everywhere Your Customers Are with AI-Driven Search & Social',
         slug: 'search-engine-social-media-marketing',
         shortDesc:
           'Comprehensive SEM and social media marketing with AI-driven ad targeting, A/B testing, and cross-platform campaign management for measurable growth.',
@@ -171,7 +171,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat2-svc4',
-        name: 'AI Social Media Automation',
+        name: 'Grow Your Social Presence on Autopilot with AI That Posts & Engages',
         slug: 'ai-social-media-automation',
         shortDesc:
           'Automate social media posting, engagement, and analytics with AI tools that schedule content, respond to interactions, and track performance in real-time.',
@@ -180,7 +180,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat2-svc5',
-        name: 'AI Sales Funnel Automation',
+        name: 'Build Funnels That Convert Themselves with AI-Powered Sales Automation',
         slug: 'ai-sales-funnel-automation',
         shortDesc:
           'Build intelligent sales funnels that automatically qualify leads, nurture prospects, and convert opportunities using AI-driven scoring and personalization.',
@@ -189,7 +189,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat2-svc6',
-        name: 'CRM & Lead Automation',
+        name: 'Never Let a Lead Go Cold Again with AI-Powered CRM & Lead Automation',
         slug: 'crm-lead-automation',
         shortDesc:
           'Automate CRM workflows and lead management with AI-powered scoring, routing, follow-ups, and pipeline analytics to close deals faster.',
@@ -198,7 +198,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat2-svc7',
-        name: 'AI Market Research & Customer Intelligence',
+        name: 'Know Your Market Before You Enter It with AI-Powered Research',
         slug: 'ai-market-research-customer-intelligence',
         shortDesc:
           'Market research, competitor intelligence, ICP, buyer personas, and customer insights powered by AI for data-driven strategic decisions.',
@@ -207,7 +207,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat2-svc8',
-        name: 'AI Lead Generation & Prospecting',
+        name: 'Find Buyers Before They Find You with AI-Powered Lead Generation',
         slug: 'ai-lead-generation-prospecting',
         shortDesc:
           'B2B prospect discovery, target-account research, AI-powered lead lists, and prospect qualification for building high-quality pipelines.',
@@ -216,7 +216,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat2-svc9',
-        name: 'AI Outbound Sales & Outreach',
+        name: 'Book More Meetings with AI Outbound That Books While You Sleep',
         slug: 'ai-outbound-sales-outreach',
         shortDesc:
           'Personalized LinkedIn outreach, cold outreach, AI sales messaging, and multi-channel prospect engagement for pipeline acceleration.',
@@ -225,7 +225,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat2-svc10',
-        name: 'AI Account-Based Marketing (ABM)',
+        name: 'Win the Accounts That Matter with AI-Powered ABM Strategies',
         slug: 'ai-account-based-marketing',
         shortDesc:
           'Target-account campaigns, account intelligence, personalized marketing, and sales alignment for enterprise account growth.',
@@ -234,7 +234,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat2-svc11',
-        name: 'AI Paid Advertising & Campaign Strategy',
+        name: 'Make Every Ad Dollar Count with AI-Powered Advertising Strategy',
         slug: 'ai-paid-advertising-campaign-strategy',
         shortDesc:
           'Google/Meta/LinkedIn advertising, AI campaign planning, audience targeting, and optimization for maximum ROAS across all platforms.',
@@ -243,7 +243,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat2-svc12',
-        name: 'AI Sales Enablement & Revenue Intelligence',
+        name: 'Equip Your Team to Close More with AI Sales Enablement',
         slug: 'ai-sales-enablement-revenue-intelligence',
         shortDesc:
           'Sales playbooks, AI pitch materials, competitive intelligence, call insights, and revenue reporting for sales team performance.',
@@ -299,7 +299,7 @@ export const serviceCategories: ServiceCategory[] = [
     services: [
       {
         id: 'cat3-svc1',
-        name: 'Custom AI Agents',
+        name: 'Build Autonomous AI Agents That Get Things Done Without You',
         slug: 'custom-ai-agents',
         shortDesc:
           'Design and deploy purpose-built AI agents tailored to your business needs — from research assistants to decision-support systems that learn and adapt.',
@@ -308,7 +308,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat3-svc2',
-        name: 'Multi-Agent Systems',
+        name: 'Deploy Multi-Agent AI Swarms That Solve Complex Tasks Together',
         slug: 'multi-agent-systems',
         shortDesc:
           'Architect collaborative AI agent networks where specialized agents work together, share knowledge, and coordinate to solve complex, multi-step problems.',
@@ -317,7 +317,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat3-svc3',
-        name: 'AI Workflow Automation',
+        name: 'Connect Your Tools & Automate the Busywork with AI Workflows',
         slug: 'ai-workflow-automation',
         shortDesc:
           'Automate end-to-end business workflows with AI that orchestrates tasks, handles exceptions, and continuously optimizes process efficiency.',
@@ -326,7 +326,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat3-svc4',
-        name: 'AI Manufacturing & Process Automation',
+        name: 'Automate Your Factory Floor with AI That Optimizes in Real-Time',
         slug: 'ai-manufacturing-process-automation',
         shortDesc:
           'Implement AI-driven manufacturing automation with predictive maintenance, quality control, production optimization, and smart factory solutions.',
@@ -335,7 +335,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat3-svc5',
-        name: 'AI Recruitment Automation',
+        name: 'Automate Your Hiring Pipeline with AI That Screens & Shortlists',
         slug: 'ai-recruitment-automation',
         shortDesc:
           'Streamline hiring with AI-powered resume screening, candidate matching, interview scheduling, and onboarding automation for faster talent acquisition.',
@@ -344,7 +344,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat3-svc6',
-        name: 'AI Operations Automation',
+        name: 'Run Your Operations on Autopilot with AI That Monitors 24/7',
         slug: 'ai-operations-automation',
         shortDesc:
           'Automate IT and business operations with AIOps — intelligent monitoring, incident resolution, capacity planning, and process optimization.',
@@ -400,7 +400,7 @@ export const serviceCategories: ServiceCategory[] = [
     services: [
       {
         id: 'cat4-svc1',
-        name: 'Self-Hosted AI Platform Deployment',
+        name: 'Deploy Your Own AI Platform with Zero Vendor Lock-In',
         slug: 'self-hosted-ai-platform-deployment',
         shortDesc:
           'Deploy and configure self-hosted AI platforms like Ollama, Hugging Face, LocalAI, and LlamaIndex on your infrastructure for complete data privacy and control.',
@@ -409,7 +409,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat4-svc2',
-        name: 'ERP & Portal Deployment',
+        name: 'Deploy ERPs & Portals That Your Team Actually Wants to Use',
         slug: 'erp-portal-deployment',
         shortDesc:
           'Deploy and customize open source ERP systems (Odoo, ERPNext) and enterprise portals tailored to your business processes and organizational needs.',
@@ -418,7 +418,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat4-svc3',
-        name: 'Custom Apps & Platforms Deployment',
+        name: 'Ship Custom Apps & Platforms Deployed by Senior Architects',
         slug: 'custom-apps-platforms-deployment',
         shortDesc:
           'Deploy and configure custom applications built on open source frameworks — from CMS platforms and e-commerce to learning management systems.',
@@ -436,7 +436,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat4-svc5',
-        name: 'Monitoring & Observability',
+        name: 'See Everything, Miss Nothing with AI-Powered Monitoring',
         slug: 'monitoring-observability',
         shortDesc:
           'Deploy monitoring and observability stacks with Prometheus, Grafana, ELK, and Jaeger for full visibility into application performance and system health.',
@@ -445,7 +445,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat4-svc6',
-        name: 'Private Cloud Deployment',
+        name: 'Deploy Your Own Private Cloud with Security & Control',
         slug: 'private-cloud-deployment',
         shortDesc:
           'Build and deploy private cloud infrastructure using OpenStack, Proxmox, or Kubernetes-based solutions for secure, scalable, self-managed cloud computing.',
@@ -501,7 +501,7 @@ export const serviceCategories: ServiceCategory[] = [
     services: [
       {
         id: 'cat5-svc1',
-        name: 'Enterprise Web Applications',
+        name: 'Build Enterprise Web Apps That Scale to Millions of Users',
         slug: 'enterprise-web-applications',
         shortDesc:
           'Build scalable, secure enterprise web applications with modern frameworks like React, Next.js, and Node.js that handle complex business logic at scale.',
@@ -510,7 +510,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat5-svc2',
-        name: 'SaaS Development',
+        name: 'Launch Your SaaS Product with Multi-Tenant Architecture Built to Scale',
         slug: 'saas-development',
         shortDesc:
           'Design and develop multi-tenant SaaS platforms with subscription management, user roles, analytics dashboards, and scalable cloud architecture.',
@@ -519,7 +519,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat5-svc3',
-        name: 'Mobile Apps',
+        name: 'Ship Mobile Apps for iOS & Android from One Codebase, Built to Scale',
         slug: 'mobile-apps',
         shortDesc:
           'Build native and cross-platform mobile apps for iOS and Android using React Native and Flutter with seamless backend integration and offline support.',
@@ -528,7 +528,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat5-svc4',
-        name: 'ERP & CRM Development',
+        name: 'Build Custom ERPs & CRMs That Fit Your Business Perfectly',
         slug: 'erp-crm-development',
         shortDesc:
           'Develop custom ERP and CRM systems that integrate finance, HR, supply chain, sales, and operations into a unified, intelligent business platform.',
@@ -537,7 +537,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat5-svc5',
-        name: 'API Development & Integration',
+        name: 'Connect Everything with APIs That Are Fast, Reliable & Secure',
         slug: 'api-development-integration',
         shortDesc:
           'Design, develop, and integrate robust RESTful and GraphQL APIs that connect your systems, enable data flow, and power third-party integrations.',
@@ -546,7 +546,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat5-svc6',
-        name: 'Legacy Modernization',
+        name: 'Modernize Your Legacy Systems Without Downtime or Data Loss',
         slug: 'legacy-modernization',
         shortDesc:
           'Migrate and re-architect outdated monolithic applications into modern microservices with cloud-native technologies, containers, and CI/CD pipelines.',
@@ -602,7 +602,7 @@ export const serviceCategories: ServiceCategory[] = [
     services: [
       {
         id: 'cat6-svc1',
-        name: 'Data Warehousing',
+        name: 'Build a Single Source of Truth with Modern Data Warehousing',
         slug: 'data-warehousing',
         shortDesc:
           'Design and implement modern data warehouses on Snowflake, BigQuery, or Redshift that centralize your data for fast, reliable analytical queries at scale.',
@@ -611,7 +611,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat6-svc2',
-        name: 'ETL / ELT',
+        name: 'Move & Transform Data at Scale with Production-Grade ETL/ELT Pipelines',
         slug: 'etl-elt',
         shortDesc:
           'Build reliable ETL/ELT data pipelines using Apache Airflow, dbt, and Spark that extract, transform, and load data from diverse sources into your analytics platform.',
@@ -620,7 +620,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat6-svc3',
-        name: 'BI Dashboards',
+        name: 'See Your Business in Real-Time with BI Dashboards That Actually Work',
         slug: 'bi-dashboards',
         shortDesc:
           'Create interactive business intelligence dashboards using Power BI, Tableau, or custom solutions that give teams real-time visibility into KPIs and metrics.',
@@ -629,7 +629,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat6-svc4',
-        name: 'Real-Time Analytics',
+        name: 'Make Decisions Powered by Live Data with Real-Time Analytics',
         slug: 'real-time-analytics',
         shortDesc:
           'Implement real-time analytics with Apache Kafka, Flink, and Spark Streaming for live data ingestion, processing, and instant decision-making.',
@@ -638,7 +638,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat6-svc5',
-        name: 'Data Lakes',
+        name: 'Build Data Lakes That Store Everything, Query Anything',
         slug: 'data-lakes',
         shortDesc:
           'Build scalable data lake architectures on AWS S3, Azure Data Lake, or Delta Lake for cost-effective storage and processing of structured and unstructured data.',
@@ -647,7 +647,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat6-svc6',
-        name: 'Predictive Analytics',
+        name: "See What's Coming Before It Arrives with AI-Powered Predictive Analytics",
         slug: 'predictive-analytics',
         shortDesc:
           'Develop predictive models and forecasting solutions using machine learning that anticipate trends, optimize operations, and drive data-informed decisions.',
@@ -703,7 +703,7 @@ export const serviceCategories: ServiceCategory[] = [
     services: [
       {
         id: 'cat7-svc1',
-        name: 'Cloud Migration',
+        name: 'Move to the Cloud with Zero Downtime & Full Data Integrity',
         slug: 'cloud-migration',
         shortDesc:
           'Plan and execute seamless cloud migrations from on-premise or legacy infrastructure to AWS, Azure, or GCP with minimal downtime and zero data loss.',
@@ -712,7 +712,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat7-svc2',
-        name: 'Kubernetes',
+        name: 'Orchestrate Containers at Scale with Kubernetes Done Right',
         slug: 'kubernetes',
         shortDesc:
           'Design, deploy, and manage Kubernetes clusters for container orchestration with auto-scaling, self-healing, and rolling updates for production workloads.',
@@ -721,7 +721,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat7-svc3',
-        name: 'CI/CD Automation',
+        name: 'Ship Code with Confidence with CI/CD Pipelines That Just Work',
         slug: 'ci-cd-automation',
         shortDesc:
           'Automate build, test, and deployment pipelines with GitHub Actions, GitLab CI, Jenkins, or ArgoCD for rapid, reliable, and consistent releases.',
@@ -730,7 +730,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat7-svc4',
-        name: 'Infrastructure as Code',
+        name: 'Provision Infrastructure in Minutes with Terraform & IaC',
         slug: 'infrastructure-as-code',
         shortDesc:
           'Define and manage your entire infrastructure using Terraform, Pulumi, or CloudFormation for version-controlled, reproducible, and automated provisioning.',
@@ -739,7 +739,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat7-svc5',
-        name: 'Cloud Security',
+        name: 'Lock Down Your Cloud End-to-End with Enterprise-Grade Security',
         slug: 'cloud-security',
         shortDesc:
           'Implement comprehensive cloud security with IAM policies, network segmentation, encryption, compliance monitoring, and zero-trust architecture.',
@@ -748,7 +748,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat7-svc6',
-        name: 'Managed DevOps',
+        name: 'We Run Your DevOps, You Ship with Managed DevOps 24/7',
         slug: 'managed-devops',
         shortDesc:
           'Get end-to-end DevOps management — from pipeline setup and monitoring to incident response and optimization — so your team focuses on building products.',
@@ -804,7 +804,7 @@ export const serviceCategories: ServiceCategory[] = [
     services: [
       {
         id: 'cat8-svc1',
-        name: 'Machine Learning',
+        name: 'Deploy ML Models That Predict, Recommend & Drive Decisions',
         slug: 'machine-learning',
         shortDesc:
           'Develop custom ML models for classification, regression, clustering, and recommendation systems using scikit-learn, XGBoost, and PyTorch for your specific use cases.',
@@ -813,7 +813,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat8-svc2',
-        name: 'LLM Development',
+        name: 'Build Custom Large Language Models Tuned to Your Domain & Data',
         slug: 'llm-development',
         shortDesc:
           'Build, fine-tune, and deploy large language models for chatbots, content generation, code assistants, and domain-specific AI applications using GPT, Llama, and Mistral.',
@@ -822,7 +822,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat8-svc3',
-        name: 'Computer Vision',
+        name: 'See, Detect & Classify from Images with Production-Grade Vision AI',
         slug: 'computer-vision',
         shortDesc:
           'Implement image recognition, object detection, video analytics, and visual inspection solutions using YOLO, ResNet, and Vision Transformers for your industry.',
@@ -831,7 +831,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat8-svc4',
-        name: 'NLP Solutions',
+        name: 'Understand & Generate Human Language with AI-Powered NLP',
         slug: 'nlp-solutions',
         shortDesc:
           'Build NLP pipelines for text classification, sentiment analysis, entity extraction, summarization, and document processing using transformers and custom models.',
@@ -840,7 +840,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat8-svc5',
-        name: 'MLOps',
+        name: 'Deploy, Monitor & Scale ML Models with MLOps Built for Production',
         slug: 'mlops',
         shortDesc:
           'Establish MLOps infrastructure for model versioning, automated training, A/B testing, monitoring, and continuous deployment of ML models in production.',
@@ -849,7 +849,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat8-svc6',
-        name: 'Model Fine-Tuning',
+        name: 'Fine-Tune Foundation Models for Your Specific Domain & Use Case',
         slug: 'model-fine-tuning',
         shortDesc:
           'Fine-tune pre-trained AI models on your proprietary data for domain-specific accuracy — from LLMs and vision models to speech and multi-modal systems.',
@@ -905,7 +905,7 @@ export const serviceCategories: ServiceCategory[] = [
     services: [
       {
         id: 'cat9-svc1',
-        name: 'AI Strategy',
+        name: 'Get a Roadmap for AI — Not Guesswork, a Real Strategy',
         slug: 'ai-strategy',
         shortDesc:
           'Develop a comprehensive AI strategy aligned with your business goals — identify high-impact use cases, build roadmaps, and establish AI centers of excellence.',
@@ -914,7 +914,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat9-svc2',
-        name: 'Digital Transformation',
+        name: 'Re-Architect Your Business for the AI Era — End to End',
         slug: 'digital-transformation',
         shortDesc:
           'End-to-end digital transformation services that modernize operations, digitize customer experiences, and build agile, technology-driven organizations.',
@@ -923,7 +923,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat9-svc3',
-        name: 'Process Reengineering',
+        name: 'Redesign Your Workflows for the AI Era with Proven Methodology',
         slug: 'process-reengineering',
         shortDesc:
           'Analyze, redesign, and optimize business processes using lean methodologies and AI-driven insights for maximum efficiency and operational excellence.',
@@ -932,7 +932,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat9-svc4',
-        name: 'Technology Architecture',
+        name: 'Build a Technology Foundation That Lasts for the Next Decade',
         slug: 'technology-architecture',
         shortDesc:
           'Design future-proof technology architectures — microservices, event-driven systems, cloud-native platforms — that scale with your business and support innovation.',
@@ -941,7 +941,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat9-svc5',
-        name: 'IT Modernization',
+        name: 'Bring Your Tech Stack into Today with IT Modernization',
         slug: 'it-modernization',
         shortDesc:
           'Modernize legacy IT systems with strategic migration plans, cloud adoption roadmaps, and phased modernization approaches that minimize risk and disruption.',
@@ -950,7 +950,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         id: 'cat9-svc6',
-        name: 'AI Governance',
+        name: "Deploy AI That's Safe, Compliant & Trusted with Proper Governance",
         slug: 'ai-governance',
         shortDesc:
           'Establish AI governance frameworks covering ethical AI, bias detection, model transparency, compliance, and responsible AI practices for trustworthy deployments.',

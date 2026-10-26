@@ -194,28 +194,6 @@ export function PublicTechAIServices() {
         />
 
         <div className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
-          {/* Breadcrumb */}
-          <nav
-            aria-label="Breadcrumb"
-            className="mb-6 flex items-center gap-1.5 text-xs text-slate-400"
-          >
-            <button
-              onClick={() => navigate("public", "home")}
-              className="transition-colors hover:text-white"
-            >
-              Home
-            </button>
-            <ChevronRight className="h-3 w-3 opacity-60" />
-            <button
-              onClick={() => navigate("public", "tech-ai-services")}
-              className="transition-colors hover:text-white"
-            >
-              Pro Services
-            </button>
-            <ChevronRight className="h-3 w-3 opacity-60" />
-            <span className="text-white">{activeCatName}</span>
-          </nav>
-
           {/* Headline */}
           <div className="max-w-3xl">
             <div className="mb-5 flex flex-wrap items-center gap-2">

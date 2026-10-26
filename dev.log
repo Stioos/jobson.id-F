@@ -6,15 +6,13 @@
   · optimizePackageImports
 
 ✓ Starting...
-✓ Ready in 2000ms
+✓ Ready in 2.2s
 ○ Compiling / ...
- GET / 200 in 11.0s (compile: 10.4s, render: 579ms)
- GET / 200 in 8.3s (compile: 8.1s, render: 198ms)
- GET / 200 in 85ms (compile: 9ms, render: 76ms)
- GET /programs/forward-deployed-engineer 200 in 9.3s (compile: 9.2s, render: 75ms)
- GET / 200 in 46ms (compile: 4ms, render: 42ms)
- GET / 200 in 58ms (compile: 5ms, render: 54ms)
- GET /pro-services 200 in 154ms (compile: 76ms, render: 78ms)
- GET /favicon.ico 200 in 283ms (compile: 24ms, render: 258ms)
- GET / 200 in 58ms (compile: 8ms, render: 50ms)
- GET /pro-services 200 in 154ms (compile: 84ms, render: 70ms)
+ GET / 200 in 15.9s (compile: 15.5s, render: 410ms)
+ GET /pro-services/custom-software-development/enterprise-web-applications 200 in 16.1s (compile: 16.1s, render: 86ms)
+ GET /favicon.ico 200 in 334ms (compile: 168ms, render: 165ms)
+ GET /pro-services 200 in 173ms (compile: 73ms, render: 101ms)
+ GET /favicon.ico 200 in 246ms (compile: 8ms, render: 237ms)
+ GET /pro-services/custom-software-development/enterprise-web-applications 200 in 275ms (compile: 70ms, render: 205ms)
+ GET /favicon.ico 200 in 365ms (compile: 95ms, render: 270ms)
+ GET / 200 in 52ms (compile: 5ms, render: 47ms)
