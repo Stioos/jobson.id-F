@@ -3477,3 +3477,43 @@ Stage Summary:
   - Unselected card: white background, hover green border + shadow
   - Rounded-xl cards with overflow-hidden for accent bar
 - Lint: 0 errors. Browser-verified: all 6 card elements confirmed visible. Console: clean.
+
+---
+Task ID: REPLACE-LOGO
+Agent: Main (Z.ai Code)
+
+Task: Remove the existing logo and add the new attached logo (New Jobsonn (7).png).
+
+Work Log:
+- Read /home/z/my-project/worklog.md to understand previous work
+- Checked new logo file at /home/z/my-project/upload/New Jobsonn (7).png — 1.1MB, 3019x569 PNG
+- Checked existing logo at /home/z/my-project/public/jobsonn-logo.png — 1.2MB, 3019x563 PNG
+- Found all logo references in the codebase:
+  - src/app/layout.tsx (metadata, og:image)
+  - src/components/layout/Footer.tsx (footer logo)
+  - src/components/layout/PublicNavbar.tsx (header logo + mobile nav logo)
+  - src/portals/public/PublicAuth.tsx (login page logo)
+  - src/portals/public/PublicRegister.tsx (registration page logo)
+  - All reference `/jobsonn-logo.png` path
+- Replaced the logo file: `cp "/home/z/my-project/upload/New Jobsonn (7).png" /home/z/my-project/public/jobsonn-logo.png`
+- The BrandMark component in PortalSidebar.tsx is a small SVG icon (not the main logo) — kept as is since it's a simplified brand mark for the narrow 64px sidebar rail
+- VLM analyzed the new logo: horizontal logo with green icon (square with stylized figure) + text "JOBSOn.id" in green gradient, modern rounded sans-serif
+
+- Browser-verified the new logo appears in:
+  1. Header (PublicNavbar) — VLM confirmed: "stylized green icon + JOBSONN text in dark green/teal"
+  2. Footer — VLM confirmed: "stylized green icon + JOBSONN in bold dark green/teal capital letters"
+  3. Auth/Login page — VLM confirmed: "JOBSONN in bold modern uppercase lettering with green-to-teal gradient + stylized icon"
+  4. Registration page — uses same logo reference, will show new logo automatically
+- Console: clean, no errors
+
+Stage Summary:
+- Existing logo file replaced with new logo at /home/z/my-project/public/jobsonn-logo.png
+- New logo is a horizontal combination mark: green gradient icon (square with stylized figure) + "JOBSOn.id" text in green gradient
+- All 6 locations that reference /jobsonn-logo.png now show the new logo automatically:
+  - Header navbar (desktop + mobile)
+  - Footer
+  - Auth/Login page
+  - Registration page
+  - OG image metadata
+- No code changes needed — just file replacement
+- Lint: N/A (no code changes). Browser-verified: new logo visible in header, footer, and auth page. Console: clean.
