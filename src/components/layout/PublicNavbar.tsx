@@ -367,6 +367,7 @@ const PRO_SERVICE_CATEGORIES = [
   {
     key: "ai-intelligence",
     label: "AI & Intelligence",
+    twoLineTitle: "Make Machines Work\nFor Your Business",
     tagline: "Make machines work for you",
     desc: "AI business solutions, agentic automation & custom ML models that turn data into decisions.",
     icon: Brain,
@@ -391,6 +392,7 @@ const PRO_SERVICE_CATEGORIES = [
   {
     key: "build-engineer",
     label: "Build & Engineer",
+    twoLineTitle: "Ship Products,\nNot Prototypes",
     tagline: "Ship products, not prototypes",
     desc: "Custom software, mobile apps, SaaS platforms & data pipelines engineered for scale.",
     icon: Code2,
@@ -412,6 +414,7 @@ const PRO_SERVICE_CATEGORIES = [
   {
     key: "cloud-deploy",
     label: "Cloud & Deploy",
+    twoLineTitle: "Scale Infra That\nScales Itself",
     tagline: "Infrastructure that scales itself",
     desc: "Cloud migration, DevOps, Kubernetes & open-source platform deployment — built to scale.",
     icon: Cloud,
@@ -432,6 +435,7 @@ const PRO_SERVICE_CATEGORIES = [
   {
     key: "grow-market",
     label: "Grow & Market",
+    twoLineTitle: "Turn Attention\nInto Revenue",
     tagline: "Turn attention into revenue",
     desc: "AI-powered digital marketing, sales automation & lead intelligence that fills your pipeline.",
     icon: Megaphone,
@@ -454,6 +458,7 @@ const PRO_SERVICE_CATEGORIES = [
   {
     key: "transform-strategize",
     label: "Transform & Strategize",
+    twoLineTitle: "Future-Proof\nYour Business",
     tagline: "Future-proof your business",
     desc: "Digital transformation consulting, AI strategy & technology architecture that re-architects your business.",
     icon: Compass,
@@ -470,6 +475,7 @@ const PRO_SERVICE_CATEGORIES = [
   {
     key: "career-services",
     label: "Career Services",
+    twoLineTitle: "From Lost to Hired,\nFast",
     tagline: "From lost to hired, fast",
     desc: "8 professional services — career assessment, resume branding, skills, portfolio, AI job matching, mock interviews & more.",
     icon: GraduationCap,
@@ -574,8 +580,15 @@ function ProServicesDropdown({ go }: { go: (v: string) => void }) {
                     <CatIcon className="h-5 w-5" />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <h3 className="text-sm font-bold">{cat.label}</h3>
-                    <p className="text-xs font-medium italic" style={{ color: cat.color }}>{cat.tagline}</p>
+                    <h3 className="text-sm font-bold leading-tight">{cat.label}</h3>
+                    {cat.twoLineTitle && (
+                      <p className="mt-0.5 text-[13px] font-bold leading-tight" style={{ color: cat.color }}>
+                        {cat.twoLineTitle.split("\n").map((line, i) => (
+                          <span key={i} className="block">{line}</span>
+                        ))}
+                      </p>
+                    )}
+                    <p className="mt-0.5 text-xs font-medium italic text-muted-foreground">{cat.tagline}</p>
                   </div>
                 </div>
                 <p className="mb-2 text-xs leading-relaxed text-muted-foreground">{cat.desc}</p>

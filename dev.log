@@ -6,23 +6,17 @@
   · optimizePackageImports
 
 ✓ Starting...
-✓ Ready in 2.2s
-○ Compiling /[...slug] ...
- GET / 200 in 5.4s (compile: 5.2s, render: 250ms)
- GET / 200 in 14.2s (compile: 13.3s, render: 869ms)
- GET / 200 in 13.1s (compile: 12.6s, render: 485ms)
- GET /register/candidate 200 in 15.9s (compile: 15.7s, render: 142ms)
- GET /favicon.ico 200 in 369ms (compile: 200ms, render: 169ms)
- GET / 200 in 355ms (compile: 8ms, render: 347ms)
- GET /favicon.ico 200 in 438ms (compile: 209ms, render: 229ms)
- GET / 200 in 57ms (compile: 6ms, render: 52ms)
- GET / 200 in 56ms (compile: 6ms, render: 50ms)
-✓ Compiled in 7.1s
- GET /register/candidate 200 in 172ms (compile: 79ms, render: 92ms)
- GET /favicon.ico 200 in 162ms (compile: 5ms, render: 157ms)
- GET /register/candidate 200 in 148ms (compile: 73ms, render: 75ms)
- GET /register/employer 200 in 89ms (compile: 7ms, render: 82ms)
- GET /register/recruiter 200 in 135ms (compile: 5ms, render: 130ms)
- GET /register/training 200 in 92ms (compile: 6ms, render: 87ms)
- GET /register/partner 200 in 82ms (compile: 7ms, render: 75ms)
- GET /register/admin 200 in 126ms (compile: 68ms, render: 58ms)
+✓ Ready in 1772ms
+○ Compiling / ...
+ GET / 200 in 18.9s (compile: 18.7s, render: 273ms)
+ GET /pro-services 200 in 2.3s (compile: 2.2s, render: 79ms)
+ GET /pro-services/ai-powered-business-solutions/ai-business-process-automation 200 in 168ms (compile: 102ms, render: 65ms)
+ GET /register/candidate 200 in 355ms (compile: 110ms, render: 245ms)
+ GET /favicon.ico 200 in 412ms (compile: 129ms, render: 283ms)
+ GET /pro-services 200 in 179ms (compile: 66ms, render: 113ms)
+ GET /favicon.ico 200 in 246ms (compile: 5ms, render: 241ms)
+ GET / 200 in 49ms (compile: 9ms, render: 40ms)
+ GET / 200 in 81ms (compile: 21ms, render: 60ms)
+ GET /sitemap.xml 200 in 676ms (compile: 600ms, render: 76ms)
+ GET /pro-services 200 in 185ms (compile: 83ms, render: 102ms)
+ GET /pro-services/ai-powered-business-solutions 200 in 80ms (compile: 7ms, render: 73ms)

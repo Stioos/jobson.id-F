@@ -1,0 +1,1053 @@
+     1→// ==================== TYPES ====================
+     2→
+     3→export interface ServiceItem {
+     4→  id: string;
+     5→  name: string;
+     6→  slug: string;
+     7→  shortDesc: string;
+     8→  icon: string;
+     9→  color: string;
+    10→}
+    11→
+    12→export interface ServiceCategory {
+    13→  slug: string;
+    14→  name: string;
+    15→  icon: string;
+    16→  color: string;
+    17→  gradientFrom: string;
+    18→  gradientTo: string;
+    19→  description: string;
+    20→  services: ServiceItem[];
+    21→  keyBenefits: { icon: string; title: string; desc: string }[];
+    22→  industries: string[];
+    23→  processSteps: { step: number; title: string; desc: string }[];
+    24→  techStack: string[];
+    25→  stats: { value: string; label: string }[];
+    26→  faqs: { q: string; a: string }[];
+    27→  testimonials: { name: string; role: string; company: string; text: string }[];
+    28→}
+    29→
+    30→// ==================== DATA ====================
+    31→
+    32→export const serviceCategories: ServiceCategory[] = [
+    33→  // ─── 1. AI-Powered Business Solutions ─────────────────────────────────
+    34→  {
+    35→    slug: 'ai-powered-business-solutions',
+    36→    name: 'AI-Powered Business Solutions',
+    37→    icon: 'Brain',
+    38→    color: '#0099FF',
+    39→    gradientFrom: '#0099FF',
+    40→    gradientTo: '#0055CC',
+    41→    description:
+    42→      'Transform your business operations with intelligent AI systems that automate workflows, enhance customer engagement, and deliver actionable insights across every department.',
+    43→    services: [
+    44→      {
+    45→        id: 'cat1-svc1',
+    46→        name: 'AI Business Process Automation',
+    47→        slug: 'ai-business-process-automation',
+    48→        shortDesc:
+    49→          'Automate repetitive business processes with intelligent AI workflows that reduce manual effort, minimize errors, and accelerate operations across your organization.',
+    50→        icon: 'Workflow',
+    51→        color: '#0099FF',
+    52→      },
+    53→      {
+    54→        id: 'cat1-svc2',
+    55→        name: 'AI Customer Support Solutions',
+    56→        slug: 'ai-customer-support-solutions',
+    57→        shortDesc:
+    58→          'Deploy AI-powered support systems that handle customer queries 24/7 with natural conversations, intelligent routing, and sentiment-aware responses.',
+    59→        icon: 'Headphones',
+    60→        color: '#0099FF',
+    61→      },
+    62→      {
+    63→        id: 'cat1-svc3',
+    64→        name: 'AI Document Intelligence',
+    65→        slug: 'ai-document-intelligence',
+    66→        shortDesc:
+    67→          'Extract, classify, and process information from documents at scale using advanced OCR, NLP, and machine learning for intelligent document management.',
+    68→        icon: 'FileSearch',
+    69→        color: '#0099FF',
+    70→      },
+    71→      {
+    72→        id: 'cat1-svc4',
+    73→        name: 'AI Knowledge Management',
+    74→        slug: 'ai-knowledge-management',
+    75→        shortDesc:
+    76→          'Build intelligent knowledge bases that automatically organize, retrieve, and recommend information to empower your teams with instant expertise.',
+    77→        icon: 'BookOpen',
+    78→        color: '#0099FF',
+    79→      },
+    80→      {
+    81→        id: 'cat1-svc5',
+    82→        name: 'AI Voice & Chat Assistants',
+    83→        slug: 'ai-voice-chat-assistants',
+    84→        shortDesc:
+    85→          'Create conversational AI assistants for voice and text that understand context, handle complex queries, and integrate seamlessly with your existing systems.',
+    86→        icon: 'Mic',
+    87→        color: '#0099FF',
+    88→      },
+    89→      {
+    90→        id: 'cat1-svc6',
+    91→        name: 'Enterprise AI Integration',
+    92→        slug: 'enterprise-ai-integration',
+    93→        shortDesc:
+    94→          'Seamlessly integrate AI capabilities into your existing enterprise systems, ERP, CRM, and workflows to unlock intelligent automation at scale.',
+    95→        icon: 'Plug',
+    96→        color: '#0099FF',
+    97→      },
+    98→    ],
+    99→    keyBenefits: [
+   100→      { icon: 'Zap', title: '40% Faster Operations', desc: 'AI-powered process automation eliminates manual bottlenecks, reducing cycle times across invoicing, approvals, and reporting by up to 40%.' },
+   101→      { icon: 'Brain', title: 'Intelligent Decision Making', desc: 'Real-time AI insights surface patterns in your business data that human teams miss, enabling data-driven decisions at every organizational level.' },
+   102→      { icon: 'Clock', title: '24/7 AI Availability', desc: 'AI assistants and support systems operate round the clock without fatigue, ensuring consistent service quality and instant responses across all time zones.' },
+   103→      { icon: 'DollarSign', title: '60% Cost Reduction', desc: 'Automating document processing, customer support, and knowledge retrieval slashes operational costs while improving accuracy and throughput.' },
+   104→      { icon: 'Shield', title: 'Enterprise-Grade Security', desc: 'All AI solutions are deployed with SOC 2 compliant architectures, end-to-end encryption, and role-based access controls for your sensitive business data.' },
+   105→      { icon: 'RefreshCw', title: 'Continuous Learning', desc: 'Our AI systems continuously learn from interactions and feedback, improving accuracy and relevance over time without manual retraining cycles.' },
+   106→    ],
+   107→    industries: ['Banking & Finance', 'Healthcare & Life Sciences', 'Insurance & Risk Management', 'Legal & Compliance', 'Government & Public Sector', 'Telecommunications'],
+   108→    processSteps: [
+   109→      { step: 1, title: 'Discovery & Audit', desc: 'We analyze your current business processes, identify automation opportunities, and map integration points with existing enterprise systems.' },
+   110→      { step: 2, title: 'AI Solution Design', desc: 'Our team architects custom AI workflows, selects the right models, and designs conversational flows tailored to your specific business logic.' },
+   111→      { step: 3, title: 'Build & Integrate', desc: 'We develop, train, and deploy AI solutions with seamless integration into your ERP, CRM, and communication platforms with zero downtime.' },
+   112→      { step: 4, title: 'Monitor & Optimize', desc: 'Post-launch, we continuously monitor AI performance, retrain models on new data, and optimize workflows for maximum business impact.' },
+   113→    ],
+   114→    techStack: ['OpenAI GPT-4', 'Azure Cognitive Services', 'LangChain', 'Pinecone', 'Elasticsearch', 'Python', 'TensorFlow', 'FastAPI'],
+   115→    stats: [
+   116→      { value: '200+', label: 'AI Solutions Deployed' },
+   117→      { value: '40%', label: 'Average Cost Savings' },
+   118→      { value: '99.2%', label: 'AI Accuracy Rate' },
+   119→      { value: '3x', label: 'Faster Processing' },
+   120→    ],
+   121→    faqs: [
+   122→      { q: 'How long does it take to implement an AI business solution?', a: 'Implementation timelines vary from 4-12 weeks depending on complexity. Simple AI chatbots and document processors can be deployed in 4-6 weeks, while enterprise-wide AI integrations with multiple system touchpoints typically take 8-12 weeks including testing and training.' },
+   123→      { q: 'Can AI solutions integrate with our existing ERP and CRM systems?', a: 'Absolutely. We have extensive experience integrating AI with SAP, Oracle, Salesforce, Microsoft Dynamics, and custom enterprise systems. Our integration approach uses REST APIs, webhooks, and middleware to ensure seamless data flow without disrupting existing workflows.' },
+   124→      { q: 'How do you handle data privacy and security in AI solutions?', a: 'All our AI solutions follow SOC 2 Type II compliance standards. We implement data encryption at rest and in transit, use private cloud or on-premise deployments for sensitive data, and ensure no customer data is used to train public models. We also provide audit trails and access controls.' },
+   125→      { q: 'What kind of ROI can we expect from AI business automation?', a: 'Our clients typically see 30-60% reduction in operational costs within the first 6 months. Document processing automation alone saves an average of 15 hours per employee per week. Customer support AI reduces ticket resolution time by 70% while improving CSAT scores by 25-35%.' },
+   126→    ],
+   127→    testimonials: [
+   128→      { name: 'Rajesh Mehta', role: 'VP of Operations', company: 'FinServe Global', text: 'JOBSONN\'s AI document intelligence transformed our loan processing pipeline. What used to take our team 3 days now completes in under 4 hours with higher accuracy. The ROI was visible within the first quarter.' },
+   129→      { name: 'Sarah Chen', role: 'CTO', company: 'MedTech Solutions', text: 'The AI knowledge management system they built for our medical device support team has been a game-changer. Support agents now find answers 80% faster, and patient satisfaction scores jumped by 32 points.' },
+   130→      { name: 'Arun Patel', role: 'Director of Digital', company: 'InsureRight Inc.', text: 'Their AI customer support solution handles 73% of our queries without human intervention. The sentiment-aware routing ensures complex claims go to the right specialists instantly. Truly enterprise-grade AI.' },
+   131→    ],
+   132→  },
+   133→
+   134→  // ─── 2. Digital Sales & AI Marketing ─────────────────────────────────
+   135→  {
+   136→    slug: 'digital-sales-ai-marketing',
+   137→    name: 'Digital Sales & AI Marketing',
+   138→    icon: 'TrendingUp',
+   139→    color: '#7C3AED',
+   140→    gradientFrom: '#7C3AED',
+   141→    gradientTo: '#5B21B6',
+   142→    description:
+   143→      'Leverage AI-driven marketing and sales automation to reach the right audience, optimize conversions, and accelerate revenue growth across all digital channels.',
+   144→    services: [
+   145→      {
+   146→        id: 'cat2-svc1',
+   147→        name: 'AI Digital Marketing',
+   148→        slug: 'ai-digital-marketing',
+   149→        shortDesc:
+   150→          'AI-powered digital marketing strategies that use predictive analytics, audience segmentation, and automated campaign optimization for maximum ROI.',
+   151→        icon: 'Target',
+   152→        color: '#7C3AED',
+   153→      },
+   154→      {
+   155→        id: 'cat2-svc2',
+   156→        name: 'SEO & GEO AI Content Marketing',
+   157→        slug: 'seo-geo-ai-content-marketing',
+   158→        shortDesc:
+   159→          'Generate and optimize content with AI for search engines and generative engine optimization (GEO) to dominate organic rankings and AI search results.',
+   160→        icon: 'Search',
+   161→        color: '#7C3AED',
+   162→      },
+   163→      {
+   164→        id: 'cat2-svc3',
+   165→        name: 'Search Engine & Social Media Marketing',
+   166→        slug: 'search-engine-social-media-marketing',
+   167→        shortDesc:
+   168→          'Comprehensive SEM and social media marketing with AI-driven ad targeting, A/B testing, and cross-platform campaign management for measurable growth.',
+   169→        icon: 'Megaphone',
+   170→        color: '#7C3AED',
+   171→      },
+   172→      {
+   173→        id: 'cat2-svc4',
+   174→        name: 'AI Social Media Automation',
+   175→        slug: 'ai-social-media-automation',
+   176→        shortDesc:
+   177→          'Automate social media posting, engagement, and analytics with AI tools that schedule content, respond to interactions, and track performance in real-time.',
+   178→        icon: 'Share2',
+   179→        color: '#7C3AED',
+   180→      },
+   181→      {
+   182→        id: 'cat2-svc5',
+   183→        name: 'AI Sales Funnel Automation',
+   184→        slug: 'ai-sales-funnel-automation',
+   185→        shortDesc:
+   186→          'Build intelligent sales funnels that automatically qualify leads, nurture prospects, and convert opportunities using AI-driven scoring and personalization.',
+   187→        icon: 'Filter',
+   188→        color: '#7C3AED',
+   189→      },
+   190→      {
+   191→        id: 'cat2-svc6',
+   192→        name: 'CRM & Lead Automation',
+   193→        slug: 'crm-lead-automation',
+   194→        shortDesc:
+   195→          'Automate CRM workflows and lead management with AI-powered scoring, routing, follow-ups, and pipeline analytics to close deals faster.',
+   196→        icon: 'Users',
+   197→        color: '#7C3AED',
+   198→      },
+   199→      {
+   200→        id: 'cat2-svc7',
+   201→        name: 'AI Market Research & Customer Intelligence',
+   202→        slug: 'ai-market-research-customer-intelligence',
+   203→        shortDesc:
+   204→          'Market research, competitor intelligence, ICP, buyer personas, and customer insights powered by AI for data-driven strategic decisions.',
+   205→        icon: 'BarChart3',
+   206→        color: '#7C3AED',
+   207→      },
+   208→      {
+   209→        id: 'cat2-svc8',
+   210→        name: 'AI Lead Generation & Prospecting',
+   211→        slug: 'ai-lead-generation-prospecting',
+   212→        shortDesc:
+   213→          'B2B prospect discovery, target-account research, AI-powered lead lists, and prospect qualification for building high-quality pipelines.',
+   214→        icon: 'Target',
+   215→        color: '#7C3AED',
+   216→      },
+   217→      {
+   218→        id: 'cat2-svc9',
+   219→        name: 'AI Outbound Sales & Outreach',
+   220→        slug: 'ai-outbound-sales-outreach',
+   221→        shortDesc:
+   222→          'Personalized LinkedIn outreach, cold outreach, AI sales messaging, and multi-channel prospect engagement for pipeline acceleration.',
+   223→        icon: 'Send',
+   224→        color: '#7C3AED',
+   225→      },
+   226→      {
+   227→        id: 'cat2-svc10',
+   228→        name: 'AI Account-Based Marketing (ABM)',
+   229→        slug: 'ai-account-based-marketing',
+   230→        shortDesc:
+   231→          'Target-account campaigns, account intelligence, personalized marketing, and sales alignment for enterprise account growth.',
+   232→        icon: 'Layers',
+   233→        color: '#7C3AED',
+   234→      },
+   235→      {
+   236→        id: 'cat2-svc11',
+   237→        name: 'AI Paid Advertising & Campaign Strategy',
+   238→        slug: 'ai-paid-advertising-campaign-strategy',
+   239→        shortDesc:
+   240→          'Google/Meta/LinkedIn advertising, AI campaign planning, audience targeting, and optimization for maximum ROAS across all platforms.',
+   241→        icon: 'Megaphone',
+   242→        color: '#7C3AED',
+   243→      },
+   244→      {
+   245→        id: 'cat2-svc12',
+   246→        name: 'AI Sales Enablement & Revenue Intelligence',
+   247→        slug: 'ai-sales-enablement-revenue-intelligence',
+   248→        shortDesc:
+   249→          'Sales playbooks, AI pitch materials, competitive intelligence, call insights, and revenue reporting for sales team performance.',
+   250→        icon: 'TrendingUp',
+   251→        color: '#7C3AED',
+   252→      },
+   253→    ],
+   254→    keyBenefits: [
+   255→      { icon: 'Target', title: 'Precision Audience Targeting', desc: 'AI analyzes behavioral data, purchase patterns, and engagement signals to identify and target high-converting audience segments with surgical precision.' },
+   256→      { icon: 'ArrowUpRight', title: '3x Higher Conversion Rates', desc: 'AI-optimized landing pages, personalized email sequences, and smart A/B testing consistently deliver 2-3x improvement in conversion rates over traditional campaigns.' },
+   257→      { icon: 'DollarSign', title: '45% Lower Acquisition Cost', desc: 'Intelligent bid management, audience suppression, and budget allocation algorithms reduce customer acquisition costs by optimizing every dollar of ad spend.' },
+   258→      { icon: 'BarChart3', title: 'Real-Time Performance Analytics', desc: 'Live dashboards track every campaign metric, attribution model, and revenue impact so you can pivot strategies instantly based on real market data.' },
+   259→      { icon: 'RefreshCw', title: 'Automated Content at Scale', desc: 'Generate SEO-optimized blog posts, social content, ad copy, and email sequences at scale using AI while maintaining your brand voice and messaging consistency.' },
+   260→      { icon: 'Users', title: 'Intelligent Lead Scoring', desc: 'AI models score and prioritize leads based on engagement signals, firmographic data, and buying intent, ensuring your sales team focuses on the hottest opportunities.' },
+   261→    ],
+   262→    industries: ['E-Commerce & Retail', 'SaaS & Technology', 'Real Estate', 'Education & EdTech', 'Healthcare & Wellness', 'B2B & Professional Services'],
+   263→    processSteps: [
+   264→      { step: 1, title: 'Market & Competitor Analysis', desc: 'We audit your current marketing performance, analyze competitor strategies, and identify untapped channels and audience segments for growth.' },
+   265→      { step: 2, title: 'AI Strategy & Funnel Design', desc: 'We design AI-powered marketing funnels, content calendars, and automation workflows tailored to your buyer personas and revenue targets.' },
+   266→      { step: 3, title: 'Campaign Launch & Optimization', desc: 'We launch campaigns across channels with AI-driven targeting, then continuously optimize bids, creatives, and messaging based on real-time performance data.' },
+   267→      { step: 4, title: 'Scale & Report', desc: 'We scale winning campaigns, refine attribution models, and deliver comprehensive ROI reports with actionable insights for sustained growth.' },
+   268→    ],
+   269→    techStack: ['Google Ads AI', 'Meta Business Suite', 'HubSpot', 'Semrush', 'ChatGPT API', 'Segment', 'Looker', 'React Email'],
+   270→    stats: [
+   271→      { value: '350+', label: 'Campaigns Managed' },
+   272→      { value: '3.2x', label: 'Average ROAS' },
+   273→      { value: '45%', label: 'Lower CAC' },
+   274→      { value: '10M+', label: 'Leads Generated' },
+   275→    ],
+   276→    faqs: [
+   277→      { q: 'How does AI improve our digital marketing ROI compared to traditional approaches?', a: 'AI analyzes thousands of data points in real-time to optimize ad targeting, bid amounts, content timing, and channel allocation. Our clients see an average 3.2x ROAS compared to 1.5-2x with traditional methods. AI also enables predictive audience modeling that identifies high-value customers before competitors.' },
+   278→      { q: 'What is GEO (Generative Engine Optimization) and why does it matter?', a: 'GEO optimizes your content for AI-powered search engines like ChatGPT, Perplexity, and Google SGE. As more users get answers from AI summaries rather than clicking links, GEO ensures your brand appears in AI-generated responses. We optimize content structure, authority signals, and entity relationships for maximum AI visibility.' },
+   279→      { q: 'Can you manage our multi-channel campaigns across different platforms?', a: 'Yes. We manage campaigns across Google Ads, Meta (Facebook/Instagram), LinkedIn, X (Twitter), TikTok, and programmatic display. Our AI platform unifies audience data across channels, enabling cross-platform attribution and automated budget reallocation to the best-performing channels.' },
+   280→      { q: 'How do you ensure AI-generated content aligns with our brand voice?', a: 'We start by training AI models on your existing high-performing content, brand guidelines, and style guides. Every piece of AI-generated content goes through human editorial review before publication. We also maintain a brand voice scorecard that measures consistency across all generated content.' },
+   281→    ],
+   282→    testimonials: [
+   283→      { name: 'Priya Sharma', role: 'CMO', company: 'ShopVista E-Commerce', text: 'JOBSONN\'s AI marketing engine took our ROAS from 1.8x to 4.2x in just 5 months. Their predictive audience targeting found customer segments we never knew existed. Revenue grew 180% year-over-year.' },
+   284→      { name: 'Marcus Johnson', role: 'VP of Sales', company: 'CloudStack Pro', text: 'The AI sales funnel they built qualifies and nurtures leads better than our best SDRs. Our sales team now only talks to prospects who are ready to buy. Close rates improved by 65% and sales cycle dropped from 45 to 18 days.' },
+   285→      { name: 'Lisa Wang', role: 'Founder', company: 'EduBright Academy', text: 'Their GEO strategy got us featured in ChatGPT responses for our top 12 keywords. Organic traffic from AI search engines grew 400% in 6 months. This is the future of SEO and JOBSONN nailed it.' },
+   286→    ],
+   287→  },
+   288→
+   289→  // ─── 3. AI Agentic & Automation ───────────────────────────────────────
+   290→  {
+   291→    slug: 'ai-agentic-automation',
+   292→    name: 'AI Agentic & Automation',
+   293→    icon: 'Bot',
+   294→    color: '#10B981',
+   295→    gradientFrom: '#10B981',
+   296→    gradientTo: '#059669',
+   297→    description:
+   298→      'Build autonomous AI agents and intelligent automation systems that handle complex tasks, make decisions, and operate independently to transform your operations.',
+   299→    services: [
+   300→      {
+   301→        id: 'cat3-svc1',
+   302→        name: 'Custom AI Agents',
+   303→        slug: 'custom-ai-agents',
+   304→        shortDesc:
+   305→          'Design and deploy purpose-built AI agents tailored to your business needs — from research assistants to decision-support systems that learn and adapt.',
+   306→        icon: 'Bot',
+   307→        color: '#10B981',
+   308→      },
+   309→      {
+   310→        id: 'cat3-svc2',
+   311→        name: 'Multi-Agent Systems',
+   312→        slug: 'multi-agent-systems',
+   313→        shortDesc:
+   314→          'Architect collaborative AI agent networks where specialized agents work together, share knowledge, and coordinate to solve complex, multi-step problems.',
+   315→        icon: 'Network',
+   316→        color: '#10B981',
+   317→      },
+   318→      {
+   319→        id: 'cat3-svc3',
+   320→        name: 'AI Workflow Automation',
+   321→        slug: 'ai-workflow-automation',
+   322→        shortDesc:
+   323→          'Automate end-to-end business workflows with AI that orchestrates tasks, handles exceptions, and continuously optimizes process efficiency.',
+   324→        icon: 'Workflow',
+   325→        color: '#10B981',
+   326→      },
+   327→      {
+   328→        id: 'cat3-svc4',
+   329→        name: 'AI Manufacturing & Process Automation',
+   330→        slug: 'ai-manufacturing-process-automation',
+   331→        shortDesc:
+   332→          'Implement AI-driven manufacturing automation with predictive maintenance, quality control, production optimization, and smart factory solutions.',
+   333→        icon: 'Factory',
+   334→        color: '#10B981',
+   335→      },
+   336→      {
+   337→        id: 'cat3-svc5',
+   338→        name: 'AI Recruitment Automation',
+   339→        slug: 'ai-recruitment-automation',
+   340→        shortDesc:
+   341→          'Streamline hiring with AI-powered resume screening, candidate matching, interview scheduling, and onboarding automation for faster talent acquisition.',
+   342→        icon: 'UserCheck',
+   343→        color: '#10B981',
+   344→      },
+   345→      {
+   346→        id: 'cat3-svc6',
+   347→        name: 'AI Operations Automation',
+   348→        slug: 'ai-operations-automation',
+   349→        shortDesc:
+   350→          'Automate IT and business operations with AIOps — intelligent monitoring, incident resolution, capacity planning, and process optimization.',
+   351→        icon: 'Cog',
+   352→        color: '#10B981',
+   353→      },
+   354→    ],
+   355→    keyBenefits: [
+   356→      { icon: 'Bot', title: 'Autonomous Task Execution', desc: 'AI agents independently handle complex, multi-step tasks without human intervention — from data research and report generation to procurement and scheduling.' },
+   357→      { icon: 'Zap', title: '90% Task Automation Rate', desc: 'Our AI agents successfully complete 90% of assigned tasks autonomously, only escalating edge cases that truly require human judgment and creativity.' },
+   358→      { icon: 'Network', title: 'Multi-Agent Collaboration', desc: 'Specialized agents work together like a virtual team — a research agent gathers data, an analysis agent processes it, and a decision agent recommends actions.' },
+   359→      { icon: 'Clock', title: 'Instant Scalability', desc: 'Deploy additional AI agents in minutes to handle demand spikes. Unlike human teams, AI agents scale linearly without hiring, training, or management overhead.' },
+   360→      { icon: 'Cpu', title: 'Continuous Improvement', desc: 'Agents learn from every interaction, automatically refining their strategies, improving accuracy, and expanding their capability scope over time through self-supervised learning.' },
+   361→      { icon: 'Shield', title: 'Guardrails & Compliance', desc: 'Every agent operates within defined guardrails — approval workflows, compliance checks, and audit logging ensure AI actions align with your business policies.' },
+   362→    ],
+   363→    industries: ['Manufacturing & Industrial', 'Logistics & Supply Chain', 'Financial Services', 'Human Resources & Staffing', 'IT & Technology Operations', 'Healthcare Administration'],
+   364→    processSteps: [
+   365→      { step: 1, title: 'Process Mapping', desc: 'We document and analyze your existing workflows, identify automation candidates, and define success metrics for each AI agent deployment.' },
+   366→      { step: 2, title: 'Agent Architecture', desc: 'We design the agent system — single agents for simple tasks or multi-agent orchestration for complex workflows — with clear decision boundaries and escalation paths.' },
+   367→      { step: 3, title: 'Development & Training', desc: 'We build and train agents on your domain data, integrate with your tools and APIs, and implement safety guardrails and human-in-the-loop controls.' },
+   368→      { step: 4, title: 'Deploy & Evolve', desc: 'Agents go live with monitoring dashboards. We track performance, gather feedback, and iteratively improve agent capabilities based on real-world results.' },
+   369→    ],
+   370→    techStack: ['LangGraph', 'CrewAI', 'AutoGen', 'OpenAI Agents SDK', 'n8n', 'Python', 'Redis', 'Docker'],
+   371→    stats: [
+   372→      { value: '85+', label: 'AI Agents Deployed' },
+   373→      { value: '90%', label: 'Task Automation Rate' },
+   374→      { value: '75%', label: 'Time Saved' },
+   375→      { value: '5x', label: 'Productivity Gain' },
+   376→    ],
+   377→    faqs: [
+   378→      { q: 'What is the difference between AI automation and AI agents?', a: 'Traditional AI automation follows pre-defined rules and triggers (like if-this-then-that). AI agents are autonomous — they understand goals, plan their approach, use tools, make decisions, and adapt when conditions change. Agents can handle novel situations that rule-based automation cannot.' },
+   379→      { q: 'How do multi-agent systems work together?', a: 'Multi-agent systems use orchestration frameworks like LangGraph or CrewAI. Each agent has a specialized role — for example, a research agent gathers data, an analyst processes it, a writer creates reports, and a reviewer checks quality. They communicate through shared memory and message passing, coordinating like a virtual team.' },
+   380→      { q: 'Can AI agents make decisions autonomously without human oversight?', a: 'Agents can operate autonomously within defined guardrails. We implement configurable autonomy levels — from fully supervised (every action requires approval) to fully autonomous (only escalates exceptions). Most clients start with supervised mode and gradually increase autonomy as confidence builds.' },
+   381→      { q: 'What happens when an AI agent encounters a situation it cannot handle?', a: 'Agents are designed with graceful degradation. When confidence is low or a situation falls outside their training, they escalate to human operators with full context about what they tried and why. This human-in-the-loop approach ensures nothing falls through the cracks while maintaining high automation rates.' },
+   382→    ],
+   383→    testimonials: [
+   384→      { name: 'David Kim', role: 'COO', company: 'SteelWorks Manufacturing', text: 'The multi-agent system JOBSONN built for our procurement process is remarkable. One agent negotiates with suppliers, another checks compliance, and a third handles PO generation. Our procurement cycle went from 2 weeks to 2 days.' },
+   385→      { name: 'Anita Desai', role: 'CHRO', company: 'TalentFirst Solutions', text: 'Their AI recruitment agents screen 5,000+ applications daily, match candidates to roles with 92% accuracy, and schedule interviews automatically. Our time-to-hire dropped from 34 days to 8 days. It is like having 20 extra recruiters.' },
+   386→      { name: 'James Morrison', role: 'VP of IT Ops', company: 'NetScale Systems', text: 'AIOps agents now handle 85% of our L1 and L2 incidents autonomously. Mean time to resolution dropped from 4 hours to 12 minutes. The agents even predict and prevent outages before they impact users.' },
+   387→    ],
+   388→  },
+   389→
+   390→  // ─── 4. Open Source Ready-to-Use Deployment ──────────────────────────
+   391→  {
+   392→    slug: 'open-source-deployment',
+   393→    name: 'Open Source Ready-to-Use Deployment',
+   394→    icon: 'Box',
+   395→    color: '#F59E0B',
+   396→    gradientFrom: '#F59E0B',
+   397→    gradientTo: '#D97706',
+   398→    description:
+   399→      'Deploy production-ready open source platforms and tools customized for your infrastructure — from AI platforms and ERPs to DevOps toolchains and private clouds.',
+   400→    services: [
+   401→      {
+   402→        id: 'cat4-svc1',
+   403→        name: 'Self-Hosted AI Platform Deployment',
+   404→        slug: 'self-hosted-ai-platform-deployment',
+   405→        shortDesc:
+   406→          'Deploy and configure self-hosted AI platforms like Ollama, Hugging Face, LocalAI, and LlamaIndex on your infrastructure for complete data privacy and control.',
+   407→        icon: 'Server',
+   408→        color: '#F59E0B',
+   409→      },
+   410→      {
+   411→        id: 'cat4-svc2',
+   412→        name: 'ERP & Portal Deployment',
+   413→        slug: 'erp-portal-deployment',
+   414→        shortDesc:
+   415→          'Deploy and customize open source ERP systems (Odoo, ERPNext) and enterprise portals tailored to your business processes and organizational needs.',
+   416→        icon: 'LayoutDashboard',
+   417→        color: '#F59E0B',
+   418→      },
+   419→      {
+   420→        id: 'cat4-svc3',
+   421→        name: 'Custom Apps & Platforms Deployment',
+   422→        slug: 'custom-apps-platforms-deployment',
+   423→        shortDesc:
+   424→          'Deploy and configure custom applications built on open source frameworks — from CMS platforms and e-commerce to learning management systems.',
+   425→        icon: 'AppWindow',
+   426→        color: '#F59E0B',
+   427→      },
+   428→      {
+   429→        id: 'cat4-svc4',
+   430→        name: 'DevOps Platform Deployment',
+   431→        slug: 'devops-platform-deployment',
+   432→        shortDesc:
+   433→          'Set up comprehensive DevOps platforms with GitLab, Jenkins, ArgoCD, and Terraform for automated build, test, and deployment pipelines.',
+   434→        icon: 'GitBranch',
+   435→        color: '#F59E0B',
+   436→      },
+   437→      {
+   438→        id: 'cat4-svc5',
+   439→        name: 'Monitoring & Observability',
+   440→        slug: 'monitoring-observability',
+   441→        shortDesc:
+   442→          'Deploy monitoring and observability stacks with Prometheus, Grafana, ELK, and Jaeger for full visibility into application performance and system health.',
+   443→        icon: 'Activity',
+   444→        color: '#F59E0B',
+   445→      },
+   446→      {
+   447→        id: 'cat4-svc6',
+   448→        name: 'Private Cloud Deployment',
+   449→        slug: 'private-cloud-deployment',
+   450→        shortDesc:
+   451→          'Build and deploy private cloud infrastructure using OpenStack, Proxmox, or Kubernetes-based solutions for secure, scalable, self-managed cloud computing.',
+   452→        icon: 'Cloud',
+   453→        color: '#F59E0B',
+   454→      },
+   455→    ],
+   456→    keyBenefits: [
+   457→      { icon: 'DollarSign', title: '70% Cost Savings', desc: 'Open source platforms eliminate expensive licensing fees. Deploy enterprise-grade ERP, AI, and DevOps tools at a fraction of proprietary software costs.' },
+   458→      { icon: 'Lock', title: 'Complete Data Sovereignty', desc: 'Self-hosted deployments keep all data within your infrastructure. No third-party data sharing, no vendor lock-in, and full compliance with data residency requirements.' },
+   459→      { icon: 'Settings', title: 'Full Customization Freedom', desc: 'Unlike SaaS products, open source platforms give you complete access to source code for unlimited customization, custom workflows, and branded experiences.' },
+   460→      { icon: 'Shield', title: 'Proven Enterprise Reliability', desc: 'Platforms like Odoo, GitLab, Kubernetes, and Grafana power thousands of enterprises worldwide. We deploy them with production-grade hardening and high availability.' },
+   461→      { icon: 'GitBranch', title: 'No Vendor Lock-In', desc: 'Open source means you own your stack. Migrate, extend, or modify any component without depending on a single vendor\'s roadmap or pricing decisions.' },
+   462→      { icon: 'Zap', title: 'Rapid Deployment', desc: 'Our pre-configured deployment templates and automation scripts get open source platforms running in days, not months. We handle security patching, backups, and updates.' },
+   463→    ],
+   464→    industries: ['Startups & SMEs', 'Government & Defense', 'Healthcare & HIPAA', 'Education & Research', 'Financial Services', 'Manufacturing & Industrial'],
+   465→    processSteps: [
+   466→      { step: 1, title: 'Requirements & Platform Selection', desc: 'We assess your needs, evaluate open source alternatives, and recommend the best platforms based on features, community support, scalability, and your team\'s skills.' },
+   467→      { step: 2, title: 'Infrastructure Planning', desc: 'We design the deployment architecture — single server, HA cluster, or Kubernetes — considering your performance, security, and budget requirements.' },
+   468→      { step: 3, title: 'Deploy & Configure', desc: 'We deploy platforms using infrastructure-as-code, configure security settings, integrate with your existing systems, and migrate data from legacy tools.' },
+   469→      { step: 4, title: 'Train & Handover', desc: 'We train your team on platform administration, create runbooks, set up monitoring alerts, and provide ongoing support for updates and troubleshooting.' },
+   470→    ],
+   471→    techStack: ['Docker & Kubernetes', 'Terraform', 'Odoo / ERPNext', 'GitLab CE', 'Prometheus & Grafana', 'Ollama / LocalAI', 'PostgreSQL', 'Nginx'],
+   472→    stats: [
+   473→      { value: '150+', label: 'Deployments Completed' },
+   474→      { value: '70%', label: 'Cost Savings' },
+   475→      { value: '99.9%', label: 'Uptime SLA' },
+   476→      { value: '48hrs', label: 'Avg Deployment Time' },
+   477→    ],
+   478→    faqs: [
+   479→      { q: 'Are open source platforms secure enough for enterprise use?', a: 'Absolutely. Open source platforms like Kubernetes, GitLab, and Odoo are used by Fortune 500 companies. The open source model means thousands of developers review code for vulnerabilities. We add enterprise-grade security hardening including TLS encryption, RBAC, network policies, and regular security patching.' },
+   480→      { q: 'Can we migrate from a proprietary SaaS to an open source alternative?', a: 'Yes, we specialize in SaaS-to-open-source migrations. We handle data export, schema mapping, data transformation, and validation. We have migrated clients from Salesforce to Odoo, Jira to GitLab, Datadog to Prometheus/Grafana, and many more with zero data loss.' },
+   481→      { q: 'What ongoing support and maintenance do you provide for open source deployments?', a: 'We provide tiered support plans including 24/7 monitoring, security patching, performance optimization, backup management, and disaster recovery. Our team handles upgrades, compatibility issues, and provides a dedicated Slack channel for your team.' },
+   482→      { q: 'How do self-hosted AI platforms compare to cloud AI services like OpenAI?', a: 'Self-hosted AI platforms like Ollama and LocalAI give you complete data privacy, no per-API-call costs, and unlimited usage. While they may require more initial setup, the long-term cost savings are massive for high-volume use cases. We can also deploy fine-tuned models that outperform generic APIs for your specific domain.' },
+   483→    ],
+   484→    testimonials: [
+   485→      { name: 'Ramesh Gupta', role: 'CTO', company: 'GovTech Solutions', text: 'JOBSONN deployed a complete open source DevOps stack — GitLab, ArgoCD, Prometheus, Grafana — in under a week. We saved $180K annually in licensing fees and got better features than our previous proprietary tools.' },
+   486→      { name: 'Emily Foster', role: 'IT Director', company: 'MedCare Clinics', text: 'The Odoo ERP they deployed handles our 12 clinics\' operations perfectly. Custom modules for patient management and insurance billing were built in weeks. HIPAA compliance was built in from day one.' },
+   487→      { name: 'Ahmed Khan', role: 'Founder', company: 'LearnPath Academy', text: 'Their self-hosted AI platform lets us run LLMs on our own servers with full student data privacy. We process 50K+ student queries monthly with zero data leaving our infrastructure. Incredible value.' },
+   488→    ],
+   489→  },
+   490→
+   491→  // ─── 5. Custom Software Development ──────────────────────────────────
+   492→  {
+   493→    slug: 'custom-software-development',
+   494→    name: 'Custom Software Development',
+   495→    icon: 'Code2',
+   496→    color: '#EF4444',
+   497→    gradientFrom: '#EF4444',
+   498→    gradientTo: '#DC2626',
+   499→    description:
+   500→      'From enterprise web applications to mobile apps and SaaS platforms, we build robust, scalable software solutions tailored to your unique business requirements.',
+   501→    services: [
+   502→      {
+   503→        id: 'cat5-svc1',
+   504→        name: 'Enterprise Web Applications',
+   505→        slug: 'enterprise-web-applications',
+   506→        shortDesc:
+   507→          'Build scalable, secure enterprise web applications with modern frameworks like React, Next.js, and Node.js that handle complex business logic at scale.',
+   508→        icon: 'Globe',
+   509→        color: '#EF4444',
+   510→      },
+   511→      {
+   512→        id: 'cat5-svc2',
+   513→        name: 'SaaS Development',
+   514→        slug: 'saas-development',
+   515→        shortDesc:
+   516→          'Design and develop multi-tenant SaaS platforms with subscription management, user roles, analytics dashboards, and scalable cloud architecture.',
+   517→        icon: 'Layers',
+   518→        color: '#EF4444',
+   519→      },
+   520→      {
+   521→        id: 'cat5-svc3',
+   522→        name: 'Mobile Apps',
+   523→        slug: 'mobile-apps',
+   524→        shortDesc:
+   525→          'Build native and cross-platform mobile apps for iOS and Android using React Native and Flutter with seamless backend integration and offline support.',
+   526→        icon: 'Smartphone',
+   527→        color: '#EF4444',
+   528→      },
+   529→      {
+   530→        id: 'cat5-svc4',
+   531→        name: 'ERP & CRM Development',
+   532→        slug: 'erp-crm-development',
+   533→        shortDesc:
+   534→          'Develop custom ERP and CRM systems that integrate finance, HR, supply chain, sales, and operations into a unified, intelligent business platform.',
+   535→        icon: 'LayoutDashboard',
+   536→        color: '#EF4444',
+   537→      },
+   538→      {
+   539→        id: 'cat5-svc5',
+   540→        name: 'API Development & Integration',
+   541→        slug: 'api-development-integration',
+   542→        shortDesc:
+   543→          'Design, develop, and integrate robust RESTful and GraphQL APIs that connect your systems, enable data flow, and power third-party integrations.',
+   544→        icon: 'Plug',
+   545→        color: '#EF4444',
+   546→      },
+   547→      {
+   548→        id: 'cat5-svc6',
+   549→        name: 'Legacy Modernization',
+   550→        slug: 'legacy-modernization',
+   551→        shortDesc:
+   552→          'Migrate and re-architect outdated monolithic applications into modern microservices with cloud-native technologies, containers, and CI/CD pipelines.',
+   553→        icon: 'RefreshCw',
+   554→        color: '#EF4444',
+   555→      },
+   556→    ],
+   557→    keyBenefits: [
+   558→      { icon: 'Code2', title: 'Tailored to Your Business', desc: 'Every line of code is written for your specific requirements. No forced workarounds, no unnecessary features — just a perfect-fit solution that maps to your workflows.' },
+   559→      { icon: 'Rocket', title: 'Faster Time to Market', desc: 'Our agile development methodology with 2-week sprints delivers working increments rapidly. MVP to production in 8-12 weeks for most enterprise applications.' },
+   560→      { icon: 'Layers', title: 'Scalable Architecture', desc: 'Microservices, horizontal scaling, and cloud-native patterns ensure your software handles growth from 100 to 10 million users without architectural rewrites.' },
+   561→      { icon: 'Shield', title: 'Security Built-In', desc: 'OWASP Top 10 compliance, SAST/DAST scanning, dependency auditing, and penetration testing are integrated into every sprint, not bolted on at the end.' },
+   562→      { icon: 'GitBranch', title: 'Clean Code & Documentation', desc: 'Every project follows SOLID principles, comprehensive API documentation, architecture decision records, and knowledge transfer sessions for your internal teams.' },
+   563→      { icon: 'Monitor', title: 'Production-Grade Quality', desc: '80%+ code coverage, load testing, chaos engineering, and comprehensive monitoring ensure your software performs reliably under real-world conditions.' },
+   564→    ],
+   565→    industries: ['Fintech & Banking', 'Healthcare & MedTech', 'Logistics & Transportation', 'E-Commerce & Marketplace', 'Education & E-Learning', 'Real Estate & PropTech'],
+   566→    processSteps: [
+   567→      { step: 1, title: 'Discovery & Architecture', desc: 'We conduct deep-dive workshops to understand your requirements, design system architecture, create wireframes, and define the technical roadmap with clear milestones.' },
+   568→      { step: 2, title: 'Agile Development Sprints', desc: 'We build in 2-week sprints with working demos, continuous integration, automated testing, and daily standups to keep you informed and in control of progress.' },
+   569→      { step: 3, title: 'Testing & QA', desc: 'Comprehensive testing including unit, integration, E2E, performance, security, and UAT ensures every release meets quality standards before reaching your users.' },
+   570→      { step: 4, title: 'Launch & Support', desc: 'We handle deployment, monitoring setup, performance optimization, and provide ongoing maintenance, bug fixes, and feature enhancements post-launch.' },
+   571→    ],
+   572→    techStack: ['React / Next.js', 'Node.js / NestJS', 'TypeScript', 'PostgreSQL', 'React Native / Flutter', 'AWS / Azure', 'GraphQL', 'Redis'],
+   573→    stats: [
+   574→      { value: '300+', label: 'Projects Delivered' },
+   575→      { value: '12wks', label: 'Avg Time to MVP' },
+   576→      { value: '98%', label: 'On-Time Delivery' },
+   577→      { value: '4.9/5', label: 'Client Rating' },
+   578→    ],
+   579→    faqs: [
+   580→      { q: 'What development methodology do you follow?', a: 'We follow Scrum/Agile with 2-week sprints. Each sprint includes planning, daily standups, a working demo, and retrospective. You get full visibility through tools like Jira or Linear, and can provide feedback at every sprint review. For fixed-scope projects, we also offer hybrid waterfall-agile approaches.' },
+   581→      { q: 'Do you provide dedicated development teams or project-based engagement?', a: 'Both. We offer dedicated team models where developers become an extension of your in-house team, and fixed-price project models with defined scope and timelines. Many clients start with a project and transition to a dedicated team for ongoing development and maintenance.' },
+   582→      { q: 'How do you handle project communication and collaboration?', a: 'Every project gets a dedicated PM, daily Slack/Teams communication, weekly progress reports, and sprint demos. We use shared repositories, Figma for design collaboration, and provide access to project management tools. You will never be in the dark about your project status.' },
+   583→      { q: 'What happens after the project is delivered? Do you provide maintenance?', a: 'Yes. We offer flexible post-launch support plans — from basic bug fixes to full managed services including monitoring, performance optimization, security patching, and feature development. Our average client relationship extends 2+ years beyond initial delivery.' },
+   584→    ],
+   585→    testimonials: [
+   586→      { name: 'Michael Torres', role: 'CEO', company: 'PayFlow Fintech', text: 'JOBSONN built our entire payment platform from scratch — mobile app, merchant dashboard, and payment gateway API — in 14 weeks. The architecture handles 50K transactions daily without breaking a sweat. Exceptional engineering team.' },
+   587→      { name: 'Neha Reddy', role: 'Product Head', company: 'HealthBridge App', text: 'Their React Native team delivered our patient-doctor app for iOS and Android with a shared codebase. Offline sync, real-time chat, and video consultations all work flawlessly. App store approval on first submission.' },
+   588→      { name: 'Robert Chang', role: 'CTO', company: 'LogiTrack Systems', text: 'We hired JOBSONN to modernize our 15-year-old logistics platform. They re-architected it into microservices, migrated the database, and launched the new system with zero downtime. A masterclass in legacy modernization.' },
+   589→    ],
+   590→  },
+   591→
+   592→  // ─── 6. Data Engineering & Analytics ──────────────────────────────────
+   593→  {
+   594→    slug: 'data-engineering-analytics',
+   595→    name: 'Data Engineering & Analytics',
+   596→    icon: 'Database',
+   597→    color: '#06B6D4',
+   598→    gradientFrom: '#06B6D4',
+   599→    gradientTo: '#0891B2',
+   600→    description:
+   601→      'Build robust data infrastructure and unlock strategic insights with comprehensive data engineering, warehousing, real-time analytics, and predictive modeling services.',
+   602→    services: [
+   603→      {
+   604→        id: 'cat6-svc1',
+   605→        name: 'Data Warehousing',
+   606→        slug: 'data-warehousing',
+   607→        shortDesc:
+   608→          'Design and implement modern data warehouses on Snowflake, BigQuery, or Redshift that centralize your data for fast, reliable analytical queries at scale.',
+   609→        icon: 'HardDrive',
+   610→        color: '#06B6D4',
+   611→      },
+   612→      {
+   613→        id: 'cat6-svc2',
+   614→        name: 'ETL / ELT',
+   615→        slug: 'etl-elt',
+   616→        shortDesc:
+   617→          'Build reliable ETL/ELT data pipelines using Apache Airflow, dbt, and Spark that extract, transform, and load data from diverse sources into your analytics platform.',
+   618→        icon: 'ArrowRightLeft',
+   619→        color: '#06B6D4',
+   620→      },
+   621→      {
+   622→        id: 'cat6-svc3',
+   623→        name: 'BI Dashboards',
+   624→        slug: 'bi-dashboards',
+   625→        shortDesc:
+   626→          'Create interactive business intelligence dashboards using Power BI, Tableau, or custom solutions that give teams real-time visibility into KPIs and metrics.',
+   627→        icon: 'BarChart3',
+   628→        color: '#06B6D4',
+   629→      },
+   630→      {
+   631→        id: 'cat6-svc4',
+   632→        name: 'Real-Time Analytics',
+   633→        slug: 'real-time-analytics',
+   634→        shortDesc:
+   635→          'Implement real-time analytics with Apache Kafka, Flink, and Spark Streaming for live data ingestion, processing, and instant decision-making.',
+   636→        icon: 'Activity',
+   637→        color: '#06B6D4',
+   638→      },
+   639→      {
+   640→        id: 'cat6-svc5',
+   641→        name: 'Data Lakes',
+   642→        slug: 'data-lakes',
+   643→        shortDesc:
+   644→          'Build scalable data lake architectures on AWS S3, Azure Data Lake, or Delta Lake for cost-effective storage and processing of structured and unstructured data.',
+   645→        icon: 'Layers',
+   646→        color: '#06B6D4',
+   647→      },
+   648→      {
+   649→        id: 'cat6-svc6',
+   650→        name: 'Predictive Analytics',
+   651→        slug: 'predictive-analytics',
+   652→        shortDesc:
+   653→          'Develop predictive models and forecasting solutions using machine learning that anticipate trends, optimize operations, and drive data-informed decisions.',
+   654→        icon: 'TrendingUp',
+   655→        color: '#06B6D4',
+   656→      },
+   657→    ],
+   658→    keyBenefits: [
+   659→      { icon: 'Database', title: 'Unified Data Foundation', desc: 'Consolidate data from 50+ sources — databases, APIs, SaaS tools, spreadsheets — into a single, governed, query-optimized data platform for your entire organization.' },
+   660→      { icon: 'Activity', title: 'Real-Time Insights', desc: 'Stream processing with sub-second latency enables live dashboards, instant anomaly detection, and real-time operational decisions instead of waiting for batch reports.' },
+   661→      { icon: 'BarChart3', title: 'Self-Service Analytics', desc: 'Empower business users with intuitive dashboards and SQL interfaces so they can explore data and generate reports independently without waiting for data team requests.' },
+   662→      { icon: 'TrendingUp', title: 'Predictive Capabilities', desc: 'ML-powered forecasting models predict demand, churn, revenue, and operational metrics with 85-95% accuracy, turning retrospective reporting into proactive strategy.' },
+   663→      { icon: 'HardDrive', title: '80% Lower Storage Costs', desc: 'Modern data lake architectures on cloud object storage reduce data warehousing costs by up to 80% compared to traditional on-premise solutions while improving query performance.' },
+   664→      { icon: 'Shield', title: 'Data Governance & Quality', desc: 'Built-in data lineage, quality checks, access controls, and compliance automation ensure your data is trustworthy, secure, and auditable across the entire pipeline.' },
+   665→    ],
+   666→    industries: ['Retail & E-Commerce', 'Banking & Capital Markets', 'Healthcare & Pharma', 'Telecommunications', 'Energy & Utilities', 'Supply Chain & Logistics'],
+   667→    processSteps: [
+   668→      { step: 1, title: 'Data Audit & Strategy', desc: 'We assess your current data landscape, identify gaps in data collection, catalog existing sources, and design a target architecture aligned with business objectives.' },
+   669→      { step: 2, title: 'Pipeline Development', desc: 'We build ETL/ELT pipelines using Airflow and dbt, implement data quality checks, set up schema evolution handling, and configure error recovery mechanisms.' },
+   670→      { step: 3, title: 'Analytics & Modeling', desc: 'We create BI dashboards, build predictive models, and implement real-time analytics streams that transform raw data into actionable business intelligence.' },
+   671→      { step: 4, title: 'Governance & Optimization', desc: 'We establish data governance frameworks, optimize query performance, set up data catalogs, and train your team on self-service analytics tools and best practices.' },
+   672→    ],
+   673→    techStack: ['Apache Spark', 'Apache Kafka', 'Snowflake / BigQuery', 'dbt', 'Airflow', 'Power BI / Tableau', 'Python / SQL', 'Delta Lake'],
+   674→    stats: [
+   675→      { value: '2PB+', label: 'Data Processed Daily' },
+   676→      { value: '50+', label: 'Data Sources Integrated' },
+   677→      { value: '92%', label: 'Forecast Accuracy' },
+   678→      { value: '80%', label: 'Storage Cost Savings' },
+   679→    ],
+   680→    faqs: [
+   681→      { q: 'What is the difference between a data warehouse and a data lake?', a: 'A data warehouse stores structured, processed data optimized for SQL queries and BI reporting. A data lake stores raw structured and unstructured data (logs, images, documents) at low cost. Modern architectures use both — a data lake for raw storage and a data warehouse for analytics, connected by ETL pipelines. We help you determine the right mix.' },
+   682→      { q: 'How do you ensure data quality across pipelines?', a: 'We implement multi-layer data quality checks — source validation, schema enforcement, statistical anomaly detection, and business rule validation using tools like Great Expectations and dbt tests. Every data quality issue triggers alerts, and we build automated reconciliation processes that catch and fix data discrepancies.' },
+   683→      { q: 'Can you build real-time analytics on top of our existing data infrastructure?', a: 'Yes. We layer real-time streaming using Kafka and Flink on top of your existing batch infrastructure. This hybrid approach lets you keep proven batch pipelines for historical analysis while adding real-time capabilities for live monitoring, fraud detection, and operational dashboards.' },
+   684→      { q: 'How long does it take to set up a complete data platform?', a: 'A basic data warehouse with 5-10 source integrations and BI dashboards takes 6-8 weeks. A full-scale data platform with real-time streaming, data lake, predictive models, and self-service analytics typically takes 12-16 weeks. We deliver in phases so you see value from week 4 onwards.' },
+   685→    ],
+   686→    testimonials: [
+   687→      { name: 'Vikram Singh', role: 'Head of Analytics', company: 'RetailMax Group', text: 'JOBSONN built our entire data platform — Snowflake warehouse, 40+ Airflow pipelines, dbt transformations, and Tableau dashboards — in 10 weeks. Our merchandising team now makes decisions based on real-time sales data instead of weekly Excel reports.' },
+   688→      { name: 'Laura Mitchell', role: 'VP of Data', company: 'Capital Edge Bank', text: 'Their predictive analytics models for loan default prediction achieved 94% accuracy, saving us $12M in potential bad loans last year. The real-time fraud detection pipeline processes 2M transactions per hour with sub-second latency.' },
+   689→      { name: 'Sanjay Patel', role: 'CTO', company: 'TeleConnect Networks', text: 'We went from zero data culture to having 200+ self-service analytics users in 6 months. JOBSONN not only built the infrastructure but also trained our teams and created a data governance framework that our compliance team loves.' },
+   690→    ],
+   691→  },
+   692→
+   693→  // ─── 7. Cloud Infrastructure & DevOps ────────────────────────────────
+   694→  {
+   695→    slug: 'cloud-infrastructure-devops',
+   696→    name: 'Cloud Infrastructure & DevOps',
+   697→    icon: 'Cloud',
+   698→    color: '#FFB800',
+   699→    gradientFrom: '#FFB800',
+   700→    gradientTo: '#E5A700',
+   701→    description:
+   702→      'Accelerate your cloud journey with expert infrastructure design, migration, containerization, and DevOps automation for speed, reliability, and cost efficiency.',
+   703→    services: [
+   704→      {
+   705→        id: 'cat7-svc1',
+   706→        name: 'Cloud Migration',
+   707→        slug: 'cloud-migration',
+   708→        shortDesc:
+   709→          'Plan and execute seamless cloud migrations from on-premise or legacy infrastructure to AWS, Azure, or GCP with minimal downtime and zero data loss.',
+   710→        icon: 'ArrowUpRight',
+   711→        color: '#FFB800',
+   712→      },
+   713→      {
+   714→        id: 'cat7-svc2',
+   715→        name: 'Kubernetes',
+   716→        slug: 'kubernetes',
+   717→        shortDesc:
+   718→          'Design, deploy, and manage Kubernetes clusters for container orchestration with auto-scaling, self-healing, and rolling updates for production workloads.',
+   719→        icon: 'Container',
+   720→        color: '#FFB800',
+   721→      },
+   722→      {
+   723→        id: 'cat7-svc3',
+   724→        name: 'CI/CD Automation',
+   725→        slug: 'ci-cd-automation',
+   726→        shortDesc:
+   727→          'Automate build, test, and deployment pipelines with GitHub Actions, GitLab CI, Jenkins, or ArgoCD for rapid, reliable, and consistent releases.',
+   728→        icon: 'GitBranch',
+   729→        color: '#FFB800',
+   730→      },
+   731→      {
+   732→        id: 'cat7-svc4',
+   733→        name: 'Infrastructure as Code',
+   734→        slug: 'infrastructure-as-code',
+   735→        shortDesc:
+   736→          'Define and manage your entire infrastructure using Terraform, Pulumi, or CloudFormation for version-controlled, reproducible, and automated provisioning.',
+   737→        icon: 'FileCode',
+   738→        color: '#FFB800',
+   739→      },
+   740→      {
+   741→        id: 'cat7-svc5',
+   742→        name: 'Cloud Security',
+   743→        slug: 'cloud-security',
+   744→        shortDesc:
+   745→          'Implement comprehensive cloud security with IAM policies, network segmentation, encryption, compliance monitoring, and zero-trust architecture.',
+   746→        icon: 'Shield',
+   747→        color: '#FFB800',
+   748→      },
+   749→      {
+   750→        id: 'cat7-svc6',
+   751→        name: 'Managed DevOps',
+   752→        slug: 'managed-devops',
+   753→        shortDesc:
+   754→          'Get end-to-end DevOps management — from pipeline setup and monitoring to incident response and optimization — so your team focuses on building products.',
+   755→        icon: 'Settings',
+   756→        color: '#FFB800',
+   757→      },
+   758→    ],
+   759→    keyBenefits: [
+   760→      { icon: 'Rocket', title: '10x Faster Deployments', desc: 'Automated CI/CD pipelines reduce deployment time from hours to minutes. Push code at 10 AM, and it is in production by 10:02 AM with full rollback capability.' },
+   761→      { icon: 'DollarSign', title: '40% Cloud Cost Optimization', desc: 'Right-sizing, reserved instances, spot instances, and automated scaling policies optimize your cloud spend without sacrificing performance or reliability.' },
+   762→      { icon: 'Shield', title: 'Zero-Trust Security', desc: 'Every layer — network, identity, data, application — follows zero-trust principles with automated compliance scanning, vulnerability management, and incident response.' },
+   763→      { icon: 'Server', title: '99.99% Uptime Guarantee', desc: 'Multi-AZ architectures, auto-scaling, self-healing containers, and automated failover ensure your applications stay available even during infrastructure failures.' },
+   764→      { icon: 'GitBranch', title: 'Infrastructure as Code', desc: 'Every infrastructure change goes through code review, version control, and automated testing. Reproduce environments instantly and eliminate configuration drift.' },
+   765→      { icon: 'Container', title: 'Container-Native Operations', desc: 'Kubernetes orchestration with Helm charts, service mesh, auto-scaling, and canary deployments gives you enterprise-grade container management for any workload.' },
+   766→    ],
+   767→    industries: ['SaaS & Cloud-Native', 'Financial Services', 'Media & Entertainment', 'Gaming', 'E-Commerce', 'Healthcare & Life Sciences'],
+   768→    processSteps: [
+   769→      { step: 1, title: 'Cloud Assessment', desc: 'We audit your current infrastructure, map dependencies, estimate cloud costs, and create a phased migration plan with risk assessment and rollback strategies.' },
+   770→      { step: 2, title: 'Architecture & IaC', desc: 'We design cloud-native architecture, write Terraform/Pulumi modules for infrastructure provisioning, and set up Kubernetes clusters with networking and storage.' },
+   771→      { step: 3, title: 'Pipeline & Security Setup', desc: 'We configure CI/CD pipelines, implement security controls, set up monitoring and alerting, and establish GitOps workflows for automated deployments.' },
+   772→      { step: 4, title: 'Migration & Optimization', desc: 'We execute the migration, validate workloads, optimize performance and costs, train your team, and provide ongoing managed DevOps support.' },
+   773→    ],
+   774→    techStack: ['AWS / Azure / GCP', 'Kubernetes & Helm', 'Terraform / Pulumi', 'GitHub Actions / ArgoCD', 'Prometheus & Grafana', 'Vault', 'Istio', 'Datadog'],
+   775→    stats: [
+   776→      { value: '200+', label: 'Cloud Migrations' },
+   777→      { value: '99.99%', label: 'Uptime Achieved' },
+   778→      { value: '40%', label: 'Cost Reduction' },
+   779→      { value: '500+', label: 'Pipelines Automated' },
+   780→    ],
+   781→    faqs: [
+   782→      { q: 'How do you minimize downtime during cloud migration?', a: 'We use blue-green deployments, database replication with sync lag monitoring, and canary releases to migrate with near-zero downtime. For complex migrations, we use a phased approach — migrating non-critical services first, then progressively moving traffic. Most migrations achieve less than 5 minutes of planned downtime.' },
+   783→      { q: 'Which cloud provider do you recommend — AWS, Azure, or GCP?', a: 'It depends on your workload, existing Microsoft/Google investments, compliance requirements, and team expertise. AWS has the broadest service catalog, Azure excels for Microsoft shops, and GCP leads in data/AI. We are certified in all three and recommend based on your specific needs — many clients use multi-cloud strategies.' },
+   784→      { q: 'What is Infrastructure as Code and why do we need it?', a: 'IaC means defining your entire cloud infrastructure — servers, databases, networks, security policies — as code (Terraform, Pulumi). Benefits include: version control for infrastructure changes, reproducible environments (dev/staging/prod), automated testing of infrastructure, and elimination of manual configuration errors. It is the foundation of modern DevOps.' },
+   785→      { q: 'How do you handle cloud cost optimization?', a: 'We implement a multi-layered approach: right-sizing instances based on actual usage, reserved/spot instance strategies for non-critical workloads, automated scaling policies, storage lifecycle management, and continuous cost monitoring with alerting. Our clients typically save 30-50% on their cloud bills within the first 6 months.' },
+   786→    ],
+   787→    testimonials: [
+   788→      { name: 'Chris Anderson', role: 'VP Engineering', company: 'StreamBox Media', text: 'JOBSONN migrated our entire video streaming platform from on-premise to AWS with zero downtime during peak World Cup season. Kubernetes auto-scaling handles 10x traffic spikes effortlessly. Cloud costs actually dropped 35%.' },
+   789→      { name: 'Deepa Nair', role: 'DevOps Lead', company: 'FinGuard Security', text: 'Their Terraform modules and ArgoCD GitOps setup transformed our release process. We went from monthly releases with manual deployment anxiety to multiple daily releases with full confidence. MTTR dropped from 2 hours to 8 minutes.' },
+   790→      { name: 'Tom Bradley', role: 'CTO', company: 'GameForge Studios', text: 'The Kubernetes cluster JOBSONN manages for our gaming backend handles 2M concurrent players across 3 regions. Their auto-scaling policies and service mesh configuration gave us 99.99% uptime during our biggest launch event.' },
+   791→    ],
+   792→  },
+   793→
+   794→  // ─── 8. AI / ML Model Development ────────────────────────────────────
+   795→  {
+   796→    slug: 'ai-ml-model-development',
+   797→    name: 'AI / ML Model Development',
+   798→    icon: 'Cpu',
+   799→    color: '#8B5CF6',
+   800→    gradientFrom: '#8B5CF6',
+   801→    gradientTo: '#7C3AED',
+   802→    description:
+   803→      'From machine learning and large language models to computer vision and MLOps — build production-grade AI systems trained on your data for real business impact.',
+   804→    services: [
+   805→      {
+   806→        id: 'cat8-svc1',
+   807→        name: 'Machine Learning',
+   808→        slug: 'machine-learning',
+   809→        shortDesc:
+   810→          'Develop custom ML models for classification, regression, clustering, and recommendation systems using scikit-learn, XGBoost, and PyTorch for your specific use cases.',
+   811→        icon: 'Brain',
+   812→        color: '#8B5CF6',
+   813→      },
+   814→      {
+   815→        id: 'cat8-svc2',
+   816→        name: 'LLM Development',
+   817→        slug: 'llm-development',
+   818→        shortDesc:
+   819→          'Build, fine-tune, and deploy large language models for chatbots, content generation, code assistants, and domain-specific AI applications using GPT, Llama, and Mistral.',
+   820→        icon: 'Sparkles',
+   821→        color: '#8B5CF6',
+   822→      },
+   823→      {
+   824→        id: 'cat8-svc3',
+   825→        name: 'Computer Vision',
+   826→        slug: 'computer-vision',
+   827→        shortDesc:
+   828→          'Implement image recognition, object detection, video analytics, and visual inspection solutions using YOLO, ResNet, and Vision Transformers for your industry.',
+   829→        icon: 'Eye',
+   830→        color: '#8B5CF6',
+   831→      },
+   832→      {
+   833→        id: 'cat8-svc4',
+   834→        name: 'NLP Solutions',
+   835→        slug: 'nlp-solutions',
+   836→        shortDesc:
+   837→          'Build NLP pipelines for text classification, sentiment analysis, entity extraction, summarization, and document processing using transformers and custom models.',
+   838→        icon: 'MessageSquare',
+   839→        color: '#8B5CF6',
+   840→      },
+   841→      {
+   842→        id: 'cat8-svc5',
+   843→        name: 'MLOps',
+   844→        slug: 'mlops',
+   845→        shortDesc:
+   846→          'Establish MLOps infrastructure for model versioning, automated training, A/B testing, monitoring, and continuous deployment of ML models in production.',
+   847→        icon: 'RefreshCw',
+   848→        color: '#8B5CF6',
+   849→      },
+   850→      {
+   851→        id: 'cat8-svc6',
+   852→        name: 'Model Fine-Tuning',
+   853→        slug: 'model-fine-tuning',
+   854→        shortDesc:
+   855→          'Fine-tune pre-trained AI models on your proprietary data for domain-specific accuracy — from LLMs and vision models to speech and multi-modal systems.',
+   856→        icon: 'Sliders',
+   857→        color: '#8B5CF6',
+   858→      },
+   859→    ],
+   860→    keyBenefits: [
+   861→      { icon: 'Brain', title: 'Domain-Specific Accuracy', desc: 'Models trained on your proprietary data achieve 85-98% accuracy for your specific use cases, far outperforming generic off-the-shelf AI solutions.' },
+   862→      { icon: 'Sparkles', title: 'Production-Ready ML', desc: 'Every model comes with MLOps infrastructure — automated retraining, A/B testing, monitoring dashboards, and CI/CD pipelines — not just Jupyter notebooks.' },
+   863→      { icon: 'Eye', title: 'Multi-Modal AI Capabilities', desc: 'Build AI that understands text, images, video, and audio. Our multi-modal expertise enables solutions that combine vision, language, and speech in a single system.' },
+   864→      { icon: 'Sliders', title: 'Efficient Fine-Tuning', desc: 'LoRA, QLoRA, and PEFT techniques let us fine-tune large models on your data using 90% less compute, making advanced AI accessible without massive GPU budgets.' },
+   865→      { icon: 'RefreshCw', title: 'Continuous Model Improvement', desc: 'MLOps pipelines automatically retrain models on new data, detect performance drift, and deploy updated models with zero downtime and full rollback capability.' },
+   866→      { icon: 'Shield', title: 'Explainable & Fair AI', desc: 'We implement model explainability (SHAP, LIME), bias detection, and fairness auditing to ensure your AI systems are transparent, trustworthy, and compliant with regulations.' },
+   867→    ],
+   868→    industries: ['Healthcare & Diagnostics', 'Autonomous Vehicles', 'Financial Trading', 'Retail & Personalization', 'Agriculture & AgTech', 'Manufacturing & Quality'],
+   869→    processSteps: [
+   870→      { step: 1, title: 'Data Strategy & Collection', desc: 'We define data requirements, assess data quality, implement labeling pipelines, and prepare training datasets with proper splits for train/validation/test.' },
+   871→      { step: 2, title: 'Model Development', desc: 'We experiment with multiple model architectures, conduct hyperparameter tuning, cross-validation, and select the best-performing model based on your business metrics.' },
+   872→      { step: 3, title: 'MLOps & Deployment', desc: 'We containerize models, set up serving infrastructure (TensorRT, Triton, vLLM), implement A/B testing, and deploy with automated scaling and monitoring.' },
+   873→      { step: 4, title: 'Monitor & Retrain', desc: 'We monitor model performance in production, detect data drift and concept drift, trigger automated retraining, and continuously optimize model accuracy.' },
+   874→    ],
+   875→    techStack: ['PyTorch / TensorFlow', 'Hugging Face', 'LangChain', 'vLLM / TensorRT', 'MLflow', 'AWS SageMaker', 'Python', 'CUDA'],
+   876→    stats: [
+   877→      { value: '120+', label: 'Models in Production' },
+   878→      { value: '94%', label: 'Avg Model Accuracy' },
+   879→      { value: '50ms', label: 'Avg Inference Latency' },
+   880→      { value: '10x', label: 'Faster Inference' },
+   881→    ],
+   882→    faqs: [
+   883→      { q: 'Do we need a large dataset to build an ML model?', a: 'Not necessarily. For many use cases, we use transfer learning and fine-tuning on pre-trained models, which require significantly less data (hundreds to a few thousand examples). For custom models from scratch, we help with data collection strategies, synthetic data generation, and data augmentation techniques.' },
+   884→      { q: 'How do you handle model deployment and serving in production?', a: 'We deploy models using optimized serving frameworks like vLLM for LLMs, TensorRT for vision models, and FastAPI for custom ML models. Models run in Kubernetes with auto-scaling, GPU optimization, and load balancing. We implement canary deployments for safe rollouts and instant rollback if needed.' },
+   885→      { q: 'What is MLOps and why is it critical for ML in production?', a: 'MLOps applies DevOps practices to ML — versioning models and data, automating training pipelines, monitoring model performance, and handling drift. Without MLOps, models silently degrade as real-world data changes. Our MLOps setup catches these issues and automatically retrains models before accuracy drops.' },
+   886→      { q: 'Can you fine-tune LLMs on our proprietary data while keeping it private?', a: 'Absolutely. We use on-premise or private cloud GPU infrastructure for fine-tuning. Your data never leaves your environment. We use techniques like LoRA and QLoRA that require minimal compute while achieving domain-specific performance that rivals or exceeds generic models on your specific tasks.' },
+   887→    ],
+   888→    testimonials: [
+   889→      { name: 'Dr. Anita Rao', role: 'Head of AI', company: 'DiagnosticsPro Health', text: 'JOBSONN\'s computer vision model for X-ray analysis detects early-stage abnormalities with 96.3% accuracy — surpassing our radiologists in initial screening. It now assists 40+ hospitals in their diagnostic workflow.' },
+   890→      { name: 'Kevin Park', role: 'AI Director', company: 'RetailGenius', text: 'The recommendation engine they built increased our average order value by 34% and customer engagement by 52%. Fine-tuned LLMs power our product descriptions and customer chatbot with brand-perfect tone.' },
+   891→      { name: 'Sophie Laurent', role: 'CTO', company: 'AgriVision Tech', text: 'Their crop disease detection model processes drone imagery in real-time and identifies 15 types of crop diseases with 91% accuracy. The MLOps pipeline retrains monthly with new field data. Truly transformative for precision agriculture.' },
+   892→    ],
+   893→  },
+   894→
+   895→  // ─── 9. Digital Transformation Consulting ─────────────────────────────
+   896→  {
+   897→    slug: 'digital-transformation-consulting',
+   898→    name: 'Digital Transformation Consulting',
+   899→    icon: 'Compass',
+   900→    color: '#EC4899',
+   901→    gradientFrom: '#EC4899',
+   902→    gradientTo: '#DB2777',
+   903→    description:
+   904→      'Strategic consulting and hands-on execution to modernize your organization — from AI strategy and process reengineering to technology architecture and governance.',
+   905→    services: [
+   906→      {
+   907→        id: 'cat9-svc1',
+   908→        name: 'AI Strategy',
+   909→        slug: 'ai-strategy',
+   910→        shortDesc:
+   911→          'Develop a comprehensive AI strategy aligned with your business goals — identify high-impact use cases, build roadmaps, and establish AI centers of excellence.',
+   912→        icon: 'Target',
+   913→        color: '#EC4899',
+   914→      },
+   915→      {
+   916→        id: 'cat9-svc2',
+   917→        name: 'Digital Transformation',
+   918→        slug: 'digital-transformation',
+   919→        shortDesc:
+   920→          'End-to-end digital transformation services that modernize operations, digitize customer experiences, and build agile, technology-driven organizations.',
+   921→        icon: 'Rocket',
+   922→        color: '#EC4899',
+   923→      },
+   924→      {
+   925→        id: 'cat9-svc3',
+   926→        name: 'Process Reengineering',
+   927→        slug: 'process-reengineering',
+   928→        shortDesc:
+   929→          'Analyze, redesign, and optimize business processes using lean methodologies and AI-driven insights for maximum efficiency and operational excellence.',
+   930→        icon: 'Workflow',
+   931→        color: '#EC4899',
+   932→      },
+   933→      {
+   934→        id: 'cat9-svc4',
+   935→        name: 'Technology Architecture',
+   936→        slug: 'technology-architecture',
+   937→        shortDesc:
+   938→          'Design future-proof technology architectures — microservices, event-driven systems, cloud-native platforms — that scale with your business and support innovation.',
+   939→        icon: 'Layout',
+   940→        color: '#EC4899',
+   941→      },
+   942→      {
+   943→        id: 'cat9-svc5',
+   944→        name: 'IT Modernization',
+   945→        slug: 'it-modernization',
+   946→        shortDesc:
+   947→          'Modernize legacy IT systems with strategic migration plans, cloud adoption roadmaps, and phased modernization approaches that minimize risk and disruption.',
+   948→        icon: 'Server',
+   949→        color: '#EC4899',
+   950→      },
+   951→      {
+   952→        id: 'cat9-svc6',
+   953→        name: 'AI Governance',
+   954→        slug: 'ai-governance',
+   955→        shortDesc:
+   956→          'Establish AI governance frameworks covering ethical AI, bias detection, model transparency, compliance, and responsible AI practices for trustworthy deployments.',
+   957→        icon: 'ShieldCheck',
+   958→        color: '#EC4899',
+   959→      },
+   960→    ],
+   961→    keyBenefits: [
+   962→      { icon: 'Compass', title: 'Strategic Clarity', desc: 'We cut through technology hype to identify the digital initiatives that deliver maximum business value — aligned with your goals, budget, and organizational readiness.' },
+   963→      { icon: 'Layout', title: 'Future-Proof Architecture', desc: 'Technology architectures designed for 5-10 year horizons with microservices, API-first design, and cloud-native patterns that adapt as your business evolves.' },
+   964→      { icon: 'Workflow', title: 'Operational Excellence', desc: 'Process reengineering eliminates waste, reduces handoffs, and streamlines workflows — delivering 30-50% efficiency gains while improving quality and employee satisfaction.' },
+   965→      { icon: 'ShieldCheck', title: 'Responsible AI Framework', desc: 'Comprehensive AI governance covering bias auditing, explainability, data privacy, regulatory compliance, and ethical guidelines to build trustworthy AI systems.' },
+   966→      { icon: 'Users', title: 'Change Management', desc: 'We don\'t just deliver strategy documents — we work alongside your teams to build capabilities, drive adoption, and ensure lasting organizational transformation.' },
+   967→      { icon: 'Target', title: 'Measurable Outcomes', desc: 'Every initiative has defined KPIs, success metrics, and milestone checkpoints. We track and report ROI at every phase so you know exactly what value is being delivered.' },
+   968→    ],
+   969→    industries: ['Banking & Insurance', 'Government & Public Sector', 'Healthcare', 'Manufacturing', 'Retail & Consumer Goods', 'Energy & Utilities'],
+   970→    processSteps: [
+   971→      { step: 1, title: 'Assessment & Vision', desc: 'We conduct organizational maturity assessments, technology audits, stakeholder interviews, and competitive analysis to define your digital transformation vision and priorities.' },
+   972→      { step: 2, title: 'Roadmap & Strategy', desc: 'We create phased transformation roadmaps with business cases, technology selections, resource plans, risk assessments, and quick-win identification for early momentum.' },
+   973→      { step: 3, title: 'Execution & Delivery', desc: 'We work embedded with your teams to execute the roadmap — from architecture implementation and vendor selection to process redesign and capability building.' },
+   974→      { step: 4, title: 'Sustain & Evolve', desc: 'We establish centers of excellence, train internal teams, set up governance frameworks, and define continuous improvement processes for long-term digital maturity.' },
+   975→    ],
+   976→    techStack: ['TOGAF Framework', 'ArchiMate', 'Lean / Six Sigma', 'Cloud Strategy', 'Microservices Patterns', 'SAFe Agile', 'ITIL 4', 'COBIT'],
+   977→    stats: [
+   978→      { value: '50+', label: 'Transformations Led' },
+   979→      { value: '45%', label: 'Efficiency Gains' },
+   980→      { value: '3x', label: 'Faster Time-to-Market' },
+   981→      { value: '$2B+', label: 'Client Value Created' },
+   982→    ],
+   983→    faqs: [
+   984→      { q: 'How long does a digital transformation initiative typically take?', a: 'Transformation timelines vary by scope. A targeted AI strategy engagement takes 4-6 weeks. A department-level digital transformation takes 3-6 months. Enterprise-wide transformation typically spans 12-24 months in phased approaches. We always start with quick wins that deliver value in 4-8 weeks while building toward the long-term vision.' },
+   985→      { q: 'Do you only provide strategy consulting or do you also implement?', a: 'We do both — and that is what makes us different. We don\'t hand off a 100-page strategy document and disappear. Our consultants are also hands-on practitioners who architect, build, and deploy alongside your teams. This strategy-to-execution approach ensures vision actually becomes reality.' },
+   986→      { q: 'How do you handle organizational change management during transformation?', a: 'Change management is embedded in everything we do. We use the ADKAR framework, conduct stakeholder mapping, run adoption workshops, create champions networks within your organization, and measure adoption metrics. Technology changes nothing if people don\'t adopt it — we ensure they do.' },
+   987→      { q: 'What makes your AI governance framework different?', a: 'Our AI governance framework goes beyond compliance checklists. We implement practical tools — bias detection dashboards, model explainability reports, automated audit trails, and risk scoring — that your teams actually use daily. We align with EU AI Act, NIST AI RMF, and industry-specific regulations while keeping governance lightweight and actionable.' },
+   988→    ],
+   989→    testimonials: [
+   990→      { name: 'Rajiv Kapoor', role: 'CEO', company: 'Legacy National Bank', text: 'JOBSONN guided our 18-month digital transformation that touched every department. They helped us move from 40-year-old mainframes to a cloud-native microservices platform. Customer onboarding went from 2 weeks to 15 minutes. Revenue grew 28% in the first year post-transformation.' },
+   991→      { name: 'Maria Gonzalez', role: 'CIO', company: 'Metro Health System', text: 'Their AI governance framework was exactly what we needed to deploy clinical AI tools safely. The bias auditing tools and explainability dashboards gave our medical board the confidence to approve 5 AI diagnostic tools that now serve 200K+ patients.' },
+   992→      { name: 'Prakash Iyer', role: 'COO', company: 'Heavy Industries Ltd.', text: 'The process reengineering engagement identified $8M in annual savings from operational waste. JOBSONN\'s consultants worked on the shop floor with our teams to redesign workflows. Employee satisfaction improved 40% because we eliminated the frustrating parts of their jobs.' },
+   993→    ],
+   994→  },
+   995→];
+   996→
+   997→// ==================== HELPER FUNCTIONS ====================
+   998→
+   999→/** Returns all 9 service categories */
+  1000→export function getAllCategories(): ServiceCategory[] {
+  1001→  return serviceCategories;
+  1002→}
+  1003→
+  1004→/** Returns a single category by its slug */
+  1005→export function getCategoryBySlug(slug: string): ServiceCategory | undefined {
+  1006→  return serviceCategories.find((cat) => cat.slug === slug);
+  1007→}
+  1008→
+  1009→/** Returns a specific service within a category */
+  1010→export function getServiceBySlug(
+  1011→  categorySlug: string,
+  1012→  serviceSlug: string
+  1013→): ServiceItem | undefined {
+  1014→  const category = getCategoryBySlug(categorySlug);
+  1015→  return category?.services.find((svc) => svc.slug === serviceSlug);
+  1016→}
+  1017→
+  1018→/** Returns related categories (excluding current) */
+  1019→export function getRelatedCategories(currentSlug: string, limit = 4): ServiceCategory[] {
+  1020→  return serviceCategories.filter((c) => c.slug !== currentSlug).slice(0, limit);
+  1021→}
+  1022→
+  1023→/** Search all services across all categories */
+  1024→export function searchAllServices(query: string) {
+  1025→  if (!query.trim()) return [];
+  1026→  const q = query.toLowerCase();
+  1027→  const results: { service: ServiceItem; category: ServiceCategory }[] = [];
+  1028→  for (const cat of serviceCategories) {
+  1029→    for (const svc of cat.services) {
+  1030→      if (
+  1031→        svc.name.toLowerCase().includes(q) ||
+  1032→        svc.shortDesc.toLowerCase().includes(q) ||
+  1033→        cat.name.toLowerCase().includes(q)
+  1034→      ) {
+  1035→        results.push({ service: svc, category: cat });
+  1036→      }
+  1037→    }
+  1038→  }
+  1039→  return results;
+  1040→}
+  1041→
+  1042→/** Search services within a single category */
+  1043→export function searchCategoryServices(categorySlug: string, query: string) {
+  1044→  const cat = getCategoryBySlug(categorySlug);
+  1045→  if (!cat || !query.trim()) return [];
+  1046→  const q = query.toLowerCase();
+  1047→  return cat.services.filter(
+  1048→    (svc) =>
+  1049→      svc.name.toLowerCase().includes(q) ||
+  1050→      svc.shortDesc.toLowerCase().includes(q)
+  1051→  );
+  1052→}
+  1053→
