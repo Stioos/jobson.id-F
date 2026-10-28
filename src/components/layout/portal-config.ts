@@ -784,6 +784,7 @@ export const portalConfigs: Record<Portal, PortalConfig> = {
               { key: "sa-guarantee-tracking", label: "Guarantee Tracking", icon: "ShieldCheck" },
               { key: "sa-rejection-audit", label: "Rejection Audit", icon: "MailX" },
               { key: "sa-hiring-funnel", label: "Hiring Funnel", icon: "Filter" },
+              { key: "sa-skill-credential-sync", label: "Skill Credential Sync", icon: "Award" },
             ],
           },
           // TALENT OVERSIGHT
@@ -833,6 +834,10 @@ export const portalConfigs: Record<Portal, PortalConfig> = {
               { key: "sa-cross-portal-approvals", label: "Cross-Portal Approvals", icon: "CheckCircle2" },
               { key: "sa-sourcing-bridge", label: "Sourcing Bridge", icon: "ArrowRightLeft" },
               { key: "sa-placement-handoff", label: "Placement Handoff", icon: "Send" },
+              { key: "sa-offer-handshake", label: "Offer Handshake", icon: "Handshake" },
+              { key: "sa-interview-sync", label: "Interview Sync", icon: "CalendarSync" },
+              { key: "sa-guarantee-claims", label: "Guarantee Claims", icon: "ShieldAlert" },
+              { key: "sa-t2h-pipeline-visibility", label: "T2H Pipeline View", icon: "Eye" },
             ],
           },
           // SECURITY
@@ -854,6 +859,8 @@ export const portalConfigs: Record<Portal, PortalConfig> = {
               { key: "sa-cookie-compliance", label: "Cookie Compliance", icon: "Cookie" },
               { key: "sa-data-export-audit", label: "Data Export Audit", icon: "Download" },
               { key: "sa-incident-response", label: "Incident Response", icon: "Siren" },
+              { key: "sa-consent-management-portal", label: "Cross-Portal Consent", icon: "HeartHandshake" },
+              { key: "sa-unified-audit-trail", label: "Unified Audit Trail", icon: "History" },
             ],
           },
           // PARTNERS
@@ -889,6 +896,7 @@ export const portalConfigs: Record<Portal, PortalConfig> = {
               { key: "sa-shared-notifications", label: "Shared Notifications", icon: "Bell" },
               { key: "sa-unified-calendar", label: "Unified Calendar", icon: "Calendar" },
               { key: "sa-comms-health", label: "Comms Health", icon: "Activity" },
+              { key: "sa-cross-portal-tasks", label: "Cross-Portal Tasks", icon: "CheckSquare" },
             ],
           },
           // OPS

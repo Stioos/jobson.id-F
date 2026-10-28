@@ -40,6 +40,9 @@ import {
   Grid3x3, Split,
   ArrowRightLeft,
   Reply,
+  CalendarSync, ShieldAlert,
+  UserX,
+  EyeOff,
   type LucideIcon,
 } from "lucide-react";
 
@@ -82,6 +85,9 @@ const map: Record<string, LucideIcon> = {
   Grid3x3, Split,
   ArrowRightLeft,
   Reply,
+  CalendarSync, ShieldAlert,
+  UserX,
+  EyeOff,
 };
 
 export function Icon({ name, className }: { name: string; className?: string }) {

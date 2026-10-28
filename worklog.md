@@ -5408,3 +5408,115 @@ The 15 bridge pages resolve approximately 30 of the 38 identified cross-portal g
 - ✅ Shared notifications (resolves 9.3, 1.1 partial)
 - ✅ Unified calendar (resolves 10.8)
 - ✅ Comms health (oversight for all comms gaps)
+
+---
+Task ID: CROSS-PORTAL-WORKFLOW-BRIDGES
+Agent: Z.ai Code (sub-agent)
+Task: Build 8 remaining cross-portal bridge pages in the Super Admin portal that resolve the last 8 gaps from the cross-portal audit. Each needs: page file, route case, sidebar item.
+
+Work Log:
+- Read `/home/z/my-project/worklog.md` (full history, prior 4 bridge batches) and inspected existing patterns: `portal-config.ts` (admin groups: `sa-process-grp`, `sa-security-grp`, `sa-comms-grp`, `sa-hiring-grp`), admin router `index.tsx` (dynamic imports + switch cases), `Icon.tsx` icon map, `@/components/common` (PageHeader, StatCard, SectionCard, EmptyState, Card*), existing `SuperAdminCrossPortalApprovals.tsx` as a style reference.
+- Added 4 missing icons to `src/components/common/Icon.tsx` (lucide-react imports + map entries): `CalendarSync`, `ShieldAlert`, `UserX`, `EyeOff`.
+- Added 8 sidebar children to existing admin groups in `portal-config.ts`:
+  - `sa-process-grp` (Process Oversight) +4: `sa-offer-handshake` (Handshake), `sa-interview-sync` (CalendarSync), `sa-guarantee-claims` (ShieldAlert), `sa-t2h-pipeline-visibility` (Eye)
+  - `sa-security-grp` (Security) +2: `sa-consent-management-portal` (HeartHandshake), `sa-unified-audit-trail` (History)
+  - `sa-comms-grp` (Communication) +1: `sa-cross-portal-tasks` (CheckSquare)
+  - `sa-hiring-grp` (Hiring Oversight) +1: `sa-skill-credential-sync` (Award)
+- Created 8 page files in `src/portals/admin/` (each `"use client"`, 200-300 lines, mock data, emerald brand colors, no indigo/blue, using `Badge` from `@/components/ui/badge`):
+  1. `SuperAdminOfferHandshake.tsx` — Cross-portal offer acceptance handshake tracker. Stats (Total/Pending/Accepted/Declined/Expired/Avg Time-to-Accept). Offer table with Offer ID/Candidate/Employer/Role/CTC/Sent/Expiry/Candidate Action/Employer Status/Handshake Status. Expandable rows show handshake timeline (Employer sent → Candidate viewed → Candidate accepted → Employer notified → Placement created) across Employer/Candidate/Cross-Portal. Sync conflict resolver panel. 12 mock offers.
+  2. `SuperAdminInterviewSync.tsx` — Cross-portal interview schedule sync. Stats (Total/Synced/Pending Sync/Conflicts/No-show Rate). Interview table with ID/Candidate/Employer+Recruiter/Role/Date-Time/Mode/By/Visibility/Sync/Status. Expandable rows show sync chain (Recruiter scheduled → Employer confirmed → Candidate notified → Calendar updated). Conflict detection (double-booking, sync failures). 12 mock interviews.
+  3. `SuperAdminGuaranteeClaims.tsx` — Cross-portal guarantee claim workflow. Stats (Active/Approved/Rejected/Total Refund/Avg Resolution). Claim table with ID/Placement/Candidate/Employer/Guarantor+Portal/Type/Reason/Within Guarantee/Status. Expandable rows show claim workflow (Recruiter/Training/Partner submits → Employer reviews → Finance approves → Credit note issued → Replacement search). SLA tracking panel. 8 mock claims across Recruiter/Training/Partner guarantors.
+  4. `SuperAdminT2hPipelineVisibility.tsx` — T2H pipeline visibility across Candidate/Training/Employer portals. Stats (Active/By Stage/Completion Rate/Placement Rate). Pipeline table with Candidate/Training Provider/Target Employer+Role/Training Stage/Employer Stage/Candidate Visibility toggle/Status. Expandable rows show 3-portal pipeline (Training module progress → Employer profile review/interview/offer → Candidate sees progress + employer stage). By-training-stage breakdown. 10 mock T2H candidates.
+  5. `SuperAdminConsentManagementPortal.tsx` — Cross-portal consent management. Stats (Total/Granted/Withdrawn/Pending/By Type). Consent table with ID/User/Portal/Type/Status/Granted+Expiry/Withdrawn/Purpose. Expandable rows show cross-portal consent flow visualization per record. DPDP Act 2023 compliance check panel (5 checks: purpose, withdrawal propagation, expiry tracking, pending SLA, expired auto-withdrawal). Withdrawal cascade example (Candidate withdraws Recruiter Outreach → 5 portal notifications). 15 mock consent records.
+  6. `SuperAdminUnifiedAuditTrail.tsx` — Unified audit trail per record across all portals. Stats (Records Indexed/Total Entries/Portals Touched/Trail Integrity). Record search table (search by ID/type). Once a record is selected, shows full chronological cross-portal timeline with Timestamp/Portal/User/Action/Field Changes (before→after)/IP Address. Immutable vertical timeline UI with action color-coded dots. Export + integrity verify actions. 5 mock records (Placement, Application, Transaction, Offer, Enrollment) with full timelines.
+  7. `SuperAdminCrossPortalTasks.tsx` — Cross-portal task assignment tracker. Stats (Total/Pending/Completed/Overdue/Portal Pairs). Task table with ID/Title/Assigned By (name+portal)/Assigned To (name+portal)/Type/Related Record/Due/Priority/Status. Expandable rows show cross-portal task chain. Task creation form (target portal + task type + due date). 12 mock cross-portal tasks across all 6 portal pairs.
+  8. `SuperAdminSkillCredentialSync.tsx` — Skill credential sync between Training and Candidate portals. Stats (Issued/Synced/Pending/Failed/Verified). Sync table with ID/Candidate/Training Provider/Skill+Level/Issue Date/Candidate Portal Status/Verified Status/Last Sync. Expandable rows show sync flow (Training issues cert → Skill added to candidate profile → Skill marked Verified → Employer sees verified badge). Failed sync queue with retry. Manual verification queue. 12 mock credentials.
+- Added 8 dynamic imports in a new "// Cross-Portal Workflow Bridges" section in `src/portals/admin/index.tsx` (after `TasksPage` import).
+- Added 8 switch cases in `index.tsx` distributed across the existing sections:
+  - 4 cases after `sa-placement-handoff` in "Cross-portal Process Bridges" group (offer-handshake, interview-sync, guarantee-claims, t2h-pipeline-visibility)
+  - 2 cases after `sa-incident-response` in "Security" group (consent-management-portal, unified-audit-trail)
+  - 1 case after `sa-comms-health` in "Comms" group (cross-portal-tasks)
+  - 1 case after `sa-hiring-funnel` in "Hiring Oversight" group (skill-credential-sync)
+- Each page uses `"use client"`, `PageHeader`/`StatCard`/`SectionCard`/`EmptyState` from `@/components/common`, `Icon` from `@/components/common/Icon`, `Badge` from `@/components/ui/badge` (NOT from common), `toast` from `sonner`. Emerald brand colors only — no indigo/blue.
+
+Routes (8):
+- `sa-offer-handshake` → SuperAdminOfferHandshake
+- `sa-interview-sync` → SuperAdminInterviewSync
+- `sa-guarantee-claims` → SuperAdminGuaranteeClaims
+- `sa-t2h-pipeline-visibility` → SuperAdminT2hPipelineVisibility
+- `sa-consent-management-portal` → SuperAdminConsentManagementPortal
+- `sa-unified-audit-trail` → SuperAdminUnifiedAuditTrail
+- `sa-cross-portal-tasks` → SuperAdminCrossPortalTasks
+- `sa-skill-credential-sync` → SuperAdminSkillCredentialSync
+
+Files Created (8):
+- src/portals/admin/SuperAdminOfferHandshake.tsx
+- src/portals/admin/SuperAdminInterviewSync.tsx
+- src/portals/admin/SuperAdminGuaranteeClaims.tsx
+- src/portals/admin/SuperAdminT2hPipelineVisibility.tsx
+- src/portals/admin/SuperAdminConsentManagementPortal.tsx
+- src/portals/admin/SuperAdminUnifiedAuditTrail.tsx
+- src/portals/admin/SuperAdminCrossPortalTasks.tsx
+- src/portals/admin/SuperAdminSkillCredentialSync.tsx
+- /home/z/my-project/agent-ctx/CROSS-PORTAL-WORKFLOW-BRIDGES-zai-code.md (work record)
+
+Files Modified (3):
+- src/components/common/Icon.tsx (added CalendarSync, ShieldAlert, UserX, EyeOff icons)
+- src/components/layout/portal-config.ts (added 8 children across 4 existing groups)
+- src/portals/admin/index.tsx (added 8 dynamic imports + 8 switch cases)
+
+Lint: 0 errors, 6 warnings (all pre-existing `react-hooks/incompatible-library` warnings about React Hook Form's `watch()` API in unrelated Training portal files; 0 warnings in any new file).
+
+HTTP Verification: Dev server was initially OOM-killed during first compile (sandbox memory pressure from Turbopack). Cleared `.next` cache, restarted with `nohup bun run dev`. Server ready in 902ms, first compile took 39.8s. HTTP 200 verified on root and all 8 new routes:
+- `GET /` → 200
+- `GET /?portal=admin&route=sa-offer-handshake` → 200 (compile 9ms, render 102ms)
+- `GET /?portal=admin&route=sa-interview-sync` → 200 (compile 6ms, render 151ms)
+- `GET /?portal=admin&route=sa-guarantee-claims` → 200 (compile 17ms, render 138ms)
+- `GET /?portal=admin&route=sa-t2h-pipeline-visibility` → 200 (compile 5ms, render 91ms)
+- `GET /?portal=admin&route=sa-consent-management-portal` → 200 (compile 4ms, render 95ms)
+- `GET /?portal=admin&route=sa-unified-audit-trail` → 200 (compile 4ms, render 97ms)
+- `GET /?portal=admin&route=sa-cross-portal-tasks` → 200 (compile 34ms, render 103ms)
+- `GET /?portal=admin&route=sa-skill-credential-sync` → 200 (compile 4ms, render 92ms)
+
+Issues: None. All 8 cross-portal workflow bridges built, sidebar items added to existing 4 groups (Process Oversight, Security, Communication, Hiring Oversight), routes wired up, lint passes with 0 errors, dev server healthy, all 8 routes serve HTTP 200. This completes the cross-portal audit — all 38 originally identified cross-portal gaps are now resolved by 23 bridge pages (5 transaction + 5 process + 5 communication + 8 workflow bridges).
+
+---
+Task ID: CROSS-PORTAL-WORKFLOW-BRIDGES-FINAL
+Agent: Main (Z.ai Code) + Subagent
+
+Task: Build the remaining 8 cross-portal workflow bridge pages to resolve ALL 38 identified cross-portal gaps.
+
+## 8 NEW Cross-Portal Workflow Bridge Pages
+
+### Process Oversight (+4 pages):
+1. **Offer Handshake** (`sa-offer-handshake`) — Cross-portal offer acceptance handshake. 12 offers with 5-step timeline (Employer sends → Candidate views → Candidate accepts → Employer notified → Placement created). Sync conflict resolver.
+2. **Interview Sync** (`sa-interview-sync`) — Cross-portal interview schedule sync. 12 interviews with 4-step sync chain (Recruiter schedules → Employer confirms → Candidate notified → Calendar updated). Double-booking + sync-failure detection.
+3. **Guarantee Claims** (`sa-guarantee-claims`) — Cross-portal guarantee claim workflow. 8 claims with multi-step chain (Recruiter submits → Employer reviews → Finance approves → Credit note issued → Replacement initiated). SLA tracking.
+4. **T2H Pipeline View** (`sa-t2h-pipeline-visibility`) — 3-portal T2H pipeline visibility (Training + Employer + Candidate). 10 candidates with per-stage visibility toggle. Shows training progress + employer review status + candidate awareness.
+
+### Security (+2 pages):
+5. **Cross-Portal Consent** (`sa-consent-management-portal`) — Cross-portal consent management. 15 records with DPDP Act 2023 compliance. Withdrawal cascade (candidate withdraws → all relevant portals notified).
+6. **Unified Audit Trail** (`sa-unified-audit-trail`) — Immutable cross-portal audit trail per record. Search by record ID → shows full chronological timeline across ALL portals. Field-level changes with before→after values + IP audit.
+
+### Communication (+1 page):
+7. **Cross-Portal Tasks** (`sa-cross-portal-tasks`) — Cross-portal task assignment. 12 tasks across 6 portal pairs. Task creation form (select target portal + user, task type, related record, due date). Task chain tracking.
+
+### Hiring Oversight (+1 page):
+8. **Skill Credential Sync** (`sa-skill-credential-sync`) — Skill credential sync between Training and Candidate portals. 12 credentials with sync flow (Training issues → Skill added to candidate profile → Verified badge → Employer sees verified skill). Failed sync queue + manual verification queue.
+
+## ALL 38 CROSS-PORTAL GAPS NOW RESOLVED
+
+Total cross-portal bridge pages built: 23
+- 5 Transaction Bridges (Finance group)
+- 5 Process Bridges (Process Oversight group)
+- 5 Communication Bridges (Communication group)
+- 8 Workflow Bridges (Process Oversight + Security + Communication + Hiring Oversight)
+
+## FINAL STATS
+- Super Admin page files: 177 (was 169, +8 new)
+- Total route cases: 177
+- Lint: 0 errors, 6 pre-existing warnings
+- Dev server: running on port 3000, HTTP 200
+- Browser-verified: Offer Handshake page renders with 12 offers, 5-step timeline, sync conflict resolver. All new bridge pages visible in sidebar.
+- Console: clean, no errors
+- Source code size: 18MB (below 20MB target)

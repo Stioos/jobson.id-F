@@ -188,6 +188,16 @@ const SuperAdminIncidentResponse = dynamic(() => import("./SuperAdminIncidentRes
 // Cross-portal shared pages
 const TasksPage = dynamic(() => import("@/portals/_settings-support-shared/TasksPage").then((m) => m.TasksPage));
 
+// Cross-Portal Workflow Bridges (final 8 — CROSS-PORTAL-WORKFLOW-BRIDGES)
+const SuperAdminOfferHandshake = dynamic(() => import("./SuperAdminOfferHandshake").then((m) => m.SuperAdminOfferHandshake));
+const SuperAdminInterviewSync = dynamic(() => import("./SuperAdminInterviewSync").then((m) => m.SuperAdminInterviewSync));
+const SuperAdminGuaranteeClaims = dynamic(() => import("./SuperAdminGuaranteeClaims").then((m) => m.SuperAdminGuaranteeClaims));
+const SuperAdminT2hPipelineVisibility = dynamic(() => import("./SuperAdminT2hPipelineVisibility").then((m) => m.SuperAdminT2hPipelineVisibility));
+const SuperAdminConsentManagementPortal = dynamic(() => import("./SuperAdminConsentManagementPortal").then((m) => m.SuperAdminConsentManagementPortal));
+const SuperAdminUnifiedAuditTrail = dynamic(() => import("./SuperAdminUnifiedAuditTrail").then((m) => m.SuperAdminUnifiedAuditTrail));
+const SuperAdminCrossPortalTasks = dynamic(() => import("./SuperAdminCrossPortalTasks").then((m) => m.SuperAdminCrossPortalTasks));
+const SuperAdminSkillCredentialSync = dynamic(() => import("./SuperAdminSkillCredentialSync").then((m) => m.SuperAdminSkillCredentialSync));
+
 // User Management System
 const SuperAdminRoles = dynamic(() => import("./SuperAdminRoles").then((m) => m.SuperAdminRoles));
 const SuperAdminGroups = dynamic(() => import("./SuperAdminGroups").then((m) => m.SuperAdminGroups));
@@ -287,6 +297,8 @@ export function render(route: string): React.ReactNode {
     case "sa-cookie-compliance": return <SuperAdminCookieCompliance />;
     case "sa-data-export-audit": return <SuperAdminDataExportAudit />;
     case "sa-incident-response": return <SuperAdminIncidentResponse />;
+    case "sa-consent-management-portal": return <SuperAdminConsentManagementPortal />;
+    case "sa-unified-audit-trail": return <SuperAdminUnifiedAuditTrail />;
 
     // Partners
     case "sa-partner-applications": return <SuperAdminPartnerApplications />;
@@ -316,6 +328,7 @@ export function render(route: string): React.ReactNode {
     case "sa-shared-notifications": return <SuperAdminSharedNotifications />;
     case "sa-unified-calendar": return <SuperAdminUnifiedCalendar />;
     case "sa-comms-health": return <SuperAdminCommsHealth />;
+    case "sa-cross-portal-tasks": return <SuperAdminCrossPortalTasks />;
 
     // Ops
     case "sa-tickets": return <SuperAdminTickets />;
@@ -373,6 +386,10 @@ export function render(route: string): React.ReactNode {
     case "sa-cross-portal-approvals": return <SuperAdminCrossPortalApprovals />;
     case "sa-sourcing-bridge": return <SuperAdminSourcingBridge />;
     case "sa-placement-handoff": return <SuperAdminPlacementHandoff />;
+    case "sa-offer-handshake": return <SuperAdminOfferHandshake />;
+    case "sa-interview-sync": return <SuperAdminInterviewSync />;
+    case "sa-guarantee-claims": return <SuperAdminGuaranteeClaims />;
+    case "sa-t2h-pipeline-visibility": return <SuperAdminT2hPipelineVisibility />;
 
     // Hiring Oversight
     case "sa-jobs-all": return <SuperAdminJobsAll />;
@@ -388,6 +405,7 @@ export function render(route: string): React.ReactNode {
     case "sa-guarantee-tracking": return <SuperAdminGuaranteeTracking />;
     case "sa-rejection-audit": return <SuperAdminRejectionAudit />;
     case "sa-hiring-funnel": return <SuperAdminHiringFunnel />;
+    case "sa-skill-credential-sync": return <SuperAdminSkillCredentialSync />;
 
     // Talent Oversight
     case "sa-talent-directory": return <SuperAdminTalentDirectory />;
