@@ -34,6 +34,9 @@ import {
   CalendarDays, AlarmClock,
   Pin,
   Activity, CheckSquare, Tag, Key, AlertCircle, Code, Webhook, Tags,
+  MailCheck, ListOrdered, Server,
+  Snowflake, Undo2, HeartHandshake, Bug, Crosshair, Cookie, Siren,
+  MousePointerClick, Share2,
   type LucideIcon,
 } from "lucide-react";
 
@@ -70,6 +73,9 @@ const map: Record<string, LucideIcon> = {
   CalendarDays, AlarmClock,
   Pin,
   Activity, CheckSquare, Tag, Key, AlertCircle, Code, Webhook, Tags,
+  MailCheck, ListOrdered, Server,
+  Snowflake, Undo2, HeartHandshake, Bug, Crosshair, Cookie, Siren,
+  MousePointerClick, Share2,
 };
 
 export function Icon({ name, className }: { name: string; className?: string }) {

@@ -6,16 +6,18 @@
   · optimizePackageImports
 
 ✓ Starting...
-✓ Ready in 1845ms
+Attention: Next.js now collects completely anonymous telemetry regarding usage.
+This information is used to shape Next.js' roadmap and prioritize features.
+You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+https://nextjs.org/telemetry
+
+✓ Ready in 1225ms
 ○ Compiling / ...
- GET / 200 in 11.7s (compile: 11.5s, render: 188ms)
- GET / 200 in 15.8s (compile: 15.2s, render: 584ms)
- GET / 200 in 14.2s (compile: 13.6s, render: 601ms)
- GET / 200 in 12.8s (compile: 12.1s, render: 649ms)
- GET /favicon.ico 200 in 2.7s (compile: 2.6s, render: 102ms)
- GET /favicon.ico 200 in 450ms (compile: 346ms, render: 104ms)
- GET / 200 in 272ms (compile: 46ms, render: 226ms)
- GET /favicon.ico 200 in 729ms (compile: 254ms, render: 475ms)
- GET / 200 in 77ms (compile: 17ms, render: 60ms)
- GET /favicon.ico 200 in 137ms (compile: 75ms, render: 62ms)
-n 137ms (compile: 75ms, render: 62ms)
+ GET / 200 in 32.0s (compile: 31.6s, render: 347ms)
+ GET / 200 in 8.9s (compile: 8.3s, render: 579ms)
+○ Compiling /[...slug] ...
+ GET /favicon.ico 200 in 10.0s (compile: 9.9s, render: 119ms)
+ GET / 200 in 331ms (compile: 15ms, render: 316ms)
+ GET /favicon.ico 200 in 477ms (compile: 230ms, render: 246ms)
+✓ Finished writing to filesystem cache in 12.7s
+ writing to filesystem cache in 12.7s
