@@ -61,7 +61,7 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-8 flex flex-col items-center justify-between gap-3 border-t pt-6 text-xs text-muted-foreground sm:flex-row">
-          <p>© {new Date().getFullYear()} JOBSONN Technologies. Demo prototype — all data is simulated.</p>
+          <p>© 2026 JOBSONN Technologies. Demo prototype — all data is simulated.</p>
           <div className="flex items-center gap-4">
             <button className="hover:text-foreground">Privacy</button>
             <button className="hover:text-foreground">Terms</button>

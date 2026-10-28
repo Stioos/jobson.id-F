@@ -1,6 +1,10 @@
+⚠ `eslint` configuration in next.config.ts is no longer supported. See more info here: https://nextjs.org/docs/app/api-reference/cli/next#next-lint-options
+⚠ Invalid next.config.ts options detected: 
+⚠     Unrecognized key(s) in object: 'eslint'
+⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
 ▲ Next.js 16.1.3 (Turbopack)
 - Local:         http://localhost:3000
-- Network:       http://21.0.8.185:3000
+- Network:       http://21.0.21.199:3000
 - Environments: .env
 - Experiments (use with caution):
   · optimizePackageImports
@@ -11,19 +15,15 @@ This information is used to shape Next.js' roadmap and prioritize features.
 You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
 https://nextjs.org/telemetry
 
-✓ Ready in 915ms
+✓ Ready in 600ms
 ○ Compiling / ...
- GET / 200 in 22.1s (compile: 21.7s, render: 347ms)
- GET / 200 in 37.7s (compile: 36.5s, render: 1201ms)
- GET /auth 200 in 41s (compile: 41s, render: 276ms)
- GET / 200 in 41s (compile: 40s, render: 1054ms)
- GET / 200 in 335ms (compile: 8ms, render: 326ms)
- GET / 200 in 260ms (compile: 133ms, render: 127ms)
- GET /auth 200 in 264ms (compile: 101ms, render: 163ms)
- GET / 200 in 383ms (compile: 20ms, render: 363ms)
- GET /favicon.ico 200 in 453ms (compile: 305ms, render: 148ms)
- GET / 200 in 86ms (compile: 21ms, render: 65ms)
- GET /favicon.ico 200 in 314ms (compile: 82ms, render: 233ms)
- GET /favicon.ico 200 in 95ms (compile: 9ms, render: 86ms)
- GET / 200 in 56ms (compile: 7ms, render: 48ms)
- in 56ms (compile: 7ms, render: 48ms)
+ GET / 200 in 2.5s (compile: 2.3s, render: 192ms)
+ GET / 200 in 32.4s (compile: 31.2s, render: 1167ms)
+ GET /auth 200 in 32.3s (compile: 32.1s, render: 157ms)
+ GET / 200 in 42ms (compile: 6ms, render: 36ms)
+ GET / 200 in 158ms (compile: 7ms, render: 152ms)
+ GET /auth 200 in 109ms (compile: 50ms, render: 59ms)
+ GET /favicon.ico 200 in 224ms (compile: 62ms, render: 161ms)
+ GET / 200 in 62ms (compile: 7ms, render: 55ms)
+ GET / 200 in 53ms (compile: 7ms, render: 46ms)
+ GET /favicon.ico 200 in 219ms (compile: 71ms, render: 148ms)
