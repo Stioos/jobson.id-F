@@ -758,6 +758,7 @@ const APPS_ITEMS = [
   { label: "Employer", icon: Building2, color: "#8B5CF6", portal: "employer" as const, desc: "Hire talent & manage postings" },
   { label: "Recruiter", icon: Briefcase, color: "#F59E0B", portal: "recruiter" as const, desc: "Source candidates & earn commissions" },
   { label: "Partner", icon: Handshake, color: "#10B981", portal: "partner" as const, desc: "Grow your business with us" },
+  { label: "Super Admin", icon: ShieldCheck, color: "#EF4444", portal: "admin" as const, desc: "Platform governance & control" },
 ];
 
 function AppsDropdown() {
@@ -786,13 +787,13 @@ function AppsDropdown() {
       </button>
       {open && (
         <div className="absolute right-0 top-full z-50 pt-2" style={{ filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.18))" }}>
-          <div className="w-[300px] rounded-xl border bg-popover p-3">
+          <div className="w-[320px] rounded-xl border bg-popover p-3">
             {/* Header */}
             <div className="mb-3 flex items-center justify-between border-b pb-2">
               <span className="text-[10px] font-bold uppercase tracking-widest text-brand">Switch Portal</span>
-              <span className="text-[9px] text-muted-foreground">4 portals</span>
+              <span className="text-[9px] text-muted-foreground">5 portals</span>
             </div>
-            {/* 2x2 grid */}
+            {/* grid — 2 cols x 3 rows (5 items + 1 spacer) */}
             <div className="grid grid-cols-2 gap-2">
               {APPS_ITEMS.map((item) => {
                 const Icon = item.icon;

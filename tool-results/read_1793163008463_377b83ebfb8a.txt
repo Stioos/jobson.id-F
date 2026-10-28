@@ -1,0 +1,837 @@
+     1→import type { NavSection, Portal } from "@/lib/types";
+     2→
+     3→export interface PortalConfig {
+     4→  id: Portal;
+     5→  label: string;
+     6→  short: string;
+     7→  description: string;
+     8→  accent: string;
+     9→  sections: NavSection[];
+    10→}
+    11→
+    12→// ============================================================
+    13→// NAVIGATION DESIGN PRINCIPLES
+    14→// - Max 4 MAIN items per portal (top-level, always visible)
+    15→// - Max 6 SUB-items per main item (expandable/collapsible)
+    16→// - Max 24 leaf routes per portal
+    17→// - Each main item groups related workflows
+    18→// - Inspired by leading recruitment-platform partner portals
+    19→//   (Naukri Resdex, LinkedIn Recruiter, Workday, Greenhouse, Lever)
+    20→// ============================================================
+    21→
+    22→export const portalConfigs: Record<Portal, PortalConfig> = {
+    23→  // ============================================================
+    24→  // PUBLIC CAREER PORTAL
+    25→  // ============================================================
+    26→  public: {
+    27→    id: "public",
+    28→    label: "Career Portal",
+    29→    short: "Public",
+    30→    description: "Find your next opportunity",
+    31→    accent: "bg-brand",
+    32→    sections: [
+    33→      {
+    34→        title: "Explore",
+    35→        items: [
+    36→          { key: "home", label: "Home", icon: "Home" },
+    37→          { key: "jobs", label: "Jobs", icon: "Briefcase" },
+    38→          { key: "companies", label: "Companies", icon: "Building2" },
+    39→          { key: "salary-insights", label: "Salary Insights", icon: "Banknote" },
+    40→          { key: "training", label: "Training & Courses", icon: "GraduationCap" },
+    41→          { key: "career-resources", label: "Career Resources", icon: "BookOpen" },
+    42→        ],
+    43→      },
+    44→      {
+    45→        title: "Company",
+    46→        items: [
+    47→          { key: "about", label: "About JOBSONN", icon: "Globe" },
+    48→          { key: "contact", label: "Contact", icon: "Mail" },
+    49→        ],
+    50→      },
+    51→    ],
+    52→  },
+    53→
+    54→  // ============================================================
+    55→  // CANDIDATE PORTAL (merged with Learner Portal)
+    56→  // 4 main × 6 sub = 24 routes
+    57→  // ============================================================
+    58→  candidate: {
+    59→    id: "candidate",
+    60→    label: "Candidate Portal",
+    61→    short: "Candidate",
+    62→    description: "Jobs, learning & career growth",
+    63→    accent: "bg-brand",
+    64→    sections: [
+    65→      {
+    66→        title: "Main",
+    67→        items: [
+    68→          //Dashboard—LEAF(nosub-itemsdirectlink),
+    69→          { key: "overview", label: "Dashboard", icon: "LayoutDashboard" },
+    70→          //Tasks—MAIN(sharedtaskmanagementwithsub-sidebarforallportals),
+    71→          {
+    72→            key: "tasks-grp", label: "Tasks", icon: "CheckSquare", badge: "6", children: [
+    73→              { key: "tasks", label: "All Tasks", icon: "ListChecks" },
+    74→              { key: "tasks/calls", label: "Calls", icon: "Phone" },
+    75→              { key: "tasks/emails", label: "Emails", icon: "Mail" },
+    76→              { key: "tasks/meetings", label: "Meetings", icon: "Video" },
+    77→              { key: "tasks/follow-ups", label: "Follow-ups", icon: "ArrowUpRight" },
+    78→            ],
+    79→          },
+    80→          //Profile—NEWMAIN(profile-relatedpagesmovedherefromDashboard),
+    81→          {
+    82→            key: "profile-grp", label: "Profile", icon: "User", children: [
+    83→              { key: "profile", label: "My Profile", icon: "User" },
+    84→              { key: "profile-preview", label: "Profile Preview", icon: "Eye" },
+    85→              { key: "profile-analytics", label: "Profile Analytics", icon: "BarChart3" },
+    86→              { key: "profile-optimizer", label: "Profile Optimizer", icon: "Sparkles" },
+    87→              { key: "cover-letter", label: "Cover Letter Builder", icon: "FilePen" },
+    88→              { key: "resume", label: "Resume & CV", icon: "FileText" },
+    89→              { key: "resume-builder", label: "Resume Builder", icon: "FilePlus2" },
+    90→              { key: "portfolio", label: "Portfolio", icon: "FolderGit2" },
+    91→              { key: "documents", label: "Documents", icon: "FileStack" },
+    92→            ],
+    93→          },
+    94→          //CareerTools—NEWMAIN(pendingitems:alerts+accountitems),
+    95→          {
+    96→            key: "career-grp", label: "Career Tools", icon: "TrendingUp", children: [
+    97→              { key: "alerts", label: "Job Alerts", icon: "Bell" },
+    98→              { key: "skills", label: "My Skills", icon: "Brain" },
+    99→              { key: "goals", label: "Learning Goals", icon: "Target" },
+   100→              { key: "messages", label: "Messages", icon: "Mail" },
+   101→              { key: "salary-calculator", label: "Salary Calculator", icon: "Calculator" },
+   102→              { key: "interview-prep", label: "Interview Prep", icon: "BookOpen" },
+   103→              { key: "career-explorer", label: "Career Explorer", icon: "Route" },
+   104→              { key: "reference-requests", label: "References", icon: "UserCheck" },
+   105→              { key: "group-chat", label: "Group Chat", icon: "Users" },
+   106→            ],
+   107→          },
+   108→          {
+   109→            key: "jobs", label: "Jobs", icon: "Briefcase", children: [
+   110→              { key: "find-jobs", label: "Browse Jobs", icon: "Search" },
+   111→              { key: "recommended", label: "Recommended", icon: "Sparkles", badge: "AI" },
+   112→              { key: "saved-jobs", label: "Saved Jobs", icon: "Bookmark" },
+   113→              { key: "applications", label: "Applications", icon: "Inbox" },
+   114→              { key: "application-pipeline", label: "Pipeline", icon: "KanbanSquare" },
+   115→              { key: "interviews", label: "Interviews", icon: "Calendar" },
+   116→              { key: "interview-reschedule", label: "Reschedule Requests", icon: "CalendarClock" },
+   117→              { key: "video-call", label: "Video Calls", icon: "Video" },
+   118→              { key: "offers", label: "Job Offers", icon: "Gift" },
+   119→              { key: "offer-negotiation", label: "Offer Negotiation", icon: "MessagesSquare" },
+   120→              { key: "onboarding-checklist", label: "Onboarding Checklist", icon: "ListChecks" },
+   121→              { key: "compare-jobs", label: "Compare Jobs", icon: "Columns3" },
+   122→              { key: "compare-offers", label: "Compare Offers", icon: "Scale" },
+   123→              { key: "company-research", label: "Company Research", icon: "Search" },
+   124→            ],
+   125→          },
+   126→          {
+   127→            key: "learning", label: "Learning Academy", icon: "GraduationCap", children: [
+   128→              { key: "catalog", label: "Browse Courses", icon: "BookOpen" },
+   129→              { key: "my-learning", label: "My Learning", icon: "GraduationCap" },
+   130→              { key: "certificates", label: "My Certificates", icon: "Award" },
+   131→              { key: "career-paths", label: "Career Paths", icon: "Route" },
+   132→              { key: "achievements", label: "Achievements", icon: "Trophy" },
+   133→              { key: "partner-courses", label: "Partner Courses", icon: "Handshake" },
+   134→              { key: "events-calendar", label: "Events & Webinars", icon: "CalendarDays" },
+   135→            ],
+   136→          },
+   137→          {
+   138→            key: "billing", label: "Billing", icon: "Wallet", children: [
+   139→              { key: "my-wallet", label: "My Wallet", icon: "Wallet" },
+   140→              { key: "withdraw", label: "Withdraw Funds", icon: "ArrowDownToLine" },
+   141→              { key: "my-transactions", label: "Transactions", icon: "Receipt" },
+   142→              { key: "invoices", label: "Invoices", icon: "FileText" },
+   143→              { key: "my-subscription", label: "Subscription", icon: "Crown" },
+   144→              { key: "payments", label: "Payments", icon: "CreditCard" },
+   145→              { key: "payment-methods", label: "Payment Methods", icon: "CreditCard" },
+   146→              { key: "promo-codes", label: "Promo Codes", icon: "Ticket" },
+   147→              { key: "transaction-disputes", label: "Disputes", icon: "AlertTriangle" },
+   148→              { key: "referrals", label: "Referrals", icon: "Repeat" },
+   149→            ],
+   150→          },
+   151→          {
+   152→            key: "talent-solutions", label: "Talent Solutions", icon: "GraduationCap", children: [
+   153→              { key: "ts-hub", label: "Solutions Hub", icon: "Sparkles" },
+   154→              { key: "ts-my-programs", label: "My Programs", icon: "Briefcase" },
+   155→              { key: "ts-transactions", label: "Transactions", icon: "Receipt" },
+   156→            ],
+   157→          },
+   158→          {
+   159→            key: "support-grp", label: "Support", icon: "HelpCircle", children: [
+   160→              { key: "support-hub", label: "Help Center", icon: "LifeBuoy" },
+   161→              { key: "recruiter-reviews", label: "Recruiter Reviews", icon: "Star" },
+   162→              { key: "support", label: "Support (Legacy)", icon: "HelpCircle" },
+   163→            ],
+   164→          },
+   165→          {
+   166→            key: "settings-grp", label: "Settings", icon: "Settings", children: [
+   167→              { key: "settings-hub", label: "Settings Center", icon: "Settings" },
+   168→              { key: "security-center", label: "Security Center", icon: "ShieldCheck" },
+   169→              { key: "notification-center", label: "Notification Center", icon: "BellRing" },
+   170→              { key: "notification-preferences", label: "Notifications", icon: "Bell" },
+   171→              { key: "settings", label: "Privacy (Legacy)", icon: "Shield" },
+   172→            ],
+   173→          }
+   174→        ],
+   175→      },
+   176→    ],
+   177→  },
+   178→
+   179→  // ============================================================
+   180→  // EMPLOYER PORTAL (merged with Enterprise Portal)
+   181→  // 5 main × up to 6 sub = 24+ routes
+   182→  // ============================================================
+   183→  employer: {
+   184→    id: "employer",
+   185→    label: "Employer Portal",
+   186→    short: "Employer",
+   187→    description: "Hire, train & manage talent",
+   188→    accent: "bg-brand",
+   189→    sections: [
+   190→      {
+   191→        title: "Main",
+   192→        items: [
+   193→          //Dashboard—LEAF(nosub-itemsdirectlink),
+   194→          { key: "overview", label: "Dashboard", icon: "LayoutDashboard" },
+   195→          //Tasks—MAIN(sharedtaskmanagementwithsub-sidebarforallportals),
+   196→          {
+   197→            key: "tasks-grp", label: "Tasks", icon: "CheckSquare", badge: "6", children: [
+   198→              { key: "tasks", label: "All Tasks", icon: "ListChecks" },
+   199→              { key: "tasks/calls", label: "Calls", icon: "Phone" },
+   200→              { key: "tasks/emails", label: "Emails", icon: "Mail" },
+   201→              { key: "tasks/meetings", label: "Meetings", icon: "Video" },
+   202→              { key: "tasks/follow-ups", label: "Follow-ups", icon: "ArrowUpRight" },
+   203→            ],
+   204→          },
+   205→          {
+   206→            key: "hiring", label: "Hiring", icon: "Briefcase", children: [
+   207→              { key: "jobs", label: "Jobs", icon: "Briefcase" },
+   208→              { key: "create-job", label: "Create Job", icon: "PenSquare" },
+   209→              { key: "requisitions", label: "Requisitions", icon: "ClipboardList" },
+   210→              { key: "applicants", label: "Applicants", icon: "Users", badge: "18" },
+   211→              { key: "pipeline", label: "Pipeline", icon: "KanbanSquare" },
+   212→              { key: "interviews", label: "Interviews", icon: "Calendar" },
+   213→              { key: "interview-kits", label: "Interview Kits", icon: "FileBox" },
+   214→              { key: "debriefs", label: "Debriefs", icon: "Users2" },
+   215→              { key: "hiring-manager-portal", label: "Hiring Manager Portal", icon: "Briefcase" },
+   216→            ],
+   217→          },
+   218→          {
+   219→            key: "talent", label: "Talent & Team", icon: "Users", children: [
+   220→              { key: "talent-search", label: "Talent Search", icon: "Search" },
+   221→              { key: "talent-pool", label: "Talent Pool", icon: "Database" },
+   222→              { key: "shortlists", label: "Shortlists", icon: "ListChecks" },
+   223→              { key: "compare-candidates", label: "Compare Candidates", icon: "Columns3" },
+   224→              { key: "offers", label: "Offers", icon: "Gift" },
+   225→              { key: "hires", label: "Employees & Hires", icon: "Users2" },
+   226→              { key: "background-verification", label: "Background Verification", icon: "ShieldCheck" },
+   227→              { key: "onboarding", label: "Onboarding Tracker", icon: "UserPlus" },
+   228→              { key: "probation", label: "Probation Tracking", icon: "Clock" },
+   229→              { key: "performance-review", label: "Performance Review", icon: "Star" },
+   230→              { key: "leave-management", label: "Leave Management", icon: "CalendarOff" },
+   231→              { key: "exit-management", label: "Exit Management", icon: "DoorOpen" },
+   232→              { key: "referral-program", label: "Referral Program", icon: "UserPlus" },
+   233→              { key: "campaigns", label: "Bulk Campaigns", icon: "Send" },
+   234→              { key: "team", label: "Recruitment Team", icon: "Users" },
+   235→            ],
+   236→          },
+   237→          {
+   238→            key: "learning", label: "Learning & Dev", icon: "GraduationCap", children: [
+   239→              { key: "ld-dashboard", label: "L&D Dashboard", icon: "LayoutDashboard" },
+   240→              { key: "assign-learning", label: "Assign Learning", icon: "GraduationCap" },
+   241→              { key: "employee-learning", label: "Employee Learning", icon: "UserCheck" },
+   242→              { key: "compliance-training", label: "Compliance", icon: "ShieldCheck" },
+   243→              { key: "skill-gaps", label: "Skill Gaps", icon: "GitBranch", badge: "AI" },
+   244→              { key: "training-roi", label: "Training ROI", icon: "TrendingUp" },
+   245→            ],
+   246→          },
+   247→          {
+   248→            key: "enterprise", label: "Enterprise", icon: "Building2", children: [
+   249→              { key: "ent-overview", label: "Enterprise Overview", icon: "LayoutDashboard" },
+   250→              { key: "ent-entities", label: "Entities & Brands", icon: "Building2" },
+   251→              { key: "ent-headcount", label: "Headcount Planning", icon: "Users2" },
+   252→              { key: "ent-budgets", label: "Budgets", icon: "Banknote" },
+   253→              { key: "ent-approvals", label: "Approvals", icon: "ShieldCheck" },
+   254→              { key: "ent-audit", label: "Audit & Compliance", icon: "ScrollText" },
+   255→            ],
+   256→          },
+   257→          {
+   258→            key: "finance", label: "Finance", icon: "Wallet", children: [
+   259→              { key: "emp-wallet", label: "Employer Wallet", icon: "Wallet" },
+   260→              { key: "emp-transactions", label: "Transactions", icon: "Receipt" },
+   261→              { key: "emp-settlements", label: "Partner Settlements", icon: "Coins" },
+   262→              { key: "invoices", label: "Invoices", icon: "FileText" },
+   263→              { key: "tax-documents", label: "Tax Documents", icon: "ReceiptText" },
+   264→              { key: "purchase-orders", label: "Purchase Orders", icon: "FileText" },
+   265→              { key: "cost-per-hire", label: "Cost per Hire", icon: "TrendingDown" },
+   266→              { key: "credits", label: "Credits & Tokens", icon: "Coins" },
+   267→              { key: "subscription", label: "Subscription & Billing", icon: "Crown" },
+   268→              { key: "analytics", label: "Analytics", icon: "BarChart3" },
+   269→            ],
+   270→          },
+   271→          {
+   272→            key: "partners", label: "Partners", icon: "Handshake", children: [
+   273→              { key: "partner-talent", label: "Partner Talent", icon: "Users" },
+   274→              { key: "partner-services", label: "Partner Services", icon: "Briefcase" },
+   275→            ],
+   276→          },
+   277→          {
+   278→            key: "talent-solutions", label: "Talent Solutions", icon: "GraduationCap", children: [
+   279→              { key: "ts-hub", label: "Solutions Hub", icon: "Sparkles" },
+   280→              { key: "ts-programs", label: "Programs", icon: "Briefcase" },
+   281→              { key: "ts-transactions", label: "Transactions", icon: "Receipt" },
+   282→              { key: "partner-talent", label: "Partner Talent", icon: "Users" },
+   283→            ],
+   284→          },
+   285→          {
+   286→            key: "support-grp", label: "Support", icon: "HelpCircle", children: [
+   287→              { key: "support-hub", label: "Help Center", icon: "LifeBuoy" },
+   288→              { key: "messages", label: "Messages", icon: "Mail" },
+   289→              { key: "whatsapp-sms", label: "WhatsApp / SMS", icon: "MessageCircle" },
+   290→              { key: "support", label: "Legacy Support", icon: "HelpCircle" },
+   291→            ],
+   292→          },
+   293→          {
+   294→            key: "settings-grp", label: "Settings", icon: "Settings", children: [
+   295→              { key: "settings-hub", label: "Settings Center", icon: "Settings" },
+   296→              { key: "security-center", label: "Security Center", icon: "ShieldCheck" },
+   297→              { key: "notification-preferences", label: "Notifications", icon: "Bell" },
+   298→              { key: "calendar-sync", label: "Calendar Sync", icon: "CalendarCheck" },
+   299→              { key: "status-notifications", label: "Status Notifications", icon: "BellRing" },
+   300→              { key: "company-preview", label: "Company Preview", icon: "Eye" },
+   301→              { key: "branding-score", label: "Branding Score", icon: "TrendingUp" },
+   302→              { key: "benefits-manager", label: "Benefits Manager", icon: "Gift" },
+   303→              { key: "team", label: "Team & Roles", icon: "Users" },
+   304→              { key: "integrations", label: "Integrations", icon: "Plug" },
+   305→              { key: "settings", label: "Legacy Settings", icon: "Cog" },
+   306→            ],
+   307→          }
+   308→        ],
+   309→      },
+   310→    ],
+   311→  },
+   312→
+   313→  // ============================================================
+   314→  // RECRUITER PORTAL (merged with Agency Portal)
+   315→  // 8 main groups covering the full reference recruitment model
+   316→  // ============================================================
+   317→  recruiter: {
+   318→    id: "recruiter",
+   319→    label: "Recruiter Portal",
+   320→    short: "Recruiter",
+   321→    description: "Source, submit & place talent",
+   322→    accent: "bg-brand",
+   323→    sections: [
+   324→      {
+   325→        title: "Main",
+   326→        items: [
+   327→          //Dashboard—LEAF(nosub-itemsdirectlink),
+   328→          { key: "overview", label: "Dashboard", icon: "LayoutDashboard" },
+   329→          //Tasks—MAIN(sharedtaskmanagementwithsub-sidebarforallportals),
+   330→          {
+   331→            key: "tasks-grp", label: "Tasks", icon: "CheckSquare", badge: "6", children: [
+   332→              { key: "tasks", label: "All Tasks", icon: "ListChecks" },
+   333→              { key: "tasks/calls", label: "Calls", icon: "Phone" },
+   334→              { key: "tasks/emails", label: "Emails", icon: "Mail" },
+   335→              { key: "tasks/meetings", label: "Meetings", icon: "Video" },
+   336→              { key: "tasks/follow-ups", label: "Follow-ups", icon: "ArrowUpRight" },
+   337→            ],
+   338→          },
+   339→          {
+   340→            key: "overview-grp", label: "Analytics & Intel", icon: "Gauge", children: [
+   341→              { key: "analytics", label: "Analytics Hub", icon: "Gauge" },
+   342→              { key: "activity", label: "Activity & Comms", icon: "History" },
+   343→              { key: "report-builder", label: "Report Builder", icon: "BarChart3" },
+   344→              { key: "talent-forecast", label: "Talent Forecast", icon: "TrendingUp" },
+   345→              { key: "recruiting-ai", label: "Recruiting AI", icon: "Sparkles", badge: "AI" },
+   346→              { key: "audit-logs", label: "Audit Logs", icon: "ScrollText" },
+   347→            ],
+   348→          },
+   349→          {
+   350→            key: "clients-grp", label: "Clients & Business", icon: "Building2", children: [
+   351→              { key: "client-accounts", label: "Client Accounts", icon: "Building2" },
+   352→              { key: "clients", label: "Client Companies", icon: "Handshake" },
+   353→              { key: "client-dev", label: "Client Development", icon: "Target" },
+   354→              { key: "marketing", label: "Marketing Centre", icon: "Megaphone" },
+   355→              { key: "requisitions", label: "Requisitions", icon: "Briefcase" },
+   356→              { key: "ag-clients", label: "Agency Clients", icon: "Handshake" },
+   357→            ],
+   358→          },
+   359→          {
+   360→            key: "jobs-grp", label: "Jobs & Pipeline", icon: "Briefcase", children: [
+   361→              { key: "job-orders", label: "Job Orders", icon: "ClipboardList", badge: "5" },
+   362→              { key: "openings", label: "Openings & Headcount", icon: "Users" },
+   363→              { key: "pipeline", label: "Pipeline Board", icon: "KanbanSquare" },
+   364→              { key: "submissions", label: "Submissions", icon: "Send" },
+   365→              { key: "submission-tracker", label: "Submission Tracker", icon: "Send" },
+   366→              { key: "interview-pipeline", label: "Interview Pipeline", icon: "Calendar" },
+   367→              { key: "scheduling", label: "Scheduling", icon: "CalendarCheck2" },
+   368→            ],
+   369→          },
+   370→          {
+   371→            key: "sourcing-grp", label: "Talent & Sourcing", icon: "Search", children: [
+   372→              { key: "candidates", label: "Candidate Pool", icon: "Users" },
+   373→              { key: "ai-match-scoring", label: "AI Match Scoring", icon: "Sparkles", badge: "AI" },
+   374→              { key: "talent-pool", label: "Talent Pools", icon: "Database" },
+   375→              { key: "hotlists", label: "Hotlists", icon: "Flame" },
+   376→              { key: "dedup-center", label: "Dedup Center", icon: "Copy" },
+   377→              { key: "boolean-search", label: "Boolean Search", icon: "SearchCode" },
+   378→              { key: "resume-parser", label: "Resume Parser", icon: "FileSearch" },
+   379→              { key: "network-sourcing", label: "Network Sourcing", icon: "Network", badge: "AI" },
+   380→              { key: "referrals", label: "Referrals", icon: "UserCheck" },
+   381→              { key: "sourcing-campaigns", label: "Campaigns", icon: "Megaphone" },
+   382→              { key: "partner-candidates", label: "Partner Candidates", icon: "GraduationCap" },
+   383→              { key: "partner-network", label: "Partner Network", icon: "Handshake" },
+   384→            ],
+   385→          },
+   386→          {
+   387→            key: "hiring-grp", label: "Hiring & Ops", icon: "ClipboardCheck", children: [
+   388→              { key: "offers", label: "Offers", icon: "FileText" },
+   389→              { key: "offer-esign", label: "Offer E-Sign", icon: "FileSignature" },
+   390→              { key: "assessments", label: "Assessments", icon: "ClipboardCheck" },
+   391→              { key: "feedback", label: "Interview Feedback", icon: "Star" },
+   392→              { key: "placements", label: "Placements", icon: "Handshake" },
+   393→              { key: "placement-verification", label: "Placement Verification", icon: "BadgeCheck" },
+   394→              { key: "guarantees", label: "Guarantee Tracker", icon: "ShieldCheck" },
+   395→              { key: "onboarding", label: "Onboarding", icon: "UserCheck" },
+   396→              { key: "tasks", label: "Tasks & Follow-ups", icon: "ListChecks", badge: "2" },
+   397→            ],
+   398→          },
+   399→          {
+   400→            key: "finance-grp", label: "Finance", icon: "Wallet", children: [
+   401→              { key: "wallet", label: "Wallet & Revenue", icon: "Wallet" },
+   402→              { key: "multi-currency-wallet", label: "Multi-Currency Wallet", icon: "Wallet" },
+   403→              { key: "payouts", label: "Payouts", icon: "ArrowDownToLine" },
+   404→              { key: "settlements", label: "Settlements", icon: "Coins" },
+   405→              { key: "commissions", label: "Commissions", icon: "Percent" },
+   406→              { key: "invoices", label: "Invoices & Billing", icon: "Receipt" },
+   407→              { key: "gst-invoice-generator", label: "GST Invoice Generator", icon: "FileText" },
+   408→              { key: "billing-milestones", label: "Billing Milestones", icon: "Milestone" },
+   409→              { key: "earnings-forecast", label: "Earnings Forecast", icon: "TrendingUp" },
+   410→              { key: "client-payment-aging", label: "Payment Aging", icon: "Clock" },
+   411→              { key: "timesheets", label: "Timesheets", icon: "Calendar" },
+   412→              { key: "candidate-compliance", label: "Compliance", icon: "ShieldCheck" },
+   413→            ],
+   414→          },
+   415→          {
+   416→            key: "comms-grp", label: "Comms & Support", icon: "Mail", children: [
+   417→              { key: "inbox", label: "Candidate Inbox", icon: "Inbox", badge: "2" },
+   418→              { key: "whatsapp", label: "WhatsApp", icon: "MessageCircle" },
+   419→              { key: "sequences", label: "Drip Campaigns", icon: "Workflow" },
+   420→              { key: "email-templates", label: "Email Templates", icon: "Mail" },
+   421→              { key: "rejection-automation", label: "Rejection Automation", icon: "MailX" },
+   422→              { key: "sms-inbox", label: "SMS Inbox", icon: "Smartphone" },
+   423→              { key: "auto-reminders", label: "Auto Reminders", icon: "AlarmClock" },
+   424→              { key: "follow-up-automation", label: "Follow-up Automation", icon: "Workflow" },
+   425→              { key: "voip-logging", label: "VoIP Call Logs", icon: "PhoneCall" },
+   426→              { key: "messages", label: "Messages", icon: "MessagesSquare" },
+   427→              { key: "support", label: "Support", icon: "HelpCircle" },
+   428→            ],
+   429→          },
+   430→          {
+   431→            key: "agency-grp", label: "Agency & Team", icon: "Settings", children: [
+   432→              { key: "recruiters", label: "Recruiter Team", icon: "Users" },
+   433→              { key: "recruiter-profile-public", label: "Public Profile", icon: "UserCircle" },
+   434→              { key: "agency-branding", label: "Agency Branding", icon: "Palette" },
+   435→              { key: "ag-overview", label: "Agency Overview", icon: "LayoutDashboard" },
+   436→              { key: "ag-profile", label: "Agency Profile", icon: "Building2" },
+   437→              { key: "ag-recruiters", label: "Agency Recruiters", icon: "Users" },
+   438→              { key: "ag-commissions", label: "Commission Recon", icon: "Coins" },
+   439→              { key: "ag-settings", label: "Agency Settings", icon: "Settings" },
+   440→            ],
+   441→          },
+   442→          {
+   443→            key: "talent-solutions", label: "Talent Solutions", icon: "GraduationCap", children: [
+   444→              { key: "ts-hub", label: "T2H Candidates", icon: "Users" },
+   445→              { key: "ts-transactions", label: "Transactions", icon: "Receipt" },
+   446→            ],
+   447→          },
+   448→          {
+   449→            key: "support-grp", label: "Support", icon: "HelpCircle", children: [
+   450→              { key: "support-hub", label: "Help Center", icon: "LifeBuoy" },
+   451→              { key: "inbox", label: "Candidate Inbox", icon: "Inbox" },
+   452→              { key: "support", label: "Legacy Support", icon: "HelpCircle" },
+   453→            ],
+   454→          },
+   455→          {
+   456→            key: "settings-grp", label: "Settings", icon: "Settings", children: [
+   457→              { key: "settings-hub", label: "Settings Center", icon: "Settings" },
+   458→              { key: "security-center", label: "Security Center", icon: "ShieldCheck" },
+   459→              { key: "notification-preferences", label: "Notifications", icon: "Bell" },
+   460→              { key: "recruiters", label: "Recruiter Team", icon: "Users" },
+   461→              { key: "settings", label: "Legacy Settings", icon: "Cog" },
+   462→            ],
+   463→          }
+   464→        ],
+   465→      },
+   466→    ],
+   467→  },
+   468→
+   469→  // ============================================================
+   470→  // TRAINING PORTAL (merged with Admin Portal)
+   471→  // 4 main × 6 sub = 24 routes (consolidated from 75!)
+   472→  // ============================================================
+   473→  training: {
+   474→    id: "training",
+   475→    label: "Training & Admin Portal",
+   476→    short: "Training",
+   477→    description: "Corporate training + platform admin",
+   478→    accent: "bg-brand",
+   479→    sections: [
+   480→      {
+   481→        title: "Main",
+   482→        items: [
+   483→          //Dashboard—LEAF(nosub-itemsdirectlink),
+   484→          { key: "overview", label: "Dashboard", icon: "LayoutDashboard" },
+   485→          //Tasks—MAIN(sharedtaskmanagementwithsub-sidebarforallportals),
+   486→          {
+   487→            key: "tasks-grp", label: "Tasks", icon: "CheckSquare", badge: "6", children: [
+   488→              { key: "tasks", label: "All Tasks", icon: "ListChecks" },
+   489→              { key: "tasks/calls", label: "Calls", icon: "Phone" },
+   490→              { key: "tasks/emails", label: "Emails", icon: "Mail" },
+   491→              { key: "tasks/meetings", label: "Meetings", icon: "Video" },
+   492→              { key: "tasks/follow-ups", label: "Follow-ups", icon: "ArrowUpRight" },
+   493→            ],
+   494→          },
+   495→          //1.Training(overviewremoved—it'snowtheDashboardleafabove),
+   496→          {
+   497→            key: "training-ops", label: "Training", icon: "GraduationCap", children: [
+   498→              { key: "courses", label: "Course Catalog", icon: "BookOpen" },
+   499→              { key: "curriculum-designer", label: "Curriculum Designer", icon: "LayoutTemplate" },
+   500→              { key: "cohorts", label: "Cohorts", icon: "Users2" },
+   501→              { key: "live-training", label: "Live Sessions", icon: "Video" },
+   502→              { key: "trainers", label: "Trainers", icon: "GraduationCap" },
+   503→              { key: "trainer-allocation", label: "Trainer Allocation", icon: "UserCog" },
+   504→              { key: "completion-tracker", label: "Completion Tracker", icon: "Flag" },
+   505→              { key: "assessments", label: "Assessments", icon: "ClipboardCheck" },
+   506→              { key: "question-bank", label: "Question Bank", icon: "HelpCircle" },
+   507→              { key: "certifications", label: "Certifications", icon: "Award" },
+   508→              { key: "attendance", label: "Attendance", icon: "CalendarCheck" },
+   509→              { key: "gradebook", label: "Gradebook", icon: "GraduationCap" },
+   510→            ],
+   511→          },
+   512→          //2.TalentSolutions(NEWMAIN),
+   513→          {
+   514→            key: "talent-solutions", label: "Talent Solutions", icon: "Target", children: [
+   515→              { key: "ts-hub", label: "Solutions Hub", icon: "LayoutDashboard" },
+   516→              { key: "ts-train-to-hire", label: "Train to Hire", icon: "GraduationCap", badge: "T2H" },
+   517→              { key: "ts-hire-to-train", label: "Hire to Train", icon: "UserCheck", badge: "H2T" },
+   518→              { key: "ts-corporate-training", label: "Corporate Training", icon: "Building2" },
+   519→              { key: "talent-search", label: "Talent Search", icon: "Search", badge: "AI" },
+   520→              { key: "placements", label: "Placements", icon: "Handshake" },
+   521→            ],
+   522→          },
+   523→          //3.Business(existing),
+   524→          {
+   525→            key: "business", label: "Business", icon: "Handshake", children: [
+   526→              { key: "training-profile", label: "Provider Profile", icon: "Building2" },
+   527→              { key: "clients", label: "Corporate Clients", icon: "Building2" },
+   528→              { key: "programs", label: "Training Programs", icon: "Target" },
+   529→              { key: "campaigns", label: "Campaigns", icon: "Megaphone" },
+   530→              { key: "corporate-sponsorship", label: "Sponsorships", icon: "Handshake" },
+   531→              { key: "budgets", label: "Client Budgets", icon: "Wallet" },
+   532→              { key: "invoices", label: "Invoices", icon: "Receipt" },
+   533→              { key: "academy", label: "Corporate Academies", icon: "Building2" },
+   534→            ],
+   535→          },
+   536→          //4.Transactions(NEWMAIN),
+   537→          {
+   538→            key: "transactions-grp", label: "Transactions", icon: "Wallet", children: [
+   539→              { key: "transaction-hub", label: "Transaction Hub", icon: "LayoutDashboard" },
+   540→              { key: "transactions", label: "All Transactions", icon: "ReceiptText" },
+   541→              { key: "billing-center", label: "Billing Center", icon: "Receipt" },
+   542→              { key: "payment-gateway", label: "Payment Gateway", icon: "CreditCard" },
+   543→              { key: "settlement-engine", label: "Settlements", icon: "Coins" },
+   544→              { key: "fee-collection", label: "Fee Collection", icon: "Wallet" },
+   545→              { key: "invoice-rules", label: "Invoice Rules", icon: "Settings2" },
+   546→              { key: "refunds", label: "Refunds", icon: "RotateCcw" },
+   547→              { key: "transaction-comms", label: "Communications", icon: "Mail" },
+   548→            ],
+   549→          },
+   550→          //5.Talent&Skills(existing),
+   551→          {
+   552→            key: "talent", label: "Talent & Skills", icon: "Users", children: [
+   553→              { key: "student-profile-360", label: "Student 360° View", icon: "Users" },
+   554→              { key: "sourcing-requests", label: "Sourcing Requests", icon: "Briefcase", badge: "5" },
+   555→              { key: "skills", label: "Skill Frameworks", icon: "Brain" },
+   556→              { key: "skill-gaps", label: "Skill Gaps", icon: "GitBranch", badge: "AI" },
+   557→              { key: "compliance", label: "Compliance", icon: "ShieldCheck" },
+   558→              { key: "enrollments", label: "Enrollments", icon: "Users2" },
+   559→              { key: "enrollment-approval", label: "Enrollment Approvals", icon: "ClipboardCheck" },
+   560→              { key: "verify-credentials", label: "Verify Credentials", icon: "BadgeCheck" },
+   561→              { key: "scholarships", label: "Scholarships", icon: "Award" },
+   562→            ],
+   563→          },
+   564→          //6.PlatformAdmin(NEWMAIN—expandedwithsuperadmin),
+   565→          {
+   566→            key: "admin", label: "Platform Admin", icon: "Shield", children: [
+   567→              { key: "adm-overview", label: "Admin Overview", icon: "LayoutDashboard" },
+   568→              { key: "adm-user-mgmt", label: "User Management", icon: "Users" },
+   569→              { key: "adm-roles-hierarchy", label: "Roles & Hierarchy", icon: "ShieldCheck" },
+   570→              { key: "adm-organizations", label: "Organizations", icon: "Building2" },
+   571→              { key: "adm-partner-mgmt", label: "Partner Mgmt", icon: "Handshake" },
+   572→              { key: "adm-audit-logs", label: "Audit Logs", icon: "ScrollText" },
+   573→            ],
+   574→          },
+   575→          //7.Finance&Revenue,
+   576→          {
+   577→            key: "finance-grp", label: "Finance & Revenue", icon: "Banknote", children: [
+   578→              { key: "adm-platform-revenue", label: "Platform Revenue", icon: "Banknote" },
+   579→              { key: "adm-partner-payouts", label: "Partner Payouts", icon: "Coins" },
+   580→              { key: "adm-transaction-monitoring", label: "Monitoring", icon: "Gauge" },
+   581→              { key: "adm-partner-applications", label: "Partner Applications", icon: "FileText", badge: "6" },
+   582→              { key: "adm-partner-performance", label: "Partner Performance", icon: "TrendingUp" },
+   583→              { key: "adm-system-config", label: "System Settings", icon: "Cog" },
+   584→            ],
+   585→          },
+   586→          //8.Tools&Support,
+   587→          {
+   588→            key: "tools-grp", label: "Tools", icon: "Wrench", children: [
+   589→              { key: "verify-cert", label: "Verify Certificate", icon: "ShieldCheck" },
+   590→              { key: "approvals", label: "Approvals", icon: "BadgeCheck" },
+   591→              { key: "providers", label: "Content Providers", icon: "Handshake" },
+   592→              { key: "data-export", label: "Data Export", icon: "FileText" },
+   593→              { key: "student-messaging", label: "Student Messaging", icon: "MessageSquare" },
+   594→              { key: "parent-portal", label: "Parent Portal", icon: "Users" },
+   595→              { key: "discussion-forums", label: "Discussion Forums", icon: "MessageSquare" },
+   596→            ],
+   597→          },
+   598→          //9.Settings(SETTINGS-SUPPORT),
+   599→          //10.Support(SETTINGS-SUPPORT),
+   600→          {
+   601→            key: "support-grp", label: "Support", icon: "HelpCircle", children: [
+   602→              { key: "support-hub", label: "Help Center", icon: "LifeBuoy" },
+   603→              { key: "announcements", label: "Announcements", icon: "Megaphone" },
+   604→              { key: "audit-logs", label: "Audit Logs", icon: "ScrollText" },
+   605→              { key: "support", label: "Legacy Support", icon: "HelpCircle" },
+   606→            ],
+   607→          },
+   608→          {
+   609→            key: "settings-grp", label: "Settings", icon: "Settings", children: [
+   610→              { key: "settings-hub", label: "Settings Center", icon: "Settings" },
+   611→              { key: "security-center", label: "Security Center", icon: "ShieldCheck" },
+   612→              { key: "notification-preferences", label: "Notifications", icon: "Bell" },
+   613→              { key: "integrations", label: "Integrations", icon: "Plug" },
+   614→              { key: "settings", label: "Legacy Settings", icon: "Cog" },
+   615→            ],
+   616→          }
+   617→        ],
+   618→      },
+   619→    ],
+   620→  },
+   621→
+   622→  // ============================================================
+   623→  // Legacy portal configs kept for type completeness (unused after merge)
+   624→  // ============================================================
+   625→  agency: {
+   626→    id: "agency",
+   627→    label: "Agency Portal",
+   628→    short: "Agency",
+   629→    description: "Manage your agency",
+   630→    accent: "bg-brand",
+   631→    sections: [{ title: "Main", items: [
+   632→      { key: "overview", label: "Overview", icon: "LayoutDashboard" },
+   633→      {
+   634→        key: "tasks-grp", label: "Tasks", icon: "CheckSquare", badge: "6", children: [
+   635→          { key: "tasks", label: "All Tasks", icon: "ListChecks" },
+   636→          { key: "tasks/calls", label: "Calls", icon: "Phone" },
+   637→          { key: "tasks/emails", label: "Emails", icon: "Mail" },
+   638→          { key: "tasks/meetings", label: "Meetings", icon: "Video" },
+   639→          { key: "tasks/follow-ups", label: "Follow-ups", icon: "ArrowUpRight" },
+   640→        ],
+   641→      },
+   642→    ] }],
+   643→  },
+   644→  enterprise: {
+   645→    id: "enterprise",
+   646→    label: "Enterprise Portal",
+   647→    short: "Enterprise",
+   648→    description: "Govern hiring at scale",
+   649→    accent: "bg-brand",
+   650→    sections: [{ title: "Main", items: [
+   651→      { key: "overview", label: "Overview", icon: "LayoutDashboard" },
+   652→      {
+   653→        key: "tasks-grp", label: "Tasks", icon: "CheckSquare", badge: "6", children: [
+   654→          { key: "tasks", label: "All Tasks", icon: "ListChecks" },
+   655→          { key: "tasks/calls", label: "Calls", icon: "Phone" },
+   656→          { key: "tasks/emails", label: "Emails", icon: "Mail" },
+   657→          { key: "tasks/meetings", label: "Meetings", icon: "Video" },
+   658→          { key: "tasks/follow-ups", label: "Follow-ups", icon: "ArrowUpRight" },
+   659→        ],
+   660→      },
+   661→    ] }],
+   662→  },
+   663→  admin: {
+   664→    id: "admin",
+   665→    label: "Admin Portal",
+   666→    short: "Admin",
+   667→    description: "Platform governance",
+   668→    accent: "bg-brand",
+   669→    sections: [{ title: "Main", items: [
+   670→      { key: "overview", label: "Overview", icon: "LayoutDashboard" },
+   671→      {
+   672→        key: "tasks-grp", label: "Tasks", icon: "CheckSquare", badge: "6", children: [
+   673→          { key: "tasks", label: "All Tasks", icon: "ListChecks" },
+   674→          { key: "tasks/calls", label: "Calls", icon: "Phone" },
+   675→          { key: "tasks/emails", label: "Emails", icon: "Mail" },
+   676→          { key: "tasks/meetings", label: "Meetings", icon: "Video" },
+   677→          { key: "tasks/follow-ups", label: "Follow-ups", icon: "ArrowUpRight" },
+   678→        ],
+   679→      },
+   680→    ] }],
+   681→  },
+   682→  learner: {
+   683→    id: "learner",
+   684→    label: "Learner Portal",
+   685→    short: "Learner",
+   686→    description: "Learn, get certified, grow",
+   687→    accent: "bg-brand",
+   688→    sections: [{ title: "Main", items: [
+   689→      { key: "overview", label: "Overview", icon: "LayoutDashboard" },
+   690→      {
+   691→        key: "tasks-grp", label: "Tasks", icon: "CheckSquare", badge: "6", children: [
+   692→          { key: "tasks", label: "All Tasks", icon: "ListChecks" },
+   693→          { key: "tasks/calls", label: "Calls", icon: "Phone" },
+   694→          { key: "tasks/emails", label: "Emails", icon: "Mail" },
+   695→          { key: "tasks/meetings", label: "Meetings", icon: "Video" },
+   696→          { key: "tasks/follow-ups", label: "Follow-ups", icon: "ArrowUpRight" },
+   697→        ],
+   698→      },
+   699→    ] }],
+   700→  },
+   701→  // ============================================================
+   702→  // PARTNER PORTAL (Franchise model — 8 mains × 6 subs = 42 routes)
+   703→  // Generic partner view + College partner view from reference screenshots
+   704→  // ============================================================
+   705→  partner: {
+   706→    id: "partner",
+   707→    label: "Partner Portal",
+   708→    short: "Partner",
+   709→    description: "Franchise & partnership operations",
+   710→    accent: "bg-brand",
+   711→    sections: [
+   712→      {
+   713→        title: "Main",
+   714→        items: [
+   715→          //Dashboard—LEAF(nosub-itemsdirectlink),
+   716→          { key: "overview", label: "Dashboard", icon: "LayoutDashboard" },
+   717→          //Tasks—MAIN(sharedtaskmanagementwithsub-sidebarforallportals),
+   718→          {
+   719→            key: "tasks-grp", label: "Tasks", icon: "CheckSquare", badge: "6", children: [
+   720→              { key: "tasks", label: "All Tasks", icon: "ListChecks" },
+   721→              { key: "tasks/calls", label: "Calls", icon: "Phone" },
+   722→              { key: "tasks/emails", label: "Emails", icon: "Mail" },
+   723→              { key: "tasks/meetings", label: "Meetings", icon: "Video" },
+   724→              { key: "tasks/follow-ups", label: "Follow-ups", icon: "ArrowUpRight" },
+   725→            ],
+   726→          },
+   727→          {
+   728→            key: "overview-grp", label: "Analytics & Reports", icon: "Gauge", children: [
+   729→              { key: "analytics", label: "Analytics Hub", icon: "Gauge" },
+   730→              { key: "partner-scorecard", label: "Performance Scorecard", icon: "Trophy" },
+   731→              { key: "reports", label: "Reports", icon: "BarChart3" },
+   732→              { key: "revenue", label: "Revenue", icon: "TrendingUp" },
+   733→              { key: "announcements", label: "Announcements", icon: "BellRing", badge: "3" },
+   734→              { key: "audit-logs", label: "Audit Logs", icon: "ScrollText" },
+   735→            ],
+   736→          },
+   737→          {
+   738→            key: "deals-grp", label: "Deals & CRM", icon: "Briefcase", children: [
+   739→              { key: "deals", label: "Deals Pipeline", icon: "Briefcase" },
+   740→              { key: "leads", label: "Leads & CRM", icon: "Users" },
+   741→              { key: "my-clients", label: "My Clients", icon: "Handshake" },
+   742→              { key: "students", label: "Students", icon: "GraduationCap" },
+   743→              { key: "marketing", label: "Marketing Centre", icon: "Megaphone" },
+   744→              { key: "applications", label: "Applications", icon: "FileText", badge: "6" },
+   745→            ],
+   746→          },
+   747→          {
+   748→            key: "partnership-grp", label: "Partnership", icon: "Handshake", children: [
+   749→              { key: "profile", label: "Partner Profile", icon: "Building2" },
+   750→              { key: "partner-profile-enhanced", label: "Partner Profile", icon: "Building2" },
+   751→              { key: "college-profiles", label: "College Profiles", icon: "GraduationCap" },
+   752→              { key: "college-applications", label: "College Applications", icon: "FileText" },
+   753→              { key: "colleges", label: "My Colleges", icon: "Building2" },
+   754→              { key: "college-workspace", label: "College Workspace", icon: "Building2" },
+   755→              { key: "models", label: "Partnership Models", icon: "GitBranch" },
+   756→              { key: "mou-agreements", label: "MoU & Agreements", icon: "FileText" },
+   757→              { key: "partner-onboarding", label: "Onboarding Wizard", icon: "Rocket" },
+   758→              { key: "renewals", label: "Renewals", icon: "RotateCcw", badge: "3" },
+   759→              { key: "renewal-forecast", label: "Renewal Forecast", icon: "CalendarClock" },
+   760→            ],
+   761→          },
+   762→          {
+   763→            key: "academics-grp", label: "Academics", icon: "GraduationCap", children: [
+   764→              { key: "programs", label: "Programs", icon: "BookOpen" },
+   765→              { key: "centres", label: "Training Centres", icon: "Building2" },
+   766→              { key: "batches", label: "Batches", icon: "CalendarCheck2" },
+   767→              { key: "faculty", label: "Faculty", icon: "Users" },
+   768→              { key: "training-delivery", label: "Training & Delivery", icon: "Presentation" },
+   769→              { key: "events-drives", label: "Events & Drives", icon: "Calendar" },
+   770→            ],
+   771→          },
+   772→          {
+   773→            key: "careers-grp", label: "Careers & Outcomes", icon: "TrendingUp", children: [
+   774→              { key: "internships", label: "Internships", icon: "Briefcase" },
+   775→              { key: "projects", label: "Projects", icon: "FolderGit2" },
+   776→              { key: "job-orders", label: "Job Orders", icon: "ClipboardList", badge: "5" },
+   777→              { key: "placements", label: "Placements", icon: "BadgeCheck" },
+   778→              { key: "compliance", label: "Compliance", icon: "ShieldCheck" },
+   779→              { key: "certificates", label: "Certificates", icon: "Award" },
+   780→            ],
+   781→          },
+   782→          {
+   783→            key: "finance-grp", label: "Finance", icon: "Wallet", children: [
+   784→              { key: "wallet", label: "Wallet & Payouts", icon: "Wallet" },
+   785→              { key: "settlements", label: "Settlements", icon: "Coins" },
+   786→              { key: "split-simulator", label: "Split Simulator", icon: "Calculator" },
+   787→              { key: "settlement-disputes", label: "Settlement Disputes", icon: "AlertTriangle" },
+   788→              { key: "transactions", label: "Transactions", icon: "ReceiptText" },
+   789→              { key: "accounts", label: "Balances & Tax", icon: "Landmark" },
+   790→              { key: "tax-rates", label: "Tax Rates", icon: "Percent" },
+   791→              { key: "commissions", label: "Commissions", icon: "Percent" },
+   792→              { key: "tax-documents", label: "Tax Documents", icon: "ReceiptText" },
+   793→              { key: "fees", label: "Fees & Collections", icon: "ReceiptText" },
+   794→            ],
+   795→          },
+   796→          {
+   797→            key: "tools-grp", label: "Tools", icon: "Wrench", children: [
+   798→              { key: "online-tools", label: "Online Software", icon: "LayoutTemplate" },
+   799→              { key: "forms-assistance", label: "Forms & Assistance", icon: "FileText" },
+   800→              { key: "guidelines", label: "Guidelines", icon: "BookOpen" },
+   801→              { key: "service-catalog", label: "Service Catalog", icon: "Layers" },
+   802→              { key: "engagements", label: "Engagements", icon: "KanbanSquare" },
+   803→              { key: "marketing-materials", label: "Marketing Materials", icon: "FolderOpen" },
+   804→              { key: "client-messaging", label: "Client Messaging", icon: "MessageSquare", badge: "5" },
+   805→            ],
+   806→          },
+   807→          {
+   808→            key: "talent-solutions", label: "Talent Solutions", icon: "GraduationCap", children: [
+   809→              { key: "ts-hub", label: "Solutions Hub", icon: "Sparkles" },
+   810→              { key: "ts-transactions", label: "Transactions", icon: "Receipt" },
+   811→            ],
+   812→          },
+   813→          {
+   814→            key: "support-grp", label: "Support", icon: "HelpCircle", children: [
+   815→              { key: "support-hub", label: "Help Center", icon: "LifeBuoy" },
+   816→              { key: "revenue-splits", label: "Revenue Splits", icon: "Percent" },
+   817→              { key: "invoices", label: "Invoices", icon: "FileText" },
+   818→              { key: "support", label: "Legacy Support", icon: "HelpCircle" },
+   819→            ],
+   820→          },
+   821→          {
+   822→            key: "settings-grp", label: "Settings", icon: "Settings", children: [
+   823→              { key: "settings-hub", label: "Settings Center", icon: "Settings" },
+   824→              { key: "security-center", label: "Security Center", icon: "ShieldCheck" },
+   825→              { key: "notification-preferences", label: "Notifications", icon: "Bell" },
+   826→              { key: "settings", label: "Legacy Settings", icon: "Cog" },
+   827→              { key: "configure-settings", label: "Configure", icon: "SlidersHorizontal" },
+   828→              { key: "calculator", label: "Revenue Calculator", icon: "Calculator" },
+   829→            ],
+   830→          }
+   831→        ],
+   832→      },
+   833→    ],
+   834→  },
+   835→};
+
+[showing lines 1-835 of 836; use offset=836 with limit to continue reading]

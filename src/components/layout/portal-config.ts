@@ -662,22 +662,143 @@ export const portalConfigs: Record<Portal, PortalConfig> = {
   },
   admin: {
     id: "admin",
-    label: "Admin Portal",
-    short: "Admin",
-    description: "Platform governance",
+    label: "Super Admin Portal",
+    short: "Super Admin",
+    description: "Platform-wide governance & control",
     accent: "bg-brand",
-    sections: [{ title: "Main", items: [
-      { key: "overview", label: "Overview", icon: "LayoutDashboard" },
+    sections: [
       {
-        key: "tasks-grp", label: "Tasks", icon: "CheckSquare", badge: "6", children: [
-          { key: "tasks", label: "All Tasks", icon: "ListChecks" },
-          { key: "tasks/calls", label: "Calls", icon: "Phone" },
-          { key: "tasks/emails", label: "Emails", icon: "Mail" },
-          { key: "tasks/meetings", label: "Meetings", icon: "Video" },
-          { key: "tasks/follow-ups", label: "Follow-ups", icon: "ArrowUpRight" },
+        title: "Main",
+        items: [
+          { key: "sa-overview", label: "Command Center", icon: "LayoutDashboard" },
+          {
+            key: "sa-tasks-grp", label: "Tasks", icon: "CheckSquare", badge: "12", children: [
+              { key: "tasks", label: "All Tasks", icon: "ListChecks" },
+              { key: "tasks/calls", label: "Calls", icon: "Phone" },
+              { key: "tasks/emails", label: "Emails", icon: "Mail" },
+              { key: "tasks/meetings", label: "Meetings", icon: "Video" },
+              { key: "tasks/follow-ups", label: "Follow-ups", icon: "ArrowUpRight" },
+            ],
+          },
+          // GOVERNANCE
+          {
+            key: "sa-governance", label: "Governance", icon: "Shield", children: [
+              { key: "sa-tenants", label: "Multi-Tenant Config", icon: "Building2" },
+              { key: "sa-portal-settings", label: "Portal Settings", icon: "Settings" },
+              { key: "sa-feature-flags", label: "Feature Flags", icon: "Flag" },
+              { key: "sa-maintenance", label: "Maintenance Mode", icon: "Wrench" },
+              { key: "sa-health", label: "Platform Health", icon: "Activity" },
+            ],
+          },
+          // USERS & ORGS
+          {
+            key: "sa-users-grp", label: "Users & Orgs", icon: "Users", children: [
+              { key: "sa-users-all", label: "All Users", icon: "Users" },
+              { key: "sa-users-candidates", label: "Candidates", icon: "User" },
+              { key: "sa-users-employers", label: "Employers", icon: "Building2" },
+              { key: "sa-users-recruiters", label: "Recruiters", icon: "Briefcase" },
+              { key: "sa-users-training", label: "Training Providers", icon: "GraduationCap" },
+              { key: "sa-users-partners", label: "Partners", icon: "Handshake" },
+              { key: "sa-roles-hierarchy", label: "Roles & Hierarchy", icon: "ShieldCheck" },
+              { key: "sa-impersonation", label: "Impersonation", icon: "UserCog" },
+            ],
+          },
+          // ANALYTICS
+          {
+            key: "sa-analytics-grp", label: "Analytics", icon: "BarChart3", children: [
+              { key: "sa-analytics", label: "Platform Analytics", icon: "BarChart3" },
+              { key: "sa-growth", label: "User Growth", icon: "TrendingUp" },
+              { key: "sa-funnels", label: "Funnel Analytics", icon: "Filter" },
+              { key: "sa-revenue-analytics", label: "Revenue Analytics", icon: "DollarSign" },
+              { key: "sa-cohorts", label: "Cohort Analysis", icon: "Users2" },
+            ],
+          },
+          // FINANCE
+          {
+            key: "sa-finance-grp", label: "Finance", icon: "Wallet", children: [
+              { key: "sa-txn-all", label: "All Transactions", icon: "Receipt" },
+              { key: "sa-revenue", label: "Platform Revenue", icon: "DollarSign" },
+              { key: "sa-invoices", label: "All Invoices", icon: "FileText" },
+              { key: "sa-payouts", label: "Payouts & Settlements", icon: "Coins" },
+              { key: "sa-refunds", label: "Refund Center", icon: "RotateCcw" },
+              { key: "sa-tax", label: "Tax & GST", icon: "ReceiptText" },
+              { key: "sa-plans-pricing", label: "Plans & Pricing", icon: "Tag" },
+            ],
+          },
+          // CONTENT
+          {
+            key: "sa-content-grp", label: "Content", icon: "BookOpen", children: [
+              { key: "sa-job-taxonomy", label: "Job Taxonomy", icon: "Briefcase" },
+              { key: "sa-skill-taxonomy", label: "Skill Taxonomy", icon: "Brain" },
+              { key: "sa-courses", label: "Course Catalog", icon: "GraduationCap" },
+              { key: "sa-cms", label: "CMS", icon: "FileText" },
+              { key: "sa-templates", label: "Templates", icon: "LayoutTemplate" },
+              { key: "sa-job-moderation", label: "Job Moderation", icon: "ShieldCheck" },
+            ],
+          },
+          // SECURITY
+          {
+            key: "sa-security-grp", label: "Security", icon: "Lock", children: [
+              { key: "sa-audit", label: "Audit Logs", icon: "ScrollText" },
+              { key: "sa-access-control", label: "Access Control", icon: "Key" },
+              { key: "sa-privacy", label: "Data Privacy", icon: "ShieldCheck" },
+              { key: "sa-security-alerts", label: "Security Alerts", icon: "AlertTriangle" },
+              { key: "sa-api-keys", label: "API Keys", icon: "Key" },
+              { key: "sa-sessions", label: "Sessions", icon: "Monitor" },
+            ],
+          },
+          // PARTNERS
+          {
+            key: "sa-partners-grp", label: "Partners", icon: "Handshake", children: [
+              { key: "sa-partner-applications", label: "Applications", icon: "FileText" },
+              { key: "sa-partner-directory", label: "Partner Directory", icon: "Building2" },
+              { key: "sa-partner-performance", label: "Performance", icon: "TrendingUp" },
+              { key: "sa-revenue-splits", label: "Revenue Splits", icon: "Percent" },
+              { key: "sa-mou", label: "MoU Management", icon: "FileSignature" },
+            ],
+          },
+          // COMMS
+          {
+            key: "sa-comms-grp", label: "Communication", icon: "Megaphone", children: [
+              { key: "sa-announcements", label: "Announcements", icon: "Megaphone" },
+              { key: "sa-email-campaigns", label: "Email Campaigns", icon: "Mail" },
+              { key: "sa-push", label: "Push Notifications", icon: "Bell" },
+              { key: "sa-sms", label: "SMS Gateway", icon: "Smartphone" },
+              { key: "sa-whatsapp", label: "WhatsApp", icon: "MessageCircle" },
+            ],
+          },
+          // OPS
+          {
+            key: "sa-ops-grp", label: "Operations", icon: "LifeBuoy", children: [
+              { key: "sa-tickets", label: "Support Tickets", icon: "Ticket" },
+              { key: "sa-sla", label: "SLA Monitoring", icon: "Clock" },
+              { key: "sa-incidents", label: "Incident Management", icon: "AlertCircle" },
+              { key: "sa-kb", label: "Knowledge Base", icon: "BookOpen" },
+              { key: "sa-status-page", label: "System Status", icon: "Activity" },
+            ],
+          },
+          // SYSTEM
+          {
+            key: "sa-system-grp", label: "System", icon: "Cog", children: [
+              { key: "sa-integrations", label: "Integration Hub", icon: "Plug" },
+              { key: "sa-api", label: "API Management", icon: "Code" },
+              { key: "sa-webhooks", label: "Webhooks", icon: "Webhook" },
+              { key: "sa-ai-config", label: "AI Configuration", icon: "Sparkles" },
+              { key: "sa-backups", label: "Backups & DR", icon: "Database" },
+              { key: "sa-system-config", label: "System Config", icon: "Settings" },
+            ],
+          },
+          // SETTINGS & SUPPORT
+          {
+            key: "sa-settings-grp", label: "Settings", icon: "Settings", children: [
+              { key: "sa-settings-hub", label: "Settings Center", icon: "Settings" },
+              { key: "sa-security-center", label: "Security Center", icon: "ShieldCheck" },
+              { key: "sa-notification-preferences", label: "Notifications", icon: "Bell" },
+            ],
+          },
         ],
       },
-    ] }],
+    ],
   },
   learner: {
     id: "learner",

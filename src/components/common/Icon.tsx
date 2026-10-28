@@ -33,6 +33,7 @@ import {
   Ticket, Settings2,
   CalendarDays, AlarmClock,
   Pin,
+  Activity, CheckSquare, Tag, Key, AlertCircle, Code, Webhook, Tags,
   type LucideIcon,
 } from "lucide-react";
 
@@ -68,6 +69,7 @@ const map: Record<string, LucideIcon> = {
   Ticket, Settings2,
   CalendarDays, AlarmClock,
   Pin,
+  Activity, CheckSquare, Tag, Key, AlertCircle, Code, Webhook, Tags,
 };
 
 export function Icon({ name, className }: { name: string; className?: string }) {

@@ -1,0 +1,302 @@
+     1→# JOBSONN Development Worklog
+     2→
+     3→This file is the shared worklog for all agents building JOBSONN.
+     4→Append (do not overwrite) new sections separated by `---`.
+     5→
+     6→---
+     7→Task ID: 1
+     8→Agent: Main (orchestrator)
+     9→Task: Build foundation — theme, layout, types, mock data, mock API, navigation store, shared components, app shell
+    10→
+    11→Work Log:
+    12→- Inspected existing Next.js 16 + TS + Tailwind 4 + shadcn project (dev server running on :3000)
+    13→- Set up emerald "brand" theme (light + dark) in `src/app/globals.css` (primary oklch emerald, brand vars)
+    14→- Updated `src/app/layout.tsx`: metadata, ThemeProvider (next-themes), Toaster + Sonner
+    15→- Created `src/components/layout/theme-provider.tsx`
+    16→- Created `src/lib/types.ts` — full domain model (User, CandidateProfile, EmployerOrganization, Agency, Job, JobApplication, Interview, Assessment, JobOffer, TalentPool, Message, Notification, Plan/Subscription/Invoice/Payment/Promotion/Referral, TrainingCourse, Certification, ProjectOpportunity, SupportTicket, AuditLog, ConsentRecord, IntegrationConfig, NavSection, etc.)
+    17→- Created `src/lib/format.ts` — currency (INR L/Cr), date, timeAgo, initials, slugify
+    18→- Created `src/lib/mock-data.ts` — realistic seed data: 6 employers, 8 published jobs + 3 employer-only (draft/pending/closed), 4 candidate profiles, 6 applications + 15 extra applicants, 4 interviews, 6 assessments, 4 assessment results, 1 offer, 2 agencies, 5 plans, 5 subscriptions, 5 invoices, 3 payments, 3 promotions, 3 referrals, 4 talent pools, 5 messages, 5 notifications, 6 training courses, 5 certifications, 4 project opportunities, 4 support tickets, 5 audit logs, 8 integrations, 4 flagged jobs, 10+ platform users
+    19→- Created `src/lib/mock-api.ts` — typed service layer (jobService, applicationService, employerService, agencyService, candidateService, interviewService, assessmentService, offerService, messageService, notificationService, planService, subscriptionService, invoiceService, paymentService, promotionService, referralService, trainingService, certificationService, projectService, talentPoolService, supportService, auditService, integrationService, adminUserService, moderationService, aiService) with simulated latency. aiService clearly returns `simulated: true`
+    20→- Created `src/lib/store.ts` — Zustand `useNav` (portal, route, role, commandOpen, notifOpen, sidebarOpen, navigate) with persist; `useAuth` simulated demo user per role
+    21→- Created shared components:
+    22→  - `src/components/common/Icon.tsx` — string→lucide icon mapper
+    23→  - `src/components/common/AvatarLogo.tsx` — initials avatar with deterministic color
+    24→  - `src/components/common/index.tsx` — PageHeader, Card/CardHeader/Title/Content, SectionCard, StatCard, StatusBadge (huge status→tone map), MatchScore (SVG ring), EmptyState
+    25→- Created layout:
+    26→  - `src/components/layout/portal-config.ts` — NavSection definitions for all 7 portals (public, candidate, employer, recruiter, agency, enterprise, admin) with all sidebar modules from the spec
+    27→  - `src/components/layout/PortalSidebar.tsx` — collapsible sidebar with sections, badges, active state, mobile sheet
+    28→  - `src/components/layout/Topbar.tsx` — portal switcher, command search, theme toggle, notifications dropdown, user menu with demo role switcher
+    29→  - `src/components/layout/PublicNavbar.tsx` — public site navbar with "Get started" role dropdown
+    30→  - `src/components/layout/Footer.tsx` — public footer with link columns
+    31→  - `src/components/layout/CommandPalette.tsx` — ⌘K command dialog (navigate, jobs, companies, portals)
+    32→  - `src/components/layout/AppShell.tsx` — switches public layout (navbar+footer) vs portal layout (sidebar+topbar)
+    33→- Created directory scaffold: `src/portals/{public,candidate,employer,recruiter,agency,enterprise,admin,auth}`
+    34→
+    35→Stage Summary:
+    36→- Foundation COMPLETE. Single `/` route architecture: AppShell reads `useNav().portal` and renders the right layout; each portal renders its own pages via a per-portal `render(route)` router (to be created by portal subagents).
+    37→- CONTRACT for portal subagents (CRITICAL — read before coding):
+    38→  - Navigation: `import { useNav } from "@/lib/store"` → `const { navigate, route, portal } = useNav()`. `navigate(portal, routeKey)` switches view. `route` is a string like `"overview"`, `"jobs"`, `"jobs/j_001"`.
+    39→  - Types: `import type { X } from "@/lib/types"`.
+    40→  - Mock data: `import { jobs, employers, applications, ... } from "@/lib/mock-data"`.
+    41→  - Mock API: `import { jobService, applicationService, ... } from "@/lib/mock-api"`. Services are async (simulated latency). You may also read mock data directly for synchronous rendering in client components.
+    42→  - Shared UI: `import { PageHeader, Card, CardHeader, CardTitle, CardContent, CardDescription, SectionCard, StatCard, StatusBadge, MatchScore, EmptyState } from "@/components/common"` and `import { AvatarLogo } from "@/components/common/AvatarLogo"` and `import { Icon } from "@/components/common/Icon"`.
+    43→  - shadcn components: `@/components/ui/*` (button, card, table, badge, dialog, tabs, input, select, dropdown-menu, sheet, tabs, progress, tooltip, popover, command, etc. all exist).
+    44→  - Formatting: `import { formatCurrency, formatDate, formatDateTime, timeAgo, daysUntil, initials, formatNumber } from "@/lib/format"`.
+    45→  - Toasts: `import { toast } from "sonner"` and `import { useToast } from "@/hooks/use-toast"`.
+    46→  - Charts: `recharts` is installed. Use ResponsiveContainer + Area/Bar/Line/Pie.
+    47→  - **Each portal folder MUST export an `index.tsx` with: `export function render(route: string): React.ReactNode`** that parses the route string (split on `/`) and returns the matching page component, with a sensible fallback. Wrap pages in `"use client"` where they use hooks.
+    48→  - Use `"use client"` at top of any file using hooks/state/navigation.
+    49→  - Design rules: NO indigo/blue as primary (brand is emerald). Responsive. Cards p-4/p-6, gap-4/gap-6. Long lists use `max-h-96 overflow-y-auto scroll-thin`. Sticky footer handled by AppShell. Use semantic HTML. Show loading/empty states.
+    50→  - Mark simulated AI clearly (e.g. a "Simulated AI" badge).
+    51→- Next: dispatch subagents to build each portal's pages + router, then wire `src/app/page.tsx`.
+    52→
+    53→---
+    54→Task ID: 3
+    55→Agent: Public Portal Subagent
+    56→Task: Build the public Career Portal — 10 pages + router in `src/portals/public/`
+    57→
+    58→Work Log:
+    59→- Read worklog contract + types + mock-data + mock-api + shared components + AppShell + PublicNavbar to ground all navigation, types and styling decisions.
+    60→- Built 10 polished, responsive, fully-interactive pages plus a router. All files `"use client"`, all use the agreed contract (`useNav`, mock data, `AvatarLogo`, `Icon`, shadcn/ui, `toast`, emerald brand).
+    61→
+    62→Files created in `src/portals/public/`:
+    63→
+    64→1. **PublicHome.tsx** (`home`) — Hero with `bg-grid`, headline "Connecting Talent, Employers & Opportunities Through Intelligent Technology", prominent job search bar (keyword + location + button → stashes search to `sessionStorage` then `navigate("public","jobs")`), trending pills, 4 trust stat cards (clearly labelled demo), 8 popular-category pills (click → jobs filtered), Featured Employers grid (AvatarLogo, rating, industry, followerCount, verified badge, hover lift), Featured Jobs grid (6 cards), "One platform, three audiences" 3-step section (For Candidates / Employers / Agencies), CTA section with stat grid. Premium gradient + grid background.
+    65→
+    66→2. **PublicJobs.tsx** (`jobs`) — Left sidebar filters (keyword, location, work-arrangement checkboxes, employment-type checkboxes, min-experience slider, min-salary slider, category select, posted-within select, sort select), mobile Sheet for filters, results count, job cards list with employer AvatarLogo, title, company, location, work arrangement badge, employment type, salary range, experience, skill chips, posted-time-ago, Featured/Urgent/Sponsored badges, Save (local state + toast) + Apply buttons. WORKING client-side filter state via `useState`/`useMemo`. "Load more" pagination (6 at a time). Empty state. Hydrates initial filters from `sessionStorage` set by home page.
+    67→
+    68→3. **PublicJobDetail.tsx** (`jobs/[id]`) — Two-column layout. Header card with AvatarLogo xl, badges, title, company link, 8 info chips (location, work mode, employment, experience, salary, posted, views, applicants). Tabs: Overview (description, responsibilities, requirements, nice-to-have, benefits), Screening questions (list with type/required/knockout badges), Company snapshot (industry/size/founded/HQ/rating/followers + link), Insights (recharts BarChart salary distribution + Simulated AI fit indicator). Sidebar: sticky Apply card with deadline/target hire date, "Apply now" opens a Dialog with react-hook-form + zod form (basic info + dynamic screening-question fields based on question type — boolean→RadioGroup, choice→Select, number/text→Input; required/knockout validation), cover note, consent notice; on submit → toast + navigate to candidate applications. Copy link (clipboard + toast), Save, Share, Report this job, Quick-facts card. Similar jobs list (3, same category). Hooks-safe: `useMemo` for salary data moved before early-return guard.
+    69→
+    70→4. **PublicCompanies.tsx** (`companies`) — Search by name/industry/keyword + industry filter + sort (followers/rating/A-Z). Stats line. Grid of company cards (AvatarLogo xl, name, verified badge, featured crown badge, industry, size, HQ, rating + reviewCount, followerCount, open job count, "View profile" button).
+    71→
+    72→5. **PublicCompanyDetail.tsx** (`companies/[slug]`) — Banner with grid overlay, sticky header card with -mt offset for logo, name + verified + featured badges, industry/size/HQ/founded stats row, Follow button (toggle + toast), website link. Tabs: Overview (about, mission, benefits grid), Jobs (list of company's published jobs → job detail), Reviews (rating summary + distribution bars + 4 sample reviews with pros/cons), Culture (principles grid + office locations + hiring pace). Empty state when no jobs.
+    73→
+    74→6. **PublicSalaryInsights.tsx** (`salary-insights`) — Simulated-data badge. Filters (location, role-focus, max-experience slider). 3 KPI StatCards (median/p25/p75). recharts BarChart with min/median/max bars per role (derived from real job postings via `aggregateByRole`). Detailed table (role, min, median, max, postings count). Side panel: top-5 paying roles horizontal BarChart with Cell color gradient, methodology card with Tabs (What's included / What's not), CTA to jobs page.
+    75→
+    76→7. **PublicTraining.tsx** (`training`) — Filters (keyword, category, level). Grid of training course cards (AvatarLogo-style icon, title, provider, description, level/category/skill badges, rating, duration, enrolled count, price, "Enroll now" button with toggle state + toast). Certifications section (5 cards with issuer, category, skill level, validity). "Freelance & Project Marketplace" section with projectOpportunities cards (type, client, budget, duration, skills, remote, proposals count, "Submit proposal" button → toast). CTA to candidate portal.
+    77→
+    78→8. **PublicCareerResources.tsx** (`career-resources`) — Featured article hero with split layout (article preview + "In this report" outline), 10 sample articles with category filter pills + keyword search, article cards (category icon badge, title, excerpt, author avatar + role, read time, published-at). Newsletter signup form (validates email + toast). 3-card CTA row linking to jobs/training/salary-insights.
+    79→
+    80→9. **PublicAbout.tsx** (`about`) — Hero with bg-grid, mission section with quote card, 4 value cards (Trust first / Augment don't replace / Candidate dignity / Privacy by design), 4 StatCards (founded/employers/candidates/cities), journey timeline (5 milestones alternating sides), leadership grid (6 members with AvatarLogo + bio), investors + press section, final CTA.
+    81→
+    82→10. **PublicContact.tsx** (`contact`) — 3 contact cards (Sales/Support/Press with email + phone). Contact form with react-hook-form + zod validation (name, email, company, subject via Select, message), submit shows loading spinner then success state + toast. Side panel: response-time card, office locations (Bengaluru/Mumbai/Remote), "Book a demo" CTA. FAQ accordion (6 Q&As).
+    83→
+    84→11. **index.tsx** — Router with `export function render(route: string): React.ReactNode`. Parses route by `/`, switches on first segment, handles `jobs/[id]` and `companies/[slug]` patterns, fallback `NotFound` component using EmptyState + Button back to home.
+    85→
+    86→Quality bar:
+    87→- Every button does something (toast / navigate / toggle state).
+    88→- EmptyState used wherever lists could be empty.
+    89→- Hover effects (`hover:-translate-y-0.5 hover:border-brand hover:shadow-md`) on all cards.
+    90→- Card padding `p-4`/`p-5`/`p-6`, gaps `gap-4`/`gap-6`.
+    91→- Long lists use `max-h-[...] overflow-y-auto scroll-thin` where appropriate (jobs filter sidebar).
+    92→- All emerald brand (`text-brand`, `bg-brand`, `bg-brand/10`, `border-brand`). NO indigo/blue as primary.
+    93→- Responsive grid breakpoints (`sm:`/`lg:`).
+    94→- Semantic HTML (`section`, `aside`, `h1`/`h2`/`h3`, `nav`-like button rows).
+    95→- Simulated AI clearly labelled ("Simulated", "Illustrative", "Simulated AI" badges).
+    96→- react-hook-form + zod used in PublicJobDetail (screening questions, dynamic schema) and PublicContact (contact form).
+    97→- recharts used in PublicJobDetail (salary mini-chart) and PublicSalaryInsights (bar chart + top-5 horizontal chart).
+    98→
+    99→Lint status:
+   100→- `bunx eslint src/portals/public/` → EXIT 0 (clean).
+   101→- One initial rules-of-hooks error in PublicJobDetail (useMemo after early return) was fixed by moving the useMemo above the early-return guard with a `if (!job) return []` guard inside.
+   102→- All unused imports stripped from every file before lint.
+   103→- Remaining lint errors elsewhere in repo (admin, candidate, employer portals) belong to other agents — not touched per task constraint.
+   104→
+   105→Issues / notes for orchestrator:
+   106→- Home page search → jobs page handoff uses `sessionStorage["jobsonn_job_search"]` (JSON: `{keyword, location, category?}`), consumed & cleared on jobs page mount. This is a lightweight cross-page state without modifying the shared Zustand store.
+   107→- ApplyDialog stashes `sessionStorage["jobsonn_last_application"]` on submit before navigating to `candidate/applications` — the candidate portal agent can read this to surface a "just applied" banner.
+   108→- The `useNav` `route` is a plain string; the public router handles `home`, `jobs`, `jobs/<id>`, `companies`, `companies/<slug>`, `salary-insights`, `training`, `career-resources`, `about`, `contact` — any unknown first-segment falls back to NotFound (which offers a "Back to home" button).
+   109→- The PublicNavbar (from foundation) highlights `route === l.key`; for nested routes like `jobs/j_001` the highlight won't fire (expected — navbar only knows top-level keys). Not blocking.
+   110→
+   111→Stage Summary:
+   112→- Public Portal COMPLETE. 10 pages + 1 router. All files `"use client"`, all use the agreed contract. Lint clean for `src/portals/public/`. Ready for orchestrator to wire `src/app/page.tsx` to call `render(useNav().route)` from `@/portals/public`.
+   113→
+   114→---
+   115→Task ID: 5
+   116→Agent: Employer Portal Subagent
+   117→Task: Build complete Employer Portal (22 pages + router) in src/portals/employer/
+   118→
+   119→Work Log:
+   120→- Read foundation worklog and CONTRACT for portal subagents.
+   121→- Built 22 employer pages, all "use client", emerald brand, responsive, real data from mock-data + mock-api:
+   122→  1. EmployerOverview.tsx — Dashboard with 6 KPI StatCards, AreaChart (apps trend), funnel bar visualization, jobs needing attention list, recent applicants preview, quick actions grid.
+   123→  2. EmployerCompanyProfile.tsx — Editable form (name/industry/size/founded/HQ/website/about/mission/benefits list editor/culture list editor/locations/social links), logo upload UI, profile completeness meter, live preview card.
+   124→  3. EmployerBranding.tsx — Banner upload, culture photos gallery (picsum demo), testimonials editor (add/remove with rating stars), Why work with us list, video embed placeholder, branding tips + live preview.
+   125→  4. EmployerJobs.tsx — Jobs management table with status tabs (All/Published/Draft/Pending/Paused/Closed/Archived), search, sortable columns (title/apps/views/posted), row dropdown actions (Edit/Duplicate/Preview/Pause/Resume/Close/Archive) all wired with toasts. Includes the draft/pending/closed extras from employerJobsExtra.
+   126→  5. EmployerCreateJob.tsx — Rich multi-section form: Basic, Location & work, Compensation, Requirements, Screening questions (dynamic add/remove with type/required/knockout). "AI Generate" button → aiService.generateJobDescription fills description/responsibilities/requirements with "Simulated AI" badge. "Check bias" button → aiService.checkBias shows inclusivity score + suggestions. Preview pane (Tabs), completeness meter, Save as draft + Publish.
+   127→  6. EmployerTemplates.tsx — Grid of 6 sample templates (Senior Engineer/PM/Designer/DevOps/Sales/Data Scientist). "Use template" → toast + navigate to create-job.
+   128→  7. EmployerApplicants.tsx — TanStack Table with sortable columns (candidate/status/match/rating/tags/applied), row selection + bulk actions dropdown (Shortlist/Add tag/Reject), job filter select, multi-select status chips, search. Click row → Sheet drawer with: profile, match analysis (matched/missing), screening answers, rating stars, timeline, internal notes (add note → toast), action buttons (Shortlist/Send assessment/Schedule interview/Reject). Rejection dialog with template select. Pagination.
+   129→  8. EmployerPipeline.tsx — Kanban with @dnd-kit/core (PointerSensor, droppable columns, draggable cards). 7 stages (Applied/Screening/Assessment/Interview/Offer/Hired/Rejected). On drop → applicationService.updateStatus + toast + card moves. Job filter. Toggle Kanban/Table view.
+   130→  9. EmployerTalentSearch.tsx — Search bar + filters sidebar (skills chips/location/experience/company), AI natural language search input (toast showing parsed query), candidate result cards (AvatarLogo/headline/skills/match), "View profile" → Sheet with full profile, "Add to pool", "Invite to apply". Premium badge.
+   131→  10. EmployerTalentPool.tsx — Pool cards (name/description/candidateCount/owner/tags/created), click → candidate list view with remove, Create pool dialog, Delete pool with AlertDialog confirm.
+   132→  11. EmployerShortlists.tsx — Job selector + two-pane UI (all applicants ↔ shortlist for job). Add/remove from shortlist, rating stars, per-candidate note editor.
+   133→  12. EmployerAssessments.tsx — Tabs (Library grid of 6 assessments + assign button / Assigned table with score/status/deadline). Create assessment dialog. Send assessment dialog.
+   134→  13. EmployerInterviews.tsx — Tabs (Upcoming/Completed/All). Interview cards (candidate/round/date/time/interviewers/meeting link/status). Schedule interview dialog (candidate/job/round/type/date/time/duration/timezone/interviewer multi-select). Completed → "Add feedback" opens scorecard (criteria rows w/ rating + note, overall rating, recommendation select, summary). Reschedule/cancel dropdown.
+   135→  14. EmployerOffers.tsx — Tabs by status. Table with workflow indicator (draft→pending_approval→sent→accepted progress bar). Create offer dialog. Send offer / mark accepted / withdraw actions. Offer letter preview dialog. Withdraw with AlertDialog.
+   136→  15. EmployerHires.tsx — 7 mock hires table (name/job/hire date/onboarding status/manager/location). KPI StatCards (hires/conversion/time-to-hire/retention). Onboarding pipeline breakdown. Export CSV button.
+   137→  16. EmployerTeam.tsx — Members table (name/email/role select/last active/status) with inline role change + remove. Invite member dialog. Permissions matrix table (Admin/Hiring Mgr/Recruiter/Interviewer/Viewer × capabilities). Seat usage StatBlocks.
+   138→  17. EmployerAnalytics.tsx — Date range selector. 8 KPI cards with formula tooltips. Charts: Applications trend (AreaChart), Source breakdown (PieChart), Funnel conversion (vertical BarChart), Time-to-hire trend (AreaChart). Export report button.
+   139→  18. EmployerSubscription.tsx — Current plan card (Enterprise), usage meters (job posts/resume views/seats), plans grid with monthly/annual toggle, payment methods, invoices table with download, payment history, cancel subscription AlertDialog.
+   140→  19. EmployerIntegrations.tsx — Grid of integrations (connected/available/coming_soon badges) with connect/disconnect/sync actions. API credentials section (key + webhook URL + docs link). Usage stats bars per connected category.
+   141→  20. EmployerMessages.tsx — Two-pane messaging UI (thread list with search/star/unread + thread view with message bubbles + composer with Templates dropdown + attach). ⌘+Enter to send.
+   142→  21. EmployerSettings.tsx — 5 tabs: Organization (form + logo + locations), Hiring (default stages editor + rejection templates editor), Notifications (toggle switches), Security (MFA/SSO/sessions), Audit log (table filtered to employer actors).
+   143→  22. EmployerSupport.tsx — 3 support channel cards (raise ticket/live chat/docs), searchable FAQ accordion, my tickets list, raise ticket dialog (subject/category/priority/description).
+   144→
+   145→- Router: src/portals/employer/index.tsx exports `render(route: string): React.ReactNode` switching on `route.split("/")[0]` with EmployerOverview fallback. Covers all 22 routes.
+   146→
+   147→Quality:
+   148→- All "use client", emerald brand (no indigo/blue primary), responsive (mobile-first with sm/md/lg/xl breakpoints), cards p-4/p-6, long lists max-h-* overflow-y-auto scroll-thin.
+   149→- AlertDialog used for destructive actions (delete pool, withdraw offer, cancel subscription, disconnect integration).
+   150→- AI features (generateJobDescription, checkBias, NL search) clearly labelled "Simulated AI".
+   151→- Kanban actually drags via dnd-kit (PointerSensor, useDraggable/useDroppable, onDragEnd → updateStatus).
+   152→- TanStack Table on Applicants page (sortable, selectable, paginated, filterable).
+   153→- No `any` types — all types from @/lib/types.
+   154→- All toasts via sonner. Charts via recharts. Forms via react-hook-form patterns (controlled state).
+   155→
+   156→Verification:
+   157→- `bun run lint` (employer only): 0 errors, 1 warning (react-hooks/incompatible-library on useReactTable — known TanStack Table + React Compiler warning, not actionable).
+   158→- `npx tsc --noEmit` on employer files: 0 errors.
+   159→- Remaining lint errors in src/portals/admin/* are NOT mine (Task 5 = Employer only) — AdminInvoices.tsx parse error, AdminPlans.tsx missing Select import, AdminRoles/AdminUsers unused-expression warnings.
+   160→- dev.log: clean, no errors.
+   161→
+   162→Files created (23):
+   163→- src/portals/employer/index.tsx
+   164→- src/portals/employer/EmployerOverview.tsx
+   165→- src/portals/employer/EmployerCompanyProfile.tsx
+   166→- src/portals/employer/EmployerBranding.tsx
+   167→- src/portals/employer/EmployerJobs.tsx
+   168→- src/portals/employer/EmployerCreateJob.tsx
+   169→- src/portals/employer/EmployerTemplates.tsx
+   170→- src/portals/employer/EmployerApplicants.tsx
+   171→- src/portals/employer/EmployerPipeline.tsx
+   172→- src/portals/employer/EmployerTalentSearch.tsx
+   173→- src/portals/employer/EmployerTalentPool.tsx
+   174→- src/portals/employer/EmployerShortlists.tsx
+   175→- src/portals/employer/EmployerAssessments.tsx
+   176→- src/portals/employer/EmployerInterviews.tsx
+   177→- src/portals/employer/EmployerOffers.tsx
+   178→- src/portals/employer/EmployerHires.tsx
+   179→- src/portals/employer/EmployerTeam.tsx
+   180→- src/portals/employer/EmployerAnalytics.tsx
+   181→- src/portals/employer/EmployerSubscription.tsx
+   182→- src/portals/employer/EmployerIntegrations.tsx
+   183→- src/portals/employer/EmployerMessages.tsx
+   184→- src/portals/employer/EmployerSettings.tsx
+   185→- src/portals/employer/EmployerSupport.tsx
+   186→
+   187→Stage Summary:
+   188→- Employer Portal COMPLETE. All 22 routes implemented + router. Ready for orchestrator to wire into AppShell/page.tsx via `import { render as renderEmployer } from "@/portals/employer"` and call `renderEmployer(route)` when `portal === "employer"`.
+   189→
+   190→---
+   191→
+   192→Task ID: 4
+   193→Agent: Candidate Portal Builder
+   194→Task: Build the Candidate Portal — 20 pages + router in `src/portals/candidate/`
+   195→
+   196→Work Log:
+   197→- Read worklog.md and the foundation contract (Task 1) before coding. Reused the foundation: `useNav`, `useAuth`, mock-data, mock-api services (`jobService`, `applicationService`, `candidateService`, `interviewService`, `offerService`, `messageService`, `trainingService`, `aiService`), shared common UI (`PageHeader`, `SectionCard`, `StatCard`, `StatusBadge`, `MatchScore`, `EmptyState`, `AvatarLogo`, `Icon`), shadcn components, recharts, react-hook-form + zod, sonner toasts.
+   198→- Logged-in candidate = `candidateProfiles[0]` (Priya Nair, candidateId `"c_001"`), per the contract.
+   199→- Created `src/portals/candidate/index.tsx` exporting `render(route)` that switches on `route.split("/")[0]` across all 20 sidebar routes (`overview`, `profile`, `resume`, `find-jobs`, `recommended`, `saved-jobs`, `applications`, `interviews`, `offers`, `skills`, `career-development`, `training`, `portfolio`, `messages`, `alerts`, `documents`, `payments`, `referrals`, `settings`, `support`) with fallback to `CandidateOverview`.
+   200→
+   201→Files created (all `"use client"`):
+   202→1. `CandidateOverview.tsx` — Greeting "Welcome back, Priya", 5 KPI cards (profile completeness with Progress, applications, active interviews, saved jobs, profile views), quick actions row, 2-column responsive layout: Recommended for you (uses `jobService.recommended` with loading skeletons + match-score rings + matched/missing skill chips + "Simulated AI" badge + disclaimer), Profile strength card with Progress, Application status breakdown PieChart (recharts), Upcoming interviews list, Recent notifications list (click → navigate).
+   203→2. `CandidateProfile.tsx` — Full profile editor with react-hook-form + zod validation. Header card (AvatarLogo, name, headline, location, open-to-work Switch toggle). Tabs: Summary (headline/location/expectedSalary/summary form), Experience (add/edit/delete via Dialog with month pickers + "current" switch), Education (same pattern), Skills (list with level Select, verified badge, "Get verified" → toast, add/remove), Extras (certifications, languages, achievements, projects, links), Visibility (radio: public/employers_only/private). Live-computed profile completeness Progress bar. All saves → toast feedback.
+   204→3. `CandidateResume.tsx` — Resume manager. 3 seed versions ("Default Resume", "TechCorp Tailored", "FinEdge PM (Draft)") with name/lastUpdated/size/default badge/source. Actions: Preview (Dialog with rendered profile preview), Download (toast), Set as default, Delete (AlertDialog confirm). "Upload resume" → Dialog with drag-drop zone + file input → loading state → `aiService.parseResume(fileName)` → displays extracted fields with "Simulated AI" badge and confidence Progress. "Create resume from profile" button.
+   205→4. `CandidateFindJobs.tsx` — Job search. Filters sidebar (keywords, location, work arrangement, employment type, min salary, sort). Job cards with AvatarLogo, MatchScore ring (computed from candidate skills), matched/missing skill chips, save toggle (bookmark icon), "Easy Apply" → `applicationService.apply` → toast + disable applied. Click card → Dialog with full job summary + Apply. Empty state with reset filters.
+   206→5. `CandidateRecommended.tsx` — AI recommendations. Banner card "AI-Powered Recommendations" with "Simulated AI" badge + disclaimer. Calls `jobService.recommended("c_001")` in useEffect with loading skeletons. Cards with MatchScore ring, matched skills (green), missing skills (amber), expandable "Why this match?" Collapsible with reasoning bullets, "View job" + "Apply" buttons (apply → `applicationService.apply`).
+   207→6. `CandidateSavedJobs.tsx` — Saved jobs list (3 seed jobs). Cards with unsave + apply buttons. Empty state.
+   208→7. `CandidateApplications.tsx` — Tracker with Tabs (All/Active/Interview/Offer/Rejected/Withdrawn) and search. Cards with StatusBadge, MatchScore, match reason/missing skill chips. Expandable timeline (numbered events with notes). "Withdraw" → AlertDialog confirm → `applicationService.updateStatus("withdrawn")` → toast. Pagination (5 per page).
+   209→8. `CandidateInterviews.tsx` — Two sections. Upcoming: cards with job title/employer/round/type/scheduledAt/duration/interviewers/meeting-link, "Join"/"Reschedule"/"Cancel"/"Contact" buttons → toasts. Past: completed interviews with scorecard summary (criteria ratings, recommendation badge, summary) when available, else "Feedback pending".
+   210→9. `CandidateOffers.tsx` — Offer card for Priya (seeded) with salary, joining bonus, stock options, benefits grid, start date, expiry countdown (daysUntil). "Accept"/"Decline" → AlertDialog confirm → toast + status change. Offer tips section. Empty-state fallback for candidates with no offers.
+   211→10. `CandidateSkills.tsx` — Tabs: My Skills (list with level, years, verified badge, "Get verified" → toast, Progress bar) + Skill gap analysis card (Simulated AI badge, target role Select, matched/missing chips, "Generate learning path" button). Assessments: my results (filtered to c_001) + available assessments grid with difficulty badges + "Start" → Dialog with prep info → toast.
+   212→11. `CandidateCareerDevelopment.tsx` — Career goal form (target role, timeline, notes) + Save goal. Skill gap radar chart (recharts RadarChart comparing current vs target for 6 skills). Strengths/gaps cards. Recommended learning path (4 trainingCourses with enroll). Mock interview prep card with "Start mock interview" → `aiService.generateInterviewQuestions` → Dialog with "Simulated AI" badge and questions list, regenerate.
+   213→12. `CandidateTraining.tsx` — Tabs: My Learning (3 enrolled courses with Progress + Continue), Browse Courses (grid of all trainingCourses with enroll button → toast), Certifications (list of all certifications with Prepare button).
+   214→13. `CandidatePortfolio.tsx` — External links display (GitHub/LinkedIn/Portfolio). Project cards with edit/delete. "Add project" Dialog (react-hook-form + zod). AlertDialog confirm for delete.
+   215→14. `CandidateMessages.tsx` — Two-pane layout. Left: folders (Inbox/Sent/Starred via Tabs), search input, message list with read/unread/star states. Right: thread view with body, attachments, Reply/Star buttons. "Compose" Dialog (recipient/subject/body) → toast. Filters by Priya as recipient/sender. Responsive (stacks on mobile).
+   216→15. `CandidateAlerts.tsx` — 4 seed job alerts with query/frequency/email toggle/pause/last triggered/match count. Toggle pause, toggle email, delete (AlertDialog). "Create alert" Dialog (query, frequency, email switch). How-it-works section.
+   217→16. `CandidateDocuments.tsx` — Stats row (total/resumes/certs/storage). Document vault list with type-specific icons, size, uploaded date, download (toast) and delete (AlertDialog). "Upload" Dialog with drag-drop, name input, type Select.
+   218→17. `CandidatePayments.tsx` — Tabs: Plan (Free plan card + usage bars + upgrade CTA), Premium Services (4 services: Resume Boost, Priority Apps, Mock Interview Pack, Career Coaching — buy → toast), History (transaction table with status badges + invoice download buttons).
+   219→18. `CandidateReferrals.tsx` — Referral code banner with copy button (clipboard API). Stats cards (Invited/Signed up/Converted/Rewards earned). Referral history table (seeded with 3 referrals for Priya). "Invite friends" Dialog (comma-separated emails → creates pending referrals + toast). How-it-works 3-step section.
+   220→19. `CandidateSettings.tsx` — Tabs: Account (name/email/phone/password change form via react-hook-form + zod), Privacy (4 consent switches: marketing/data_sharing/analytics/profile_indexing), Notifications (5 notification toggles), Security (MFA switch, active sessions list with sign-out, login history table), Data (download my data → toast, delete account → AlertDialog confirm). Fixed a typo in AlertDialog structure.
+   221→20. `CandidateSupport.tsx` — Contact options (email/chat/phone cards). FAQ accordion (6 Q&As). My tickets list (seeded with 1 ticket for Priya + new ones added on submit). "Raise a ticket" Dialog with react-hook-form + zod (subject/category/priority/description). Category & Priority Selects extracted to child components to avoid React Compiler warning with `form.watch`.
+   222→
+   223→Quality:
+   224→- All 20 pages + router present, all `"use client"`, all using the contract imports.
+   225→- Every interactive element wired: toasts for actions, AlertDialog for destructive (withdraw/delete/decline offer/delete account), navigation via `useNav().navigate`.
+   226→- AI features clearly labeled "Simulated AI" (Overview recs, Recommended banner + cards, Resume parse, Career Development mock interview, Skills gap analysis) with disclaimers where appropriate.
+   227→- No `any` types. Clean typed code using `@/lib/types`.
+   228→- Responsive throughout (mobile-first, `grid-cols-1 sm:grid-cols-2 lg:grid-cols-3` patterns, flex-wrap, stacks on mobile for messages).
+   229→- Long lists use `max-h-* overflow-y-auto scroll-thin`.
+   230→- Brand emerald colors throughout, no indigo/blue primaries.
+   231→- Loading states (skeletons for async recommended jobs), empty states everywhere with CTAs.
+   232→
+   233→Verification:
+   234→- Ran `bun run lint 2>&1 | grep -i candidate` → ZERO candidate-portal lint errors or warnings. (Remaining 23 errors are in admin/employer/public portal files owned by other agents — AdminInvoices parsing error, AdminPlans missing Select imports, EmployerApplicants useMemo/Compiler warnings, EmployerTemplates rules-of-hooks, EmployerSupport missing Badge import, PublicJobDetail rules-of-hooks, AdminUsers/AdminRoles no-unused-expressions — none in candidate files.)
+   235→- Fixed candidate-specific issues during lint: removed duplicate `className` on a Badge in `CandidateSkills.tsx`, removed unused eslint-disable directives in `CandidateFindJobs.tsx` and `CandidateReferrals.tsx`, refactored `CandidateSupport.tsx` to extract CategorySelect/PrioritySelect child components (avoids React Compiler `form.watch` warning), removed unused `Badge` and `formatDate` imports from `CandidateSupport.tsx`.
+   236→- Dev server (`bun run dev`) compiles cleanly: `✓ Compiled in 199ms` latest.
+   237→
+   238→Files Created (21 total):
+   239→- `src/portals/candidate/index.tsx` (router)
+   240→- `src/portals/candidate/CandidateOverview.tsx`
+   241→- `src/portals/candidate/CandidateProfile.tsx`
+   242→- `src/portals/candidate/CandidateResume.tsx`
+   243→- `src/portals/candidate/CandidateFindJobs.tsx`
+   244→- `src/portals/candidate/CandidateRecommended.tsx`
+   245→- `src/portals/candidate/CandidateSavedJobs.tsx`
+   246→- `src/portals/candidate/CandidateApplications.tsx`
+   247→- `src/portals/candidate/CandidateInterviews.tsx`
+   248→- `src/portals/candidate/CandidateOffers.tsx`
+   249→- `src/portals/candidate/CandidateSkills.tsx`
+   250→- `src/portals/candidate/CandidateCareerDevelopment.tsx`
+   251→- `src/portals/candidate/CandidateTraining.tsx`
+   252→- `src/portals/candidate/CandidatePortfolio.tsx`
+   253→- `src/portals/candidate/CandidateMessages.tsx`
+   254→- `src/portals/candidate/CandidateAlerts.tsx`
+   255→- `src/portals/candidate/CandidateDocuments.tsx`
+   256→- `src/portals/candidate/CandidatePayments.tsx`
+   257→- `src/portals/candidate/CandidateReferrals.tsx`
+   258→- `src/portals/candidate/CandidateSettings.tsx`
+   259→- `src/portals/candidate/CandidateSupport.tsx`
+   260→
+   261→Issues / Notes for orchestrator:
+   262→- The candidate router `render(route)` is ready to be wired by `src/app/page.tsx` (when `useNav().portal === "candidate"`). Suggested: `import { render as renderCandidate } from "@/portals/candidate";` and call `renderCandidate(route)` inside AppShell's portal switch.
+   263→- The candidate portal is fully self-contained and depends only on Task 1 foundation. No coupling to other portal subagents.
+   264→- All actions are demo-only with simulated state; no backend calls beyond the mock-api layer.
+   265→
+   266→---
+   267→Task ID: 8
+   268→Agent: Admin Portal subagent
+   269→Task: Build admin portal pages + router in `src/portals/admin/` (25 routes, render() entry)
+   270→
+   271→Work Log:
+   272→- Read worklog CONTRACT (Task ID 1 foundation): useNav/useAuth, types, mock-data, mock-api, shared components (PageHeader/Card/SectionCard/StatCard/StatusBadge/EmptyState/AvatarLogo/Icon), shadcn ui/*, format helpers, sonner toasts, recharts, react-hook-form+zod available.
+   273→- Confirmed admin user is "Aarav Sharma" (platform_admin) via currentUser in mock-data and roleUsers.platform_admin in store.ts.
+   274→- Confirmed admin sidebar nav config in portal-config.ts: 25 route keys (overview, users, organizations, verification, job-moderation, recruitment-monitoring, roles, ai-config, assessments, training, plans, pricing, payments, invoices, promotions, referrals, notifications, cms, reports, integrations, api, audit, privacy, support, settings).
+   275→
+   276→Files created in src/portals/admin/:
+   277→- _shared.tsx — shared helpers: CHART_COLORS (emerald-leaning palette), ChartCard wrapper, SimulatedBadge, SeverityBadge (low/info/medium/warning/high/critical), Toolbar (search+filters+actions), makeSeries (deterministic time-series), ChartTooltip (custom recharts tooltip).
+   278→- AdminOverview.tsx — KPI grid (8 cards: Total users, Organizations, Active jobs, Applications 30d, Hires, Revenue 30d, Verification queue, Flagged content). Charts: User growth AreaChart, Revenue by plan PieChart, Applications trend LineChart, Activity BarChart. Needs attention panel (verification, flagged, overdue invoices, open tickets, failed payments). Recent activity feed from auditLogs.
+   279→- AdminUsers.tsx — TanStack-free table (Table primitives) of platformUsers with AvatarLogo, role/verified filters, search, bulk select with verify/suspend, row dropdown (View, Edit, Verify, Suspend, Restore, Deactivate). AlertDialog for suspend + deactivate. Sheet detail with consent records, login history, memberships. Create user dialog.
+   280→- AdminOrganizations.tsx — Table of employers + agencies combined (8+2=10 rows). Filters by type/plan/verified. Row dropdown (View, Edit, Verify, Suspend, Delete). AlertDialog for suspend + delete. Sheet detail with members, jobs, subscription/billing. Create org dialog.
+   281→- AdminVerification.tsx — KYC queue with 5 pending items. Stats (pending/approved today/rejected/avg review time). Review dialog with documents list + KYC checklist + Approve/Request more info/Reject actions. Reject AlertDialog with reason textarea. KYC checklist section.
+   282→- AdminJobModeration.tsx — flaggedJobs table with severity filter, search. Suspicious indicators panel (6 fraud patterns). All jobs moderation search table. Actions: Review job, Approve, Warn employer, Remove job (AlertDialog), Ban employer (AlertDialog). Review dialog with reason + checklist.
+   283→- AdminRecruitmentMonitoring.tsx — Platform hiring metrics. Application volume LineChart, hiring funnel (7 stages), top employers BarChart, top categories PieChart, anomaly detection panel (4 mock signals), live activity feed.
+   284→- AdminRoles.tsx — 11 system roles with descriptions + user counts. Permission matrix (22 permissions × roles, editable checkboxes). Custom role creator dialog. Groups management. Assignment stats with progress bars.
+   285→- AdminAiConfig.tsx — Tabs: Providers (3 cards OpenAI/Anthropic/Local with masked API key, model select, test connection), Prompt Templates (list + editor with Run preview via aiService), Evaluation cases (table with Run button → simulated pass/fail), Version history (3 versions with diff/restore), Usage monitoring (AreaChart tokens + BarChart by feature), Feature toggles (6 switches). SimulatedBadge prominently displayed.
+   286→- AdminAssessments.tsx — Table of assessments with type/difficulty/questions/duration/assigned/completion rate. Switch to enable/disable. Create/edit dialog. Results analytics cards.
+   287→- AdminTraining.tsx — Tabs: Courses (table with Switch enable/disable + Add dialog), Certifications (table + Add dialog), Analytics (enrollment BarChart by category + top courses by revenue).
+   288→- AdminPlans.tsx — Cards for 5 plans with editable price/features/limits. Plan popularity BarChart. Usage stats per plan with progress bars. Create/edit plan dialog with full form.
+   289→- AdminPricing.tsx — Commission rules table (7 rules by service×plan, editable rate inputs). Tax config (GST rate, GSTIN, currency). Coupon rules section. Disclaimer about legal/accounting review. Add coupon dialog.
+   290→- AdminPayments.tsx — Transactions table with status/method filters + search. Revenue AreaChart. By-method breakdown. Refund dialog (reason textarea → toast). Failed payment alerts. Export.
+   291→- AdminInvoices.tsx — Invoices table with status filter + search. Mini stats (invoiced/paid/overdue/GST). Refund requests panel (approve/reject). GST report (output/input/net/payable). Invoice detail dialog with items. Generate invoice dialog.
+   292→- AdminPromotions.tsx — Promotions table with status filter, usage progress bars. Redemption BarChart (used vs limit). Featured/sponsored jobs panel. Ad inventory grid (4 slots with booking). Create/edit promotion dialog. Delete AlertDialog.
+   293→- AdminReferrals.tsx — Referrals table with status filter. Referral trend AreaChart. Affiliate config (3 tiers + cookie duration, editable). Payout management list. Process payout dialog.
+   294→- AdminNotifications.tsx — Tabs: Templates (5 templates with Edit dialog supporting variables + channel switches), Delivery logs (table), Channels (Email/SMS/In-app config cards with Switch toggles). Send broadcast dialog (audience select + subject + body).
+   295→- AdminCms.tsx — Landing pages table (7 pages with status/last edited). Banner management with Switch toggles. Publish & schedule panel. Page editor dialog with toolbar + rich-text area. SEO settings dialog.
+   296→- AdminReports.tsx — Report library (6 reports with generate/schedule/download). User growth LineChart, Revenue BarChart (with formula captions). Scheduled reports + Saved reports lists. Metric definitions reference (8 KPIs with formulas). Custom report builder dialog.
+   297→- AdminIntegrations.tsx — Tabs: Grid (8 integrations with connect/disconnect/configure), Health (AreaChart uptime + per-integration status), Partners (API partners table). Config dialog with API key + webhook + sync options.
+   298→- AdminApi.tsx — API keys table (4 keys with org/key masked/scopes/rate limit/status/last used). Generate key dialog with scope checkboxes. Rate limiting config. Webhook endpoints list. Versioning + docs panel. Revoke AlertDialog. Usage AreaCharts (requests + latency).
+   299→- AdminAudit.tsx — Security alerts panel (4 alerts with severity). Audit log table with severity/actor/action filters + search. Immutable note. Failed logins, suspicious activity stats. Export.
+   300→- AdminPrivacy.tsx — Tabs: Retention (6 data types with editable period + auto-delete Switch), Consent (5 consent types with granted/denied bars), DSAR (data subject access requests table with process dialog), DPA (data processing agreements list), Policy (privacy policy versioning). DPDP/GDPR compliance tools.
+
+[showing lines 1-300 of 4696; use offset=301 with limit to continue reading]
