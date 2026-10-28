@@ -37,7 +37,9 @@ import {
   MailCheck, ListOrdered, Server,
   Snowflake, Undo2, HeartHandshake, Bug, Crosshair, Cookie, Siren,
   MousePointerClick, Share2,
-  Grid3x3,
+  Grid3x3, Split,
+  ArrowRightLeft,
+  Reply,
   type LucideIcon,
 } from "lucide-react";
 
@@ -77,7 +79,9 @@ const map: Record<string, LucideIcon> = {
   MailCheck, ListOrdered, Server,
   Snowflake, Undo2, HeartHandshake, Bug, Crosshair, Cookie, Siren,
   MousePointerClick, Share2,
-  Grid3x3,
+  Grid3x3, Split,
+  ArrowRightLeft,
+  Reply,
 };
 
 export function Icon({ name, className }: { name: string; className?: string }) {

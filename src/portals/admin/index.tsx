@@ -120,6 +120,13 @@ const SuperAdminOnboardingOversight = dynamic(() => import("./SuperAdminOnboardi
 const SuperAdminEnrollmentOversight = dynamic(() => import("./SuperAdminEnrollmentOversight").then((m) => m.SuperAdminEnrollmentOversight));
 const SuperAdminTrainerAllocationOversight = dynamic(() => import("./SuperAdminTrainerAllocationOversight").then((m) => m.SuperAdminTrainerAllocationOversight));
 
+// Cross-portal Process Bridges
+const SuperAdminUnifiedApplications = dynamic(() => import("./SuperAdminUnifiedApplications").then((m) => m.SuperAdminUnifiedApplications));
+const SuperAdminCrossPortalPipeline = dynamic(() => import("./SuperAdminCrossPortalPipeline").then((m) => m.SuperAdminCrossPortalPipeline));
+const SuperAdminCrossPortalApprovals = dynamic(() => import("./SuperAdminCrossPortalApprovals").then((m) => m.SuperAdminCrossPortalApprovals));
+const SuperAdminSourcingBridge = dynamic(() => import("./SuperAdminSourcingBridge").then((m) => m.SuperAdminSourcingBridge));
+const SuperAdminPlacementHandoff = dynamic(() => import("./SuperAdminPlacementHandoff").then((m) => m.SuperAdminPlacementHandoff));
+
 // Wave 6 — Comms gap pages
 const SuperAdminMessageAudit = dynamic(() => import("./SuperAdminMessageAudit").then((m) => m.SuperAdminMessageAudit));
 const SuperAdminEmailDeliverability = dynamic(() => import("./SuperAdminEmailDeliverability").then((m) => m.SuperAdminEmailDeliverability));
@@ -127,6 +134,11 @@ const SuperAdminSmsDltCompliance = dynamic(() => import("./SuperAdminSmsDltCompl
 const SuperAdminWhatsappOversight = dynamic(() => import("./SuperAdminWhatsappOversight").then((m) => m.SuperAdminWhatsappOversight));
 const SuperAdminCommsAnalytics = dynamic(() => import("./SuperAdminCommsAnalytics").then((m) => m.SuperAdminCommsAnalytics));
 const SuperAdminTemplateApproval = dynamic(() => import("./SuperAdminTemplateApproval").then((m) => m.SuperAdminTemplateApproval));
+const SuperAdminUnifiedInbox = dynamic(() => import("./SuperAdminUnifiedInbox").then((m) => m.SuperAdminUnifiedInbox));
+const SuperAdminCrossPortalThreads = dynamic(() => import("./SuperAdminCrossPortalThreads").then((m) => m.SuperAdminCrossPortalThreads));
+const SuperAdminSharedNotifications = dynamic(() => import("./SuperAdminSharedNotifications").then((m) => m.SuperAdminSharedNotifications));
+const SuperAdminUnifiedCalendar = dynamic(() => import("./SuperAdminUnifiedCalendar").then((m) => m.SuperAdminUnifiedCalendar));
+const SuperAdminCommsHealth = dynamic(() => import("./SuperAdminCommsHealth").then((m) => m.SuperAdminCommsHealth));
 
 // Wave 6 — System gap pages
 const SuperAdminCronMonitor = dynamic(() => import("./SuperAdminCronMonitor").then((m) => m.SuperAdminCronMonitor));
@@ -155,6 +167,11 @@ const SuperAdminMultiCurrencyOversight = dynamic(() => import("./SuperAdminMulti
 const SuperAdminPaymentGatewayHealth = dynamic(() => import("./SuperAdminPaymentGatewayHealth").then((m) => m.SuperAdminPaymentGatewayHealth));
 const SuperAdminWalletLedger = dynamic(() => import("./SuperAdminWalletLedger").then((m) => m.SuperAdminWalletLedger));
 const SuperAdminFinancialAudit = dynamic(() => import("./SuperAdminFinancialAudit").then((m) => m.SuperAdminFinancialAudit));
+const SuperAdminCrossPortalPlacements = dynamic(() => import("./SuperAdminCrossPortalPlacements").then((m) => m.SuperAdminCrossPortalPlacements));
+const SuperAdminUnifiedLedger = dynamic(() => import("./SuperAdminUnifiedLedger").then((m) => m.SuperAdminUnifiedLedger));
+const SuperAdminCommissionTracker = dynamic(() => import("./SuperAdminCommissionTracker").then((m) => m.SuperAdminCommissionTracker));
+const SuperAdminSettlementHub = dynamic(() => import("./SuperAdminSettlementHub").then((m) => m.SuperAdminSettlementHub));
+const SuperAdminRevenueShareEngine = dynamic(() => import("./SuperAdminRevenueShareEngine").then((m) => m.SuperAdminRevenueShareEngine));
 
 // Security gap pages
 const SuperAdminConsentManagement = dynamic(() => import("./SuperAdminConsentManagement").then((m) => m.SuperAdminConsentManagement));
@@ -239,6 +256,11 @@ export function render(route: string): React.ReactNode {
     case "sa-payment-gateway-health": return <SuperAdminPaymentGatewayHealth />;
     case "sa-wallet-ledger": return <SuperAdminWalletLedger />;
     case "sa-financial-audit": return <SuperAdminFinancialAudit />;
+    case "sa-cross-portal-placements": return <SuperAdminCrossPortalPlacements />;
+    case "sa-unified-ledger": return <SuperAdminUnifiedLedger />;
+    case "sa-commission-tracker": return <SuperAdminCommissionTracker />;
+    case "sa-settlement-hub": return <SuperAdminSettlementHub />;
+    case "sa-revenue-share-engine": return <SuperAdminRevenueShareEngine />;
 
     // Content
     case "sa-job-taxonomy": return <SuperAdminJobTaxonomy />;
@@ -289,6 +311,11 @@ export function render(route: string): React.ReactNode {
     case "sa-whatsapp-oversight": return <SuperAdminWhatsappOversight />;
     case "sa-comms-analytics": return <SuperAdminCommsAnalytics />;
     case "sa-template-approval": return <SuperAdminTemplateApproval />;
+    case "sa-unified-inbox": return <SuperAdminUnifiedInbox />;
+    case "sa-cross-portal-threads": return <SuperAdminCrossPortalThreads />;
+    case "sa-shared-notifications": return <SuperAdminSharedNotifications />;
+    case "sa-unified-calendar": return <SuperAdminUnifiedCalendar />;
+    case "sa-comms-health": return <SuperAdminCommsHealth />;
 
     // Ops
     case "sa-tickets": return <SuperAdminTickets />;
@@ -339,6 +366,13 @@ export function render(route: string): React.ReactNode {
     case "sa-onboarding-oversight": return <SuperAdminOnboardingOversight />;
     case "sa-enrollment-oversight": return <SuperAdminEnrollmentOversight />;
     case "sa-trainer-allocation-oversight": return <SuperAdminTrainerAllocationOversight />;
+
+    // Cross-portal Process Bridges
+    case "sa-unified-applications": return <SuperAdminUnifiedApplications />;
+    case "sa-cross-portal-pipeline": return <SuperAdminCrossPortalPipeline />;
+    case "sa-cross-portal-approvals": return <SuperAdminCrossPortalApprovals />;
+    case "sa-sourcing-bridge": return <SuperAdminSourcingBridge />;
+    case "sa-placement-handoff": return <SuperAdminPlacementHandoff />;
 
     // Hiring Oversight
     case "sa-jobs-all": return <SuperAdminJobsAll />;
