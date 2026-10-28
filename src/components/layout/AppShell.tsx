@@ -42,9 +42,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
                 {children}
               </div>
             </main>
-            <footer className="shrink-0 border-t bg-background px-4 py-3 text-center text-xs text-muted-foreground">
-              © {new Date().getFullYear()} JOBSONN — {portal.charAt(0).toUpperCase() + portal.slice(1)} Portal · Demo prototype (simulated data)
-            </footer>
           </div>
         </div>
       )}

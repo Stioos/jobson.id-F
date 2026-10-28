@@ -6,19 +6,16 @@
   · optimizePackageImports
 
 ✓ Starting...
-✓ Ready in 1891ms
+✓ Ready in 1845ms
 ○ Compiling / ...
- GET / 200 in 13.4s (compile: 13.1s, render: 313ms)
- GET / 200 in 7.3s (compile: 7.2s, render: 110ms)
- GET / 200 in 728ms (compile: 121ms, render: 607ms)
- GET /favicon.ico 200 in 3.7s (compile: 3.6s, render: 146ms)
- GET /favicon.ico 200 in 871ms (compile: 724ms, render: 147ms)
- GET / 200 in 69ms (compile: 11ms, render: 58ms)
-✓ Compiled in 1791ms
- GET / 200 in 72ms (compile: 18ms, render: 54ms)
- GET / 200 in 48ms (compile: 7ms, render: 41ms)
- GET / 200 in 54ms (compile: 9ms, render: 45ms)
- GET /favicon.ico 200 in 157ms (compile: 97ms, render: 59ms)
- GET / 200 in 55ms (compile: 8ms, render: 46ms)
- GET /favicon.ico 200 in 127ms (compile: 68ms, render: 59ms)
-n 127ms (compile: 68ms, render: 59ms)
+ GET / 200 in 11.7s (compile: 11.5s, render: 188ms)
+ GET / 200 in 15.8s (compile: 15.2s, render: 584ms)
+ GET / 200 in 14.2s (compile: 13.6s, render: 601ms)
+ GET / 200 in 12.8s (compile: 12.1s, render: 649ms)
+ GET /favicon.ico 200 in 2.7s (compile: 2.6s, render: 102ms)
+ GET /favicon.ico 200 in 450ms (compile: 346ms, render: 104ms)
+ GET / 200 in 272ms (compile: 46ms, render: 226ms)
+ GET /favicon.ico 200 in 729ms (compile: 254ms, render: 475ms)
+ GET / 200 in 77ms (compile: 17ms, render: 60ms)
+ GET /favicon.ico 200 in 137ms (compile: 75ms, render: 62ms)
+n 137ms (compile: 75ms, render: 62ms)

@@ -4881,3 +4881,34 @@ Task: Deep research all existing portals, analyze what a Super Admin needs to co
 | **TOTAL** | **62** | **Complete Super Admin portal** |
 
 The Super Admin portal now controls ALL aspects of the platform across all 5 user portals (candidate, employer, recruiter, training, partner).
+
+---
+Task ID: REMOVE-DASHBOARD-FOOTER
+Agent: Main (Z.ai Code)
+
+Task: Remove the dashboard footer from all portal dashboards.
+
+Work Log:
+- Read /home/z/my-project/worklog.md to understand previous work
+- Found the dashboard footer in /home/z/my-project/src/components/layout/AppShell.tsx at lines 45-47:
+  ```tsx
+  <footer className="shrink-0 border-t bg-background px-4 py-3 text-center text-xs text-muted-foreground">
+    © {new Date().getFullYear()} JOBSONN — {portal.charAt(0).toUpperCase() + portal.slice(1)} Portal · Demo prototype (simulated data)
+  </footer>
+  ```
+- This footer was rendered for ALL non-public portals (candidate, employer, recruiter, training, partner, admin, etc.)
+- Removed the entire `<footer>` element from the dashboard layout branch
+- The public portal footer (Footer component, line 33) remains unchanged — it's a different, full-featured footer for the public website only
+- Kept the `Footer` import since it's still used for the public portal
+
+- Ran `bun run lint` — 0 errors, only 6 pre-existing warnings
+- Dev server restarted, confirmed HTTP 200
+- Browser-verified:
+  1. Candidate Portal — VLM confirmed: "No footer visible" at bottom
+  2. Training & Admin Portal — VLM confirmed: "No" footer visible
+- Console: clean, no errors
+
+Stage Summary:
+- Dashboard footer removed from ALL portal dashboards (candidate, employer, recruiter, training, partner, super admin, agency, enterprise, admin, learner)
+- The public website footer (Footer component) remains for the public portal only
+- Lint: 0 errors. Browser-verified: no footer visible in candidate and training portals. Console: clean.
