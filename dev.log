@@ -1,6 +1,6 @@
 ▲ Next.js 16.1.3 (Turbopack)
 - Local:         http://localhost:3000
-- Network:       http://21.0.4.225:3000
+- Network:       http://21.0.8.185:3000
 - Environments: .env
 - Experiments (use with caution):
   · optimizePackageImports
@@ -11,13 +11,18 @@ This information is used to shape Next.js' roadmap and prioritize features.
 You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
 https://nextjs.org/telemetry
 
-✓ Ready in 1225ms
+✓ Ready in 995ms
 ○ Compiling / ...
- GET / 200 in 32.0s (compile: 31.6s, render: 347ms)
- GET / 200 in 8.9s (compile: 8.3s, render: 579ms)
+ GET / 200 in 22.6s (compile: 22.5s, render: 109ms)
+ GET / 200 in 31.6s (compile: 31.1s, render: 477ms)
+ GET / 200 in 28.5s (compile: 28.4s, render: 102ms)
+ GET / 200 in 56ms (compile: 6ms, render: 50ms)
 ○ Compiling /[...slug] ...
- GET /favicon.ico 200 in 10.0s (compile: 9.9s, render: 119ms)
- GET / 200 in 331ms (compile: 15ms, render: 316ms)
- GET /favicon.ico 200 in 477ms (compile: 230ms, render: 246ms)
-✓ Finished writing to filesystem cache in 12.7s
- writing to filesystem cache in 12.7s
+✓ Finished writing to filesystem cache in 11.6s
+ GET / 200 in 321ms (compile: 29ms, render: 292ms)
+ GET /favicon.ico 200 in 2.3s (compile: 2.1s, render: 190ms)
+ GET /favicon.ico 200 in 19.2s (compile: 19.0s, render: 191ms)
+ GET / 200 in 82ms (compile: 28ms, render: 54ms)
+ GET /favicon.ico 200 in 161ms (compile: 83ms, render: 77ms)
+ GET / 200 in 134ms (compile: 22ms, render: 112ms)
+ 134ms (compile: 22ms, render: 112ms)
