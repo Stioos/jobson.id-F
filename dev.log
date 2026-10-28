@@ -11,15 +11,19 @@ This information is used to shape Next.js' roadmap and prioritize features.
 You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
 https://nextjs.org/telemetry
 
-✓ Ready in 933ms
+✓ Ready in 930ms
 ○ Compiling / ...
- GET / 200 in 30.0s (compile: 29.7s, render: 320ms)
- GET / 200 in 44s (compile: 42s, render: 1044ms)
- GET /auth 200 in 43s (compile: 43s, render: 165ms)
- GET / 200 in 330ms (compile: 96ms, render: 234ms)
- GET /auth 200 in 244ms (compile: 163ms, render: 81ms)
- GET /favicon.ico 200 in 685ms (compile: 390ms, render: 294ms)
- GET / 200 in 424ms (compile: 12ms, render: 412ms)
-✓ Finished writing to filesystem cache in 13.0s
- GET /favicon.ico 200 in 383ms (compile: 158ms, render: 225ms)
-383ms (compile: 158ms, render: 225ms)
+ GET / 200 in 30.1s (compile: 29.8s, render: 312ms)
+ GET / 200 in 44s (compile: 42s, render: 1095ms)
+ GET /auth 200 in 38.5s (compile: 38.3s, render: 246ms)
+ GET / 200 in 29.9s (compile: 29.3s, render: 587ms)
+ GET / 200 in 421ms (compile: 10ms, render: 412ms)
+ GET /auth 200 in 319ms (compile: 78ms, render: 242ms)
+ GET /favicon.ico 200 in 544ms (compile: 292ms, render: 251ms)
+ GET / 200 in 188ms (compile: 18ms, render: 170ms)
+ GET /?portal=admin&route=sa-overview 200 in 203ms (compile: 45ms, render: 158ms)
+ GET /?portal=candidate&route=overview 200 in 57ms (compile: 7ms, render: 50ms)
+ GET /favicon.ico 200 in 134ms (compile: 68ms, render: 66ms)
+ GET / 200 in 492ms (compile: 12ms, render: 480ms)
+ GET /favicon.ico 200 in 503ms (compile: 155ms, render: 348ms)
+503ms (compile: 155ms, render: 348ms)
