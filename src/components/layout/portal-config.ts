@@ -703,6 +703,23 @@ export const portalConfigs: Record<Portal, PortalConfig> = {
               { key: "sa-impersonation", label: "Impersonation", icon: "UserCog" },
             ],
           },
+          // USER MANAGEMENT SYSTEM
+          {
+            key: "sa-usermgmt-grp", label: "User Management", icon: "UserCog", children: [
+              { key: "sa-roles", label: "Roles", icon: "Shield" },
+              { key: "sa-groups", label: "Groups", icon: "Users" },
+              { key: "sa-permissions", label: "Permissions", icon: "Key" },
+              { key: "sa-access-control-matrix", label: "Access Matrix", icon: "Grid3x3" },
+              { key: "sa-admin-accounts", label: "Admin Accounts", icon: "ShieldCheck" },
+              { key: "sa-sub-admins", label: "Sub-Admins", icon: "UserCheck" },
+              { key: "sa-business-users", label: "Business Users", icon: "Briefcase" },
+              { key: "sa-user-invitations", label: "Invitations", icon: "Mail" },
+              { key: "sa-user-onboarding", label: "Onboarding", icon: "UserPlus" },
+              { key: "sa-departments", label: "Departments", icon: "Building2" },
+              { key: "sa-reporting-hierarchy", label: "Reporting Hierarchy", icon: "Network" },
+              { key: "sa-user-activity-log", label: "Activity Log", icon: "History" },
+            ],
+          },
           // ANALYTICS
           {
             key: "sa-analytics-grp", label: "Analytics", icon: "BarChart3", children: [

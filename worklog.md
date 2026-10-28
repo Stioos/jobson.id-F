@@ -5090,3 +5090,109 @@ Task: Deep research all portal features feature-by-feature and function-by-funct
 | System | 14 | Integrations, API, webhooks, AI config, backups, system config + cron monitor, queue monitor, log aggregation, DNS, SSL, cache, CDN, database admin |
 | Settings | 3 | Settings hub, security center, notification preferences |
 | **TOTAL** | **142** | **Complete platform governance** |
+
+---
+Task ID: SA-USER-MANAGEMENT-SYSTEM
+Agent: Sub-agent (User Management System builder)
+Task: Build 12 comprehensive User Management pages for the Super Admin portal covering Roles, Groups, Permissions, Access Control, and Admin/Sub-Admin creation.
+
+Work Log:
+- Read existing portal-config.ts, admin router (index.tsx), common components (PageHeader, StatCard, SectionCard, EmptyState, Icon), and an existing SuperAdmin page (SuperAdminAccessControl.tsx) to learn conventions.
+- Added `Grid3x3` icon import + map entry to `src/components/common/Icon.tsx` (lucide-react Grid3x3 was available, was just missing from local map).
+- Added new sidebar group "User Management" (`sa-usermgmt-grp`) with 12 children to portal-config.ts immediately after `sa-users-grp`.
+- Created 12 page files in `/home/z/my-project/src/portals/admin/`:
+  1. `SuperAdminRoles.tsx` — Role Management: stats (Total/Active/System/Custom), role table with Level L1-L5 badges, system-role lock badges, expandable permission summary, Create Role dialog.
+  2. `SuperAdminGroups.tsx` — Group Management: stats, group table with role chips & portal chips, group hierarchy tree, group↔role mapping table, Create Group dialog with multi-select.
+  3. `SuperAdminPermissions.tsx` — Permission Management: catalog of 25 permissions across 8 categories (Platform, Users, Finance, Content, Security, Partners, Analytics, System), inheritance rules tab, Create Custom Permission dialog.
+  4. `SuperAdminAccessControlMatrix.tsx` — Visual access matrix: 25 perms × 8 roles with click-to-cycle Granted→Conditional→Denied cells, color-coded (emerald/amber/rose), bulk grant/deny per role, CSV export toast, legend, summary footer.
+  5. `SuperAdminAdminAccounts.tsx` — Admin account management: stats, table with portals chips & status badges, Edit/Suspend/Reset Password/View Activity actions, admin detail Sheet panel, Create Admin dialog.
+  6. `SuperAdminSubAdmins.tsx` — Sub-Admin management: table with parent admin, scope (portals+sections), delegated permission count, expiry date, delegation chain visualization per parent admin, Create Sub-Admin dialog with portal/section scope checkboxes.
+  7. `SuperAdminBusinessUsers.tsx` — Business users across portals: 6 stat cards (Candidates/Employers/Recruiters/Partners/Training/Total), filter by portal, search by name/email/org, bulk actions (activate/suspend/export), business role templates per portal, convert-to-admin button.
+  8. `SuperAdminUserInvitations.tsx` — Invitation system: stats (Pending/Accepted/Expired/Revoked), invitation analytics (acceptance rate, avg time-to-accept), Send Invitation dialog with single/bulk mode, role/group/portal/expiry selectors, custom message, resend/revoke actions.
+  9. `SuperAdminUserOnboarding.tsx` — Onboarding tracker: 9-stage pipeline (Invited→Onboarded) with per-stage count/conversion/avg-time + bottleneck detection, per-user expandable checklist, onboarding templates per role, automated reminders toggle.
+  10. `SuperAdminDepartments.tsx` — Department management: stats, table with head/staff/budget/portals, hierarchy tree view, budget tracker with progress bars, mock performance metrics, Create Department dialog.
+  11. `SuperAdminReportingHierarchy.tsx` — Org chart: tree visualization with avatars (initials), click-to-open detail Sheet (direct reports, permissions, access summary), department & portal filters, matrix view (dept × role), reporting line changes log.
+  12. `SuperAdminUserActivityLog.tsx` — Activity log: stats, table with user/portal/action/resource/timestamp/IP/device/location/status, anomaly detection panel (foreign IP, off-hours impersonation, bulk export), retention status (hot/warm/cold archive), real-time feed toggle, flagged-only toggle, export action.
+- Added 12 dynamic imports + 12 switch cases for the new routes in `src/portals/admin/index.tsx`.
+- Each page uses `"use client"`, PageHeader, StatCard, SectionCard, EmptyState from `@/components/common`, `Icon` from `@/components/common/Icon`, `Badge` from `@/components/ui/badge` (NOT from common), `toast` from `sonner`, emerald brand colors only (no indigo/blue).
+- Each page is between 200-350 lines with mock data.
+
+Routes (12):
+- sa-roles, sa-groups, sa-permissions, sa-access-control-matrix
+- sa-admin-accounts, sa-sub-admins, sa-business-users
+- sa-user-invitations, sa-user-onboarding, sa-departments
+- sa-reporting-hierarchy, sa-user-activity-log
+
+Files created: 12 new page files
+Files modified:
+- src/components/common/Icon.tsx (added Grid3x3)
+- src/components/layout/portal-config.ts (added sa-usermgmt-grp group with 12 children)
+- src/portals/admin/index.tsx (added 12 dynamic imports + 12 switch cases)
+
+Lint: 0 errors, 6 warnings (all pre-existing react-hooks/incompatible-library warnings about React Hook Form's watch() API in unrelated files; none in any new file).
+Dev server: Restarted (previous instance had corrupted turbopack cache). HTTP 200 verified on `/` and `/?portal=admin&route=sa-roles`.
+
+Issues: None. All 12 pages compile cleanly, lint passes with 0 errors, dev server is healthy.
+
+---
+Task ID: SA-USER-MGMT-AND-CLEANUP-FINAL
+Agent: Main (Z.ai Code) + Subagent
+
+Task: 1) Build comprehensive user management features (Roles, Groups, Permissions, Access Control, Admin/Sub-Admin creation). 2) Remove unwanted files/code to bring project below 20MB.
+
+## TASK 1: User Management System (12 new pages)
+
+Built a complete "User Management" sidebar group with 12 pages:
+
+1. **Roles** (`sa-roles`) — Role management with L1-L5 levels, system-role lock badges, expandable permission summary, create dialog
+2. **Groups** (`sa-groups`) — Group directory, hierarchy tree, group↔role mapping, create with multi-select
+3. **Permissions** (`sa-permissions`) — 26-permission catalog across 8 categories (Platform, Users, Finance, Content, Security, Partners, Analytics, System), inheritance rules
+4. **Access Matrix** (`sa-access-control-matrix`) — Visual matrix 26×8 (permissions × roles), click-to-cycle Granted→Conditional→Denied, bulk grant/deny, CSV export
+5. **Admin Accounts** (`sa-admin-accounts`) — Admin list with detail panel, suspend/reset/edit actions, create dialog
+6. **Sub-Admins** (`sa-sub-admins`) — Sub-admin directory with delegation chain visualization, scoped permissions, expiry
+7. **Business Users** (`sa-business-users`) — Cross-portal non-admin users (candidates, employers, recruiters, partners, training providers), bulk actions, role templates
+8. **Invitations** (`sa-user-invitations`) — Invitation list, analytics, single/bulk send dialog with expiry options
+9. **Onboarding** (`sa-user-onboarding`) — 9-stage onboarding pipeline with bottleneck detection, per-user checklists, templates
+10. **Departments** (`sa-departments`) — Department list, hierarchy tree, budget tracker, performance metrics
+11. **Reporting Hierarchy** (`sa-reporting-hierarchy`) — Org chart with detail panel, dept/portal filters, matrix view, change log
+12. **Activity Log** (`sa-user-activity-log`) — Activity feed with filters, anomaly detection, retention status, live toggle
+
+All 12 pages: page files created, route cases added to router, sidebar items added to portal-config.ts.
+
+## TASK 2: File Cleanup
+
+Removed non-project files to bring project size below 20MB:
+
+**Removed:**
+- `skills/` (61MB) — skill documentation, not part of the Next.js app
+- `tool-results/` (13MB) — temp VLM output files
+- `agent-ctx/` (244KB) — agent work records
+- `upload/` contents (2.4MB) — user-uploaded reference images
+- `examples/` — demo files
+- `tests/` — test files (user's rule: no test code)
+- `download/` — empty/unused
+- `public/logo.png` (1.7MB) — unused old logo
+- `public/jobsonn-icon.png` (1.7MB) — unused
+- `public/logo-tagline.png` (336KB) — unused
+- `.next/` cache — regenerated on build
+
+**Kept (all functional/process code):**
+- `src/` (13MB) — all application source code
+- `public/` (3.9MB) — logo, blog images, service images
+- `prisma/` — database schema
+- `db/` — database files
+- `mini-services/` — websocket services
+- `package.json`, `tsconfig.json`, `next.config.ts`, etc. — config files
+
+## FINAL VERIFICATION
+- **Project size**: 18MB (excluding node_modules and .git) — ✅ below 20MB target
+- **Lint**: 0 errors, 6 pre-existing warnings (unrelated files) ✅
+- **Dev server**: Running on port 3000, HTTP 200 ✅
+- **Browser-verified**: Super Admin → User Management group visible with all 12 items, Permissions page renders with 26 permissions across 8 categories, Access Matrix page renders with 26×8 visual matrix with click-to-cycle cells
+- **Console**: clean, no errors ✅
+
+## SUPER ADMIN PORTAL — FINAL STATS
+- Total page files: 154 (was 142, +12 new)
+- Total sidebar groups: 16 (was 15, +1 new: User Management)
+- Total route cases: 154
+- Project size: 18MB

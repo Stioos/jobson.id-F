@@ -171,6 +171,20 @@ const SuperAdminIncidentResponse = dynamic(() => import("./SuperAdminIncidentRes
 // Cross-portal shared pages
 const TasksPage = dynamic(() => import("@/portals/_settings-support-shared/TasksPage").then((m) => m.TasksPage));
 
+// User Management System
+const SuperAdminRoles = dynamic(() => import("./SuperAdminRoles").then((m) => m.SuperAdminRoles));
+const SuperAdminGroups = dynamic(() => import("./SuperAdminGroups").then((m) => m.SuperAdminGroups));
+const SuperAdminPermissions = dynamic(() => import("./SuperAdminPermissions").then((m) => m.SuperAdminPermissions));
+const SuperAdminAccessControlMatrix = dynamic(() => import("./SuperAdminAccessControlMatrix").then((m) => m.SuperAdminAccessControlMatrix));
+const SuperAdminAdminAccounts = dynamic(() => import("./SuperAdminAdminAccounts").then((m) => m.SuperAdminAdminAccounts));
+const SuperAdminSubAdmins = dynamic(() => import("./SuperAdminSubAdmins").then((m) => m.SuperAdminSubAdmins));
+const SuperAdminBusinessUsers = dynamic(() => import("./SuperAdminBusinessUsers").then((m) => m.SuperAdminBusinessUsers));
+const SuperAdminUserInvitations = dynamic(() => import("./SuperAdminUserInvitations").then((m) => m.SuperAdminUserInvitations));
+const SuperAdminUserOnboarding = dynamic(() => import("./SuperAdminUserOnboarding").then((m) => m.SuperAdminUserOnboarding));
+const SuperAdminDepartments = dynamic(() => import("./SuperAdminDepartments").then((m) => m.SuperAdminDepartments));
+const SuperAdminReportingHierarchy = dynamic(() => import("./SuperAdminReportingHierarchy").then((m) => m.SuperAdminReportingHierarchy));
+const SuperAdminUserActivityLog = dynamic(() => import("./SuperAdminUserActivityLog").then((m) => m.SuperAdminUserActivityLog));
+
 export function PortalRouter() {
   const { route } = useNav();
   return <>{render(route)}</>;
@@ -353,6 +367,20 @@ export function render(route: string): React.ReactNode {
     case "sa-hotlists-oversight": return <SuperAdminHotlistsOversight />;
     case "sa-candidate-lifecycle": return <SuperAdminCandidateLifecycle />;
     case "sa-talent-analytics": return <SuperAdminTalentAnalytics />;
+
+    // User Management System
+    case "sa-roles": return <SuperAdminRoles />;
+    case "sa-groups": return <SuperAdminGroups />;
+    case "sa-permissions": return <SuperAdminPermissions />;
+    case "sa-access-control-matrix": return <SuperAdminAccessControlMatrix />;
+    case "sa-admin-accounts": return <SuperAdminAdminAccounts />;
+    case "sa-sub-admins": return <SuperAdminSubAdmins />;
+    case "sa-business-users": return <SuperAdminBusinessUsers />;
+    case "sa-user-invitations": return <SuperAdminUserInvitations />;
+    case "sa-user-onboarding": return <SuperAdminUserOnboarding />;
+    case "sa-departments": return <SuperAdminDepartments />;
+    case "sa-reporting-hierarchy": return <SuperAdminReportingHierarchy />;
+    case "sa-user-activity-log": return <SuperAdminUserActivityLog />;
 
     // Legacy fallback (old routes that may still be linked)
     case "overview":
