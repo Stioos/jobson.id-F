@@ -73,7 +73,7 @@ const PartnerTaxDocuments = dynamic(() => import("./PartnerTaxDocuments").then((
 const PartnerClientMessaging = dynamic(() => import("./PartnerClientMessaging").then((m) => m.PartnerClientMessaging));
 
 // Cross-portal shared pages (SETTINGS-SUPPORT-SHARED)
-const TasksPage = dynamic(() => import("@/portals/_settings-support-shared/TasksPage").then((m) => m.TasksPage));
+const TasksWorkspace = dynamic(() => import("@/portals/_settings-support-shared/TasksWorkspace").then((m) => m.TasksWorkspace));
 
 // --- 3 profile features (WAVE1-PARTNER-PROFILE) ---
 const PartnerProfileEnhanced = dynamic(() => import("./PartnerProfileEnhanced").then((m) => m.PartnerProfileEnhanced));
@@ -105,7 +105,7 @@ export function render(route: string): React.ReactNode {
     case "home":
     case "":
       return <PartnerOverview />;
-    case "tasks": return <TasksPage portal="partner" route={route} />;
+    case "tasks": return <TasksWorkspace portal="partner" route={route} />;
     case "analytics": return <PartnerAnalytics />;
     case "partner-scorecard": return <PartnerScorecard />;
     case "reports": return <PartnerReports />;

@@ -101,7 +101,7 @@ const EmployerCalendarSync = dynamic(() => import("./EmployerCalendarSync").then
 const EmployerStatusNotifications = dynamic(() => import("./EmployerStatusNotifications").then((m) => m.EmployerStatusNotifications));
 
 // Cross-portal shared pages (SETTINGS-SUPPORT-SHARED)
-const TasksPage = dynamic(() => import("@/portals/_settings-support-shared/TasksPage").then((m) => m.TasksPage));
+const TasksWorkspace = dynamic(() => import("@/portals/_settings-support-shared/TasksWorkspace").then((m) => m.TasksWorkspace));
 
 export function PortalRouter() {
   const { route } = useNav();
@@ -112,7 +112,7 @@ export function render(route: string): React.ReactNode {
   const root = route.split("/")[0] ?? "overview";
   switch (root) {
     case "overview": return <EmployerOverview />;
-    case "tasks": return <TasksPage portal="employer" route={route} />;
+    case "tasks": return <TasksWorkspace portal="employer" route={route} />;
     case "company-profile": return <EmployerCompanyProfile />;
     case "company-preview": return <EmployerCompanyPreview />;
     case "branding-score": return <EmployerBrandingScore />;

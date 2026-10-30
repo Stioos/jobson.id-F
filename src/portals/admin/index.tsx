@@ -186,7 +186,7 @@ const SuperAdminDataExportAudit = dynamic(() => import("./SuperAdminDataExportAu
 const SuperAdminIncidentResponse = dynamic(() => import("./SuperAdminIncidentResponse").then((m) => m.SuperAdminIncidentResponse));
 
 // Cross-portal shared pages
-const TasksPage = dynamic(() => import("@/portals/_settings-support-shared/TasksPage").then((m) => m.TasksPage));
+const TasksWorkspace = dynamic(() => import("@/portals/_settings-support-shared/TasksWorkspace").then((m) => m.TasksWorkspace));
 
 // Cross-Portal Workflow Bridges (final 8 — CROSS-PORTAL-WORKFLOW-BRIDGES)
 const SuperAdminOfferHandshake = dynamic(() => import("./SuperAdminOfferHandshake").then((m) => m.SuperAdminOfferHandshake));
@@ -221,7 +221,7 @@ export function render(route: string): React.ReactNode {
   const root = (route || "sa-overview").split("/")[0];
   switch (root) {
     // Tasks (shared)
-    case "tasks": return <TasksPage portal="admin" route={route} />;
+    case "tasks": return <TasksWorkspace portal="admin" route={route} />;
 
     // Governance
     case "sa-overview": return <SuperAdminOverview />;

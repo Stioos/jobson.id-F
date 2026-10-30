@@ -102,7 +102,7 @@ const RecruiterFollowUpAutomation = dynamic(() => import("./RecruiterFollowUpAut
 const RecruiterVoipLogging = dynamic(() => import("./RecruiterVoipLogging").then((m) => m.RecruiterVoipLogging));
 
 // Cross-portal shared pages (SETTINGS-SUPPORT-SHARED)
-const TasksPage = dynamic(() => import("@/portals/_settings-support-shared/TasksPage").then((m) => m.TasksPage));
+const TasksWorkspace = dynamic(() => import("@/portals/_settings-support-shared/TasksWorkspace").then((m) => m.TasksWorkspace));
 
 // Agency Management pages (merged from the former Agency Portal)
 const AgencyOverview = dynamic(() => import("@/portals/agency/AgencyOverview").then((m) => m.AgencyOverview));
@@ -126,7 +126,7 @@ export function render(route: string): React.ReactNode {
   const top = route.split("/")[0] || "overview";
   switch (top) {
     case "overview": return <RecruiterOverview />;
-    case "tasks": return <TasksPage portal="recruiter" route={route} />;
+    case "tasks": return <TasksWorkspace portal="recruiter" route={route} />;
     case "clients": return <RecruiterClients />;
     case "requisitions": return <RecruiterRequisitions />;
     case "candidates": return <RecruiterCandidates />;

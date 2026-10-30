@@ -161,7 +161,7 @@ const SettlementEngine = dynamic(() => import("./SettlementEngine").then((m) => 
 const TransactionCommunications = dynamic(() => import("./TransactionCommunications").then((m) => m.TransactionCommunications));
 
 // Cross-portal shared pages (SETTINGS-SUPPORT-SHARED)
-const TasksPage = dynamic(() => import("@/portals/_settings-support-shared/TasksPage").then((m) => m.TasksPage));
+const TasksWorkspace = dynamic(() => import("@/portals/_settings-support-shared/TasksWorkspace").then((m) => m.TasksWorkspace));
 
 export function PortalRouter() {
   const { route } = useNav();
@@ -175,7 +175,7 @@ export function render(route: string): React.ReactNode {
     case "home":
     case "":
       return <TrainingOverview />;
-    case "tasks": return <TasksPage portal="training" route={route} />;
+    case "tasks": return <TasksWorkspace portal="training" route={route} />;
     case "company": return <TrainingCompany />;
     case "clients": return <TrainingClients />;
     case "programs": return <TrainingPrograms />;
