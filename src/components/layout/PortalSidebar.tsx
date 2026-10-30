@@ -8,11 +8,13 @@ import { Icon } from "@/components/common/Icon";
 import { cn } from "@/lib/utils";
 import { X, ChevronLeft, ChevronRight, PanelLeftClose, PanelLeftOpen, Route, ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "@/components/ui/tooltip";
 import type { NavItem } from "@/lib/types";
 
 export function PortalSidebar({ portal }: { portal: ReturnType<typeof useNav.getState>["portal"] }) {
   const cfg = portalConfigs[portal];
   const { route, navigate, sidebarOpen, setSidebarOpen } = useNav();
+  const hasSectionDashboards = portal === "admin" || portal === "candidate" || portal === "employer" || portal === "recruiter" || portal === "training" || portal === "partner";
 
   // Which main item's sub-panel is open (by item.key). Only one at a time.
   const [activeMainKey, setActiveMainKey] = React.useState<string | null>(null);
@@ -57,6 +59,18 @@ export function PortalSidebar({ portal }: { portal: ReturnType<typeof useNav.get
   }, [route, allMainItems, leafItems]);
 
   const handleMainClick = (item: NavItem) => {
+    // For portals with Section Dashboards: clicking any main section icon opens panel and navigates to its section dashboard (except tasks)
+    if (hasSectionDashboards && item.key !== "tasks") {
+      if (activeMainKey === item.key && !panelCollapsed && route === item.key) {
+        setPanelCollapsed(true);
+      } else {
+        setActiveMainKey(item.key);
+        setPanelCollapsed(false);
+        navigate(portal, item.key);
+      }
+      return;
+    }
+
     if (activeMainKey === item.key && !panelCollapsed) {
       // Click the active main again → collapse the panel
       setPanelCollapsed(true);
@@ -70,6 +84,7 @@ export function PortalSidebar({ portal }: { portal: ReturnType<typeof useNav.get
 
   // Check if a main item contains the active route
   const isMainActive = (item: NavItem) => {
+    if (route === item.key || route.startsWith(item.key + "/")) return true;
     if (!item.children) return false;
     return item.children.some((c) => route === c.key || route.startsWith(c.key + "/"));
   };
@@ -83,47 +98,54 @@ export function PortalSidebar({ portal }: { portal: ReturnType<typeof useNav.get
   const RailItem = ({ item, isMain }: { item: NavItem; isMain: boolean }) => {
     const active = isMain ? isMainActive(item) : isLeafActive(item);
     const panelOpen = isMain && activeMainKey === item.key && !panelCollapsed;
+
     return (
-      <button
-        onClick={() => isMain ? handleMainClick(item) : (navigate(portal, item.key), setSidebarOpen(false))}
-        className={cn(
-          "group relative flex w-full flex-col items-center gap-1 rounded-lg py-2 px-1 transition-all",
-          active || panelOpen
-            ? "bg-brand/10 text-brand"
-            : "text-muted-foreground hover:bg-sidebar-accent hover:text-foreground"
-        )}
-        title={item.label}
-        aria-label={item.label}
-      >
-        <div className="relative">
-          <Icon name={item.icon} className={cn("h-5 w-5 shrink-0 transition-colors", active || panelOpen ? "text-brand" : "text-muted-foreground group-hover:text-foreground")} />
-          {item.badge && (
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <button
+            onClick={() => isMain ? handleMainClick(item) : (navigate(portal, item.key), setSidebarOpen(false))}
+            className={cn(
+              "group relative flex w-full flex-col items-center gap-1 rounded-lg py-2 px-1 transition-all cursor-pointer",
+              active || panelOpen
+                ? "bg-brand/10 text-brand"
+                : "text-muted-foreground hover:bg-sidebar-accent hover:text-foreground"
+            )}
+            aria-label={item.label}
+          >
+            <div className="relative">
+              <Icon name={item.icon} className={cn("h-5 w-5 shrink-0 transition-colors", active || panelOpen ? "text-brand" : "text-muted-foreground group-hover:text-foreground")} />
+              {item.badge && (
+                <span className={cn(
+                  "absolute -right-2 -top-2 flex h-4 min-w-4 items-center justify-center rounded-full px-1 text-[9px] font-bold",
+                  item.badge === "AI"
+                    ? "bg-violet-500 text-white"
+                    : "bg-rose-500 text-white"
+                )}>
+                  {typeof item.badge === "number" ? (item.badge > 9 ? "9+" : item.badge) : item.badge}
+                </span>
+              )}
+            </div>
             <span className={cn(
-              "absolute -right-2 -top-2 flex h-4 min-w-4 items-center justify-center rounded-full px-1 text-[9px] font-bold",
-              item.badge === "AI"
-                ? "bg-violet-500 text-white"
-                : "bg-rose-500 text-white"
+              "w-full truncate text-center text-[10px] font-medium leading-tight transition-colors",
+              active || panelOpen ? "text-brand" : "text-muted-foreground group-hover:text-foreground"
             )}>
-              {typeof item.badge === "number" ? (item.badge > 9 ? "9+" : item.badge) : item.badge}
+              {item.label.split(" ")[0]}
             </span>
-          )}
-        </div>
-        <span className={cn(
-          "w-full truncate text-center text-[10px] font-medium leading-tight transition-colors",
-          active || panelOpen ? "text-brand" : "text-muted-foreground group-hover:text-foreground"
-        )}>
-          {item.label.split(" ")[0]}
-        </span>
-        {/* Active indicator bar */}
-        {(active || panelOpen) && (
-          <span className="absolute left-0 top-1/2 h-7 w-1 -translate-y-1/2 rounded-r-full bg-brand" />
-        )}
-      </button>
+            {/* Active indicator bar */}
+            {(active || panelOpen) && (
+              <span className="absolute left-0 top-1/2 h-7 w-1 -translate-y-1/2 rounded-r-full bg-brand" />
+            )}
+          </button>
+        </TooltipTrigger>
+        <TooltipContent side="right" sideOffset={8}>
+          <span>{item.label}</span>
+        </TooltipContent>
+      </Tooltip>
     );
   };
 
   return (
-    <>
+    <TooltipProvider delayDuration={100}>
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div
@@ -143,9 +165,16 @@ export function PortalSidebar({ portal }: { portal: ReturnType<typeof useNav.get
         <div className="flex h-screen w-16 shrink-0 flex-col border-r bg-sidebar text-sidebar-foreground">
           {/* Logo / collapse toggle */}
           <div className="flex h-14 shrink-0 flex-col items-center justify-center border-b">
-            <button onClick={() => navigate("public", "home")} className="mb-0.5" title="Home">
-              <BrandMark className="h-7 w-7" />
-            </button>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <button onClick={() => navigate("public", "home")} className="mb-0.5 cursor-pointer" aria-label="Home">
+                  <BrandMark className="h-7 w-7" />
+                </button>
+              </TooltipTrigger>
+              <TooltipContent side="right" sideOffset={8}>
+                <span>Home</span>
+              </TooltipContent>
+            </Tooltip>
           </div>
 
           {/* Rail nav (scrollable) — renders ALL items in config order */}
@@ -159,13 +188,20 @@ export function PortalSidebar({ portal }: { portal: ReturnType<typeof useNav.get
 
           {/* Footer: collapse/expand panel toggle */}
           <div className="shrink-0 border-t p-1.5">
-            <button
-              onClick={() => setPanelCollapsed((c) => !c)}
-              className="flex w-full items-center justify-center rounded-lg py-2 text-muted-foreground hover:bg-sidebar-accent hover:text-foreground transition-colors"
-              title={panelCollapsed ? "Expand panel" : "Collapse panel"}
-            >
-              {panelCollapsed ? <PanelLeftOpen className="h-4 w-4" /> : <PanelLeftClose className="h-4 w-4" />}
-            </button>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <button
+                  onClick={() => setPanelCollapsed((c) => !c)}
+                  className="flex w-full items-center justify-center rounded-lg py-2 text-muted-foreground hover:bg-sidebar-accent hover:text-foreground transition-colors cursor-pointer"
+                  aria-label={panelCollapsed ? "Expand panel" : "Collapse panel"}
+                >
+                  {panelCollapsed ? <PanelLeftOpen className="h-4 w-4" /> : <PanelLeftClose className="h-4 w-4" />}
+                </button>
+              </TooltipTrigger>
+              <TooltipContent side="right" sideOffset={8}>
+                <span>{panelCollapsed ? "Expand Panel" : "Collapse Panel"}</span>
+              </TooltipContent>
+            </Tooltip>
           </div>
         </div>
 
@@ -174,16 +210,34 @@ export function PortalSidebar({ portal }: { portal: ReturnType<typeof useNav.get
           <div className="flex h-screen w-60 shrink-0 flex-col border-r bg-sidebar text-sidebar-foreground">
             {/* Panel header */}
             <div className="flex h-14 shrink-0 items-center justify-between border-b px-4">
-              <div className="flex items-center gap-2">
+              <button
+                onClick={() => {
+                  if (hasSectionDashboards && activeMainItem && activeMainItem.key !== "tasks") {
+                    navigate(portal, activeMainItem.key);
+                  }
+                }}
+                className={cn(
+                  "flex items-center gap-2 text-left",
+                  hasSectionDashboards && activeMainItem && activeMainItem.key !== "tasks" && "hover:opacity-80 transition-opacity cursor-pointer"
+                )}
+                title={hasSectionDashboards && activeMainItem ? `${activeMainItem.label} Dashboard` : undefined}
+              >
                 <Icon name={activeMainItem.icon} className="h-4 w-4 text-brand" />
                 <span className="text-sm font-semibold tracking-tight">{activeMainItem.label}</span>
-              </div>
+              </button>
               <div className="flex items-center gap-0.5">
-                {/* Page router icon — navigates to portal overview */}
+                {/* Page router icon — navigates to section dashboard for portals with section dashboards, or portal overview */}
                 <button
-                  onClick={() => { navigate(portal, "overview"); setSidebarOpen(false); }}
+                  onClick={() => {
+                    if (hasSectionDashboards && activeMainItem && activeMainItem.key !== "tasks") {
+                      navigate(portal, activeMainItem.key);
+                    } else {
+                      navigate(portal, "overview");
+                    }
+                    setSidebarOpen(false);
+                  }}
                   className="flex h-7 w-7 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-sidebar-accent hover:text-foreground"
-                  title="Page Router — Go to overview"
+                  title={hasSectionDashboards && activeMainItem ? `${activeMainItem.label} Dashboard` : "Page Router — Go to overview"}
                 >
                   <Route className="h-3.5 w-3.5" />
                 </button>
@@ -256,7 +310,7 @@ export function PortalSidebar({ portal }: { portal: ReturnType<typeof useNav.get
           <div className="hidden lg:flex h-screen w-0 shrink-0" />
         )}
       </aside>
-    </>
+    </TooltipProvider>
   );
 }
 

@@ -937,9 +937,8 @@ export function TasksWorkspace({ portal = 'partner', route = 'tasks' }: { portal
                       </span>
                     </button>
                   </TooltipTrigger>
-                  <TooltipContent side="bottom" className="text-xs">
-                    <p className="font-semibold">{act.label}</p>
-                    <p className="text-[10px] text-muted-foreground">{act.tooltip}</p>
+                  <TooltipContent side="bottom" sideOffset={6}>
+                    <span>{act.label}</span>
                   </TooltipContent>
                 </Tooltip>
               );

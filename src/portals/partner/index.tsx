@@ -74,6 +74,7 @@ const PartnerClientMessaging = dynamic(() => import("./PartnerClientMessaging").
 
 // Cross-portal shared pages (SETTINGS-SUPPORT-SHARED)
 const TasksWorkspace = dynamic(() => import("@/portals/_settings-support-shared/TasksWorkspace").then((m) => m.TasksWorkspace));
+const PartnerSectionDashboard = dynamic(() => import("./PartnerSectionDashboard").then((m) => m.PartnerSectionDashboard));
 
 // --- 3 profile features (WAVE1-PARTNER-PROFILE) ---
 const PartnerProfileEnhanced = dynamic(() => import("./PartnerProfileEnhanced").then((m) => m.PartnerProfileEnhanced));
@@ -100,6 +101,17 @@ export function PortalRouter() {
 export function render(route: string): React.ReactNode {
   const root = (route || "overview").split("/")[0];
   switch (root) {
+    case "overview-grp":
+    case "deals-grp":
+    case "partnership-grp":
+    case "academics-grp":
+    case "careers-grp":
+    case "finance-grp":
+    case "tools-grp":
+    case "talent-solutions":
+    case "support-grp":
+    case "settings-grp":
+      return <PartnerSectionDashboard sectionKey={root} />;
     // Overview
     case "overview":
     case "home":

@@ -7,6 +7,8 @@ import { useNav } from "@/lib/store";
 // Legacy admin pages (kept for backward compatibility)
 
 // Super Admin pages (sa-* routes)
+const SuperAdminGovernanceDashboard = dynamic(() => import("./SuperAdminGovernanceDashboard").then((m) => m.SuperAdminGovernanceDashboard));
+const SuperAdminSectionDashboard = dynamic(() => import("./SuperAdminSectionDashboard").then((m) => m.SuperAdminSectionDashboard));
 const SuperAdminOverview = dynamic(() => import("./SuperAdminOverview").then((m) => m.SuperAdminOverview));
 const SuperAdminTenants = dynamic(() => import("./SuperAdminTenants").then((m) => m.SuperAdminTenants));
 const SuperAdminPortalSettings = dynamic(() => import("./SuperAdminPortalSettings").then((m) => m.SuperAdminPortalSettings));
@@ -225,11 +227,30 @@ export function render(route: string): React.ReactNode {
 
     // Governance
     case "sa-overview": return <SuperAdminOverview />;
+    case "sa-governance": return <SuperAdminGovernanceDashboard />;
     case "sa-tenants": return <SuperAdminTenants />;
     case "sa-portal-settings": return <SuperAdminPortalSettings />;
     case "sa-feature-flags": return <SuperAdminFeatureFlags />;
     case "sa-maintenance": return <SuperAdminMaintenance />;
     case "sa-health": return <SuperAdminHealth />;
+
+    // Main Section Group Dashboards
+    case "sa-users-grp":
+    case "sa-usermgmt-grp":
+    case "sa-analytics-grp":
+    case "sa-finance-grp":
+    case "sa-content-grp":
+    case "sa-hiring-grp":
+    case "sa-talent-grp":
+    case "sa-learning-grp":
+    case "sa-process-grp":
+    case "sa-security-grp":
+    case "sa-partners-grp":
+    case "sa-comms-grp":
+    case "sa-ops-grp":
+    case "sa-system-grp":
+    case "sa-settings-grp":
+      return <SuperAdminSectionDashboard sectionKey={root} />;
 
     // Users & Orgs
     case "sa-users-all": return <SuperAdminUsersAll />;

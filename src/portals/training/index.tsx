@@ -162,6 +162,7 @@ const TransactionCommunications = dynamic(() => import("./TransactionCommunicati
 
 // Cross-portal shared pages (SETTINGS-SUPPORT-SHARED)
 const TasksWorkspace = dynamic(() => import("@/portals/_settings-support-shared/TasksWorkspace").then((m) => m.TasksWorkspace));
+const TrainingSectionDashboard = dynamic(() => import("./TrainingSectionDashboard").then((m) => m.TrainingSectionDashboard));
 
 export function PortalRouter() {
   const { route } = useNav();
@@ -171,6 +172,17 @@ export function PortalRouter() {
 export function render(route: string): React.ReactNode {
   const root = (route || "overview").split("/")[0];
   switch (root) {
+    case "training-ops":
+    case "talent-solutions":
+    case "business":
+    case "transactions-grp":
+    case "talent":
+    case "admin":
+    case "finance-grp":
+    case "tools-grp":
+    case "support-grp":
+    case "settings-grp":
+      return <TrainingSectionDashboard sectionKey={root} />;
     case "overview":
     case "home":
     case "":
