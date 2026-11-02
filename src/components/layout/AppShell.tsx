@@ -13,8 +13,14 @@ import { cn } from "@/lib/utils";
 export function AppShell({ children }: { children: React.ReactNode }) {
   const { portal, route } = useNav();
 
-  // Partner login is a full-screen auth experience (no navbar/footer).
-  const isPartnerLogin = portal === "public" && route === "partner-login";
+  // Auth pages are a full-screen auth experience (no navbar/footer).
+  const isAuthPage =
+    portal === "public" &&
+    (route === "partner-login" ||
+      route === "auth" ||
+      route === "signin" ||
+      route === "login" ||
+      route.startsWith("register"));
 
   // Show secondary header on Hire Talent pages
   const showTalentSecondary =
@@ -27,7 +33,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <CommandPalette />
-      {isPartnerLogin ? (
+      {isAuthPage ? (
         <main className="flex-1">{children}</main>
       ) : portal === "public" ? (
         <div className="flex min-h-screen flex-col">

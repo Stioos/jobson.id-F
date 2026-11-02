@@ -7,12 +7,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/common";
-import { AvatarLogo } from "@/components/common/AvatarLogo";
 import { toast } from "sonner";
 import {
   Eye, EyeOff, ArrowRight, ShieldCheck, Users, Building2,
   GraduationCap, Briefcase, Sparkles, Handshake, CheckCircle2,
-  Mail, Lock, Crown, type LucideIcon,
+  Mail, Lock, Crown, AlertCircle, type LucideIcon,
 } from "lucide-react";
 import type { Portal, UserRole } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -39,40 +38,71 @@ export const AUTH_ROLES: RoleDef[] = [
 ];
 
 export function PublicAuth() {
-  const { navigate } = useNav();
+  const { navigate, setRole } = useNav();
   const { login } = useAuth();
-  const [selected, setSelected] = React.useState<RoleDef>(AUTH_ROLES[0]);
-  const [email, setEmail] = React.useState(selected.demoUser.email);
+  const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [showPwd, setShowPwd] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
-
-  React.useEffect(() => {
-    setEmail(selected.demoUser.email);
-    setPassword("");
-  }, [selected]);
+  const [error, setError] = React.useState<string | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-    setTimeout(() => {
-      login(selected.role);
-      toast.success(`Welcome back, ${selected.demoUser.name.split(" ")[0]}!`, {
-        description: `Signed in to ${selected.label} portal`,
+
+    const normalizedEmail = email.trim().toLowerCase();
+    if (!normalizedEmail) {
+      setError("Please enter your email.");
+      return;
+    }
+    if (!password) {
+      setError("Please enter your password.");
+      return;
+    }
+
+    const VALID_EMAIL = "jobson.id@gmail.com";
+    const VALID_PASSWORD = "businessos2026";
+
+    // If using the official jobson.id email, enforce credentials check
+    if (normalizedEmail === VALID_EMAIL && password !== VALID_PASSWORD) {
+      setError("Invalid password for jobson.id@gmail.com. Please try again.");
+      toast.error("Invalid credentials", {
+        description: "The password entered is incorrect.",
       });
-      navigate(selected.portal, "overview");
+      return;
+    }
+
+    setError(null);
+    setLoading(true);
+
+    const emailName = normalizedEmail.includes("@") ? normalizedEmail.split("@")[0] : normalizedEmail;
+    const initials = emailName.slice(0, 2).toUpperCase();
+
+    setTimeout(() => {
+      setRole("candidate");
+      login("candidate");
+      useAuth.setState({
+        user: {
+          id: "u_candidate",
+          name: emailName,
+          email: normalizedEmail,
+          role: "candidate",
+          avatar: initials,
+        },
+        isAuthenticated: true,
+      });
+      toast.success(`Welcome back, ${emailName}!`);
+      navigate("public", "home");
       setLoading(false);
-    }, 700);
+    }, 600);
   };
 
   return (
     <div className="min-h-screen bg-grid">
       <div className="mx-auto flex min-h-screen max-w-6xl flex-col px-4 py-6 sm:px-6 lg:px-8">
         <header className="flex items-center justify-between">
-          <button onClick={() => navigate("public", "home")} className="flex items-center" aria-label="JOBSONN home">
+          <div className="flex items-center" aria-label="JOBSONN home">
             <Image src="/jobsonn-logo.png" alt="JOBSONN" width={120} height={32} className="h-7 w-auto object-contain sm:h-8" priority />
-          </button>
-          <Button variant="ghost" size="sm" onClick={() => navigate("public", "home")}>Back to site</Button>
+          </div>
         </header>
 
         <div className="grid flex-1 items-center gap-8 py-6 lg:grid-cols-2 lg:gap-12">
@@ -111,39 +141,33 @@ export function PublicAuth() {
           <div className="mx-auto w-full max-w-md">
             <Card className="border-border/60 shadow-lg">
               <CardContent className="p-6">
-                <h2 className="mb-1 text-xl font-bold">Sign in to your portal</h2>
-                <p className="mb-4 text-xs text-muted-foreground">Select your role to continue</p>
-
-                {/* Role selector */}
-                <div className="mb-4 grid grid-cols-3 gap-1.5">
-                  {AUTH_ROLES.map((r) => (
-                    <button key={r.portal} type="button" onClick={() => setSelected(r)}
-                      className={cn("flex flex-col items-center gap-1 rounded-lg border p-2 text-center transition-all",
-                        selected.portal === r.portal ? "border-brand bg-brand/5 ring-1 ring-brand/30" : "border-border hover:border-brand/40 hover:bg-muted/40")}>
-                      <r.icon className="h-4 w-4" style={{ color: r.color }} />
-                      <span className="text-[9px] font-semibold leading-tight">{r.shortLabel}</span>
-                    </button>
-                  ))}
-                </div>
-                <p className="mb-3 text-[10px] text-muted-foreground">{selected.description}</p>
-
-                {/* Demo user */}
-                <div className="mb-3 flex items-center gap-2.5 rounded-lg border bg-muted/40 p-2.5">
-                  <AvatarLogo text={selected.demoUser.name} size="sm" />
-                  <div className="min-w-0 flex-1">
-                    <div className="truncate text-xs font-semibold">{selected.demoUser.name}</div>
-                    <div className="truncate text-[10px] text-muted-foreground">{selected.demoUser.email}</div>
-                  </div>
-                  <span className="rounded bg-brand/10 px-1.5 py-0.5 text-[10px] font-medium text-brand">Demo</span>
-                </div>
+                <h2 className="mb-1 text-xl font-bold">Sign in to your account</h2>
+                <p className="mb-4 text-xs text-muted-foreground">Enter your credentials to continue</p>
 
                 {/* Login form */}
                 <form onSubmit={handleSubmit} className="space-y-3">
+                  {error && (
+                    <div className="flex items-center gap-2 rounded-lg border border-destructive/20 bg-destructive/10 p-2.5 text-xs text-destructive">
+                      <AlertCircle className="h-4 w-4 shrink-0" />
+                      <span>{error}</span>
+                    </div>
+                  )}
                   <div className="space-y-1">
                     <Label htmlFor="email" className="text-[11px]">Email</Label>
                     <div className="relative">
                       <Mail className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
-                      <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@company.com" required className="h-9 pl-8 text-sm" />
+                      <Input
+                        id="email"
+                        type="email"
+                        value={email}
+                        onChange={(e) => {
+                          setEmail(e.target.value);
+                          if (error) setError(null);
+                        }}
+                        placeholder="Enter email"
+                        required
+                        className="h-9 pl-8 text-sm"
+                      />
                     </div>
                   </div>
                   <div className="space-y-1">
@@ -153,21 +177,27 @@ export function PublicAuth() {
                     </div>
                     <div className="relative">
                       <Lock className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
-                      <Input id="password" type={showPwd ? "text" : "password"} value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••" className="h-9 pl-8 pr-8 text-sm" required />
+                      <Input
+                        id="password"
+                        type={showPwd ? "text" : "password"}
+                        value={password}
+                        onChange={(e) => {
+                          setPassword(e.target.value);
+                          if (error) setError(null);
+                        }}
+                        placeholder="Enter password"
+                        className="h-9 pl-8 pr-8 text-sm"
+                        required
+                      />
                       <button type="button" onClick={() => setShowPwd(s => !s)} className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground">
                         {showPwd ? <EyeOff className="h-3.5 w-3.5" /> : <Eye className="h-3.5 w-3.5" />}
                       </button>
                     </div>
                   </div>
                   <Button type="submit" className="w-full gap-1.5 h-9 text-sm" disabled={loading}>
-                    {loading ? "Signing in…" : <>Sign in to {selected.label} <ArrowRight className="h-4 w-4" /></>}
+                    {loading ? "Signing in…" : <>Sign in <ArrowRight className="h-4 w-4" /></>}
                   </Button>
                 </form>
-
-                <div className="flex items-center gap-2 text-[10px] text-muted-foreground">
-                  <CheckCircle2 className="h-3 w-3 shrink-0 text-emerald-500" />
-                  <span>Demo environment — any password works. All data is simulated.</span>
-                </div>
 
                 {/* Register links — separate page per role */}
                 <div className="mt-4 border-t pt-3">

@@ -3,7 +3,7 @@
 import * as React from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from "recharts";
 import { toast } from "sonner";
-import { useNav } from "@/lib/store";
+import { useNav, useAuth } from "@/lib/store";
 import {
   PageHeader,
   SectionCard,
@@ -50,7 +50,9 @@ const STATUS_COLORS: Record<string, string> = {
 
 export function CandidateOverview() {
   const { navigate } = useNav();
+  const { user } = useAuth();
   const candidate = candidateProfiles[0]; // Priya Nair
+  const displayName = user?.name || candidate.name.split(" ")[0];
   const myApps = applications.filter((a) => a.candidateId === CANDIDATE_ID);
   const myInterviews = interviews.filter(
     (iv) => iv.candidateName === candidate.name
@@ -136,7 +138,7 @@ export function CandidateOverview() {
   return (
     <div className="space-y-6">
       <PageHeader
-        title={`Welcome back, ${candidate.name.split(" ")[0]}`}
+        title={`Welcome back, ${displayName}`}
         description="Your career command center — track applications, prep for interviews, and discover matching roles."
         actions={[
           {

@@ -113,12 +113,24 @@ export default function Home() {
     useNav.persist.rehydrate();
     useAuth.persist.rehydrate();
 
-    // Deep linking: if the URL has a known path, navigate to it
+    const isAuthed = Boolean(useAuth.getState().isAuthenticated && useAuth.getState().user);
     const path = window.location.pathname;
-    if (path && path !== "/") {
-      const route = pathToRoute(path);
-      if (route && route !== "home") {
-        navigate("public", route);
+
+    if (!isAuthed) {
+      if (path && path.startsWith("/register")) {
+        const route = pathToRoute(path);
+        navigate("public", route || "auth");
+      } else {
+        navigate("public", "auth");
+      }
+    } else {
+      if (path && path !== "/" && path !== "/auth" && path !== "/partner-login" && path !== "/signin") {
+        const route = pathToRoute(path);
+        if (route && route !== "home") {
+          navigate("public", route);
+        }
+      } else if (useNav.getState().route === "auth" || useNav.getState().route === "partner-login") {
+        navigate("public", "home");
       }
     }
   }, [navigate]);

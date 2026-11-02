@@ -28,18 +28,20 @@ export const useNav = create<NavState>()(
   persist(
     (set) => ({
       portal: "public",
-      route: "home",
+      route: "auth",
       role: "candidate",
       commandOpen: false,
       notifOpen: false,
       sidebarOpen: false,
       navigate: (portal, route = "home") => {
-        set({ portal, route, sidebarOpen: false });
+        const isAuthed = Boolean(useAuth.getState().isAuthenticated && useAuth.getState().user);
+        const targetRoute = (!isAuthed && portal === "public" && !route.startsWith("register")) ? "auth" : route;
+        set({ portal, route: targetRoute, sidebarOpen: false });
         if (typeof window !== "undefined") {
           // Sync browser URL for SEO/deep-linking
           if (portal === "public") {
-            const path = routeToPath(route);
-            window.history.pushState({ portal, route }, "", path);
+            const path = routeToPath(targetRoute);
+            window.history.pushState({ portal, route: targetRoute }, "", path);
           }
           window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
         }
@@ -104,7 +106,9 @@ export interface DemoUser {
 
 interface AuthState {
   user: DemoUser | null;
+  isAuthenticated: boolean;
   login: (role: UserRole) => void;
+  setUser: (user: DemoUser) => void;
   logout: () => void;
 }
 
@@ -125,10 +129,12 @@ const roleUsers: Record<UserRole, DemoUser> = {
 export const useAuth = create<AuthState>()(
   persist(
     (set) => ({
-      user: roleUsers.candidate,
-      login: (role) => set({ user: roleUsers[role] }),
-      logout: () => set({ user: null }),
+      user: null,
+      isAuthenticated: false,
+      login: (role) => set({ user: roleUsers[role], isAuthenticated: true }),
+      setUser: (user) => set({ user, isAuthenticated: true }),
+      logout: () => set({ user: null, isAuthenticated: false }),
     }),
-    { name: "jobsonn-auth", skipHydration: true }
+    { name: "jobsonn-auth-v2", skipHydration: true }
   )
 );

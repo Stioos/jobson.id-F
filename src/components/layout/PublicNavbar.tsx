@@ -2,7 +2,8 @@
 
 import * as React from "react";
 import Image from "next/image";
-import { useNav } from "@/lib/store";
+import { useNav, useAuth } from "@/lib/store";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import {
   Menu, Search, ChevronDown, Briefcase, Building2,
@@ -12,8 +13,16 @@ import {
   Factory, Brain, Code2, Database, Cloud, Box, Bot, Compass,
   ChevronRight, CheckCircle2, type LucideIcon,
   Clock, Landmark, Star, ShieldCheck, Home, MapPin, BarChart3,
-  FileText, Mic, Sparkles, ArrowRight, LayoutGrid,
+  FileText, Mic, Sparkles, ArrowRight, LayoutGrid, LogOut,
 } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu";
+import { UserProfileModal } from "./UserProfileModal";
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
@@ -759,6 +768,7 @@ const APPS_ITEMS = [
   { label: "Recruiter", icon: Briefcase, color: "#F59E0B", portal: "recruiter" as const, desc: "Source candidates & earn commissions" },
   { label: "Partner", icon: Handshake, color: "#10B981", portal: "partner" as const, desc: "Grow your business with us" },
   { label: "Super Admin", icon: ShieldCheck, color: "#EF4444", portal: "admin" as const, desc: "Platform governance & control" },
+  { label: "Training&Admin", icon: GraduationCap, color: "#06B6D4", portal: "training" as const, desc: "Corporate training & LMS management" },
 ];
 
 function AppsDropdown() {
@@ -791,9 +801,9 @@ function AppsDropdown() {
             {/* Header */}
             <div className="mb-3 flex items-center justify-between border-b pb-2">
               <span className="text-[10px] font-bold uppercase tracking-widest text-brand">Switch Portal</span>
-              <span className="text-[9px] text-muted-foreground">5 portals</span>
+              <span className="text-[9px] text-muted-foreground">{APPS_ITEMS.length} portals</span>
             </div>
-            {/* grid — 2 cols x 3 rows (5 items + 1 spacer) */}
+            {/* grid — 2 cols x 3 rows (6 items) */}
             <div className="grid grid-cols-2 gap-2">
               {APPS_ITEMS.map((item) => {
                 const Icon = item.icon;
@@ -810,7 +820,7 @@ function AppsDropdown() {
                     >
                       <Icon className="h-4 w-4" />
                     </div>
-                    <span className="text-[11px] font-bold text-foreground">{item.label}</span>
+                    <span className="text-[11px] font-bold leading-tight text-foreground">{item.label}</span>
                   </button>
                 );
               })}
@@ -1700,8 +1710,13 @@ function MobileNav({ go }: { go: (v: string) => void }) {
 // ============================================================
 export function PublicNavbar() {
   const { navigate } = useNav();
+  const { user, isAuthenticated, logout } = useAuth();
+  const [mounted, setMounted] = React.useState(false);
   const [scrolled, setScrolled] = React.useState(false);
+  const [profileOpen, setProfileOpen] = React.useState(false);
+
   React.useEffect(() => {
+    setMounted(true);
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
@@ -1709,6 +1724,7 @@ export function PublicNavbar() {
   }, []);
 
   const go = useGo();
+  const isLoggedIn = mounted && Boolean(isAuthenticated && user);
 
   return (
     <header className={cn(
@@ -1751,12 +1767,64 @@ export function PublicNavbar() {
         {/* Right actions */}
         <div className="ml-auto flex items-center gap-2">
           <AppsDropdown />
-          <Button size="sm" className="h-8 gap-1.5 px-3 text-xs" onClick={() => navigate("public", "partner-login")}>
-            <UserCheck className="h-3.5 w-3.5" />
-            Login
-          </Button>
+          {isLoggedIn ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  size="sm"
+                  className="h-8 gap-2 bg-emerald-700 hover:bg-emerald-800 text-white px-2.5 text-xs font-medium shadow-sm transition-all"
+                >
+                  <div className="flex h-5 w-5 items-center justify-center rounded-full bg-white text-emerald-800 text-[10px] font-bold uppercase shadow-inner">
+                    {user?.avatar || (user?.name ? user.name.slice(0, 2).toUpperCase() : "U")}
+                  </div>
+                  <span className="max-w-[130px] truncate">{user?.name}</span>
+                  <ChevronDown className="h-3 w-3 opacity-75" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56">
+                <div className="p-2 border-b">
+                  <p className="truncate text-xs font-semibold text-foreground">{user?.name}</p>
+                  <p className="truncate text-[11px] text-muted-foreground">{user?.email}</p>
+                </div>
+                <DropdownMenuItem
+                  onClick={() => setProfileOpen(true)}
+                  className="cursor-pointer text-xs"
+                >
+                  <Users className="mr-2 h-3.5 w-3.5 text-muted-foreground" />
+                  My Profile
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() => go("jobs")}
+                  className="cursor-pointer text-xs"
+                >
+                  <Briefcase className="mr-2 h-3.5 w-3.5 text-muted-foreground" />
+                  Browse Jobs
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem
+                  onClick={() => {
+                    logout();
+                    toast.info("Signed out successfully");
+                    navigate("public", "auth");
+                  }}
+                  className="cursor-pointer text-xs text-rose-600 focus:text-rose-600 dark:text-rose-400"
+                >
+                  <LogOut className="mr-2 h-3.5 w-3.5" />
+                  Sign out
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <Button size="sm" className="h-8 gap-1.5 px-3 text-xs bg-emerald-700 hover:bg-emerald-800 text-white" onClick={() => navigate("public", "partner-login")}>
+              <UserCheck className="h-3.5 w-3.5" />
+              Login
+            </Button>
+          )}
         </div>
       </div>
+
+      {/* In-place Comprehensive Profile Modal */}
+      <UserProfileModal open={profileOpen} onOpenChange={setProfileOpen} />
     </header>
   );
 }

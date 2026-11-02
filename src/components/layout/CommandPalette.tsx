@@ -85,6 +85,7 @@ export function CommandPalette() {
           <CommandItem onSelect={() => go("recruiter", "overview")}>Recruiter & Agency Portal</CommandItem>
           <CommandItem onSelect={() => go("training", "overview")}>Training & Admin Portal</CommandItem>
           <CommandItem onSelect={() => go("partner", "overview")}>Partner Portal (Franchise)</CommandItem>
+          <CommandItem onSelect={() => go("admin", "sa-overview")}>Super Admin Portal</CommandItem>
         </CommandGroup>
       </CommandList>
     </CommandDialog>

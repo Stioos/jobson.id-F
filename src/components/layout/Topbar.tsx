@@ -17,7 +17,7 @@ import type { Portal, UserRole } from "@/lib/types";
 import { notifications as notifData } from "@/lib/mock-data";
 import { timeAgo } from "@/lib/format";
 
-const portalOrder: Portal[] = ["public", "candidate", "employer", "recruiter", "training", "partner"];
+const portalOrder: Portal[] = ["public", "candidate", "employer", "recruiter", "training", "partner", "admin"];
 
 const roleLabels: Record<UserRole, string> = {
   candidate: "Candidate",
@@ -51,8 +51,11 @@ export function Topbar() {
   const { portal, navigate, setCommandOpen, setSidebarOpen, role, setRole } = useNav();
   const { user, login } = useAuth();
   const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = React.useState(false);
-  React.useEffect(() => setMounted(true), []);
+  const mounted = React.useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false
+  );
 
   const cfg = portalConfigs[portal];
   const unread = notifData.filter((n) => !n.read).length;
@@ -88,6 +91,11 @@ export function Topbar() {
                   else if (p === "recruiter") navigate("recruiter", "overview");
                   else if (p === "training") navigate("training", "overview");
                   else if (p === "partner") navigate("partner", "overview");
+                  else if (p === "admin") {
+                    setRole("platform_admin");
+                    login("platform_admin");
+                    navigate("admin", "sa-overview");
+                  }
                 }}
                 className="flex items-center gap-2.5 py-2"
               >

@@ -35,25 +35,48 @@ export function PublicPartnerLogin() {
   const { navigate } = useNav();
   const { login } = useAuth();
   const [selected, setSelected] = React.useState<PortalOption>(PORTAL_OPTIONS[0]);
-  const [email, setEmail] = React.useState(selected.user.email);
+  const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [showPwd, setShowPwd] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
 
-  React.useEffect(() => {
-    setEmail(selected.user.email);
-    setPassword("");
-  }, [selected]);
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    const normalizedEmail = email.trim().toLowerCase();
+    if (!normalizedEmail || !password) {
+      toast.error("Please enter email and password");
+      return;
+    }
+
+    const VALID_EMAIL = "jobson.id@gmail.com";
+    const VALID_PASSWORD = "businessos2026";
+
+    if (normalizedEmail === VALID_EMAIL && password !== VALID_PASSWORD) {
+      toast.error("Invalid credentials", {
+        description: "The password entered is incorrect.",
+      });
+      return;
+    }
+
+    const emailName = normalizedEmail.includes("@") ? normalizedEmail.split("@")[0] : normalizedEmail;
+    const initials = emailName.slice(0, 2).toUpperCase();
+
     setLoading(true);
     setTimeout(() => {
-      login(selected.role);
-      toast.success(`Welcome back, ${selected.user.name.split(" ")[0]}!`, {
-        description: `Signed in to ${selected.label} portal`,
+      login("candidate");
+      useAuth.setState({
+        user: {
+          id: "u_candidate",
+          name: emailName,
+          email: normalizedEmail,
+          role: "candidate",
+          avatar: initials,
+        },
+        isAuthenticated: true,
       });
-      navigate(selected.portal, "overview");
+      toast.success(`Welcome back, ${emailName}!`);
+      navigate("public", "home");
       setLoading(false);
     }, 700);
   };
@@ -63,16 +86,13 @@ export function PublicPartnerLogin() {
       <div className="mx-auto flex min-h-screen max-w-6xl flex-col px-4 py-6 sm:px-6 lg:px-8">
         {/* Header */}
         <header className="flex items-center justify-between">
-          <button onClick={() => navigate("public", "home")} className="flex items-center gap-2">
+          <div className="flex items-center gap-2">
             <BrandMark className="h-9 w-9" />
             <div className="text-left">
               <div className="text-lg font-bold tracking-tight">JOBSONN</div>
               <div className="text-[10px] text-muted-foreground">Partner Portal</div>
             </div>
-          </button>
-          <Button variant="ghost" size="sm" onClick={() => navigate("public", "home")}>
-            Back to site
-          </Button>
+          </div>
         </header>
 
         {/* Main split layout */}
@@ -136,18 +156,6 @@ export function PublicPartnerLogin() {
                   ))}
                 </div>
 
-                {/* Selected user preview */}
-                <div className="flex items-center gap-2.5 rounded-lg border bg-muted/40 p-2.5">
-                  <AvatarLogo text={selected.user.name} size="sm" />
-                  <div className="min-w-0 flex-1">
-                    <div className="truncate text-xs font-semibold">{selected.user.name}</div>
-                    <div className="truncate text-[10px] text-muted-foreground">{selected.user.email}</div>
-                  </div>
-                  <span className="rounded bg-brand/10 px-1.5 py-0.5 text-[10px] font-medium text-brand">
-                    Demo user
-                  </span>
-                </div>
-
                 {/* Login form */}
                 <form onSubmit={handleSubmit} className="space-y-3">
                   <div className="space-y-1.5">
@@ -157,7 +165,7 @@ export function PublicPartnerLogin() {
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder="you@company.com"
+                      placeholder="Enter email"
                       required
                     />
                   </div>
@@ -174,7 +182,7 @@ export function PublicPartnerLogin() {
                         type={showPwd ? "text" : "password"}
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        placeholder="••••••••"
+                        placeholder="Enter password"
                         className="pr-9"
                       />
                       <button
@@ -190,11 +198,6 @@ export function PublicPartnerLogin() {
                     {loading ? "Signing in…" : <>Sign in to {selected.label} <ArrowRight className="h-4 w-4" /></>}
                   </Button>
                 </form>
-
-                <div className="flex items-center gap-2 text-[10px] text-muted-foreground">
-                  <CheckCircle2 className="h-3 w-3 shrink-0 text-emerald-500" />
-                  <span>Demo environment — any password works. All data is simulated.</span>
-                </div>
 
                 <div className="border-t pt-3 text-center text-xs text-muted-foreground">
                   New to JOBSONN?{" "}

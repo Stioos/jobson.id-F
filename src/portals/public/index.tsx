@@ -92,6 +92,7 @@ export function render(route: string): React.ReactNode {
     case "partner-login":
     case "auth":
     case "signin":
+    case "login":
       return <PublicAuth />;
     case "register":
       // register/{roleKey} → role-specific registration page
