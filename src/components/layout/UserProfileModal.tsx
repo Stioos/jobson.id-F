@@ -47,7 +47,7 @@ export function UserProfileModal({ open, onOpenChange }: UserProfileModalProps) 
   const { user } = useAuth();
 
   // Profile Form States
-  const [name, setName] = React.useState(user?.name || "jobson.id");
+  const [name, setName] = React.useState(user?.name || "User");
   const [headline, setHeadline] = React.useState(
     "Full-Stack Software Engineer & Cloud Architect | Open to Opportunities"
   );
@@ -56,6 +56,12 @@ export function UserProfileModal({ open, onOpenChange }: UserProfileModalProps) 
   const [bio, setBio] = React.useState(
     "Passionate software engineer with 5+ years of experience crafting scalable web and mobile applications using React, Next.js, Node.js, and cloud platforms."
   );
+
+  React.useEffect(() => {
+    if (user?.name) {
+      setName(user.name);
+    }
+  }, [user?.name, open]);
 
   // Preferences
   const [preferredRole, setPreferredRole] = React.useState("Senior Full Stack Engineer");
@@ -137,7 +143,7 @@ export function UserProfileModal({ open, onOpenChange }: UserProfileModalProps) 
 
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
-    const updatedName = name.trim() || user?.name || "jobson.id";
+    const updatedName = name.trim() || user?.name || "User";
     const initials = updatedName.slice(0, 2).toUpperCase();
 
     if (user) {

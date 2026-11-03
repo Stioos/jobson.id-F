@@ -78,20 +78,41 @@ export function PublicAuth() {
     const initials = emailName.slice(0, 2).toUpperCase();
 
     setTimeout(() => {
-      setRole("candidate");
-      login("candidate");
+      let redirectPortal: string | null = null;
+      if (typeof window !== "undefined") {
+        try {
+          redirectPortal = sessionStorage.getItem("jobsonn_redirect_portal");
+          sessionStorage.removeItem("jobsonn_redirect_portal");
+        } catch {}
+      }
+
+      const roleForPortal: UserRole =
+        redirectPortal === "partner" || redirectPortal === "employer" ? "employer"
+        : redirectPortal === "recruiter" ? "recruiter"
+        : redirectPortal === "admin" ? "platform_admin"
+        : redirectPortal === "training" ? "training"
+        : "candidate";
+
+      setRole(roleForPortal);
+      login(roleForPortal);
       useAuth.setState({
         user: {
-          id: "u_candidate",
+          id: `u_${Date.now()}`,
           name: emailName,
           email: normalizedEmail,
-          role: "candidate",
+          role: roleForPortal,
           avatar: initials,
         },
         isAuthenticated: true,
       });
+
       toast.success(`Welcome back, ${emailName}!`);
-      navigate("public", "home");
+
+      if (redirectPortal && redirectPortal !== "public") {
+        navigate(redirectPortal as any, "overview");
+      } else {
+        navigate("public", "home");
+      }
       setLoading(false);
     }, 600);
   };

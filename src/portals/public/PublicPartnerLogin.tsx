@@ -64,19 +64,39 @@ export function PublicPartnerLogin() {
 
     setLoading(true);
     setTimeout(() => {
-      login("candidate");
+      let redirectPortal: string | null = null;
+      if (typeof window !== "undefined") {
+        try {
+          redirectPortal = sessionStorage.getItem("jobsonn_redirect_portal");
+          sessionStorage.removeItem("jobsonn_redirect_portal");
+        } catch {}
+      }
+
+      const roleForPortal: UserRole =
+        redirectPortal === "candidate" ? "candidate"
+        : redirectPortal === "recruiter" ? "recruiter"
+        : redirectPortal === "admin" ? "platform_admin"
+        : "employer";
+
+      login(roleForPortal);
       useAuth.setState({
         user: {
-          id: "u_candidate",
+          id: `u_${Date.now()}`,
           name: emailName,
           email: normalizedEmail,
-          role: "candidate",
+          role: roleForPortal,
           avatar: initials,
         },
         isAuthenticated: true,
       });
+
       toast.success(`Welcome back, ${emailName}!`);
-      navigate("public", "home");
+
+      if (redirectPortal && redirectPortal !== "public") {
+        navigate(redirectPortal as any, "overview");
+      } else {
+        navigate("public", "home");
+      }
       setLoading(false);
     }, 700);
   };

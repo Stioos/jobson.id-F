@@ -237,9 +237,9 @@ const REG_CONFIGS: Record<string, RoleRegConfig> = {
           { name: "country", label: "Country", type: "select", options: ["India", "United States", "UAE", "Saudi Arabia", "Singapore", "Other"], required: true, half: true, icon: Globe },
           { name: "location", label: "City", type: "text", placeholder: "Chennai", required: true, half: true, icon: MapPin },
           { name: "investmentCapacity", label: "Investment Capacity", type: "select", options: ["₹1-3 Lakhs", "₹3-5 Lakhs", "₹5-10 Lakhs", "₹10-15 Lakhs", "₹15 Lakhs+"], required: true, half: true },
-          { name: "website", label: "Website (if any)", type: "text", placeholder: "https://youracademy.in", half: true, icon: Globe },
-          { name: "existingBusiness", label: "Existing Business?", type: "select", options: ["Yes, running a training centre", "Yes, in different business", "No, starting fresh"], half: true },
           { name: "timeline", label: "Expected Start Timeline", type: "select", options: ["Within 30 days", "1-2 months", "3-6 months", "Exploring options"], half: true },
+          { name: "existingBusiness", label: "Existing Business?", type: "select", options: ["Yes, running a training centre", "Yes, in different business", "No, starting fresh"], half: true },
+          { name: "website", label: "Website (if any)", type: "text", placeholder: "https://youracademy.in", half: true, icon: Globe },
         ],
       },
       {
@@ -293,10 +293,10 @@ export function PublicRegister({ roleKey }: { roleKey: string }) {
 
   if (!config) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-slate-950">
-        <div className="text-center">
+      <div className="flex min-h-screen items-center justify-center bg-grid">
+        <div className="rounded-2xl border border-border/80 bg-card p-8 text-center shadow-xl">
           <p className="text-sm text-muted-foreground">Registration type not found.</p>
-          <Button className="mt-4" onClick={() => navigate("public", "partner-login")}>Back to Sign In</Button>
+          <Button className="mt-4" onClick={() => navigate("public", "auth")}>Back to Sign In</Button>
         </div>
       </div>
     );
@@ -312,7 +312,9 @@ export function PublicRegister({ roleKey }: { roleKey: string }) {
   const handleNext = () => {
     const missing = currentStep.fields.filter(f => f.required && !data[f.name]?.trim());
     if (missing.length > 0) {
-      toast.error("Please fill all required fields", { description: `${missing.length} field(s) need attention: ${missing.map(f => f.label).join(", ")}` });
+      toast.error("Please fill all required fields", {
+        description: `${missing.length} field(s) need attention: ${missing.map(f => f.label).join(", ")}`,
+      });
       return;
     }
     if (step < config.steps.length - 1) {
@@ -325,191 +327,298 @@ export function PublicRegister({ roleKey }: { roleKey: string }) {
       }
       setLoading(true);
       setTimeout(() => {
+        const userName = data.firstName
+          ? `${data.firstName} ${data.lastName || ""}`.trim()
+          : data.partnerName || data.companyName || config.label;
+        const email = data.email || `${userName.toLowerCase().replace(/[^a-z0-9]/g, ".")}@gmail.com`;
+        const initials = userName.slice(0, 2).toUpperCase();
+
         login(config.role);
-        toast.success("Account created successfully!", {
-          description: `Welcome to JOBSONN, ${data.firstName || "there"}! Redirecting...`,
+        useAuth.setState({
+          user: {
+            id: `u_${Date.now()}`,
+            name: userName,
+            email: email,
+            role: config.role,
+            avatar: initials,
+          },
+          isAuthenticated: true,
         });
-        navigate(config.portal, "overview");
+
+        toast.success("Account created successfully!", {
+          description: `Welcome to JOBSONN, ${userName}!`,
+        });
+        navigate("public", "home");
         setLoading(false);
-      }, 1200);
+      }, 1000);
     }
   };
 
   const handleBack = () => { if (step > 0) setStep(step - 1); };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white">
-      <div className="mx-auto flex min-h-screen max-w-2xl flex-col px-4 py-6 sm:px-6">
-        {/* Header */}
-        <header className="flex items-center justify-between">
-          <button onClick={() => navigate("public", "home")} className="flex items-center" aria-label="JOBSONN home">
+    <div className="relative min-h-screen bg-grid flex flex-col justify-between overflow-x-hidden">
+      {/* Ambient background glows */}
+      <div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 h-[350px] w-[800px] rounded-full bg-brand/10 blur-[130px]" />
+      <div className="pointer-events-none absolute top-1/3 -right-40 h-[400px] w-[500px] rounded-full bg-emerald-500/10 blur-[140px]" />
+      <div className="pointer-events-none absolute -bottom-20 -left-20 h-[350px] w-[500px] rounded-full bg-blue-500/10 blur-[130px]" />
+
+      {/* Top Header */}
+      <header className="relative z-10 w-full border-b border-border/40 bg-background/80 backdrop-blur-md">
+        <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-4 sm:px-6">
+          <div className="flex items-center" aria-label="JOBSONN home">
             <Image src="/jobsonn-logo.png" alt="JOBSONN" width={120} height={32} className="h-7 w-auto object-contain sm:h-8" priority />
-          </button>
-          <button onClick={() => navigate("public", "partner-login")} className="text-xs text-slate-400 hover:text-white">
-            Already have an account? <span className="font-medium text-brand">Sign in</span>
-          </button>
-        </header>
-
-        {/* Main centered form */}
-        <div className="flex flex-1 flex-col justify-center py-8">
-          {/* Title block */}
-          <div className="mb-6 flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl" style={{ background: `${config.color}20`, color: config.color }}>
-              <RoleIcon className="h-6 w-6" />
-            </div>
-            <div>
-              <h1 className="text-2xl font-bold tracking-tight">Create {config.label} Account</h1>
-              <p className="text-sm text-slate-400">{currentStep.subtitle}</p>
-            </div>
           </div>
+          <div className="flex items-center gap-3">
+            <span className="hidden text-xs text-muted-foreground sm:inline">Already have an account?</span>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => navigate("public", "auth")}
+              className="h-8 gap-1.5 rounded-full border-border/80 px-3.5 text-xs font-semibold hover:border-brand/40 hover:bg-brand/5 hover:text-brand transition-all"
+            >
+              Sign in
+              <ArrowRight className="h-3 w-3" />
+            </Button>
+          </div>
+        </div>
+      </header>
 
-          {/* Progress bar */}
-          <div className="mb-6">
-            <div className="mb-2 flex items-center justify-between text-[11px]">
-              <span className="font-medium text-slate-400">Step {step + 1} of {config.steps.length}</span>
-              <span className="font-medium text-slate-400">{Math.round(progress)}% complete</span>
-            </div>
-            <div className="h-1.5 overflow-hidden rounded-full bg-slate-800">
-              <div className="h-full rounded-full transition-all duration-300" style={{ width: `${progress}%`, background: `linear-gradient(90deg, ${config.color}, #10B981)` }} />
-            </div>
-            {/* Step dots */}
-            <div className="mt-2 flex items-center gap-1.5">
-              {config.steps.map((s, i) => (
-                <React.Fragment key={i}>
-                  <div
-                    className={cn("flex h-5 w-5 items-center justify-center rounded-full text-[9px] font-bold transition-all", i < step ? "bg-brand text-white" : i === step ? "text-white" : "bg-slate-800 text-slate-500")}
-                    style={i === step ? { background: config.color } : {}}
-                  >
-                    {i < step ? <CheckCircle2 className="h-3 w-3" /> : i + 1}
+      {/* Main Container */}
+      <main className="relative z-10 mx-auto flex w-full max-w-2xl flex-1 flex-col justify-center px-4 py-8 sm:px-6">
+        <div className="overflow-hidden rounded-2xl border border-border/80 bg-card/95 shadow-2xl backdrop-blur-xl transition-all">
+          {/* Card Header */}
+          <div className="border-b border-border/60 bg-muted/30 p-6 sm:p-7">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="flex items-center gap-3.5">
+                <div
+                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl shadow-inner ring-1 ring-white/10"
+                  style={{ background: `${config.color}20`, color: config.color }}
+                >
+                  <RoleIcon className="h-6 w-6" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <h1 className="text-xl font-bold tracking-tight text-foreground sm:text-2xl">
+                      Create {config.label} Account
+                    </h1>
                   </div>
-                  {i < config.steps.length - 1 && <div className={cn("h-0.5 flex-1 rounded-full", i < step ? "bg-brand" : "bg-slate-800")} />}
-                </React.Fragment>
-              ))}
+                  <p className="mt-0.5 text-xs text-muted-foreground">{currentStep.subtitle}</p>
+                </div>
+              </div>
+
+              {/* Step indicator pill */}
+              <div className="flex items-center gap-2 self-start sm:self-auto rounded-full bg-background border border-border/70 px-3 py-1 shadow-xs">
+                <span className="text-[11px] font-medium text-muted-foreground">Step</span>
+                <span className="flex h-5 w-5 items-center justify-center rounded-full text-[10px] font-bold text-white" style={{ background: config.color }}>
+                  {step + 1}
+                </span>
+                <span className="text-[11px] font-medium text-muted-foreground">of {config.steps.length}</span>
+              </div>
+            </div>
+
+            {/* Step progress bar */}
+            <div className="mt-5">
+              <div className="flex items-center justify-between text-[11px] font-medium mb-1.5">
+                <span className="text-foreground">{currentStep.title}</span>
+                <span className="text-muted-foreground">{Math.round(progress)}% complete</span>
+              </div>
+              <div className="h-1.5 w-full overflow-hidden rounded-full bg-muted">
+                <div
+                  className="h-full rounded-full transition-all duration-400 ease-out"
+                  style={{
+                    width: `${progress}%`,
+                    background: `linear-gradient(90deg, ${config.color}, #10B981)`,
+                  }}
+                />
+              </div>
             </div>
           </div>
 
-          {/* Form fields */}
-          <div className="space-y-3">
-            {currentStep.fields.map((field) => (
-              <div key={field.name} className={cn(field.half && "grid grid-cols-2 gap-3")}>
-                {field.half && <div />}
-                <div className={cn("space-y-1", field.half && "col-span-1")}>
-                  <Label className="flex items-center gap-1 text-[11px] font-medium text-slate-300">
-                    {field.icon && <field.icon className="h-3 w-3 text-slate-500" />}
-                    {field.label}
-                    {field.required && <span className="text-rose-400">*</span>}
-                  </Label>
-                  {field.type === "select" ? (
-                    <Select value={data[field.name] || ""} onValueChange={(v) => setField(field.name, v)}>
-                      <SelectTrigger className="h-9 border-slate-700 bg-slate-900 text-sm text-white hover:border-slate-600 focus:border-brand"><SelectValue placeholder={field.placeholder || "Select..."} /></SelectTrigger>
-                      <SelectContent className="border-slate-700 bg-slate-900 text-white">
-                        {field.options?.map(opt => <SelectItem key={opt} value={opt} className="text-sm hover:bg-slate-800">{opt}</SelectItem>)}
-                      </SelectContent>
-                    </Select>
-                  ) : field.type === "textarea" ? (
-                    <textarea
-                      value={data[field.name] || ""}
-                      onChange={(e) => setField(field.name, e.target.value)}
-                      placeholder={field.placeholder}
-                      required={field.required}
-                      rows={3}
-                      className="w-full rounded-md border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-white placeholder:text-slate-600 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-brand"
-                    />
-                  ) : field.type === "file" ? (
-                    <div className="flex items-center gap-2 rounded-md border border-dashed border-slate-700 bg-slate-900 p-3 text-xs text-slate-500 cursor-pointer hover:border-brand/50 hover:bg-brand/5 transition-all">
-                      <Upload className="h-4 w-4" />
-                      <span>{field.placeholder || "Click to upload"}</span>
-                      <input type="file" className="hidden" onChange={(e) => setField(field.name, e.target.files?.[0]?.name || "")} />
-                    </div>
-                  ) : field.type === "password" ? (
-                    <div className="relative">
-                      <Input
-                        type={showPwd ? "text" : "password"}
+          {/* Form Fields Grid */}
+          <div className="p-6 sm:p-7 space-y-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-3.5">
+              {currentStep.fields.map((field) => {
+                const isFullWidth = !field.half || field.type === "textarea";
+                return (
+                  <div
+                    key={field.name}
+                    className={cn(
+                      isFullWidth ? "col-span-1 sm:col-span-2" : "col-span-1",
+                      "space-y-1.5"
+                    )}
+                  >
+                    <Label className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
+                      {field.icon && <field.icon className="h-3.5 w-3.5 text-muted-foreground" />}
+                      <span>{field.label}</span>
+                      {field.required && <span className="text-rose-500 font-bold">*</span>}
+                    </Label>
+
+                    {field.type === "select" ? (
+                      <Select value={data[field.name] || ""} onValueChange={(v) => setField(field.name, v)}>
+                        <SelectTrigger className="h-10 w-full rounded-lg border-border/80 bg-background/80 text-sm hover:border-brand/50 focus:border-brand focus:ring-2 focus:ring-brand/20 transition-all">
+                          <SelectValue placeholder={field.placeholder || "Select an option..."} />
+                        </SelectTrigger>
+                        <SelectContent className="border-border bg-popover text-popover-foreground">
+                          {field.options?.map((opt) => (
+                            <SelectItem key={opt} value={opt} className="text-xs hover:bg-muted cursor-pointer">
+                              {opt}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    ) : field.type === "textarea" ? (
+                      <textarea
                         value={data[field.name] || ""}
                         onChange={(e) => setField(field.name, e.target.value)}
                         placeholder={field.placeholder}
                         required={field.required}
-                        className="h-9 border-slate-700 bg-slate-900 pr-8 text-sm text-white placeholder:text-slate-600 focus:border-brand"
+                        rows={3}
+                        className="w-full rounded-lg border border-border/80 bg-background/80 px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20 transition-all resize-none"
                       />
-                      <button type="button" onClick={() => setShowPwd(s => !s)} className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-500 hover:text-white">
-                        {showPwd ? <EyeOff className="h-3.5 w-3.5" /> : <Eye className="h-3.5 w-3.5" />}
-                      </button>
-                    </div>
-                  ) : (
-                    <Input
-                      type={field.type}
-                      value={data[field.name] || ""}
-                      onChange={(e) => setField(field.name, e.target.value)}
-                      placeholder={field.placeholder}
-                      required={field.required}
-                      className="h-9 border-slate-700 bg-slate-900 text-sm text-white placeholder:text-slate-600 focus:border-brand"
-                    />
-                  )}
-                  {field.hint && <p className="text-[10px] text-slate-500">{field.hint}</p>}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Terms checkbox on last step */}
-          {isLastStep && (
-            <div className="mt-4 flex items-start gap-2 rounded-lg border border-slate-800 bg-slate-900/50 p-3">
-              <input type="checkbox" id="terms" checked={agreed} onChange={(e) => setAgreed(e.target.checked)} className="mt-0.5 h-3.5 w-3.5 rounded border-slate-700 bg-slate-900" />
-              <label htmlFor="terms" className="text-[10px] leading-relaxed text-slate-400">
-                I agree to the <button type="button" onClick={() => navigate("public", "terms")} className="font-medium text-brand hover:underline">Terms of Service</button>, <button type="button" onClick={() => navigate("public", "privacy")} className="font-medium text-brand hover:underline">Privacy Policy</button> and consent to data processing under DPDP Act 2023. I confirm all information provided is accurate.
-              </label>
+                    ) : field.type === "file" ? (
+                      <label className="flex items-center gap-2.5 rounded-lg border border-dashed border-border/90 bg-muted/20 px-3.5 py-2.5 text-xs text-muted-foreground cursor-pointer hover:border-brand/60 hover:bg-brand/5 transition-all group">
+                        <div className="flex h-7 w-7 items-center justify-center rounded-md bg-muted text-foreground group-hover:bg-brand/10 group-hover:text-brand transition-colors">
+                          <Upload className="h-3.5 w-3.5" />
+                        </div>
+                        <div className="min-w-0 flex-1 truncate font-medium text-foreground">
+                          {data[field.name] || field.placeholder || "Click to upload file"}
+                        </div>
+                        <span className="text-[10px] text-muted-foreground shrink-0 font-medium">Browse</span>
+                        <input
+                          type="file"
+                          className="hidden"
+                          onChange={(e) => setField(field.name, e.target.files?.[0]?.name || "")}
+                        />
+                      </label>
+                    ) : field.type === "password" ? (
+                      <div className="relative">
+                        <Input
+                          type={showPwd ? "text" : "password"}
+                          value={data[field.name] || ""}
+                          onChange={(e) => setField(field.name, e.target.value)}
+                          placeholder={field.placeholder}
+                          required={field.required}
+                          className="h-10 rounded-lg border-border/80 bg-background/80 pr-10 text-sm hover:border-brand/50 focus:border-brand focus:ring-2 focus:ring-brand/20 transition-all"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowPwd((s) => !s)}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                          tabIndex={-1}
+                          aria-label={showPwd ? "Hide password" : "Show password"}
+                        >
+                          {showPwd ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                        </button>
+                      </div>
+                    ) : (
+                      <Input
+                        type={field.type}
+                        value={data[field.name] || ""}
+                        onChange={(e) => setField(field.name, e.target.value)}
+                        placeholder={field.placeholder}
+                        required={field.required}
+                        className="h-10 rounded-lg border-border/80 bg-background/80 text-sm hover:border-brand/50 focus:border-brand focus:ring-2 focus:ring-brand/20 transition-all"
+                      />
+                    )}
+                    {field.hint && <p className="text-[10px] text-muted-foreground">{field.hint}</p>}
+                  </div>
+                );
+              })}
             </div>
-          )}
 
-          {/* Navigation buttons */}
-          <div className="mt-5 flex gap-2">
-            {step > 0 && (
-              <Button type="button" variant="outline" onClick={handleBack} className="gap-1.5 h-10 border-slate-700 bg-slate-900 text-sm text-white hover:bg-slate-800 hover:text-white">
-                <ArrowLeft className="h-4 w-4" /> Back
-              </Button>
+            {/* Terms Checkbox on Last Step */}
+            {isLastStep && (
+              <div className="flex items-start gap-3 rounded-xl border border-border/70 bg-muted/30 p-3.5">
+                <input
+                  type="checkbox"
+                  id="terms"
+                  checked={agreed}
+                  onChange={(e) => setAgreed(e.target.checked)}
+                  className="mt-0.5 h-4 w-4 rounded border-border text-brand focus:ring-brand accent-brand cursor-pointer"
+                />
+                <label htmlFor="terms" className="text-xs leading-relaxed text-muted-foreground cursor-pointer select-none">
+                  I agree to the{" "}
+                  <button type="button" onClick={() => navigate("public", "terms")} className="font-semibold text-brand hover:underline">
+                    Terms of Service
+                  </button>
+                  ,{" "}
+                  <button type="button" onClick={() => navigate("public", "privacy")} className="font-semibold text-brand hover:underline">
+                    Privacy Policy
+                  </button>{" "}
+                  and consent to data processing under the DPDP Act 2023. I confirm all provided information is accurate.
+                </label>
+              </div>
             )}
-            <Button
-              type="button"
-              onClick={handleNext}
-              className="flex-1 gap-1.5 h-10 border-0 text-sm font-semibold text-white"
-              disabled={loading || (isLastStep && !agreed)}
-              style={{ background: `linear-gradient(90deg, ${config.color}, #10B981)` }}
-            >
-              {loading ? (
-                <span className="flex items-center gap-2">
-                  <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
-                  Creating account...
-                </span>
-              ) : isLastStep ? (
-                <>Create {config.label} Account <CheckCircle2 className="h-4 w-4" /></>
-              ) : (
-                <>Continue <ArrowRight className="h-4 w-4" /></>
+
+            {/* Action Buttons */}
+            <div className="flex items-center gap-3 pt-2">
+              {step > 0 && (
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={handleBack}
+                  className="h-11 px-5 rounded-lg border-border font-medium text-xs sm:text-sm gap-1.5 hover:bg-muted"
+                >
+                  <ArrowLeft className="h-4 w-4" /> Back
+                </Button>
               )}
-            </Button>
-          </div>
-
-          {/* Cross-role navigation */}
-          <div className="mt-5 flex flex-wrap justify-center gap-1.5">
-            {Object.values(REG_CONFIGS).filter(r => r.roleKey !== roleKey).map(r => (
-              <button
-                key={r.roleKey}
-                onClick={() => { navigate("public", `register/${r.roleKey}`); }}
-                className="flex items-center gap-1 rounded-md border border-slate-800 px-2 py-1 text-[9px] font-medium text-slate-500 transition-all hover:border-brand hover:text-brand"
+              <Button
+                type="button"
+                onClick={handleNext}
+                className="flex-1 h-11 rounded-lg text-xs sm:text-sm font-semibold text-white shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2"
+                disabled={loading || (isLastStep && !agreed)}
+                style={{
+                  background: `linear-gradient(135deg, ${config.color}, #059669)`,
+                }}
               >
-                <r.icon className="h-2.5 w-2.5" style={{ color: r.color }} />
-                {r.label}
-              </button>
-            ))}
-          </div>
-
-          {/* Trust badges */}
-          <div className="mt-4 flex flex-wrap items-center justify-center gap-4 text-[10px] text-slate-600">
-            <span className="flex items-center gap-1"><ShieldCheck className="h-3 w-3" /> DPDP Compliant</span>
-            <span className="flex items-center gap-1"><Lock className="h-3 w-3" /> 256-bit SSL</span>
-            <span className="flex items-center gap-1"><CheckCircle2 className="h-3 w-3" /> Free to Register</span>
+                {loading ? (
+                  <span className="flex items-center gap-2">
+                    <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                    Creating account...
+                  </span>
+                ) : isLastStep ? (
+                  <>Create {config.label} Account <CheckCircle2 className="h-4 w-4" /></>
+                ) : (
+                  <>Continue <ArrowRight className="h-4 w-4" /></>
+                )}
+              </Button>
+            </div>
           </div>
         </div>
-      </div>
+
+        {/* Cross-Role Navigation */}
+        <div className="mt-6 flex flex-col items-center gap-2">
+          <span className="text-[11px] font-medium text-muted-foreground">Looking to register as someone else?</span>
+          <div className="flex flex-wrap items-center justify-center gap-1.5">
+            {Object.values(REG_CONFIGS).map((r) => {
+              const isCurrent = r.roleKey === roleKey;
+              return (
+                <button
+                  key={r.roleKey}
+                  onClick={() => navigate("public", `register/${r.roleKey}`)}
+                  className={cn(
+                    "flex items-center gap-1.5 rounded-full border px-3 py-1 text-[11px] font-medium transition-all",
+                    isCurrent
+                      ? "border-brand bg-brand/10 text-brand font-semibold shadow-xs"
+                      : "border-border/60 bg-card/60 text-muted-foreground hover:border-brand/40 hover:text-foreground hover:bg-muted/40"
+                  )}
+                >
+                  <r.icon className="h-3 w-3" style={{ color: r.color }} />
+                  {r.label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Trust Badges */}
+        <footer className="mt-6 flex flex-wrap items-center justify-center gap-6 text-[11px] text-muted-foreground pb-4">
+          <span className="flex items-center gap-1.5"><ShieldCheck className="h-3.5 w-3.5 text-emerald-500" /> DPDP Act 2023 Compliant</span>
+          <span className="flex items-center gap-1.5"><Lock className="h-3.5 w-3.5 text-blue-500" /> 256-bit SSL Encrypted</span>
+          <span className="flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" /> Free to Register</span>
+        </footer>
+      </main>
     </div>
   );
 }

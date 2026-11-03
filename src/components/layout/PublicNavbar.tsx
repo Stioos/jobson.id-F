@@ -13,7 +13,7 @@ import {
   Factory, Brain, Code2, Database, Cloud, Box, Bot, Compass,
   ChevronRight, CheckCircle2, type LucideIcon,
   Clock, Landmark, Star, ShieldCheck, Home, MapPin, BarChart3,
-  FileText, Mic, Sparkles, ArrowRight, LayoutGrid, LogOut,
+  FileText, Mic, Sparkles, ArrowRight, LayoutGrid, LogOut, LogIn,
 } from "lucide-react";
 import {
   DropdownMenu,
@@ -167,44 +167,44 @@ const TALENT_SEGMENTS: {
   segmentLabel: string; segmentColor: string; isHorizontal?: boolean;
   items: { label: string; view: string; icon: LucideIcon; desc: string; color: string; badge: string }[]
 }[] = [
-  {
-    segmentLabel: "Talent Development",
-    segmentColor: "#0EA5E9",
-    items: [
-      { label: "Train to Hire", view: "talent/talent-train-to-hire", icon: GraduationCap, desc: "Upskill fresh talent through industry-aligned training before they join your team.", color: "#0EA5E9", badge: "Training + Placement" },
-      { label: "Hire to Train", view: "talent/talent-hire-to-train", icon: UserCheck, desc: "Hire promising candidates and we train them to meet your specific requirements.", color: "#8B5CF6", badge: "Hire + Upskill" },
-      { label: "Corporate Training", view: "talent/talent-corporate-training", icon: Award, desc: "Custom corporate training programs designed to upskill your existing workforce.", color: "#F97316", badge: "Enterprise Training" },
-    ],
-  },
-  {
-    segmentLabel: "Workforce Solutions",
-    segmentColor: "#10B981",
-    items: [
-      { label: "Sourcing & Recruitment", view: "talent/talent-sourcing-recruitment", icon: Search, desc: "AI-powered talent sourcing from 2M+ candidates. Find the right fit fast.", color: "#0EA5E9", badge: "Talent Sourcing" },
-      { label: "Flexible Deployment", view: "talent/talent-flexible-deployment", icon: Layers, desc: "Deploy talent flexibly — contract, project-based, or on-demand staffing.", color: "#10B981", badge: "On-Demand Talent" },
-      { label: "End-to-End Workforce", view: "talent/talent-end-to-end-workforce", icon: Globe, desc: "Complete workforce management from hiring to retention, one partner.", color: "#8B5CF6", badge: "Full Lifecycle" },
-    ],
-  },
-  {
-    segmentLabel: "Assessment & Placements",
-    segmentColor: "#F97316",
-    items: [
-      { label: "Talent Assessment", view: "talent/talent-assessment", icon: ClipboardCheck, desc: "AI-powered assessments to evaluate technical skills, aptitude, and cultural fit.", color: "#EF4444", badge: "AI Assessment" },
-      { label: "Staffing Solutions", view: "talent/talent-staffing", icon: Users, desc: "Flexible staffing models — contract, permanent, or project-based — to scale your team.", color: "#10B981", badge: "Flexible Staffing" },
-      { label: "Placements", view: "placements", icon: TrendingUp, desc: "Explore placement opportunities and connect with top employers across industries.", color: "#D4A017", badge: "Career Placement" },
-    ],
-  },
-  {
-    segmentLabel: "Get Started",
-    segmentColor: "#D4A017",
-    isHorizontal: true,
-    items: [
-      { label: "Register as Candidate", view: "candidate/overview", icon: GraduationCap, desc: "Access 10,000+ job opportunities with AI-powered matching.", color: "#0EA5E9", badge: "Job Seeker" },
-      { label: "Register as Employer", view: "employer/overview", icon: Building2, desc: "Start hiring from 50,000+ verified candidates.", color: "#8B5CF6", badge: "Hire Talent" },
-      { label: "Professional Services", view: "professional-services", icon: BookOpen, desc: "Career assessment, resume building, interview coaching, and 8 professional services.", color: "#D4A017", badge: "8 Services" },
-    ],
-  },
-];
+    {
+      segmentLabel: "Talent Development",
+      segmentColor: "#0EA5E9",
+      items: [
+        { label: "Train to Hire", view: "talent/talent-train-to-hire", icon: GraduationCap, desc: "Upskill fresh talent through industry-aligned training before they join your team.", color: "#0EA5E9", badge: "Training + Placement" },
+        { label: "Hire to Train", view: "talent/talent-hire-to-train", icon: UserCheck, desc: "Hire promising candidates and we train them to meet your specific requirements.", color: "#8B5CF6", badge: "Hire + Upskill" },
+        { label: "Corporate Training", view: "talent/talent-corporate-training", icon: Award, desc: "Custom corporate training programs designed to upskill your existing workforce.", color: "#F97316", badge: "Enterprise Training" },
+      ],
+    },
+    {
+      segmentLabel: "Workforce Solutions",
+      segmentColor: "#10B981",
+      items: [
+        { label: "Sourcing & Recruitment", view: "talent/talent-sourcing-recruitment", icon: Search, desc: "AI-powered talent sourcing from 2M+ candidates. Find the right fit fast.", color: "#0EA5E9", badge: "Talent Sourcing" },
+        { label: "Flexible Deployment", view: "talent/talent-flexible-deployment", icon: Layers, desc: "Deploy talent flexibly — contract, project-based, or on-demand staffing.", color: "#10B981", badge: "On-Demand Talent" },
+        { label: "End-to-End Workforce", view: "talent/talent-end-to-end-workforce", icon: Globe, desc: "Complete workforce management from hiring to retention, one partner.", color: "#8B5CF6", badge: "Full Lifecycle" },
+      ],
+    },
+    {
+      segmentLabel: "Assessment & Placements",
+      segmentColor: "#F97316",
+      items: [
+        { label: "Talent Assessment", view: "talent/talent-assessment", icon: ClipboardCheck, desc: "AI-powered assessments to evaluate technical skills, aptitude, and cultural fit.", color: "#EF4444", badge: "AI Assessment" },
+        { label: "Staffing Solutions", view: "talent/talent-staffing", icon: Users, desc: "Flexible staffing models — contract, permanent, or project-based — to scale your team.", color: "#10B981", badge: "Flexible Staffing" },
+        { label: "Placements", view: "placements", icon: TrendingUp, desc: "Explore placement opportunities and connect with top employers across industries.", color: "#D4A017", badge: "Career Placement" },
+      ],
+    },
+    {
+      segmentLabel: "Get Started",
+      segmentColor: "#D4A017",
+      isHorizontal: true,
+      items: [
+        { label: "Register as Candidate", view: "candidate/overview", icon: GraduationCap, desc: "Access 10,000+ job opportunities with AI-powered matching.", color: "#0EA5E9", badge: "Job Seeker" },
+        { label: "Register as Employer", view: "employer/overview", icon: Building2, desc: "Start hiring from 50,000+ verified candidates.", color: "#8B5CF6", badge: "Hire Talent" },
+        { label: "Professional Services", view: "professional-services", icon: BookOpen, desc: "Career assessment, resume building, interview coaching, and 8 professional services.", color: "#D4A017", badge: "8 Services" },
+      ],
+    },
+  ];
 
 const RESOURCES_SUB: { label: string; view: string; icon: React.ReactNode; desc: string }[] = [
   { label: "About Us", view: "about", icon: <Building2 className="h-5 w-5" />, desc: "Learn about our mission, values, and the team driving innovation." },
@@ -230,15 +230,26 @@ const TECH_AI_CAT_SEGMENTS: { segmentLabel: string; color: string; slugs: string
 // Helper: navigate to a public route
 function useGo() {
   const { navigate } = useNav();
+  const { isAuthenticated, user } = useAuth();
   return React.useCallback((view: string) => {
-    // "candidate/overview" and "employer/overview" cross-portal links
+    // Cross-portal links (candidate, employer, partner, recruiter, etc.)
     if (view.includes("/") && ["candidate", "employer", "recruiter", "training", "partner", "admin", "agency", "enterprise", "learner"].includes(view.split("/")[0])) {
-      const [portal, ...rest] = view.split("/");
-      navigate(portal as any, rest.join("/") || "overview");
+      const [targetPortal, ...rest] = view.split("/");
+      if (!isAuthenticated || !user) {
+        toast.error(`Please sign in to access the ${targetPortal.charAt(0).toUpperCase() + targetPortal.slice(1)} Portal.`);
+        if (typeof window !== "undefined") {
+          try {
+            sessionStorage.setItem("jobsonn_redirect_portal", targetPortal);
+          } catch {}
+        }
+        navigate("public", "auth");
+        return;
+      }
+      navigate(targetPortal as any, rest.join("/") || "overview");
     } else {
       navigate("public", view);
     }
-  }, [navigate]);
+  }, [navigate, isAuthenticated, user]);
 }
 
 // ============================================================
@@ -774,8 +785,20 @@ const APPS_ITEMS = [
 function AppsDropdown() {
   const [open, setOpen] = React.useState(false);
   const { navigate } = useNav();
+  const { isAuthenticated, user } = useAuth();
 
   const handleClick = (portal: string) => {
+    if (!isAuthenticated || !user) {
+      toast.error(`Please sign in to access the ${portal.charAt(0).toUpperCase() + portal.slice(1)} Portal.`);
+      if (typeof window !== "undefined") {
+        try {
+          sessionStorage.setItem("jobsonn_redirect_portal", portal);
+        } catch {}
+      }
+      navigate("public", "auth");
+      setOpen(false);
+      return;
+    }
     navigate(portal as any, "overview");
     setOpen(false);
   };
@@ -1805,7 +1828,7 @@ export function PublicNavbar() {
                   onClick={() => {
                     logout();
                     toast.info("Signed out successfully");
-                    navigate("public", "auth");
+                    navigate("public", "home");
                   }}
                   className="cursor-pointer text-xs text-rose-600 focus:text-rose-600 dark:text-rose-400"
                 >
@@ -1815,8 +1838,12 @@ export function PublicNavbar() {
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <Button size="sm" className="h-8 gap-1.5 px-3 text-xs bg-emerald-700 hover:bg-emerald-800 text-white" onClick={() => navigate("public", "partner-login")}>
-              <UserCheck className="h-3.5 w-3.5" />
+            <Button
+              size="sm"
+              className="h-8 gap-1.5 px-3 text-xs bg-emerald-700 hover:bg-emerald-800 text-white font-medium shadow-sm transition-all"
+              onClick={() => navigate("public", "auth")}
+            >
+              <LogIn className="h-3.5 w-3.5" />
               Login
             </Button>
           )}

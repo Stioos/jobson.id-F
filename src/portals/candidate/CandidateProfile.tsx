@@ -169,28 +169,28 @@ export function CandidateProfile() {
       />
 
       {/* Header card */}
-      <Card>
-        <CardContent className="p-6">
+      <Card className="overflow-hidden border border-border/80 shadow-xs">
+        <CardContent className="p-6 sm:p-6 sm:pt-6">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
             <AvatarLogo text={profile.name} size="xl" />
             <div className="min-w-0 flex-1">
-              <h2 className="text-xl font-semibold">{profile.name}</h2>
-              <p className="text-sm text-muted-foreground">{profile.headline}</p>
-              <div className="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-xs text-muted-foreground">
-                <span className="inline-flex items-center gap-1">
-                  <Icon name="MapPin" className="h-3 w-3" /> {profile.location}
+              <h2 className="text-xl font-bold tracking-tight text-foreground">{profile.name}</h2>
+              <p className="text-sm font-medium text-muted-foreground mt-0.5">{profile.headline}</p>
+              <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-muted-foreground">
+                <span className="inline-flex items-center gap-1.5">
+                  <Icon name="MapPin" className="h-3.5 w-3.5 text-muted-foreground/80" /> {profile.location}
                 </span>
-                <span className="inline-flex items-center gap-1">
-                  <Icon name="Briefcase" className="h-3 w-3" /> {profile.experienceYears} yrs exp
+                <span className="inline-flex items-center gap-1.5">
+                  <Icon name="Briefcase" className="h-3.5 w-3.5 text-muted-foreground/80" /> {profile.experienceYears} yrs exp
                 </span>
-                <span className="inline-flex items-center gap-1">
-                  <Icon name="Building2" className="h-3 w-3" /> {profile.currentCompany}
+                <span className="inline-flex items-center gap-1.5">
+                  <Icon name="Building2" className="h-3.5 w-3.5 text-muted-foreground/80" /> {profile.currentCompany}
                 </span>
               </div>
             </div>
-            <div className="flex flex-col items-end gap-2">
-              <div className="flex items-center gap-2">
-                <Label htmlFor="otw" className="text-xs">
+            <div className="flex flex-col items-start sm:items-end gap-2.5">
+              <div className="flex items-center gap-3">
+                <Label htmlFor="otw" className="text-xs font-medium cursor-pointer">
                   Open to work
                 </Label>
                 <Switch
@@ -204,18 +204,18 @@ export function CandidateProfile() {
                 />
               </div>
               {openToWork && (
-                <Badge className="bg-emerald-500/10 text-emerald-700 dark:text-emerald-400">
-                  <Icon name="BadgeCheck" className="h-3 w-3" /> Actively looking
+                <Badge className="bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20 font-medium text-[11px] gap-1 px-2.5 py-0.5">
+                  <Icon name="BadgeCheck" className="h-3.5 w-3.5" /> Actively looking
                 </Badge>
               )}
             </div>
           </div>
-          <div className="mt-4">
+          <div className="mt-5 border-t border-border/60 pt-4">
             <div className="flex items-center justify-between text-xs">
-              <span className="font-medium">Profile completeness</span>
-              <span className="text-muted-foreground">{completeness}%</span>
+              <span className="font-semibold text-foreground/90">Profile completeness</span>
+              <span className="font-semibold text-brand">{completeness}%</span>
             </div>
-            <Progress value={completeness} className="mt-1 h-2" />
+            <Progress value={completeness} className="mt-2 h-2" />
           </div>
         </CardContent>
       </Card>

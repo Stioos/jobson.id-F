@@ -92,7 +92,17 @@ export function CardDescription({ className, ...props }: React.HTMLAttributes<HT
 }
 
 export function CardContent({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn("p-4 pt-0 sm:p-5 sm:pt-0", className)} {...props} />;
+  // If the consumer explicitly provides padding (p-, py-, pt-, px-), do not inject conflicting pt-0 or sm:pt-0
+  const hasPadding = className && /\b(p|py|pt|px|sm:p|sm:pt)[a-z]?-/.test(className);
+  return (
+    <div
+      className={cn(
+        hasPadding ? "" : "p-4 pt-0 sm:p-5 sm:pt-0",
+        className
+      )}
+      {...props}
+    />
+  );
 }
 
 export function EmptyState({

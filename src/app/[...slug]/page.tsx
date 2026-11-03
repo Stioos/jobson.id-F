@@ -30,22 +30,21 @@ export default function CatchAllPage() {
     const isAuthed = Boolean(useAuth.getState().isAuthenticated && useAuth.getState().user);
     const path = window.location.pathname;
 
-    if (!isAuthed) {
-      if (path && path.startsWith("/register")) {
-        const route = pathToRoute(path);
-        navigate("public", route || "auth");
+    // Gate non-public portals if unauthenticated
+    if (!isAuthed && useNav.getState().portal !== "public") {
+      navigate("public", "auth");
+      return;
+    }
+
+    if (path && path !== "/" && path !== "/home") {
+      const route = pathToRoute(path);
+      if (route) {
+        navigate("public", route);
       } else {
-        navigate("public", "auth");
-      }
-    } else {
-      if (path && path !== "/" && path !== "/auth" && path !== "/partner-login" && path !== "/signin") {
-        const route = pathToRoute(path);
-        if (route && route !== "home") {
-          navigate("public", route);
-        }
-      } else if (useNav.getState().route === "auth" || useNav.getState().route === "partner-login") {
         navigate("public", "home");
       }
+    } else {
+      navigate("public", "home");
     }
   }, [navigate]);
 

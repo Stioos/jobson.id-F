@@ -174,33 +174,33 @@ export function CandidateProfilePreview() {
         {/* EMPLOYER VIEW */}
         <TabsContent value="employer" className="space-y-4">
           {/* Header card with anonymized identity */}
-          <Card>
-            <CardContent className="p-6">
+          <Card className="overflow-hidden border border-border/80 shadow-xs">
+            <CardContent className="p-6 sm:p-6 sm:pt-6">
               <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
                 <AvatarLogo text="Priya Nair" size="xl" />
-                <div className="min-w-0 flex-1">
+                <div className="min-w-2 flex-1">
                   <div className="flex flex-wrap items-center gap-2">
-                    <h2 className="text-xl font-semibold">Priya N.</h2>
-                    <Badge className="bg-emerald-500/10 text-emerald-700 dark:text-emerald-400">
-                      <Icon name="BadgeCheck" className="h-3 w-3" /> Verified Profile
+                    <h2 className="text-xl font-bold tracking-tight text-foreground">Priya Nair</h2>
+                    <Badge className="bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20 font-medium text-[11px] gap-1 px-2.5 py-0.5">
+                      <Icon name="BadgeCheck" className="h-3.5 w-3.5" /> Verified Profile
                     </Badge>
-                    <Badge className="bg-brand/10 text-brand">
-                      <Icon name="Sparkles" className="h-3 w-3" /> {MATCH_SCORE}% Match
+                    <Badge className="bg-brand/10 text-brand border border-brand/20 font-medium text-[11px] gap-1 px-2.5 py-0.5">
+                      <Icon name="Sparkles" className="h-3.5 w-3.5" /> {MATCH_SCORE}% Match
                     </Badge>
                   </div>
-                  <p className="mt-1 text-sm text-muted-foreground">Senior Frontend Engineer · 7+ yrs</p>
-                  <div className="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-xs text-muted-foreground">
-                    <span className="inline-flex items-center gap-1">
-                      <Icon name="MapPin" className="h-3 w-3" /> Bengaluru, IN
+                  <p className="mt-1 text-sm font-medium text-muted-foreground">Senior Frontend Engineer · 7+ yrs</p>
+                  <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1.5 text-xs text-muted-foreground">
+                    <span className="inline-flex items-center gap-1.5">
+                      <Icon name="MapPin" className="h-3.5 w-3.5 text-muted-foreground/80" /> Bengaluru, IN
                     </span>
-                    <span className="inline-flex items-center gap-1">
-                      <Icon name="Briefcase" className="h-3 w-3" /> Currently at TechCorp India
+                    <span className="inline-flex items-center gap-1.5">
+                      <Icon name="Briefcase" className="h-3.5 w-3.5 text-muted-foreground/80" /> Currently at TechCorp India
                     </span>
-                    <span className="inline-flex items-center gap-1">
-                      <Icon name="Mail" className="h-3 w-3" /> Contact hidden
+                    <span className="inline-flex items-center gap-1.5">
+                      <Icon name="Mail" className="h-3.5 w-3.5 text-muted-foreground/80" /> Contact hidden
                     </span>
-                    <span className="inline-flex items-center gap-1">
-                      <Icon name="PhoneCall" className="h-3 w-3" /> Contact hidden
+                    <span className="inline-flex items-center gap-1.5">
+                      <Icon name="PhoneCall" className="h-3.5 w-3.5 text-muted-foreground/80" /> Contact hidden
                     </span>
                   </div>
                 </div>
@@ -362,8 +362,8 @@ export function CandidateProfilePreview() {
                         t.impact === "high"
                           ? "bg-rose-500/10 text-rose-600 dark:text-rose-400"
                           : t.impact === "medium"
-                          ? "bg-amber-500/10 text-amber-600 dark:text-amber-400"
-                          : "bg-muted text-muted-foreground"
+                            ? "bg-amber-500/10 text-amber-600 dark:text-amber-400"
+                            : "bg-muted text-muted-foreground"
                       }
                     >
                       {t.impact} impact
@@ -378,18 +378,18 @@ export function CandidateProfilePreview() {
 
         {/* MY VIEW */}
         <TabsContent value="mine" className="space-y-4">
-          <Card>
-            <CardContent className="p-6">
+          <Card className="overflow-hidden border border-border/80 shadow-xs">
+            <CardContent className="p-6 sm:p-6 sm:pt-6">
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm font-medium">Profile Completeness</span>
-                  <span className="text-sm text-brand">{COMPLETENESS}%</span>
+                  <span className="text-sm font-semibold text-foreground/90">Profile Completeness</span>
+                  <span className="text-sm font-semibold text-brand">{COMPLETENESS}%</span>
                 </div>
-                <Progress value={COMPLETENESS} className="h-2" />
+                <Progress value={COMPLETENESS} className="h-2.5" />
                 <p className="text-xs text-muted-foreground">
                   Add 3 more skills, a professional headshot, and quantified achievements to reach 90%+.
                 </p>
-                <div className="flex flex-wrap gap-2 pt-1">
+                <div className="flex flex-wrap gap-2 pt-2">
                   <Button size="sm" variant="outline" onClick={() => navigate("candidate", "profile-optimizer")}>
                     <Icon name="Sparkles" className="mr-1 h-3.5 w-3.5" /> Open Optimizer
                   </Button>

@@ -4,6 +4,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import type { Portal, UserRole } from "./types";
 import { routeToPath, pathToRoute } from "./routeRegistry";
+import { toast } from "sonner";
 
 export interface NavState {
   portal: Portal;
@@ -28,20 +29,37 @@ export const useNav = create<NavState>()(
   persist(
     (set) => ({
       portal: "public",
-      route: "auth",
+      route: "home",
       role: "candidate",
       commandOpen: false,
       notifOpen: false,
       sidebarOpen: false,
       navigate: (portal, route = "home") => {
         const isAuthed = Boolean(useAuth.getState().isAuthenticated && useAuth.getState().user);
-        const targetRoute = (!isAuthed && portal === "public" && !route.startsWith("register")) ? "auth" : route;
-        set({ portal, route: targetRoute, sidebarOpen: false });
+
+        // Gate non-public portals behind authentication
+        if (portal !== "public" && !isAuthed) {
+          if (typeof window !== "undefined") {
+            try {
+              sessionStorage.setItem("jobsonn_redirect_portal", portal);
+            } catch {}
+          }
+          toast.error(`Please sign in to access the ${portal.charAt(0).toUpperCase() + portal.slice(1)} Portal.`);
+          set({ portal: "public", route: "auth", sidebarOpen: false });
+          if (typeof window !== "undefined") {
+            const path = routeToPath("auth");
+            window.history.pushState({ portal: "public", route: "auth" }, "", path);
+            window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
+          }
+          return;
+        }
+
+        set({ portal, route, sidebarOpen: false });
         if (typeof window !== "undefined") {
           // Sync browser URL for SEO/deep-linking
           if (portal === "public") {
-            const path = routeToPath(targetRoute);
-            window.history.pushState({ portal, route: targetRoute }, "", path);
+            const path = routeToPath(route);
+            window.history.pushState({ portal, route }, "", path);
           }
           window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
         }
@@ -52,7 +70,7 @@ export const useNav = create<NavState>()(
       setSidebarOpen: (sidebarOpen) => set({ sidebarOpen }),
     }),
     {
-      name: "jobsonn-nav",
+      name: "jobsonn-nav-v3",
       partialize: (s) => ({ portal: s.portal, route: s.route, role: s.role }),
       skipHydration: true,
     }
@@ -135,6 +153,6 @@ export const useAuth = create<AuthState>()(
       setUser: (user) => set({ user, isAuthenticated: true }),
       logout: () => set({ user: null, isAuthenticated: false }),
     }),
-    { name: "jobsonn-auth-v2", skipHydration: true }
+    { name: "jobsonn-auth-v3", skipHydration: true }
   )
 );
