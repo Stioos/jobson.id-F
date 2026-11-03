@@ -49,18 +49,28 @@ export function PublicPartnerLogin() {
       return;
     }
 
-    const VALID_EMAIL = "jobson.id@gmail.com";
-    const VALID_PASSWORD = "businessos2026";
+    const ALLOWED_EMAILS = ["jobson.id@gmail.com", "jobson.id"];
+    const ALLOWED_PASSWORD = "businessos2026";
 
-    if (normalizedEmail === VALID_EMAIL && password !== VALID_PASSWORD) {
+    // Strictly check email
+    if (!ALLOWED_EMAILS.includes(normalizedEmail)) {
       toast.error("Invalid credentials", {
-        description: "The password entered is incorrect.",
+        description: "Only authorized email accounts can sign in.",
       });
       return;
     }
 
-    const emailName = normalizedEmail.includes("@") ? normalizedEmail.split("@")[0] : normalizedEmail;
-    const initials = emailName.slice(0, 2).toUpperCase();
+    // Strictly check password
+    if (password !== ALLOWED_PASSWORD) {
+      toast.error("Invalid credentials", {
+        description: "The password entered is incorrect. Please try again.",
+      });
+      return;
+    }
+
+    const emailName = "jobson.id";
+    const fullEmail = "jobson.id@gmail.com";
+    const initials = "JO";
 
     setLoading(true);
     setTimeout(() => {
@@ -83,7 +93,7 @@ export function PublicPartnerLogin() {
         user: {
           id: `u_${Date.now()}`,
           name: emailName,
-          email: normalizedEmail,
+          email: fullEmail,
           role: roleForPortal,
           avatar: initials,
         },
@@ -182,7 +192,7 @@ export function PublicPartnerLogin() {
                     <Label htmlFor="email" className="text-xs">Email</Label>
                     <Input
                       id="email"
-                      type="email"
+                      type="text"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="Enter email"

@@ -282,7 +282,7 @@ const REG_CONFIGS: Record<string, RoleRegConfig> = {
 // ============================================================
 
 export function PublicRegister({ roleKey }: { roleKey: string }) {
-  const { navigate } = useNav();
+  const { navigate, setLoginDrawerOpen } = useNav();
   const { login } = useAuth();
   const config = REG_CONFIGS[roleKey];
   const [step, setStep] = React.useState(0);
@@ -291,12 +291,17 @@ export function PublicRegister({ roleKey }: { roleKey: string }) {
   const [showPwd, setShowPwd] = React.useState(false);
   const [agreed, setAgreed] = React.useState(false);
 
+  const handleOpenLoginDrawer = () => {
+    navigate("public", "home");
+    setLoginDrawerOpen(true);
+  };
+
   if (!config) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-grid">
         <div className="rounded-2xl border border-border/80 bg-card p-8 text-center shadow-xl">
           <p className="text-sm text-muted-foreground">Registration type not found.</p>
-          <Button className="mt-4" onClick={() => navigate("public", "auth")}>Back to Sign In</Button>
+          <Button className="mt-4" onClick={handleOpenLoginDrawer}>Back to Sign In</Button>
         </div>
       </div>
     );
@@ -366,7 +371,11 @@ export function PublicRegister({ roleKey }: { roleKey: string }) {
       {/* Top Header */}
       <header className="relative z-10 w-full border-b border-border/40 bg-background/80 backdrop-blur-md">
         <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-4 sm:px-6">
-          <div className="flex items-center" aria-label="JOBSONN home">
+          <div
+            className="flex items-center cursor-pointer transition-opacity hover:opacity-85"
+            aria-label="JOBSONN home"
+            onClick={() => navigate("public", "home")}
+          >
             <Image src="/jobsonn-logo.png" alt="JOBSONN" width={120} height={32} className="h-7 w-auto object-contain sm:h-8" priority />
           </div>
           <div className="flex items-center gap-3">
@@ -374,8 +383,8 @@ export function PublicRegister({ roleKey }: { roleKey: string }) {
             <Button
               variant="outline"
               size="sm"
-              onClick={() => navigate("public", "auth")}
-              className="h-8 gap-1.5 rounded-full border-border/80 px-3.5 text-xs font-semibold hover:border-brand/40 hover:bg-brand/5 hover:text-brand transition-all"
+              onClick={handleOpenLoginDrawer}
+              className="h-8 gap-1.5 rounded-full border-border/80 px-3.5 text-xs font-semibold hover:border-brand/40 hover:bg-brand/5 hover:text-brand transition-all cursor-pointer"
             >
               Sign in
               <ArrowRight className="h-3 w-3" />

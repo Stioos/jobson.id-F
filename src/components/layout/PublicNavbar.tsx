@@ -23,6 +23,7 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { UserProfileModal } from "./UserProfileModal";
+import { LoginDrawer } from "./LoginDrawer";
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
@@ -229,27 +230,27 @@ const TECH_AI_CAT_SEGMENTS: { segmentLabel: string; color: string; slugs: string
 
 // Helper: navigate to a public route
 function useGo() {
-  const { navigate } = useNav();
+  const { navigate, setLoginDrawerOpen } = useNav();
   const { isAuthenticated, user } = useAuth();
   return React.useCallback((view: string) => {
     // Cross-portal links (candidate, employer, partner, recruiter, etc.)
     if (view.includes("/") && ["candidate", "employer", "recruiter", "training", "partner", "admin", "agency", "enterprise", "learner"].includes(view.split("/")[0])) {
       const [targetPortal, ...rest] = view.split("/");
       if (!isAuthenticated || !user) {
-        toast.error(`Please sign in to access the ${targetPortal.charAt(0).toUpperCase() + targetPortal.slice(1)} Portal.`);
+        toast.info(`Please sign in to access the ${targetPortal.charAt(0).toUpperCase() + targetPortal.slice(1)} Portal.`);
         if (typeof window !== "undefined") {
           try {
             sessionStorage.setItem("jobsonn_redirect_portal", targetPortal);
           } catch {}
         }
-        navigate("public", "auth");
+        setLoginDrawerOpen(true);
         return;
       }
       navigate(targetPortal as any, rest.join("/") || "overview");
     } else {
       navigate("public", view);
     }
-  }, [navigate, isAuthenticated, user]);
+  }, [navigate, setLoginDrawerOpen, isAuthenticated, user]);
 }
 
 // ============================================================
@@ -784,18 +785,18 @@ const APPS_ITEMS = [
 
 function AppsDropdown() {
   const [open, setOpen] = React.useState(false);
-  const { navigate } = useNav();
+  const { navigate, setLoginDrawerOpen } = useNav();
   const { isAuthenticated, user } = useAuth();
 
   const handleClick = (portal: string) => {
     if (!isAuthenticated || !user) {
-      toast.error(`Please sign in to access the ${portal.charAt(0).toUpperCase() + portal.slice(1)} Portal.`);
+      toast.info(`Please sign in to access the ${portal.charAt(0).toUpperCase() + portal.slice(1)} Portal.`);
       if (typeof window !== "undefined") {
         try {
           sessionStorage.setItem("jobsonn_redirect_portal", portal);
         } catch {}
       }
-      navigate("public", "auth");
+      setLoginDrawerOpen(true);
       setOpen(false);
       return;
     }
@@ -1732,7 +1733,7 @@ function MobileNav({ go }: { go: (v: string) => void }) {
 // MAIN NAVBAR
 // ============================================================
 export function PublicNavbar() {
-  const { navigate } = useNav();
+  const { navigate, setLoginDrawerOpen } = useNav();
   const { user, isAuthenticated, logout } = useAuth();
   const [mounted, setMounted] = React.useState(false);
   const [scrolled, setScrolled] = React.useState(false);
@@ -1841,7 +1842,7 @@ export function PublicNavbar() {
             <Button
               size="sm"
               className="h-8 gap-1.5 px-3 text-xs bg-emerald-700 hover:bg-emerald-800 text-white font-medium shadow-sm transition-all"
-              onClick={() => navigate("public", "auth")}
+              onClick={() => setLoginDrawerOpen(true)}
             >
               <LogIn className="h-3.5 w-3.5" />
               Login
@@ -1852,6 +1853,9 @@ export function PublicNavbar() {
 
       {/* In-place Comprehensive Profile Modal */}
       <UserProfileModal open={profileOpen} onOpenChange={setProfileOpen} />
+
+      {/* Slide-over Login Drawer from Right Side */}
+      <LoginDrawer />
     </header>
   );
 }

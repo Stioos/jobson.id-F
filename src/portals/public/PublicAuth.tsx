@@ -59,11 +59,20 @@ export function PublicAuth() {
       return;
     }
 
-    const VALID_EMAIL = "jobson.id@gmail.com";
-    const VALID_PASSWORD = "businessos2026";
+    const ALLOWED_EMAILS = ["jobson.id@gmail.com", "jobson.id"];
+    const ALLOWED_PASSWORD = "businessos2026";
 
-    // If using the official jobson.id email, enforce credentials check
-    if (normalizedEmail === VALID_EMAIL && password !== VALID_PASSWORD) {
+    // Strictly check email
+    if (!ALLOWED_EMAILS.includes(normalizedEmail)) {
+      setError("Invalid email address. Access is restricted to authorized accounts.");
+      toast.error("Invalid credentials", {
+        description: "Only authorized accounts can sign in.",
+      });
+      return;
+    }
+
+    // Strictly check password
+    if (password !== ALLOWED_PASSWORD) {
       setError("Invalid password for jobson.id@gmail.com. Please try again.");
       toast.error("Invalid credentials", {
         description: "The password entered is incorrect.",
@@ -74,8 +83,9 @@ export function PublicAuth() {
     setError(null);
     setLoading(true);
 
-    const emailName = normalizedEmail.includes("@") ? normalizedEmail.split("@")[0] : normalizedEmail;
-    const initials = emailName.slice(0, 2).toUpperCase();
+    const emailName = "jobson.id";
+    const fullEmail = "jobson.id@gmail.com";
+    const initials = "JO";
 
     setTimeout(() => {
       let redirectPortal: string | null = null;
@@ -99,7 +109,7 @@ export function PublicAuth() {
         user: {
           id: `u_${Date.now()}`,
           name: emailName,
-          email: normalizedEmail,
+          email: fullEmail,
           role: roleForPortal,
           avatar: initials,
         },
@@ -179,7 +189,7 @@ export function PublicAuth() {
                       <Mail className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
                       <Input
                         id="email"
-                        type="email"
+                        type="text"
                         value={email}
                         onChange={(e) => {
                           setEmail(e.target.value);

@@ -17,6 +17,9 @@ export interface NavState {
   notifOpen: boolean;
   // mobile sidebar
   sidebarOpen: boolean;
+  // login slide-over sheet from right side
+  loginDrawerOpen: boolean;
+  setLoginDrawerOpen: (open: boolean) => void;
   // theme is handled by next-themes
   navigate: (portal: Portal, route?: string) => void;
   setRole: (role: UserRole) => void;
@@ -34,6 +37,8 @@ export const useNav = create<NavState>()(
       commandOpen: false,
       notifOpen: false,
       sidebarOpen: false,
+      loginDrawerOpen: false,
+      setLoginDrawerOpen: (loginDrawerOpen) => set({ loginDrawerOpen }),
       navigate: (portal, route = "home") => {
         const isAuthed = Boolean(useAuth.getState().isAuthenticated && useAuth.getState().user);
 
