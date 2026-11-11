@@ -153,7 +153,7 @@ export function RecruiterTsTransactions() {
         description="Placement fees, commissions, and bonuses earned from placing T2H-trained candidates with your clients."
         breadcrumbs={[
           { label: "Recruiter", onClick: () => navigate("recruiter", "overview") },
-          { label: "Talent Solutions", onClick: () => navigate("recruiter", "ts-hub") },
+          { label: "Finance", onClick: () => navigate("recruiter", "finance-grp") },
           { label: "Transactions" },
         ]}
         icon={<Receipt className="h-6 w-6" />}

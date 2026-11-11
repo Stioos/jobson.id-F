@@ -98,35 +98,43 @@ const SKILL_POOLS: Record<string, string[]> = {
   tsp_001: ["React 19", "Node.js", "PostgreSQL", "System Design", "TypeScript"],
   tsp_002: ["Linux", "Docker", "Kubernetes", "AWS", "Terraform", "CI/CD"],
   tsp_003: ["Python", "ML", "MLOps", "TensorFlow", "Data Modeling"],
+  tsp_004: ["Network Security", "SIEM", "Incident Response", "DPDP Compliance"],
+  tsp_005: ["Go Fundamentals", "gRPC", "Microservices", "Kubernetes", "PostgreSQL"],
+  tsp_006: ["React 19", "TypeScript", "Next.js", "Tailwind CSS", "Redux Toolkit"],
+  tsp_007: ["AWS Cloud", "Terraform", "Cloud Architecture", "Docker", "CI/CD"],
+  tsp_008: ["Financial Modeling", "AI Risk Analysis", "FinTech Compliance", "Python"],
 };
 
-const T2H_CANDIDATES: T2HCandidate[] = talentSolutionPrograms
-  .filter((p) => p.type === "TRAIN_TO_HIRE")
-  .flatMap((p) => {
-    const trainedCount = p.trained;
-    const placedCount = p.placed;
-    const available = Math.max(0, trainedCount - placedCount);
-    const take = Math.min(available, 4);
-    return Array.from({ length: take }).map((_, i) => {
-      const name = CANDIDATE_NAMES[(p.id.charCodeAt(4) + i) % CANDIDATE_NAMES.length];
-      const status: T2HCandidate["placementStatus"] =
-        i === 0 ? "available" : i === 1 ? "in_review" : i === 2 ? "submitted" : "available";
-      return {
-        id: `tc_${p.id}_${i}`,
-        name,
-        programId: p.id,
-        programName: p.name,
-        client: p.clientName,
-        skills: SKILL_POOLS[p.id] ?? p.programCurriculum,
-        certifications: p.certifications,
-        placementStatus: status,
-        matchScore: 75 + ((i * 7) % 20),
-        experienceYears: 1 + (i % 3),
-        rating: 3.8 + ((i % 5) * 0.2),
-        completedAt: p.endDate,
-      } as T2HCandidate;
+function generateCandidates(programType: "TRAIN_TO_HIRE" | "HIRE_TO_TRAIN"): T2HCandidate[] {
+  return talentSolutionPrograms
+    .filter((p) => p.type === programType)
+    .flatMap((p) => {
+      const count = p.trained || p.hiredCandidates || 4;
+      const placed = p.placed || 0;
+      const available = Math.max(0, count - placed);
+      const take = Math.min(Math.max(available, 2), 4);
+      return Array.from({ length: take }).map((_, i) => {
+        const nameIdx = (p.id.charCodeAt(4) + i * 2) % CANDIDATE_NAMES.length;
+        const name = CANDIDATE_NAMES[nameIdx];
+        const status: T2HCandidate["placementStatus"] =
+          i === 0 ? "available" : i === 1 ? "in_review" : i === 2 ? "submitted" : "available";
+        return {
+          id: `tc_${p.id}_${i}`,
+          name,
+          programId: p.id,
+          programName: p.name,
+          client: p.clientName,
+          skills: SKILL_POOLS[p.id] ?? p.programCurriculum,
+          certifications: p.certifications,
+          placementStatus: status,
+          matchScore: 78 + ((i * 7) % 20),
+          experienceYears: 1 + (i % 3),
+          rating: 3.8 + ((i % 5) * 0.2),
+          completedAt: p.endDate,
+        } as T2HCandidate;
+      });
     });
-  });
+}
 
 const STATUS_LABELS: Record<T2HCandidate["placementStatus"], string> = {
   available: "Available",
@@ -135,7 +143,7 @@ const STATUS_LABELS: Record<T2HCandidate["placementStatus"], string> = {
   placed: "Placed",
 };
 
-export function RecruiterTalentSolutions() {
+export function RecruiterTalentSolutions({ mode = "t2h" }: { mode?: "t2h" | "h2t" }) {
   const { navigate } = useNav();
   const [search, setSearch] = React.useState("");
   const [programFilter, setProgramFilter] = React.useState<string>("all");
@@ -144,16 +152,24 @@ export function RecruiterTalentSolutions() {
   const [selectedJob, setSelectedJob] = React.useState<string>("");
   const [detail, setDetail] = React.useState<T2HCandidate | null>(null);
 
-  // Programs that have trained candidates available
-  const t2hPrograms = talentSolutionPrograms.filter(
-    (p) => p.type === "TRAIN_TO_HIRE" && (p.status === "completed" || p.status === "in_progress")
-  );
+  const isH2T = mode === "h2t";
+  const targetType = isH2T ? "HIRE_TO_TRAIN" : "TRAIN_TO_HIRE";
 
-  // All skill options from T2H programs
-  const allSkills = Array.from(new Set(t2hPrograms.flatMap((p) => p.programCurriculum)));
+  // Candidates for selected mode
+  const candidates = React.useMemo(() => generateCandidates(targetType), [targetType]);
+
+  // Programs for selected mode
+  const activePrograms = React.useMemo(() => {
+    return talentSolutionPrograms.filter((p) => p.type === targetType);
+  }, [targetType]);
+
+  // All skill options from programs
+  const allSkills = React.useMemo(() => {
+    return Array.from(new Set(activePrograms.flatMap((p) => p.programCurriculum)));
+  }, [activePrograms]);
 
   const filtered = React.useMemo(() => {
-    return T2H_CANDIDATES.filter((c) => {
+    return candidates.filter((c) => {
       if (programFilter !== "all" && c.programId !== programFilter) return false;
       if (skillFilter.length > 0 && !skillFilter.every((s) => c.skills.includes(s))) return false;
       if (search) {
@@ -168,13 +184,13 @@ export function RecruiterTalentSolutions() {
       }
       return true;
     });
-  }, [search, programFilter, skillFilter]);
+  }, [candidates, search, programFilter, skillFilter]);
 
   // KPIs
-  const availableCount = T2H_CANDIDATES.filter((c) => c.placementStatus === "available").length;
-  const placedCount = T2H_CANDIDATES.filter((c) => c.placementStatus === "placed").length;
-  const submittedCount = T2H_CANDIDATES.filter((c) => c.placementStatus === "submitted").length;
-  const avgTimeToPlace = 18; // days (synthesized)
+  const availableCount = candidates.filter((c) => c.placementStatus === "available").length;
+  const placedCount = candidates.filter((c) => c.placementStatus === "placed").length;
+  const submittedCount = candidates.filter((c) => c.placementStatus === "submitted").length;
+  const avgTimeToPlace = isH2T ? 14 : 18; // days
 
   // Recruiter's job orders (for submit dialog)
   const recruiterJobs = jobs.slice(0, 6);
@@ -200,20 +216,35 @@ export function RecruiterTalentSolutions() {
   return (
     <div className="space-y-6">
       <PageHeader
-        title="Talent Solutions — T2H Candidates"
-        description="Trained and certified candidates from Train-to-Hire programs — ready for placement with your clients. Filter by program, skills, and placement status."
+        title={isH2T ? "Talent & Sourcing — H2T Candidate" : "Talent & Sourcing — T2H Candidate"}
+        description={
+          isH2T
+            ? "Pre-hired and upskilled candidates from client-sponsored Hire-to-Train programs — tailored to custom stack requirements."
+            : "Trained and certified candidates from specialized Train-to-Hire bootcamps — ready for placement with your clients. Filter by program, skills, and placement status."
+        }
         breadcrumbs={[
           { label: "Recruiter", onClick: () => navigate("recruiter", "overview") },
-          { label: "Talent Solutions" },
+          { label: "Talent & Sourcing", onClick: () => navigate("recruiter", "sourcing-grp") },
+          { label: isH2T ? "H2T Candidate" : "T2H Candidate" },
         ]}
         actions={[
           {
-            label: "Transactions",
+            label: isH2T ? "T2H Candidate" : "H2T Candidate",
             variant: "outline",
-            onClick: () => navigate("recruiter", "ts-transactions"),
+            onClick: () => navigate("recruiter", isH2T ? "t2h" : "h2t"),
+          },
+          {
+            label: "Candidate Pool",
+            variant: "outline",
+            onClick: () => navigate("recruiter", "candidates"),
+          },
+          {
+            label: "Talent & Sourcing Hub",
+            variant: "outline",
+            onClick: () => navigate("recruiter", "sourcing-grp"),
           },
         ]}
-        icon={<GraduationCap className="h-6 w-6" />}
+        icon={<Users className="h-6 w-6" />}
       />
 
       {/* KPIs */}
@@ -235,7 +266,7 @@ export function RecruiterTalentSolutions() {
             <SelectTrigger className="w-full lg:w-64"><SelectValue placeholder="All programs" /></SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All programs</SelectItem>
-              {t2hPrograms.map((p) => (
+              {activePrograms.map((p) => (
                 <SelectItem key={p.id} value={p.id}>{p.name}</SelectItem>
               ))}
             </SelectContent>
@@ -262,7 +293,7 @@ export function RecruiterTalentSolutions() {
         <EmptyState
           icon={<Users className="h-5 w-5" />}
           title="No matching candidates"
-          description="Adjust filters to find T2H-trained candidates for your mandates."
+          description={`Adjust filters to find ${isH2T ? "H2T" : "T2H"}-trained candidates for your mandates.`}
         />
       ) : (
         <Card>
@@ -340,10 +371,10 @@ export function RecruiterTalentSolutions() {
       )}
 
       {/* Talent pool snapshot */}
-      <SectionCard title="T2H talent pool summary" description="Quick overview of available trained talent by program">
+      <SectionCard title={isH2T ? "H2T talent pool summary" : "T2H talent pool summary"} description="Quick overview of available trained talent by program">
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {t2hPrograms.map((p) => {
-            const inProgram = T2H_CANDIDATES.filter((c) => c.programId === p.id);
+          {activePrograms.map((p) => {
+            const inProgram = candidates.filter((c) => c.programId === p.id);
             const available = inProgram.filter((c) => c.placementStatus === "available").length;
             return (
               <Card key={p.id} className="p-4">

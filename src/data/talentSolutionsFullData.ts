@@ -1250,6 +1250,12 @@ export const TALENT_SOLUTIONS_FULL_DATA: Record<string, FullTalentSolution> = {
   },
 };
 
+import { normalizeTalentKey } from "./talentSolutionsConfig";
+
 export function getFullTalentSolution(key: string): FullTalentSolution | undefined {
-  return TALENT_SOLUTIONS_FULL_DATA[key];
+  if (!key) return undefined;
+  if (TALENT_SOLUTIONS_FULL_DATA[key]) return TALENT_SOLUTIONS_FULL_DATA[key];
+  const norm = normalizeTalentKey(key);
+  if (TALENT_SOLUTIONS_FULL_DATA[norm]) return TALENT_SOLUTIONS_FULL_DATA[norm];
+  return undefined;
 }

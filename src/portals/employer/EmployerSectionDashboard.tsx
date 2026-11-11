@@ -58,7 +58,7 @@ const EMPLOYER_SECTION_METADATA: Record<string, SectionMeta> = {
   },
 
   "talent": {
-    title: "Talent & Team Management",
+    title: "Workforce & Team Management",
     desc: "Candidate search, talent pools, background verifications, employee onboarding, probation, and retention.",
     icon: "Users",
     kpis: [

@@ -121,6 +121,8 @@ const RECRUITER_SECTION_METADATA: Record<string, SectionMeta> = {
       { label: "Deduplication Rate", value: "99.8%", icon: "Copy", tone: "success" },
     ],
     childDescriptions: {
+      "h2t": { desc: "Candidates hired directly and upskilled through custom Hire-to-Train programs", badge: "H2T Talent", stat: "38 candidates" },
+      "t2h": { desc: "Verified graduate trainees from specialized Train-to-Hire bootcamps ready for client placement", badge: "T2H Talent", stat: "64 graduates" },
       "candidates": { desc: "Master searchable talent repository with experience, location, and CTC filters", badge: "Talent Bank", stat: "42k candidates" },
       "ai-match-scoring": { desc: "Algorithmic relevance scoring matching candidates to open job orders", badge: "AI Matching", stat: "95.4% precision" },
       "talent-pool": { desc: "Curated talent benches segmented by tech stack, seniority, and availability", badge: "Pools", stat: "18 pools" },
@@ -132,6 +134,7 @@ const RECRUITER_SECTION_METADATA: Record<string, SectionMeta> = {
       "referrals": { desc: "Candidate referral network tracking referral fees and peer recommendations", badge: "Referrals", stat: "18 active" },
       "sourcing-campaigns": { desc: "Outbound talent reach-out campaigns with email and WhatsApp drip steps", badge: "Campaigns", stat: "6 live" },
       "partner-candidates": { desc: "Pre-trained student candidates graduating from accredited partner academies", badge: "Academies", stat: "140 graduates" },
+      "t2h-candidates": { desc: "Verified graduate trainees from specialized bootcamps ready for client placement", badge: "T2H Talent", stat: "64 graduates" },
       "partner-network": { desc: "Cooperative recruitment network for sharing candidate benches and splits", badge: "Network", stat: "24 agencies" },
     },
     telemetry: [
@@ -268,30 +271,6 @@ const RECRUITER_SECTION_METADATA: Record<string, SectionMeta> = {
     auditTrail: [
       { action: "Added new Associate Consultant to FinTech sourcing desk", user: "Agency Partner", time: "2h ago" },
       { action: "Monthly consultant commission reconciliation signed off", user: "Finance Lead", time: "3d ago" },
-    ],
-  },
-
-  "talent-solutions": {
-    title: "Talent Solutions & Programs",
-    desc: "Access verified Train-to-Hire student benches, partner candidate pipelines, and placement bounties.",
-    icon: "GraduationCap",
-    kpis: [
-      { label: "T2H Candidates", value: "64 Ready", icon: "Users", tone: "brand" },
-      { label: "Placement Bounty", value: "₹45,000 / hire", icon: "Coins", tone: "success" },
-      { label: "Partner Academies", value: "12 Institutes", icon: "Building2", tone: "default" },
-      { label: "Client Acceptance", value: "92%", icon: "Award", tone: "success" },
-    ],
-    childDescriptions: {
-      "ts-hub": { desc: "Verified graduate trainees from specialized bootcamps ready for client placement", badge: "T2H Talent", stat: "64 graduates" },
-      "ts-transactions": { desc: "Placement bounty statements and university partnership commission records", badge: "Bounties", stat: "₹3.8L earned" },
-    },
-    telemetry: [
-      { name: "Academy Student Sync Engine", status: "Operational", info: "12 institutes linked" },
-      { name: "Bounty Settlement Engine", status: "Operational", info: "Auto-credited" },
-    ],
-    auditTrail: [
-      { action: "Placed 4 Full-Stack Apprentices with CloudTech (₹1,80,000 bounty)", user: "You", time: "1d ago" },
-      { action: "New cohort of 24 Python/ML graduates available in Talent Solutions", user: "Partner Academy", time: "3d ago" },
     ],
   },
 

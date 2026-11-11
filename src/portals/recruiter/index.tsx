@@ -134,7 +134,6 @@ export function render(route: string): React.ReactNode {
     case "finance-grp":
     case "comms-grp":
     case "agency-grp":
-    case "talent-solutions":
     case "support-grp":
     case "settings-grp":
       return <RecruiterSectionDashboard sectionKey={top} />;
@@ -190,8 +189,17 @@ export function render(route: string): React.ReactNode {
     // Cross-portal partner integration (CROSS-INTEGRATE)
     case "partner-candidates": return <RecruiterPartnerCandidates />;
     case "partner-network": return <RecruiterPartnerNetwork />;
-    // Talent Solutions (TS-CROSS)
-    case "ts-hub": return <RecruiterTalentSolutions />;
+    // Talent & Sourcing / H2T Candidate
+    case "h2t":
+    case "h2t-candidate":
+    case "h2t-candidates":
+      return <RecruiterTalentSolutions mode="h2t" />;
+    // Talent & Sourcing / T2H Candidate
+    case "t2h":
+    case "t2h-candidate":
+    case "t2h-candidates":
+    case "ts-hub":
+      return <RecruiterTalentSolutions mode="t2h" />;
     case "ts-transactions": return <RecruiterTsTransactions />;
     // High-impact missing features (BUILD-RECRUITER-FEATURES)
     case "boolean-search": return <RecruiterBooleanSearch />;

@@ -3,7 +3,7 @@
 import * as React from "react";
 import dynamic from "next/dynamic";
 import { useNav } from "@/lib/store";
-import { TALENT_SOLUTIONS_CONFIG } from "@/data/talentSolutionsConfig";
+import { TALENT_SOLUTIONS_CONFIG, getTalentSolution } from "@/data/talentSolutionsConfig";
 import { Button } from "@/components/ui/button";
 import { EmptyState } from "@/components/common";
 import { Home, AlertCircle } from "lucide-react";
@@ -142,28 +142,28 @@ export function render(route: string): React.ReactNode {
       if (!parts[1]) return <PublicProfessionalServices />;
       return <PublicProfessionalServiceDetail slug={parts[1]} />;
     case "talent-solutions":
+      if (parts[1]) {
+        const sol = getTalentSolution(parts[1]);
+        if (sol) {
+          if (parts[2]) return <PublicTalentSolutionSubPage solutionKey={sol.solutionKey} subPageKey={parts[2]} />;
+          return <PublicTalentSolutionLanding solutionKey={sol.solutionKey} />;
+        }
+      }
       return <PublicTalentSolutions />;
     case "talent":
-      // talent/{solutionKey}                     → generic landing (7 solutions) or PublicTalentRole
+      // talent/{solutionKey}                     → generic landing (all 9 solutions)
       // talent/{solutionKey}/{subPageKey}        → generic sub-page (8 sub-pages each)
-      // talent/talent-sourcing-recruitment       → dedicated Talent Sourcing landing
-      // talent/talent-sourcing-recruitment/{sub} → Talent Sourcing sub-page
       if (!parts[1]) return <PublicTalentSolutions />;
-      // Talent Sourcing has its own dedicated components
-      if (parts[1] === "talent-sourcing-recruitment") {
-        if (parts[2]) return <PublicTalentSourcingSubPage subPageKey={parts[2]} />;
-        return <PublicTalentSourcingLanding />;
-      }
-      // Check if this solution is in the generic config (7 solutions with 8 sub-pages each)
-      const talentSolution = TALENT_SOLUTIONS_CONFIG.find(s => s.solutionKey === parts[1]);
+      const talentSolution = getTalentSolution(parts[1]);
       if (talentSolution) {
-        if (parts[2]) return <PublicTalentSolutionSubPage solutionKey={parts[1]} subPageKey={parts[2]} />;
-        return <PublicTalentSolutionLanding solutionKey={parts[1]} />;
+        if (parts[2]) return <PublicTalentSolutionSubPage solutionKey={talentSolution.solutionKey} subPageKey={parts[2]} />;
+        return <PublicTalentSolutionLanding solutionKey={talentSolution.solutionKey} />;
       }
       // Fallback: other talent roles (single pages)
       return <PublicTalentRole roleKey={parts[1]} />;
     case "placements":
-      return <PublicPlacements />;
+      if (parts[1]) return <PublicTalentSolutionSubPage solutionKey="placements" subPageKey={parts[1]} />;
+      return <PublicTalentSolutionLanding solutionKey="placements" />;
     case "events":
       return <PublicEvents />;
     case "blogs":

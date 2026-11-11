@@ -200,7 +200,7 @@ export const portalConfigs: Record<Portal, PortalConfig> = {
             ],
           },
           {
-            key: "talent", label: "Talent & Team", icon: "Users", children: [
+            key: "talent", label: "Workforce & Team", icon: "Users", children: [
               { key: "talent-search", label: "Talent Search", icon: "Search" },
               { key: "talent-pool", label: "Talent Pool", icon: "Database" },
               { key: "shortlists", label: "Shortlists", icon: "ListChecks" },
@@ -345,6 +345,8 @@ export const portalConfigs: Record<Portal, PortalConfig> = {
           },
           {
             key: "sourcing-grp", label: "Talent & Sourcing", icon: "Search", children: [
+              { key: "h2t", label: "H2T Candidate", icon: "Users", badge: "H2T" },
+              { key: "t2h", label: "T2H Candidate", icon: "GraduationCap", badge: "T2H" },
               { key: "candidates", label: "Candidate Pool", icon: "Users" },
               { key: "ai-match-scoring", label: "AI Match Scoring", icon: "Sparkles", badge: "AI" },
               { key: "talent-pool", label: "Talent Pools", icon: "Database" },
@@ -412,12 +414,6 @@ export const portalConfigs: Record<Portal, PortalConfig> = {
               { key: "ag-recruiters", label: "Agency Recruiters", icon: "Users" },
               { key: "ag-commissions", label: "Commission Recon", icon: "Coins" },
               { key: "ag-settings", label: "Agency Settings", icon: "Settings" },
-            ],
-          },
-          {
-            key: "talent-solutions", label: "Talent Solutions", icon: "GraduationCap", children: [
-              { key: "ts-hub", label: "T2H Candidates", icon: "Users" },
-              { key: "ts-transactions", label: "Transactions", icon: "Receipt" },
             ],
           },
           {
