@@ -64,7 +64,8 @@ export const useNav = create<NavState>()(
           // Sync browser URL for SEO/deep-linking
           if (portal === "public") {
             const path = routeToPath(route);
-            window.history.pushState({ portal, route }, "", path);
+            const suffix = window.location.pathname === path ? window.location.search : "";
+            window.history.pushState({ portal, route }, "", `${path}${suffix}`);
           }
           window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
         }
@@ -127,11 +128,25 @@ export interface DemoUser {
   orgLogo?: string;
 }
 
+export interface RegisteredAccount {
+  id: string;
+  name: string;
+  username: string;
+  email: string;
+  phone: string;
+  password: string;
+  role: UserRole;
+  portal: Portal;
+  avatar: string;
+}
+
 interface AuthState {
   user: DemoUser | null;
   isAuthenticated: boolean;
+  registeredAccounts: RegisteredAccount[];
   login: (role: UserRole) => void;
   setUser: (user: DemoUser) => void;
+  registerAccount: (account: Omit<RegisteredAccount, "id">) => RegisteredAccount;
   logout: () => void;
 }
 
@@ -154,10 +169,115 @@ export const useAuth = create<AuthState>()(
     (set) => ({
       user: null,
       isAuthenticated: false,
+      registeredAccounts: [],
       login: (role) => set({ user: roleUsers[role], isAuthenticated: true }),
       setUser: (user) => set({ user, isAuthenticated: true }),
+      registerAccount: (account) => {
+        const newAccount: RegisteredAccount = { ...account, id: `u_${Date.now()}` };
+        set((state) => ({
+          registeredAccounts: [
+            ...state.registeredAccounts.filter(
+              (a) => a.email.toLowerCase() !== account.email.toLowerCase()
+            ),
+            newAccount,
+          ],
+        }));
+        return newAccount;
+      },
       logout: () => set({ user: null, isAuthenticated: false }),
     }),
     { name: "jobsonn-auth-v3", skipHydration: true }
   )
 );
+
+const BUILTIN_ALLOWED_EMAILS = ["jobson.id@gmail.com", "jobson.id"];
+const BUILTIN_ALLOWED_PASSWORD = "businessos2026";
+
+export type CredentialAuthResult =
+  | { ok: true; user: DemoUser; portal: Portal }
+  | { ok: false; error: string; toastTitle: string; toastDescription: string };
+
+/**
+ * Validates email (or username) + password against newly registered accounts
+ * first, falling back to the built-in authorized account.
+ */
+export function authenticateUserCredentials(
+  emailInput: string,
+  passwordInput: string,
+  redirectPortal?: string | null
+): CredentialAuthResult {
+  const normalized = emailInput.trim().toLowerCase();
+  const normalizedUsername = normalized.replace(/^@/, "");
+  const accounts = useAuth.getState().registeredAccounts ?? [];
+
+  const matchedAccount = accounts.find(
+    (acc) =>
+      acc.email.toLowerCase() === normalized ||
+      acc.username.toLowerCase() === normalizedUsername
+  );
+
+  if (matchedAccount) {
+    if (matchedAccount.password !== passwordInput) {
+      return {
+        ok: false,
+        error: `Invalid password for ${matchedAccount.email}. Please try again.`,
+        toastTitle: "Invalid credentials",
+        toastDescription: "The password entered does not match your registered password.",
+      };
+    }
+
+    return {
+      ok: true,
+      user: {
+        id: matchedAccount.id,
+        name: matchedAccount.name,
+        email: matchedAccount.email,
+        role: matchedAccount.role,
+        avatar: matchedAccount.avatar,
+      },
+      portal: "public",
+    };
+  }
+
+  if (!BUILTIN_ALLOWED_EMAILS.includes(normalized)) {
+    return {
+      ok: false,
+      error: "Invalid email address. Please sign in with your registered account.",
+      toastTitle: "Invalid credentials",
+      toastDescription: "No account found for that email address.",
+    };
+  }
+
+  if (passwordInput !== BUILTIN_ALLOWED_PASSWORD) {
+    return {
+      ok: false,
+      error: "Invalid password for jobson.id@gmail.com. Please try again.",
+      toastTitle: "Invalid credentials",
+      toastDescription: "The password entered is incorrect.",
+    };
+  }
+
+  const roleForPortal: UserRole =
+    redirectPortal === "partner" || redirectPortal === "employer"
+      ? "employer"
+      : redirectPortal === "recruiter"
+      ? "recruiter"
+      : redirectPortal === "admin" || redirectPortal === "training"
+      ? "platform_admin"
+      : "candidate";
+
+  return {
+    ok: true,
+    user: {
+      id: `u_${Date.now()}`,
+      name: "jobson.id",
+      email: "jobson.id@gmail.com",
+      role: roleForPortal,
+      avatar: "JO",
+    },
+    portal:
+      redirectPortal && redirectPortal !== "public"
+        ? (redirectPortal as Portal)
+        : "public",
+  };
+}

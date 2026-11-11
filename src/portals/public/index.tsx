@@ -23,6 +23,7 @@ const PublicContact = dynamic(() => import("./PublicContact").then((m) => m.Publ
 const PublicPartnerLogin = dynamic(() => import("./PublicPartnerLogin").then((m) => m.PublicPartnerLogin));
 const PublicAuth = dynamic(() => import("./PublicAuth").then((m) => m.PublicAuth));
 const PublicRegister = dynamic(() => import("./PublicRegister").then((m) => m.PublicRegister));
+const PublicAccount = dynamic(() => import("./PublicAccount").then((m) => m.PublicAccount));
 const PublicPartnerModels = dynamic(() => import("./PublicPartnerModels").then((m) => m.PublicPartnerModels));
 const PublicPartnerPrograms = dynamic(() => import("./PublicPartnerPrograms").then((m) => m.PublicPartnerPrograms));
 const PublicPartnerCalculator = dynamic(() => import("./PublicPartnerCalculator").then((m) => m.PublicPartnerCalculator));
@@ -96,8 +97,9 @@ export function render(route: string): React.ReactNode {
       return <PublicAuth />;
     case "register":
       // register/{roleKey} → role-specific registration page
-      if (parts[1]) return <PublicRegister roleKey={parts[1]} />;
-      return <PublicAuth />;
+      return <PublicRegister roleKey={parts[1] || "candidate"} />;
+    case "account":
+      return <PublicAccount />;
     case "partner-models":
       return <PublicPartnerModels />;
     case "partner-programs":

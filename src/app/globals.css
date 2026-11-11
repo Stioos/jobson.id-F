@@ -161,3 +161,7 @@
   background-size: 1000px 100%;
   animation: shimmer 2s infinite linear;
 }
+
+.shadow-soft {
+  box-shadow: 0 4px 20px -2px rgb(15 23 42 / 0.06), 0 2px 6px -1px rgb(15 23 42 / 0.03);
+}

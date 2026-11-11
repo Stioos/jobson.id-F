@@ -2,8 +2,7 @@
 
 import * as React from "react";
 import Image from "next/image";
-import { useNav, useAuth } from "@/lib/store";
-import type { UserRole } from "@/lib/types";
+import { useNav, useAuth, authenticateUserCredentials } from "@/lib/store";
 import { toast } from "sonner";
 import {
   Sheet,
@@ -41,7 +40,7 @@ const REGISTER_ROLES = [
 
 export function LoginDrawer() {
   const { loginDrawerOpen, setLoginDrawerOpen, navigate, setRole } = useNav();
-  const { login } = useAuth();
+  const { setUser } = useAuth();
 
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -60,8 +59,7 @@ export function LoginDrawer() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const normalizedEmail = email.trim().toLowerCase();
-    if (!normalizedEmail) {
+    if (!email.trim()) {
       setError("Please enter your email address.");
       return;
     }
@@ -70,23 +68,18 @@ export function LoginDrawer() {
       return;
     }
 
-    const ALLOWED_EMAILS = ["jobson.id@gmail.com", "jobson.id"];
-    const ALLOWED_PASSWORD = "businessos2026";
-
-    // Strictly check email
-    if (!ALLOWED_EMAILS.includes(normalizedEmail)) {
-      setError("Invalid email address. Access is restricted to authorized accounts.");
-      toast.error("Invalid credentials", {
-        description: "Only authorized accounts can sign in.",
-      });
-      return;
+    let redirectPortal: string | null = null;
+    if (typeof window !== "undefined") {
+      try {
+        redirectPortal = sessionStorage.getItem("jobsonn_redirect_portal");
+      } catch {}
     }
 
-    // Strictly check password
-    if (password !== ALLOWED_PASSWORD) {
-      setError("Invalid password for jobson.id@gmail.com. Please try again.");
-      toast.error("Invalid credentials", {
-        description: "The password entered is incorrect.",
+    const authResult = authenticateUserCredentials(email, password, redirectPortal);
+    if (!authResult.ok) {
+      setError(authResult.error);
+      toast.error(authResult.toastTitle, {
+        description: authResult.toastDescription,
       });
       return;
     }
@@ -94,49 +87,25 @@ export function LoginDrawer() {
     setError(null);
     setLoading(true);
 
-    const emailName = "jobson.id";
-    const fullEmail = "jobson.id@gmail.com";
-    const initials = "JO";
-
     setTimeout(() => {
-      let redirectPortal: string | null = null;
       if (typeof window !== "undefined") {
         try {
-          redirectPortal = sessionStorage.getItem("jobsonn_redirect_portal");
           sessionStorage.removeItem("jobsonn_redirect_portal");
+          sessionStorage.removeItem("jobsonn_registered_notice");
         } catch {}
       }
 
-      const roleForPortal: UserRole =
-        redirectPortal === "partner" || redirectPortal === "employer"
-          ? "employer"
-          : redirectPortal === "recruiter"
-          ? "recruiter"
-          : redirectPortal === "admin"
-          ? "platform_admin"
-          : redirectPortal === "training"
-          ? "training"
-          : "candidate";
+      setRole(authResult.user.role);
+      setUser(authResult.user);
 
-      setRole(roleForPortal);
-      login(roleForPortal);
-      useAuth.setState({
-        user: {
-          id: `u_${Date.now()}`,
-          name: emailName,
-          email: fullEmail,
-          role: roleForPortal,
-          avatar: initials,
-        },
-        isAuthenticated: true,
-      });
-
-      toast.success(`Welcome back, ${emailName}!`);
+      toast.success(`Welcome back, ${authResult.user.name}!`);
       setLoading(false);
       setLoginDrawerOpen(false);
 
-      if (redirectPortal && redirectPortal !== "public") {
-        navigate(redirectPortal as any, "overview");
+      if (authResult.portal && authResult.portal !== "public") {
+        navigate(authResult.portal, "overview");
+      } else {
+        navigate("public", "home");
       }
     }, 600);
   };

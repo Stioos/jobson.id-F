@@ -230,6 +230,9 @@ export function Topbar() {
               Platform Admin
             </DropdownMenuCheckboxItem>
             <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={() => navigate("public", "account")}>
+              <User className="h-4 w-4" /> My Profile
+            </DropdownMenuItem>
             <DropdownMenuItem onClick={() => navigate(portal === "public" ? "candidate" : portal, "settings")}>
               <Settings className="h-4 w-4" /> Settings
             </DropdownMenuItem>

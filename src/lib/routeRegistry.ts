@@ -38,6 +38,15 @@ export const PUBLIC_ROUTES: RouteDef[] = [
   { route: "about", path: "/about", title: "About JOBSONN — Our Mission & Team", description: "JOBSONN is on a mission to connect talent, employers and opportunities through intelligent technology. Learn about our story, values and team.", keywords: ["about", "company", "mission", "team", "values"], changefreq: "monthly", priority: 0.5 },
   { route: "contact", path: "/contact", title: "Contact JOBSONN — Talk to Our Team", description: "Get in touch with JOBSONN for sales, support, partnerships or press. Response within 24 hours. Offices in Bengaluru, Mumbai & remote.", keywords: ["contact", "support", "sales", "partnership", "help"], changefreq: "yearly", priority: 0.4 },
   { route: "auth", path: "/auth", title: "Sign In — JOBSONN", description: "Sign in to your JOBSONN account. Candidate, Employer, Recruiter, Training, Partner & Admin.", keywords: ["sign in", "login", "auth"], changefreq: "monthly", priority: 0.6 },
+  { route: "account", path: "/account", title: "Account & Profile Dashboard — JOBSONN", description: "Manage your JOBSONN profile, career preferences, work experience, education, skills, documents, security & privacy settings.", keywords: ["account", "profile", "dashboard", "settings"], sitemap: false, changefreq: "monthly", priority: 0.5 },
+  { route: "account/employee", path: "/account/employee", title: "Candidate Profile Dashboard — JOBSONN", description: "Manage your professional profile, work experience, education, skills & career preferences.", keywords: ["candidate profile", "account"], sitemap: false, changefreq: "monthly", priority: 0.5 },
+  { route: "account/sales-agent", path: "/account/sales-agent", title: "Sales Agent Profile — JOBSONN", description: "Manage your sales agent profile and credentials.", keywords: ["sales agent profile"], sitemap: false, changefreq: "monthly", priority: 0.4 },
+  { route: "account/influencer", path: "/account/influencer", title: "Influencer Profile — JOBSONN", description: "Manage your influencer and creator profile.", keywords: ["influencer profile"], sitemap: false, changefreq: "monthly", priority: 0.4 },
+  { route: "account/specialist", path: "/account/specialist", title: "Specialist Profile — JOBSONN", description: "Manage your consultant and domain specialist profile.", keywords: ["specialist profile"], sitemap: false, changefreq: "monthly", priority: 0.4 },
+  { route: "account/sell", path: "/account/sell", title: "Organization Profile — JOBSONN", description: "Manage your organization profile, legal tax info & verification.", keywords: ["organization profile"], sitemap: false, changefreq: "monthly", priority: 0.4 },
+  { route: "account/buy", path: "/account/buy", title: "Organization Profile — JOBSONN", description: "Manage your buyer organization profile.", keywords: ["organization profile"], sitemap: false, changefreq: "monthly", priority: 0.4 },
+  { route: "account/partnerships", path: "/account/partnerships", title: "Organization Profile — JOBSONN", description: "Manage your partnership organization profile.", keywords: ["organization profile"], sitemap: false, changefreq: "monthly", priority: 0.4 },
+  { route: "account/brands", path: "/account/brands", title: "Organization Profile — JOBSONN", description: "Manage your brand profile.", keywords: ["brand profile"], sitemap: false, changefreq: "monthly", priority: 0.4 },
   { route: "partner-login", path: "/auth", title: "Sign In — JOBSONN Enterprise Portal", description: "Sign in to your JOBSONN portal. 6 portals — Candidate, Employer, Recruiter, Training, Partner & Admin. DPDP-compliant & secure.", keywords: ["sign in", "login", "enterprise portal", "candidate login", "employer login"], changefreq: "monthly", priority: 0.6 },
   { route: "register/candidate", path: "/register/candidate", title: "Register as Candidate — Find Jobs & Grow Your Career | JOBSONN", description: "Create your candidate account. Access 50,000+ jobs, AI-powered matching, training programs & career resources. Free to register.", keywords: ["candidate registration", "create account", "job seeker", "sign up candidate", "register for jobs"], changefreq: "monthly", priority: 0.6 },
   { route: "register/employer", path: "/register/employer", title: "Register as Employer — Hire Talent & Manage L&D | JOBSONN", description: "Create your employer account. Post jobs, manage pipeline, access 2M+ candidates, AI-assisted hiring. Enterprise-grade.", keywords: ["employer registration", "create employer account", "hire talent", "post jobs", "ATS registration"], changefreq: "monthly", priority: 0.6 },
@@ -319,7 +328,9 @@ export const PUBLIC_ROUTES: RouteDef[] = [
 /** Convert internal route → URL path */
 export function routeToPath(route: string): string {
   const match = PUBLIC_ROUTES.find(r => r.route === route);
-  return match?.path ?? "/";
+  if (match) return match.path;
+  if (route === "account" || route.startsWith("account/")) return `/${route}`;
+  return "/";
 }
 
 /** Convert URL path → internal route */
@@ -327,7 +338,11 @@ export function pathToRoute(path: string): string {
   // Normalize: remove trailing slash, ensure leading slash
   const normalized = path === "/" ? "/" : path.replace(/\/$/, "");
   const match = PUBLIC_ROUTES.find(r => r.path === normalized);
-  return match?.route ?? "home";
+  if (match) return match.route;
+  if (normalized === "/account" || normalized.startsWith("/account/")) {
+    return normalized.slice(1);
+  }
+  return "home";
 }
 
 /** Get route definition by internal route key */

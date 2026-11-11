@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Image from "next/image";
-import { useNav, useAuth } from "@/lib/store";
+import { useNav, useAuth, authenticateUserCredentials } from "@/lib/store";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -39,18 +39,29 @@ export const AUTH_ROLES: RoleDef[] = [
 
 export function PublicAuth() {
   const { navigate, setRole } = useNav();
-  const { login } = useAuth();
+  const { setUser } = useAuth();
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [showPwd, setShowPwd] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
+  const [registeredEmailNotice, setRegisteredEmailNotice] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      try {
+        const noticeEmail = sessionStorage.getItem("jobsonn_registered_notice");
+        if (noticeEmail) {
+          setRegisteredEmailNotice(noticeEmail);
+        }
+      } catch {}
+    }
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const normalizedEmail = email.trim().toLowerCase();
-    if (!normalizedEmail) {
+    if (!email.trim()) {
       setError("Please enter your email.");
       return;
     }
@@ -59,23 +70,18 @@ export function PublicAuth() {
       return;
     }
 
-    const ALLOWED_EMAILS = ["jobson.id@gmail.com", "jobson.id"];
-    const ALLOWED_PASSWORD = "businessos2026";
-
-    // Strictly check email
-    if (!ALLOWED_EMAILS.includes(normalizedEmail)) {
-      setError("Invalid email address. Access is restricted to authorized accounts.");
-      toast.error("Invalid credentials", {
-        description: "Only authorized accounts can sign in.",
-      });
-      return;
+    let redirectPortal: string | null = null;
+    if (typeof window !== "undefined") {
+      try {
+        redirectPortal = sessionStorage.getItem("jobsonn_redirect_portal");
+      } catch {}
     }
 
-    // Strictly check password
-    if (password !== ALLOWED_PASSWORD) {
-      setError("Invalid password for jobson.id@gmail.com. Please try again.");
-      toast.error("Invalid credentials", {
-        description: "The password entered is incorrect.",
+    const authResult = authenticateUserCredentials(email, password, redirectPortal);
+    if (!authResult.ok) {
+      setError(authResult.error);
+      toast.error(authResult.toastTitle, {
+        description: authResult.toastDescription,
       });
       return;
     }
@@ -83,43 +89,21 @@ export function PublicAuth() {
     setError(null);
     setLoading(true);
 
-    const emailName = "jobson.id";
-    const fullEmail = "jobson.id@gmail.com";
-    const initials = "JO";
-
     setTimeout(() => {
-      let redirectPortal: string | null = null;
       if (typeof window !== "undefined") {
         try {
-          redirectPortal = sessionStorage.getItem("jobsonn_redirect_portal");
           sessionStorage.removeItem("jobsonn_redirect_portal");
+          sessionStorage.removeItem("jobsonn_registered_notice");
         } catch {}
       }
 
-      const roleForPortal: UserRole =
-        redirectPortal === "partner" || redirectPortal === "employer" ? "employer"
-        : redirectPortal === "recruiter" ? "recruiter"
-        : redirectPortal === "admin" ? "platform_admin"
-        : redirectPortal === "training" ? "training"
-        : "candidate";
+      setRole(authResult.user.role);
+      setUser(authResult.user);
 
-      setRole(roleForPortal);
-      login(roleForPortal);
-      useAuth.setState({
-        user: {
-          id: `u_${Date.now()}`,
-          name: emailName,
-          email: fullEmail,
-          role: roleForPortal,
-          avatar: initials,
-        },
-        isAuthenticated: true,
-      });
+      toast.success(`Welcome back, ${authResult.user.name}!`);
 
-      toast.success(`Welcome back, ${emailName}!`);
-
-      if (redirectPortal && redirectPortal !== "public") {
-        navigate(redirectPortal as any, "overview");
+      if (authResult.portal && authResult.portal !== "public") {
+        navigate(authResult.portal, "overview");
       } else {
         navigate("public", "home");
       }
@@ -131,9 +115,14 @@ export function PublicAuth() {
     <div className="min-h-screen bg-grid">
       <div className="mx-auto flex min-h-screen max-w-6xl flex-col px-4 py-6 sm:px-6 lg:px-8">
         <header className="flex items-center justify-between">
-          <div className="flex items-center" aria-label="JOBSONN home">
+          <button
+            type="button"
+            onClick={() => navigate("public", "home")}
+            className="flex items-center cursor-pointer transition-opacity hover:opacity-80"
+            aria-label="JOBSONN home"
+          >
             <Image src="/jobsonn-logo.png" alt="JOBSONN" width={120} height={32} className="h-7 w-auto object-contain sm:h-8" priority />
-          </div>
+          </button>
         </header>
 
         <div className="grid flex-1 items-center gap-8 py-6 lg:grid-cols-2 lg:gap-12">
@@ -177,6 +166,14 @@ export function PublicAuth() {
 
                 {/* Login form */}
                 <form onSubmit={handleSubmit} className="space-y-3">
+                  {registeredEmailNotice && !error && (
+                    <div className="flex items-center gap-2 rounded-lg border border-emerald-500/30 bg-emerald-500/10 p-2.5 text-xs text-emerald-700 dark:text-emerald-300">
+                      <CheckCircle2 className="h-4 w-4 shrink-0" />
+                      <span>
+                        Account created for <strong>{registeredEmailNotice}</strong>. Enter your email and password to sign in.
+                      </span>
+                    </div>
+                  )}
                   {error && (
                     <div className="flex items-center gap-2 rounded-lg border border-destructive/20 bg-destructive/10 p-2.5 text-xs text-destructive">
                       <AlertCircle className="h-4 w-4 shrink-0" />

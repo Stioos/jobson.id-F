@@ -22,7 +22,6 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
-import { UserProfileModal } from "./UserProfileModal";
 import { LoginDrawer } from "./LoginDrawer";
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import {
@@ -1737,7 +1736,6 @@ export function PublicNavbar() {
   const { user, isAuthenticated, logout } = useAuth();
   const [mounted, setMounted] = React.useState(false);
   const [scrolled, setScrolled] = React.useState(false);
-  const [profileOpen, setProfileOpen] = React.useState(false);
 
   React.useEffect(() => {
     setMounted(true);
@@ -1811,7 +1809,7 @@ export function PublicNavbar() {
                   <p className="truncate text-[11px] text-muted-foreground">{user?.email}</p>
                 </div>
                 <DropdownMenuItem
-                  onClick={() => setProfileOpen(true)}
+                  onClick={() => go("account")}
                   className="cursor-pointer text-xs"
                 >
                   <Users className="mr-2 h-3.5 w-3.5 text-muted-foreground" />
@@ -1850,9 +1848,6 @@ export function PublicNavbar() {
           )}
         </div>
       </div>
-
-      {/* In-place Comprehensive Profile Modal */}
-      <UserProfileModal open={profileOpen} onOpenChange={setProfileOpen} />
 
       {/* Slide-over Login Drawer from Right Side */}
       <LoginDrawer />

@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { useNav, useAuth } from "@/lib/store";
+import { useNav, useAuth, authenticateUserCredentials } from "@/lib/store";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -32,8 +32,8 @@ const PORTAL_OPTIONS: PortalOption[] = [
 ];
 
 export function PublicPartnerLogin() {
-  const { navigate } = useNav();
-  const { login } = useAuth();
+  const { navigate, setRole } = useNav();
+  const { setUser } = useAuth();
   const [selected, setSelected] = React.useState<PortalOption>(PORTAL_OPTIONS[0]);
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -43,67 +43,42 @@ export function PublicPartnerLogin() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const normalizedEmail = email.trim().toLowerCase();
-    if (!normalizedEmail || !password) {
+    if (!email.trim() || !password) {
       toast.error("Please enter email and password");
       return;
     }
 
-    const ALLOWED_EMAILS = ["jobson.id@gmail.com", "jobson.id"];
-    const ALLOWED_PASSWORD = "businessos2026";
+    let redirectPortal: string | null = null;
+    if (typeof window !== "undefined") {
+      try {
+        redirectPortal = sessionStorage.getItem("jobsonn_redirect_portal");
+      } catch {}
+    }
 
-    // Strictly check email
-    if (!ALLOWED_EMAILS.includes(normalizedEmail)) {
-      toast.error("Invalid credentials", {
-        description: "Only authorized email accounts can sign in.",
+    const authResult = authenticateUserCredentials(email, password, redirectPortal);
+    if (!authResult.ok) {
+      toast.error(authResult.toastTitle, {
+        description: authResult.toastDescription,
       });
       return;
     }
-
-    // Strictly check password
-    if (password !== ALLOWED_PASSWORD) {
-      toast.error("Invalid credentials", {
-        description: "The password entered is incorrect. Please try again.",
-      });
-      return;
-    }
-
-    const emailName = "jobson.id";
-    const fullEmail = "jobson.id@gmail.com";
-    const initials = "JO";
 
     setLoading(true);
     setTimeout(() => {
-      let redirectPortal: string | null = null;
       if (typeof window !== "undefined") {
         try {
-          redirectPortal = sessionStorage.getItem("jobsonn_redirect_portal");
           sessionStorage.removeItem("jobsonn_redirect_portal");
+          sessionStorage.removeItem("jobsonn_registered_notice");
         } catch {}
       }
 
-      const roleForPortal: UserRole =
-        redirectPortal === "candidate" ? "candidate"
-        : redirectPortal === "recruiter" ? "recruiter"
-        : redirectPortal === "admin" ? "platform_admin"
-        : "employer";
+      setRole(authResult.user.role);
+      setUser(authResult.user);
 
-      login(roleForPortal);
-      useAuth.setState({
-        user: {
-          id: `u_${Date.now()}`,
-          name: emailName,
-          email: fullEmail,
-          role: roleForPortal,
-          avatar: initials,
-        },
-        isAuthenticated: true,
-      });
+      toast.success(`Welcome back, ${authResult.user.name}!`);
 
-      toast.success(`Welcome back, ${emailName}!`);
-
-      if (redirectPortal && redirectPortal !== "public") {
-        navigate(redirectPortal as any, "overview");
+      if (authResult.portal && authResult.portal !== "public") {
+        navigate(authResult.portal, "overview");
       } else {
         navigate("public", "home");
       }
@@ -231,7 +206,7 @@ export function PublicPartnerLogin() {
 
                 <div className="border-t pt-3 text-center text-xs text-muted-foreground">
                   New to JOBSONN?{" "}
-                  <button onClick={() => navigate("public", "home")} className="font-medium text-brand hover:underline">
+                  <button onClick={() => navigate("public", "register/partner")} className="font-medium text-brand hover:underline">
                     Create an account
                   </button>
                 </div>

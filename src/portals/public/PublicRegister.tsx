@@ -6,628 +6,867 @@ import { useNav, useAuth } from "@/lib/store";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Select, SelectTrigger, SelectValue, SelectContent, SelectItem,
-} from "@/components/ui/select";
 import { toast } from "sonner";
 import {
-  ArrowRight, ArrowLeft, ShieldCheck, Users, Building2,
-  GraduationCap, Briefcase, Handshake, CheckCircle2,
-  Lock, Crown, Mail, Phone, Globe, MapPin, Calendar,
-  FileText, Upload, Eye, EyeOff, Sparkles, TrendingUp,
-  Award, Zap, type LucideIcon,
+  ArrowRight,
+  ArrowLeft,
+  User,
+  Users,
+  Building2,
+  GraduationCap,
+  Briefcase,
+  Handshake,
+  Crown,
+  Mail,
+  Phone,
+  Lock,
+  Eye,
+  EyeOff,
+  Info,
+  AlertCircle,
+  Check,
+  ShieldCheck,
+  Pencil,
+  Clock,
+  type LucideIcon,
 } from "lucide-react";
 import type { Portal, UserRole } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
-// ============================================================
-// TYPES
-// ============================================================
-
-interface RegField {
-  name: string; label: string; type: "text" | "email" | "password" | "tel" | "select" | "date" | "textarea" | "file";
-  placeholder?: string; required?: boolean; options?: string[]; half?: boolean;
-  icon?: LucideIcon; hint?: string;
-}
-interface RegStep { title: string; subtitle: string; fields: RegField[]; }
-interface RoleRegConfig {
-  roleKey: string; portal: Portal; role: UserRole; label: string;
-  icon: LucideIcon; color: string; tagline: string;
-  steps: RegStep[];
+interface AccountTypeConfig {
+  roleKey: string;
+  portal: Portal;
+  role: UserRole;
+  label: string;
+  icon: LucideIcon;
+  color: string;
 }
 
-// ============================================================
-// REGISTRATION CONFIGS
-// ============================================================
+const ACCOUNT_TYPES: AccountTypeConfig[] = [
+  { roleKey: "candidate", portal: "candidate", role: "candidate", label: "Candidate", icon: Users, color: "#0EA5E9" },
+  { roleKey: "employer", portal: "employer", role: "employer", label: "Employer", icon: Building2, color: "#8B5CF6" },
+  { roleKey: "recruiter", portal: "recruiter", role: "recruiter", label: "Recruiter", icon: Briefcase, color: "#F59E0B" },
+  { roleKey: "training", portal: "training", role: "platform_admin", label: "Training", icon: GraduationCap, color: "#EF4444" },
+  { roleKey: "partner", portal: "partner", role: "employer", label: "Partner", icon: Handshake, color: "#10B981" },
+  { roleKey: "admin", portal: "admin", role: "platform_admin", label: "Admin", icon: Crown, color: "#D4A017" },
+];
 
-const REG_CONFIGS: Record<string, RoleRegConfig> = {
-  candidate: {
-    roleKey: "candidate", portal: "candidate", role: "candidate",
-    label: "Candidate", icon: Users, color: "#0EA5E9",
-    tagline: "Find jobs, learn & grow your career",
-    steps: [
-      {
-        title: "Personal Information", subtitle: "Step 1 of 4 — Let's start with the basics",
-        fields: [
-          { name: "firstName", label: "First Name", type: "text", placeholder: "Priya", required: true, half: true, icon: Users },
-          { name: "lastName", label: "Last Name", type: "text", placeholder: "Nair", required: true, half: true, icon: Users },
-          { name: "email", label: "Email Address", type: "email", placeholder: "priya@gmail.com", required: true, icon: Mail },
-          { name: "phone", label: "Mobile Number", type: "tel", placeholder: "+91 98765 43210", required: true, icon: Phone },
-          { name: "dob", label: "Date of Birth", type: "date", half: true, icon: Calendar },
-          { name: "gender", label: "Gender", type: "select", options: ["Male", "Female", "Non-binary", "Prefer not to say"], half: true },
-          { name: "country", label: "Country", type: "select", options: ["India", "United States", "United Kingdom", "Canada", "Australia", "Germany", "Singapore", "UAE", "Saudi Arabia", "Qatar", "Other"], required: true, icon: Globe },
-          { name: "city", label: "City", type: "text", placeholder: "Bengaluru", required: true, half: true, icon: MapPin },
-          { name: "timezone", label: "Timezone", type: "select", options: ["Asia/Kolkata (IST)", "America/New_York (EST)", "America/Los_Angeles (PST)", "Europe/London (GMT)", "Asia/Dubai (GST)", "Asia/Singapore (SGT)", "Other"], half: true, icon: Globe },
-          { name: "password", label: "Create Password", type: "password", placeholder: "Min 8 characters", required: true, icon: Lock, hint: "Use 8+ characters with letters, numbers & symbols" },
-        ],
-      },
-      {
-        title: "Professional Profile", subtitle: "Step 2 of 4 — Tell us about your experience",
-        fields: [
-          { name: "experience", label: "Years of Experience", type: "select", options: ["Fresher (0 years)", "1-2 years", "3-5 years", "6-10 years", "10+ years"], required: true, half: true, icon: Briefcase },
-          { name: "currentRole", label: "Current / Last Job Title", type: "text", placeholder: "Software Engineer", half: true, icon: Briefcase },
-          { name: "currentCompany", label: "Current / Last Company", type: "text", placeholder: "TechCorp India", half: true, icon: Building2 },
-          { name: "industry", label: "Industry", type: "select", options: ["IT/SaaS", "Fintech", "Healthcare", "E-commerce", "Manufacturing", "Education", "Consulting", "Other"], half: true },
-          { name: "skills", label: "Top Skills", type: "text", placeholder: "React, Node.js, Python, AWS...", required: true, icon: Zap, hint: "Comma-separated. Add at least 3 skills for better matching." },
-          { name: "education", label: "Highest Qualification", type: "select", options: ["High School", "Diploma", "Bachelor's Degree", "Master's Degree", "PhD", "Other"], required: true, half: true },
-          { name: "college", label: "College / University", type: "text", placeholder: "IIT Bombay", half: true },
-          { name: "resume", label: "Upload Resume (PDF/DOC)", type: "file", placeholder: "Click to upload resume", icon: Upload, hint: "PDF, DOC, DOCX — max 5MB" },
-        ],
-      },
-      {
-        title: "Job Preferences", subtitle: "Step 3 of 4 — What are you looking for?",
-        fields: [
-          { name: "preferredRole", label: "Preferred Job Title", type: "text", placeholder: "Senior Frontend Engineer", required: true, half: true, icon: Briefcase },
-          { name: "preferredLocation", label: "Preferred Work Location", type: "text", placeholder: "Bengaluru, Remote, USA...", required: true, half: true, icon: MapPin },
-          { name: "workType", label: "Work Arrangement", type: "select", options: ["Remote only", "Hybrid", "On-site", "Open to all"], required: true, half: true },
-          { name: "employmentType", label: "Employment Type", type: "select", options: ["Full-time", "Part-time", "Contract", "Internship", "Any"], required: true, half: true },
-          { name: "expectedSalary", label: "Expected Salary (LPA)", type: "select", options: ["3-5 LPA", "5-8 LPA", "8-12 LPA", "12-18 LPA", "18-25 LPA", "25+ LPA", "Open"], half: true },
-          { name: "noticePeriod", label: "Notice Period", type: "select", options: ["Immediate", "15 days", "30 days", "60 days", "90 days", "Currently serving"], half: true },
-          { name: "relocate", label: "Willing to Relocate?", type: "select", options: ["Yes", "No", "Depends on offer"], half: true },
-          { name: "jobAlerts", label: "Job Alert Frequency", type: "select", options: ["Daily", "Weekly", "Monthly", "No alerts"], half: true },
-        ],
-      },
-      {
-        title: "Review & Confirm", subtitle: "Step 4 of 4 — Almost done!",
-        fields: [
-          { name: "linkedin", label: "LinkedIn Profile (optional)", type: "text", placeholder: "https://linkedin.com/in/priyanair", half: true, icon: Globe },
-          { name: "portfolio", label: "Portfolio Website (optional)", type: "text", placeholder: "https://priya.dev", half: true, icon: Globe },
-          { name: "source", label: "How did you hear about us?", type: "select", options: ["Google Search", "LinkedIn", "Friend/Referral", "Social Media", "Event/Webinar", "Blog Article", "Other"], half: true },
-          { name: "referralCode", label: "Referral Code (optional)", type: "text", placeholder: "JOBSONN-REF", half: true },
-        ],
-      },
-    ],
-  },
-  employer: {
-    roleKey: "employer", portal: "employer", role: "employer",
-    label: "Employer", icon: Building2, color: "#8B5CF6",
-    tagline: "Hire talent, manage L&D, enterprise",
-    steps: [
-      {
-        title: "Company Information", subtitle: "Step 1 of 4 — Tell us about your organization",
-        fields: [
-          { name: "companyName", label: "Company Name", type: "text", placeholder: "TechCorp India Pvt Ltd", required: true, icon: Building2 },
-          { name: "website", label: "Company Website", type: "text", placeholder: "https://techcorp.com", required: true, half: true, icon: Globe },
-          { name: "industry", label: "Industry", type: "select", options: ["IT/SaaS", "Fintech", "Healthcare", "E-commerce", "Manufacturing", "Education", "Consulting", "Real Estate", "Logistics", "Other"], required: true, half: true },
-          { name: "companySize", label: "Company Size", type: "select", options: ["1-10 employees", "11-50 employees", "51-200 employees", "201-500 employees", "501-1000 employees", "1000+ employees"], required: true, half: true },
-          { name: "founded", label: "Year Founded", type: "text", placeholder: "2018", half: true },
-          { name: "fundingStage", label: "Funding Stage", type: "select", options: ["Bootstrapped", "Seed", "Series A", "Series B", "Series C+", "Public", "Not applicable"], half: true },
-          { name: "country", label: "Country", type: "select", options: ["India", "United States", "United Kingdom", "Canada", "Australia", "Germany", "Singapore", "UAE", "Other"], required: true, icon: Globe },
-          { name: "hqLocation", label: "HQ City", type: "text", placeholder: "Bengaluru", required: true, half: true, icon: MapPin },
-          { name: "companyDescription", label: "Company Description (optional)", type: "textarea", placeholder: "Brief description of your company, culture & mission..." },
-        ],
-      },
-      {
-        title: "Account Administrator", subtitle: "Step 2 of 4 — Who will manage this account?",
-        fields: [
-          { name: "firstName", label: "Your Full Name", type: "text", placeholder: "Rohan Mehta", required: true, half: true, icon: Users },
-          { name: "jobTitle", label: "Your Job Title", type: "text", placeholder: "Head of Talent Acquisition", required: true, half: true, icon: Briefcase },
-          { name: "email", label: "Work Email", type: "email", placeholder: "rohan@techcorp.com", required: true, icon: Mail },
-          { name: "phone", label: "Phone Number", type: "tel", placeholder: "+91 98765 43210", required: true, half: true, icon: Phone },
-          { name: "department", label: "Department", type: "select", options: ["HR / Talent Acquisition", "Engineering", "Operations", "Finance", "Leadership / C-Suite", "People & Culture", "Other"], required: true, half: true },
-          { name: "decisionMaker", label: "Are you the hiring decision maker?", type: "select", options: ["Yes, I make hiring decisions", "No, I manage the process", "I influence decisions"], half: true },
-          { name: "password", label: "Create Password", type: "password", placeholder: "Min 8 characters", required: true, icon: Lock },
-        ],
-      },
-      {
-        title: "Hiring Requirements", subtitle: "Step 3 of 4 — What roles are you hiring for?",
-        fields: [
-          { name: "monthlyHires", label: "Expected Monthly Hires", type: "select", options: ["1-5 hires/month", "6-10 hires/month", "11-25 hires/month", "26-50 hires/month", "50+ hires/month"], required: true, half: true, icon: Users },
-          { name: "hiringUrgency", label: "Hiring Urgency", type: "select", options: ["Immediate (this month)", "Within 1-2 months", "Within 3-6 months", "Exploratory"], required: true, half: true },
-          { name: "primaryRoles", label: "Primary Roles You're Hiring", type: "text", placeholder: "Software Engineer, Product Manager...", required: true, icon: Briefcase },
-          { name: "salaryRange", label: "Typical Salary Range (LPA)", type: "select", options: ["3-6 LPA", "6-10 LPA", "10-15 LPA", "15-25 LPA", "25-40 LPA", "40+ LPA", "Varies by role"], half: true },
-          { name: "annualBudget", label: "Annual Hiring Budget", type: "select", options: ["Under ₹5L", "₹5-10L", "₹10-25L", "₹25-50L", "₹50L+", "Not sure yet"], half: true },
-          { name: "workArrangement", label: "Work Arrangement Offered", type: "select", options: ["Remote", "Hybrid", "On-site", "Mixed (varies by role)"], half: true },
-          { name: "hiringChallenges", label: "Biggest Hiring Challenge", type: "select", options: ["Finding quality candidates", "Slow time-to-hire", "High offer drop-off", "Budget constraints", "Niche skill shortage", "Volume hiring"], half: true },
-        ],
-      },
-      {
-        title: "Review & Confirm", subtitle: "Step 4 of 4 — Final step!",
-        fields: [
-          { name: "gstNumber", label: "GST Number (for invoicing)", type: "text", placeholder: "29ABCDE1234F1Z5", half: true, icon: FileText },
-          { name: "source", label: "How did you hear about us?", type: "select", options: ["Google Search", "LinkedIn", "Referral", "Event", "Sales Outreach", "Other"], half: true },
-        ],
-      },
-    ],
-  },
-  recruiter: {
-    roleKey: "recruiter", portal: "recruiter", role: "recruiter",
-    label: "Recruiter / Agency", icon: Briefcase, color: "#F59E0B",
-    tagline: "Source, submit & place talent",
-    steps: [
-      {
-        title: "Agency Information", subtitle: "Step 1 of 3 — Tell us about your agency",
-        fields: [
-          { name: "agencyName", label: "Agency / Company Name", type: "text", placeholder: "TalentBridge Consulting", required: true, icon: Building2 },
-          { name: "website", label: "Website", type: "text", placeholder: "https://talentbridge.in", half: true, icon: Globe },
-          { name: "agencyType", label: "Agency Type", type: "select", options: ["Independent Recruiter", "Staffing Agency", "RPO Provider", "Executive Search Firm", "Freelance Recruiter", "Campus Recruiter"], required: true, half: true },
-          { name: "specialization", label: "Primary Specialization", type: "select", options: ["IT / Software", "Finance & Banking", "Healthcare", "Manufacturing", "Sales & Marketing", "Generalist (all verticals)", "Other"], required: true, half: true },
-          { name: "teamSize", label: "Recruitment Team Size", type: "select", options: ["Solo (just me)", "2-5 recruiters", "6-10 recruiters", "11-25 recruiters", "25+ recruiters"], required: true, half: true },
-          { name: "yearsActive", label: "Years in Operation", type: "select", options: ["Less than 1 year", "1-3 years", "3-5 years", "5-10 years", "10+ years"], half: true },
-          { name: "country", label: "Country", type: "select", options: ["India", "United States", "United Kingdom", "UAE", "Singapore", "Other"], required: true, icon: Globe },
-          { name: "location", label: "Office City", type: "text", placeholder: "Hyderabad", required: true, half: true, icon: MapPin },
-          { name: "gstNumber", label: "GST Number", type: "text", placeholder: "29ABCDE1234F1Z5", required: true, icon: FileText },
-        ],
-      },
-      {
-        title: "Primary Contact", subtitle: "Step 2 of 3 — Who is the main point of contact?",
-        fields: [
-          { name: "firstName", label: "Your Name", type: "text", placeholder: "Sneha Reddy", required: true, half: true, icon: Users },
-          { name: "designation", label: "Your Designation", type: "text", placeholder: "Senior Recruiter / Founder", required: true, half: true, icon: Briefcase },
-          { name: "email", label: "Work Email", type: "email", placeholder: "sneha@talentbridge.in", required: true, icon: Mail },
-          { name: "phone", label: "Phone Number", type: "tel", placeholder: "+91 98765 43210", required: true, half: true, icon: Phone },
-          { name: "panNumber", label: "PAN Number", type: "text", placeholder: "ABCDE1234F", half: true, icon: FileText },
-          { name: "password", label: "Create Password", type: "password", placeholder: "Min 8 characters", required: true, icon: Lock },
-        ],
-      },
-      {
-        title: "Capabilities & Terms", subtitle: "Step 3 of 3 — What can your agency deliver?",
-        fields: [
-          { name: "monthlySubmissions", label: "Monthly Candidate Submissions", type: "select", options: ["1-10", "11-25", "26-50", "51-100", "100+"], required: true, half: true },
-          { name: "monthlyPlacements", label: "Average Monthly Placements", type: "select", options: ["1-3", "4-10", "11-25", "26-50", "50+"], half: true },
-          { name: "verticals", label: "Verticals You Serve", type: "text", placeholder: "IT, Finance, Healthcare, Sales...", required: true, icon: Briefcase },
-          { name: "commissionModel", label: "Preferred Commission Model", type: "select", options: ["8.33% CTC (1 month)", "10% CTC", "15% CTC", "Fixed per hire", "Retained + Success Fee", "Flexible"], required: true, half: true },
-          { name: "replacementPeriod", label: "Replacement Guarantee Period", type: "select", options: ["30 days", "60 days", "90 days", "No replacement guarantee"], half: true },
-          { name: "atsUsed", label: "ATS / Tools You Use", type: "text", placeholder: "Naukri, LinkedIn Recruiter, Zoho...", half: true },
-        ],
-      },
-    ],
-  },
-  training: {
-    roleKey: "training", portal: "training", role: "platform_admin",
-    label: "Training Organization", icon: GraduationCap, color: "#EF4444",
-    tagline: "Deliver JOBSONN-certified training programs",
-    steps: [
-      {
-        title: "Organization Information", subtitle: "Step 1 of 2 — Tell us about your organization",
-        fields: [
-          { name: "orgName", label: "Organization Name", type: "text", placeholder: "SkillForge Academy", required: true, icon: Building2 },
-          { name: "website", label: "Website", type: "text", placeholder: "https://skillforge.academy", half: true, icon: Globe },
-          { name: "orgType", label: "Organization Type", type: "select", options: ["Training Academy", "Corporate L&D Department", "University / College", "EdTech Company", "Independent Trainer", "NGO / Non-profit"], required: true, half: true },
-          { name: "programs", label: "Programs Currently Offered", type: "text", placeholder: "Fullstack, Data Science, Cloud, AI/ML...", required: true, icon: GraduationCap },
-          { name: "country", label: "Country", type: "select", options: ["India", "United States", "United Kingdom", "Other"], required: true, half: true, icon: Globe },
-          { name: "location", label: "City", type: "text", placeholder: "Pune", required: true, half: true, icon: MapPin },
-          { name: "studentsPerYear", label: "Students Trained Per Year", type: "select", options: ["1-50", "51-200", "201-500", "501-1000", "1000+"], required: true, half: true },
-          { name: "infrastructure", label: "Infrastructure Available", type: "select", options: ["Classrooms only", "Classrooms + Computer Lab", "Online only", "Hybrid (Online + Physical)"], half: true },
-        ],
-      },
-      {
-        title: "Account Setup", subtitle: "Step 2 of 2 — Create your admin account",
-        fields: [
-          { name: "firstName", label: "Your Name", type: "text", placeholder: "Divya Sharma", required: true, half: true, icon: Users },
-          { name: "role", label: "Your Role", type: "text", placeholder: "Director / Head of Training", required: true, half: true, icon: Briefcase },
-          { name: "email", label: "Work Email", type: "email", placeholder: "divya@skillforge.academy", required: true, icon: Mail },
-          { name: "phone", label: "Phone Number", type: "tel", placeholder: "+91 98765 43210", required: true, half: true, icon: Phone },
-          { name: "gstNumber", label: "GST Number", type: "text", placeholder: "27ABCDE1234F1Z5", half: true, icon: FileText },
-          { name: "password", label: "Create Password", type: "password", placeholder: "Min 8 characters", required: true, icon: Lock },
-        ],
-      },
-    ],
-  },
-  partner: {
-    roleKey: "partner", portal: "partner", role: "employer",
-    label: "Franchise Partner", icon: Handshake, color: "#10B981",
-    tagline: "Build your business with JOBSONN",
-    steps: [
-      {
-        title: "Partner Information", subtitle: "Step 1 of 2 — Tell us about your partnership interest",
-        fields: [
-          { name: "partnerName", label: "Partner / Organization Name", type: "text", placeholder: "Chennai Tech Academy", required: true, icon: Building2 },
-          { name: "partnerType", label: "Partner Type", type: "select", options: ["Recruitment Partner", "Physical Centre Partner", "University Partner", "Training Partner"], required: true, icon: Handshake },
-          { name: "country", label: "Country", type: "select", options: ["India", "United States", "UAE", "Saudi Arabia", "Singapore", "Other"], required: true, half: true, icon: Globe },
-          { name: "location", label: "City", type: "text", placeholder: "Chennai", required: true, half: true, icon: MapPin },
-          { name: "investmentCapacity", label: "Investment Capacity", type: "select", options: ["₹1-3 Lakhs", "₹3-5 Lakhs", "₹5-10 Lakhs", "₹10-15 Lakhs", "₹15 Lakhs+"], required: true, half: true },
-          { name: "timeline", label: "Expected Start Timeline", type: "select", options: ["Within 30 days", "1-2 months", "3-6 months", "Exploring options"], half: true },
-          { name: "existingBusiness", label: "Existing Business?", type: "select", options: ["Yes, running a training centre", "Yes, in different business", "No, starting fresh"], half: true },
-          { name: "website", label: "Website (if any)", type: "text", placeholder: "https://youracademy.in", half: true, icon: Globe },
-        ],
-      },
-      {
-        title: "Contact Details", subtitle: "Step 2 of 2 — How can we reach you?",
-        fields: [
-          { name: "firstName", label: "Your Name", type: "text", placeholder: "Rajesh Kumar", required: true, half: true, icon: Users },
-          { name: "designation", label: "Your Designation", type: "text", placeholder: "Director / Proprietor", required: true, half: true, icon: Briefcase },
-          { name: "email", label: "Email Address", type: "email", placeholder: "rajesh@youracademy.in", required: true, icon: Mail },
-          { name: "phone", label: "Phone Number", type: "tel", placeholder: "+91 98765 43210", required: true, half: true, icon: Phone },
-          { name: "gstNumber", label: "GST Number", type: "text", placeholder: "33ABCDE1234F1Z5", half: true, icon: FileText },
-          { name: "password", label: "Create Password", type: "password", placeholder: "Min 8 characters", required: true, icon: Lock },
-        ],
-      },
-    ],
-  },
-  admin: {
-    roleKey: "admin", portal: "admin", role: "platform_admin",
-    label: "Platform Admin", icon: Crown, color: "#D4A017",
-    tagline: "Platform administration & super admin",
-    steps: [
-      {
-        title: "Admin Account Setup", subtitle: "Step 1 of 1 — Internal use only — requires authorization",
-        fields: [
-          { name: "firstName", label: "Full Name", type: "text", placeholder: "Admin User", required: true, half: true, icon: Users },
-          { name: "employeeId", label: "Employee ID", type: "text", placeholder: "JOBSONN-001", required: true, half: true, icon: FileText },
-          { name: "email", label: "Official Email", type: "email", placeholder: "admin@jobsonn.com", required: true, icon: Mail },
-          { name: "phone", label: "Phone Number", type: "tel", placeholder: "+91 98765 43210", required: true, half: true, icon: Phone },
-          { name: "department", label: "Department", type: "select", options: ["Operations", "Engineering", "Sales", "Support", "Finance", "Leadership", "HR"], required: true, half: true },
-          { name: "accessLevel", label: "Access Level Requested", type: "select", options: ["Super Admin", "Operations Admin", "Support Admin", "Finance Admin", "Read-Only Auditor"], required: true, icon: Lock },
-          { name: "managerEmail", label: "Reporting Manager's Email", type: "email", placeholder: "manager@jobsonn.com", required: true, half: true, icon: Mail },
-          { name: "password", label: "Create Password", type: "password", placeholder: "Min 12 characters", required: true, icon: Lock, hint: "Admin passwords must be 12+ characters with special characters" },
-        ],
-      },
-    ],
-  },
-};
+const getAccountType = (key?: string): AccountTypeConfig =>
+  ACCOUNT_TYPES.find((item) => item.roleKey === key) ?? ACCOUNT_TYPES[0];
 
-// ============================================================
-// REGISTRATION PAGE COMPONENT — Dark theme, centered card, reference design
-// ============================================================
+const pillInputClass =
+  "h-11 rounded-full border-slate-200 dark:border-border bg-white dark:bg-background/80 text-sm text-foreground placeholder:text-slate-400 focus-visible:border-[#0ea5e9] focus-visible:ring-3 focus-visible:ring-[#0ea5e9]/15 transition-all";
 
-export function PublicRegister({ roleKey }: { roleKey: string }) {
-  const { navigate, setLoginDrawerOpen } = useNav();
-  const { login } = useAuth();
-  const config = REG_CONFIGS[roleKey];
-  const [step, setStep] = React.useState(0);
-  const [data, setData] = React.useState<Record<string, string>>({});
-  const [loading, setLoading] = React.useState(false);
-  const [showPwd, setShowPwd] = React.useState(false);
-  const [agreed, setAgreed] = React.useState(false);
+interface OtpVerificationCardProps {
+  title: string;
+  targetValue: string;
+  icon: LucideIcon;
+  digits: string[];
+  onChangeDigits: (next: string[]) => void;
+  verified: boolean;
+  changeLabel: string;
+  onChangeTarget: () => void;
+  verifiedMessage: string;
+  resendSeconds: number;
+  onResend: () => void;
+}
 
-  const handleOpenLoginDrawer = () => {
-    navigate("public", "home");
-    setLoginDrawerOpen(true);
-  };
+/**
+ * Shared 6-digit OTP verification card for email & phone verification.
+ */
+function OtpVerificationCard({
+  title,
+  targetValue,
+  icon: CardIcon,
+  digits,
+  onChangeDigits,
+  verified,
+  changeLabel,
+  onChangeTarget,
+  verifiedMessage,
+  resendSeconds,
+  onResend,
+}: OtpVerificationCardProps) {
+  const inputRefs = React.useRef<Array<HTMLInputElement | null>>([]);
 
-  if (!config) {
-    return (
-      <div className="flex min-h-screen items-center justify-center bg-grid">
-        <div className="rounded-2xl border border-border/80 bg-card p-8 text-center shadow-xl">
-          <p className="text-sm text-muted-foreground">Registration type not found.</p>
-          <Button className="mt-4" onClick={handleOpenLoginDrawer}>Back to Sign In</Button>
-        </div>
-      </div>
-    );
-  }
-
-  const currentStep = config.steps[step];
-  const progress = ((step + 1) / config.steps.length) * 100;
-  const RoleIcon = config.icon;
-  const isLastStep = step === config.steps.length - 1;
-
-  const setField = (name: string, value: string) => setData(prev => ({ ...prev, [name]: value }));
-
-  const handleNext = () => {
-    const missing = currentStep.fields.filter(f => f.required && !data[f.name]?.trim());
-    if (missing.length > 0) {
-      toast.error("Please fill all required fields", {
-        description: `${missing.length} field(s) need attention: ${missing.map(f => f.label).join(", ")}`,
-      });
+  const handleDigitChange = (index: number, raw: string) => {
+    const cleaned = raw.replace(/\D/g, "");
+    if (!cleaned) {
+      const next = [...digits];
+      next[index] = "";
+      onChangeDigits(next);
       return;
     }
-    if (step < config.steps.length - 1) {
-      setStep(step + 1);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    } else {
-      if (!agreed) {
-        toast.error("Please accept the Terms to continue");
-        return;
-      }
-      setLoading(true);
-      setTimeout(() => {
-        const userName = data.firstName
-          ? `${data.firstName} ${data.lastName || ""}`.trim()
-          : data.partnerName || data.companyName || config.label;
-        const email = data.email || `${userName.toLowerCase().replace(/[^a-z0-9]/g, ".")}@gmail.com`;
-        const initials = userName.slice(0, 2).toUpperCase();
 
-        login(config.role);
-        useAuth.setState({
-          user: {
-            id: `u_${Date.now()}`,
-            name: userName,
-            email: email,
-            role: config.role,
-            avatar: initials,
-          },
-          isAuthenticated: true,
-        });
+    const next = [...digits];
+    if (cleaned.length > 1) {
+      // Handle multi-digit paste/autofill across boxes
+      const chars = cleaned.slice(0, 6 - index).split("");
+      chars.forEach((ch, offset) => {
+        next[index + offset] = ch;
+      });
+      onChangeDigits(next);
+      const focusIdx = Math.min(index + chars.length, 5);
+      inputRefs.current[focusIdx]?.focus();
+      return;
+    }
 
-        toast.success("Account created successfully!", {
-          description: `Welcome to JOBSONN, ${userName}!`,
-        });
-        navigate("public", "home");
-        setLoading(false);
-      }, 1000);
+    next[index] = cleaned;
+    onChangeDigits(next);
+    if (index < 5) {
+      inputRefs.current[index + 1]?.focus();
     }
   };
 
-  const handleBack = () => { if (step > 0) setStep(step - 1); };
+  const handleKeyDown = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Backspace" && !digits[index] && index > 0) {
+      const next = [...digits];
+      next[index - 1] = "";
+      onChangeDigits(next);
+      inputRefs.current[index - 1]?.focus();
+    } else if (e.key === "ArrowLeft" && index > 0) {
+      inputRefs.current[index - 1]?.focus();
+    } else if (e.key === "ArrowRight" && index < 5) {
+      inputRefs.current[index + 1]?.focus();
+    }
+  };
+
+  const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
+    const pasted = e.clipboardData.getData("text").replace(/\D/g, "").slice(0, 6);
+    if (!pasted) return;
+    e.preventDefault();
+    const next = Array.from({ length: 6 }, (_, i) => pasted[i] ?? "");
+    onChangeDigits(next);
+    const focusIdx = Math.min(pasted.length, 5);
+    inputRefs.current[focusIdx]?.focus();
+  };
 
   return (
-    <div className="relative min-h-screen bg-grid flex flex-col justify-between overflow-x-hidden">
-      {/* Ambient background glows */}
-      <div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 h-[350px] w-[800px] rounded-full bg-brand/10 blur-[130px]" />
-      <div className="pointer-events-none absolute top-1/3 -right-40 h-[400px] w-[500px] rounded-full bg-emerald-500/10 blur-[140px]" />
-      <div className="pointer-events-none absolute -bottom-20 -left-20 h-[350px] w-[500px] rounded-full bg-blue-500/10 blur-[130px]" />
-
-      {/* Top Header */}
-      <header className="relative z-10 w-full border-b border-border/40 bg-background/80 backdrop-blur-md">
-        <div className="mx-auto flex h-16 max-w-5xl items-center justify-between px-4 sm:px-6">
+    <div
+      className={cn(
+        "rounded-2xl border p-5 transition-all shadow-xs",
+        verified
+          ? "border-emerald-300/90 bg-emerald-50/45 dark:border-emerald-700/60 dark:bg-emerald-950/20"
+          : "border-slate-200/90 bg-white dark:border-border dark:bg-card"
+      )}
+    >
+      {/* Top header row */}
+      <div className="flex items-start justify-between gap-2">
+        <div className="flex items-center gap-3 min-w-0">
           <div
-            className="flex items-center cursor-pointer transition-opacity hover:opacity-85"
-            aria-label="JOBSONN home"
-            onClick={() => navigate("public", "home")}
+            className={cn(
+              "flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-colors",
+              verified
+                ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/50 dark:text-emerald-300"
+                : "bg-sky-50 text-[#0891b2] dark:bg-sky-950/50 dark:text-cyan-400"
+            )}
           >
-            <Image src="/jobsonn-logo.png" alt="JOBSONN" width={120} height={32} className="h-7 w-auto object-contain sm:h-8" priority />
+            {verified ? <Check className="h-4 w-4 stroke-[2.5]" /> : <CardIcon className="h-4 w-4" />}
           </div>
-          <div className="flex items-center gap-3">
-            <span className="hidden text-xs text-muted-foreground sm:inline">Already have an account?</span>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handleOpenLoginDrawer}
-              className="h-8 gap-1.5 rounded-full border-border/80 px-3.5 text-xs font-semibold hover:border-brand/40 hover:bg-brand/5 hover:text-brand transition-all cursor-pointer"
+          <div className="min-w-0">
+            <h2 className="text-sm font-bold text-slate-900 dark:text-foreground">{title}</h2>
+            <p className="truncate text-xs text-slate-500 dark:text-muted-foreground">
+              Code sent to <strong className="font-semibold text-slate-800 dark:text-foreground">{targetValue}</strong>
+            </p>
+          </div>
+        </div>
+
+        {verified && (
+          <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-emerald-100 px-2.5 py-0.5 text-[10px] font-bold tracking-wide text-emerald-700 dark:bg-emerald-900/60 dark:text-emerald-300 uppercase">
+            <Check className="h-3 w-3 stroke-[2.5]" /> Verified
+          </span>
+        )}
+      </div>
+
+      {/* 6-Digit OTP Boxes */}
+      <div className="mt-4 grid grid-cols-6 gap-2">
+        {digits.map((digit, idx) => (
+          <input
+            key={idx}
+            ref={(el) => {
+              inputRefs.current[idx] = el;
+            }}
+            type="text"
+            inputMode="numeric"
+            maxLength={6}
+            value={digit}
+            onChange={(e) => handleDigitChange(idx, e.target.value)}
+            onKeyDown={(e) => handleKeyDown(idx, e)}
+            onPaste={handlePaste}
+            aria-label={`${title} digit ${idx + 1}`}
+            className={cn(
+              "h-12 w-full rounded-2xl border text-center text-base font-semibold transition-all focus:outline-none",
+              verified
+                ? "border-emerald-300 bg-emerald-50/90 text-emerald-800 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 dark:border-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-200"
+                : "border-slate-200 bg-white text-slate-900 focus:border-[#0ea5e9] focus:ring-2 focus:ring-[#0ea5e9]/20 dark:border-border dark:bg-background dark:text-foreground"
+            )}
+          />
+        ))}
+      </div>
+
+      {/* Bottom status / action row */}
+      <div className="mt-4 flex items-center justify-between gap-2 text-xs">
+        {verified ? (
+          <>
+            <span className="inline-flex items-center gap-1 font-semibold text-emerald-600 dark:text-emerald-400">
+              <Check className="h-3.5 w-3.5 stroke-[2.5]" /> {verifiedMessage}
+            </span>
+            <button
+              type="button"
+              onClick={onChangeTarget}
+              className="inline-flex items-center gap-1 text-slate-500 hover:text-foreground transition-colors cursor-pointer"
             >
-              Sign in
-              <ArrowRight className="h-3 w-3" />
-            </Button>
-          </div>
+              <Pencil className="h-3 w-3" /> {changeLabel}
+            </button>
+          </>
+        ) : (
+          <>
+            <button
+              type="button"
+              onClick={onChangeTarget}
+              className="inline-flex items-center gap-1 font-medium text-[#0891b2] dark:text-cyan-400 hover:underline cursor-pointer"
+            >
+              <Pencil className="h-3 w-3" /> {changeLabel}
+            </button>
+            {resendSeconds > 0 ? (
+              <span className="inline-flex items-center gap-1 text-slate-500 dark:text-muted-foreground">
+                <Clock className="h-3 w-3" /> Resend in {resendSeconds}s
+              </span>
+            ) : (
+              <button
+                type="button"
+                onClick={onResend}
+                className="inline-flex items-center gap-1 font-medium text-[#0891b2] dark:text-cyan-400 hover:underline cursor-pointer"
+              >
+                <Clock className="h-3 w-3" /> Resend code
+              </button>
+            )}
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export function PublicRegister({ roleKey = "candidate" }: { roleKey?: string }) {
+  const { navigate } = useNav();
+  const registerAccount = useAuth((s) => s.registerAccount);
+  const logout = useAuth((s) => s.logout);
+
+  const [selectedRoleKey, setSelectedRoleKey] = React.useState<string>(
+    getAccountType(roleKey).roleKey
+  );
+  const [step, setStep] = React.useState<"register" | "verify">("register");
+
+  const [firstName, setFirstName] = React.useState("");
+  const [lastName, setLastName] = React.useState("");
+  const [username, setUsername] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [phone, setPhone] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [confirmPassword, setConfirmPassword] = React.useState("");
+  const [agreed, setAgreed] = React.useState(false);
+
+  const [showPwd, setShowPwd] = React.useState(false);
+  const [showConfirmPwd, setShowConfirmPwd] = React.useState(false);
+  const [error, setError] = React.useState<string | null>(null);
+  const [loading, setLoading] = React.useState(false);
+
+  // Step 2: 6-digit OTP verification state
+  const [emailDigits, setEmailDigits] = React.useState<string[]>(Array(6).fill(""));
+  const [phoneDigits, setPhoneDigits] = React.useState<string[]>(Array(6).fill(""));
+  const [emailResendSec, setEmailResendSec] = React.useState(25);
+  const [phoneResendSec, setPhoneResendSec] = React.useState(25);
+
+  const emailInputRef = React.useRef<HTMLInputElement | null>(null);
+  const phoneInputRef = React.useRef<HTMLInputElement | null>(null);
+
+  React.useEffect(() => {
+    setSelectedRoleKey(getAccountType(roleKey).roleKey);
+  }, [roleKey]);
+
+  const emailVerified = emailDigits.every((d) => /^\d$/.test(d));
+  const phoneVerified = phoneDigits.every((d) => /^\d$/.test(d));
+  const bothVerified = emailVerified && phoneVerified;
+
+  // Countdown timer while on verify step
+  React.useEffect(() => {
+    if (step !== "verify") return;
+    const id = setInterval(() => {
+      setEmailResendSec((s) => (s > 0 ? s - 1 : 0));
+      setPhoneResendSec((s) => (s > 0 ? s - 1 : 0));
+    }, 1000);
+    return () => clearInterval(id);
+  }, [step]);
+
+  const activeAccountType = getAccountType(selectedRoleKey);
+  const ActiveRoleIcon = activeAccountType.icon;
+
+  const handleCreateAccount = (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+
+    if (!firstName.trim() || !lastName.trim()) {
+      setError("Please enter your first name and last name.");
+      return;
+    }
+
+    const cleanUsername = username.trim().replace(/^@/, "");
+    if (!/^[a-zA-Z0-9_]{3,30}$/.test(cleanUsername)) {
+      setError("Username must be 3-30 characters using letters, numbers & underscores only.");
+      return;
+    }
+
+    const cleanEmail = email.trim().toLowerCase();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
+    if (phone.replace(/\D/g, "").length < 7) {
+      setError("Please enter a valid phone number.");
+      return;
+    }
+
+    if (password.length < 8) {
+      setError("Password must be at least 8 characters long.");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match. Please confirm your password.");
+      return;
+    }
+
+    if (!agreed) {
+      setError("Please agree to the Terms & Conditions and Privacy Policy.");
+      return;
+    }
+
+    setEmailResendSec(25);
+    setPhoneResendSec(25);
+    setStep("verify");
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+    toast.info("Verification codes sent!", {
+      description: `Enter any 6-digit code for ${cleanEmail} and ${phone.trim()} to verify.`,
+    });
+  };
+
+  const handleEditTarget = (field: "email" | "phone") => {
+    setStep("register");
+    setTimeout(() => {
+      if (field === "email") {
+        setEmailDigits(Array(6).fill(""));
+        emailInputRef.current?.focus();
+      } else {
+        setPhoneDigits(Array(6).fill(""));
+        phoneInputRef.current?.focus();
+      }
+    }, 50);
+  };
+
+  const handleVerifyAndContinue = () => {
+    if (!bothVerified || loading) return;
+
+    setLoading(true);
+    setTimeout(() => {
+      const fullName = `${firstName.trim()} ${lastName.trim()}`.trim();
+      const cleanUsername = username.trim().replace(/^@/, "");
+      const cleanEmail = email.trim().toLowerCase();
+      const initials =
+        `${firstName.trim().charAt(0)}${lastName.trim().charAt(0)}`.toUpperCase() || "JO";
+
+      // Ensure user signs in explicitly with their registered credentials on the Sign In page
+      logout();
+      registerAccount({
+        name: fullName,
+        username: cleanUsername,
+        email: cleanEmail,
+        phone: phone.trim(),
+        password,
+        role: activeAccountType.role,
+        portal: activeAccountType.portal,
+        avatar: initials,
+      });
+
+      if (typeof window !== "undefined") {
+        try {
+          sessionStorage.removeItem("jobsonn_redirect_portal");
+          sessionStorage.setItem("jobsonn_registered_notice", cleanEmail);
+        } catch {}
+      }
+
+      toast.success("Account verified!", {
+        description: `Sign in with ${cleanEmail} and your password to open the Career Portal.`,
+      });
+      setLoading(false);
+      navigate("public", "auth");
+    }, 500);
+  };
+
+  return (
+    <div className="min-h-screen bg-[#f8fafc] dark:bg-background flex flex-col">
+      {/* Minimal Top Bar */}
+      <header className="w-full px-4 pt-5 sm:px-8">
+        <div className="mx-auto flex max-w-6xl items-center justify-between">
+          <button
+            type="button"
+            onClick={() => navigate("public", "home")}
+            className="flex items-center cursor-pointer transition-opacity hover:opacity-80"
+            aria-label="JOBSONN home"
+          >
+            <Image
+              src="/jobsonn-logo.png"
+              alt="JOBSONN"
+              width={120}
+              height={32}
+              className="h-7 w-auto object-contain"
+              priority
+            />
+          </button>
+          <button
+            type="button"
+            onClick={() => navigate("public", "auth")}
+            className="text-xs font-medium text-slate-500 hover:text-foreground transition-colors cursor-pointer"
+          >
+            Sign in
+          </button>
         </div>
       </header>
 
-      {/* Main Container */}
-      <main className="relative z-10 mx-auto flex w-full max-w-2xl flex-1 flex-col justify-center px-4 py-8 sm:px-6">
-        <div className="overflow-hidden rounded-2xl border border-border/80 bg-card/95 shadow-2xl backdrop-blur-xl transition-all">
-          {/* Card Header */}
-          <div className="border-b border-border/60 bg-muted/30 p-6 sm:p-7">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div className="flex items-center gap-3.5">
-                <div
-                  className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl shadow-inner ring-1 ring-white/10"
-                  style={{ background: `${config.color}20`, color: config.color }}
-                >
-                  <RoleIcon className="h-6 w-6" />
-                </div>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <h1 className="text-xl font-bold tracking-tight text-foreground sm:text-2xl">
-                      Create {config.label} Account
-                    </h1>
-                  </div>
-                  <p className="mt-0.5 text-xs text-muted-foreground">{currentStep.subtitle}</p>
-                </div>
+      {/* Main Content */}
+      <main className="flex flex-1 items-center justify-center px-4 py-8 sm:px-6">
+        {step === "register" ? (
+          /* Stage 1: Registration Card (Image 1) */
+          <div className="w-full max-w-[560px] rounded-[22px] border border-slate-200/80 dark:border-border bg-white dark:bg-card p-6 sm:p-8 shadow-[0_14px_45px_-12px_rgba(15,23,42,0.12)]">
+            {/* Card Header */}
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <h1 className="text-[22px] sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-foreground">
+                  Create your account
+                </h1>
+                <p className="mt-1 text-xs sm:text-[13px] text-slate-500 dark:text-muted-foreground">
+                  Fill in your information to join JOBSONN as a {activeAccountType.label}.
+                </p>
               </div>
-
-              {/* Step indicator pill */}
-              <div className="flex items-center gap-2 self-start sm:self-auto rounded-full bg-background border border-border/70 px-3 py-1 shadow-xs">
-                <span className="text-[11px] font-medium text-muted-foreground">Step</span>
-                <span className="flex h-5 w-5 items-center justify-center rounded-full text-[10px] font-bold text-white" style={{ background: config.color }}>
-                  {step + 1}
-                </span>
-                <span className="text-[11px] font-medium text-muted-foreground">of {config.steps.length}</span>
-              </div>
+              <span
+                className="inline-flex shrink-0 items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] font-semibold"
+                style={{
+                  borderColor: `${activeAccountType.color}35`,
+                  backgroundColor: `${activeAccountType.color}12`,
+                  color: activeAccountType.color,
+                }}
+              >
+                <ActiveRoleIcon className="h-3 w-3" />
+                {activeAccountType.label}
+              </span>
             </div>
 
-            {/* Step progress bar */}
-            <div className="mt-5">
-              <div className="flex items-center justify-between text-[11px] font-medium mb-1.5">
-                <span className="text-foreground">{currentStep.title}</span>
-                <span className="text-muted-foreground">{Math.round(progress)}% complete</span>
-              </div>
-              <div className="h-1.5 w-full overflow-hidden rounded-full bg-muted">
-                <div
-                  className="h-full rounded-full transition-all duration-400 ease-out"
-                  style={{
-                    width: `${progress}%`,
-                    background: `linear-gradient(90deg, ${config.color}, #10B981)`,
-                  }}
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Form Fields Grid */}
-          <div className="p-6 sm:p-7 space-y-5">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-3.5">
-              {currentStep.fields.map((field) => {
-                const isFullWidth = !field.half || field.type === "textarea";
-                return (
-                  <div
-                    key={field.name}
-                    className={cn(
-                      isFullWidth ? "col-span-1 sm:col-span-2" : "col-span-1",
-                      "space-y-1.5"
-                    )}
-                  >
-                    <Label className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
-                      {field.icon && <field.icon className="h-3.5 w-3.5 text-muted-foreground" />}
-                      <span>{field.label}</span>
-                      {field.required && <span className="text-rose-500 font-bold">*</span>}
-                    </Label>
-
-                    {field.type === "select" ? (
-                      <Select value={data[field.name] || ""} onValueChange={(v) => setField(field.name, v)}>
-                        <SelectTrigger className="h-10 w-full rounded-lg border-border/80 bg-background/80 text-sm hover:border-brand/50 focus:border-brand focus:ring-2 focus:ring-brand/20 transition-all">
-                          <SelectValue placeholder={field.placeholder || "Select an option..."} />
-                        </SelectTrigger>
-                        <SelectContent className="border-border bg-popover text-popover-foreground">
-                          {field.options?.map((opt) => (
-                            <SelectItem key={opt} value={opt} className="text-xs hover:bg-muted cursor-pointer">
-                              {opt}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    ) : field.type === "textarea" ? (
-                      <textarea
-                        value={data[field.name] || ""}
-                        onChange={(e) => setField(field.name, e.target.value)}
-                        placeholder={field.placeholder}
-                        required={field.required}
-                        rows={3}
-                        className="w-full rounded-lg border border-border/80 bg-background/80 px-3 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20 transition-all resize-none"
-                      />
-                    ) : field.type === "file" ? (
-                      <label className="flex items-center gap-2.5 rounded-lg border border-dashed border-border/90 bg-muted/20 px-3.5 py-2.5 text-xs text-muted-foreground cursor-pointer hover:border-brand/60 hover:bg-brand/5 transition-all group">
-                        <div className="flex h-7 w-7 items-center justify-center rounded-md bg-muted text-foreground group-hover:bg-brand/10 group-hover:text-brand transition-colors">
-                          <Upload className="h-3.5 w-3.5" />
-                        </div>
-                        <div className="min-w-0 flex-1 truncate font-medium text-foreground">
-                          {data[field.name] || field.placeholder || "Click to upload file"}
-                        </div>
-                        <span className="text-[10px] text-muted-foreground shrink-0 font-medium">Browse</span>
-                        <input
-                          type="file"
-                          className="hidden"
-                          onChange={(e) => setField(field.name, e.target.files?.[0]?.name || "")}
-                        />
-                      </label>
-                    ) : field.type === "password" ? (
-                      <div className="relative">
-                        <Input
-                          type={showPwd ? "text" : "password"}
-                          value={data[field.name] || ""}
-                          onChange={(e) => setField(field.name, e.target.value)}
-                          placeholder={field.placeholder}
-                          required={field.required}
-                          className="h-10 rounded-lg border-border/80 bg-background/80 pr-10 text-sm hover:border-brand/50 focus:border-brand focus:ring-2 focus:ring-brand/20 transition-all"
-                        />
-                        <button
-                          type="button"
-                          onClick={() => setShowPwd((s) => !s)}
-                          className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
-                          tabIndex={-1}
-                          aria-label={showPwd ? "Hide password" : "Show password"}
-                        >
-                          {showPwd ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                        </button>
-                      </div>
-                    ) : (
-                      <Input
-                        type={field.type}
-                        value={data[field.name] || ""}
-                        onChange={(e) => setField(field.name, e.target.value)}
-                        placeholder={field.placeholder}
-                        required={field.required}
-                        className="h-10 rounded-lg border-border/80 bg-background/80 text-sm hover:border-brand/50 focus:border-brand focus:ring-2 focus:ring-brand/20 transition-all"
-                      />
-                    )}
-                    {field.hint && <p className="text-[10px] text-muted-foreground">{field.hint}</p>}
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Terms Checkbox on Last Step */}
-            {isLastStep && (
-              <div className="flex items-start gap-3 rounded-xl border border-border/70 bg-muted/30 p-3.5">
-                <input
-                  type="checkbox"
-                  id="terms"
-                  checked={agreed}
-                  onChange={(e) => setAgreed(e.target.checked)}
-                  className="mt-0.5 h-4 w-4 rounded border-border text-brand focus:ring-brand accent-brand cursor-pointer"
-                />
-                <label htmlFor="terms" className="text-xs leading-relaxed text-muted-foreground cursor-pointer select-none">
-                  I agree to the{" "}
-                  <button type="button" onClick={() => navigate("public", "terms")} className="font-semibold text-brand hover:underline">
-                    Terms of Service
-                  </button>
-                  ,{" "}
-                  <button type="button" onClick={() => navigate("public", "privacy")} className="font-semibold text-brand hover:underline">
-                    Privacy Policy
-                  </button>{" "}
-                  and consent to data processing under the DPDP Act 2023. I confirm all provided information is accurate.
-                </label>
+            {error && (
+              <div className="mt-4 flex items-start gap-2 rounded-2xl border border-destructive/30 bg-destructive/10 px-3.5 py-2.5 text-xs text-destructive">
+                <AlertCircle className="h-4 w-4 shrink-0 mt-0.5" />
+                <span>{error}</span>
               </div>
             )}
 
-            {/* Action Buttons */}
-            <div className="flex items-center gap-3 pt-2">
-              {step > 0 && (
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={handleBack}
-                  className="h-11 px-5 rounded-lg border-border font-medium text-xs sm:text-sm gap-1.5 hover:bg-muted"
+            <form onSubmit={handleCreateAccount} className="mt-5 space-y-4">
+              {/* First Name & Last Name */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                <div className="space-y-1.5">
+                  <Label
+                    htmlFor="reg-first-name"
+                    className="text-xs font-semibold text-slate-800 dark:text-foreground"
+                  >
+                    First Name
+                  </Label>
+                  <div className="relative">
+                    <User className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+                    <Input
+                      id="reg-first-name"
+                      type="text"
+                      value={firstName}
+                      onChange={(e) => {
+                        setFirstName(e.target.value);
+                        if (error) setError(null);
+                      }}
+                      placeholder="John"
+                      className={cn(pillInputClass, "pl-10 pr-4")}
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-1.5">
+                  <Label
+                    htmlFor="reg-last-name"
+                    className="text-xs font-semibold text-slate-800 dark:text-foreground"
+                  >
+                    Last Name
+                  </Label>
+                  <Input
+                    id="reg-last-name"
+                    type="text"
+                    value={lastName}
+                    onChange={(e) => {
+                      setLastName(e.target.value);
+                      if (error) setError(null);
+                    }}
+                    placeholder="Doe"
+                    className={cn(pillInputClass, "px-4")}
+                    required
+                  />
+                </div>
+              </div>
+
+              {/* Username (unique) */}
+              <div className="space-y-1.5">
+                <Label
+                  htmlFor="reg-username"
+                  className="text-xs font-semibold text-slate-800 dark:text-foreground"
                 >
-                  <ArrowLeft className="h-4 w-4" /> Back
-                </Button>
-              )}
+                  Username{" "}
+                  <span className="font-medium text-[#0891b2] dark:text-cyan-400">
+                    (unique)
+                  </span>
+                </Label>
+                <div className="relative">
+                  <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-sm font-medium text-slate-500">
+                    @
+                  </span>
+                  <Input
+                    id="reg-username"
+                    type="text"
+                    value={username}
+                    onChange={(e) => {
+                      const sanitized = e.target.value.replace(/[^a-zA-Z0-9_]/g, "");
+                      setUsername(sanitized);
+                      if (error) setError(null);
+                    }}
+                    placeholder="johndoe"
+                    className={cn(pillInputClass, "pl-8 pr-4")}
+                    required
+                  />
+                </div>
+                <p className="text-[11px] text-slate-400 dark:text-muted-foreground">
+                  Letters, numbers &amp; underscores only.
+                </p>
+              </div>
+
+              {/* Email & Phone No */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                <div className="space-y-1.5">
+                  <Label
+                    htmlFor="reg-email"
+                    className="text-xs font-semibold text-slate-800 dark:text-foreground"
+                  >
+                    Email
+                  </Label>
+                  <div className="relative">
+                    <Mail className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+                    <Input
+                      ref={emailInputRef}
+                      id="reg-email"
+                      type="email"
+                      value={email}
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                        if (error) setError(null);
+                      }}
+                      placeholder="you@company.com"
+                      className={cn(pillInputClass, "pl-10 pr-4")}
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-1.5">
+                  <Label
+                    htmlFor="reg-phone"
+                    className="text-xs font-semibold text-slate-800 dark:text-foreground"
+                  >
+                    Phone No
+                  </Label>
+                  <div className="relative">
+                    <Phone className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+                    <Input
+                      ref={phoneInputRef}
+                      id="reg-phone"
+                      type="tel"
+                      value={phone}
+                      onChange={(e) => {
+                        setPhone(e.target.value);
+                        if (error) setError(null);
+                      }}
+                      placeholder="+91 98765 43210"
+                      className={cn(pillInputClass, "pl-10 pr-4")}
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Password & Confirm Password */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                <div className="space-y-1.5">
+                  <Label
+                    htmlFor="reg-password"
+                    className="text-xs font-semibold text-slate-800 dark:text-foreground"
+                  >
+                    Password
+                  </Label>
+                  <div className="relative">
+                    <Lock className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+                    <Input
+                      id="reg-password"
+                      type={showPwd ? "text" : "password"}
+                      value={password}
+                      onChange={(e) => {
+                        setPassword(e.target.value);
+                        if (error) setError(null);
+                      }}
+                      placeholder="••••••••"
+                      className={cn(pillInputClass, "pl-10 pr-10")}
+                      required
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPwd((s) => !s)}
+                      className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-foreground transition-colors"
+                      tabIndex={-1}
+                      aria-label={showPwd ? "Hide password" : "Show password"}
+                    >
+                      {showPwd ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    </button>
+                  </div>
+                </div>
+
+                <div className="space-y-1.5">
+                  <Label
+                    htmlFor="reg-confirm-password"
+                    className="text-xs font-semibold text-slate-800 dark:text-foreground"
+                  >
+                    Confirm Password
+                  </Label>
+                  <div className="relative">
+                    <Lock className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+                    <Input
+                      id="reg-confirm-password"
+                      type={showConfirmPwd ? "text" : "password"}
+                      value={confirmPassword}
+                      onChange={(e) => {
+                        setConfirmPassword(e.target.value);
+                        if (error) setError(null);
+                      }}
+                      placeholder="••••••••"
+                      className={cn(pillInputClass, "pl-10 pr-10")}
+                      required
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowConfirmPwd((s) => !s)}
+                      className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-foreground transition-colors"
+                      tabIndex={-1}
+                      aria-label={showConfirmPwd ? "Hide confirm password" : "Show confirm password"}
+                    >
+                      {showConfirmPwd ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Info Banner */}
+              <div className="flex items-center gap-2.5 rounded-full border border-[#dbeafe] dark:border-sky-900/50 bg-[#f4f8fe] dark:bg-sky-950/30 px-4 py-2.5 text-xs text-slate-600 dark:text-slate-300">
+                <Info className="h-4 w-4 shrink-0 text-[#0284c7] dark:text-sky-400" />
+                <span>
+                  After registration you&apos;ll verify email &amp; phone, then sign in to open the Career Portal.
+                </span>
+              </div>
+
+              {/* Terms & Privacy Checkbox */}
+              <div className="flex items-center gap-2.5 pt-0.5">
+                <input
+                  id="reg-terms"
+                  type="checkbox"
+                  checked={agreed}
+                  onChange={(e) => {
+                    setAgreed(e.target.checked);
+                    if (error) setError(null);
+                  }}
+                  className="h-4 w-4 rounded border-slate-300 accent-[#0891b2] cursor-pointer"
+                />
+                <label
+                  htmlFor="reg-terms"
+                  className="text-xs text-slate-600 dark:text-muted-foreground cursor-pointer select-none"
+                >
+                  I agree to the{" "}
+                  <button
+                    type="button"
+                    onClick={() => navigate("public", "terms")}
+                    className="font-medium text-[#0891b2] dark:text-cyan-400 hover:underline"
+                  >
+                    Terms &amp; Conditions
+                  </button>{" "}
+                  and{" "}
+                  <button
+                    type="button"
+                    onClick={() => navigate("public", "privacy")}
+                    className="font-medium text-[#0891b2] dark:text-cyan-400 hover:underline"
+                  >
+                    Privacy Policy
+                  </button>{" "}
+                  of JOBSONN.
+                </label>
+              </div>
+
+              {/* Submit Button */}
+              <Button
+                type="submit"
+                className="w-full h-11 rounded-full bg-gradient-to-r from-[#0694b8] via-[#057de0] to-[#085cf7] text-sm font-semibold text-white shadow-md hover:brightness-105 transition-all flex items-center justify-center gap-2 cursor-pointer"
+              >
+                Create Account <ArrowRight className="h-4 w-4" />
+              </Button>
+
+              {/* Already have an account */}
+              <p className="pt-1 text-center text-xs text-slate-500 dark:text-muted-foreground">
+                Already have an account?{" "}
+                <button
+                  type="button"
+                  onClick={() => navigate("public", "auth")}
+                  className="inline-flex items-center gap-1 font-semibold text-[#0891b2] dark:text-cyan-400 hover:underline cursor-pointer"
+                >
+                  Sign in <ArrowRight className="h-3 w-3" />
+                </button>
+              </p>
+            </form>
+          </div>
+        ) : (
+          /* Stage 2 & 3: Verify Your Account (Image 2 -> Image 3) */
+          <div className="w-full max-w-[760px] py-2">
+            {/* Stepper Pills */}
+            <div className="flex items-center justify-center gap-2 sm:gap-3">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-[11px] font-bold tracking-wider text-amber-700 dark:border-amber-800/60 dark:bg-amber-950/40 dark:text-amber-300 uppercase">
+                <Check className="h-3 w-3 stroke-[2.5]" /> Account
+              </span>
+              <span className="h-px w-4 sm:w-6 bg-slate-200 dark:bg-border" />
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-[11px] font-bold tracking-wider text-amber-700 dark:border-amber-800/60 dark:bg-amber-950/40 dark:text-amber-300 uppercase">
+                <Check className="h-3 w-3 stroke-[2.5]" /> Details
+              </span>
+              <span className="h-px w-4 sm:w-6 bg-slate-200 dark:bg-border" />
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-[#0891b2] px-3.5 py-1 text-[11px] font-bold tracking-wider text-white shadow-xs uppercase">
+                <ShieldCheck className="h-3.5 w-3.5" /> Verify
+              </span>
+            </div>
+
+            {/* Heading */}
+            <div className="mt-5 text-center">
+              <h1 className="text-3xl sm:text-[34px] font-bold tracking-tight text-slate-900 dark:text-foreground">
+                Verify your account.
+              </h1>
+              <p className="mx-auto mt-2 max-w-lg text-xs sm:text-sm text-slate-500 dark:text-muted-foreground leading-relaxed">
+                We sent verification codes to your registered email and phone. Enter the 6-digit codes
+                below to activate your JOBSONN account.
+              </p>
+            </div>
+
+            {/* Side-by-side Email & Phone Verification Cards */}
+            <div className="mt-7 grid grid-cols-1 md:grid-cols-2 gap-4">
+              <OtpVerificationCard
+                title="Email verification"
+                targetValue={email.trim().toLowerCase()}
+                icon={Mail}
+                digits={emailDigits}
+                onChangeDigits={setEmailDigits}
+                verified={emailVerified}
+                changeLabel="Change email"
+                onChangeTarget={() => handleEditTarget("email")}
+                verifiedMessage="Email successfully verified"
+                resendSeconds={emailResendSec}
+                onResend={() => {
+                  setEmailResendSec(25);
+                  toast.success(`Verification code resent to ${email.trim().toLowerCase()}`);
+                }}
+              />
+
+              <OtpVerificationCard
+                title="Phone verification"
+                targetValue={phone.trim()}
+                icon={Phone}
+                digits={phoneDigits}
+                onChangeDigits={setPhoneDigits}
+                verified={phoneVerified}
+                changeLabel="Change phone"
+                onChangeTarget={() => handleEditTarget("phone")}
+                verifiedMessage="Phone successfully verified"
+                resendSeconds={phoneResendSec}
+                onResend={() => {
+                  setPhoneResendSec(25);
+                  toast.success(`Verification code resent to ${phone.trim()}`);
+                }}
+              />
+            </div>
+
+            {/* Info Notice */}
+            <div className="mt-4 flex items-center gap-2.5 rounded-full border border-[#dbeafe] dark:border-sky-900/50 bg-[#f4f8fe] dark:bg-sky-950/30 px-4 py-2.5 text-xs text-slate-600 dark:text-slate-300">
+              <Info className="h-4 w-4 shrink-0 text-[#0284c7] dark:text-sky-400" />
+              <span>
+                Check your spam folder if you don&apos;t see the email. SMS may take up to 30 seconds to arrive.
+              </span>
+            </div>
+
+            {/* Primary CTA Button (Disabled gray in Image 2 -> Active gradient in Image 3) */}
+            <div className="mt-4">
               <Button
                 type="button"
-                onClick={handleNext}
-                className="flex-1 h-11 rounded-lg text-xs sm:text-sm font-semibold text-white shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2"
-                disabled={loading || (isLastStep && !agreed)}
-                style={{
-                  background: `linear-gradient(135deg, ${config.color}, #059669)`,
-                }}
+                disabled={!bothVerified || loading}
+                onClick={handleVerifyAndContinue}
+                className={cn(
+                  "w-full h-12 rounded-full text-sm font-semibold transition-all flex items-center justify-center gap-2",
+                  bothVerified
+                    ? "bg-gradient-to-r from-[#0694b8] via-[#057de0] to-[#085cf7] text-white shadow-md hover:brightness-105 cursor-pointer"
+                    : "bg-slate-200/80 text-slate-500 hover:bg-slate-200/80 shadow-none cursor-not-allowed dark:bg-muted dark:text-muted-foreground"
+                )}
               >
                 {loading ? (
                   <span className="flex items-center gap-2">
-                    <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
-                    Creating account...
+                    <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                    Activating account...
                   </span>
-                ) : isLastStep ? (
-                  <>Create {config.label} Account <CheckCircle2 className="h-4 w-4" /></>
+                ) : bothVerified ? (
+                  <>
+                    Verify &amp; continue <ArrowRight className="h-4 w-4" />
+                  </>
                 ) : (
-                  <>Continue <ArrowRight className="h-4 w-4" /></>
+                  "Enter both codes to continue"
                 )}
               </Button>
             </div>
-          </div>
-        </div>
 
-        {/* Cross-Role Navigation */}
-        <div className="mt-6 flex flex-col items-center gap-2">
-          <span className="text-[11px] font-medium text-muted-foreground">Looking to register as someone else?</span>
-          <div className="flex flex-wrap items-center justify-center gap-1.5">
-            {Object.values(REG_CONFIGS).map((r) => {
-              const isCurrent = r.roleKey === roleKey;
-              return (
-                <button
-                  key={r.roleKey}
-                  onClick={() => navigate("public", `register/${r.roleKey}`)}
-                  className={cn(
-                    "flex items-center gap-1.5 rounded-full border px-3 py-1 text-[11px] font-medium transition-all",
-                    isCurrent
-                      ? "border-brand bg-brand/10 text-brand font-semibold shadow-xs"
-                      : "border-border/60 bg-card/60 text-muted-foreground hover:border-brand/40 hover:text-foreground hover:bg-muted/40"
-                  )}
-                >
-                  <r.icon className="h-3 w-3" style={{ color: r.color }} />
-                  {r.label}
-                </button>
-              );
-            })}
-          </div>
-        </div>
+            {/* OR Divider & Back to registration */}
+            <div className="mt-5 flex items-center gap-3">
+              <div className="h-px flex-1 bg-slate-200 dark:bg-border" />
+              <span className="text-[11px] font-medium tracking-wider text-slate-400 uppercase">OR</span>
+              <div className="h-px flex-1 bg-slate-200 dark:bg-border" />
+            </div>
 
-        {/* Trust Badges */}
-        <footer className="mt-6 flex flex-wrap items-center justify-center gap-6 text-[11px] text-muted-foreground pb-4">
-          <span className="flex items-center gap-1.5"><ShieldCheck className="h-3.5 w-3.5 text-emerald-500" /> DPDP Act 2023 Compliant</span>
-          <span className="flex items-center gap-1.5"><Lock className="h-3.5 w-3.5 text-blue-500" /> 256-bit SSL Encrypted</span>
-          <span className="flex items-center gap-1.5"><CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" /> Free to Register</span>
-        </footer>
+            <div className="mt-3 text-center">
+              <button
+                type="button"
+                onClick={() => setStep("register")}
+                className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#0891b2] dark:text-cyan-400 hover:underline cursor-pointer"
+              >
+                <ArrowLeft className="h-3.5 w-3.5" /> Back to registration
+              </button>
+            </div>
+          </div>
+        )}
       </main>
+
+      {/* Footer */}
+      <footer className="py-5 text-center text-[11px] text-slate-400 dark:text-muted-foreground">
+        &copy; {new Date().getFullYear()} JOBSONN. Global Career &amp; Talent Discovery Platform.
+      </footer>
     </div>
   );
 }

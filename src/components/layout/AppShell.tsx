@@ -36,14 +36,16 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     }
   }, [mounted, portal, isAuthenticated, user, navigate]);
 
-  // Auth pages are a full-screen auth experience (no navbar/footer).
+  // Auth & standalone account workspace pages hide the Career Portal navbar/footer.
   const isAuthPage =
     portal === "public" &&
     (route === "partner-login" ||
       route === "auth" ||
       route === "signin" ||
       route === "login" ||
-      route.startsWith("register"));
+      route.startsWith("register") ||
+      route === "account" ||
+      route.startsWith("account/"));
 
   // Show secondary header on Hire Talent pages
   const showTalentSecondary =
