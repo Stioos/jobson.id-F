@@ -144,7 +144,7 @@ export function CategoryHierarchyScreen({ onNavigate }: CategoryHierarchyScreenP
     setTimeout(() => {
       setIsSaving(false);
       toast.success("Category preferences saved successfully");
-      if (onNavigate) onNavigate("documents");
+      if (onNavigate) onNavigate("registrations-licences");
     }, 400);
   };
 

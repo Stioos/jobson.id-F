@@ -71,8 +71,9 @@ export function LegalTaxInfoScreen({ onNavigate }: LegalTaxInfoScreenProps = {})
     await verifyCin();
   };
 
-  const handleSave = () => {
-    saveData("Legal & tax information");
+  const handleSave = async () => {
+    await saveData("Legal & tax information");
+    onNavigate?.("address-master");
   };
 
   return (

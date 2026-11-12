@@ -49,12 +49,17 @@ export function LoginDrawer() {
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
 
-  // Reset errors when drawer opens/closes
-  React.useEffect(() => {
-    if (loginDrawerOpen) {
-      setError(null);
-    }
-  }, [loginDrawerOpen]);
+  const resetForm = () => {
+    setEmail("");
+    setPassword("");
+    setShowPwd(false);
+    setError(null);
+  };
+
+  const handleOpenChange = (open: boolean) => {
+    resetForm();
+    setLoginDrawerOpen(open);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -99,6 +104,7 @@ export function LoginDrawer() {
       setUser(authResult.user);
 
       toast.success(`Welcome back, ${authResult.user.name}!`);
+      resetForm();
       setLoading(false);
       setLoginDrawerOpen(false);
 
@@ -111,7 +117,7 @@ export function LoginDrawer() {
   };
 
   return (
-    <Sheet open={loginDrawerOpen} onOpenChange={setLoginDrawerOpen}>
+    <Sheet open={loginDrawerOpen} onOpenChange={handleOpenChange}>
       <SheetContent
         side="right"
         className="w-full sm:max-w-md md:max-w-[480px] p-0 flex flex-col justify-between h-full bg-card shadow-2xl border-l border-border/80"
@@ -158,7 +164,7 @@ export function LoginDrawer() {
             )}
 
             {/* Form */}
-            <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+            <form onSubmit={handleSubmit} autoComplete="off" className="mt-6 space-y-4">
               {/* Email Field */}
               <div className="space-y-1.5">
                 <Label htmlFor="drawer-email" className="text-xs font-medium text-foreground">
@@ -169,12 +175,13 @@ export function LoginDrawer() {
                   <Input
                     id="drawer-email"
                     type="text"
+                    autoComplete="off"
                     value={email}
                     onChange={(e) => {
                       setEmail(e.target.value);
                       if (error) setError(null);
                     }}
-                    placeholder="jobson.id@gmail.com"
+                    placeholder="Enter your email id"
                     required
                     className="h-10 pl-9 pr-3 text-sm rounded-lg border-border/80 bg-background/80 focus:border-brand"
                   />
@@ -191,12 +198,13 @@ export function LoginDrawer() {
                   <Input
                     id="drawer-password"
                     type={showPwd ? "text" : "password"}
+                    autoComplete="new-password"
                     value={password}
                     onChange={(e) => {
                       setPassword(e.target.value);
                       if (error) setError(null);
                     }}
-                    placeholder="••••••••"
+                    placeholder="Enter your password"
                     required
                     className="h-10 pl-9 pr-10 text-sm rounded-lg border-border/80 bg-background/80 focus:border-brand"
                   />

@@ -458,7 +458,10 @@ export function AddressMasterScreen({ onNavigate }: AddressMasterScreenProps = {
       <div className="flex justify-end gap-3">
         <button
           type="button"
-          onClick={() => saveData("Address master")}
+          onClick={async () => {
+            await saveData("Address master");
+            onNavigate?.("company-info");
+          }}
           disabled={isSaving}
           className="inline-flex items-center gap-2 rounded-xl bg-cyan-500 px-6 py-3 text-sm font-bold text-slate-950 transition-all hover:bg-cyan-400 hover:shadow-lg hover:shadow-cyan-500/25 disabled:opacity-50 cursor-pointer"
         >

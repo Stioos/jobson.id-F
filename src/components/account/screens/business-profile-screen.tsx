@@ -84,8 +84,9 @@ export function BusinessProfileScreen({ onNavigate }: BusinessProfileScreenProps
     }
   };
 
-  const handleSave = () => {
-    saveData("Business profile");
+  const handleSave = async () => {
+    await saveData("Business profile");
+    onNavigate?.("legal-tax");
   };
 
   return (

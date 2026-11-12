@@ -163,7 +163,7 @@ export default function RootLayout({
         >
           {children}
           <Toaster />
-          <SonnerToaster position="top-right" richColors closeButton />
+          <SonnerToaster position="bottom-right" richColors closeButton />
           {/* Global chunk-error recovery script — runs before React hydrates.
               If a ChunkLoadError was thrown on the previous load, this clears
               stale caches and reloads cleanly. */}

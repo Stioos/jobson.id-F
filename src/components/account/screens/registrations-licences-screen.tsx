@@ -397,7 +397,10 @@ export function RegistrationsLicencesScreen({ onNavigate }: RegistrationsLicence
             <div className="px-3 pb-3 pt-2">
               <button
                 type="button"
-                onClick={() => saveData("Registrations & Licences")}
+                onClick={async () => {
+                  await saveData("Registrations & Licences");
+                  onNavigate?.("documents");
+                }}
                 disabled={isSaving}
                 className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-cyan-500 px-4 py-2.5 text-xs font-bold text-slate-950 transition-all hover:bg-cyan-400 disabled:opacity-50 cursor-pointer"
               >

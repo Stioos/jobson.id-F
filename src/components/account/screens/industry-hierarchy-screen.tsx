@@ -31,6 +31,7 @@ import {
 } from "lucide-react";
 import { ecosystems } from "@/data/taxonomy";
 import { toast } from "sonner";
+import { getStoredPortalChoice } from "./account-type-selection-screen";
 import { Checkbox } from "@/components/ui/checkbox";
 
 function getTaxonomyIcon(iconName: string, className = "h-4 w-4") {
@@ -261,7 +262,7 @@ export function IndustryHierarchyScreen({ onNavigate }: IndustryHierarchyScreenP
     setTimeout(() => {
       setIsSaving(false);
       toast.success("Industry hierarchy and mapping saved successfully!");
-      if (onNavigate) {
+      if (onNavigate && getStoredPortalChoice() !== "employer") {
         onNavigate("category-hierarchy");
       }
     }, 400);
@@ -281,7 +282,7 @@ export function IndustryHierarchyScreen({ onNavigate }: IndustryHierarchyScreenP
     setTimeout(() => {
       setIsSaving(false);
       toast.success("Industry hierarchy and mapping saved successfully!");
-      if (onNavigate) {
+      if (onNavigate && getStoredPortalChoice() !== "employer") {
         onNavigate("category-hierarchy");
       }
     }, 400);

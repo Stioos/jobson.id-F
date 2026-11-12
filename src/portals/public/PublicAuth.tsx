@@ -192,7 +192,7 @@ export function PublicAuth() {
                           setEmail(e.target.value);
                           if (error) setError(null);
                         }}
-                        placeholder="Enter email"
+                        placeholder="Enter your email id"
                         required
                         className="h-9 pl-8 text-sm"
                       />
@@ -213,7 +213,7 @@ export function PublicAuth() {
                           setPassword(e.target.value);
                           if (error) setError(null);
                         }}
-                        placeholder="Enter password"
+                        placeholder="Enter your password"
                         className="h-9 pl-8 pr-8 text-sm"
                         required
                       />

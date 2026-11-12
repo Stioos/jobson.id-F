@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect, useCallback } from "react";
+import { useState, useMemo, useEffect, useCallback, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { useSearchParams, usePathname } from "next/navigation";
 import {
@@ -28,7 +28,11 @@ import { ProjectsPortfolioScreen } from "./screens/projects-portfolio-screen";
 import { ResumeDocumentsScreen } from "./screens/resume-documents-screen";
 import { AddressMasterScreen } from "./screens/address-master-screen";
 import { RegistrationsLicencesScreen } from "./screens/registrations-licences-screen";
-import { AccountTypeSelectionScreen } from "./screens/account-type-selection-screen";
+import {
+  AccountTypeSelectionScreen,
+  subscribePortalChoice,
+  getStoredPortalChoice,
+} from "./screens/account-type-selection-screen";
 import { SecurityScreen } from "./screens/security-screen";
 import { PrivacyScreen } from "./screens/privacy-screen";
 import { NotificationsScreen } from "./screens/notifications-screen";
@@ -270,6 +274,12 @@ export function AccountDashboard() {
   }, [pathType, queryRole, storedRole, authUser.accountType, authUser.professionalRole, authUser.businessIntent]);
 
   const agentRole: AgentRole | null = (resolvedRole === "sales-agent" || resolvedRole === "freelancer-agent") ? resolvedRole as AgentRole : null;
+  const portalChoice = useSyncExternalStore(
+    subscribePortalChoice,
+    getStoredPortalChoice,
+    () => ""
+  );
+  const isEmployerPortal = portalChoice === "employer";
 
   const emailParam = searchParams.get("email");
   const phoneParam = searchParams.get("phone");
@@ -385,13 +395,25 @@ export function AccountDashboard() {
     // The specific intent (sell/buy/both/brands) is stored and can be used
     // to customize the business profile screen, but the sidebar sections
     // remain the same across all 4 business intents.
+    const filteredBusinessGroup = isEmployerPortal
+      ? {
+          ...businessGroup,
+          items: businessGroup.items.filter(
+            (item) =>
+              item.id !== "category-hierarchy" &&
+              item.id !== "registrations-licences" &&
+              item.id !== "documents"
+          ),
+        }
+      : businessGroup;
+
     return [
       identityGroup,
-      businessGroup,
+      filteredBusinessGroup,
       securityGroup,
       systemGroup,
     ];
-  }, [agentRole, isEmployeeRole, resolvedRole]);
+  }, [agentRole, isEmployeeRole, isEmployerPortal, resolvedRole]);
 
   // Flattened nav items for searching & matching
   const allNavItems = useMemo(() => {
@@ -417,6 +439,15 @@ export function AccountDashboard() {
     const normalized = normalizeNavId(id) ?? (id as NavId);
     if (isEmployeeRole && (normalized === "legal-tax" || normalized === "gstn")) {
       setActiveNav("home");
+      return;
+    }
+    if (
+      isEmployerPortal &&
+      (normalized === "category-hierarchy" ||
+        normalized === "registrations-licences" ||
+        normalized === "documents")
+    ) {
+      setActiveNav("business");
       return;
     }
     // Gate: if account type hasn't been selected yet, only allow navigation
@@ -685,15 +716,17 @@ export function AccountDashboard() {
 
               {activeNav === "industry" && <IndustryHierarchyScreen onNavigate={handleNavigate} />}
 
-              {activeNav === "category-hierarchy" && <CategoryHierarchyScreen onNavigate={handleNavigate} />}
+              {activeNav === "category-hierarchy" && !isEmployerPortal && (
+                <CategoryHierarchyScreen onNavigate={handleNavigate} />
+              )}
 
-              {activeNav === "documents" && <LegalDocumentsScreen />}
+              {activeNav === "documents" && !isEmployerPortal && <LegalDocumentsScreen />}
 
               {activeNav === "address-master" && (
                 <AddressMasterScreen onNavigate={handleNavigate} />
               )}
 
-              {activeNav === "registrations-licences" && (
+              {activeNav === "registrations-licences" && !isEmployerPortal && (
                 <RegistrationsLicencesScreen onNavigate={handleNavigate} />
               )}
 
