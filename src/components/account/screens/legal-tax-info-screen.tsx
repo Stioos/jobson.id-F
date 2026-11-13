@@ -24,12 +24,12 @@ function ApiField({
   value: string;
   icon?: typeof FileText;
   mono?: boolean;
-  accent?: "emerald" | "emerald" | "amber";
+  accent?: "emerald" | "teal" | "amber";
   full?: boolean;
 }) {
   const accentCls =
     accent === "emerald" ? "text-emerald-600 dark:text-emerald-400"
-      : accent === "emerald" ? "text-emerald-600 dark:text-emerald-400"
+      : accent === "teal" ? "text-teal-600 dark:text-teal-400"
         : accent === "amber" ? "text-amber-600 dark:text-amber-400"
           : "text-foreground dark:text-white";
   return (

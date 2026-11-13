@@ -8,7 +8,7 @@ import {
   ShieldCheck, Lock, Bell, Sparkles, Clock,
   Search, HelpCircle, Grid3x3, Check, ChevronDown,
   Menu, X, BriefcaseBusiness, IdCard, Scale, GraduationCap, FileCheck2, FolderTree, MapPin,
-  Award, FileSignature
+  Award, FileSignature, BookOpen, Target, Briefcase, IndianRupee, BarChart3, Presentation, Users
 } from "lucide-react";
 import { WebuosLogo } from "@/components/brand/webuos-logo";
 import { cn } from "@/lib/utils";
@@ -52,6 +52,15 @@ import { UniversityLegalTaxScreen } from "./screens/university-legal-tax-screen"
 import { UniversityAddressMasterScreen } from "./screens/university-address-master-screen";
 import { UniversityAcademicHierarchyScreen } from "./screens/university-academic-hierarchy-screen";
 import { UniversityDocumentsVerifyScreen } from "./screens/university-documents-verify-screen";
+import { UniversityOverviewCockpitScreen } from "./screens/university-overview-cockpit-screen";
+import { UniversityProgramsScreen } from "./screens/university-programs-screen";
+import { UniversityStudentsScreen } from "./screens/university-students-screen";
+import { UniversityFacultyScreen } from "./screens/university-faculty-screen";
+import { UniversityTrainingDeliveryScreen } from "./screens/university-training-delivery-screen";
+import { UniversityPlacementsScreen } from "./screens/university-placements-screen";
+import { UniversityInternshipsScreen } from "./screens/university-internships-screen";
+import { UniversityRevenueSettlementsScreen } from "./screens/university-revenue-settlements-screen";
+import { UniversityPerformanceReportsScreen } from "./screens/university-performance-reports-screen";
 
 // ============================================================
 // Types & Nav Item Configuration
@@ -98,7 +107,17 @@ export type NavId =
   | "mou-agreement"
   | "accreditations"
   | "academic-hierarchy"
-  | "institution-profile";
+  | "institution-profile"
+  | "programs"
+  | "students"
+  | "faculty"
+  | "training"
+  | "placements"
+  | "internships"
+  | "events"
+  | "revenue"
+  | "performance"
+  | "reports";
 
 export interface NavGroup {
   title: string;
@@ -115,13 +134,13 @@ export interface NavGroup {
 }
 
 export const UNIVERSITY_NAV_ITEMS: NavGroup["items"] = [
-  { id: "business", label: "Business profile", title: "Institution Profile & Campus", description: "Define your university / college profile, leadership, campus infrastructure, and academic credentials.", icon: GraduationCap, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300", badge: "Active", badgeType: "verified" },
-  { id: "legal-tax", label: "Legal & Tax Info", title: "Legal, Trust & Tax Information", description: "Manage sponsoring Trust/Society registration, 12A/80G tax exemptions, PAN, GSTIN & signatory KYC.", icon: FileText, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300", badge: "Verified", badgeType: "verified" },
-  { id: "address-master", label: "Address Master", title: "Campus Address & Facilities Master", description: "Manage main university campus, constituent colleges, research centres, and billing addresses.", icon: MapPin, color: "bg-teal-500/15 text-teal-700 dark:text-teal-300" },
-  { id: "company-info", label: "Company Info", title: "MoU & Partnership Agreement", description: "Manage active partnership MoU, model tier (A–E), 17-stage lifecycle, and 60/90-day renewal status.", icon: FileSignature, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300", badge: "55d Renewal", badgeType: "pro" },
-  { id: "industry", label: "Industry hierarchy", title: "Academic & Department Hierarchy", description: "Map academic faculties, degree levels (UG/PG), student intake quotas, and jobson.id career programs.", icon: Network, color: "bg-teal-500/15 text-teal-700 dark:text-teal-300", badge: "6 Depts", badgeType: "verified" },
-  { id: "registrations-licences", label: "Registrations & Licences", title: "Accreditation & Regulatory Approvals", description: "Track NAAC grade, NBA approvals, UGC recognition, AICTE compliance, and NIRF ranking.", icon: Award, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300", badge: "NAAC A++", badgeType: "verified" },
-  { id: "documents", label: "Legal docs & Verify", title: "Institutional Verification Documents", description: "Store, review, and verify statutory charters, accreditation letters, lab audits, and compliance standing.", icon: FolderCheck, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300", badge: "7 Docs", badgeType: "pro" },
+  { id: "business", label: "Institution Profile", title: "Institution Profile & Campus", description: "Define your university / college profile, leadership, campus infrastructure, and academic credentials.", icon: GraduationCap, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300", badge: "Active", badgeType: "verified" },
+  { id: "company-info", label: "MoU & Agreements", title: "MoU & Partnership Agreement", description: "Manage active partnership MoU, model tier (A–E), 17-stage lifecycle, and 60/90-day renewal status.", icon: FileSignature, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300", badge: "55d Renewal", badgeType: "pro" },
+  { id: "registrations-licences", label: "Accreditation & Approvals", title: "Accreditation & Regulatory Approvals", description: "Track NAAC grade, NBA approvals, UGC recognition, AICTE compliance, and NIRF ranking.", icon: Award, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300", badge: "NAAC A++", badgeType: "verified" },
+  { id: "legal-tax", label: "Legal & Tax (12A/80G)", title: "Legal, Trust & Tax Information", description: "Manage sponsoring Trust/Society registration, 12A/80G tax exemptions, PAN, GSTIN & signatory KYC.", icon: FileText, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300", badge: "Verified", badgeType: "verified" },
+  { id: "address-master", label: "Campus Address Master", title: "Campus Address & Facilities Master", description: "Manage main university campus, constituent colleges, research centres, and billing addresses.", icon: MapPin, color: "bg-teal-500/15 text-teal-700 dark:text-teal-300" },
+  { id: "industry", label: "Academic Hierarchy", title: "Academic & Department Hierarchy", description: "Map academic faculties, degree levels (UG/PG), student intake quotas, and jobson.id career programs.", icon: Network, color: "bg-teal-500/15 text-teal-700 dark:text-teal-300", badge: "6 Depts", badgeType: "verified" },
+  { id: "documents", label: "Verification Documents", title: "Institutional Verification Documents", description: "Store, review, and verify statutory charters, accreditation letters, lab audits, and compliance standing.", icon: FolderCheck, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300", badge: "7 Docs", badgeType: "pro" },
 ];
 
 export const NAV_GROUPS: NavGroup[] = [
@@ -200,6 +219,30 @@ function normalizeNavId(id: string | null | undefined): NavId | null {
   if (lower === "category-hierarchy" || lower === "categories" || lower === "category") {
     return "category-hierarchy";
   }
+  if (lower === "programs" || lower === "curriculum" || lower === "courses") {
+    return "programs";
+  }
+  if (lower === "students" || lower === "cohorts" || lower === "student-roster") {
+    return "students";
+  }
+  if (lower === "faculty" || lower === "professors" || lower === "mentors") {
+    return "faculty";
+  }
+  if (lower === "training" || lower === "training-delivery" || lower === "labs") {
+    return "training";
+  }
+  if (lower === "placements" || lower === "drives" || lower === "placement-drives") {
+    return "placements";
+  }
+  if (lower === "internships" || lower === "projects" || lower === "capstones") {
+    return "internships";
+  }
+  if (lower === "revenue" || lower === "settlements" || lower === "wallet") {
+    return "revenue";
+  }
+  if (lower === "performance" || lower === "reports" || lower === "audit") {
+    return "performance";
+  }
   return lower as NavId;
 }
 
@@ -211,6 +254,10 @@ function isNavActive(itemId: NavId, activeNav: NavId): boolean {
   if (itemId === "industry" && ((activeNav as string) === "industries" || (activeNav as string) === "industry-hierarchy" || (activeNav as string) === "academic-hierarchy" || (activeNav as string) === "departments")) return true;
   if (itemId === "registrations-licences" && ((activeNav as string) === "accreditations" || (activeNav as string) === "accreditation")) return true;
   if (itemId === "category-hierarchy" && ((activeNav as string) === "categories" || (activeNav as string) === "category")) return true;
+  if (itemId === "revenue" && ((activeNav as string) === "wallet" || (activeNav as string) === "settlements")) return true;
+  if (itemId === "performance" && ((activeNav as string) === "reports" || (activeNav as string) === "audit")) return true;
+  if (itemId === "internships" && ((activeNav as string) === "projects" || (activeNav as string) === "capstones")) return true;
+  if (itemId === "training" && ((activeNav as string) === "labs" || (activeNav as string) === "training-delivery")) return true;
   return false;
 }
 
@@ -309,10 +356,30 @@ export function AccountDashboard() {
   const isEmployerPortal = portalChoice === "employer";
   const isUniversityPartner = useMemo(() => {
     if (portalChoice === "universal" || portalChoice === "partner") return true;
-    if (resolvedRole === "university" || resolvedRole === "college" || resolvedRole === "partnerships") return true;
-    if (queryRole === "university" || queryRole === "college" || queryRole === "partnerships") return true;
+    if (
+      resolvedRole === "university" ||
+      resolvedRole === "college" ||
+      resolvedRole === "partnerships" ||
+      resolvedRole === "universal" ||
+      resolvedRole === "partner"
+    ) return true;
+    if (
+      queryRole === "university" ||
+      queryRole === "college" ||
+      queryRole === "partnerships" ||
+      queryRole === "universal" ||
+      queryRole === "partner"
+    ) return true;
+    if (typeof window !== "undefined") {
+      try {
+        const stored = window.localStorage.getItem("jobson.id-account-portal-choice") || window.localStorage.getItem("webuos-account-portal-choice");
+        if (stored === "universal" || stored === "partner") return true;
+      } catch {}
+    }
+    // Default to University Partner flagship when visiting /account
+    if (!pathType && !queryRole && !isEmployeeRole && (!portalChoice || portalChoice === "universal")) return true;
     return false;
-  }, [portalChoice, resolvedRole, queryRole]);
+  }, [portalChoice, resolvedRole, queryRole, pathType, isEmployeeRole]);
 
   const emailParam = searchParams.get("email");
   const phoneParam = searchParams.get("phone");
@@ -371,7 +438,7 @@ export function AccountDashboard() {
     };
   }, [isEmployeeRole]);
 
-  const visibleNavGroups = useMemo(() => {
+  const visibleNavGroups: NavGroup[] = useMemo((): NavGroup[] => {
     const identityGroup = NAV_GROUPS.find((g) => g.title === "Overview & Identity")!;
     const securityGroup = NAV_GROUPS.find((g) => g.title === "Security & Governance")!;
     const systemGroup = NAV_GROUPS.find((g) => g.title === "System & Resources")!;
@@ -423,13 +490,44 @@ export function AccountDashboard() {
       ];
     }
 
-    // ─── University / College Partner: specialized higher-ed verification flow ───
+    // ─── University / College Partner: comprehensive higher-ed ecosystem ───
     if (isUniversityPartner) {
       return [
-        identityGroup,
         {
-          title: "Business & Verification",
+          title: "Executive Cockpit & Identity",
+          items: [
+            { id: "home", label: "Executive Overview", title: "University Partner Executive Cockpit", description: "Real-time institutional dashboard, 10 KPI statistics, MoU expiry tracking, and active skilling status.", icon: Home, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300", badge: "Live Cockpit", badgeType: "verified" },
+            { id: "personal", label: "Personal info", title: "Personal Information", description: "Manage your personal details, profile photo, and signatory identity verification.", icon: User, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300" },
+            { id: "communication", label: "Communication", title: "Communication", description: "Manage institutional email, phone, and verified official contacts.", icon: Mail, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300", badge: "Verified", badgeType: "verified" },
+            { id: "account-type", label: "Account Type", title: "Account Type Selection", description: "Select your account type and switch between portal workspaces.", icon: User, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300" },
+          ],
+        },
+        {
+          title: "Partnership & Regulatory Verification",
           items: UNIVERSITY_NAV_ITEMS,
+        },
+        {
+          title: "Academics & Skill Delivery",
+          items: [
+            { id: "programs", label: "Skilling Programs & Curricula", title: "University Skilling Programs & Curricula", description: "Industry-aligned technical curricula mapped to department semesters.", icon: BookOpen, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300", badge: "4 Curricula", badgeType: "verified" },
+            { id: "students", label: "Student Cohorts & Roster", title: "Student Cohorts & Directory", description: "Enrolled candidates, training progress, attendance, and placement outcomes.", icon: GraduationCap, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300", badge: "10 Enrolled", badgeType: "verified" },
+            { id: "faculty", label: "Faculty Mentors & FDP", title: "Department Faculty & Mentors", description: "Faculty coordinators certified under Faculty Development Programs.", icon: Users, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300", badge: "Tier-1", badgeType: "verified" },
+            { id: "training", label: "Lab Training & Delivery", title: "Lab Infrastructure & Cohort Delivery", description: "On-campus computer labs, workstations, and cohort milestone schedules.", icon: Presentation, color: "bg-teal-500/15 text-teal-700 dark:text-teal-300", badge: "3 Labs", badgeType: "verified" },
+          ],
+        },
+        {
+          title: "Careers, Outreach & Placements",
+          items: [
+            { id: "placements", label: "Campus Placement Drives", title: "Campus Placement Drives & Hiring Mandates", description: "Direct recruiter drives, candidate selections, and CTC packages.", icon: Target, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300", badge: "78% Placed", badgeType: "pro" },
+            { id: "internships", label: "Internships & Capstones", title: "Corporate Internships & Industry Capstones", description: "Paid corporate internships and live client capstone deliverables.", icon: Briefcase, color: "bg-purple-500/15 text-purple-700 dark:text-purple-300", badge: "6 Interns", badgeType: "verified" },
+          ],
+        },
+        {
+          title: "Finance & Commercials",
+          items: [
+            { id: "revenue", label: "Revenue & Settlements Ledger", title: "University Revenue & Settlements Ledger", description: "Official partnership disbursements, 70/30 fee split, and pending remittances.", icon: IndianRupee, color: "bg-teal-500/15 text-teal-700 dark:text-teal-300", badge: "₹3.47L", badgeType: "verified" },
+            { id: "performance", label: "Performance & NAAC Audit", title: "Performance Analytics & Statutory Audit Reports", description: "NAAC Criteria 1 & 5, NIRF, and AICTE compliance packs ready for export.", icon: BarChart3, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300", badge: "Export Ready", badgeType: "pro" },
+          ],
         },
         securityGroup,
         systemGroup,
@@ -654,10 +752,19 @@ export function AccountDashboard() {
                 // Account-type-specific groups (Business & Verification, Career &
                 // Profile, Agent Profile / Sales Agent Profile / Influencer Profile
                 // / Specialist Profile) are HIDDEN until the account type is selected.
-                const alwaysEnabledGroups = ["Overview & Identity", "Security & Governance", "System & Resources"];
+                const alwaysEnabledGroups = [
+                  "Overview & Identity",
+                  "Executive Cockpit & Identity",
+                  "Partnership & Regulatory Verification",
+                  "Academics & Skill Delivery",
+                  "Careers, Outreach & Placements",
+                  "Finance & Commercials",
+                  "Security & Governance",
+                  "System & Resources",
+                ];
                 const isAlwaysEnabled = alwaysEnabledGroups.some((g) => group.title.includes(g));
                 const isAccountTypeSpecific = !isAlwaysEnabled;
-                const groupHidden = isAccountTypeSpecific && !hasAccountType;
+                const groupHidden = isUniversityPartner ? false : (isAccountTypeSpecific && !hasAccountType);
 
                 if (groupHidden) return null;
 
@@ -725,14 +832,18 @@ export function AccountDashboard() {
               {agentRole && ["identity", "experience", "commission", "skills", "education", "consent", "review"].includes(activeNav) ? (
                 <AgentProfileScreen role={agentRole} sectionId={activeNav as AgentSectionId} onNavigate={(sectionId) => handleNavigate(sectionId)} />
               ) : activeNav === "home" && (
-                <OverviewScreen
-                  email={email}
-                  phone={phone}
-                  companyName={companyName}
-                  initials={initials}
-                  onNavigate={handleNavigate}
-                  isEmployee={isEmployeeRole}
-                />
+                isUniversityPartner ? (
+                  <UniversityOverviewCockpitScreen onNavigate={handleNavigate} />
+                ) : (
+                  <OverviewScreen
+                    email={email}
+                    phone={phone}
+                    companyName={companyName}
+                    initials={initials}
+                    onNavigate={handleNavigate}
+                    isEmployee={isEmployeeRole}
+                  />
+                )
               )}
 
               {activeNav === "personal" && (
@@ -805,6 +916,39 @@ export function AccountDashboard() {
                 ) : (
                   <RegistrationsLicencesScreen onNavigate={handleNavigate} />
                 )
+              )}
+
+              {/* ── University-Specific Academic, Placement & Finance Screens ── */}
+              {activeNav === "programs" && (
+                <UniversityProgramsScreen onNavigate={handleNavigate} />
+              )}
+
+              {activeNav === "students" && (
+                <UniversityStudentsScreen onNavigate={handleNavigate} />
+              )}
+
+              {activeNav === "faculty" && (
+                <UniversityFacultyScreen onNavigate={handleNavigate} />
+              )}
+
+              {activeNav === "training" && (
+                <UniversityTrainingDeliveryScreen onNavigate={handleNavigate} />
+              )}
+
+              {activeNav === "placements" && (
+                <UniversityPlacementsScreen onNavigate={handleNavigate} />
+              )}
+
+              {activeNav === "internships" && (
+                <UniversityInternshipsScreen onNavigate={handleNavigate} />
+              )}
+
+              {activeNav === "revenue" && (
+                <UniversityRevenueSettlementsScreen onNavigate={handleNavigate} />
+              )}
+
+              {(activeNav === "performance" || (activeNav as string) === "reports") && (
+                <UniversityPerformanceReportsScreen onNavigate={handleNavigate} />
               )}
 
               {activeNav === "security" && <SecurityScreen />}

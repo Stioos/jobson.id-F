@@ -144,11 +144,15 @@ export function subscribePortalChoice(listener: () => void) {
 }
 
 export function getStoredPortalChoice(): string {
-  if (typeof window === "undefined") return "";
+  if (typeof window === "undefined") return "universal";
   try {
-    return window.localStorage.getItem(SELECTED_PORTAL_KEY) || "";
+    const direct = window.localStorage.getItem(SELECTED_PORTAL_KEY);
+    if (direct) return direct;
+    const legacy = window.localStorage.getItem("webuos-account-portal-choice");
+    if (legacy) return legacy;
+    return "universal";
   } catch {
-    return "";
+    return "universal";
   }
 }
 
@@ -178,8 +182,11 @@ export function AccountTypeSelectionScreen({ onNavigate }: AccountTypeSelectionS
 
     try {
       window.localStorage.setItem(SELECTED_PORTAL_KEY, option.id);
-      window.localStorage.setItem("webuos-agent-role", "organization");
+      window.localStorage.setItem("webuos-account-portal-choice", option.id);
+      window.localStorage.setItem("webuos-agent-role", option.id === "universal" ? "partnerships" : "organization");
       portalChoiceListeners.forEach((l) => l());
+      window.dispatchEvent(new Event("jobson.id-auth-change"));
+      window.dispatchEvent(new Event("storage"));
     } catch {
       // ignore storage failures
     }
