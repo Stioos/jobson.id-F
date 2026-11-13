@@ -1,6 +1,6 @@
-# JOBSONN Development Worklog
+# jobson.id Development Worklog
 
-This file is the shared worklog for all agents building JOBSONN.
+This file is the shared worklog for all agents building jobson.id.
 Append (do not overwrite) new sections separated by `---`.
 
 ---
@@ -103,8 +103,8 @@ Lint status:
 - Remaining lint errors elsewhere in repo (admin, candidate, employer portals) belong to other agents — not touched per task constraint.
 
 Issues / notes for orchestrator:
-- Home page search → jobs page handoff uses `sessionStorage["jobsonn_job_search"]` (JSON: `{keyword, location, category?}`), consumed & cleared on jobs page mount. This is a lightweight cross-page state without modifying the shared Zustand store.
-- ApplyDialog stashes `sessionStorage["jobsonn_last_application"]` on submit before navigating to `candidate/applications` — the candidate portal agent can read this to surface a "just applied" banner.
+- Home page search → jobs page handoff uses `sessionStorage["jobson_id_job_search"]` (JSON: `{keyword, location, category?}`), consumed & cleared on jobs page mount. This is a lightweight cross-page state without modifying the shared Zustand store.
+- ApplyDialog stashes `sessionStorage["jobson_id_last_application"]` on submit before navigating to `candidate/applications` — the candidate portal agent can read this to surface a "just applied" banner.
 - The `useNav` `route` is a plain string; the public router handles `home`, `jobs`, `jobs/<id>`, `companies`, `companies/<slug>`, `salary-insights`, `training`, `career-resources`, `about`, `contact` — any unknown first-segment falls back to NotFound (which offers a "Back to home" button).
 - The PublicNavbar (from foundation) highlights `route === l.key`; for nested routes like `jobs/j_001` the highlight won't fire (expected — navbar only knows top-level keys). Not blocking.
 
@@ -550,7 +550,7 @@ Work Log:
 - Dev server: compiling cleanly, GET / 200.
 
 Stage Summary:
-- JOBSONN platform COMPLETE and browser-verified. 7 portals (public, candidate, employer, recruiter, agency, enterprise, admin) with 100+ pages total, all interconnected via client-side navigation (single `/` route per environment constraint).
+- jobson.id platform COMPLETE and browser-verified. 7 portals (public, candidate, employer, recruiter, agency, enterprise, admin) with 100+ pages total, all interconnected via client-side navigation (single `/` route per environment constraint).
 - Architecture: Zustand `useNav` store drives portal+route; AppShell switches public-layout (navbar+footer) vs portal-layout (sidebar+topbar); each portal exports `render(route)` router.
 - All core golden paths verified working in browser: job search/filter, job detail + apply, portal switching, candidate dashboard/applications, employer pipeline Kanban, admin analytics, responsive + sticky footer, clean console.
 - Known limitations: all data is simulated (mock); auth/AI/payments/email/integrations are clearly-labelled mock adapters, not production. Frontend route guards are UX-only — backend must enforce RBAC + tenant isolation.
@@ -1061,10 +1061,10 @@ Stage Summary:
 ---
 Task ID: NAV-REDESIGN
 Agent: Main (orchestrator)
-Task: Redesign all portal navigations to main+sub structure (max 4 mains, max 6 subs) + add partner login inspired by partner.jobsonn.com
+Task: Redesign all portal navigations to main+sub structure (max 4 mains, max 6 subs) + add partner login inspired by partner.jobson.id
 
 Work Log:
-- Researched reference portal at partner.jobsonn.com (unreachable from sandbox network — IPv6 unreachable, IPv4 timeout). Applied deep domain knowledge of recruitment-platform partner portals (Naukri Resdex, LinkedIn Recruiter, Workday, Greenhouse, Lever) to guide the redesign.
+- Researched reference portal at partner.jobson.id (unreachable from sandbox network — IPv6 unreachable, IPv4 timeout). Applied deep domain knowledge of recruitment-platform partner portals (Naukri Resdex, LinkedIn Recruiter, Workday, Greenhouse, Lever) to guide the redesign.
 - Analyzed current nav bloat: training=75 items/10 sections, employer=41/5, candidate=32/5, recruiter=24/3. User requirement: max 4 main items, max 6 sub-items each (24 leaf routes max).
 - Evolved NavItem type in src/lib/types.ts to support optional `children?: NavItem[]` for sub-items.
 - Completely rewrote src/components/layout/portal-config.ts with the new main+sub structure:
@@ -1106,7 +1106,7 @@ Work Log:
 Stage Summary:
 - All 5 portals redesigned to max 4 main × 6 sub structure.
 - New expand/collapse sidebar with auto-expand of active section.
-- Partner login page added (partner.jobsonn.com-inspired) with role selector.
+- Partner login page added (partner.jobson.id-inspired) with role selector.
 - Training portal consolidated from 75→24 items (68% reduction) while keeping all functionality accessible.
 - All merges from previous tasks preserved (learner→candidate, enterprise→employer, agency→recruiter, admin→training).
 
@@ -1191,17 +1191,17 @@ Work Log:
 
 Files created in src/portals/public/:
 
-1. **PublicPartnerModels.tsx** (`partner-models`) — Hero "6 ways to partner with JOBSONN", stats banner (derived from real partners data), grid of 6 model cards (Centre, College, Service, Technology, AI, Recruitment) — each with icon, tagline, description, 6 key capabilities, ideal-for chips, "Apply" button → partner-apply (stashes model hint in sessionStorage), "How it works" secondary. Per-model active partner count. "Which model is right for you?" persona helper (6 buttons → highlight matching model + toast). 14-point comparison table (sticky first col, all 6 models). Featured partners strip (4 cards w/ AvatarLogo, location, students/rating/revenue). CTA.
+1. **PublicPartnerModels.tsx** (`partner-models`) — Hero "6 ways to partner with jobson.id", stats banner (derived from real partners data), grid of 6 model cards (Centre, College, Service, Technology, AI, Recruitment) — each with icon, tagline, description, 6 key capabilities, ideal-for chips, "Apply" button → partner-apply (stashes model hint in sessionStorage), "How it works" secondary. Per-model active partner count. "Which model is right for you?" persona helper (6 buttons → highlight matching model + toast). 14-point comparison table (sticky first col, all 6 models). Featured partners strip (4 cards w/ AvatarLogo, location, students/rating/revenue). CTA.
 
-2. **PublicPartnerPrograms.tsx** (`partner-programs`) — Hero "Programs your partners can deliver". 3 StatCards (programs.length, students trained, avg placement). Search (name/code/desc/role/cert) + category Select filter. Grid of program cards (icon by category, code badge, name, category, description, duration, price, certifications, target roles). "View details" → Dialog with full info + revenue split preview (gross/partner/JOBSONN). "Apply to deliver this program" → partner-apply with program hint stashed. Calculator CTA. Empty state.
+2. **PublicPartnerPrograms.tsx** (`partner-programs`) — Hero "Programs your partners can deliver". 3 StatCards (programs.length, students trained, avg placement). Search (name/code/desc/role/cert) + category Select filter. Grid of program cards (icon by category, code badge, name, category, description, duration, price, certifications, target roles). "View details" → Dialog with full info + revenue split preview (gross/partner/jobson.id). "Apply to deliver this program" → partner-apply with program hint stashed. Calculator CTA. Empty state.
 
-3. **PublicPartnerCalculator.tsx** (`partner-calculator` — KEY CONVERSION) — Hero "See how much you can earn". **Live calculator that actually computes using revenueShareRules**: selects model + program + lead source + gross + discount + gateway fee % + tax %. Computation: findRule() = highest-priority active rule matching model+lead source; netCollected = gross-discount; deduct gateway fee + tax; apply partner% / JOBSONN% from rule. Displays rule applied (name + percentages). 4 quick presets. Result cards (partner share vs JOBSONN share + projected monthly). **Visual breakdown** (recharts PieChart 5 segments: partner, JOBSONN, gateway, tax, discount) + legend + summary. AI/commercial disclaimer card. "How it's calculated" 4-step explainer.
+3. **PublicPartnerCalculator.tsx** (`partner-calculator` — KEY CONVERSION) — Hero "See how much you can earn". **Live calculator that actually computes using revenueShareRules**: selects model + program + lead source + gross + discount + gateway fee % + tax %. Computation: findRule() = highest-priority active rule matching model+lead source; netCollected = gross-discount; deduct gateway fee + tax; apply partner% / jobson.id% from rule. Displays rule applied (name + percentages). 4 quick presets. Result cards (partner share vs jobson.id share + projected monthly). **Visual breakdown** (recharts PieChart 5 segments: partner, jobson.id, gateway, tax, discount) + legend + summary. AI/commercial disclaimer card. "How it's calculated" 4-step explainer.
 
 4. **PublicPartnerHowItWorks.tsx** (`partner-how-it-works`) — Hero "From application to first settlement — in 6 clear steps". Alternating timeline (desktop) / vertical (mobile) with 6 steps: Apply → Review & approval → Agreement & onboarding → Training & certification → Launch & deliver → Settle & grow (each w/ icon, description, duration badge). "What you get" section (6 capability cards: LMS, CRM, certification, marketing kit, wallet, support). Requirements per model (6 cards × 5 requirements). Process FAQ accordion (6 Q&As). CTA.
 
 5. **PublicPartnerStories.tsx** (`partner-stories`) — Hero "Real partners. Real outcomes." Stats banner (120+ partners, 48K+ students, ₹X settled — derived from real partners data + illustrative uplift). Filter buttons (All + 6 models). Grid of 8 partner stories (1–2 per model) — each w/ AvatarLogo, partner name, org, rating, model badge, city, quote (Quote icon), 3 result stats, highlights chips. "Become a success story" CTA.
 
-6. **PublicPartnerFaqs.tsx** (`partner-faqs`) — Hero "Everything you want to know about partnering with JOBSONN". **30+ FAQs** across 10 categories (General, Centre, College, Service, Technology, AI, Recruitment, Commercial, Operations, Support). **Search** + **category Tabs**. Grouped accordion display (category header w/ icon + count, then Accordion of Q&As). Empty state on no match. "Still have questions? Contact us" CTA → contact route.
+6. **PublicPartnerFaqs.tsx** (`partner-faqs`) — Hero "Everything you want to know about partnering with jobson.id". **30+ FAQs** across 10 categories (General, Centre, College, Service, Technology, AI, Recruitment, Commercial, Operations, Support). **Search** + **category Tabs**. Grouped accordion display (category header w/ icon + count, then Accordion of Q&As). Empty state on no match. "Still have questions? Contact us" CTA → contact route.
 
 7. **PublicPartnerApply.tsx** (`partner-apply` — KEY CONVERSION) — **Real 9-step wizard** with react-hook-form + zod:
    - Step 1: Model (6 cards, single-select)
@@ -1216,7 +1216,7 @@ Files created in src/portals/public/:
    - **Progress bar + clickable stepper at top** (validated navigation; can edit any prior step)
    - **Per-step validation** via form.trigger(fields) — error toast if invalid
    - **Autosave to localStorage** on every form change (via form.watch) — restores on mount
-   - **Hydrates from sessionStorage hints** set by other pages (jobsonn_partner_apply_model from PublicPartnerModels, jobsonn_partner_apply_program from PublicPartnerPrograms)
+   - **Hydrates from sessionStorage hints** set by other pages (jobson_id_partner_apply_model from PublicPartnerModels, jobson_id_partner_apply_program from PublicPartnerPrograms)
    - "Save draft" button (manual save + toast)
    - On submit → success state + toast "Application submitted!" → navigates to partner/overview after 2.5s + clears localStorage draft
    - Type-safe: `zodResolver(schema) as Resolver<FormValues>` pattern (consistent with TrainingCohorts.tsx) to handle z.coerce.number() type asymmetry
@@ -1243,11 +1243,11 @@ Quality bar:
 - recharts PieChart used in calculator; react-hook-form + zod used in apply wizard.
 
 Cross-page handoff (sessionStorage):
-- `jobsonn_partner_apply_model` — set by PublicPartnerModels "Apply" buttons, consumed by PublicPartnerApply to pre-select model in step 1
-- `jobsonn_partner_apply_program` — set by PublicPartnerPrograms "Apply to deliver" buttons, consumed by PublicPartnerApply to pre-check program in step 7
+- `jobson_id_partner_apply_model` — set by PublicPartnerModels "Apply" buttons, consumed by PublicPartnerApply to pre-select model in step 1
+- `jobson_id_partner_apply_program` — set by PublicPartnerPrograms "Apply to deliver" buttons, consumed by PublicPartnerApply to pre-check program in step 7
 
 Autosave (localStorage):
-- `jobsonn_partner_application_draft` — entire form state, autosaved on every change via form.watch, restored on mount, cleared on successful submit
+- `jobson_id_partner_application_draft` — entire form state, autosaved on every change via form.watch, restored on mount, cleared on successful submit
 
 Verification:
 - `bunx eslint <my 9 files>` → **0 errors, 1 warning** (known non-actionable `react-hooks/incompatible-library` warning about form.watch() from react-hook-form — same warning present in 5 other files in repo)
@@ -1288,15 +1288,15 @@ Delivery section (6):
 
 Finance section (6):
 13. **PartnerWallet.tsx** (`wallet`) — Hero wallet balance card (gradient, prominent). 4 KPIs (revenue YTD, settlements YTD, pending, this-month credit). Wallet balance trend AreaChart (6mo). Type filter. Transactions table (type badge, amount colored, balance, description, reference, timestamp). Withdraw dialog with account selector + balance validation.
-14. **PartnerSettlements.tsx** (`settlements`) — KPIs (gross, net, paid, pending). Settlement trend BarChart. Status filter. Table: number, period, partner, gross, partner share, deductions, net payable, status, payment date. Generate settlement dialog (period select). Click → Sheet with gross/partner/JOBSONN/deductions cards, hero net-payable, line items list, payment info, mark-as-paid action. Settlement disclaimer per agreement.
-15. **PartnerRevenueSplits.tsx** (`revenue-splits`) — KPIs (gross, partner share + avg %, JOBSONN share, count). Revenue share model explanation card. Status + lead-source filters. Table: partner, program, source, gross, net-after-fees, partner %, partner share, JOBSONN share, rule applied, status. Click → Sheet with rule applied, full revenue breakdown (gross/discount/net/fees/tax/net-after-fees), partner-vs-JOBSONN visual bars, status/settled-at.
-16. **PartnerCalculator.tsx** (`calculator`) — KEY interactive page. Left card: program select, lead-source select (shows matched rule), gross input, discount + scholarship inputs, gateway-fee Slider (0–5%), tax Slider (0–28%), Compute button. Right card: hero partner-share card, breakdown rows, distribution bar (partner vs JOBSONN), Save/Share buttons. Formula explanation card. Active revenue share rules preview table for partner's model. Uses `computeSplit()` from _shared.tsx + `findRule()` (priority-sorted active match by leadSource × partnerModel).
+14. **PartnerSettlements.tsx** (`settlements`) — KPIs (gross, net, paid, pending). Settlement trend BarChart. Status filter. Table: number, period, partner, gross, partner share, deductions, net payable, status, payment date. Generate settlement dialog (period select). Click → Sheet with gross/partner/jobson.id/deductions cards, hero net-payable, line items list, payment info, mark-as-paid action. Settlement disclaimer per agreement.
+15. **PartnerRevenueSplits.tsx** (`revenue-splits`) — KPIs (gross, partner share + avg %, jobson.id share, count). Revenue share model explanation card. Status + lead-source filters. Table: partner, program, source, gross, net-after-fees, partner %, partner share, jobson.id share, rule applied, status. Click → Sheet with rule applied, full revenue breakdown (gross/discount/net/fees/tax/net-after-fees), partner-vs-jobson.id visual bars, status/settled-at.
+16. **PartnerCalculator.tsx** (`calculator`) — KEY interactive page. Left card: program select, lead-source select (shows matched rule), gross input, discount + scholarship inputs, gateway-fee Slider (0–5%), tax Slider (0–28%), Compute button. Right card: hero partner-share card, breakdown rows, distribution bar (partner vs jobson.id), Save/Share buttons. Formula explanation card. Active revenue share rules preview table for partner's model. Uses `computeSplit()` from _shared.tsx + `findRule()` (priority-sorted active match by leadSource × partnerModel).
 17. **PartnerFees.tsx** (`fees`) — KPIs (total, collected, pending, overdue count). Overdue alert card with student names. Fee collection trend AreaChart. Status filter. Table: student (with avatar), program, total, paid, pending, due date, status, "Collect" button. Collect dialog (amount + method).
 18. **PartnerInvoices.tsx** (`invoices`) — KPIs (total invoiced, paid, pending, GST collected). GST summary card (output GST, ITC, net payable, next filing). Overdue alert. Status filter. Table: number, client (avatar), amount, GST, total, status, issue/due/paid dates, mark-paid + download actions. Generate invoice dialog with auto-GST.
 
 Account section (6):
 19. **PartnerProfile.tsx** (`profile`) — KPIs (model, tier, status, rating). Profile completeness Progress. Editable form (name, legal, contact, city/state/territory). Specialities & accreditation tag editors (add/remove chips). Capabilities matrix grid (15 capabilities with ENABLED/DISABLED/CONFIGURABLE badges). Agreement details (start, end, tier, established). Save → toast.
-20. **PartnerModels.tsx** (`models`) — Current model banner card. Tabs: 6 Partner Models (cards with icon, label, description, capabilities chips, revenue model, ideal-for, "Switch" button → info toast), College Models A–E (cards with JOBSONN/College scope, revenue model, ideal-for), Comparison table. Current model highlighted.
+20. **PartnerModels.tsx** (`models`) — Current model banner card. Tabs: 6 Partner Models (cards with icon, label, description, capabilities chips, revenue model, ideal-for, "Switch" button → info toast), College Models A–E (cards with jobson.id/College scope, revenue model, ideal-for), Comparison table. Current model highlighted.
 21. **PartnerPrograms.tsx** (`programs`) — KPIs (total, active, avg price, avg partner %). Search + category filter. Grid of program cards (duration/price/partner% + target role chips + View/Enroll buttons). "View details" → Dialog with full info + interactive revenue split preview (lead source + discount sliders → live partner-share card). "Enroll student" → toast.
 22. **PartnerCompliance.tsx** (`compliance`) — Compliance score hero card (color-coded by score). 4 KPIs (total, compliant, due soon, overdue). Overdue alert. Checklist with 10 items (status icon, category, mandatory, due date with overdue/urgent coloring, last completed, mark-done button). Upcoming inspections list. Document vault (4 docs with download).
 23. **PartnerSettings.tsx** (`settings`) — 5 tabs: Account (org form + save), Notifications (6 toggle Switches), Team (5 mock members table with role select + AlertDialog remove + invite dialog), Security (MFA Switch, active sessions, password reset), API (partner ID, API key, webhook URL with copy buttons, rotate/docs). Invite dialog uses AlertDialog.
@@ -1341,7 +1341,7 @@ Work Log:
 - Fixed recruiter nav config: redesigned 4 mains × 6 subs to include new recruitment routes (job-orders, hotlists, onboarding, timesheets, email-templates, candidate-compliance) while keeping agency routes. 4 mains: Sourcing, Jobs & Mandates, Finance & Agency, Account.
 - Added missing icons: CalendarCheck2, Calculator, ReceiptText.
 - Browser verification (all PASSED):
-  - Public Partners page renders: "6 ways to partner with JOBSONN" ✓
+  - Public Partners page renders: "6 ways to partner with jobson.id" ✓
   - Partner Portal renders: "Welcome, Rajesh 👋" (Chennai Tech Academy) ✓
   - Partner sidebar: exactly 4 main items (Dashboard, Delivery, Finance, Account) ✓
   - Revenue Calculator renders ✓
@@ -1399,7 +1399,7 @@ Work Log:
 
   7. **RecruiterWallet.tsx** (`wallet`) — Wallet & revenue. Hero balance card (gradient emerald, large formatCurrency balance, Updated date, Withdraw + Add buttons, NEFT notice). KPIs: total earned, total withdrawn, pending payout, this month earned. Revenue trend AreaChart (6 months with gradient fill). Earnings by client PieChart (6 segments with Cell colors + legend). Transaction history table (10 mock WalletTxn: type icon with color, description, category Badge, date, amount with +/− color, balance after, download receipt). Filter by type (all/credits/debits). Footer summary with total credits + total debits. Withdraw dialog: available balance card, amount input with quick presets (₹1L/₹2.5L/₹5L/Max), bank account select (3 mock accounts), breakdown (amount + NEFT fee + you'll receive). AlertDialog confirm before processing.
 
-  8. **RecruiterSettlements.tsx** (`settlements`) — Settlements. Amber disclaimer notice ("All amounts per signed recruitment partner agreement; revenue shares, deductions and net payable are final once paid; disputes within 7 days"). KPIs: total gross, total net payable, total deductions, pending settlements. Table: settlement # (mono), period, gross, partner share (emerald), JOBSONN share (muted), deductions (rose), net payable (bold), status StatusBadge, paid date. Settlement trend BarChart (6 periods). "Generate settlement" dialog: period select (4 options), 4-step computation explainer. Click → Sheet detail: status + net payable hero, payment info card (paid date, method, transaction ID — when paid), amount breakdown (BreakRow component: gross / +partner / −JOBSONN / −deductions / =net), line items list, action buttons (Download PDF, Generate invoice, Raise dispute for unpaid). Footer: created-at timestamp + "final once paid" notice.
+  8. **RecruiterSettlements.tsx** (`settlements`) — Settlements. Amber disclaimer notice ("All amounts per signed recruitment partner agreement; revenue shares, deductions and net payable are final once paid; disputes within 7 days"). KPIs: total gross, total net payable, total deductions, pending settlements. Table: settlement # (mono), period, gross, partner share (emerald), jobson.id share (muted), deductions (rose), net payable (bold), status StatusBadge, paid date. Settlement trend BarChart (6 periods). "Generate settlement" dialog: period select (4 options), 4-step computation explainer. Click → Sheet detail: status + net payable hero, payment info card (paid date, method, transaction ID — when paid), amount breakdown (BreakRow component: gross / +partner / −jobson.id / −deductions / =net), line items list, action buttons (Download PDF, Generate invoice, Raise dispute for unpaid). Footer: created-at timestamp + "final once paid" notice.
 
   9. **RecruiterTeam.tsx** (`recruiters`) — Recruiter team. Tabs: Team / Roles & permissions. Team table: name (AvatarLogo), email, role (custom tone badge with 6 roles: Owner/Admin/Senior/Recruiter/Associate/Sourcing), active mandates, submissions, placements, revenue (formatCurrency), rating (star + value), status StatusBadge, last active (timeAgo). Filter by role + status + search. Performance leaderboard (top 5 by revenue with Trophy icon for #1, medal colors for #2/#3). Click → Sheet detail: KPI grid, profile card (specialty, rating, joined, last active), conversion rate (submissions→placements) Progress, active mandates list, placement history list, action buttons (Message, Download report). Roles & permissions tab: 10-capability × 6-role matrix (PermCell Check/X icons), role description cards (6). "Invite recruiter" dialog (name, email, role select) with validation.
 
@@ -1438,7 +1438,7 @@ Files updated (1):
 
 Issues / notes for orchestrator:
 - The 10 new routes are wired in the recruiter router. To surface them in the recruiter sidebar/topbar, the orchestrator (or a navigation subagent) should add entries to the recruiter nav config — out of my task scope per CONTRACT.
-- RecruiterAI is fully simulated (clearly labelled). Production would call a JOBSONN Recruiting AI service with RAG over real candidate/client/pipeline data.
+- RecruiterAI is fully simulated (clearly labelled). Production would call a jobson.id Recruiting AI service with RAG over real candidate/client/pipeline data.
 - Settlements disclaimer is explicit (amber notice) — all amounts per signed agreement; disputes within 7 days.
 - Audit logs immutable notice is explicit (emerald notice) — write-once, hash-chained, retained per policy.
 - Wallet withdraw flow uses NEFT (1–2 business days); min ₹10,000; no processing fee shown.
@@ -1477,7 +1477,7 @@ Files created:
 
 5. **EmployerTransactions.tsx** (`emp-transactions`) — Comprehensive transaction history. Summary cards: total spend YTD, this month, refunds, count. Monthly spend AreaChart (6 months, gradient fill). Spend by Category PieChart (6 categories: subscription, job_post, featured_listing, resume_access, add_on, refund — with color legend). Filters: search, type select (6 types), status select (4 statuses), date range. Transaction table with: date, type badge (color-coded), description, invoice number (monospace), method, status, amount (refund=green, debit=red), per-row Download Invoice button → toast. Export CSV → toast. 14 mock transactions including 1 failed and 1 refund.
 
-6. **EmployerSettlements.tsx** (`emp-settlements`) — Partner settlements management (employer paying partners via JOBSONN). Commission disclaimer card (amber, configurable rates notice). KPIs: pending count + amount, approved count, paid YTD, disputed count. Default Commission Rates panel (4 partner types with partner % / JOBSONN % split badges and notes). Settlement Volume BarChart (horizontal, by partner type, color-coded). Settlement Schedule (3 cycle cards: weekly/bi-weekly/monthly with next-run + count + amount). Settlement History table with filters (partner type, status) — columns: settlement #, partner (with type icon), period, service description, gross, partner share (green, with %), JOBSONN fee (with %), status, action button (Approve / Mark paid / Resolve dispute per status). Approve settlement via AlertDialog with breakdown summary. 8 mock settlements across 4 partner types and 5 statuses. Partner payment history tabs (Paid/Approved/Disputed).
+6. **EmployerSettlements.tsx** (`emp-settlements`) — Partner settlements management (employer paying partners via jobson.id). Commission disclaimer card (amber, configurable rates notice). KPIs: pending count + amount, approved count, paid YTD, disputed count. Default Commission Rates panel (4 partner types with partner % / jobson.id % split badges and notes). Settlement Volume BarChart (horizontal, by partner type, color-coded). Settlement Schedule (3 cycle cards: weekly/bi-weekly/monthly with next-run + count + amount). Settlement History table with filters (partner type, status) — columns: settlement #, partner (with type icon), period, service description, gross, partner share (green, with %), jobson.id fee (with %), status, action button (Approve / Mark paid / Resolve dispute per status). Approve settlement via AlertDialog with breakdown summary. 8 mock settlements across 4 partner types and 5 statuses. Partner payment history tabs (Paid/Approved/Disputed).
 
 **Training/Admin Portal (`src/portals/training/`):**
 
@@ -2065,7 +2065,7 @@ Work Log:
 
 - Built **20 new pages** (4 per portal × 5 portals), each `"use client"`, emerald brand, responsive:
   - Candidate: `CandidateSettingsHub.tsx` (quick links + 3 quick toggles + Account/Appearance/Privacy/Billing[Integration: LinkedIn/GitHub/Stack Overflow/Behance]/DangerZone), `CandidateSecurityCenter.tsx` (score + Password + MFA + Sessions[4] + LoginHistory[10] + Alerts[4]), `CandidateNotificationPrefs.tsx` (Email[7]/SMS[4]/InApp[3]/Push[3] + Quiet hours + Channel matrix), `CandidateSupportHub.tsx` (Contact[3] + FAQ[8] + Tickets[2 mock] + KB[6] + Videos[6] + Status + Feedback + Forum[4])
-  - Employer: same 4 shapes adapted for org context. Integrations: Greenhouse/Workday/Slack/LinkedIn Recruiter/Calendly/DocuSign. Billing: Enterprise ₹49,999/mo. Extra: `ApiSection` + `IpAllowlistSection` (employer-only). Support: enterprise@jobsonn.com + dedicated CSM "Riya". FAQ[8] employer-specific (post job, AI matching, Enterprise plan, SSO, confidential employer).
+  - Employer: same 4 shapes adapted for org context. Integrations: Greenhouse/Workday/Slack/LinkedIn Recruiter/Calendly/DocuSign. Billing: Enterprise ₹49,999/mo. Extra: `ApiSection` + `IpAllowlistSection` (employer-only). Support: enterprise@jobson.id + dedicated CSM "Riya". FAQ[8] employer-specific (post job, AI matching, Enterprise plan, SSO, confidential employer).
   - Recruiter: Integrations: Naukri Resdex/LinkedIn Recruiter/Bullhorn/Indeed/Shine/Calendly. Billing: Recruiter Pro ₹4,999/mo. FAQ[8] recruiter-specific (commissions 8.33%, submissions, split desks, guarantee period, white-label).
   - Training: Integrations: Moodle LMS/Google Calendar/Zoom/Teams/Razorpay/Zoho Books. Defaults: Divya Sharma @ SkillForge Academy. FAQ[8] training-specific (course builder, live sessions, certifications, corporate billing, LMS sync).
   - Partner: Integrations: GST Portal/ICICI Bank/Razorpay/Google Workspace/Tally/WhatsApp Business. Defaults: Rajesh Kumar @ Chennai Tech Academy. FAQ[8] partner-specific (revenue share 60/40, weekly settlements, MoU renewals, certificates, sub-partners).
@@ -2126,7 +2126,7 @@ Agent: Main (orchestrator)
 Task: Rebuild public header to match reference image + port data files for missing pages
 
 Work Log:
-- Analyzed reference project at /tmp/jobsonn-ref/Jobsonn-main/ (Jobsonn-main.zip)
+- Analyzed reference project at /tmp/jobson.id-ref/jobson.id-main/ (jobson.id-main.zip)
 - Analyzed attached header screenshot (pasted_image_1792911087047.png) — 6 nav items with dropdowns + icons
 - Ported 5 data files into existing project:
   - src/data/servicesData.ts (9 categories, 54 services)
@@ -2218,7 +2218,7 @@ Created `src/portals/public/PublicProgramDetail.tsx` (~560 lines) — Program de
 - Specialization roles: 6 cards (uses getRolesForProgram) — each card navigates to role route, shows icon tile (role color), badge, label, motive, weeks/mode.
 - Tech stack chips: aggregated across all 6 tracks via getTechStackForProgram() (dedupes via Set).
 - Career outcomes: realistic salary bands (LPA) per role for this program — 6 roles per program in a 2-col grid card with Briefcase icons (accent color) and "₹X–Y LPA" labels.
-- Comparison table: "JOBSONN {tag} vs Traditional degree" — 7-row 3-col table (Feature / JOBSONN / Traditional) covering duration, cost, curriculum freshness, live projects, mentorship, placement support, starting salary.
+- Comparison table: "jobson.id {tag} vs Traditional degree" — 7-row 3-col table (Feature / jobson.id / Traditional) covering duration, cost, curriculum freshness, live projects, mentorship, placement support, starting salary.
 - Testimonials: 3 cards with Quote icon, AvatarLogo (initials), name, role · company, CTC badge (emerald). Per-program testimonials (FDE-FWD: Razorpay/Postman/Zerodha; FDE: Swiggy/Freshworks/PhonePe; DSAI: Zoho/CRED/Groww).
 - FAQ accordion: 4 program-specific Q&As (defined in PROGRAM_FAQS map per program).
 - CTA: "Apply to {program.label}" with Apply Now + Pay After Placement buttons.
@@ -2239,7 +2239,7 @@ Created `src/portals/public/PublicPayAfterPlacement.tsx` (~315 lines) — PAP pa
 - Hero: PAP badge (emerald), headline "Learn now. Pay only when you earn." (emerald accent), subheadline, 2 CTAs (Explore Programs, Talk to Counselor → toast), 3 inline checkmarks.
 - How it works: 3 numbered step cards (Apply & enroll / Learn & build / Get placed, then pay) with FileSignature/Rocket/HandCoins icons (emerald), duration badges.
 - Benefits: 6 cards (Zero upfront tuition, Income-share option, 6-month placement window, 220+ hiring partners, Pre-agreed CTC threshold, Top 10% earn 30–60% more) with emerald icon tiles.
-- Fee comparison table: "JOBSONN PAP vs Traditional fee" — 6-row 3-col table covering upfront cost, payment timing, no-placement scenario, risk, skin in the game, income-share option.
+- Fee comparison table: "jobson.id PAP vs Traditional fee" — 6-row 3-col table covering upfront cost, payment timing, no-placement scenario, risk, skin in the game, income-share option.
 - Metrics: 4 StatCards (avg starting CTC ₹11.2 LPA, 94% placement rate, 47 days median time-to-offer, 1,400+ total PAP alumni).
 - Testimonials: 3 PAP alumni cards (Pooja Reddy @Swiggy ₹12 LPA, Karthik Iyer @Zoho ₹11 LPA, Aarav Kulkarni @Razorpay ₹16 LPA).
 - FAQ: 5 Q&As using native `<details>`/`<summary>` (rotating arrow on open) — covers CTC threshold, leaving job early, upfront alternative, international students, dropout policy.
@@ -2534,7 +2534,7 @@ Issues Encountered: None. All edits applied cleanly.
 Task ID: TALENT-SOURCING-SUBPAGES
 Agent: Talent Sourcing Sub-pages Agent
 
-Task: Build a comprehensive Talent Sourcing section under "Hire Talent" with a main landing page + 8 sub-pages, each with 16 sections. Inspired by jobsonn.com/talent-solutions reference site.
+Task: Build a comprehensive Talent Sourcing section under "Hire Talent" with a main landing page + 8 sub-pages, each with 16 sections. Inspired by jobson.id/talent-solutions reference site.
 
 Files Created (2):
 1. `src/portals/public/PublicTalentSourcingLanding.tsx` (~310 lines) — Main Talent Sourcing landing page (route: `talent/talent-sourcing-recruitment`). Replaces the previous PublicTalentRole view for this route with a much richer page:
@@ -2563,7 +2563,7 @@ Files Created (2):
    4. How It Works — 5-step alternating timeline (emerald dots + cards)
    5. Benefits — 6 benefit cards grid with emerald icon tiles
    6. Use Cases — 4 scenario cards (2x2) with emerald top-border + scenario/solution/metrics
-   7. Comparison — 3-column table (Capability / Traditional / JOBSONN) with emerald-highlighted "ours" column + checkmarks; horizontal scroll on mobile
+   7. Comparison — 3-column table (Capability / Traditional / jobson.id) with emerald-highlighted "ours" column + checkmarks; horizontal scroll on mobile
    8. Tech Stack — emerald chips grid (12 technologies per sub-page) with Cog icon
    9. Integrations — 6 integration cards (ATS/HRIS/Payments/Messaging) with icon + name + type badge + desc
    10. Metrics — 4 StatCards (brand tone) with metrics from last 12 months
@@ -2688,7 +2688,7 @@ Work Log:
 - Read attached reference image at /home/z/my-project/upload/pasted_image_1793011427319.png using VLM
 - Reference image analysis (two-column hero):
   - LEFT (~60%): breadcrumbs at top, category tags, large two-line headline, description, metadata row (Project type/duration/rating), category tag pills, two CTAs (Get a Quote, Schedule Consultation)
-  - RIGHT (~40%): preview card with gradient icon tile, "JOBSONN Enterprise Service" badge, truncated headline + description, mini meta (Type/Timeline/Rating), trust checklist, full-width "Hire a Specialist" CTA
+  - RIGHT (~40%): preview card with gradient icon tile, "jobson.id Enterprise Service" badge, truncated headline + description, mini meta (Type/Timeline/Rating), trust checklist, full-width "Hire a Specialist" CTA
 - Read existing PublicServiceDetail.tsx hero (single-column, max-w-4xl, simple badge + icon + title + desc + 2 CTAs)
 - Extracted all 60 actual service slugs + names from /home/z/my-project/src/data/servicesData.ts (9 categories × 6-12 services each)
 - Added CATEGORY_HERO_META map (project type, duration, rating, reviews, tags per category) — reusing marketplace metadata
@@ -2705,13 +2705,13 @@ Work Log:
 - Each title = [punchy first line, supporting second line in emerald green]
 - Replaced the entire hero section with new two-column design:
   - LEFT column: breadcrumb nav (Pro Services > Category > Service), top-right tag pills (Professional Service / Enterprise), gradient icon tile + two-line headline (line 2 in text-brand), description, metadata row (project type · duration · rating with icons), category tag pills + Fixed Scope + Senior Team, two CTAs (Get a Quote emerald, Schedule Consultation outline)
-  - RIGHT column: sticky preview card with gradient top strip, gradient icon tile + JOBSONN Enterprise Service badge, truncated headline + description, 3-column mini meta (Type/Timeline/Rating), trust checklist (3 items with CheckCircle2), full-width emerald "Hire a Specialist" CTA, subtext "Free 45-min consultation · No commitment"
+  - RIGHT column: sticky preview card with gradient top strip, gradient icon tile + jobson.id Enterprise Service badge, truncated headline + description, 3-column mini meta (Type/Timeline/Rating), trust checklist (3 items with CheckCircle2), full-width emerald "Hire a Specialist" CTA, subtext "Free 45-min consultation · No commitment"
 - Removed unused CatIcon variable (was only in hero, now removed)
 - Kept formatINR + ILLUSTRATIVE_PRICE at module scope (void startingPrice to suppress unused)
 - Ran `bun run lint` — 0 errors, only 6 pre-existing warnings in unrelated training files
 - Dev server crashed during testing (ERR_CONNECTION_REFUSED) — restarted with `rm -rf .next && nohup bun run dev`
 - Browser-verified 3 different service detail pages:
-  1. /pro-services/custom-software-development/saas-development → VLM confirmed: two-column, breadcrumbs, two-line headline "Launch Your SaaS Product with / Multi-Tenant Architecture Built to Scale" (2nd line green), preview card with JOBSONN badge + Hire a Specialist button
+  1. /pro-services/custom-software-development/saas-development → VLM confirmed: two-column, breadcrumbs, two-line headline "Launch Your SaaS Product with / Multi-Tenant Architecture Built to Scale" (2nd line green), preview card with jobson.id badge + Hire a Specialist button
   2. /pro-services/ai-agentic-automation/custom-ai-agents → VLM confirmed: "Build Autonomous AI Agents / That Get Things Done Without You" (2nd line green)
   3. /pro-services/cloud-infrastructure-devops/kubernetes → VLM confirmed: "Orchestrate Containers at Scale / with Kubernetes Done Right" (2nd line green), preview card with Hire a Specialist button
 - Checked console + errors — clean, no errors
@@ -2720,7 +2720,7 @@ Stage Summary:
 - PublicServiceDetail.tsx hero section completely redesigned to match reference image:
   - Two-column layout (lg:grid-cols-[1.5fr_1fr])
   - Left: breadcrumbs, tags, gradient icon, two-line headline (2nd line emerald), description, metadata row, tag pills, 2 CTAs
-  - Right: sticky preview card with gradient strip, icon, JOBSONN badge, truncated content, mini meta grid, trust checklist, full-width Hire a Specialist CTA
+  - Right: sticky preview card with gradient strip, icon, jobson.id badge, truncated content, mini meta grid, trust checklist, full-width Hire a Specialist CTA
 - ATTRACTIVE_TITLES map covers all 60 services with correct slugs (verified against servicesData.ts)
 - CATEGORY_HERO_META map provides project type/duration/rating/tags per category
 - Maintained light theme with emerald brand color (bg-background, bg-card, text-brand, bg-brand) — NO dark colors, NO amber
@@ -3021,7 +3021,7 @@ Work Log:
 
 - Checked existing JobsDropdown (3-column: Future-Ready Roles, Trending Now, Global Hiring Hotspots) — needed complete replacement
 - Checked PublicJobs.tsx FilterState — supports: keyword, location, workArrangements, employmentTypes, experienceMin, salaryMin, category, postedWithinDays, sort
-- Checked sessionStorage mechanism — `jobsonn_job_search` key stores partial FilterState, hydrated on mount
+- Checked sessionStorage mechanism — `jobson_id_job_search` key stores partial FilterState, hydrated on mount
 
 - REDESIGNED JobsDropdown with 4-column filter grid (920px wide, left-aligned to prevent overflow):
   - Header: "Job Search Filters" label + "150,000+ live roles — filter & find your fit" + "Browse All Jobs →" CTA
@@ -3037,7 +3037,7 @@ Work Log:
 - CREATED FilterItem component: clickable filter button with label + count, hover highlight
 
 - IMPLEMENTED filter application via sessionStorage:
-  - applyFilter() stores filter data in `jobsonn_job_search` sessionStorage key
+  - applyFilter() stores filter data in `jobson_id_job_search` sessionStorage key
   - Uses `window.location.assign("/jobs")` for full page navigation (so PublicJobs remounts and reads sessionStorage)
   - handleWorkMode: maps "On-site"/"Hybrid"/"Remote" → workArrangements array
   - handleLocation: sets location field
@@ -3482,34 +3482,34 @@ Stage Summary:
 Task ID: REPLACE-LOGO
 Agent: Main (Z.ai Code)
 
-Task: Remove the existing logo and add the new attached logo (New Jobsonn (7).png).
+Task: Remove the existing logo and add the new attached logo (New jobson.id (7).png).
 
 Work Log:
 - Read /home/z/my-project/worklog.md to understand previous work
-- Checked new logo file at /home/z/my-project/upload/New Jobsonn (7).png — 1.1MB, 3019x569 PNG
-- Checked existing logo at /home/z/my-project/public/jobsonn-logo.png — 1.2MB, 3019x563 PNG
+- Checked new logo file at /home/z/my-project/upload/New jobson.id (7).png — 1.1MB, 3019x569 PNG
+- Checked existing logo at /home/z/my-project/public/jobson-id-logo.png — 1.2MB, 3019x563 PNG
 - Found all logo references in the codebase:
   - src/app/layout.tsx (metadata, og:image)
   - src/components/layout/Footer.tsx (footer logo)
   - src/components/layout/PublicNavbar.tsx (header logo + mobile nav logo)
   - src/portals/public/PublicAuth.tsx (login page logo)
   - src/portals/public/PublicRegister.tsx (registration page logo)
-  - All reference `/jobsonn-logo.png` path
-- Replaced the logo file: `cp "/home/z/my-project/upload/New Jobsonn (7).png" /home/z/my-project/public/jobsonn-logo.png`
+  - All reference `/jobson-id-logo.png` path
+- Replaced the logo file: `cp "/home/z/my-project/upload/New jobson.id (7).png" /home/z/my-project/public/jobson-id-logo.png`
 - The BrandMark component in PortalSidebar.tsx is a small SVG icon (not the main logo) — kept as is since it's a simplified brand mark for the narrow 64px sidebar rail
 - VLM analyzed the new logo: horizontal logo with green icon (square with stylized figure) + text "JOBSOn.id" in green gradient, modern rounded sans-serif
 
 - Browser-verified the new logo appears in:
-  1. Header (PublicNavbar) — VLM confirmed: "stylized green icon + JOBSONN text in dark green/teal"
-  2. Footer — VLM confirmed: "stylized green icon + JOBSONN in bold dark green/teal capital letters"
-  3. Auth/Login page — VLM confirmed: "JOBSONN in bold modern uppercase lettering with green-to-teal gradient + stylized icon"
+  1. Header (PublicNavbar) — VLM confirmed: "stylized green icon + jobson.id text in dark green/teal"
+  2. Footer — VLM confirmed: "stylized green icon + jobson.id in bold dark green/teal capital letters"
+  3. Auth/Login page — VLM confirmed: "jobson.id in bold modern uppercase lettering with green-to-teal gradient + stylized icon"
   4. Registration page — uses same logo reference, will show new logo automatically
 - Console: clean, no errors
 
 Stage Summary:
-- Existing logo file replaced with new logo at /home/z/my-project/public/jobsonn-logo.png
+- Existing logo file replaced with new logo at /home/z/my-project/public/jobson-id-logo.png
 - New logo is a horizontal combination mark: green gradient icon (square with stylized figure) + "JOBSOn.id" text in green gradient
-- All 6 locations that reference /jobsonn-logo.png now show the new logo automatically:
+- All 6 locations that reference /jobson-id-logo.png now show the new logo automatically:
   - Header navbar (desktop + mobile)
   - Footer
   - Auth/Login page
@@ -4893,7 +4893,7 @@ Work Log:
 - Found the dashboard footer in /home/z/my-project/src/components/layout/AppShell.tsx at lines 45-47:
   ```tsx
   <footer className="shrink-0 border-t bg-background px-4 py-3 text-center text-xs text-muted-foreground">
-    © {new Date().getFullYear()} JOBSONN — {portal.charAt(0).toUpperCase() + portal.slice(1)} Portal · Demo prototype (simulated data)
+    © {new Date().getFullYear()} jobson.id — {portal.charAt(0).toUpperCase() + portal.slice(1)} Portal · Demo prototype (simulated data)
   </footer>
   ```
 - This footer was rendered for ALL non-public portals (candidate, employer, recruiter, training, partner, admin, etc.)
@@ -5172,7 +5172,7 @@ Removed non-project files to bring project size below 20MB:
 - `tests/` — test files (user's rule: no test code)
 - `download/` — empty/unused
 - `public/logo.png` (1.7MB) — unused old logo
-- `public/jobsonn-icon.png` (1.7MB) — unused
+- `public/jobson.id-icon.png` (1.7MB) — unused
 - `public/logo-tagline.png` (336KB) — unused
 - `.next/` cache — regenerated on build
 
@@ -5525,7 +5525,7 @@ Total cross-portal bridge pages built: 23
 Task ID: PROJECT-VERIFICATION-FINAL
 Agent: Main (Z.ai Code)
 
-Task: Comprehensive verification of the entire JOBSONN platform — all portals, all features, all cross-portal bridges.
+Task: Comprehensive verification of the entire jobson.id platform — all portals, all features, all cross-portal bridges.
 
 ## VERIFICATION RESULTS
 
@@ -5593,7 +5593,7 @@ Each portal has comprehensive features across 4 categories:
 Task ID: FINAL-PRODUCTION-VERIFICATION
 Agent: Main (Z.ai Code)
 
-Task: Full final verification of the entire JOBSONN platform — architecture, security, code quality, and browser testing.
+Task: Full final verification of the entire jobson.id platform — architecture, security, code quality, and browser testing.
 
 ## VERIFICATION RESULTS
 

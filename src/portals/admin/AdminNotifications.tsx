@@ -34,7 +34,7 @@ const TEMPLATES: Template[] = [
   { id: "t2", name: "Interview scheduled", category: "interview", subject: "Interview scheduled: {{job_title}}", body: "Hi {{candidate_name}},\n\nYour {{interview_type}} interview is scheduled for {{interview_date}} at {{interview_time}}.", channels: { email: true, sms: true, inApp: true } },
   { id: "t3", name: "Offer extended", category: "offer", subject: "Offer from {{employer}}!", body: "Congratulations {{candidate_name}}!\n\n{{employer}} has extended an offer for {{job_title}}. View details and respond.", channels: { email: true, sms: true, inApp: true } },
   { id: "t4", name: "Invoice payment failed", category: "billing", subject: "Payment failed for invoice {{invoice_number}}", body: "Hi {{customer_name}},\n\nYour payment for invoice {{invoice_number}} could not be processed. Please update your payment method.", channels: { email: true, sms: false, inApp: true } },
-  { id: "t5", name: "Welcome to JOBSONN", category: "system", subject: "Welcome to JOBSONN, {{name}}!", body: "Hi {{name}},\n\nWelcome to JOBSONN. Complete your profile to get started.", channels: { email: true, sms: false, inApp: true } },
+  { id: "t5", name: "Welcome to jobson.id", category: "system", subject: "Welcome to jobson.id, {{name}}!", body: "Hi {{name}},\n\nWelcome to jobson.id. Complete your profile to get started.", channels: { email: true, sms: false, inApp: true } },
 ];
 
 const LOGS = [
@@ -135,8 +135,8 @@ export function AdminNotifications() {
                 <label className="flex items-center justify-between"><span>Enabled</span><Switch checked={channelConfig.email} onCheckedChange={(v) => setChannelConfig((p) => ({ ...p, email: v }))} /></label>
                 <div className="rounded-md border p-2 text-xs text-muted-foreground">
                   <p>Provider: AWS SES</p>
-                  <p>From: notifications@jobsonn.com</p>
-                  <p>Reply-to: support@jobsonn.com</p>
+                  <p>From: notifications@jobson.id</p>
+                  <p>Reply-to: support@jobson.id</p>
                 </div>
                 <Button size="sm" variant="outline" onClick={() => toast.success("Test email sent (demo)")}>Send test</Button>
               </div>
@@ -146,7 +146,7 @@ export function AdminNotifications() {
                 <label className="flex items-center justify-between"><span>Enabled</span><Switch checked={channelConfig.sms} onCheckedChange={(v) => setChannelConfig((p) => ({ ...p, sms: v }))} /></label>
                 <div className="rounded-md border p-2 text-xs text-muted-foreground">
                   <p>Provider: (not configured)</p>
-                  <p>Sender ID: JOBSONN</p>
+                  <p>Sender ID: jobson.id</p>
                   <p>DLT template IDs required</p>
                 </div>
                 <Button size="sm" variant="outline" onClick={() => toast.info("Configure SMS provider (demo)")}>Configure</Button>

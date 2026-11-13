@@ -84,8 +84,8 @@ interface PartnerSettlement {
   grossAmount: number;
   partnerSharePct: number;
   partnerShare: number;
-  jobsonnFeePct: number;
-  jobsonnFee: number;
+  jobsonIdFeePct: number;
+  jobsonIdFee: number;
   total: number;
   status: SettlementStatus;
   createdAt: string;
@@ -94,21 +94,21 @@ interface PartnerSettlement {
 
 // ----- Mock data -----
 const SEED_SETTLEMENTS: PartnerSettlement[] = [
-  { id: "ps_1", settlementNumber: "EST-2024-201", partnerName: "Chennai Tech Academy", partnerType: "training_partner", period: "Oct 2024", serviceDescription: "Full-Stack Program — 8 enrollments", grossAmount: 360000, partnerSharePct: 70, partnerShare: 252000, jobsonnFeePct: 30, jobsonnFee: 108000, total: 360000, status: "approved", createdAt: "2024-10-20T10:00:00Z", paymentDate: "2024-10-24T12:00:00Z" },
-  { id: "ps_2", settlementNumber: "EST-2024-202", partnerName: "HireBridge Staffing", partnerType: "recruiter", period: "Oct 2024", serviceDescription: "Senior Engineer placement — TechCorp", grossAmount: 200000, partnerSharePct: 68, partnerShare: 136000, jobsonnFeePct: 32, jobsonnFee: 64000, total: 200000, status: "pending", createdAt: "2024-10-22T14:30:00Z" },
-  { id: "ps_3", settlementNumber: "EST-2024-203", partnerName: "Meridian IT Services", partnerType: "service_partner", period: "Oct 2024", serviceDescription: "DevOps Pipeline Setup — Acme Manufacturing", grossAmount: 280000, partnerSharePct: 60, partnerShare: 168000, jobsonnFeePct: 40, jobsonnFee: 112000, total: 280000, status: "approved", createdAt: "2024-10-18T09:00:00Z" },
-  { id: "ps_4", settlementNumber: "EST-2024-204", partnerName: "Kanchana Institute of Technology", partnerType: "college", period: "Oct 2024", serviceDescription: "Campus placement drive — 12 placed", grossAmount: 360000, partnerSharePct: 65, partnerShare: 234000, jobsonnFeePct: 35, jobsonnFee: 126000, total: 360000, status: "paid", createdAt: "2024-10-05T11:00:00Z", paymentDate: "2024-10-19T16:00:00Z" },
-  { id: "ps_5", settlementNumber: "EST-2024-205", partnerName: "Bengaluru Skills Centre", partnerType: "training_partner", period: "Oct 2024", serviceDescription: "Cloud DevOps Program — 4 enrollments", grossAmount: 192000, partnerSharePct: 60, partnerShare: 115200, jobsonnFeePct: 40, jobsonnFee: 76800, total: 192000, status: "draft", createdAt: "2024-10-23T08:00:00Z" },
-  { id: "ps_6", settlementNumber: "EST-2024-206", partnerName: "HireBridge Staffing", partnerType: "recruiter", period: "Sep 2024", serviceDescription: "2 DevOps contract placements — FinEdge", grossAmount: 340000, partnerSharePct: 68, partnerShare: 231200, jobsonnFeePct: 32, jobsonnFee: 108800, total: 340000, status: "paid", createdAt: "2024-09-28T10:00:00Z", paymentDate: "2024-10-03T14:00:00Z" },
-  { id: "ps_7", settlementNumber: "EST-2024-207", partnerName: "Northwind Tech Solutions", partnerType: "service_partner", period: "Sep 2024", serviceDescription: "ERP Integration — Meridian Logistics", grossAmount: 650000, partnerSharePct: 72, partnerShare: 468000, jobsonnFeePct: 28, jobsonnFee: 182000, total: 650000, status: "disputed", createdAt: "2024-09-20T15:00:00Z" },
-  { id: "ps_8", settlementNumber: "EST-2024-208", partnerName: "Veltech University", partnerType: "college", period: "Sep 2024", serviceDescription: "Pre-placement training — 240 students", grossAmount: 480000, partnerSharePct: 65, partnerShare: 312000, jobsonnFeePct: 35, jobsonnFee: 168000, total: 480000, status: "approved", createdAt: "2024-09-15T09:00:00Z" },
+  { id: "ps_1", settlementNumber: "EST-2024-201", partnerName: "Chennai Tech Academy", partnerType: "training_partner", period: "Oct 2024", serviceDescription: "Full-Stack Program — 8 enrollments", grossAmount: 360000, partnerSharePct: 70, partnerShare: 252000, jobsonIdFeePct: 30, jobsonIdFee: 108000, total: 360000, status: "approved", createdAt: "2024-10-20T10:00:00Z", paymentDate: "2024-10-24T12:00:00Z" },
+  { id: "ps_2", settlementNumber: "EST-2024-202", partnerName: "HireBridge Staffing", partnerType: "recruiter", period: "Oct 2024", serviceDescription: "Senior Engineer placement — TechCorp", grossAmount: 200000, partnerSharePct: 68, partnerShare: 136000, jobsonIdFeePct: 32, jobsonIdFee: 64000, total: 200000, status: "pending", createdAt: "2024-10-22T14:30:00Z" },
+  { id: "ps_3", settlementNumber: "EST-2024-203", partnerName: "Meridian IT Services", partnerType: "service_partner", period: "Oct 2024", serviceDescription: "DevOps Pipeline Setup — Acme Manufacturing", grossAmount: 280000, partnerSharePct: 60, partnerShare: 168000, jobsonIdFeePct: 40, jobsonIdFee: 112000, total: 280000, status: "approved", createdAt: "2024-10-18T09:00:00Z" },
+  { id: "ps_4", settlementNumber: "EST-2024-204", partnerName: "Kanchana Institute of Technology", partnerType: "college", period: "Oct 2024", serviceDescription: "Campus placement drive — 12 placed", grossAmount: 360000, partnerSharePct: 65, partnerShare: 234000, jobsonIdFeePct: 35, jobsonIdFee: 126000, total: 360000, status: "paid", createdAt: "2024-10-05T11:00:00Z", paymentDate: "2024-10-19T16:00:00Z" },
+  { id: "ps_5", settlementNumber: "EST-2024-205", partnerName: "Bengaluru Skills Centre", partnerType: "training_partner", period: "Oct 2024", serviceDescription: "Cloud DevOps Program — 4 enrollments", grossAmount: 192000, partnerSharePct: 60, partnerShare: 115200, jobsonIdFeePct: 40, jobsonIdFee: 76800, total: 192000, status: "draft", createdAt: "2024-10-23T08:00:00Z" },
+  { id: "ps_6", settlementNumber: "EST-2024-206", partnerName: "HireBridge Staffing", partnerType: "recruiter", period: "Sep 2024", serviceDescription: "2 DevOps contract placements — FinEdge", grossAmount: 340000, partnerSharePct: 68, partnerShare: 231200, jobsonIdFeePct: 32, jobsonIdFee: 108800, total: 340000, status: "paid", createdAt: "2024-09-28T10:00:00Z", paymentDate: "2024-10-03T14:00:00Z" },
+  { id: "ps_7", settlementNumber: "EST-2024-207", partnerName: "Northwind Tech Solutions", partnerType: "service_partner", period: "Sep 2024", serviceDescription: "ERP Integration — Meridian Logistics", grossAmount: 650000, partnerSharePct: 72, partnerShare: 468000, jobsonIdFeePct: 28, jobsonIdFee: 182000, total: 650000, status: "disputed", createdAt: "2024-09-20T15:00:00Z" },
+  { id: "ps_8", settlementNumber: "EST-2024-208", partnerName: "Veltech University", partnerType: "college", period: "Sep 2024", serviceDescription: "Pre-placement training — 240 students", grossAmount: 480000, partnerSharePct: 65, partnerShare: 312000, jobsonIdFeePct: 35, jobsonIdFee: 168000, total: 480000, status: "approved", createdAt: "2024-09-15T09:00:00Z" },
 ];
 
-const COMMISSION_RATES: { partnerType: PartnerType; label: string; partnerPct: number; jobsonnPct: number; notes: string }[] = [
-  { partnerType: "training_partner", label: "Training Partner (Centre)", partnerPct: 70, jobsonnPct: 30, notes: "Partner-generated leads · walk-ins · website enquiries" },
-  { partnerType: "recruiter", label: "Recruitment Partner", partnerPct: 68, jobsonnPct: 32, notes: "Permanent placements · contract staffing" },
-  { partnerType: "college", label: "College / University", partnerPct: 65, jobsonnPct: 35, notes: "Campus drives · pre-placement training · MoU" },
-  { partnerType: "service_partner", label: "Service / Technology Partner", partnerPct: 60, jobsonnPct: 40, notes: "Project work · AMC · retainers · JOBSONN-generated leads" },
+const COMMISSION_RATES: { partnerType: PartnerType; label: string; partnerPct: number; jobsonIdPct: number; notes: string }[] = [
+  { partnerType: "training_partner", label: "Training Partner (Centre)", partnerPct: 70, jobsonIdPct: 30, notes: "Partner-generated leads · walk-ins · website enquiries" },
+  { partnerType: "recruiter", label: "Recruitment Partner", partnerPct: 68, jobsonIdPct: 32, notes: "Permanent placements · contract staffing" },
+  { partnerType: "college", label: "College / University", partnerPct: 65, jobsonIdPct: 35, notes: "Campus drives · pre-placement training · MoU" },
+  { partnerType: "service_partner", label: "Service / Technology Partner", partnerPct: 60, jobsonIdPct: 40, notes: "Project work · AMC · retainers · jobson.id-generated leads" },
 ];
 
 const PARTNER_TYPE_LABELS: Record<PartnerType, string> = {
@@ -191,7 +191,7 @@ export function EmployerSettlements() {
     <div className="space-y-6">
       <PageHeader
         title="Partner Settlements"
-        description="Approve and track payouts to your training partners, recruiters, colleges, and service partners via JOBSONN."
+        description="Approve and track payouts to your training partners, recruiters, colleges, and service partners via jobson.id."
         icon={<Handshake className="h-6 w-6" />}
         actions={[
           { label: "Download statement", variant: "outline", onClick: downloadStatement },
@@ -262,7 +262,7 @@ export function EmployerSettlements() {
                   </div>
                   <div className="flex items-center gap-2">
                     <Badge className="bg-brand/10 text-brand border-brand/20">Partner {r.partnerPct}%</Badge>
-                    <Badge variant="outline">JOBSONN {r.jobsonnPct}%</Badge>
+                    <Badge variant="outline">jobson.id {r.jobsonIdPct}%</Badge>
                   </div>
                 </div>
                 <p className="mt-1.5 text-xs text-muted-foreground">{r.notes}</p>
@@ -386,7 +386,7 @@ export function EmployerSettlements() {
                   <TableHead>Service</TableHead>
                   <TableHead className="text-right">Gross</TableHead>
                   <TableHead className="text-right">Partner Share</TableHead>
-                  <TableHead className="text-right">JOBSONN Fee</TableHead>
+                  <TableHead className="text-right">jobson.id Fee</TableHead>
                   <TableHead>Status</TableHead>
                   <TableHead className="text-right">Action</TableHead>
                 </TableRow>
@@ -414,7 +414,7 @@ export function EmployerSettlements() {
                       <span className="ml-1 text-[10px] text-muted-foreground">({s.partnerSharePct}%)</span>
                     </TableCell>
                     <TableCell className="text-right text-xs text-muted-foreground">
-                      {formatCurrency(s.jobsonnFee)} ({s.jobsonnFeePct}%)
+                      {formatCurrency(s.jobsonIdFee)} ({s.jobsonIdFeePct}%)
                     </TableCell>
                     <TableCell>
                       <StatusBadge status={s.status} />
@@ -534,14 +534,14 @@ export function EmployerSettlements() {
           <AlertDialogHeader>
             <AlertDialogTitle>Approve settlement {approveTarget?.settlementNumber}?</AlertDialogTitle>
             <AlertDialogDescription>
-              You're about to approve a payout of <span className="font-semibold text-emerald-600 dark:text-emerald-400">{formatCurrency(approveTarget?.partnerShare ?? 0)}</span> to <span className="font-semibold">{approveTarget?.partnerName}</span> for {approveTarget?.serviceDescription}. The JOBSONN platform fee of {formatCurrency(approveTarget?.jobsonnFee ?? 0)} ({approveTarget?.jobsonnFeePct}%) will be retained.
+              You're about to approve a payout of <span className="font-semibold text-emerald-600 dark:text-emerald-400">{formatCurrency(approveTarget?.partnerShare ?? 0)}</span> to <span className="font-semibold">{approveTarget?.partnerName}</span> for {approveTarget?.serviceDescription}. The jobson.id platform fee of {formatCurrency(approveTarget?.jobsonIdFee ?? 0)} ({approveTarget?.jobsonIdFeePct}%) will be retained.
             </AlertDialogDescription>
           </AlertDialogHeader>
           {approveTarget && (
             <div className="rounded-lg border p-3 text-xs">
               <div className="flex justify-between"><span className="text-muted-foreground">Gross amount</span><span className="font-medium">{formatCurrency(approveTarget.grossAmount)}</span></div>
               <div className="flex justify-between"><span className="text-muted-foreground">Partner share ({approveTarget.partnerSharePct}%)</span><span className="font-medium text-emerald-600 dark:text-emerald-400">{formatCurrency(approveTarget.partnerShare)}</span></div>
-              <div className="flex justify-between"><span className="text-muted-foreground">JOBSONN fee ({approveTarget.jobsonnFeePct}%)</span><span className="font-medium">{formatCurrency(approveTarget.jobsonnFee)}</span></div>
+              <div className="flex justify-between"><span className="text-muted-foreground">jobson.id fee ({approveTarget.jobsonIdFeePct}%)</span><span className="font-medium">{formatCurrency(approveTarget.jobsonIdFee)}</span></div>
               <div className="mt-1.5 border-t pt-1.5 flex justify-between"><span className="font-medium">Total</span><span className="font-semibold">{formatCurrency(approveTarget.total)}</span></div>
             </div>
           )}

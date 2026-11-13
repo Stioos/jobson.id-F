@@ -76,8 +76,8 @@ class ChunkErrorBoundary extends React.Component<
         if (typeof window !== "undefined") {
           // Clear sessionStorage that might hold stale route state
           try {
-            sessionStorage.removeItem("jobsonn_job_search");
-            sessionStorage.removeItem("jobsonn_last_application");
+            sessionStorage.removeItem("jobson_id_job_search");
+            sessionStorage.removeItem("jobson_id_last_application");
           } catch {}
           // Force a hard reload to fetch fresh chunks
           window.location.reload();

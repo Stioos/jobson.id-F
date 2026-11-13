@@ -30,19 +30,19 @@ export function PrivacyScreen() {
       {/* Discovery & Indexing Preferences */}
       <section className="rounded-3xl border border-border bg-card/80 p-6 shadow-soft backdrop-blur-sm sm:p-8 dark:border-white/10 dark:bg-slate-900/60 dark:shadow-none">
         <h3 className="text-base font-bold text-foreground dark:text-white">Marketplace & Search Indexing</h3>
-        <p className="text-xs text-muted-foreground dark:text-slate-400">Configure your visibility on JOBSONN and external partner search engines.</p>
+        <p className="text-xs text-muted-foreground dark:text-slate-400">Configure your visibility on jobson.id and external partner search engines.</p>
 
         <div className="mt-6 space-y-4">
           {[
             {
-              title: "Index Company in JOBSONN Global Search",
+              title: "Index Company in jobson.id Global Search",
               desc: "Allow verified enterprise buyers to discover your products and services via keyword & filter search",
               state: searchIndexable,
               setState: setSearchIndexable,
             },
             {
               title: "Allow AI Agents & Procurement Bots to Match RFQs",
-              desc: "Enable JOBSONN AI procurement agents to automatically suggest your company for matching industrial purchase orders",
+              desc: "Enable jobson.id AI procurement agents to automatically suggest your company for matching industrial purchase orders",
               state: aiAgentsIndexable,
               setState: setAiAgentsIndexable,
             },
@@ -74,7 +74,7 @@ export function PrivacyScreen() {
                   toast.success("Privacy preference updated.");
                 }}
                 className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out ${
-                  item.state ? "bg-cyan-500" : "bg-muted-foreground/30 dark:bg-slate-700"
+                  item.state ? "bg-emerald-500" : "bg-muted-foreground/30 dark:bg-slate-700"
                 }`}
               >
                 <span
@@ -92,7 +92,7 @@ export function PrivacyScreen() {
       <section className="rounded-3xl border border-border bg-card/80 p-6 shadow-soft backdrop-blur-sm sm:p-8 dark:border-white/10 dark:bg-slate-900/60 dark:shadow-none">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-start gap-3.5">
-            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400">
+            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
               <Download className="h-5 w-5" />
             </span>
             <div>
@@ -124,7 +124,7 @@ export function PrivacyScreen() {
           <div className="flex-1">
             <h3 className="text-base font-bold text-rose-600 dark:text-rose-400">Delete Account & Purge Data</h3>
             <p className="mt-1 text-xs text-muted-foreground dark:text-slate-400">
-              Permanently remove your business profile, product listings, verification badges, and buyer inquiry logs from JOBSONN. This action cannot be undone.
+              Permanently remove your business profile, product listings, verification badges, and buyer inquiry logs from jobson.id. This action cannot be undone.
             </p>
             <button
               type="button"

@@ -150,7 +150,7 @@ interface Testimonial {
 
 const TESTIMONIALS: Testimonial[] = [
   {
-    quote: "JOBSONN's train-to-hire cohort delivered 84 production-ready engineers in 5 months — exactly the domain depth we needed for our payments platform launch.",
+    quote: "jobson.id's train-to-hire cohort delivered 84 production-ready engineers in 5 months — exactly the domain depth we needed for our payments platform launch.",
     name: "Rajesh Kumar",
     role: "VP Engineering",
     company: "FinEdge",
@@ -180,7 +180,7 @@ const TECH_STACK = [
 
 const FAQS: { q: string; a: string }[] = [
   {
-    q: "How quickly can JOBSONN start delivering candidates?",
+    q: "How quickly can jobson.id start delivering candidates?",
     a: "Most engagements begin delivering shortlists within 5–7 business days of contract signing. For Train-to-Hire cohorts, the first batch is typically deployment-ready in 12–16 weeks depending on the technical depth required.",
   },
   {
@@ -377,7 +377,7 @@ export function PublicTalentSolutions() {
       <section className="border-y bg-muted/30">
         <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
           <div className="mb-10 text-center">
-            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Why teams choose JOBSONN</h2>
+            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Why teams choose jobson.id</h2>
             <p className="mt-2 text-sm text-muted-foreground">Six concrete advantages over traditional staffing vendors.</p>
           </div>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -514,7 +514,7 @@ export function PublicTalentSolutions() {
         <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
           <div className="mb-10 text-center">
             <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">What our clients say</h2>
-            <p className="mt-2 text-sm text-muted-foreground">Hiring leaders across India on partnering with JOBSONN.</p>
+            <p className="mt-2 text-sm text-muted-foreground">Hiring leaders across India on partnering with jobson.id.</p>
           </div>
           <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
             {TESTIMONIALS.map((t) => (
@@ -538,7 +538,7 @@ export function PublicTalentSolutions() {
       <section className="mx-auto max-w-3xl px-4 py-14 sm:px-6 lg:px-8">
         <div className="mb-10 text-center">
           <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Frequently asked questions</h2>
-          <p className="mt-2 text-sm text-muted-foreground">Common questions about working with JOBSONN&apos;s talent team.</p>
+          <p className="mt-2 text-sm text-muted-foreground">Common questions about working with jobson.id&apos;s talent team.</p>
         </div>
         <Accordion type="single" collapsible className="space-y-3">
           {FAQS.map((f, i) => (

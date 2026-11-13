@@ -242,7 +242,7 @@ function AddCourseDialog({ open, onOpenChange, onAdd }: { open: boolean; onOpenC
           <Button onClick={() => {
             if (!title.trim()) { toast.error("Title is required"); return; }
             onAdd({
-              id: `tc_${Date.now()}`, title: title.trim(), provider: provider.trim() || "JOBSONN Academy",
+              id: `tc_${Date.now()}`, title: title.trim(), provider: provider.trim() || "jobson.id Academy",
               category, level, durationHours: duration, rating: 0, enrolledCount: 0, price, currency: "INR",
               skills: [], description: description.trim(), certified,
             });

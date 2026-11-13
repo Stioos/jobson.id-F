@@ -194,7 +194,7 @@ export function CandidatePaymentMethods() {
           </li>
           <li className="flex items-start gap-2">
             <Icon name="AlertTriangle" className="mt-0.5 h-4 w-4 text-amber-600" />
-            <span>Never share OTP, CVV, or UPI PIN. JOBSONN will never ask for these over call or email.</span>
+            <span>Never share OTP, CVV, or UPI PIN. jobson.id will never ask for these over call or email.</span>
           </li>
         </ul>
       </SectionCard>

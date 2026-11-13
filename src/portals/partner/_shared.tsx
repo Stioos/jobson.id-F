@@ -90,7 +90,7 @@ export function EmptyRow({ colSpan, children }: { colSpan: number; children: Rea
 
 /** Compute a revenue split using the same formula the revenueSplits data uses.
  *  Order: gross → discount → netCollected → gatewayFee (% of netCollected) → tax (% of netCollected) →
- *  netAfterFees → apply partner/jobsonn pct → shares.
+ *  netAfterFees → apply partner/jobson.id pct → shares.
  *  Rule resolution: find matching active rule by leadSource + partnerModel with highest priority.
  */
 export function computeSplit(opts: {
@@ -99,7 +99,7 @@ export function computeSplit(opts: {
   gatewayFeePct: number;
   taxPct: number;
   partnerPct: number;
-  jobsonnPct: number;
+  jobsonIdPct: number;
   ruleName: string;
 }) {
   const netCollected = Math.max(0, opts.gross - opts.discount);
@@ -107,7 +107,7 @@ export function computeSplit(opts: {
   const tax = Math.round((netCollected * opts.taxPct) / 100);
   const netAfterFees = netCollected - gatewayFee - tax;
   const partnerShare = Math.round((netAfterFees * opts.partnerPct) / 100);
-  const jobsonnShare = netAfterFees - partnerShare;
+  const jobsonIdShare = netAfterFees - partnerShare;
   return {
     gross: opts.gross,
     discount: opts.discount,
@@ -116,9 +116,9 @@ export function computeSplit(opts: {
     tax,
     netAfterFees,
     partnerPct: opts.partnerPct,
-    jobsonnPct: opts.jobsonnPct,
+    jobsonIdPct: opts.jobsonIdPct,
     partnerShare,
-    jobsonnShare,
+    jobsonIdShare,
     ruleName: opts.ruleName,
   };
 }

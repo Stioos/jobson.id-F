@@ -21,7 +21,7 @@ interface AppDef {
 
 const APPS: AppDef[] = [
   { name: "Career Portal", desc: "Explore jobs, companies & insights", icon: Globe, gradient: "from-emerald-500 to-teal-600", portal: "public", route: "home" },
-  { name: "Candidate Hub", desc: "Applications, AI matches & interviews", icon: Briefcase, gradient: "from-blue-500 to-cyan-500", portal: "candidate", route: "overview" },
+  { name: "Candidate Hub", desc: "Applications, AI matches & interviews", icon: Briefcase, gradient: "from-blue-500 to-emerald-500", portal: "candidate", route: "overview" },
   { name: "Employer Hub", desc: "Post jobs, manage ATS & pipelines", icon: Building2, gradient: "from-emerald-500 to-teal-500", portal: "employer", route: "overview" },
   { name: "Recruiter Hub", desc: "Client requisitions & placements", icon: Users, gradient: "from-amber-500 to-orange-500", portal: "recruiter", route: "overview" },
   { name: "Training Academy", desc: "Cohorts, programs & certifications", icon: GraduationCap, gradient: "from-indigo-500 to-blue-500", portal: "training", route: "overview" },
@@ -81,17 +81,17 @@ export function AppsDropdown() {
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        aria-label="JOBSONN Apps"
+        aria-label="jobson.id Apps"
         aria-expanded={open}
         aria-haspopup="menu"
         className={cn(
           "inline-flex h-9 items-center gap-1.5 rounded-full border px-3 text-xs font-semibold transition cursor-pointer",
           open
-            ? "border-cyan-500/60 bg-cyan-500/10 text-cyan-700 dark:border-cyan-400/50 dark:bg-cyan-500/15 dark:text-cyan-300"
-            : "border-border bg-muted/50 text-foreground hover:border-cyan-500/40 hover:bg-muted dark:border-white/10 dark:bg-white/5 dark:text-slate-300 dark:hover:bg-white/10"
+            ? "border-emerald-500/60 bg-emerald-500/10 text-emerald-700 dark:border-emerald-400/50 dark:bg-emerald-500/15 dark:text-emerald-300"
+            : "border-border bg-muted/50 text-foreground hover:border-emerald-500/40 hover:bg-muted dark:border-white/10 dark:bg-white/5 dark:text-slate-300 dark:hover:bg-white/10"
         )}
       >
-        <LayoutGrid className="h-3.5 w-3.5 text-cyan-600 dark:text-cyan-400" />
+        <LayoutGrid className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
         Apps
         <ChevronDown className={cn("h-3 w-3 transition-transform", open && "rotate-180")} />
       </button>
@@ -101,15 +101,15 @@ export function AppsDropdown() {
           role="menu"
           className="absolute left-0 top-full z-50 mt-2 flex max-h-[calc(100vh-96px)] w-[380px] max-w-[calc(100vw-2rem)] flex-col overflow-hidden rounded-xl border border-border bg-card shadow-xl dark:border-white/10 dark:bg-[#0c1220]"
         >
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-500/40 to-transparent" />
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-emerald-500/40 to-transparent" />
           <div className="flex items-center justify-between border-b border-border px-4 py-3 dark:border-white/10">
             <div className="flex items-center gap-2">
-              <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-cyan-500/15 text-cyan-600 ring-1 ring-cyan-500/30 dark:text-cyan-400">
+              <span className="inline-flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-500/15 text-emerald-600 ring-1 ring-emerald-500/30 dark:text-emerald-400">
                 <LayoutGrid className="h-3.5 w-3.5" />
               </span>
               <div>
-                <h2 className="text-[11px] font-bold uppercase tracking-[0.15em] text-cyan-600 dark:text-cyan-400">
-                  JOBSONN Apps
+                <h2 className="text-[11px] font-bold uppercase tracking-[0.15em] text-emerald-600 dark:text-emerald-400">
+                  jobson.id Apps
                 </h2>
                 <p className="text-[10px] text-muted-foreground dark:text-slate-500">
                   {APPS.length} portals
@@ -137,7 +137,7 @@ export function AppsDropdown() {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search portals..."
-                className="h-8 w-full rounded-lg border border-border bg-muted/40 pl-8 pr-7 text-xs text-foreground placeholder:text-muted-foreground focus:border-cyan-500/50 focus:bg-background focus:outline-none focus:ring-2 focus:ring-cyan-500/20 dark:border-white/10 dark:bg-white/[0.04] dark:text-white"
+                className="h-8 w-full rounded-lg border border-border bg-muted/40 pl-8 pr-7 text-xs text-foreground placeholder:text-muted-foreground focus:border-emerald-500/50 focus:bg-background focus:outline-none focus:ring-2 focus:ring-emerald-500/20 dark:border-white/10 dark:bg-white/[0.04] dark:text-white"
                 autoFocus
               />
               {search && (
@@ -159,9 +159,9 @@ export function AppsDropdown() {
                 type="button"
                 onClick={() => handleOpenPortal("public", "talent-solutions")}
                 role="menuitem"
-                className="group flex w-full items-center gap-3 rounded-lg border border-cyan-500/30 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 p-2.5 text-left transition-all hover:border-cyan-500/60 hover:from-cyan-500/20 hover:to-blue-500/20 cursor-pointer"
+                className="group flex w-full items-center gap-3 rounded-lg border border-emerald-500/30 bg-gradient-to-r from-emerald-500/10 to-blue-500/10 p-2.5 text-left transition-all hover:border-emerald-500/60 hover:from-emerald-500/20 hover:to-blue-500/20 cursor-pointer"
               >
-                <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-cyan-500 to-blue-600 text-white shadow-md transition-transform group-hover:scale-110">
+                <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-emerald-500 to-blue-600 text-white shadow-md transition-transform group-hover:scale-110">
                   <Layers className="h-4 w-4" />
                 </span>
                 <div className="min-w-0 flex-1">
@@ -170,7 +170,7 @@ export function AppsDropdown() {
                     Workforce Solutions &amp; Hiring Tools
                   </p>
                 </div>
-                <ArrowRight className="h-3.5 w-3.5 text-cyan-600 transition-transform group-hover:translate-x-1 dark:text-cyan-400" />
+                <ArrowRight className="h-3.5 w-3.5 text-emerald-600 transition-transform group-hover:translate-x-1 dark:text-emerald-400" />
               </button>
             </div>
           )}
@@ -196,7 +196,7 @@ export function AppsDropdown() {
                       <Icon className="h-3.5 w-3.5" />
                     </span>
                     <div className="min-w-0 flex-1">
-                      <p className="truncate text-[11px] font-semibold text-foreground group-hover:text-cyan-600 dark:text-slate-200 dark:group-hover:text-cyan-300">
+                      <p className="truncate text-[11px] font-semibold text-foreground group-hover:text-emerald-600 dark:text-slate-200 dark:group-hover:text-emerald-300">
                         {app.name}
                       </p>
                       <p className="truncate text-[9px] text-muted-foreground dark:text-slate-500">
@@ -219,7 +219,7 @@ export function AppsDropdown() {
               <button
                 type="button"
                 onClick={() => handleOpenPortal("public", "jobs")}
-                className="inline-flex items-center gap-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-1.5 text-xs font-semibold text-cyan-600 transition-all hover:bg-cyan-500/20 dark:text-cyan-400 cursor-pointer"
+                className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5 text-xs font-semibold text-emerald-600 transition-all hover:bg-emerald-500/20 dark:text-emerald-400 cursor-pointer"
               >
                 Explore Career Portal <ArrowRight className="h-3 w-3" />
               </button>

@@ -16,18 +16,18 @@ export function SubscriptionScreen() {
       {/* Screen title & description now render in the dashboard header */}
 
       {/* Active Plan Card */}
-      <section className="relative overflow-hidden rounded-3xl border border-cyan-500/40 bg-gradient-to-br from-cyan-500/10 via-card to-blue-500/10 p-6 shadow-soft backdrop-blur-sm sm:p-8 dark:from-cyan-950/40 dark:via-slate-900/90 dark:to-blue-950/40 dark:shadow-none">
+      <section className="relative overflow-hidden rounded-3xl border border-emerald-500/40 bg-gradient-to-br from-emerald-500/10 via-card to-blue-500/10 p-6 shadow-soft backdrop-blur-sm sm:p-8 dark:from-emerald-950/40 dark:via-slate-900/90 dark:to-blue-950/40 dark:shadow-none">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
           <div className="space-y-2">
             <div className="flex items-center gap-2">
-              <span className="rounded-full bg-cyan-500/20 px-3 py-1 text-xs font-bold text-cyan-600 dark:text-cyan-400">
+              <span className="rounded-full bg-emerald-500/20 px-3 py-1 text-xs font-bold text-emerald-600 dark:text-emerald-400">
                 Active Tier
               </span>
               <span className="text-xs text-muted-foreground dark:text-slate-400">Next renewal: Nov 15, 2026</span>
             </div>
             <h3 className="text-2xl font-extrabold text-foreground sm:text-3xl dark:text-white">Enterprise Verified Vendor</h3>
             <p className="text-xs text-muted-foreground max-w-lg dark:text-slate-300">
-              Unlimited product & service catalog indexing, automated AI procurement matching, and top priority in JOBSONN global discovery algorithms.
+              Unlimited product & service catalog indexing, automated AI procurement matching, and top priority in jobson.id global discovery algorithms.
             </p>
           </div>
 
@@ -51,7 +51,7 @@ export function SubscriptionScreen() {
             "24/7 Priority Support",
           ].map((feat) => (
             <div key={feat} className="flex items-center gap-2 text-xs text-foreground/80 dark:text-slate-300">
-              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-cyan-500/20 text-cyan-600 dark:text-cyan-400">
+              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-600 dark:text-emerald-400">
                 <Check className="h-3 w-3 stroke-[3]" />
               </span>
               <span>{feat}</span>
@@ -88,7 +88,7 @@ export function SubscriptionScreen() {
                   onClick={() => toast.success(`Downloading tax invoice ${inv.id}`)}
                   className="inline-flex items-center gap-1.5 rounded-xl border border-border bg-muted/60 px-3 py-1.5 text-xs font-semibold text-foreground hover:bg-muted dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:bg-white/10"
                 >
-                  <Download className="h-3.5 w-3.5 text-cyan-500 dark:text-cyan-400" /> Receipt PDF
+                  <Download className="h-3.5 w-3.5 text-emerald-500 dark:text-emerald-400" /> Receipt PDF
                 </button>
               </div>
             </div>

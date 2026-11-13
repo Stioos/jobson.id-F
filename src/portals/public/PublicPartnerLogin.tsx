@@ -51,7 +51,7 @@ export function PublicPartnerLogin() {
     let redirectPortal: string | null = null;
     if (typeof window !== "undefined") {
       try {
-        redirectPortal = sessionStorage.getItem("jobsonn_redirect_portal");
+        redirectPortal = sessionStorage.getItem("jobson_id_redirect_portal");
       } catch {}
     }
 
@@ -67,8 +67,8 @@ export function PublicPartnerLogin() {
     setTimeout(() => {
       if (typeof window !== "undefined") {
         try {
-          sessionStorage.removeItem("jobsonn_redirect_portal");
-          sessionStorage.removeItem("jobsonn_registered_notice");
+          sessionStorage.removeItem("jobson_id_redirect_portal");
+          sessionStorage.removeItem("jobson_id_registered_notice");
         } catch {}
       }
 
@@ -94,7 +94,7 @@ export function PublicPartnerLogin() {
           <div className="flex items-center gap-2">
             <BrandMark className="h-9 w-9" />
             <div className="text-left">
-              <div className="text-lg font-bold tracking-tight">JOBSONN</div>
+              <div className="text-lg font-bold tracking-tight">jobson.id</div>
               <div className="text-[10px] text-muted-foreground">Partner Portal</div>
             </div>
           </div>
@@ -205,7 +205,7 @@ export function PublicPartnerLogin() {
                 </form>
 
                 <div className="border-t pt-3 text-center text-xs text-muted-foreground">
-                  New to JOBSONN?{" "}
+                  New to jobson.id?{" "}
                   <button onClick={() => navigate("public", "register/partner")} className="font-medium text-brand hover:underline">
                     Create an account
                   </button>

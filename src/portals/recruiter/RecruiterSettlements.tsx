@@ -102,7 +102,7 @@ export function RecruiterSettlements() {
                   <th className="px-3 py-2 font-medium">Period</th>
                   <th className="px-3 py-2 font-medium text-right">Gross</th>
                   <th className="px-3 py-2 font-medium text-right hidden sm:table-cell">Partner share</th>
-                  <th className="px-3 py-2 font-medium text-right hidden md:table-cell">JOBSONN share</th>
+                  <th className="px-3 py-2 font-medium text-right hidden md:table-cell">jobson.id share</th>
                   <th className="px-3 py-2 font-medium text-right hidden lg:table-cell">Deductions</th>
                   <th className="px-3 py-2 font-medium text-right">Net payable</th>
                   <th className="px-3 py-2 font-medium">Status</th>
@@ -117,7 +117,7 @@ export function RecruiterSettlements() {
                     <td className="px-3 py-3">{s.period}</td>
                     <td className="px-3 py-3 text-right font-medium">{formatCurrency(s.grossAmount, currency)}</td>
                     <td className="px-3 py-3 text-right hidden sm:table-cell text-emerald-600 dark:text-emerald-400 font-medium">{formatCurrency(s.partnerShare, currency)}</td>
-                    <td className="px-3 py-3 text-right hidden md:table-cell text-muted-foreground">{formatCurrency(s.jobsonnShare, currency)}</td>
+                    <td className="px-3 py-3 text-right hidden md:table-cell text-muted-foreground">{formatCurrency(s.jobsonIdShare, currency)}</td>
                     <td className="px-3 py-3 text-right hidden lg:table-cell text-rose-600 dark:text-rose-400">−{formatCurrency(s.deductions, currency)}</td>
                     <td className="px-3 py-3 text-right font-bold">{formatCurrency(s.netPayable, currency)}</td>
                     <td className="px-3 py-3"><StatusBadge status={s.status} /></td>
@@ -167,7 +167,7 @@ export function RecruiterSettlements() {
             <div className="rounded-lg border p-3 text-xs space-y-1.5">
               <div className="font-semibold text-sm mb-1">How settlements are computed</div>
               <div className="text-muted-foreground">1. Sum of placement fees for placements completed in the period</div>
-              <div className="text-muted-foreground">2. Less: JOBSONN share per agreement</div>
+              <div className="text-muted-foreground">2. Less: jobson.id share per agreement</div>
               <div className="text-muted-foreground">3. Less: Applicable deductions (referrals, TDS, gateway fees)</div>
               <div className="text-muted-foreground">4. Equals: Net payable to your bank account</div>
             </div>
@@ -235,7 +235,7 @@ export function RecruiterSettlements() {
                   <div className="rounded-lg border p-3 space-y-2 text-sm">
                     <BreakRow label="Gross placement fees" value={formatCurrency(detail.grossAmount, currency)} />
                     <BreakRow label="Your share (partner)" value={`+ ${formatCurrency(detail.partnerShare, currency)}`} tone="positive" />
-                    <BreakRow label="JOBSONN share" value={`− ${formatCurrency(detail.jobsonnShare, currency)}`} tone="muted" />
+                    <BreakRow label="jobson.id share" value={`− ${formatCurrency(detail.jobsonIdShare, currency)}`} tone="muted" />
                     <BreakRow label="Deductions (TDS, gateway, referrals)" value={`− ${formatCurrency(detail.deductions, currency)}`} tone="negative" />
                     <Separator />
                     <BreakRow label="Net payable" value={formatCurrency(detail.netPayable, currency)} bold />

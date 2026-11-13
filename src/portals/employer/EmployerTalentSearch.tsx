@@ -59,7 +59,7 @@ export function EmployerTalentSearch() {
     <div className="space-y-6">
       <PageHeader
         title="Talent Search"
-        description="Search the JOBSONN resume database for passive candidates"
+        description="Search the jobson.id resume database for passive candidates"
         actions={[{ label: "Premium", icon: "Crown", variant: "outline", onClick: () => toast.info("Talent Search is a premium feature included in your Enterprise plan.") }]}
       />
 

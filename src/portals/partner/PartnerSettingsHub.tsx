@@ -19,10 +19,10 @@ import {
 } from "@/portals/_settings-support-shared";
 
 const PRIVACY_INITIAL = [
-  { key: "public_partner", label: "Public partner profile", description: "Showcase your training centre on JOBSONN's partner directory.", enabled: true },
-  { key: "student_data_sharing", label: "Share student data with JOBSONN", description: "Allow JOBSONN to verify placements and certifications.", enabled: true },
+  { key: "public_partner", label: "Public partner profile", description: "Showcase your training centre on jobson.id's partner directory.", enabled: true },
+  { key: "student_data_sharing", label: "Share student data with jobson.id", description: "Allow jobson.id to verify placements and certifications.", enabled: true },
   { key: "revenue_transparency", label: "Revenue-share transparency", description: "Show split breakdowns to your sub-partners.", enabled: false },
-  { key: "analytics", label: "Usage analytics", description: "Help improve JOBSONN with anonymous usage data.", enabled: true },
+  { key: "analytics", label: "Usage analytics", description: "Help improve jobson.id with anonymous usage data.", enabled: true },
 ];
 
 const INTEGRATIONS = [

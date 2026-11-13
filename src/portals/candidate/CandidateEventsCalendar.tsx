@@ -30,12 +30,12 @@ interface EventItem {
 
 const SEED_EVENTS: EventItem[] = [
   { id: "e1", title: "Cracking FAANG Frontend Interviews", type: "Webinar", date: "2025-01-25", time: "18:00", host: "Kunal Kushwaha", registered: 482, capacity: 500, status: "upcoming", registered_by_me: true },
-  { id: "e2", title: "Bangalore Tech Hiring Fair 2025", type: "Career Fair", date: "2025-02-08", time: "10:00", host: "JOBSONN Events", registered: 1240, capacity: 2000, status: "upcoming", registered_by_me: false },
+  { id: "e2", title: "Bangalore Tech Hiring Fair 2025", type: "Career Fair", date: "2025-02-08", time: "10:00", host: "jobson.id Events", registered: 1240, capacity: 2000, status: "upcoming", registered_by_me: false },
   { id: "e3", title: "System Design Bootcamp (Hands-On)", type: "Workshop", date: "2025-01-30", time: "16:00", host: "Alex Xu", registered: 318, capacity: 350, status: "upcoming", registered_by_me: true },
   { id: "e4", title: "Ask Me Anything: Engineering at Razorpay", type: "AMA", date: "2025-02-12", time: "17:30", host: "VP Engineering, Razorpay", registered: 256, capacity: 400, status: "upcoming", registered_by_me: false },
   { id: "e5", title: "Resume Makeover Live", type: "Workshop", date: "2024-12-15", time: "15:00", host: "Gayle McDowell", registered: 612, capacity: 700, status: "past", recordingUrl: "resume-makeover.mp4", attended: true },
   { id: "e6", title: "DevOps Career Pathways", type: "Webinar", date: "2024-11-28", time: "18:00", host: "Tech With Nikhil", registered: 845, capacity: 1000, status: "past", recordingUrl: "devops-careers.mp4", attended: false },
-  { id: "e7", title: "Mumbai Startup Hiring Drive", type: "Career Fair", date: "2024-11-10", time: "11:00", host: "JOBSONN Events", registered: 980, capacity: 1500, status: "past", attended: true },
+  { id: "e7", title: "Mumbai Startup Hiring Drive", type: "Career Fair", date: "2024-11-10", time: "11:00", host: "jobson.id Events", registered: 980, capacity: 1500, status: "past", attended: true },
   { id: "e8", title: "Behavioral Interviews AMA", type: "AMA", date: "2024-10-22", time: "17:00", host: " Recruiter Panel", registered: 432, capacity: 500, status: "past", recordingUrl: "behavioral-ama.mp4", attended: true },
 ];
 

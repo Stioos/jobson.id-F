@@ -16,15 +16,15 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://jobsonn.com"),
+  metadataBase: new URL("https://jobson.id"),
   title: {
-    default: "JOBSONN — Explore Global Opportunities. Build Limitless Careers.",
-    template: "%s | JOBSONN",
+    default: "jobson.id — Explore Global Opportunities. Build Limitless Careers.",
+    template: "%s | jobson.id",
   },
   description:
-    "JOBSONN is India's AI-powered talent marketplace. 50,000+ live jobs, 12,000+ hiring companies, 2M+ verified candidates. Find jobs, hire talent, upskill with Pay After Placement programs.",
+    "jobson.id is India's AI-powered talent marketplace. 50,000+ live jobs, 12,000+ hiring companies, 2M+ verified candidates. Find jobs, hire talent, upskill with Pay After Placement programs.",
   keywords: [
-    "JOBSONN",
+    "jobson.id",
     "jobs",
     "job portal",
     "recruitment",
@@ -52,9 +52,9 @@ export const metadata: Metadata = {
     "staffing solutions",
     "corporate training",
   ],
-  authors: [{ name: "JOBSONN" }],
-  creator: "JOBSONN",
-  publisher: "JOBSONN",
+  authors: [{ name: "jobson.id" }],
+  creator: "jobson.id",
+  publisher: "jobson.id",
   robots: {
     index: true,
     follow: true,
@@ -69,27 +69,27 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_IN",
-    url: "https://jobsonn.com",
-    siteName: "JOBSONN",
-    title: "JOBSONN — Explore Global Opportunities. Build Limitless Careers.",
+    url: "https://jobson.id",
+    siteName: "jobson.id",
+    title: "jobson.id — Explore Global Opportunities. Build Limitless Careers.",
     description: "AI-powered talent marketplace. 50,000+ jobs, 12,000+ companies, 2M+ candidates. Find jobs, hire talent, upskill with Pay After Placement.",
     images: [
       {
-        url: "/jobsonn-logo.png",
+        url: "/jobson-id-logo.png",
         width: 3019,
         height: 563,
-        alt: "JOBSONN — Talent, Recruitment & Career Marketplace",
+        alt: "jobson.id — Talent, Recruitment & Career Marketplace",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "JOBSONN — Explore Global Opportunities. Build Limitless Careers.",
+    title: "jobson.id — Explore Global Opportunities. Build Limitless Careers.",
     description: "AI-powered talent marketplace. 50,000+ jobs, 12,000+ companies, 2M+ candidates.",
-    images: ["/jobsonn-logo.png"],
+    images: ["/jobson-id-logo.png"],
   },
   alternates: {
-    canonical: "https://jobsonn.com",
+    canonical: "https://jobson.id",
   },
   category: "Jobs & Career",
 };
@@ -98,33 +98,33 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "JOBSONN",
-  url: "https://jobsonn.com",
-  logo: "https://jobsonn.com/jobsonn-logo.png",
+  name: "jobson.id",
+  url: "https://jobson.id",
+  logo: "https://jobson.id/jobson-id-logo.png",
   description: "AI-powered talent marketplace connecting candidates, employers and recruiters. 50,000+ jobs, 12,000+ companies, 2M+ candidates.",
   sameAs: [
-    "https://www.linkedin.com/company/jobsonn",
-    "https://twitter.com/jobsonn",
-    "https://github.com/jobsonn",
+    "https://www.linkedin.com/company/jobson.id",
+    "https://twitter.com/jobson.id",
+    "https://github.com/jobson.id",
   ],
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "customer support",
-    email: "info@jobsonn.com",
-    url: "https://jobsonn.com/contact",
+    email: "info@jobson.id",
+    url: "https://jobson.id/contact",
   },
 };
 
 const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: "JOBSONN",
-  url: "https://jobsonn.com",
+  name: "jobson.id",
+  url: "https://jobson.id",
   potentialAction: {
     "@type": "SearchAction",
     target: {
       "@type": "EntryPoint",
-      urlTemplate: "https://jobsonn.com/jobs?q={search_term_string}",
+      urlTemplate: "https://jobson.id/jobs?q={search_term_string}",
     },
     "query-input": "required name=search_term_string",
   },

@@ -22,12 +22,12 @@ import {
 const FAQS = [
   { q: "How is my partner share calculated?", a: "Your partner share is computed per enrollment using the revenue share rule that matches your partner model and the lead source. The formula: (Gross − Discount − Gateway Fee − Tax) × Partner % = Partner Share. The matching rule with the highest priority wins." },
   { q: "When are settlements paid out?", a: "Settlements are generated monthly (or quarterly for enterprise partners) and paid within 7 business days of approval. You'll receive an email notification when a settlement is approved and paid. The net payable is credited to your wallet and visible under Finance → Wallet." },
-  { q: "How do I switch partner models?", a: "Switching partner models (e.g. from CENTRE to SERVICE) requires a new agreement. Contact the partnership team at partnerships@jobsonn.com to discuss available models and the transition process." },
+  { q: "How do I switch partner models?", a: "Switching partner models (e.g. from CENTRE to SERVICE) requires a new agreement. Contact the partnership team at partnerships@jobson.id to discuss available models and the transition process." },
   { q: "What compliance items are mandatory?", a: "Mandatory compliance items vary by partner model. CENTRE partners must maintain centre inspection, fire safety, GST filing, and student KYC. All partners must comply with DPDP Act data protection. Visit Compliance for the full checklist with due dates." },
   { q: "Can I add multiple training centres?", a: "Yes — under Delivery → Training Centres, click 'Add Centre'. Each centre has its own capacity, classrooms, labs, and compliance score. CENTRE-model partners can manage unlimited centres within their territory." },
   { q: "How does the revenue calculator work?", a: "The Revenue Calculator (Finance → Revenue Calculator) lets you model any enrollment. Enter program, lead source, gross, discount, and fees — the calculator finds the matching active revenue share rule and computes your partner share instantly." },
   { q: "What are the college partnership models (A–E)?", a: "Colleges can partner under 5 sub-models: A (Curriculum Integration), B (Co-branded Centre), C (Faculty Development), D (Placement Partnership), E (Full Campus MoU). Visit Partnership Models → College Models for details." },
-  { q: "How do I get support?", a: "You can raise a ticket from this page, email support@jobsonn.com, or call +91 44 4000 1234 (Mon–Sat, 9 AM–7 PM IST). Urgent production issues get a 2-hour response SLA." },
+  { q: "How do I get support?", a: "You can raise a ticket from this page, email support@jobson.id, or call +91 44 4000 1234 (Mon–Sat, 9 AM–7 PM IST). Urgent production issues get a 2-hour response SLA." },
 ];
 
 interface Ticket {
@@ -91,7 +91,7 @@ export function PartnerSupport() {
             </div>
             <p className="font-semibold">Email Support</p>
             <p className="text-sm text-muted-foreground">For non-urgent queries & documentation.</p>
-            <p className="text-sm font-medium text-brand">support@jobsonn.com</p>
+            <p className="text-sm font-medium text-brand">support@jobson.id</p>
             <p className="text-xs text-muted-foreground">Response within 24 hours</p>
           </CardContent>
         </Card>

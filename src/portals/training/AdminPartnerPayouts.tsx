@@ -77,7 +77,7 @@ interface PartnerPayout {
   period: string;
   grossAmount: number;
   partnerShare: number;
-  jobsonnShare: number;
+  jobsonIdShare: number;
   status: PayoutStatus;
   createdAt: string;
   paymentDate?: string;
@@ -95,16 +95,16 @@ interface PayoutMethod {
 
 // ----- Mock data -----
 const SEED_PAYOUTS: PartnerPayout[] = [
-  { id: "po_1", payoutNumber: "PAY-2024-301", partnerName: "Chennai Tech Academy", partnerModel: "centre", period: "Oct 2024", grossAmount: 480000, partnerShare: 336000, jobsonnShare: 144000, status: "paid", createdAt: "2024-10-20T10:00:00Z", paymentDate: "2024-10-24T12:00:00Z", paymentMethod: "NEFT", transactionId: "NEFT241024001" },
-  { id: "po_2", payoutNumber: "PAY-2024-302", partnerName: "HireBridge Staffing", partnerModel: "recruitment", period: "Oct 2024", grossAmount: 680000, partnerShare: 462400, jobsonnShare: 217600, status: "approved", createdAt: "2024-10-22T14:30:00Z" },
-  { id: "po_3", payoutNumber: "PAY-2024-303", partnerName: "Meridian IT Services", partnerModel: "service", period: "Oct 2024", grossAmount: 1200000, partnerShare: 900000, jobsonnShare: 300000, status: "paid", createdAt: "2024-10-18T09:00:00Z", paymentDate: "2024-10-22T15:00:00Z", paymentMethod: "RTGS", transactionId: "RTGS241022002" },
-  { id: "po_4", payoutNumber: "PAY-2024-304", partnerName: "Northwind Tech Solutions", partnerModel: "technology", period: "Oct 2024", grossAmount: 950000, partnerShare: 684000, jobsonnShare: 266000, status: "pending", createdAt: "2024-10-23T08:00:00Z" },
-  { id: "po_5", payoutNumber: "PAY-2024-305", partnerName: "Kanchana Institute of Technology", partnerModel: "college", period: "Oct 2024", grossAmount: 360000, partnerShare: 234000, jobsonnShare: 126000, status: "approved", createdAt: "2024-10-21T11:00:00Z" },
-  { id: "po_6", payoutNumber: "PAY-2024-306", partnerName: "Bengaluru Skills Centre", partnerModel: "centre", period: "Oct 2024", grossAmount: 280000, partnerShare: 168000, jobsonnShare: 112000, status: "pending", createdAt: "2024-10-23T09:00:00Z" },
-  { id: "po_7", payoutNumber: "PAY-2024-307", partnerName: "CogniAI Labs", partnerModel: "ai", period: "Oct 2024", grossAmount: 540000, partnerShare: 432000, jobsonnShare: 108000, status: "disputed", createdAt: "2024-10-19T13:00:00Z" },
-  { id: "po_8", payoutNumber: "PAY-2024-308", partnerName: "Veltech University", partnerModel: "college", period: "Sep 2024", grossAmount: 480000, partnerShare: 312000, jobsonnShare: 168000, status: "paid", createdAt: "2024-09-20T10:00:00Z", paymentDate: "2024-09-28T14:00:00Z", paymentMethod: "NEFT", transactionId: "NEFT240928010" },
-  { id: "po_9", payoutNumber: "PAY-2024-309", partnerName: "HireBridge Staffing", partnerModel: "recruitment", period: "Sep 2024", grossAmount: 410000, partnerShare: 278800, jobsonnShare: 131200, status: "approved", createdAt: "2024-09-25T11:00:00Z" },
-  { id: "po_10", payoutNumber: "PAY-2024-310", partnerName: "Meridian IT Services", partnerModel: "service", period: "Sep 2024", grossAmount: 880000, partnerShare: 660000, jobsonnShare: 220000, status: "paid", createdAt: "2024-09-18T09:00:00Z", paymentDate: "2024-09-25T16:00:00Z", paymentMethod: "RTGS", transactionId: "RTGS240925001" },
+  { id: "po_1", payoutNumber: "PAY-2024-301", partnerName: "Chennai Tech Academy", partnerModel: "centre", period: "Oct 2024", grossAmount: 480000, partnerShare: 336000, jobsonIdShare: 144000, status: "paid", createdAt: "2024-10-20T10:00:00Z", paymentDate: "2024-10-24T12:00:00Z", paymentMethod: "NEFT", transactionId: "NEFT241024001" },
+  { id: "po_2", payoutNumber: "PAY-2024-302", partnerName: "HireBridge Staffing", partnerModel: "recruitment", period: "Oct 2024", grossAmount: 680000, partnerShare: 462400, jobsonIdShare: 217600, status: "approved", createdAt: "2024-10-22T14:30:00Z" },
+  { id: "po_3", payoutNumber: "PAY-2024-303", partnerName: "Meridian IT Services", partnerModel: "service", period: "Oct 2024", grossAmount: 1200000, partnerShare: 900000, jobsonIdShare: 300000, status: "paid", createdAt: "2024-10-18T09:00:00Z", paymentDate: "2024-10-22T15:00:00Z", paymentMethod: "RTGS", transactionId: "RTGS241022002" },
+  { id: "po_4", payoutNumber: "PAY-2024-304", partnerName: "Northwind Tech Solutions", partnerModel: "technology", period: "Oct 2024", grossAmount: 950000, partnerShare: 684000, jobsonIdShare: 266000, status: "pending", createdAt: "2024-10-23T08:00:00Z" },
+  { id: "po_5", payoutNumber: "PAY-2024-305", partnerName: "Kanchana Institute of Technology", partnerModel: "college", period: "Oct 2024", grossAmount: 360000, partnerShare: 234000, jobsonIdShare: 126000, status: "approved", createdAt: "2024-10-21T11:00:00Z" },
+  { id: "po_6", payoutNumber: "PAY-2024-306", partnerName: "Bengaluru Skills Centre", partnerModel: "centre", period: "Oct 2024", grossAmount: 280000, partnerShare: 168000, jobsonIdShare: 112000, status: "pending", createdAt: "2024-10-23T09:00:00Z" },
+  { id: "po_7", payoutNumber: "PAY-2024-307", partnerName: "CogniAI Labs", partnerModel: "ai", period: "Oct 2024", grossAmount: 540000, partnerShare: 432000, jobsonIdShare: 108000, status: "disputed", createdAt: "2024-10-19T13:00:00Z" },
+  { id: "po_8", payoutNumber: "PAY-2024-308", partnerName: "Veltech University", partnerModel: "college", period: "Sep 2024", grossAmount: 480000, partnerShare: 312000, jobsonIdShare: 168000, status: "paid", createdAt: "2024-09-20T10:00:00Z", paymentDate: "2024-09-28T14:00:00Z", paymentMethod: "NEFT", transactionId: "NEFT240928010" },
+  { id: "po_9", payoutNumber: "PAY-2024-309", partnerName: "HireBridge Staffing", partnerModel: "recruitment", period: "Sep 2024", grossAmount: 410000, partnerShare: 278800, jobsonIdShare: 131200, status: "approved", createdAt: "2024-09-25T11:00:00Z" },
+  { id: "po_10", payoutNumber: "PAY-2024-310", partnerName: "Meridian IT Services", partnerModel: "service", period: "Sep 2024", grossAmount: 880000, partnerShare: 660000, jobsonIdShare: 220000, status: "paid", createdAt: "2024-09-18T09:00:00Z", paymentDate: "2024-09-25T16:00:00Z", paymentMethod: "RTGS", transactionId: "RTGS240925001" },
 ];
 
 const PAYOUT_METHODS: PayoutMethod[] = [
@@ -404,7 +404,7 @@ export function AdminPartnerPayouts() {
                   <TableHead>Period</TableHead>
                   <TableHead className="text-right">Gross</TableHead>
                   <TableHead className="text-right">Partner Share</TableHead>
-                  <TableHead className="text-right">JOBSONN Share</TableHead>
+                  <TableHead className="text-right">jobson.id Share</TableHead>
                   <TableHead>Status</TableHead>
                   <TableHead className="text-right">Action</TableHead>
                 </TableRow>
@@ -436,7 +436,7 @@ export function AdminPartnerPayouts() {
                       {formatCurrency(p.partnerShare)}
                     </TableCell>
                     <TableCell className="text-right text-xs text-muted-foreground">
-                      {formatCurrency(p.jobsonnShare)}
+                      {formatCurrency(p.jobsonIdShare)}
                     </TableCell>
                     <TableCell>
                       <StatusBadge status={p.status} />

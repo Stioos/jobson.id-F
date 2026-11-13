@@ -34,7 +34,7 @@ export function PartnerGuidelines() {
   const guidelineContent: Record<string, string> = {
     "ftm_005": "GST filing guidelines cover GSTR-1 (monthly outward supplies), GSTR-3B (monthly summary return), and annual GSTR-9. Partners must file by the 20th of the following month. Late filing attracts ₹50/day penalty (CGST + SGST). Input tax credit (ITC) must be reconciled with GSTR-2B before filing.",
     "ftm_009": "DPDP Act compliance requires: (1) Appoint a Data Protection Officer; (2) Obtain explicit consent for data collection; (3) Implement reasonable security safeguards; (4) Notify breaches within 72 hours; (5) Provide data access/correction rights to individuals; (6) Maintain data processing records; (7) Cross-border transfer only to notified countries.",
-    "ftm_010": "Co-branding guidelines specify: (1) Logo placement — JOBSONN logo must occupy at least 40% of co-branded materials; (2) Approved color palette (emerald + neutrals); (3) Typography — use JOBSONN-approved fonts; (4) Tagline usage — 'Powered by JOBSONN'; (5) Marketing collateral approval process; (6) Centre signage specifications.",
+    "ftm_010": "Co-branding guidelines specify: (1) Logo placement — jobson.id logo must occupy at least 40% of co-branded materials; (2) Approved color palette (emerald + neutrals); (3) Typography — use jobson.id-approved fonts; (4) Tagline usage — 'Powered by jobson.id'; (5) Marketing collateral approval process; (6) Centre signage specifications.",
   };
 
   return (

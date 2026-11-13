@@ -226,7 +226,7 @@ export function TsHub() {
               </h2>
               <p className="text-emerald-50 text-base sm:text-lg max-w-xl">
                 From fresh-graduate train-to-hire programs to enterprise-wide compliance training,
-                JOBSONN Talent Solutions delivers measurable outcomes backed by 14+ placement partners
+                jobson.id Talent Solutions delivers measurable outcomes backed by 14+ placement partners
                 and a 92% placement rate.
               </p>
               <div className="flex flex-wrap gap-3 pt-2">

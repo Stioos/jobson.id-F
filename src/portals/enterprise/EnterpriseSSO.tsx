@@ -74,7 +74,7 @@ export function EnterpriseSSO() {
   const [newKeyScopes, setNewKeyScopes] = React.useState<string[]>(["jobs:read"]);
   const [newKeyIp, setNewKeyIp] = React.useState("");
   const [newlyCreated, setNewlyCreated] = React.useState<{ prefix: string; full: string } | null>(null);
-  const [webhookUrl, setWebhookUrl] = React.useState("https://hooks.techcorp.com/jobsonn/events");
+  const [webhookUrl, setWebhookUrl] = React.useState("https://hooks.techcorp.com/jobson.id/events");
   const [webhookEvents, setWebhookEvents] = React.useState<string[]>(["job.published", "application.submitted", "offer.accepted"]);
   const [ipAllowlist, setIpAllowlist] = React.useState<string[]>(["203.0.113.0/24", "198.51.100.7/32"]);
   const [newIp, setNewIp] = React.useState("");
@@ -83,8 +83,8 @@ export function EnterpriseSSO() {
     resolver: zodResolver(ssoSchema),
     defaultValues: {
       protocol: "saml",
-      providerUrl: "https://techcorp.okta.com/app/techcorp_jobsonn_1/k2s8f9a8sdf/sso/saml",
-      entityId: "techcorp-jobsonn",
+      providerUrl: "https://techcorp.okta.com/app/techcorp_jobson_id_1/k2s8f9a8sdf/sso/saml",
+      entityId: "techcorp-jobson.id",
       certificate: "-----BEGIN CERTIFICATE-----\nMIIDqjCCApKgAwIBAgIGAX9abcdefg...\n-----END CERTIFICATE-----",
       emailMapping: "email",
       nameMapping: "displayName",
@@ -184,7 +184,7 @@ export function EnterpriseSSO() {
               </Select>
             </Field>
             <Field label="Entity ID" error={form.formState.errors.entityId?.message}>
-              <Input {...form.register("entityId")} placeholder="techcorp-jobsonn" />
+              <Input {...form.register("entityId")} placeholder="techcorp-jobson.id" />
             </Field>
           </div>
           <Field label="Provider URL / Metadata URL" error={form.formState.errors.providerUrl?.message}>

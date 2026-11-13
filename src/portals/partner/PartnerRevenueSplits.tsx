@@ -33,7 +33,7 @@ export function PartnerRevenueSplits() {
 
   const totalGross = list.reduce((s, r) => s + r.grossRevenue, 0);
   const totalPartner = list.reduce((s, r) => s + r.partnerShare, 0);
-  const totalJobsonn = list.reduce((s, r) => s + r.jobsonnShare, 0);
+  const totalJobsonId = list.reduce((s, r) => s + r.jobsonIdShare, 0);
   const avgPartnerPct = list.length > 0 ? Math.round(list.reduce((s, r) => s + r.partnerPct, 0) / list.length) : 0;
 
   function open(r: RevenueSplit) {
@@ -45,7 +45,7 @@ export function PartnerRevenueSplits() {
     <div className="space-y-6">
       <PageHeader
         title="Revenue Splits"
-        description={`${partner.name} — per-enrollment revenue breakdown between partner and JOBSONN.`}
+        description={`${partner.name} — per-enrollment revenue breakdown between partner and jobson.id.`}
         icon={<Icon name="Percent" className="h-6 w-6" />}
         actions={[
           { label: "Open Calculator", icon: "Calculator", variant: "outline", onClick: () => toast.info("Use the calculator page", { description: "Finance → Revenue Calculator" }) },
@@ -57,7 +57,7 @@ export function PartnerRevenueSplits() {
       <div className="grid gap-4 grid-cols-2 lg:grid-cols-4">
         <StatCard label="Total Gross" value={formatCurrency(totalGross)} icon={<Percent className="h-5 w-5" />} tone="brand" />
         <StatCard label="Partner Share" value={formatCurrency(totalPartner)} icon={<ArrowRight className="h-5 w-5" />} tone="success" hint={`${avgPartnerPct}% average`} />
-        <StatCard label="JOBSONN Share" value={formatCurrency(totalJobsonn)} icon={<Percent className="h-5 w-5" />} />
+        <StatCard label="jobson.id Share" value={formatCurrency(totalJobsonId)} icon={<Percent className="h-5 w-5" />} />
         <StatCard label="Total Splits" value={list.length} icon={<Info className="h-5 w-5" />} />
       </div>
 
@@ -70,7 +70,7 @@ export function PartnerRevenueSplits() {
               <p className="font-semibold text-brand">Revenue Share Model</p>
               <p className="mt-1 text-muted-foreground">
                 Each enrollment's revenue is split based on the <strong>lead source</strong> and your <strong>partner model</strong>.
-                Partner-generated leads earn the highest share; JOBSONN-generated leads share the revenue more equally.
+                Partner-generated leads earn the highest share; jobson.id-generated leads share the revenue more equally.
                 All splits are governed by signed agreements and active revenue share rules.
               </p>
             </div>
@@ -118,7 +118,7 @@ export function PartnerRevenueSplits() {
                   <TableHead className="text-right">Net After Fees</TableHead>
                   <TableHead>Partner %</TableHead>
                   <TableHead className="text-right">Partner Share</TableHead>
-                  <TableHead className="text-right">JOBSONN Share</TableHead>
+                  <TableHead className="text-right">jobson.id Share</TableHead>
                   <TableHead>Rule Applied</TableHead>
                   <TableHead>Status</TableHead>
                   <TableHead></TableHead>
@@ -136,7 +136,7 @@ export function PartnerRevenueSplits() {
                     <TableCell className="text-right text-sm">{formatCurrency(r.netAfterFees)}</TableCell>
                     <TableCell><span className="rounded-md border px-2 py-0.5 text-xs font-semibold">{r.partnerPct}%</span></TableCell>
                     <TableCell className="text-right text-sm font-semibold text-brand">{formatCurrency(r.partnerShare)}</TableCell>
-                    <TableCell className="text-right text-sm">{formatCurrency(r.jobsonnShare)}</TableCell>
+                    <TableCell className="text-right text-sm">{formatCurrency(r.jobsonIdShare)}</TableCell>
                     <TableCell className="text-xs text-muted-foreground">{r.ruleApplied}</TableCell>
                     <TableCell><StatusBadge status={r.status} /></TableCell>
                     <TableCell><ArrowRight className="h-4 w-4 text-muted-foreground" /></TableCell>
@@ -164,7 +164,7 @@ export function PartnerRevenueSplits() {
                   <div className="rounded-lg border p-3">
                     <p className="text-sm font-medium">{selected.ruleApplied}</p>
                     <p className="mt-1 text-xs text-muted-foreground">
-                      Lead source: {selected.leadSource.replace(/_/g, " ")} · Partner: {selected.partnerPct}% · JOBSONN: {selected.jobsonnPct}%
+                      Lead source: {selected.leadSource.replace(/_/g, " ")} · Partner: {selected.partnerPct}% · jobson.id: {selected.jobsonIdPct}%
                     </p>
                   </div>
                 </SectionCard>
@@ -180,7 +180,7 @@ export function PartnerRevenueSplits() {
                   </div>
                 </SectionCard>
 
-                <SectionCard title="Partner vs JOBSONN Share" description="Visual breakdown">
+                <SectionCard title="Partner vs jobson.id Share" description="Visual breakdown">
                   <div className="space-y-3">
                     <div>
                       <div className="flex justify-between text-sm mb-1">
@@ -193,11 +193,11 @@ export function PartnerRevenueSplits() {
                     </div>
                     <div>
                       <div className="flex justify-between text-sm mb-1">
-                        <span className="text-muted-foreground">JOBSONN ({selected.jobsonnPct}%)</span>
-                        <span className="font-semibold">{formatCurrency(selected.jobsonnShare)}</span>
+                        <span className="text-muted-foreground">jobson.id ({selected.jobsonIdPct}%)</span>
+                        <span className="font-semibold">{formatCurrency(selected.jobsonIdShare)}</span>
                       </div>
                       <div className="h-3 rounded-full bg-muted overflow-hidden">
-                        <div className="h-full bg-teal-500" style={{ width: `${selected.jobsonnPct}%` }} />
+                        <div className="h-full bg-teal-500" style={{ width: `${selected.jobsonIdPct}%` }} />
                       </div>
                     </div>
                   </div>

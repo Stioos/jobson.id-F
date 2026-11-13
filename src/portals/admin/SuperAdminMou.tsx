@@ -33,7 +33,7 @@ const MOUS: Mou[] = [
 ];
 
 export function SuperAdminMou() {
-  const [body, setBody] = React.useState(`This Memorandum of Understanding ("MoU") is entered into between JOBSONN Pvt. Ltd. ("Platform") and {{partner_name}} ("Partner") effective {{effective_date}}.
+  const [body, setBody] = React.useState(`This Memorandum of Understanding ("MoU") is entered into between jobson.id Pvt. Ltd. ("Platform") and {{partner_name}} ("Partner") effective {{effective_date}}.
 
 1. SCOPE OF PARTNERSHIP
 {{scope}}

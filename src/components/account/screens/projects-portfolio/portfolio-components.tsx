@@ -225,7 +225,7 @@ function Field({ label, required, hint, children, className }: {
 function SectionTitle({ icon, title, subtitle }: { icon: React.ReactNode; title: string; subtitle?: string }) {
   return (
     <div className="mb-4 flex items-center gap-2.5 border-b border-border/60 pb-3 dark:border-white/10">
-      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-cyan-500/10 text-cyan-600 dark:text-cyan-400">{icon}</span>
+      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">{icon}</span>
       <div>
         <h4 className="text-sm font-bold text-foreground dark:text-white">{title}</h4>
         {subtitle && <p className="text-[11px] text-muted-foreground dark:text-slate-400">{subtitle}</p>}
@@ -269,9 +269,9 @@ export function MultiSelectChips({ options, selected, onChange, placeholder, all
     <div className="space-y-1.5">
       <div className="flex flex-wrap gap-1.5 rounded-lg border border-border bg-background/80 p-2 min-h-9 dark:border-white/10 dark:bg-slate-950/60">
         {selected.map((s) => (
-          <span key={s} className="inline-flex items-center gap-1 rounded-md bg-cyan-500/10 px-1.5 py-0.5 text-[11px] font-medium text-cyan-700 dark:bg-cyan-500/15 dark:text-cyan-300">
+          <span key={s} className="inline-flex items-center gap-1 rounded-md bg-emerald-500/10 px-1.5 py-0.5 text-[11px] font-medium text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300">
             {s}
-            <button type="button" onClick={() => remove(s)} className="text-cyan-600 hover:text-rose-500 cursor-pointer" aria-label={`Remove ${s}`}><X className="h-2.5 w-2.5" /></button>
+            <button type="button" onClick={() => remove(s)} className="text-emerald-600 hover:text-rose-500 cursor-pointer" aria-label={`Remove ${s}`}><X className="h-2.5 w-2.5" /></button>
           </span>
         ))}
         <input
@@ -289,12 +289,12 @@ export function MultiSelectChips({ options, selected, onChange, placeholder, all
         <div className="relative z-20">
           <div className="absolute mt-1 max-h-44 w-full overflow-y-auto rounded-lg border border-border bg-popover p-1 shadow-md dark:border-white/10 dark:bg-slate-900 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-border">
             {filtered.slice(0, 30).map((o) => (
-              <button key={o} type="button" onMouseDown={(e) => { e.preventDefault(); add(o); }} className="flex w-full items-center gap-1.5 rounded px-2 py-1 text-left text-[11px] text-foreground hover:bg-cyan-500/10 hover:text-cyan-700 dark:text-slate-200 dark:hover:bg-cyan-500/15 dark:hover:text-cyan-300 cursor-pointer">
+              <button key={o} type="button" onMouseDown={(e) => { e.preventDefault(); add(o); }} className="flex w-full items-center gap-1.5 rounded px-2 py-1 text-left text-[11px] text-foreground hover:bg-emerald-500/10 hover:text-emerald-700 dark:text-slate-200 dark:hover:bg-emerald-500/15 dark:hover:text-emerald-300 cursor-pointer">
                 <Plus className="h-2.5 w-2.5" /> {o}
               </button>
             ))}
             {allowManual && query.trim() && !options.some((o) => o.toLowerCase() === query.trim().toLowerCase()) && (
-              <button type="button" onMouseDown={(e) => { e.preventDefault(); add(query); }} className="flex w-full items-center gap-1.5 rounded px-2 py-1 text-left text-[11px] text-cyan-600 hover:bg-cyan-500/10 dark:text-cyan-400 cursor-pointer">
+              <button type="button" onMouseDown={(e) => { e.preventDefault(); add(query); }} className="flex w-full items-center gap-1.5 rounded px-2 py-1 text-left text-[11px] text-emerald-600 hover:bg-emerald-500/10 dark:text-emerald-400 cursor-pointer">
                 <Plus className="h-2.5 w-2.5" /> Add "{query.trim()}" manually
               </button>
             )}
@@ -376,7 +376,7 @@ function LinksEditor({ links, onChange }: { links: ProjectLink[]; onChange: (l: 
           <button type="button" onClick={() => removeLink(l.id)} className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-lg text-muted-foreground hover:bg-rose-500/10 hover:text-rose-500 dark:hover:bg-rose-500/15 cursor-pointer" aria-label="Remove link"><Trash2 className="h-3 w-3" /></button>
         </div>
       ))}
-      <button type="button" onClick={addLink} className="inline-flex items-center gap-1 text-xs font-semibold text-cyan-600 hover:underline dark:text-cyan-400 cursor-pointer"><Plus className="h-3 w-3" /> Add Link</button>
+      <button type="button" onClick={addLink} className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-600 hover:underline dark:text-emerald-400 cursor-pointer"><Plus className="h-3 w-3" /> Add Link</button>
     </div>
   );
 }
@@ -413,7 +413,7 @@ function AttachmentsEditor({ attachments, onChange }: { attachments: ProjectAtta
   return (
     <div className="space-y-2">
       <div className="flex flex-wrap items-center gap-2">
-        <label className="inline-flex h-9 cursor-pointer items-center gap-1.5 rounded-lg border border-dashed border-cyan-500/40 bg-cyan-500/5 px-4 text-xs font-bold text-cyan-600 hover:bg-cyan-500/10 dark:text-cyan-400">
+        <label className="inline-flex h-9 cursor-pointer items-center gap-1.5 rounded-lg border border-dashed border-emerald-500/40 bg-emerald-500/5 px-4 text-xs font-bold text-emerald-600 hover:bg-emerald-500/10 dark:text-emerald-400">
           <Upload className="h-3.5 w-3.5" /> Upload Attachment
           <input type="file" multiple accept=".pdf,.jpg,.jpeg,.png,.mp4,.ppt,.pptx,application/pdf,image/jpeg,image/png,video/mp4,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation" onChange={handleUpload} className="hidden" />
         </label>
@@ -424,7 +424,7 @@ function AttachmentsEditor({ attachments, onChange }: { attachments: ProjectAtta
           {attachments.map((a) => (
             <div key={a.id} className="flex flex-col gap-2 rounded-lg border border-border/70 bg-background/60 p-2.5 sm:flex-row sm:items-center sm:justify-between dark:border-white/5 dark:bg-slate-950/40">
               <div className="flex items-center gap-2 min-w-0 flex-1">
-                <FileText className="h-4 w-4 shrink-0 text-cyan-600 dark:text-cyan-400" />
+                <FileText className="h-4 w-4 shrink-0 text-emerald-600 dark:text-emerald-400" />
                 <div className="min-w-0">
                   <p className="truncate text-xs font-semibold text-foreground dark:text-white">{a.fileName}</p>
                   <p className="text-[10px] text-muted-foreground dark:text-slate-500">{a.fileSize}</p>
@@ -474,7 +474,7 @@ function AchievementsEditor({ achievements, onChange }: { achievements: Achievem
           </div>
         </div>
       ))}
-      <button type="button" onClick={add} className="inline-flex items-center gap-1 text-xs font-semibold text-cyan-600 hover:underline dark:text-cyan-400 cursor-pointer"><Plus className="h-3 w-3" /> Add Achievement</button>
+      <button type="button" onClick={add} className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-600 hover:underline dark:text-emerald-400 cursor-pointer"><Plus className="h-3 w-3" /> Add Achievement</button>
     </div>
   );
 }
@@ -570,8 +570,8 @@ export function ProjectForm({ initial, onSave, onCancel, isEditing }: ProjectFor
           </Field>
           <Field label="Currently Working on This Project">
             <label className="flex h-9 cursor-pointer items-center gap-2 text-xs font-semibold text-foreground dark:text-slate-200">
-              <input type="checkbox" checked={form.isOngoing} onChange={(e) => handleIsOngoingChange(e.target.checked)} className="h-4 w-4 rounded border-border accent-cyan-500 dark:border-white/20" />
-              <Check className="h-3.5 w-3.5 text-cyan-600 dark:text-cyan-400" /> Ongoing project
+              <input type="checkbox" checked={form.isOngoing} onChange={(e) => handleIsOngoingChange(e.target.checked)} className="h-4 w-4 rounded border-border accent-emerald-500 dark:border-white/20" />
+              <Check className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" /> Ongoing project
             </label>
           </Field>
           {!form.isOngoing && (
@@ -739,7 +739,7 @@ export function ProjectForm({ initial, onSave, onCancel, isEditing }: ProjectFor
         </label>
         <div className="flex justify-end gap-2">
           <Button variant="outline" onClick={onCancel} className="h-9 rounded-lg text-xs">Cancel</Button>
-          <Button onClick={handleSubmit} disabled={isSaving} className="h-9 rounded-lg bg-cyan-500 text-xs font-bold text-slate-950 hover:bg-cyan-400 disabled:opacity-50">
+          <Button onClick={handleSubmit} disabled={isSaving} className="h-9 rounded-lg bg-emerald-500 text-xs font-bold text-slate-950 hover:bg-emerald-400 disabled:opacity-50">
             {isSaving ? <><Loader2 className="h-3.5 w-3.5 animate-spin" /> Saving…</> : <><Save className="h-3.5 w-3.5" /> {isEditing ? "Update" : "Save"} Project</>}
           </Button>
         </div>
@@ -809,7 +809,7 @@ export function PortfolioForm({ initial, onSave, onCancel, isEditing }: {
       </div>
       <div className="mt-5 flex justify-end gap-2 border-t border-border/60 pt-4 dark:border-white/10">
         <Button variant="outline" onClick={onCancel} className="h-9 rounded-lg text-xs">Cancel</Button>
-        <Button onClick={handleSubmit} disabled={isSaving} className="h-9 rounded-lg bg-cyan-500 text-xs font-bold text-slate-950 hover:bg-cyan-400 disabled:opacity-50">
+        <Button onClick={handleSubmit} disabled={isSaving} className="h-9 rounded-lg bg-emerald-500 text-xs font-bold text-slate-950 hover:bg-emerald-400 disabled:opacity-50">
           {isSaving ? <><Loader2 className="h-3.5 w-3.5 animate-spin" /> Saving…</> : <><Save className="h-3.5 w-3.5" /> {isEditing ? "Update" : "Save"} Portfolio</>}
         </Button>
       </div>
@@ -881,7 +881,7 @@ export function AwardForm({ initial, onSave, onCancel, isEditing }: {
           <Input value={form.verificationUrl} onChange={(e) => set("verificationUrl", e.target.value)} placeholder="https://…" className="h-9 rounded-lg" />
         </Field>
         <Field label="Certificate / Evidence Upload">
-          <label className="inline-flex h-9 cursor-pointer items-center gap-1.5 rounded-lg border border-dashed border-cyan-500/40 bg-cyan-500/5 px-4 text-xs font-bold text-cyan-600 hover:bg-cyan-500/10 dark:text-cyan-400">
+          <label className="inline-flex h-9 cursor-pointer items-center gap-1.5 rounded-lg border border-dashed border-emerald-500/40 bg-emerald-500/5 px-4 text-xs font-bold text-emerald-600 hover:bg-emerald-500/10 dark:text-emerald-400">
             <Upload className="h-3.5 w-3.5" /> {form.attachmentName || "Upload"}
             <input type="file" accept=".pdf,.jpg,.jpeg,.png" onChange={(e) => { const f = e.target.files?.[0]; if (f) { set("attachmentName", f.name); toast.success(`${f.name} selected.`); } e.target.value = ""; }} className="hidden" />
           </label>
@@ -889,7 +889,7 @@ export function AwardForm({ initial, onSave, onCancel, isEditing }: {
       </div>
       <div className="mt-5 flex justify-end gap-2 border-t border-border/60 pt-4 dark:border-white/10">
         <Button variant="outline" onClick={onCancel} className="h-9 rounded-lg text-xs">Cancel</Button>
-        <Button onClick={handleSubmit} disabled={isSaving} className="h-9 rounded-lg bg-cyan-500 text-xs font-bold text-slate-950 hover:bg-cyan-400 disabled:opacity-50">
+        <Button onClick={handleSubmit} disabled={isSaving} className="h-9 rounded-lg bg-emerald-500 text-xs font-bold text-slate-950 hover:bg-emerald-400 disabled:opacity-50">
           {isSaving ? <><Loader2 className="h-3.5 w-3.5 animate-spin" /> Saving…</> : <><Save className="h-3.5 w-3.5" /> {isEditing ? "Update" : "Save"} Award</>}
         </Button>
       </div>
@@ -976,7 +976,7 @@ export function PublicationForm({ initial, onSave, onCancel, isEditing }: {
           </Select>
         </Field>
         <Field label="Research Paper Upload">
-          <label className="inline-flex h-9 cursor-pointer items-center gap-1.5 rounded-lg border border-dashed border-cyan-500/40 bg-cyan-500/5 px-4 text-xs font-bold text-cyan-600 hover:bg-cyan-500/10 dark:text-cyan-400">
+          <label className="inline-flex h-9 cursor-pointer items-center gap-1.5 rounded-lg border border-dashed border-emerald-500/40 bg-emerald-500/5 px-4 text-xs font-bold text-emerald-600 hover:bg-emerald-500/10 dark:text-emerald-400">
             <Upload className="h-3.5 w-3.5" /> {form.attachmentName || "Upload"}
             <input type="file" accept=".pdf,.doc,.docx" onChange={(e) => { const f = e.target.files?.[0]; if (f) { set("attachmentName", f.name); toast.success(`${f.name} selected.`); } e.target.value = ""; }} className="hidden" />
           </label>
@@ -984,7 +984,7 @@ export function PublicationForm({ initial, onSave, onCancel, isEditing }: {
       </div>
       <div className="mt-5 flex justify-end gap-2 border-t border-border/60 pt-4 dark:border-white/10">
         <Button variant="outline" onClick={onCancel} className="h-9 rounded-lg text-xs">Cancel</Button>
-        <Button onClick={handleSubmit} disabled={isSaving} className="h-9 rounded-lg bg-cyan-500 text-xs font-bold text-slate-950 hover:bg-cyan-400 disabled:opacity-50">
+        <Button onClick={handleSubmit} disabled={isSaving} className="h-9 rounded-lg bg-emerald-500 text-xs font-bold text-slate-950 hover:bg-emerald-400 disabled:opacity-50">
           {isSaving ? <><Loader2 className="h-3.5 w-3.5 animate-spin" /> Saving…</> : <><Save className="h-3.5 w-3.5" /> {isEditing ? "Update" : "Save"} Publication</>}
         </Button>
       </div>
@@ -1047,7 +1047,7 @@ export function ProjectCard({ project, view, onEdit, onDelete, onDuplicate, onTo
         {allTech.length > 0 && (
           <div className="mt-2 flex flex-wrap gap-1">
             {allTech.slice(0, 6).map((t) => (
-              <span key={t} className="rounded bg-cyan-500/10 px-1.5 py-0.5 text-[10px] font-medium text-cyan-700 dark:bg-cyan-500/15 dark:text-cyan-300">{t}</span>
+              <span key={t} className="rounded bg-emerald-500/10 px-1.5 py-0.5 text-[10px] font-medium text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300">{t}</span>
             ))}
             {allTech.length > 6 && <span className="rounded bg-muted px-1.5 py-0.5 text-[10px] text-muted-foreground dark:bg-white/5">+{allTech.length - 6}</span>}
           </div>
@@ -1057,16 +1057,16 @@ export function ProjectCard({ project, view, onEdit, onDelete, onDuplicate, onTo
           {project.organization && <span className="inline-flex items-center gap-0.5 rounded bg-muted px-1.5 py-0.5 dark:bg-white/5">{project.organization}</span>}
         </div>
         <div className="mt-2 flex flex-wrap gap-1.5">
-          {primaryLink?.url && <a href={primaryLink.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 rounded-md bg-cyan-500/10 px-2 py-0.5 text-[10px] font-semibold text-cyan-600 hover:underline dark:text-cyan-400 cursor-pointer"><ExternalLink className="h-3 w-3" /> Live</a>}
+          {primaryLink?.url && <a href={primaryLink.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 rounded-md bg-emerald-500/10 px-2 py-0.5 text-[10px] font-semibold text-emerald-600 hover:underline dark:text-emerald-400 cursor-pointer"><ExternalLink className="h-3 w-3" /> Live</a>}
           {githubLink?.url && <a href={githubLink.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 rounded-md bg-slate-500/10 px-2 py-0.5 text-[10px] font-semibold text-slate-600 hover:underline dark:text-slate-300 cursor-pointer"><Github className="h-3 w-3" /> Code</a>}
         </div>
       </div>
       <div className="flex items-center justify-end gap-1 border-t border-border/50 px-3 py-2 dark:border-white/5">
         <button type="button" onClick={onToggleFeatured} className={cn("inline-flex h-7 w-7 items-center justify-center rounded-lg cursor-pointer", project.isFeatured ? "bg-amber-500/15 text-amber-600 dark:bg-amber-500/20 dark:text-amber-400" : "text-muted-foreground hover:bg-amber-500/10 hover:text-amber-600 dark:hover:bg-amber-500/15")} aria-label="Feature" title="Feature/Unfeature"><Star className="h-3.5 w-3.5" /></button>
-        <button type="button" onClick={onEdit} className="inline-flex h-7 w-7 items-center justify-center rounded-lg text-muted-foreground hover:bg-cyan-500/10 hover:text-cyan-600 dark:hover:bg-cyan-500/15 dark:hover:text-cyan-400 cursor-pointer" aria-label="Edit" title="Edit"><Pencil className="h-3.5 w-3.5" /></button>
+        <button type="button" onClick={onEdit} className="inline-flex h-7 w-7 items-center justify-center rounded-lg text-muted-foreground hover:bg-emerald-500/10 hover:text-emerald-600 dark:hover:bg-emerald-500/15 dark:hover:text-emerald-400 cursor-pointer" aria-label="Edit" title="Edit"><Pencil className="h-3.5 w-3.5" /></button>
         <button type="button" onClick={onDuplicate} className="inline-flex h-7 w-7 items-center justify-center rounded-lg text-muted-foreground hover:bg-blue-500/10 hover:text-blue-600 dark:hover:bg-blue-500/15 dark:hover:text-blue-400 cursor-pointer" aria-label="Duplicate" title="Duplicate"><FileText className="h-3.5 w-3.5" /></button>
         <button type="button" onClick={onDelete} className="inline-flex h-7 w-7 items-center justify-center rounded-lg text-muted-foreground hover:bg-rose-500/10 hover:text-rose-500 dark:hover:bg-rose-500/15 dark:hover:text-rose-400 cursor-pointer" aria-label="Delete" title="Delete"><Trash2 className="h-3.5 w-3.5" /></button>
-        <button type="button" onClick={() => { setExpanded((v) => !v); onToggleExpand(); }} className="inline-flex h-7 w-7 items-center justify-center rounded-lg text-muted-foreground hover:bg-cyan-500/10 hover:text-cyan-600 dark:hover:bg-cyan-500/15 dark:hover:text-cyan-400 cursor-pointer" aria-label="Toggle details" title="View Details">{expanded ? <ChevronUp className="h-3.5 w-3.5" /> : <ChevronDown className="h-3.5 w-3.5" />}</button>
+        <button type="button" onClick={() => { setExpanded((v) => !v); onToggleExpand(); }} className="inline-flex h-7 w-7 items-center justify-center rounded-lg text-muted-foreground hover:bg-emerald-500/10 hover:text-emerald-600 dark:hover:bg-emerald-500/15 dark:hover:text-emerald-400 cursor-pointer" aria-label="Toggle details" title="View Details">{expanded ? <ChevronUp className="h-3.5 w-3.5" /> : <ChevronDown className="h-3.5 w-3.5" />}</button>
       </div>
       {expanded && (
         <div className="space-y-2 border-t border-border/50 p-4 text-[11px] dark:border-white/5">
@@ -1088,7 +1088,7 @@ export function ProjectCard({ project, view, onEdit, onDelete, onDuplicate, onTo
               <p className="font-bold uppercase text-muted-foreground dark:text-slate-500">Links ({project.links.length})</p>
               <div className="mt-1 flex flex-wrap gap-1.5">
                 {project.links.map((l) => (
-                  <a key={l.id} href={l.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 rounded bg-cyan-500/10 px-1.5 py-0.5 text-[10px] text-cyan-600 hover:underline dark:text-cyan-400 cursor-pointer">
+                  <a key={l.id} href={l.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 rounded bg-emerald-500/10 px-1.5 py-0.5 text-[10px] text-emerald-600 hover:underline dark:text-emerald-400 cursor-pointer">
                     {(() => { const I = ICON_MAP[LINK_ICONS[l.type] || "Link2"] || Link2; return <I className="h-2.5 w-2.5" />; })()} {l.type}
                   </a>
                 ))}
@@ -1126,17 +1126,17 @@ export function PortfolioCard({ item, onEdit, onDelete, onToggleFeatured }: {
           {item.description && <p className="mt-1 text-xs text-muted-foreground dark:text-slate-300 line-clamp-2">{item.description}</p>}
           {item.skills.length > 0 && (
             <div className="mt-2 flex flex-wrap gap-1">
-              {item.skills.slice(0, 5).map((s) => <span key={s} className="rounded bg-cyan-500/10 px-1.5 py-0.5 text-[10px] font-medium text-cyan-700 dark:bg-cyan-500/15 dark:text-cyan-300">{s}</span>)}
+              {item.skills.slice(0, 5).map((s) => <span key={s} className="rounded bg-emerald-500/10 px-1.5 py-0.5 text-[10px] font-medium text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300">{s}</span>)}
             </div>
           )}
           <div className="mt-2 flex flex-wrap gap-1.5">
-            {item.workSampleUrl && <a href={item.workSampleUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 rounded-md bg-cyan-500/10 px-2 py-0.5 text-[10px] font-semibold text-cyan-600 hover:underline dark:text-cyan-400 cursor-pointer"><ExternalLink className="h-3 w-3" /> View</a>}
+            {item.workSampleUrl && <a href={item.workSampleUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 rounded-md bg-emerald-500/10 px-2 py-0.5 text-[10px] font-semibold text-emerald-600 hover:underline dark:text-emerald-400 cursor-pointer"><ExternalLink className="h-3 w-3" /> View</a>}
             <span className={cn("rounded px-1.5 py-0.5 font-bold text-[10px]", VISIBILITY_COLOR[item.visibility] || "bg-muted text-muted-foreground")}>{item.visibility}</span>
           </div>
         </div>
         <div className="flex shrink-0 flex-col gap-1">
           <button type="button" onClick={onToggleFeatured} className={cn("inline-flex h-7 w-7 items-center justify-center rounded-lg cursor-pointer", item.isFeatured ? "bg-amber-500/15 text-amber-600 dark:bg-amber-500/20 dark:text-amber-400" : "text-muted-foreground hover:bg-amber-500/10 hover:text-amber-600 dark:hover:bg-amber-500/15")} aria-label="Feature"><Star className="h-3.5 w-3.5" /></button>
-          <button type="button" onClick={onEdit} className="inline-flex h-7 w-7 items-center justify-center rounded-lg text-muted-foreground hover:bg-cyan-500/10 hover:text-cyan-600 dark:hover:bg-cyan-500/15 dark:hover:text-cyan-400 cursor-pointer" aria-label="Edit"><Pencil className="h-3.5 w-3.5" /></button>
+          <button type="button" onClick={onEdit} className="inline-flex h-7 w-7 items-center justify-center rounded-lg text-muted-foreground hover:bg-emerald-500/10 hover:text-emerald-600 dark:hover:bg-emerald-500/15 dark:hover:text-emerald-400 cursor-pointer" aria-label="Edit"><Pencil className="h-3.5 w-3.5" /></button>
           <button type="button" onClick={onDelete} className="inline-flex h-7 w-7 items-center justify-center rounded-lg text-muted-foreground hover:bg-rose-500/10 hover:text-rose-500 dark:hover:bg-rose-500/15 dark:hover:text-rose-400 cursor-pointer" aria-label="Delete"><Trash2 className="h-3.5 w-3.5" /></button>
         </div>
       </div>
@@ -1165,13 +1165,13 @@ export function AwardCard({ award, onEdit, onDelete, onToggleFeatured }: {
           </div>
           {award.description && <p className="mt-1 text-xs text-muted-foreground dark:text-slate-300 line-clamp-2">{award.description}</p>}
           <div className="mt-2 flex flex-wrap gap-1.5">
-            {award.verificationUrl && <a href={award.verificationUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 rounded-md bg-cyan-500/10 px-2 py-0.5 text-[10px] font-semibold text-cyan-600 hover:underline dark:text-cyan-400 cursor-pointer"><ExternalLink className="h-3 w-3" /> Verify</a>}
+            {award.verificationUrl && <a href={award.verificationUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 rounded-md bg-emerald-500/10 px-2 py-0.5 text-[10px] font-semibold text-emerald-600 hover:underline dark:text-emerald-400 cursor-pointer"><ExternalLink className="h-3 w-3" /> Verify</a>}
             {award.attachmentName && <span className="inline-flex items-center gap-1 rounded-md bg-muted px-2 py-0.5 text-[10px] text-muted-foreground dark:bg-white/5 dark:text-slate-300"><FileText className="h-3 w-3" /> {award.attachmentName}</span>}
           </div>
         </div>
         <div className="flex shrink-0 flex-col gap-1">
           <button type="button" onClick={onToggleFeatured} className={cn("inline-flex h-7 w-7 items-center justify-center rounded-lg cursor-pointer", award.isFeatured ? "bg-amber-500/15 text-amber-600 dark:bg-amber-500/20 dark:text-amber-400" : "text-muted-foreground hover:bg-amber-500/10 hover:text-amber-600 dark:hover:bg-amber-500/15")} aria-label="Feature"><Star className="h-3.5 w-3.5" /></button>
-          <button type="button" onClick={onEdit} className="inline-flex h-7 w-7 items-center justify-center rounded-lg text-muted-foreground hover:bg-cyan-500/10 hover:text-cyan-600 dark:hover:bg-cyan-500/15 dark:hover:text-cyan-400 cursor-pointer" aria-label="Edit"><Pencil className="h-3.5 w-3.5" /></button>
+          <button type="button" onClick={onEdit} className="inline-flex h-7 w-7 items-center justify-center rounded-lg text-muted-foreground hover:bg-emerald-500/10 hover:text-emerald-600 dark:hover:bg-emerald-500/15 dark:hover:text-emerald-400 cursor-pointer" aria-label="Edit"><Pencil className="h-3.5 w-3.5" /></button>
           <button type="button" onClick={onDelete} className="inline-flex h-7 w-7 items-center justify-center rounded-lg text-muted-foreground hover:bg-rose-500/10 hover:text-rose-500 dark:hover:bg-rose-500/15 dark:hover:text-rose-400 cursor-pointer" aria-label="Delete"><Trash2 className="h-3.5 w-3.5" /></button>
         </div>
       </div>
@@ -1201,14 +1201,14 @@ export function PublicationCard({ pub, onEdit, onDelete, onToggleFeatured }: {
           </div>
           {pub.abstract && <p className="mt-1 text-xs text-muted-foreground dark:text-slate-300 line-clamp-2">{pub.abstract}</p>}
           <div className="mt-2 flex flex-wrap gap-1.5">
-            {pub.url && <a href={pub.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 rounded-md bg-cyan-500/10 px-2 py-0.5 text-[10px] font-semibold text-cyan-600 hover:underline dark:text-cyan-400 cursor-pointer"><ExternalLink className="h-3 w-3" /> View</a>}
+            {pub.url && <a href={pub.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 rounded-md bg-emerald-500/10 px-2 py-0.5 text-[10px] font-semibold text-emerald-600 hover:underline dark:text-emerald-400 cursor-pointer"><ExternalLink className="h-3 w-3" /> View</a>}
             {pub.doi && <span className="inline-flex items-center gap-1 rounded-md bg-muted px-2 py-0.5 text-[10px] text-muted-foreground dark:bg-white/5 dark:text-slate-300">DOI: {pub.doi}</span>}
             {pub.attachmentName && <span className="inline-flex items-center gap-1 rounded-md bg-muted px-2 py-0.5 text-[10px] text-muted-foreground dark:bg-white/5 dark:text-slate-300"><FileText className="h-3 w-3" /> {pub.attachmentName}</span>}
           </div>
         </div>
         <div className="flex shrink-0 flex-col gap-1">
           <button type="button" onClick={onToggleFeatured} className={cn("inline-flex h-7 w-7 items-center justify-center rounded-lg cursor-pointer", pub.isFeatured ? "bg-amber-500/15 text-amber-600 dark:bg-amber-500/20 dark:text-amber-400" : "text-muted-foreground hover:bg-amber-500/10 hover:text-amber-600 dark:hover:bg-amber-500/15")} aria-label="Feature"><Star className="h-3.5 w-3.5" /></button>
-          <button type="button" onClick={onEdit} className="inline-flex h-7 w-7 items-center justify-center rounded-lg text-muted-foreground hover:bg-cyan-500/10 hover:text-cyan-600 dark:hover:bg-cyan-500/15 dark:hover:text-cyan-400 cursor-pointer" aria-label="Edit"><Pencil className="h-3.5 w-3.5" /></button>
+          <button type="button" onClick={onEdit} className="inline-flex h-7 w-7 items-center justify-center rounded-lg text-muted-foreground hover:bg-emerald-500/10 hover:text-emerald-600 dark:hover:bg-emerald-500/15 dark:hover:text-emerald-400 cursor-pointer" aria-label="Edit"><Pencil className="h-3.5 w-3.5" /></button>
           <button type="button" onClick={onDelete} className="inline-flex h-7 w-7 items-center justify-center rounded-lg text-muted-foreground hover:bg-rose-500/10 hover:text-rose-500 dark:hover:bg-rose-500/15 dark:hover:text-rose-400 cursor-pointer" aria-label="Delete"><Trash2 className="h-3.5 w-3.5" /></button>
         </div>
       </div>

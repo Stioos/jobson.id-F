@@ -298,7 +298,7 @@ export function IndustryHierarchyScreen({ onNavigate }: IndustryHierarchyScreenP
         <>
           {/* Step indicator */}
           <div className="flex items-center gap-2">
-            <span className="flex h-7 w-7 items-center justify-center rounded-full bg-cyan-500 text-xs font-bold text-slate-950">1</span>
+            <span className="flex h-7 w-7 items-center justify-center rounded-full bg-emerald-500 text-xs font-bold text-slate-950">1</span>
             <span className="text-sm font-bold text-foreground dark:text-white">Step 1 — Select Ecosystem &amp; Sectors</span>
             <span className="text-xs text-muted-foreground dark:text-slate-500">→ Step 2: Industries</span>
           </div>
@@ -315,19 +315,19 @@ export function IndustryHierarchyScreen({ onNavigate }: IndustryHierarchyScreenP
                     onClick={() => handleSelectEcosystem(eco.id)}
                     className={`group relative flex h-full min-w-0 cursor-pointer items-start gap-2 rounded-lg border p-2.5 transition-all duration-200 ${
                       isSelected
-                        ? "border-cyan-500 bg-cyan-500/10 shadow-soft ring-2 ring-cyan-500/30 dark:bg-cyan-500/15"
-                        : "border-border/80 bg-background/80 hover:border-cyan-500/40 hover:bg-card dark:border-white/10 dark:bg-slate-950/40 dark:hover:border-cyan-500/30"
+                        ? "border-emerald-500 bg-emerald-500/10 shadow-soft ring-2 ring-emerald-500/30 dark:bg-emerald-500/15"
+                        : "border-border/80 bg-background/80 hover:border-emerald-500/40 hover:bg-card dark:border-white/10 dark:bg-slate-950/40 dark:hover:border-emerald-500/30"
                     }`}
                   >
                     <Checkbox
                       checked={isSelected}
                       onCheckedChange={() => handleSelectEcosystem(eco.id)}
                       onClick={(e) => e.stopPropagation()}
-                      className="mt-0.5 data-[state=checked]:bg-cyan-500 data-[state=checked]:border-cyan-500 data-[state=checked]:text-slate-950 border-border dark:border-white/20 shrink-0 h-3.5 w-3.5"
+                      className="mt-0.5 data-[state=checked]:bg-emerald-500 data-[state=checked]:border-emerald-500 data-[state=checked]:text-slate-950 border-border dark:border-white/20 shrink-0 h-3.5 w-3.5"
                     />
                     <div className="flex-1 min-w-0 flex flex-col">
                       <div className="flex items-start gap-1.5 min-w-0">
-                        <div className="flex h-5 w-5 items-center justify-center rounded-md bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 shrink-0 mt-0.5">
+                        <div className="flex h-5 w-5 items-center justify-center rounded-md bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5">
                           {getTaxonomyIcon(eco.icon, "h-3 w-3")}
                         </div>
                         <h4 className="text-[11px] font-bold uppercase tracking-wide text-foreground dark:text-white leading-tight break-words">{eco.name}</h4>
@@ -355,14 +355,14 @@ export function IndustryHierarchyScreen({ onNavigate }: IndustryHierarchyScreenP
                       placeholder="Search..."
                       value={sectorSearch}
                       onChange={(e) => setSectorSearch(e.target.value)}
-                      className="h-8 w-full rounded-lg border border-border bg-background/90 pl-2.5 pr-8 text-[11px] text-foreground placeholder:text-muted-foreground/60 focus:border-cyan-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white"
+                      className="h-8 w-full rounded-lg border border-border bg-background/90 pl-2.5 pr-8 text-[11px] text-foreground placeholder:text-muted-foreground/60 focus:border-emerald-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white"
                     />
                     <Search className="absolute right-2 top-1/2 -translate-y-1/2 h-3 w-3 text-muted-foreground" />
                   </div>
                   <button
                     type="button"
                     onClick={handleSelectAllSectors}
-                    className="text-[11px] font-semibold text-cyan-600 hover:text-cyan-500 dark:text-cyan-400 hover:underline shrink-0 cursor-pointer"
+                    className="text-[11px] font-semibold text-emerald-600 hover:text-emerald-500 dark:text-emerald-400 hover:underline shrink-0 cursor-pointer"
                   >
                     {selectedSectors.length === currentEco.categories.length ? "Deselect all" : "Select all"}
                   </button>
@@ -377,17 +377,17 @@ export function IndustryHierarchyScreen({ onNavigate }: IndustryHierarchyScreenP
                       onClick={() => toggleSector(sec.id)}
                       className={`flex h-10 cursor-pointer items-center gap-2 rounded-lg border px-2.5 text-[11px] transition-all ${
                         isSelected
-                          ? "border-cyan-500/60 bg-cyan-500/10 font-medium text-foreground dark:bg-cyan-500/15 dark:text-white"
-                          : "border-border/80 bg-background/80 text-muted-foreground hover:border-cyan-500/40 hover:text-foreground dark:border-white/5 dark:bg-slate-950/40 dark:text-slate-400 dark:hover:border-white/15 dark:hover:text-slate-200"
+                          ? "border-emerald-500/60 bg-emerald-500/10 font-medium text-foreground dark:bg-emerald-500/15 dark:text-white"
+                          : "border-border/80 bg-background/80 text-muted-foreground hover:border-emerald-500/40 hover:text-foreground dark:border-white/5 dark:bg-slate-950/40 dark:text-slate-400 dark:hover:border-white/15 dark:hover:text-slate-200"
                       }`}
                     >
                       <Checkbox
                         checked={isSelected}
                         onCheckedChange={() => toggleSector(sec.id)}
                         onClick={(e) => e.stopPropagation()}
-                        className="data-[state=checked]:bg-cyan-500 data-[state=checked]:border-cyan-500 data-[state=checked]:text-slate-950 border-border dark:border-white/20 shrink-0 h-3.5 w-3.5"
+                        className="data-[state=checked]:bg-emerald-500 data-[state=checked]:border-emerald-500 data-[state=checked]:text-slate-950 border-border dark:border-white/20 shrink-0 h-3.5 w-3.5"
                       />
-                      <div className="flex h-5 w-5 items-center justify-center rounded bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 shrink-0">
+                      <div className="flex h-5 w-5 items-center justify-center rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 shrink-0">
                         {getTaxonomyIcon(sec.icon, "h-3 w-3")}
                       </div>
                       <span className="flex-1 select-none truncate">{sec.name}</span>
@@ -408,7 +408,7 @@ export function IndustryHierarchyScreen({ onNavigate }: IndustryHierarchyScreenP
               <button
                 type="button"
                 onClick={handleContinue}
-                className="inline-flex items-center gap-2 rounded-xl bg-cyan-500 px-6 py-2.5 text-sm font-bold text-slate-950 shadow-lg shadow-cyan-500/25 transition-all hover:bg-cyan-400 cursor-pointer"
+                className="inline-flex items-center gap-2 rounded-xl bg-emerald-500 px-6 py-2.5 text-sm font-bold text-slate-950 shadow-lg shadow-emerald-500/25 transition-all hover:bg-emerald-400 cursor-pointer"
               >
                 Continue to Industries <ArrowRight className="h-4 w-4" />
               </button>
@@ -446,7 +446,7 @@ export function IndustryHierarchyScreen({ onNavigate }: IndustryHierarchyScreenP
               >
                 <ArrowLeft className="h-3.5 w-3.5" /> Back to Sectors
               </button>
-              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-cyan-500 text-xs font-bold text-slate-950">2</span>
+              <span className="flex h-7 w-7 items-center justify-center rounded-full bg-emerald-500 text-xs font-bold text-slate-950">2</span>
               <span className="text-sm font-bold text-foreground dark:text-white">Step 2 — Select Industries</span>
             </div>
             <span className="text-xs text-muted-foreground dark:text-slate-500">
@@ -470,7 +470,7 @@ export function IndustryHierarchyScreen({ onNavigate }: IndustryHierarchyScreenP
                       placeholder="Search..."
                       value={categorySearch}
                       onChange={(e) => setCategorySearch(e.target.value)}
-                      className="h-8 w-full rounded-lg border border-border bg-background/90 pl-2.5 pr-8 text-[11px] text-foreground placeholder:text-muted-foreground/60 focus:border-cyan-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white"
+                      className="h-8 w-full rounded-lg border border-border bg-background/90 pl-2.5 pr-8 text-[11px] text-foreground placeholder:text-muted-foreground/60 focus:border-emerald-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white"
                     />
                     <Search className="absolute right-2 top-1/2 -translate-y-1/2 h-3 w-3 text-muted-foreground" />
                   </div>
@@ -478,7 +478,7 @@ export function IndustryHierarchyScreen({ onNavigate }: IndustryHierarchyScreenP
                     <button
                       type="button"
                       onClick={handleSelectAllCategories}
-                      className="text-[11px] font-semibold text-cyan-600 hover:text-cyan-500 dark:text-cyan-400 hover:underline shrink-0 cursor-pointer"
+                      className="text-[11px] font-semibold text-emerald-600 hover:text-emerald-500 dark:text-emerald-400 hover:underline shrink-0 cursor-pointer"
                     >
                       {selectedCategories.length === filteredCategories.length ? "Deselect all" : "Select all"}
                     </button>
@@ -499,7 +499,7 @@ export function IndustryHierarchyScreen({ onNavigate }: IndustryHierarchyScreenP
                 return (
                   <div key={sec.id}>
                     <div className="mb-2 flex items-center gap-1.5">
-                      <div className="flex h-6 w-6 items-center justify-center rounded-lg bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 shrink-0">
+                      <div className="flex h-6 w-6 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 shrink-0">
                         {getTaxonomyIcon(sec.icon, "h-3.5 w-3.5")}
                       </div>
                       <h4 className="text-xs font-bold uppercase tracking-wider text-foreground/80 dark:text-slate-300">{sec.name}</h4>
@@ -513,20 +513,20 @@ export function IndustryHierarchyScreen({ onNavigate }: IndustryHierarchyScreenP
                             key={cat.id}
                             className={`group flex cursor-pointer items-center gap-2 rounded-lg border p-2.5 transition-all ${
                               isCatSelected
-                                ? "border-cyan-500 bg-cyan-500/10 ring-1 ring-cyan-500/30 dark:border-cyan-500/50 dark:bg-cyan-500/15"
-                                : "border-border/80 bg-background/80 hover:border-cyan-500/40 hover:bg-muted/50 dark:border-white/5 dark:bg-slate-950/40 dark:hover:border-cyan-500/40 dark:hover:bg-white/[0.04]"
+                                ? "border-emerald-500 bg-emerald-500/10 ring-1 ring-emerald-500/30 dark:border-emerald-500/50 dark:bg-emerald-500/15"
+                                : "border-border/80 bg-background/80 hover:border-emerald-500/40 hover:bg-muted/50 dark:border-white/5 dark:bg-slate-950/40 dark:hover:border-emerald-500/40 dark:hover:bg-white/[0.04]"
                             }`}
                           >
                             <Checkbox
                               checked={isCatSelected}
                               onCheckedChange={() => toggleCategory(cat.id)}
                               onClick={(e) => e.stopPropagation()}
-                              className="data-[state=checked]:bg-cyan-500 data-[state=checked]:border-cyan-500 data-[state=checked]:text-slate-950 border-border dark:border-white/20 shrink-0 h-3.5 w-3.5"
+                              className="data-[state=checked]:bg-emerald-500 data-[state=checked]:border-emerald-500 data-[state=checked]:text-slate-950 border-border dark:border-white/20 shrink-0 h-3.5 w-3.5"
                             />
-                            <span className={`flex-1 select-none text-[11px] font-medium leading-tight truncate ${isCatSelected ? "text-cyan-700 dark:text-cyan-300" : "text-foreground/80 dark:text-slate-300"}`}>
+                            <span className={`flex-1 select-none text-[11px] font-medium leading-tight truncate ${isCatSelected ? "text-emerald-700 dark:text-emerald-300" : "text-foreground/80 dark:text-slate-300"}`}>
                               {cat.name}
                             </span>
-                            {isCatSelected && <Check className="h-3.5 w-3.5 shrink-0 text-cyan-600 dark:text-cyan-400" />}
+                            {isCatSelected && <Check className="h-3.5 w-3.5 shrink-0 text-emerald-600 dark:text-emerald-400" />}
                           </label>
                         );
                       })}
@@ -544,7 +544,7 @@ export function IndustryHierarchyScreen({ onNavigate }: IndustryHierarchyScreenP
             {/* Footer */}
             <div className="shrink-0 border-t border-border/60 dark:border-white/10 px-3 py-2.5 sm:px-4 flex items-center justify-between gap-3">
               <div className="flex items-center gap-2">
-                <Check className="h-3.5 w-3.5 text-cyan-600 dark:text-cyan-400" />
+                <Check className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
                 <span className="text-xs font-semibold text-foreground dark:text-white">{selectedCategories.length} Selected</span>
                 <span className="text-[10px] text-muted-foreground dark:text-slate-500">
                   {currentEco.name} → {selectedSectors.length} Sectors → {selectedCategories.length} Industries
@@ -560,7 +560,7 @@ export function IndustryHierarchyScreen({ onNavigate }: IndustryHierarchyScreenP
                   type="button"
                   onClick={handleSave}
                   disabled={isSaving}
-                  className="inline-flex items-center gap-1.5 rounded-lg bg-cyan-500 px-4 py-2 text-xs font-bold text-slate-950 shadow-md shadow-cyan-500/20 transition-all hover:bg-cyan-400 disabled:opacity-50 cursor-pointer"
+                  className="inline-flex items-center gap-1.5 rounded-lg bg-emerald-500 px-4 py-2 text-xs font-bold text-slate-950 shadow-md shadow-emerald-500/20 transition-all hover:bg-emerald-400 disabled:opacity-50 cursor-pointer"
                 >
                   {isSaving ? "Saving..." : "Save & Continue"}
                   <ArrowRight className="h-3.5 w-3.5" />

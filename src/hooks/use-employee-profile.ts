@@ -34,7 +34,7 @@ export interface EmployeeProfileState {
   references: EmployeeReferenceItem[];
 }
 
-const STORAGE_KEY = "jobsonn_employee_profile_v1";
+const STORAGE_KEY = "jobson_id_employee_profile_v1";
 
 const DEFAULT_EMPLOYEE_PROFILE: EmployeeProfileState = {
   currentStatus: "Actively looking",

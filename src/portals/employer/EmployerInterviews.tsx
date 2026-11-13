@@ -75,7 +75,7 @@ export function EmployerInterviews() {
       timezone: form.timezone,
       interviewerIds: [],
       interviewers: form.interviewers,
-      meetingLink: `https://meet.jobsonn.com/iv-${Date.now()}`,
+      meetingLink: `https://meet.jobson.id/iv-${Date.now()}`,
       status: "scheduled",
       feedbackSubmitted: false,
     };

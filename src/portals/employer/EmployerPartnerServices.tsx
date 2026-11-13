@@ -119,7 +119,7 @@ export function EmployerPartnerServices() {
     <div className="space-y-6">
       <PageHeader
         title="Partner Services"
-        description="Engage with JOBSONN's service, technology, and AI partners for project work, retainers, and AMC contracts."
+        description="Engage with jobson.id's service, technology, and AI partners for project work, retainers, and AMC contracts."
         icon={<Briefcase className="h-6 w-6" />}
         breadcrumbs={[{ label: "Partners" }, { label: "Partner Services" }]}
       />
@@ -134,7 +134,7 @@ export function EmployerPartnerServices() {
       {/* Active Engagements */}
       <SectionCard
         title="Your Active Engagements"
-        description="Services contracted with JOBSONN partners"
+        description="Services contracted with jobson.id partners"
         action={
           <Button variant="outline" size="sm" onClick={() => toast.info("All engagements exported", { description: "Exported to CSV for finance review." })}>
             Export

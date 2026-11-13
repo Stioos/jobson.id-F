@@ -342,7 +342,7 @@ export function PublicServiceDetail({
                       <SvcIcon className="h-6 w-6" />
                     </div>
                     <Badge className="border border-brand/30 bg-brand/10 text-[10px] font-semibold uppercase tracking-wide text-brand hover:bg-brand/15">
-                      <ShieldCheck className="mr-1 h-3 w-3" /> JOBSONN Enterprise Service
+                      <ShieldCheck className="mr-1 h-3 w-3" /> jobson.id Enterprise Service
                     </Badge>
                   </div>
 

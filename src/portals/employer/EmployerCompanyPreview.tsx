@@ -40,7 +40,7 @@ export function EmployerCompanyPreview() {
     <div className="space-y-6">
       <PageHeader
         title="Company Preview"
-        description="See exactly how candidates view your company profile on JOBSONN"
+        description="See exactly how candidates view your company profile on jobson.id"
         icon={<Eye className="h-6 w-6" />}
         actions={[
           { label: "Edit profile", variant: "outline", onClick: () => toast.info("Open Company Profile editor") },
@@ -274,7 +274,7 @@ export function EmployerCompanyPreview() {
               <li className="flex items-center gap-2"><Building2 className="h-4 w-4 text-brand" /> Internal metrics (views, conversion, source breakdown) are hidden from candidates.</li>
               <li className="flex items-center gap-2"><Video className="h-4 w-4 text-brand" /> Drafted but unpublished jobs are not visible publicly.</li>
               <li className="flex items-center gap-2"><Users className="h-4 w-4 text-brand" /> Team member rosters and roles are private to your organization.</li>
-              <li className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-brand" /> Verification badges only appear after JOBSONN confirms legal entity.</li>
+              <li className="flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-brand" /> Verification badges only appear after jobson.id confirms legal entity.</li>
             </ul>
           </SectionCard>
         </TabsContent>

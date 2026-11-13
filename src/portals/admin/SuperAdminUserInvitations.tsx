@@ -19,13 +19,13 @@ interface Invitation {
 }
 
 const INVITES: Invitation[] = [
-  { id: "i_001", email: "new.admin@jobsonn.com", invitedBy: "Aarav Sharma", role: "Admin", group: "Operations", portal: "admin", sent: "2024-09-20", expiry: "2024-10-04", status: "pending" },
+  { id: "i_001", email: "new.admin@jobson.id", invitedBy: "Aarav Sharma", role: "Admin", group: "Operations", portal: "admin", sent: "2024-09-20", expiry: "2024-10-04", status: "pending" },
   { id: "i_002", email: "hr@acme.com", invitedBy: "Neha Kapoor", role: "HR Manager", group: "Employer", portal: "employer", sent: "2024-09-18", expiry: "2024-09-25", status: "accepted" },
   { id: "i_003", email: "recruit@hirepro.in", invitedBy: "Sneha Reddy", role: "Recruiter", group: "Recruiter", portal: "recruiter", sent: "2024-09-10", expiry: "2024-09-24", status: "pending" },
   { id: "i_004", email: "ops@edutech.in", invitedBy: "Neha Kapoor", role: "Training Provider", group: "Training", portal: "training", sent: "2024-08-25", expiry: "2024-09-08", status: "expired" },
   { id: "i_005", email: "temp@temp.com", invitedBy: "Aarav Sharma", role: "Analyst", group: "Operations", portal: "admin", sent: "2024-09-05", expiry: "2024-09-19", status: "revoked" },
   { id: "i_006", email: "partner@southzone.in", invitedBy: "Pooja Desai", role: "Partner", group: "Partner Network", portal: "partner", sent: "2024-09-19", expiry: "2024-10-03", status: "pending" },
-  { id: "i_007", email: "karan.m@jobsonn.com", invitedBy: "Neha Kapoor", role: "Manager", group: "Operations", portal: "admin", sent: "2024-09-15", expiry: "2024-09-29", status: "accepted" },
+  { id: "i_007", email: "karan.m@jobson.id", invitedBy: "Neha Kapoor", role: "Manager", group: "Operations", portal: "admin", sent: "2024-09-15", expiry: "2024-09-29", status: "accepted" },
 ];
 
 export function SuperAdminUserInvitations() {

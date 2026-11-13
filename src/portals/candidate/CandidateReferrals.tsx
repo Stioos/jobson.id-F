@@ -36,7 +36,7 @@ import { referrals as seedReferrals } from "@/lib/mock-data";
 import type { Referral } from "@/lib/types";
 import { formatCurrency, formatDate } from "@/lib/format";
 
-const REFERRAL_CODE = "PRIYA-JOBSONN-5000";
+const REFERRAL_CODE = "PRIYA-jobson.id-5000";
 const REWARD_AMOUNT = 5000;
 
 export function CandidateReferrals() {
@@ -145,7 +145,7 @@ export function CandidateReferrals() {
     <div className="space-y-6">
       <PageHeader
         title="Referrals"
-        description="Invite friends to JOBSONN and earn rewards when they get hired."
+        description="Invite friends to jobson.id and earn rewards when they get hired."
         actions={[
           { label: "Invite friends", variant: "default", onClick: () => setInviteOpen(true) },
         ]}
@@ -245,7 +245,7 @@ export function CandidateReferrals() {
             {
               icon: "Users",
               title: "2. They sign up",
-              body: "Your friend joins JOBSONN with your code and starts using the platform.",
+              body: "Your friend joins jobson.id with your code and starts using the platform.",
             },
             {
               icon: "Coins",

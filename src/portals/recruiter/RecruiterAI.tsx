@@ -164,7 +164,7 @@ function simulateResponse(prompt: string): string {
     "2. Re-engage 12 warm candidates in your talent pool from the last 30 days.",
     "3. Send a status update to your top 3 clients with weekly pipeline snapshots.",
     "",
-    "**Note**: This is a simulated response for demo purposes. In production, this would call the JOBSONN Recruiting AI service with full RAG over your data.",
+    "**Note**: This is a simulated response for demo purposes. In production, this would call the jobson.id Recruiting AI service with full RAG over your data.",
   ].join("\n");
 }
 

@@ -68,7 +68,7 @@ export function PublicPartnerPrograms() {
       description: "Program will be pre-selected in the wizard.",
     });
     if (typeof window !== "undefined") {
-      sessionStorage.setItem("jobsonn_partner_apply_program", program.id);
+      sessionStorage.setItem("jobson_id_partner_apply_program", program.id);
     }
     setSelectedProgram(null);
     navigate("public", "partner-apply");
@@ -86,7 +86,7 @@ export function PublicPartnerPrograms() {
             Programs <span className="text-brand">your partners</span> can deliver
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground sm:text-lg">
-            JOBSONN&apos;s certified program catalog — full-stack, data, cloud, security, design and more.
+            jobson.id&apos;s certified program catalog — full-stack, data, cloud, security, design and more.
             Pick a program, apply to deliver it, and start earning.
           </p>
         </div>
@@ -204,7 +204,7 @@ export function PublicPartnerPrograms() {
                 <h2 className="text-xl font-bold tracking-tight sm:text-2xl">Want to see your share per enrollment?</h2>
                 <p className="mt-2 text-sm text-muted-foreground">
                   Use the revenue calculator to plug in any program, lead source and discount — and see exactly how
-                  the split flows between you and JOBSONN.
+                  the split flows between you and jobson.id.
                 </p>
               </div>
               <div className="flex flex-wrap gap-3 lg:justify-end">
@@ -246,8 +246,8 @@ export function PublicPartnerPrograms() {
                   <p className="mt-1 text-sm font-semibold text-brand">{selectedProgram.partnerPct}%</p>
                 </div>
                 <div className="rounded-lg border bg-muted/30 p-3">
-                  <p className="text-[10px] uppercase text-muted-foreground">JOBSONN share</p>
-                  <p className="mt-1 text-sm font-semibold">{selectedProgram.jobsonnPct}%</p>
+                  <p className="text-[10px] uppercase text-muted-foreground">jobson.id share</p>
+                  <p className="mt-1 text-sm font-semibold">{selectedProgram.jobsonIdPct}%</p>
                 </div>
               </div>
 
@@ -295,8 +295,8 @@ export function PublicPartnerPrograms() {
                     <p className="text-sm font-bold text-brand">{formatCurrency(selectedProgram.defaultPrice * selectedProgram.partnerPct / 100)}</p>
                   </div>
                   <div>
-                    <p className="text-[10px] uppercase text-muted-foreground">JOBSONN ({selectedProgram.jobsonnPct}%)</p>
-                    <p className="text-sm font-bold">{formatCurrency(selectedProgram.defaultPrice * selectedProgram.jobsonnPct / 100)}</p>
+                    <p className="text-[10px] uppercase text-muted-foreground">jobson.id ({selectedProgram.jobsonIdPct}%)</p>
+                    <p className="text-sm font-bold">{formatCurrency(selectedProgram.defaultPrice * selectedProgram.jobsonIdPct / 100)}</p>
                   </div>
                 </div>
                 <p className="mt-2 text-[10px] text-muted-foreground">

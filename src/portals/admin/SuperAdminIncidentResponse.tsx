@@ -17,7 +17,7 @@ interface Incident {
 const INCIDENTS: Incident[] = [
   { id: "INC-2401", title: "Suspected data exfiltration from candidate DB", severity: "SEV-1", status: "investigating", assignee: "Rohit S. + IR Team", openedAt: "2024-09-22T07:00:00Z", affected: "candidate-portal, db-primary" },
   { id: "INC-2400", title: "DDoS attack on api-gateway", severity: "SEV-2", status: "contained", assignee: "Infra On-call", openedAt: "2024-09-22T03:00:00Z", affected: "api-gateway" },
-  { id: "INC-2399", title: "Phishing campaign impersonating Jobsonn", severity: "SEV-3", status: "post_incident", assignee: "Security Comms", openedAt: "2024-09-21T14:00:00Z", affected: "External" },
+  { id: "INC-2399", title: "Phishing campaign impersonating jobson.id", severity: "SEV-3", status: "post_incident", assignee: "Security Comms", openedAt: "2024-09-21T14:00:00Z", affected: "External" },
   { id: "INC-2398", title: "Unauthorized admin login attempt from new geo", severity: "SEV-2", status: "resolved", assignee: "Anita R.", openedAt: "2024-09-21T09:00:00Z", affected: "admin-portal" },
   { id: "INC-2397", title: "Misconfigured S3 bucket public access", severity: "SEV-1", status: "resolved", assignee: "Rohit S.", openedAt: "2024-09-20T22:00:00Z", affected: "s3-backups" },
 ];
@@ -183,7 +183,7 @@ export function SuperAdminIncidentResponse() {
               <Icon name="Mail" className="h-4 w-4 text-brand" />
               <div>
                 <p className="font-medium text-xs">Internal stakeholders — SEV-1 declared</p>
-                <p className="text-[10px] text-muted-foreground">To: security@jobsonn.in, leadership</p>
+                <p className="text-[10px] text-muted-foreground">To: security@jobson.id, leadership</p>
               </div>
             </div>
             <span className="text-[10px] text-muted-foreground">{timeAgo("2024-09-22T07:10:00Z")}</span>
@@ -203,7 +203,7 @@ export function SuperAdminIncidentResponse() {
               <Icon name="Megaphone" className="h-4 w-4 text-brand" />
               <div>
                 <p className="font-medium text-xs">Customer notice — published on status page</p>
-                <p className="text-[10px] text-muted-foreground">status.jobsonn.in</p>
+                <p className="text-[10px] text-muted-foreground">status.jobson.id</p>
               </div>
             </div>
             <span className="text-[10px] text-muted-foreground">{timeAgo("2024-09-22T08:30:00Z")}</span>

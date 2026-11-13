@@ -143,7 +143,7 @@ export function TrainingIntegrations() {
           <div>
             <Label htmlFor="webhook">Webhook URL</Label>
             <div className="mt-1 flex gap-2">
-              <Input id="webhook" value="https://api.skillforge.academy/v1/webhooks/jobsonn" readOnly />
+              <Input id="webhook" value="https://api.skillforge.academy/v1/webhooks/jobson.id" readOnly />
               <Button variant="outline" onClick={() => toast.success("Webhook URL copied")}>Copy</Button>
             </div>
           </div>

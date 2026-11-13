@@ -297,7 +297,7 @@ export function PartnerSettings() {
           <Card>
             <CardHeader>
               <CardTitle className="text-base">API Credentials</CardTitle>
-              <CardDescription>Use these to integrate with JOBSONN partner APIs.</CardDescription>
+              <CardDescription>Use these to integrate with jobson.id partner APIs.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="rounded-lg border p-3">
@@ -317,8 +317,8 @@ export function PartnerSettings() {
               <div className="rounded-lg border p-3">
                 <p className="text-xs text-muted-foreground">Webhook URL</p>
                 <div className="mt-1 flex items-center justify-between gap-2">
-                  <code className="text-sm font-mono truncate">https://api.jobsonn.com/v1/partner/{partner.id}/webhook</code>
-                  <Button size="sm" variant="ghost" onClick={() => { navigator.clipboard?.writeText(`https://api.jobsonn.com/v1/partner/${partner.id}/webhook`); toast.success("Webhook URL copied"); }}><Copy className="h-3.5 w-3.5" /></Button>
+                  <code className="text-sm font-mono truncate">https://api.jobson.id/v1/partner/{partner.id}/webhook</code>
+                  <Button size="sm" variant="ghost" onClick={() => { navigator.clipboard?.writeText(`https://api.jobson.id/v1/partner/${partner.id}/webhook`); toast.success("Webhook URL copied"); }}><Copy className="h-3.5 w-3.5" /></Button>
                 </div>
               </div>
               <div className="flex gap-2">

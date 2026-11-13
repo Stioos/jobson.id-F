@@ -13,12 +13,12 @@ import { toast } from "sonner";
 import { formatNumber } from "@/lib/format";
 
 const TENANTS = [
-  { id: "t_001", name: "TechCorp India", type: "Enterprise", plan: "Enterprise", status: "active", domain: "techcorp.jobsonn.com", users: 1240, isolated: true },
-  { id: "t_002", name: "TalentBridge Consulting", type: "Agency", plan: "Business", status: "active", domain: "talentbridge.jobsonn.com", users: 84, isolated: true },
-  { id: "t_003", name: "Apex Skill Academy", type: "Training Provider", plan: "Professional", status: "active", domain: "apex.jobsonn.com", users: 412, isolated: true },
-  { id: "t_004", name: "SouthZone Franchise", type: "Partner", plan: "Business", status: "trialing", domain: "southzone.jobsonn.com", users: 28, isolated: false },
-  { id: "t_005", name: "NaukriX Pvt Ltd", type: "Enterprise", plan: "Enterprise", status: "active", domain: "naukrix.jobsonn.com", users: 540, isolated: true },
-  { id: "t_006", name: "EduFirst Colleges", type: "Partner (College)", plan: "Business", status: "past_due", domain: "edufirst.jobsonn.com", users: 168, isolated: false },
+  { id: "t_001", name: "TechCorp India", type: "Enterprise", plan: "Enterprise", status: "active", domain: "techcorp.jobson.id", users: 1240, isolated: true },
+  { id: "t_002", name: "TalentBridge Consulting", type: "Agency", plan: "Business", status: "active", domain: "talentbridge.jobson.id", users: 84, isolated: true },
+  { id: "t_003", name: "Apex Skill Academy", type: "Training Provider", plan: "Professional", status: "active", domain: "apex.jobson.id", users: 412, isolated: true },
+  { id: "t_004", name: "SouthZone Franchise", type: "Partner", plan: "Business", status: "trialing", domain: "southzone.jobson.id", users: 28, isolated: false },
+  { id: "t_005", name: "NaukriX Pvt Ltd", type: "Enterprise", plan: "Enterprise", status: "active", domain: "naukrix.jobson.id", users: 540, isolated: true },
+  { id: "t_006", name: "EduFirst Colleges", type: "Partner (College)", plan: "Business", status: "past_due", domain: "edufirst.jobson.id", users: 168, isolated: false },
 ];
 
 export function SuperAdminTenants() {
@@ -32,7 +32,7 @@ export function SuperAdminTenants() {
       toast.error("Tenant name and domain are required");
       return;
     }
-    const t = { id: `t_${Date.now()}`, name, type: "Enterprise", plan: "Starter", status: "trialing", domain: `${domain}.jobsonn.com`, users: 0, isolated };
+    const t = { id: `t_${Date.now()}`, name, type: "Enterprise", plan: "Starter", status: "trialing", domain: `${domain}.jobson.id`, users: 0, isolated };
     setTenants([t, ...tenants]);
     setName(""); setDomain("");
     toast.success(`Tenant "${t.name}" created`);
@@ -77,7 +77,7 @@ export function SuperAdminTenants() {
             <div>
               <Label className="text-xs">Subdomain</Label>
               <Input value={domain} onChange={(e) => setDomain(e.target.value)} placeholder="acme" className="mt-1" />
-              <p className="mt-1 text-xs text-muted-foreground">{domain || "acme"}.jobsonn.com</p>
+              <p className="mt-1 text-xs text-muted-foreground">{domain || "acme"}.jobson.id</p>
             </div>
             <div className="flex items-center justify-between rounded-md border p-3">
               <div>

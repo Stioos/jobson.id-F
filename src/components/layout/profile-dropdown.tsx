@@ -36,8 +36,8 @@ export function ProfileDropdown({ variant = "default" }: ProfileDropdownProps) {
     };
   }, []);
 
-  const displayName = authUser.fullName || user?.name || "JOBSONN Member";
-  const displayEmail = authUser.email || user?.email || "member@jobsonn.com";
+  const displayName = authUser.fullName || user?.name || "jobson.id Member";
+  const displayEmail = authUser.email || user?.email || "member@jobson.id";
   const initials = getInitials(displayName);
   const roleLabel = user?.role ? user.role.replace("_", " ") : "Candidate";
 

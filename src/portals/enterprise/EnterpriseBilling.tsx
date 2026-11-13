@@ -103,7 +103,7 @@ export function EnterpriseBilling() {
           <div className="rounded-lg border bg-muted/30 p-3">
             <p className="text-xs uppercase text-muted-foreground">Account manager</p>
             <p className="mt-1 text-sm font-semibold">Aarav Sharma</p>
-            <p className="text-xs text-muted-foreground">enterprise@jobsonn.com</p>
+            <p className="text-xs text-muted-foreground">enterprise@jobson.id</p>
           </div>
         </div>
       </SectionCard>

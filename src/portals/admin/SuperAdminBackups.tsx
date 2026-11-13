@@ -11,11 +11,11 @@ import { toast } from "sonner";
 import { formatDateTime, timeAgo } from "@/lib/format";
 
 const BACKUPS = [
-  { id: "bk_001", type: "Full DB", size: "4.2 GB", startedAt: "2024-09-21T02:00:00Z", completedAt: "2024-09-21T02:14:00Z", status: "success", location: "s3://jobsonn-backups/prod/db/2024-09-21" },
-  { id: "bk_002", type: "Incremental", size: "82 MB", startedAt: "2024-09-21T06:00:00Z", completedAt: "2024-09-21T06:00:42Z", status: "success", location: "s3://jobsonn-backups/prod/inc/2024-09-21-06" },
-  { id: "bk_003", type: "Incremental", size: "118 MB", startedAt: "2024-09-21T12:00:00Z", completedAt: "2024-09-21T12:01:08Z", status: "success", location: "s3://jobsonn-backups/prod/inc/2024-09-21-12" },
-  { id: "bk_004", type: "Incremental", size: "94 MB", startedAt: "2024-09-21T18:00:00Z", completedAt: "2024-09-21T18:00:52Z", status: "success", location: "s3://jobsonn-backups/prod/inc/2024-09-21-18" },
-  { id: "bk_005", type: "Full DB", size: "4.1 GB", startedAt: "2024-09-20T02:00:00Z", completedAt: "2024-09-20T02:12:00Z", status: "success", location: "s3://jobsonn-backups/prod/db/2024-09-20" },
+  { id: "bk_001", type: "Full DB", size: "4.2 GB", startedAt: "2024-09-21T02:00:00Z", completedAt: "2024-09-21T02:14:00Z", status: "success", location: "s3://jobson.id-backups/prod/db/2024-09-21" },
+  { id: "bk_002", type: "Incremental", size: "82 MB", startedAt: "2024-09-21T06:00:00Z", completedAt: "2024-09-21T06:00:42Z", status: "success", location: "s3://jobson.id-backups/prod/inc/2024-09-21-06" },
+  { id: "bk_003", type: "Incremental", size: "118 MB", startedAt: "2024-09-21T12:00:00Z", completedAt: "2024-09-21T12:01:08Z", status: "success", location: "s3://jobson.id-backups/prod/inc/2024-09-21-12" },
+  { id: "bk_004", type: "Incremental", size: "94 MB", startedAt: "2024-09-21T18:00:00Z", completedAt: "2024-09-21T18:00:52Z", status: "success", location: "s3://jobson.id-backups/prod/inc/2024-09-21-18" },
+  { id: "bk_005", type: "Full DB", size: "4.1 GB", startedAt: "2024-09-20T02:00:00Z", completedAt: "2024-09-20T02:12:00Z", status: "success", location: "s3://jobson.id-backups/prod/db/2024-09-20" },
   { id: "bk_006", type: "Full DB", size: "4.0 GB", startedAt: "2024-09-19T02:00:00Z", completedAt: "2024-09-19T02:11:00Z", status: "failed", location: "—" },
 ];
 

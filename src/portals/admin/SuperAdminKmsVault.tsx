@@ -39,7 +39,7 @@ const SECRETS: Secret[] = [
 const ACCESS_LOG = [
   { id: "AL-9001", actor: "auth-service", action: "sign_jwt", key: "KEY-002", at: "2024-09-22T08:00:00Z", ip: "10.4.0.18" },
   { id: "AL-9000", actor: "backup-job", action: "encrypt_backup", key: "KEY-001", at: "2024-09-22T03:00:00Z", ip: "10.4.0.5" },
-  { id: "AL-8999", actor: "admin@jobsonn.in", action: "view_secret", key: "SEC-001", at: "2024-09-22T02:00:00Z", ip: "10.4.2.18" },
+  { id: "AL-8999", actor: "admin@jobson.id", action: "view_secret", key: "SEC-001", at: "2024-09-22T02:00:00Z", ip: "10.4.2.18" },
   { id: "AL-8998", actor: "payment-service", action: "decrypt_pgp", key: "KEY-006", at: "2024-09-21T22:00:00Z", ip: "10.4.0.22" },
   { id: "AL-8997", actor: "webhook-dispatcher", action: "sign_hmac", key: "KEY-005", at: "2024-09-21T19:00:00Z", ip: "10.4.0.30" },
 ];

@@ -17,11 +17,11 @@ import {
 } from "@/portals/_settings-support-shared";
 
 const FAQS = [
-  { q: "How does the revenue share work?", a: "JOBSONN and partners share revenue on a per-program basis. Typical splits: 60% partner / 40% JOBSONN for tech programs. Splits are visible on the Revenue Splits page and credited to your wallet weekly." },
+  { q: "How does the revenue share work?", a: "jobson.id and partners share revenue on a per-program basis. Typical splits: 60% partner / 40% jobson.id for tech programs. Splits are visible on the Revenue Splits page and credited to your wallet weekly." },
   { q: "When do I receive settlements?", a: "Settlements are processed weekly (every Friday) for the previous week's confirmed admissions. Funds hit your linked bank account within 1-2 business days." },
   { q: "How do I admit a new student?", a: "Visit Students → Admit student. Enter name, contact, batch, and program. The student receives an enrollment SMS/email. Admission fees can be collected via Razorpay." },
-  { q: "What are the MoU renewal steps?", a: "JOBSONN sends renewal reminders at 60, 30, and 7 days before MoU expiry. Visit MoU & Agreements → Renew. Updated terms are signed digitally via DocuSign." },
-  { q: "How do I issue certificates?", a: "After a student completes a program (70%+ attendance and assessment), visit Certificates → Issue. Certificates are auto-generated from JOBSONN-approved templates and verifiable publicly." },
+  { q: "What are the MoU renewal steps?", a: "jobson.id sends renewal reminders at 60, 30, and 7 days before MoU expiry. Visit MoU & Agreements → Renew. Updated terms are signed digitally via DocuSign." },
+  { q: "How do I issue certificates?", a: "After a student completes a program (70%+ attendance and assessment), visit Certificates → Issue. Certificates are auto-generated from jobson.id-approved templates and verifiable publicly." },
   { q: "What is the role of the calculator?", a: "The Revenue Calculator (Tools menu) lets you model expected revenue based on admissions × program fee × split %. Useful for forecasting and budgeting." },
   { q: "How do I update my bank details?", a: "Settings → Configure → Banking. Changes require MFA verification and a 7-day cooling period before they take effect, to prevent fraud." },
   { q: "Can I create sub-partners under me?", a: "Premium partners can onboard sub-partners (e.g., franchise centres). Revenue splits cascade automatically. Visit Profile → Sub-partner network." },
@@ -71,7 +71,7 @@ export function PartnerSupportHub() {
 
       <ContactOptionsSection
         options={[
-          { icon: "Mail", title: "Email support", value: "partners@jobsonn.com", hint: "Replies within 6 hours", action: () => toast.info("Opening email client") },
+          { icon: "Mail", title: "Email support", value: "partners@jobson.id", hint: "Replies within 6 hours", action: () => toast.info("Opening email client") },
           { icon: "MessagesSquare", title: "Live chat", value: "Mon–Sat, 9 AM – 8 PM IST", hint: "Avg wait: 3 min", action: () => toast.info("Live chat", { description: "Connecting you to a partner specialist…" }) },
           { icon: "Phone", title: "Regional manager", value: "+91 80 4567 8904", hint: "Tamil Nadu · Priya", action: () => toast.info("Calling regional manager", { description: "Priya · TN partner success" }) },
         ]}

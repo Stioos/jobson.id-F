@@ -490,7 +490,7 @@ function CreateUserDialog({ open, onOpenChange }: { open: boolean; onOpenChange:
         <div className="space-y-4 py-2">
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <Field label="Full Name *"><Input value={form.name} onChange={(e) => setForm((s) => ({ ...s, name: e.target.value }))} placeholder="Priya Menon" /></Field>
-            <Field label="Email *"><Input type="email" value={form.email} onChange={(e) => setForm((s) => ({ ...s, email: e.target.value }))} placeholder="priya@jobsonn.com" /></Field>
+            <Field label="Email *"><Input type="email" value={form.email} onChange={(e) => setForm((s) => ({ ...s, email: e.target.value }))} placeholder="priya@jobson.id" /></Field>
             <Field label="Role">
               <Select value={form.role} onValueChange={(v) => setForm((s) => ({ ...s, role: v }))}>
                 <SelectTrigger><SelectValue /></SelectTrigger>

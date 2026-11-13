@@ -248,7 +248,7 @@ export function AppearanceSection() {
   return (
     <SectionCard
       title="Appearance"
-      description="Customise how JOBSONN looks and feels for you."
+      description="Customise how jobson.id looks and feels for you."
     >
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
         <div className="space-y-1.5">
@@ -421,7 +421,7 @@ export function ApiSection() {
     { id: "key_1", label: "Production", value: "sk_live_••••••8a3f", created: "2024-09-12" },
     { id: "key_2", label: "Staging", value: "sk_test_••••••b21c", created: "2024-10-01" },
   ]);
-  const [webhook, setWebhook] = React.useState("https://hooks.example.com/jobsonn");
+  const [webhook, setWebhook] = React.useState("https://hooks.example.com/jobson.id");
 
   return (
     <SectionCard
@@ -1188,7 +1188,7 @@ export function SystemStatusSection() {
   return (
     <SectionCard
       title="System status"
-      description="Live status of JOBSONN services."
+      description="Live status of jobson.id services."
       action={<Badge className="bg-emerald-500/10 text-emerald-700 dark:text-emerald-400">All systems operational</Badge>}
     >
       <div className="space-y-2">
@@ -1216,7 +1216,7 @@ export function FeedbackSection() {
   const [message, setMessage] = React.useState("");
 
   return (
-    <SectionCard title="Send feedback" description="Help us improve JOBSONN.">
+    <SectionCard title="Send feedback" description="Help us improve jobson.id.">
       <div className="space-y-3">
         <div className="space-y-1.5">
           <Label>How was your experience?</Label>
@@ -1284,7 +1284,7 @@ export function CommunityForumSection({
   return (
     <SectionCard
       title="Community forum"
-      description="Discuss with other JOBSONN users."
+      description="Discuss with other jobson.id users."
       action={<Button size="sm" variant="outline" onClick={() => toast.info("Opening forum")}>Open forum</Button>}
     >
       <div className="space-y-2">

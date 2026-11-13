@@ -255,7 +255,7 @@ const SUB_PAGE_CONFIG: Record<string, SubPageConfig> = {
       },
     ],
     comparison: {
-      columns: ["Capability", "Traditional keyword search", "JOBSONN AI Sourcing"],
+      columns: ["Capability", "Traditional keyword search", "jobson.id AI Sourcing"],
       rows: [
         { feature: "Query language", traditional: "Boolean operators (AND, OR, NOT)", ours: "Plain-English job description" },
         { feature: "Match method", traditional: "Exact keyword overlap", ours: "Semantic skill-graph similarity" },
@@ -323,7 +323,7 @@ const SUB_PAGE_CONFIG: Record<string, SubPageConfig> = {
     ],
     testimonials: [
       {
-        quote: "JOBSONN's AI sourcing engine cut our senior-engineer search time from 3 weeks to 3 days. The fit-scorecards are gold — hiring managers actually trust the AI now.",
+        quote: "jobson.id's AI sourcing engine cut our senior-engineer search time from 3 weeks to 3 days. The fit-scorecards are gold — hiring managers actually trust the AI now.",
         name: "Karan Bhatia",
         role: "VP Engineering",
         company: "FinEdge",
@@ -487,7 +487,7 @@ const SUB_PAGE_CONFIG: Record<string, SubPageConfig> = {
       },
     ],
     comparison: {
-      columns: ["Capability", "Traditional market research", "JOBSONN Talent Benchmarks"],
+      columns: ["Capability", "Traditional market research", "jobson.id Talent Benchmarks"],
       rows: [
         { feature: "Data freshness", traditional: "Annual industry surveys (6-12 mo lag)", ours: "Quarterly refresh from real offers" },
         { feature: "Pool coverage", traditional: "Self-reported job-board profiles", ours: "2M+ identity-verified candidates" },
@@ -718,7 +718,7 @@ const SUB_PAGE_CONFIG: Record<string, SubPageConfig> = {
       },
     ],
     comparison: {
-      columns: ["Capability", "Traditional retained search", "JOBSONN 48-Hour SLA"],
+      columns: ["Capability", "Traditional retained search", "jobson.id 48-Hour SLA"],
       rows: [
         { feature: "Time to shortlist", traditional: "5-10 business days", ours: "48 business hours (guaranteed)" },
         { feature: "Candidate quality", traditional: "Resume-only pre-filter", ours: "5-stage screening gates passed" },
@@ -949,7 +949,7 @@ const SUB_PAGE_CONFIG: Record<string, SubPageConfig> = {
       },
     ],
     comparison: {
-      columns: ["Capability", "Traditional phone screen", "JOBSONN Screening & Assessment"],
+      columns: ["Capability", "Traditional phone screen", "jobson.id Screening & Assessment"],
       rows: [
         { feature: "Screening method", traditional: "Resume + 15-min phone call", ours: "AI technical + aptitude + behavioral + culture-fit" },
         { feature: "Skill validation", traditional: "Self-reported on resume", ours: "Validated via proctored assessment" },
@@ -1181,7 +1181,7 @@ const SUB_PAGE_CONFIG: Record<string, SubPageConfig> = {
       },
     ],
     comparison: {
-      columns: ["Capability", "Traditional retained search", "JOBSONN Sourcing Plans"],
+      columns: ["Capability", "Traditional retained search", "jobson.id Sourcing Plans"],
       rows: [
         { feature: "Pricing model", traditional: "% of annual CTC (20-30%)", ours: "Flat per-role fee (₹25K-₹45K)" },
         { feature: "Pricing visibility", traditional: "Negotiated per deal", ours: "Published online — what you see is what you pay" },
@@ -1413,7 +1413,7 @@ const SUB_PAGE_CONFIG: Record<string, SubPageConfig> = {
       },
     ],
     comparison: {
-      columns: ["Capability", "Email + Excel workflow", "JOBSONN Hiring Workflow"],
+      columns: ["Capability", "Email + Excel workflow", "jobson.id Hiring Workflow"],
       rows: [
         { feature: "Scheduling", traditional: "Email ping-pong, time-zone math", ours: "Self-scheduling, time-zone aware, auto-reschedule" },
         { feature: "Feedback collection", traditional: "Free-form email notes", ours: "Structured scorecards with shared rubric" },
@@ -1645,7 +1645,7 @@ const SUB_PAGE_CONFIG: Record<string, SubPageConfig> = {
       },
     ],
     comparison: {
-      columns: ["Capability", "Generic email outreach", "JOBSONN Candidate Engagement"],
+      columns: ["Capability", "Generic email outreach", "jobson.id Candidate Engagement"],
       rows: [
         { feature: "Personalization", traditional: "First-name token in template", ours: "AI-personalized based on profile + activity + role fit" },
         { feature: "Channels", traditional: "Email only", ours: "Email + WhatsApp + call + SMS + LinkedIn" },
@@ -1877,7 +1877,7 @@ const SUB_PAGE_CONFIG: Record<string, SubPageConfig> = {
       },
     ],
     comparison: {
-      columns: ["Capability", "Excel + manual reports", "JOBSONN Analytics & Reporting"],
+      columns: ["Capability", "Excel + manual reports", "jobson.id Analytics & Reporting"],
       rows: [
         { feature: "Refresh cadence", traditional: "Weekly / monthly manual export", ours: "Real-time — refreshes every 60 seconds" },
         { feature: "Data sources", traditional: "Manual export from each tool", ours: "Unified warehouse — ATS + HRIS + assessments + sourcing" },

@@ -31,7 +31,7 @@ const MODELS = [
     name: "Technology Partner",
     color: "#0EA5E9",
     icon: Cpu,
-    desc: "Build complementary products on the JOBSONN platform — integrations, vertical SaaS, white-label deployments.",
+    desc: "Build complementary products on the jobson.id platform — integrations, vertical SaaS, white-label deployments.",
     benefits: [
       "Full API & webhooks access",
       "30% revenue share on co-sold deals",
@@ -46,7 +46,7 @@ const MODELS = [
     name: "Channel Partner",
     color: "#10B981",
     icon: Layers,
-    desc: "Resell JOBSONN products into your existing customer base — staffing firms, HR consultancies, BPOs.",
+    desc: "Resell jobson.id products into your existing customer base — staffing firms, HR consultancies, BPOs.",
     benefits: [
       "20-25% reseller margin",
       "Co-branded sales collateral",
@@ -87,21 +87,21 @@ const TESTIMONIALS = [
     role: "CEO, TalentBridge Consulting",
     company: "Channel Partner",
     initials: "PB",
-    quote: "We've been a JOBSONN Channel Partner for 14 months. The dedicated PM is the key — she joins our top deals and unblocks pricing in real time. Revenue share is honest and on-time.",
+    quote: "We've been a jobson.id Channel Partner for 14 months. The dedicated PM is the key — she joins our top deals and unblocks pricing in real time. Revenue share is honest and on-time.",
   },
   {
     name: "Sahil Kapoor",
     role: "Founder, HRTech Solutions",
     company: "Technology Partner",
     initials: "SK",
-    quote: "The API access let us build a vertical SaaS on top of JOBSONN's matching engine in 4 months. We launched to our first 50 customers and never looked back.",
+    quote: "The API access let us build a vertical SaaS on top of jobson.id's matching engine in 4 months. We launched to our first 50 customers and never looked back.",
   },
   {
     name: "Meera Krishnan",
     role: "VP Partnerships, PeopleFirst",
     company: "Strategic Partner",
     initials: "MK",
-    quote: "Our 3-year strategic alliance with JOBSONN unlocked an enterprise segment we couldn't reach alone. Joint product roadmap, co-marketing, and clean revenue accounting. Rare in this industry.",
+    quote: "Our 3-year strategic alliance with jobson.id unlocked an enterprise segment we couldn't reach alone. Joint product roadmap, co-marketing, and clean revenue accounting. Rare in this industry.",
   },
 ];
 
@@ -121,7 +121,7 @@ function RevenueCalculator() {
         <h3 className="text-lg font-semibold tracking-tight">Partnership revenue calculator</h3>
       </div>
       <p className="mt-1 text-sm text-muted-foreground">
-        Estimate your share of revenue from a JOBSONN partnership.
+        Estimate your share of revenue from a jobson.id partnership.
       </p>
 
       <div className="mt-6 space-y-5">
@@ -215,7 +215,7 @@ export function PublicPartnerWithUs() {
         <div className="relative mx-auto max-w-4xl px-4 py-16 text-center sm:px-6 sm:py-20 lg:px-8">
           <Badge className="mb-4 gap-1"><Handshake className="h-3 w-3" /> Strategic Partnerships</Badge>
           <h1 className="text-3xl font-bold tracking-tight text-balance sm:text-4xl lg:text-5xl">
-            Partner with JOBSONN to <span className="text-brand">grow together</span>
+            Partner with jobson.id to <span className="text-brand">grow together</span>
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-base text-muted-foreground sm:text-lg">
             Beyond franchise — a strategic partnership program for technology, channel, and ecosystem
@@ -246,7 +246,7 @@ export function PublicPartnerWithUs() {
       <section className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         <div className="mb-8 text-center">
           <Badge className="mb-3 gap-1"><Target className="h-3 w-3" /> Why partner with us</Badge>
-          <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Six reasons to align with JOBSONN</h2>
+          <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Six reasons to align with jobson.id</h2>
         </div>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {WHY_PARTNER.map((w) => (

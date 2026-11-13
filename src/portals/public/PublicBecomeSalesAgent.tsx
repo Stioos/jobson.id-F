@@ -73,7 +73,7 @@ const TIERS = [
 const STEPS = [
   { step: "01", title: "Apply online", desc: "Submit your application with basic details, city, and prior sales experience.", icon: User },
   { step: "02", title: "Onboarding & KYC", desc: "Complete KYC, sign the partnership agreement, and get your agent dashboard access.", icon: ShieldCheck },
-  { step: "03", title: "Training & certification", desc: "Complete the 2-day sales certification on JOBSONN products, pricing, and demo flow.", icon: Trophy },
+  { step: "03", title: "Training & certification", desc: "Complete the 2-day sales certification on jobson.id products, pricing, and demo flow.", icon: Trophy },
   { step: "04", title: "Start selling", desc: "Receive leads from your territory, demo to clients, and submit deals through the dashboard.", icon: Megaphone },
   { step: "05", title: "Earn commissions", desc: "Get paid within 7 days of deal closure — directly to your bank account, with full visibility.", icon: Wallet },
 ];
@@ -93,7 +93,7 @@ const TESTIMONIALS = [
     role: "Sales Agent, Chennai",
     salary: "₹2.4L / month avg",
     initials: "KI",
-    quote: "I run a small staffing consultancy in Chennai. After joining JOBSONN's Gold tier, my monthly income doubled — the leads are warm, the product sells itself.",
+    quote: "I run a small staffing consultancy in Chennai. After joining jobson.id's Gold tier, my monthly income doubled — the leads are warm, the product sells itself.",
   },
   {
     name: "Deepa Nair",
@@ -107,7 +107,7 @@ const TESTIMONIALS = [
     role: "Platinum Agent, Pune",
     salary: "₹4.6L / month avg",
     initials: "IS",
-    quote: "I was a one-person agency. Platinum tier + white-label portal helped me hire a team of 4. We're now JOBSONN's top-performing partner in West India.",
+    quote: "I was a one-person agency. Platinum tier + white-label portal helped me hire a team of 4. We're now jobson.id's top-performing partner in West India.",
   },
 ];
 
@@ -122,11 +122,11 @@ const FAQS = [
   },
   {
     q: "Do I need prior sales experience?",
-    a: "Not necessarily. We accept both experienced sales professionals and high-energy career switchers. The 2-day certification covers everything you need to demo JOBSONN products.",
+    a: "Not necessarily. We accept both experienced sales professionals and high-energy career switchers. The 2-day certification covers everything you need to demo jobson.id products.",
   },
   {
     q: "Is there an upfront fee to join?",
-    a: "No. Joining the JOBSONN Sales Agent program is free. We make money when you make money — that alignment is core to how we operate.",
+    a: "No. Joining the jobson.id Sales Agent program is free. We make money when you make money — that alignment is core to how we operate.",
   },
   {
     q: "Can I work part-time?",
@@ -258,7 +258,7 @@ export function PublicBecomeSalesAgent() {
         <div className="relative mx-auto max-w-4xl px-4 py-16 text-center sm:px-6 sm:py-20 lg:px-8">
           <Badge className="mb-4 gap-1"><Handshake className="h-3 w-3" /> Sales Agent Program</Badge>
           <h1 className="text-3xl font-bold tracking-tight text-balance sm:text-4xl lg:text-5xl">
-            Earn up to <span className="text-brand">16% commission</span> selling JOBSONN
+            Earn up to <span className="text-brand">16% commission</span> selling jobson.id
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-base text-muted-foreground sm:text-lg">
             Join India&apos;s most rewarding tech sales agent program. Get territory-exclusive leads,
@@ -377,7 +377,7 @@ export function PublicBecomeSalesAgent() {
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <div className="mb-10 text-center">
           <Badge className="mb-3 gap-1"><ShieldCheck className="h-3 w-3" /> Benefits</Badge>
-          <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Why agents choose JOBSONN</h2>
+          <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Why agents choose jobson.id</h2>
         </div>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {BENEFITS.map((b) => (
@@ -512,7 +512,7 @@ export function PublicBecomeSalesAgent() {
             </div>
             <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
               <span className="flex items-center gap-1"><Phone className="h-3.5 w-3.5" /> +91 80 4567 8900</span>
-              <span className="flex items-center gap-1"><Mail className="h-3.5 w-3.5" /> partners@jobsonn.com</span>
+              <span className="flex items-center gap-1"><Mail className="h-3.5 w-3.5" /> partners@jobson.id</span>
             </div>
             <Button type="submit" size="lg" className="w-full gap-1.5">
               Submit application <ArrowRight className="h-4 w-4" />
@@ -528,7 +528,7 @@ export function PublicBecomeSalesAgent() {
             <div>
               <Handshake className="h-6 w-6 text-brand" />
               <h2 className="mt-3 text-2xl font-bold tracking-tight sm:text-3xl">
-                Build a long-term partnership with JOBSONN
+                Build a long-term partnership with jobson.id
               </h2>
               <p className="mt-3 text-sm text-muted-foreground">
                 Whether you&apos;re an experienced sales professional or building an agency from scratch,

@@ -55,7 +55,7 @@ const TESTIMONIALS = [
   {
     name: "Aarti Krishnan",
     role: "Senior PM at Swiggy",
-    text: "JOBSONN's career services team gave me clarity on my next move. The mock interviews alone helped me negotiate a 32% hike. Worth every rupee.",
+    text: "jobson.id's career services team gave me clarity on my next move. The mock interviews alone helped me negotiate a 32% hike. Worth every rupee.",
     initials: "AK",
   },
   {

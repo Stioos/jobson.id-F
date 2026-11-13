@@ -298,7 +298,7 @@ export function PublicIndustriesExperience() {
               depth is non-negotiable.&rdquo;
             </p>
             <p className="mt-4 text-sm font-semibold">Vikram Joshi</p>
-            <p className="text-xs text-muted-foreground">VP, Product — JOBSONN</p>
+            <p className="text-xs text-muted-foreground">VP, Product — jobson.id</p>
           </Card>
         </div>
       </section>

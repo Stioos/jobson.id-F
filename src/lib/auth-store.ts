@@ -29,7 +29,7 @@ export interface AuthUserView {
   initials: string;
 }
 
-const PROFILE_STORAGE_KEY = "jobsonn_account_profile_store_v1";
+const PROFILE_STORAGE_KEY = "jobson_id_account_profile_store_v1";
 const ROLE_STORAGE_KEY = "webuos-agent-role";
 
 export function getInitials(name?: string | null): string {
@@ -105,7 +105,7 @@ export function getActiveUser(): AuthUserView {
     : undefined;
 
   const defaults = mapRoleToAccountDefaults(authUser?.role);
-  const fullName = stored.fullName || authUser?.name || "JOBSONN Member";
+  const fullName = stored.fullName || authUser?.name || "jobson.id Member";
   const firstName = stored.firstName || fullName.split(/\s+/)[0] || "Member";
   const email = stored.email || authUser?.email || "jobson.id@gmail.com";
   const phone = stored.phone || matchedRegistered?.phone || "+91 98765 43210";
@@ -155,7 +155,7 @@ export function saveUserData(patch: StoredAccountProfile): void {
     }
 
     window.dispatchEvent(new Event("webuos-auth-change"));
-    window.dispatchEvent(new Event("jobsonn-auth-change"));
+    window.dispatchEvent(new Event("jobson.id-auth-change"));
   } catch {
     // ignore storage failures
   }
@@ -171,11 +171,11 @@ export function useAuthUser(): AuthUserView {
   useEffect(() => {
     const refresh = () => setTick((t) => t + 1);
     window.addEventListener("webuos-auth-change", refresh);
-    window.addEventListener("jobsonn-auth-change", refresh);
+    window.addEventListener("jobson.id-auth-change", refresh);
     window.addEventListener("storage", refresh);
     return () => {
       window.removeEventListener("webuos-auth-change", refresh);
-      window.removeEventListener("jobsonn-auth-change", refresh);
+      window.removeEventListener("jobson.id-auth-change", refresh);
       window.removeEventListener("storage", refresh);
     };
   }, []);
@@ -202,7 +202,7 @@ export function useAuthUser(): AuthUserView {
     : undefined;
   const defaults = mapRoleToAccountDefaults(user?.role);
 
-  const fullName = stored.fullName || user?.name || "JOBSONN Member";
+  const fullName = stored.fullName || user?.name || "jobson.id Member";
   const firstName = stored.firstName || fullName.split(/\s+/)[0] || "Member";
   const email = stored.email || user?.email || "";
   const phone = stored.phone || matchedRegistered?.phone || "+91 98765 43210";

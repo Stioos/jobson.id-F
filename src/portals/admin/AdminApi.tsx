@@ -45,7 +45,7 @@ const INITIAL_KEYS: ApiKey[] = [
 ];
 
 const WEBHOOKS = [
-  { id: "w1", url: "https://api.techcorp.com/jobsonn/webhook", events: ["application.created", "application.stage_changed"], status: "active" },
+  { id: "w1", url: "https://api.techcorp.com/jobson.id/webhook", events: ["application.created", "application.stage_changed"], status: "active" },
   { id: "w2", url: "https://hooks.finedge.io/jobs", events: ["job.published", "job.closed"], status: "active" },
 ];
 

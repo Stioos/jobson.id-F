@@ -378,7 +378,7 @@ function CreateCorpDialog({ open, onOpenChange }: { open: boolean; onOpenChange:
             <Field label="Curriculum (comma-separated)"><Textarea value={form.curriculum} onChange={(e) => update("curriculum", e.target.value)} placeholder="Leadership Bootcamp, Strategic Leadership, Change Management" /></Field>
           </div>
           <div className="sm:col-span-2">
-            <Field label="Certifications (comma-separated)"><Input value={form.certifications} onChange={(e) => update("certifications", e.target.value)} placeholder="JOBSONN Leadership Certificate" /></Field>
+            <Field label="Certifications (comma-separated)"><Input value={form.certifications} onChange={(e) => update("certifications", e.target.value)} placeholder="jobson.id Leadership Certificate" /></Field>
           </div>
         </div>
         <DialogFooter>

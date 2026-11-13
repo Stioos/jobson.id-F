@@ -154,7 +154,7 @@ export function TrainingProviderProfile() {
         description="This is how students and corporate clients see your training provider profile. Edit any section inline."
         icon={<Building2 className="h-6 w-6" />}
         actions={[
-          { label: "Share Profile", variant: "outline", onClick: () => toast.success("Share link copied", { description: "https://jobsonn.io/t/skillbridge-academy" }) },
+          { label: "Share Profile", variant: "outline", onClick: () => toast.success("Share link copied", { description: "https://jobson.id/t/skillbridge-academy" }) },
         ]}
       />
 

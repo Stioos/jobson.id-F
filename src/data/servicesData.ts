@@ -125,7 +125,7 @@ export const serviceCategories: ServiceCategory[] = [
       { q: 'What kind of ROI can we expect from AI business automation?', a: 'Our clients typically see 30-60% reduction in operational costs within the first 6 months. Document processing automation alone saves an average of 15 hours per employee per week. Customer support AI reduces ticket resolution time by 70% while improving CSAT scores by 25-35%.' },
     ],
     testimonials: [
-      { name: 'Rajesh Mehta', role: 'VP of Operations', company: 'FinServe Global', text: 'JOBSONN\'s AI document intelligence transformed our loan processing pipeline. What used to take our team 3 days now completes in under 4 hours with higher accuracy. The ROI was visible within the first quarter.' },
+      { name: 'Rajesh Mehta', role: 'VP of Operations', company: 'FinServe Global', text: 'jobson.id\'s AI document intelligence transformed our loan processing pipeline. What used to take our team 3 days now completes in under 4 hours with higher accuracy. The ROI was visible within the first quarter.' },
       { name: 'Sarah Chen', role: 'CTO', company: 'MedTech Solutions', text: 'The AI knowledge management system they built for our medical device support team has been a game-changer. Support agents now find answers 80% faster, and patient satisfaction scores jumped by 32 points.' },
       { name: 'Arun Patel', role: 'Director of Digital', company: 'InsureRight Inc.', text: 'Their AI customer support solution handles 73% of our queries without human intervention. The sentiment-aware routing ensures complex claims go to the right specialists instantly. Truly enterprise-grade AI.' },
     ],
@@ -280,9 +280,9 @@ export const serviceCategories: ServiceCategory[] = [
       { q: 'How do you ensure AI-generated content aligns with our brand voice?', a: 'We start by training AI models on your existing high-performing content, brand guidelines, and style guides. Every piece of AI-generated content goes through human editorial review before publication. We also maintain a brand voice scorecard that measures consistency across all generated content.' },
     ],
     testimonials: [
-      { name: 'Priya Sharma', role: 'CMO', company: 'ShopVista E-Commerce', text: 'JOBSONN\'s AI marketing engine took our ROAS from 1.8x to 4.2x in just 5 months. Their predictive audience targeting found customer segments we never knew existed. Revenue grew 180% year-over-year.' },
+      { name: 'Priya Sharma', role: 'CMO', company: 'ShopVista E-Commerce', text: 'jobson.id\'s AI marketing engine took our ROAS from 1.8x to 4.2x in just 5 months. Their predictive audience targeting found customer segments we never knew existed. Revenue grew 180% year-over-year.' },
       { name: 'Marcus Johnson', role: 'VP of Sales', company: 'CloudStack Pro', text: 'The AI sales funnel they built qualifies and nurtures leads better than our best SDRs. Our sales team now only talks to prospects who are ready to buy. Close rates improved by 65% and sales cycle dropped from 45 to 18 days.' },
-      { name: 'Lisa Wang', role: 'Founder', company: 'EduBright Academy', text: 'Their GEO strategy got us featured in ChatGPT responses for our top 12 keywords. Organic traffic from AI search engines grew 400% in 6 months. This is the future of SEO and JOBSONN nailed it.' },
+      { name: 'Lisa Wang', role: 'Founder', company: 'EduBright Academy', text: 'Their GEO strategy got us featured in ChatGPT responses for our top 12 keywords. Organic traffic from AI search engines grew 400% in 6 months. This is the future of SEO and jobson.id nailed it.' },
     ],
   },
 
@@ -381,7 +381,7 @@ export const serviceCategories: ServiceCategory[] = [
       { q: 'What happens when an AI agent encounters a situation it cannot handle?', a: 'Agents are designed with graceful degradation. When confidence is low or a situation falls outside their training, they escalate to human operators with full context about what they tried and why. This human-in-the-loop approach ensures nothing falls through the cracks while maintaining high automation rates.' },
     ],
     testimonials: [
-      { name: 'David Kim', role: 'COO', company: 'SteelWorks Manufacturing', text: 'The multi-agent system JOBSONN built for our procurement process is remarkable. One agent negotiates with suppliers, another checks compliance, and a third handles PO generation. Our procurement cycle went from 2 weeks to 2 days.' },
+      { name: 'David Kim', role: 'COO', company: 'SteelWorks Manufacturing', text: 'The multi-agent system jobson.id built for our procurement process is remarkable. One agent negotiates with suppliers, another checks compliance, and a third handles PO generation. Our procurement cycle went from 2 weeks to 2 days.' },
       { name: 'Anita Desai', role: 'CHRO', company: 'TalentFirst Solutions', text: 'Their AI recruitment agents screen 5,000+ applications daily, match candidates to roles with 92% accuracy, and schedule interviews automatically. Our time-to-hire dropped from 34 days to 8 days. It is like having 20 extra recruiters.' },
       { name: 'James Morrison', role: 'VP of IT Ops', company: 'NetScale Systems', text: 'AIOps agents now handle 85% of our L1 and L2 incidents autonomously. Mean time to resolution dropped from 4 hours to 12 minutes. The agents even predict and prevent outages before they impact users.' },
     ],
@@ -482,7 +482,7 @@ export const serviceCategories: ServiceCategory[] = [
       { q: 'How do self-hosted AI platforms compare to cloud AI services like OpenAI?', a: 'Self-hosted AI platforms like Ollama and LocalAI give you complete data privacy, no per-API-call costs, and unlimited usage. While they may require more initial setup, the long-term cost savings are massive for high-volume use cases. We can also deploy fine-tuned models that outperform generic APIs for your specific domain.' },
     ],
     testimonials: [
-      { name: 'Ramesh Gupta', role: 'CTO', company: 'GovTech Solutions', text: 'JOBSONN deployed a complete open source DevOps stack — GitLab, ArgoCD, Prometheus, Grafana — in under a week. We saved $180K annually in licensing fees and got better features than our previous proprietary tools.' },
+      { name: 'Ramesh Gupta', role: 'CTO', company: 'GovTech Solutions', text: 'jobson.id deployed a complete open source DevOps stack — GitLab, ArgoCD, Prometheus, Grafana — in under a week. We saved $180K annually in licensing fees and got better features than our previous proprietary tools.' },
       { name: 'Emily Foster', role: 'IT Director', company: 'MedCare Clinics', text: 'The Odoo ERP they deployed handles our 12 clinics\' operations perfectly. Custom modules for patient management and insurance billing were built in weeks. HIPAA compliance was built in from day one.' },
       { name: 'Ahmed Khan', role: 'Founder', company: 'LearnPath Academy', text: 'Their self-hosted AI platform lets us run LLMs on our own servers with full student data privacy. We process 50K+ student queries monthly with zero data leaving our infrastructure. Incredible value.' },
     ],
@@ -583,9 +583,9 @@ export const serviceCategories: ServiceCategory[] = [
       { q: 'What happens after the project is delivered? Do you provide maintenance?', a: 'Yes. We offer flexible post-launch support plans — from basic bug fixes to full managed services including monitoring, performance optimization, security patching, and feature development. Our average client relationship extends 2+ years beyond initial delivery.' },
     ],
     testimonials: [
-      { name: 'Michael Torres', role: 'CEO', company: 'PayFlow Fintech', text: 'JOBSONN built our entire payment platform from scratch — mobile app, merchant dashboard, and payment gateway API — in 14 weeks. The architecture handles 50K transactions daily without breaking a sweat. Exceptional engineering team.' },
+      { name: 'Michael Torres', role: 'CEO', company: 'PayFlow Fintech', text: 'jobson.id built our entire payment platform from scratch — mobile app, merchant dashboard, and payment gateway API — in 14 weeks. The architecture handles 50K transactions daily without breaking a sweat. Exceptional engineering team.' },
       { name: 'Neha Reddy', role: 'Product Head', company: 'HealthBridge App', text: 'Their React Native team delivered our patient-doctor app for iOS and Android with a shared codebase. Offline sync, real-time chat, and video consultations all work flawlessly. App store approval on first submission.' },
-      { name: 'Robert Chang', role: 'CTO', company: 'LogiTrack Systems', text: 'We hired JOBSONN to modernize our 15-year-old logistics platform. They re-architected it into microservices, migrated the database, and launched the new system with zero downtime. A masterclass in legacy modernization.' },
+      { name: 'Robert Chang', role: 'CTO', company: 'LogiTrack Systems', text: 'We hired jobson.id to modernize our 15-year-old logistics platform. They re-architected it into microservices, migrated the database, and launched the new system with zero downtime. A masterclass in legacy modernization.' },
     ],
   },
 
@@ -684,9 +684,9 @@ export const serviceCategories: ServiceCategory[] = [
       { q: 'How long does it take to set up a complete data platform?', a: 'A basic data warehouse with 5-10 source integrations and BI dashboards takes 6-8 weeks. A full-scale data platform with real-time streaming, data lake, predictive models, and self-service analytics typically takes 12-16 weeks. We deliver in phases so you see value from week 4 onwards.' },
     ],
     testimonials: [
-      { name: 'Vikram Singh', role: 'Head of Analytics', company: 'RetailMax Group', text: 'JOBSONN built our entire data platform — Snowflake warehouse, 40+ Airflow pipelines, dbt transformations, and Tableau dashboards — in 10 weeks. Our merchandising team now makes decisions based on real-time sales data instead of weekly Excel reports.' },
+      { name: 'Vikram Singh', role: 'Head of Analytics', company: 'RetailMax Group', text: 'jobson.id built our entire data platform — Snowflake warehouse, 40+ Airflow pipelines, dbt transformations, and Tableau dashboards — in 10 weeks. Our merchandising team now makes decisions based on real-time sales data instead of weekly Excel reports.' },
       { name: 'Laura Mitchell', role: 'VP of Data', company: 'Capital Edge Bank', text: 'Their predictive analytics models for loan default prediction achieved 94% accuracy, saving us $12M in potential bad loans last year. The real-time fraud detection pipeline processes 2M transactions per hour with sub-second latency.' },
-      { name: 'Sanjay Patel', role: 'CTO', company: 'TeleConnect Networks', text: 'We went from zero data culture to having 200+ self-service analytics users in 6 months. JOBSONN not only built the infrastructure but also trained our teams and created a data governance framework that our compliance team loves.' },
+      { name: 'Sanjay Patel', role: 'CTO', company: 'TeleConnect Networks', text: 'We went from zero data culture to having 200+ self-service analytics users in 6 months. jobson.id not only built the infrastructure but also trained our teams and created a data governance framework that our compliance team loves.' },
     ],
   },
 
@@ -785,9 +785,9 @@ export const serviceCategories: ServiceCategory[] = [
       { q: 'How do you handle cloud cost optimization?', a: 'We implement a multi-layered approach: right-sizing instances based on actual usage, reserved/spot instance strategies for non-critical workloads, automated scaling policies, storage lifecycle management, and continuous cost monitoring with alerting. Our clients typically save 30-50% on their cloud bills within the first 6 months.' },
     ],
     testimonials: [
-      { name: 'Chris Anderson', role: 'VP Engineering', company: 'StreamBox Media', text: 'JOBSONN migrated our entire video streaming platform from on-premise to AWS with zero downtime during peak World Cup season. Kubernetes auto-scaling handles 10x traffic spikes effortlessly. Cloud costs actually dropped 35%.' },
+      { name: 'Chris Anderson', role: 'VP Engineering', company: 'StreamBox Media', text: 'jobson.id migrated our entire video streaming platform from on-premise to AWS with zero downtime during peak World Cup season. Kubernetes auto-scaling handles 10x traffic spikes effortlessly. Cloud costs actually dropped 35%.' },
       { name: 'Deepa Nair', role: 'DevOps Lead', company: 'FinGuard Security', text: 'Their Terraform modules and ArgoCD GitOps setup transformed our release process. We went from monthly releases with manual deployment anxiety to multiple daily releases with full confidence. MTTR dropped from 2 hours to 8 minutes.' },
-      { name: 'Tom Bradley', role: 'CTO', company: 'GameForge Studios', text: 'The Kubernetes cluster JOBSONN manages for our gaming backend handles 2M concurrent players across 3 regions. Their auto-scaling policies and service mesh configuration gave us 99.99% uptime during our biggest launch event.' },
+      { name: 'Tom Bradley', role: 'CTO', company: 'GameForge Studios', text: 'The Kubernetes cluster jobson.id manages for our gaming backend handles 2M concurrent players across 3 regions. Their auto-scaling policies and service mesh configuration gave us 99.99% uptime during our biggest launch event.' },
     ],
   },
 
@@ -886,7 +886,7 @@ export const serviceCategories: ServiceCategory[] = [
       { q: 'Can you fine-tune LLMs on our proprietary data while keeping it private?', a: 'Absolutely. We use on-premise or private cloud GPU infrastructure for fine-tuning. Your data never leaves your environment. We use techniques like LoRA and QLoRA that require minimal compute while achieving domain-specific performance that rivals or exceeds generic models on your specific tasks.' },
     ],
     testimonials: [
-      { name: 'Dr. Anita Rao', role: 'Head of AI', company: 'DiagnosticsPro Health', text: 'JOBSONN\'s computer vision model for X-ray analysis detects early-stage abnormalities with 96.3% accuracy — surpassing our radiologists in initial screening. It now assists 40+ hospitals in their diagnostic workflow.' },
+      { name: 'Dr. Anita Rao', role: 'Head of AI', company: 'DiagnosticsPro Health', text: 'jobson.id\'s computer vision model for X-ray analysis detects early-stage abnormalities with 96.3% accuracy — surpassing our radiologists in initial screening. It now assists 40+ hospitals in their diagnostic workflow.' },
       { name: 'Kevin Park', role: 'AI Director', company: 'RetailGenius', text: 'The recommendation engine they built increased our average order value by 34% and customer engagement by 52%. Fine-tuned LLMs power our product descriptions and customer chatbot with brand-perfect tone.' },
       { name: 'Sophie Laurent', role: 'CTO', company: 'AgriVision Tech', text: 'Their crop disease detection model processes drone imagery in real-time and identifies 15 types of crop diseases with 91% accuracy. The MLOps pipeline retrains monthly with new field data. Truly transformative for precision agriculture.' },
     ],
@@ -987,9 +987,9 @@ export const serviceCategories: ServiceCategory[] = [
       { q: 'What makes your AI governance framework different?', a: 'Our AI governance framework goes beyond compliance checklists. We implement practical tools — bias detection dashboards, model explainability reports, automated audit trails, and risk scoring — that your teams actually use daily. We align with EU AI Act, NIST AI RMF, and industry-specific regulations while keeping governance lightweight and actionable.' },
     ],
     testimonials: [
-      { name: 'Rajiv Kapoor', role: 'CEO', company: 'Legacy National Bank', text: 'JOBSONN guided our 18-month digital transformation that touched every department. They helped us move from 40-year-old mainframes to a cloud-native microservices platform. Customer onboarding went from 2 weeks to 15 minutes. Revenue grew 28% in the first year post-transformation.' },
+      { name: 'Rajiv Kapoor', role: 'CEO', company: 'Legacy National Bank', text: 'jobson.id guided our 18-month digital transformation that touched every department. They helped us move from 40-year-old mainframes to a cloud-native microservices platform. Customer onboarding went from 2 weeks to 15 minutes. Revenue grew 28% in the first year post-transformation.' },
       { name: 'Maria Gonzalez', role: 'CIO', company: 'Metro Health System', text: 'Their AI governance framework was exactly what we needed to deploy clinical AI tools safely. The bias auditing tools and explainability dashboards gave our medical board the confidence to approve 5 AI diagnostic tools that now serve 200K+ patients.' },
-      { name: 'Prakash Iyer', role: 'COO', company: 'Heavy Industries Ltd.', text: 'The process reengineering engagement identified $8M in annual savings from operational waste. JOBSONN\'s consultants worked on the shop floor with our teams to redesign workflows. Employee satisfaction improved 40% because we eliminated the frustrating parts of their jobs.' },
+      { name: 'Prakash Iyer', role: 'COO', company: 'Heavy Industries Ltd.', text: 'The process reengineering engagement identified $8M in annual savings from operational waste. jobson.id\'s consultants worked on the shop floor with our teams to redesign workflows. Employee satisfaction improved 40% because we eliminated the frustrating parts of their jobs.' },
     ],
   },
 ];

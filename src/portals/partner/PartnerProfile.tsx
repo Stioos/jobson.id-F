@@ -251,7 +251,7 @@ export function PartnerProfile() {
               </div>
             </div>
             <p className="mt-3 text-xs text-muted-foreground">
-              To switch partner model or upgrade tier, please contact the partnership team at <span className="font-medium text-brand">partnerships@jobsonn.com</span>.
+              To switch partner model or upgrade tier, please contact the partnership team at <span className="font-medium text-brand">partnerships@jobson.id</span>.
             </p>
           </CardContent>
         </Card>

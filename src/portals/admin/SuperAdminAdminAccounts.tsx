@@ -21,14 +21,14 @@ interface AdminRow {
 }
 
 const ADMINS: AdminRow[] = [
-  { id: "a_001", name: "Aarav Sharma", email: "aarav@jobsonn.com", role: "Super Admin", group: "Executive", department: "Leadership", portals: ["admin", "employer", "recruiter"], lastLogin: "2024-09-21T09:55:00Z", status: "active", activity: { actions: 248, lastAction: "Updated feature flags", tasks: 6 } },
-  { id: "a_002", name: "Neha Kapoor", email: "neha@jobsonn.com", role: "Admin", group: "Management", department: "Operations", portals: ["admin", "employer"], lastLogin: "2024-09-21T08:30:00Z", status: "active", activity: { actions: 152, lastAction: "Approved employer KYC", tasks: 12 } },
-  { id: "a_003", name: "Raj Malhotra", email: "raj@jobsonn.com", role: "Billing Admin", group: "Finance", department: "Finance", portals: ["admin", "employer"], lastLogin: "2024-09-21T07:15:00Z", status: "active", activity: { actions: 89, lastAction: "Processed payout ₹4.2L", tasks: 4 } },
-  { id: "a_004", name: "Sneha Iyer", email: "sneha@jobsonn.com", role: "Content Admin", group: "Content", department: "Content", portals: ["admin"], lastLogin: "2024-09-20T18:20:00Z", status: "active", activity: { actions: 64, lastAction: "Approved 6 jobs", tasks: 8 } },
-  { id: "a_005", name: "Vikram Reddy", email: "vikram@jobsonn.com", role: "Manager", group: "Operations", department: "Support", portals: ["admin"], lastLogin: "2024-09-19T14:10:00Z", status: "suspended", activity: { actions: 0, lastAction: "—", tasks: 0 } },
-  { id: "a_006", name: "Pooja Desai", email: "pooja@jobsonn.com", role: "Partner Admin", group: "Partner Network", department: "Partnerships", portals: ["admin", "partner"], lastLogin: "2024-09-21T09:00:00Z", status: "active", activity: { actions: 41, lastAction: "Signed partner MoU", tasks: 3 } },
-  { id: "a_007", name: "Karan Mehta", email: "karan@jobsonn.com", role: "Analyst", group: "Operations", department: "Analytics", portals: ["admin"], lastLogin: "2024-09-21T05:45:00Z", status: "active", activity: { actions: 28, lastAction: "Exported cohort report", tasks: 2 } },
-  { id: "a_008", name: "Ananya Bose", email: "ananya@jobsonn.com", role: "Admin", group: "Tech", department: "Engineering", portals: ["admin"], lastLogin: "2024-09-18T22:00:00Z", status: "pending", activity: { actions: 0, lastAction: "Awaiting approval", tasks: 0 } },
+  { id: "a_001", name: "Aarav Sharma", email: "aarav@jobson.id", role: "Super Admin", group: "Executive", department: "Leadership", portals: ["admin", "employer", "recruiter"], lastLogin: "2024-09-21T09:55:00Z", status: "active", activity: { actions: 248, lastAction: "Updated feature flags", tasks: 6 } },
+  { id: "a_002", name: "Neha Kapoor", email: "neha@jobson.id", role: "Admin", group: "Management", department: "Operations", portals: ["admin", "employer"], lastLogin: "2024-09-21T08:30:00Z", status: "active", activity: { actions: 152, lastAction: "Approved employer KYC", tasks: 12 } },
+  { id: "a_003", name: "Raj Malhotra", email: "raj@jobson.id", role: "Billing Admin", group: "Finance", department: "Finance", portals: ["admin", "employer"], lastLogin: "2024-09-21T07:15:00Z", status: "active", activity: { actions: 89, lastAction: "Processed payout ₹4.2L", tasks: 4 } },
+  { id: "a_004", name: "Sneha Iyer", email: "sneha@jobson.id", role: "Content Admin", group: "Content", department: "Content", portals: ["admin"], lastLogin: "2024-09-20T18:20:00Z", status: "active", activity: { actions: 64, lastAction: "Approved 6 jobs", tasks: 8 } },
+  { id: "a_005", name: "Vikram Reddy", email: "vikram@jobson.id", role: "Manager", group: "Operations", department: "Support", portals: ["admin"], lastLogin: "2024-09-19T14:10:00Z", status: "suspended", activity: { actions: 0, lastAction: "—", tasks: 0 } },
+  { id: "a_006", name: "Pooja Desai", email: "pooja@jobson.id", role: "Partner Admin", group: "Partner Network", department: "Partnerships", portals: ["admin", "partner"], lastLogin: "2024-09-21T09:00:00Z", status: "active", activity: { actions: 41, lastAction: "Signed partner MoU", tasks: 3 } },
+  { id: "a_007", name: "Karan Mehta", email: "karan@jobson.id", role: "Analyst", group: "Operations", department: "Analytics", portals: ["admin"], lastLogin: "2024-09-21T05:45:00Z", status: "active", activity: { actions: 28, lastAction: "Exported cohort report", tasks: 2 } },
+  { id: "a_008", name: "Ananya Bose", email: "ananya@jobson.id", role: "Admin", group: "Tech", department: "Engineering", portals: ["admin"], lastLogin: "2024-09-18T22:00:00Z", status: "pending", activity: { actions: 0, lastAction: "Awaiting approval", tasks: 0 } },
 ];
 
 const PORTAL_OPTS = ["admin", "employer", "recruiter", "training", "partner"];
@@ -185,7 +185,7 @@ export function SuperAdminAdminAccounts() {
               </div>
               <div className="space-y-1.5">
                 <Label>Email</Label>
-                <Input placeholder="priya@jobsonn.com" />
+                <Input placeholder="priya@jobson.id" />
               </div>
             </div>
             <div className="grid grid-cols-2 gap-3">

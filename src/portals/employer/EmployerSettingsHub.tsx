@@ -20,10 +20,10 @@ import {
 } from "@/portals/_settings-support-shared";
 
 const PRIVACY_INITIAL = [
-  { key: "public_profile", label: "Public employer profile", description: "Show your company on JOBSONN's public employer directory.", enabled: true },
+  { key: "public_profile", label: "Public employer profile", description: "Show your company on jobson.id's public employer directory.", enabled: true },
   { key: "candidate_indexing", label: "Candidate indexing", description: "Allow your jobs to appear in candidate search and recommendations.", enabled: true },
   { key: "data_sharing", label: "Share data with partners", description: "Share hiring analytics with training & staffing partners for talent pipelines.", enabled: false },
-  { key: "analytics", label: "Usage analytics", description: "Help improve JOBSONN with anonymous usage data.", enabled: true },
+  { key: "analytics", label: "Usage analytics", description: "Help improve jobson.id with anonymous usage data.", enabled: true },
 ];
 
 const INTEGRATIONS = [

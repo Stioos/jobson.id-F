@@ -36,7 +36,7 @@ const stats = [
 ];
 
 const milestones = [
-  { year: "2023 Q1", title: "JOBSONN founded in Bengaluru", desc: "Three co-founders, one mission: make hiring in India more transparent." },
+  { year: "2023 Q1", title: "jobson.id founded in Bengaluru", desc: "Three co-founders, one mission: make hiring in India more transparent." },
   { year: "2023 Q3", title: "Launched public beta", desc: "First 1,000 employers and 50,000 candidates onboarded." },
   { year: "2024 Q1", title: "AI match scoring introduced", desc: "Transparent, explainable fit scoring — clearly labelled as simulated while we collect data." },
   { year: "2024 Q2", title: "Enterprise & agency tiers", desc: "Launched multi-tenant enterprise workspaces and agency commission tracking." },
@@ -58,7 +58,7 @@ export function PublicAbout() {
             Hiring should be <span className="text-brand">transparent</span>, fair, and human.
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-base text-muted-foreground sm:text-lg">
-            JOBSONN is an intelligent hiring platform built for India — unifying candidates,
+            jobson.id is an intelligent hiring platform built for India — unifying candidates,
             employers, and recruiters on one trust-first, consent-driven system.
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
@@ -99,7 +99,7 @@ export function PublicAbout() {
                 candidate a fair, transparent, and dignified path to opportunity.
               </p>
               <p className="mt-3 text-base leading-relaxed text-muted-foreground">
-                We started JOBSONN because we believed India&apos;s hiring market deserved better than
+                We started jobson.id because we believed India&apos;s hiring market deserved better than
                 resume black holes, fake job posts, and opaque ATS systems. We&apos;re building the platform we
                 wished existed when we were candidates — and the one we wished we had when we became hiring managers.
               </p>
@@ -209,9 +209,9 @@ export function PublicAbout() {
               <p className="mt-2 text-sm text-muted-foreground">Coverage from leading publications.</p>
               <div className="mt-5 space-y-3">
                 {[
-                  { outlet: "YourStory", title: "JOBSONN raises $15M Series A to make Indian hiring more transparent", date: "Aug 2024" },
-                  { outlet: "Inc42", title: "How JOBSONN is using AI to fix India's resume black hole problem", date: "Jul 2024" },
-                  { outlet: "Economic Times", title: "Bengaluru HR-tech startup JOBSONN launches enterprise tier", date: "Jun 2024" },
+                  { outlet: "YourStory", title: "jobson.id raises $15M Series A to make Indian hiring more transparent", date: "Aug 2024" },
+                  { outlet: "Inc42", title: "How jobson.id is using AI to fix India's resume black hole problem", date: "Jul 2024" },
+                  { outlet: "Economic Times", title: "Bengaluru HR-tech startup jobson.id launches enterprise tier", date: "Jun 2024" },
                 ].map((p) => (
                   <Card key={p.title} className="flex items-start gap-3 p-4 transition-colors hover:border-brand">
                     <Briefcase className="mt-0.5 h-5 w-5 shrink-0 text-brand" />
@@ -234,7 +234,7 @@ export function PublicAbout() {
             <div>
               <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Join us in building hiring that works for everyone</h2>
               <p className="mt-3 text-sm text-muted-foreground">
-                Whether you&apos;re a candidate, an employer, or an agency — there&apos;s a place for you on JOBSONN.
+                Whether you&apos;re a candidate, an employer, or an agency — there&apos;s a place for you on jobson.id.
               </p>
             </div>
             <div className="flex flex-wrap gap-3 lg:justify-end">

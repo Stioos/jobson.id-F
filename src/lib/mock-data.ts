@@ -32,7 +32,7 @@ import type {
 export const currentUser: User = {
   id: "u_001",
   name: "Aarav Sharma",
-  email: "aarav.sharma@jobsonn.com",
+  email: "aarav.sharma@jobson.id",
   phone: "+91 98765 43210",
   role: "platform_admin",
   avatar: "",
@@ -1227,7 +1227,7 @@ export const interviews: Interview[] = [
     timezone: "Asia/Kolkata",
     interviewerIds: ["u_003"],
     interviewers: ["Rohan Mehta", "Anika Verma"],
-    meetingLink: "https://meet.jobsonn.com/iv-001",
+    meetingLink: "https://meet.jobson.id/iv-001",
     status: "scheduled",
     feedbackSubmitted: false,
   },
@@ -1245,7 +1245,7 @@ export const interviews: Interview[] = [
     timezone: "Asia/Kolkata",
     interviewerIds: ["u_003"],
     interviewers: ["Anika Verma"],
-    meetingLink: "https://meet.jobsonn.com/iv-002",
+    meetingLink: "https://meet.jobson.id/iv-002",
     status: "scheduled",
     feedbackSubmitted: false,
   },
@@ -1263,7 +1263,7 @@ export const interviews: Interview[] = [
     timezone: "Asia/Kolkata",
     interviewerIds: ["u_003"],
     interviewers: ["Vikram Joshi", "CEO"],
-    meetingLink: "https://meet.jobsonn.com/iv-003",
+    meetingLink: "https://meet.jobson.id/iv-003",
     status: "completed",
     feedbackSubmitted: true,
     scorecard: {
@@ -1548,10 +1548,10 @@ export const notifications: Notification[] = [
 // ============================================================
 export const trainingCourses: TrainingCourse[] = [
   { id: "tc_001", title: "Advanced React 19 Patterns", provider: "Frontend Masters", category: "Frontend", level: "advanced", durationHours: 18, rating: 4.8, enrolledCount: 12400, price: 4999, currency: "INR", skills: ["React", "Performance", "Patterns"], description: "Master concurrent rendering, suspense, server components, and advanced hooks.", certified: true },
-  { id: "tc_002", title: "System Design for Interviews", provider: "JOBSONN Academy", category: "System Design", level: "advanced", durationHours: 24, rating: 4.7, enrolledCount: 8200, price: 2999, currency: "INR", skills: ["System Design", "Distributed Systems"], description: "Crack senior engineering interviews with real system design problems.", certified: true },
+  { id: "tc_002", title: "System Design for Interviews", provider: "jobson.id Academy", category: "System Design", level: "advanced", durationHours: 24, rating: 4.7, enrolledCount: 8200, price: 2999, currency: "INR", skills: ["System Design", "Distributed Systems"], description: "Crack senior engineering interviews with real system design problems.", certified: true },
   { id: "tc_003", title: "Kubernetes for Developers (CKA prep)", provider: "KodeKloud", category: "DevOps", level: "intermediate", durationHours: 32, rating: 4.9, enrolledCount: 22100, price: 3499, currency: "INR", skills: ["Kubernetes", "DevOps"], description: "Hands-on K8s with full CKA exam preparation.", certified: true },
   { id: "tc_004", title: "Product Management Foundations", provider: "Reforge", category: "Product", level: "intermediate", durationHours: 20, rating: 4.6, enrolledCount: 5400, price: 6999, currency: "INR", skills: ["Product Strategy", "Roadmapping"], description: "From discovery to delivery — modern PM practices.", certified: true },
-  { id: "tc_005", title: "SQL & Data Analytics for PMs", provider: "JOBSONN Academy", category: "Data", level: "beginner", durationHours: 12, rating: 4.5, enrolledCount: 9800, price: 1499, currency: "INR", skills: ["SQL", "Analytics"], description: "Query databases and build dashboards without engineering help.", certified: false },
+  { id: "tc_005", title: "SQL & Data Analytics for PMs", provider: "jobson.id Academy", category: "Data", level: "beginner", durationHours: 12, rating: 4.5, enrolledCount: 9800, price: 1499, currency: "INR", skills: ["SQL", "Analytics"], description: "Query databases and build dashboards without engineering help.", certified: false },
   { id: "tc_006", title: "AWS Solutions Architect — Associate", provider: "Linux Academy", category: "Cloud", level: "intermediate", durationHours: 40, rating: 4.7, enrolledCount: 18600, price: 4499, currency: "INR", skills: ["AWS", "Cloud Architecture"], description: "Complete SAA-C03 exam preparation.", certified: true },
 ];
 

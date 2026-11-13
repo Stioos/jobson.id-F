@@ -80,7 +80,7 @@ const TESTIMONIALS: Record<string, { name: string; role: string; company: string
     {
       name: "Rohit Banerjee", role: "Platform Engineer", company: "Zerodha",
       initials: "RB", ctc: "₹17 LPA",
-      quote: "What sets JOBSONN apart is the deployment mindset. I wasn't just writing code — I was running it, monitoring it, fixing it at 2 AM. That's what hiring managers want.",
+      quote: "What sets jobson.id apart is the deployment mindset. I wasn't just writing code — I was running it, monitoring it, fixing it at 2 AM. That's what hiring managers want.",
     },
   ],
   "fde-program": [
@@ -186,15 +186,15 @@ const PROGRAM_FAQS: Record<string, { q: string; a: string }[]> = {
   ],
 };
 
-// Comparison: JOBSONN program vs traditional degree
+// Comparison: jobson.id program vs traditional degree
 const COMPARISON_ROWS = [
-  { feature: "Duration", jobsonn: "20–24 weeks", traditional: "3–4 years" },
-  { feature: "Cost", jobsonn: "Pay after placement", traditional: "₹4–15 L upfront" },
-  { feature: "Curriculum freshness", jobsonn: "Updated every cohort", traditional: "Updated every 3–5 years" },
-  { feature: "Live projects", jobsonn: "12+ real client projects", traditional: "1 capstone (often toy)" },
-  { feature: "Mentorship", jobsonn: "1:1 industry mentors", traditional: "Professor office hours" },
-  { feature: "Placement support", jobsonn: "220+ partners, 6-mo PAP", traditional: "Campus placement cell" },
-  { feature: "Starting salary", jobsonn: "₹5–18 LPA", traditional: "₹3–8 LPA" },
+  { feature: "Duration", jobsonId: "20–24 weeks", traditional: "3–4 years" },
+  { feature: "Cost", jobsonId: "Pay after placement", traditional: "₹4–15 L upfront" },
+  { feature: "Curriculum freshness", jobsonId: "Updated every cohort", traditional: "Updated every 3–5 years" },
+  { feature: "Live projects", jobsonId: "12+ real client projects", traditional: "1 capstone (often toy)" },
+  { feature: "Mentorship", jobsonId: "1:1 industry mentors", traditional: "Professor office hours" },
+  { feature: "Placement support", jobsonId: "220+ partners, 6-mo PAP", traditional: "Campus placement cell" },
+  { feature: "Starting salary", jobsonId: "₹5–18 LPA", traditional: "₹3–8 LPA" },
 ];
 
 // Pick the curriculum from the first role track of the program (each track has 4 phases).
@@ -531,14 +531,14 @@ export function PublicProgramDetail({ programId }: { programId: string }) {
           <Card className="overflow-hidden p-0">
             <div className="grid grid-cols-3 bg-muted/50 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
               <div className="p-3">Feature</div>
-              <div className="p-3 text-brand">JOBSONN {program.tag}</div>
+              <div className="p-3 text-brand">jobson.id {program.tag}</div>
               <div className="p-3">Traditional degree</div>
             </div>
             <div className="divide-y">
               {COMPARISON_ROWS.map((row) => (
                 <div key={row.feature} className="grid grid-cols-3 text-sm">
                   <div className="p-3 font-medium">{row.feature}</div>
-                  <div className="p-3 text-brand">{row.jobsonn}</div>
+                  <div className="p-3 text-brand">{row.jobsonId}</div>
                   <div className="p-3 text-muted-foreground">{row.traditional}</div>
                 </div>
               ))}

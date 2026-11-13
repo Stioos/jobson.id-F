@@ -12,10 +12,10 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-5">
           <div className="col-span-2">
-            <button onClick={() => navigate("public", "home")} className="flex items-center" aria-label="JOBSONN home">
+            <button onClick={() => navigate("public", "home")} className="flex items-center" aria-label="jobson.id home">
               <Image
-                src="/jobsonn-logo.png"
-                alt="JOBSONN"
+                src="/jobson-id-logo.png"
+                alt="jobson.id"
                 width={130}
                 height={36}
                 className="h-7 w-auto object-contain"
@@ -61,7 +61,7 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-8 flex flex-col items-center justify-between gap-3 border-t pt-6 text-xs text-muted-foreground sm:flex-row">
-          <p>© 2026 JOBSONN Technologies. Demo prototype — all data is simulated.</p>
+          <p>© 2026 jobson.id Technologies. Demo prototype — all data is simulated.</p>
           <div className="flex items-center gap-4">
             <button className="hover:text-foreground">Privacy</button>
             <button className="hover:text-foreground">Terms</button>

@@ -172,7 +172,7 @@ export function RecruiterPublicProfile() {
           {
             label: "Share Profile",
             variant: "outline",
-            onClick: () => toast.success("Share link copied", { description: "https://jobsonn.io/r/ananya-krishnan" }),
+            onClick: () => toast.success("Share link copied", { description: "https://jobson.id/r/ananya-krishnan" }),
           },
         ]}
       />
@@ -203,7 +203,7 @@ export function RecruiterPublicProfile() {
           <div>
             <p className="text-sm font-semibold">Preview as Candidate</p>
             <p className="text-xs text-muted-foreground mt-1">
-              See how your profile appears to candidates browsing recruiters on Jobsonn.
+              See how your profile appears to candidates browsing recruiters on jobson.id.
             </p>
           </div>
           <div className="mt-4 flex items-center justify-between rounded-lg border bg-brand/5 p-3">

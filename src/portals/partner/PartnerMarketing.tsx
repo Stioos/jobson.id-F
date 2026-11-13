@@ -225,7 +225,7 @@ export function PartnerMarketing() {
         </div>
       </SectionCard>
 
-      <SectionCard title="Need help crafting campaigns?" description="JOBSONN marketing team can co-create assets with you">
+      <SectionCard title="Need help crafting campaigns?" description="jobson.id marketing team can co-create assets with you">
         <div className="flex flex-wrap gap-2">
           <Button variant="outline" onClick={() => navigate("partner", "support")}>
             <Sparkles className="h-4 w-4 mr-2" /> Request marketing support

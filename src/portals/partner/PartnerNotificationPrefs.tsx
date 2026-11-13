@@ -15,7 +15,7 @@ const EMAIL_ITEMS = [
   { key: "settlements", label: "Settlement updates", description: "When settlements are credited to your wallet.", icon: "Coins" },
   { key: "renewals", label: "MoU renewals", description: "60/30/7-day reminders for partnership agreements.", icon: "RotateCcw" },
   { key: "billing", label: "Invoices & fees", description: "Invoice generation, fee collections, GST.", icon: "Receipt" },
-  { key: "announcements", label: "JOBSONN announcements", description: "Product updates and partner news.", icon: "BellRing" },
+  { key: "announcements", label: "jobson.id announcements", description: "Product updates and partner news.", icon: "BellRing" },
   { key: "security", label: "Security alerts", description: "Sign-ins, role changes, API keys.", icon: "ShieldCheck" },
   { key: "weekly_digest", label: "Weekly partner digest", description: "A Monday summary of admissions and revenue.", icon: "FileBarChart" },
 ];
@@ -110,7 +110,7 @@ export function PartnerNotificationPrefs() {
         />
         <NotificationGroupCard
           title="Push notifications"
-          description="On devices where you've installed the JOBSONN partner app"
+          description="On devices where you've installed the jobson.id partner app"
           items={PUSH_ITEMS}
           state={push}
           onChange={(k, v) => setPush((p) => ({ ...p, [k]: v }))}

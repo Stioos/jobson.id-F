@@ -15,16 +15,16 @@ import { toast } from "sonner";
 
 export function AdminSettings() {
   const [general, setGeneral] = React.useState({
-    platformName: "JOBSONN",
+    platformName: "jobson.id",
     timezone: "Asia/Kolkata",
     currency: "INR",
-    supportEmail: "support@jobsonn.com",
+    supportEmail: "support@jobson.id",
   });
   const [email, setEmail] = React.useState({
-    smtpHost: "smtp.jobsonn.com",
+    smtpHost: "smtp.jobson.id",
     smtpPort: 587,
-    fromAddress: "notifications@jobsonn.com",
-    fromName: "JOBSONN",
+    fromAddress: "notifications@jobson.id",
+    fromName: "jobson.id",
   });
   const [features, setFeatures] = React.useState<Record<string, boolean>>({
     candidate_signup: true,
@@ -92,7 +92,7 @@ export function AdminSettings() {
               <div className="flex items-center gap-3 rounded-md border p-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-md bg-brand/10 text-brand font-bold">JS</div>
                 <div className="flex-1">
-                  <p className="text-sm">jobsonn-logo.svg</p>
+                  <p className="text-sm">jobson.id-logo.svg</p>
                   <p className="text-xs text-muted-foreground">SVG · 4.2 KB</p>
                 </div>
                 <Button size="sm" variant="outline" onClick={() => toast.info("Upload logo (demo)")}>Upload new</Button>

@@ -73,7 +73,7 @@ const initialItems: ScheduleItem[] = interviewEvents
     durationMinutes: e.durationMinutes,
     interviewer: e.interviewer,
     status: e.status,
-    meetingLink: e.type === "video" ? "https://meet.jobsonn.com/r/" + e.id : undefined,
+    meetingLink: e.type === "video" ? "https://meet.jobson.id/r/" + e.id : undefined,
   }));
 
 export function RecruiterScheduling() {
@@ -351,7 +351,7 @@ function ScheduleDialog({
       durationMinutes: Number(duration),
       interviewer,
       status: "scheduled",
-      meetingLink: type === "video" ? (meetingLink || `https://meet.jobsonn.com/r/${Date.now()}`) : undefined,
+      meetingLink: type === "video" ? (meetingLink || `https://meet.jobson.id/r/${Date.now()}`) : undefined,
     });
     toast.success(`Interview scheduled — ${candidate} on ${date} at ${time}`);
     onOpenChange(false);
@@ -438,7 +438,7 @@ function ScheduleDialog({
           {type === "video" && (
             <div className="sm:col-span-2 space-y-2">
               <Label>Meeting link</Label>
-              <Input value={meetingLink} onChange={(e) => setMeetingLink(e.target.value)} placeholder="https://meet.jobsonn.com/r/…" />
+              <Input value={meetingLink} onChange={(e) => setMeetingLink(e.target.value)} placeholder="https://meet.jobson.id/r/…" />
             </div>
           )}
         </div>

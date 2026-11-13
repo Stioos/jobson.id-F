@@ -109,7 +109,7 @@ export function RecruiterNotificationPrefs() {
         />
         <NotificationGroupCard
           title="Push notifications"
-          description="On devices where you've installed the JOBSONN recruiter app"
+          description="On devices where you've installed the jobson.id recruiter app"
           items={PUSH_ITEMS}
           state={push}
           onChange={(k, v) => setPush((p) => ({ ...p, [k]: v }))}

@@ -1,5 +1,5 @@
 // ============================================================
-// TALENT SOLUTIONS FULL DATA — Extracted directly from jobsonn.com
+// TALENT SOLUTIONS FULL DATA — Extracted directly from jobson.id
 // Contains 100% comprehensive data for every option in the Talent
 // dropdown: Train to Hire, Hire to Train, Corporate Training, etc.
 // ============================================================
@@ -176,7 +176,7 @@ export const TALENT_SOLUTIONS_FULL_DATA: Record<string, FullTalentSolution> = {
     ],
     testimonials: [
       {
-        quote: "JOBSONN's train-to-hire cohort delivered 84 production-ready engineers in 5 months — exactly the domain depth we needed for our payments launch.",
+        quote: "jobson.id's train-to-hire cohort delivered 84 production-ready engineers in 5 months — exactly the domain depth we needed for our payments launch.",
         name: "Rajesh Kumar",
         role: "VP Engineering",
         company: "FinEdge",
@@ -212,7 +212,7 @@ export const TALENT_SOLUTIONS_FULL_DATA: Record<string, FullTalentSolution> = {
     label: "Hire to Train",
     badge: "Hire + Upskill",
     heroHeadline: "Hire the attitude — we train the skills on the job",
-    heroSubheadline: "Hire promising candidates on aptitude and attitude first, then JOBSONN trains them on the job — your stack, your processes, your standards — into the exact role you need filled.",
+    heroSubheadline: "Hire promising candidates on aptitude and attitude first, then jobson.id trains them on the job — your stack, your processes, your standards — into the exact role you need filled.",
     slaNotice: "Backed by written SLAs, replacement guarantees and weekly performance reporting — scoped to your goals on a free discovery call.",
     heroStats: [
       { value: "2–3 wks", label: "Offer to onboard", desc: "Fast intake velocity" },
@@ -231,7 +231,7 @@ export const TALENT_SOLUTIONS_FULL_DATA: Record<string, FullTalentSolution> = {
       },
       {
         title: "Mentors in the loop",
-        desc: "Every hire gets a JOBSONN mentor plus a named buddy on your team, with weekly sync baked into the ramp.",
+        desc: "Every hire gets a jobson.id mentor plus a named buddy on your team, with weekly sync baked into the ramp.",
       },
     ],
     bothSides: {
@@ -264,15 +264,15 @@ export const TALENT_SOLUTIONS_FULL_DATA: Record<string, FullTalentSolution> = {
       { step: "01", title: "Role profile & gap analysis", desc: "We map your must-have foundational aptitudes vs the skills you can train on the job." },
       { step: "02", title: "Aptitude-first sourcing", desc: "We screen candidates on problem-solving, cognitive ability, and learning velocity." },
       { step: "03", title: "Direct offer & hiring", desc: "You hire the candidates directly onto your payroll with confidence in their growth potential." },
-      { step: "04", title: "On-the-job training track", desc: "JOBSONN deploys customized technical modules and labs embedded into their work week." },
-      { step: "05", title: "Dual mentorship", desc: "Each trainee is paired with a JOBSONN senior engineer mentor and an internal company buddy." },
+      { step: "04", title: "On-the-job training track", desc: "jobson.id deploys customized technical modules and labs embedded into their work week." },
+      { step: "05", title: "Dual mentorship", desc: "Each trainee is paired with a jobson.id senior engineer mentor and an internal company buddy." },
       { step: "06", title: "90-day milestone sign-off", desc: "Structured reviews at 30, 60, and 90 days ensure candidates reach full autonomy." },
     ],
     benefits: [
       { title: "Expanded candidate pool", desc: "Access 10x more candidates by evaluating learning velocity rather than narrow keyword matches." },
       { title: "Lower compensation inflation", desc: "Hire high-potential talent at market-entry rates and reward them as their skills compound." },
       { title: "Tailored to your codebase", desc: "Engineers learn your architecture, design systems, and CI/CD pipelines from day one." },
-      { title: "Reduced senior engineer burnout", desc: "JOBSONN mentors handle early technical onboarding, freeing your senior leads." },
+      { title: "Reduced senior engineer burnout", desc: "jobson.id mentors handle early technical onboarding, freeing your senior leads." },
       { title: "Higher loyalty & retention", desc: "Employees whose careers you invest in demonstrate significantly higher company loyalty." },
       { title: "Guaranteed replacement", desc: "If a candidate fails to hit ramp milestones at 60 days, we replace them at no charge." },
     ],
@@ -314,7 +314,7 @@ export const TALENT_SOLUTIONS_FULL_DATA: Record<string, FullTalentSolution> = {
         initials: "VM",
       },
       {
-        quote: "The dual mentorship model was key. JOBSONN mentors answered the day-to-day coding questions, while our leads focused on architecture.",
+        quote: "The dual mentorship model was key. jobson.id mentors answered the day-to-day coding questions, while our leads focused on architecture.",
         name: "Ananya Deshmukh",
         role: "Engineering Director",
         company: "OmniLogistics",
@@ -326,7 +326,7 @@ export const TALENT_SOLUTIONS_FULL_DATA: Record<string, FullTalentSolution> = {
       "Weekly mentor feedback and milestone scorecard",
       "Git commit and code review progression metrics",
       "30-day and 60-day structured performance evaluations",
-      "Access to JOBSONN virtual sandbox environments and labs",
+      "Access to jobson.id virtual sandbox environments and labs",
       "Final 90-day autonomy audit report signed off by technical leads",
     ],
     faqs: [
@@ -439,7 +439,7 @@ export const TALENT_SOLUTIONS_FULL_DATA: Record<string, FullTalentSolution> = {
     ],
     testimonials: [
       {
-        quote: "JOBSONN transformed our cloud upskilling. Rather than endless videos, our engineers built real microservices in simulated sandbox accounts. Outstanding impact.",
+        quote: "jobson.id transformed our cloud upskilling. Rather than endless videos, our engineers built real microservices in simulated sandbox accounts. Outstanding impact.",
         name: "Arun Venkat",
         role: "Chief Learning Officer",
         company: "Standard Chartered Bank",
@@ -525,7 +525,7 @@ export const TALENT_SOLUTIONS_FULL_DATA: Record<string, FullTalentSolution> = {
     processSteps: [
       { step: "01", title: "Role intake call (15 mins)", desc: "We capture role requirements, stack specifics, compensation bands, and cultural signals." },
       { step: "02", title: "AI semantic sourcing", desc: "Our algorithm queries 2M+ profiles and external networks matching depth, trajectory, and availability." },
-      { step: "03", title: "Technical & culture screening", desc: "JOBSONN recruiters conduct 30-min technical screens, verifying motivations and notice periods." },
+      { step: "03", title: "Technical & culture screening", desc: "jobson.id recruiters conduct 30-min technical screens, verifying motivations and notice periods." },
       { step: "04", title: "48-Hour shortlist delivery", desc: "You receive 3–5 candidate dossiers complete with assessment scores and video snippets." },
       { step: "05", title: "Interview scheduling & prep", desc: "We coordinate candidate interviews and handle pre-interview briefing and feedback loops." },
       { step: "06", title: "Offer negotiation & onboarding", desc: "We manage offer closure, compensation alignment, and notice period check-ins to ensure joining." },
@@ -569,7 +569,7 @@ export const TALENT_SOLUTIONS_FULL_DATA: Record<string, FullTalentSolution> = {
     ],
     testimonials: [
       {
-        quote: "JOBSONN sent us three candidate dossiers on Tuesday after a Monday morning brief. We made an offer by Friday. Best recruiting experience we've had.",
+        quote: "jobson.id sent us three candidate dossiers on Tuesday after a Monday morning brief. We made an offer by Friday. Best recruiting experience we've had.",
         name: "Meera Krishnan",
         role: "Director of People",
         company: "PayScale India",
@@ -634,7 +634,7 @@ export const TALENT_SOLUTIONS_FULL_DATA: Record<string, FullTalentSolution> = {
         points: [
           "Pre-vetted contractors available within 48 hours",
           "Flexible 3-month to 24-month engagement terms",
-          "Full payroll, benefits, and tax compliance handled by JOBSONN",
+          "Full payroll, benefits, and tax compliance handled by jobson.id",
           "Seamless transition to permanent hires (temp-to-perm)",
         ],
         ctaText: "Staff My Pod",
@@ -662,7 +662,7 @@ export const TALENT_SOLUTIONS_FULL_DATA: Record<string, FullTalentSolution> = {
     ],
     benefits: [
       { title: "Rapid Time-to-Kickoff", desc: "Deploy seasoned engineers in under 5 business days without lengthy recruiting cycles." },
-      { title: "100% Legal & Tax Compliance", desc: "JOBSONN acts as Employer of Record (EOR), handling PF, ESIC, GST, and statutory liabilities." },
+      { title: "100% Legal & Tax Compliance", desc: "jobson.id acts as Employer of Record (EOR), handling PF, ESIC, GST, and statutory liabilities." },
       { title: "Zero Long-Term Commitments", desc: "Scale up for major feature launches and scale down as maintenance phases begin." },
       { title: "Dedicated Delivery Management", desc: "Every engagement includes a Delivery Manager who tracks SLA adherence and sprint progress." },
       { title: "Temp-to-Perm Flexibility", desc: "Evaluate contractor performance in production before extending full-time offers." },
@@ -725,7 +725,7 @@ export const TALENT_SOLUTIONS_FULL_DATA: Record<string, FullTalentSolution> = {
       { q: "How quickly can contract talent start?", a: "Pre-vetted bench consultants can be onboarded and coding within 48 to 72 hours of contract approval." },
       { q: "What is the minimum contract duration?", a: "Engagements typically run from 3 months up to 24 months. We also accommodate project-based milestones with fixed-fee SOWs." },
       { q: "Can we convert a contractor to a permanent employee?", a: "Yes! We offer a smooth Temp-to-Perm conversion path after a predetermined trial duration." },
-      { q: "Who handles statutory compliance and benefits?", a: "JOBSONN handles 100% of payroll, taxation, healthcare, and statutory requirements." },
+      { q: "Who handles statutory compliance and benefits?", a: "jobson.id handles 100% of payroll, taxation, healthcare, and statutory requirements." },
     ],
   },
 
@@ -829,7 +829,7 @@ export const TALENT_SOLUTIONS_FULL_DATA: Record<string, FullTalentSolution> = {
     ],
     testimonials: [
       {
-        quote: "Consolidating six disparate recruiting and training vendors into JOBSONN's end-to-end partnership was the best operational decision we made this year.",
+        quote: "Consolidating six disparate recruiting and training vendors into jobson.id's end-to-end partnership was the best operational decision we made this year.",
         name: "Pradeep Nambiar",
         role: "Chief Operating Officer",
         company: "Vantage Global Technologies",
@@ -1089,7 +1089,7 @@ export const TALENT_SOLUTIONS_FULL_DATA: Record<string, FullTalentSolution> = {
     ],
     testimonials: [
       {
-        quote: "JOBSONN is our primary staffing partner. When we had a client audit requiring 30 Java engineers in 10 days, they delivered 32 qualified candidates.",
+        quote: "jobson.id is our primary staffing partner. When we had a client audit requiring 30 Java engineers in 10 days, they delivered 32 qualified candidates.",
         name: "Manoj Agarwal",
         role: "Head of Staffing & Resourcing",
         company: "GlobalLogic India",
@@ -1114,7 +1114,7 @@ export const TALENT_SOLUTIONS_FULL_DATA: Record<string, FullTalentSolution> = {
     faqs: [
       { q: "What is the difference between Contract and Contract-to-Hire?", a: "Contract staffing is for a set duration (e.g. 3–12 months) to meet a specific roadmap need. Contract-to-Hire allows you to evaluate the engineer for 3–6 months with the intent to convert them to your permanent payroll." },
       { q: "How quickly can candidates start?", a: "Contractors can typically start within 3 to 7 business days. Permanent hires depend on candidate notice periods (typically 15 to 30 days)." },
-      { q: "Who manages contractor payroll and taxes?", a: "JOBSONN is the legal Employer of Record and handles 100% of payroll, PF, ESIC, insurance, and statutory filings." },
+      { q: "Who manages contractor payroll and taxes?", a: "jobson.id is the legal Employer of Record and handles 100% of payroll, PF, ESIC, insurance, and statutory filings." },
       { q: "What happens if a contractor underperforms?", a: "We replace underperforming contractors within 48 to 72 hours at no cost to your organization." },
     ],
   },
@@ -1186,12 +1186,12 @@ export const TALENT_SOLUTIONS_FULL_DATA: Record<string, FullTalentSolution> = {
       { title: "High Retention Rates (96%)", desc: "Candidates placed through skills matching stay significantly longer than cold applicants." },
       { title: "Transparent Salary Data", desc: "Comprehensive salary benchmarks ensure fair compensation for candidates and employers alike." },
       { title: "Fast-Track Hiring Loops", desc: "Placement cycles average 10 to 14 days from initial introduction to signed offer letter." },
-      { title: "Continuous Upskilling Access", desc: "Placed alumni receive continued access to JOBSONN advanced workshops and masterclasses." },
+      { title: "Continuous Upskilling Access", desc: "Placed alumni receive continued access to jobson.id advanced workshops and masterclasses." },
     ],
     useCases: [
       {
         scenario: "Tier-2 university computer science graduate struggling to get interviews at product companies.",
-        solution: "Completed JOBSONN verification assessment and was matched with an enterprise SaaS company in 8 days.",
+        solution: "Completed jobson.id verification assessment and was matched with an enterprise SaaS company in 8 days.",
         metrics: [
           { label: "Salary increase", value: "2.4x" },
           { label: "Interviews secured", value: "3" },
@@ -1219,14 +1219,14 @@ export const TALENT_SOLUTIONS_FULL_DATA: Record<string, FullTalentSolution> = {
     ],
     testimonials: [
       {
-        quote: "JOBSONN got me three interviews in one week after months of sending resumes into online portals. I accepted an offer at a fantastic SaaS company.",
+        quote: "jobson.id got me three interviews in one week after months of sending resumes into online portals. I accepted an offer at a fantastic SaaS company.",
         name: "Abhishek Verma",
         role: "Software Engineer",
         company: "Placed at CloudNine",
         initials: "AV",
       },
       {
-        quote: "Every graduate we hired through JOBSONN's placement engine was productive from their second week. The pre-screening is truly thorough.",
+        quote: "Every graduate we hired through jobson.id's placement engine was productive from their second week. The pre-screening is truly thorough.",
         name: "Deepa Menon",
         role: "Head of Campus Talent",
         company: "Zeta Interactive",
@@ -1244,7 +1244,7 @@ export const TALENT_SOLUTIONS_FULL_DATA: Record<string, FullTalentSolution> = {
     faqs: [
       { q: "Is placement assistance really free for candidates?", a: "Yes, 100%! Candidates never pay any registration fees or placement commissions. Hiring employers cover all commercial fees." },
       { q: "How long does it take to get placed?", a: "Candidates with verified assessment scores typically receive interview invitations within 5 to 10 days of profile activation." },
-      { q: "Which companies hire through JOBSONN Placements?", a: "Over 500+ companies — ranging from fast-growing Series A–C startups to established tech enterprises and global multinationals." },
+      { q: "Which companies hire through jobson.id Placements?", a: "Over 500+ companies — ranging from fast-growing Series A–C startups to established tech enterprises and global multinationals." },
       { q: "What is your placement replacement guarantee for employers?", a: "All placements are backed by our standard 90-day free replacement guarantee." },
     ],
   },

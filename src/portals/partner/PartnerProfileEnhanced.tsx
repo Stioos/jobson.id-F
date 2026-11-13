@@ -147,7 +147,7 @@ export function PartnerProfileEnhanced() {
     toast.success("Profile updated", { description: "Your enhanced partner profile changes have been saved." });
   }
   function handleShare() {
-    toast.info("Public profile link copied", { description: `jobsonn.com/partners/${partner.id}` });
+    toast.info("Public profile link copied", { description: `jobson.id/partners/${partner.id}` });
   }
   function handleAddTeam() {
     toast.info("Add team member", { description: "Opening form to invite a new team member." });
@@ -409,7 +409,7 @@ export function PartnerProfileEnhanced() {
           ))}
         </div>
         <p className="mt-3 text-xs text-muted-foreground">
-          Metrics refreshed daily from your wallet, settlement, and placement records. For dispute resolution, contact <span className="font-medium text-brand">partnerships@jobsonn.com</span>.
+          Metrics refreshed daily from your wallet, settlement, and placement records. For dispute resolution, contact <span className="font-medium text-brand">partnerships@jobson.id</span>.
         </p>
       </SectionCard>
     </div>

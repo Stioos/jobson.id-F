@@ -39,7 +39,7 @@ export function PartnerConfigureSettings() {
     { id: "apk_002", name: "Webhook Signing Key", key: "whsec_••••••••••••a2c1", created: "2024-06-15", lastUsed: "1 hour ago" },
   ]);
   const [webhooks, setWebhooks] = React.useState([
-    { id: "whk_001", url: "https://api.partner.in/webhooks/jobsonn", events: ["settlement.paid", "application.approved"], active: true },
+    { id: "whk_001", url: "https://api.partner.in/webhooks/jobson.id", events: ["settlement.paid", "application.approved"], active: true },
   ]);
   const [security, setSecurity] = React.useState({ mfa: true, ipAllowlist: false, sessionTimeout: "8", passwordRotation: "90" });
   const [data, setData] = React.useState({ retention: "7 years", autoExport: false });
@@ -398,7 +398,7 @@ export function PartnerConfigureSettings() {
                       </AlertDialogHeader>
                       <AlertDialogFooter>
                         <AlertDialogCancel>Cancel</AlertDialogCancel>
-                        <AlertDialogAction onClick={() => toast.error("Account deletion requires written confirmation", { description: "Please contact support@jobsonn.com." })} className="bg-rose-600 hover:bg-rose-700">Confirm Delete</AlertDialogAction>
+                        <AlertDialogAction onClick={() => toast.error("Account deletion requires written confirmation", { description: "Please contact support@jobson.id." })} className="bg-rose-600 hover:bg-rose-700">Confirm Delete</AlertDialogAction>
                       </AlertDialogFooter>
                     </AlertDialogContent>
                   </AlertDialog>

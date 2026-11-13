@@ -36,8 +36,8 @@ function AddressFormCard({
   accentColor: "blue" | "amber";
 }) {
   const [draft, setDraft] = useState<AddressDetails>(initial);
-  const inputCls = "h-10 w-full rounded-lg border border-border bg-background/80 px-3 text-sm text-foreground focus:border-cyan-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white";
-  const inputIconCls = "h-10 w-full rounded-lg border border-border bg-background/80 pl-9 pr-3 text-sm text-foreground focus:border-cyan-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white";
+  const inputCls = "h-10 w-full rounded-lg border border-border bg-background/80 px-3 text-sm text-foreground focus:border-emerald-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white";
+  const inputIconCls = "h-10 w-full rounded-lg border border-border bg-background/80 pl-9 pr-3 text-sm text-foreground focus:border-emerald-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white";
   const labelCls = "text-xs font-semibold text-foreground/80 dark:text-slate-300";
 
   const accentRing = accentColor === "blue" ? "ring-blue-500/30" : "ring-amber-500/30";
@@ -65,7 +65,7 @@ function AddressFormCard({
         {/* Address — full width */}
         <div className="space-y-1">
           <label className={labelCls}>Address <span className="text-rose-500">*</span></label>
-          <textarea rows={2} value={draft.address} onChange={(e) => setDraft({ ...draft, address: e.target.value })} className="w-full resize-y rounded-lg border border-border bg-background/80 px-3 py-2 text-sm text-foreground focus:border-cyan-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white" placeholder="Street address" />
+          <textarea rows={2} value={draft.address} onChange={(e) => setDraft({ ...draft, address: e.target.value })} className="w-full resize-y rounded-lg border border-border bg-background/80 px-3 py-2 text-sm text-foreground focus:border-emerald-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white" placeholder="Street address" />
         </div>
         {/* City / State */}
         <div className="grid grid-cols-2 gap-3">
@@ -123,7 +123,7 @@ function AddressFormCard({
         <button
           type="button"
           onClick={handleSave}
-          className="inline-flex items-center gap-1.5 rounded-lg bg-cyan-500 px-4 py-2 text-xs font-bold text-slate-950 transition-all hover:bg-cyan-400 disabled:opacity-50 cursor-pointer"
+          className="inline-flex items-center gap-1.5 rounded-lg bg-emerald-500 px-4 py-2 text-xs font-bold text-slate-950 transition-all hover:bg-emerald-400 disabled:opacity-50 cursor-pointer"
         >
           <Check className="h-3.5 w-3.5" /> Save Address
         </button>
@@ -152,13 +152,13 @@ function AddressDisplayCard({
   const valueCls = "text-xs font-medium text-foreground dark:text-slate-200 break-words";
 
   return (
-    <div className="relative rounded-xl border border-border bg-card/80 p-4 shadow-sm transition-all hover:border-cyan-500/30 hover:shadow-md dark:border-white/10 dark:bg-slate-900/60 dark:shadow-none">
+    <div className="relative rounded-xl border border-border bg-card/80 p-4 shadow-sm transition-all hover:border-emerald-500/30 hover:shadow-md dark:border-white/10 dark:bg-slate-900/60 dark:shadow-none">
       {/* Top-right action buttons */}
       <div className="absolute right-3 top-3 flex items-center gap-1">
         <button
           type="button"
           onClick={onEdit}
-          className="inline-flex h-7 w-7 items-center justify-center rounded-lg text-muted-foreground hover:bg-cyan-500/10 hover:text-cyan-600 dark:hover:bg-cyan-500/15 dark:hover:text-cyan-400 cursor-pointer"
+          className="inline-flex h-7 w-7 items-center justify-center rounded-lg text-muted-foreground hover:bg-emerald-500/10 hover:text-emerald-600 dark:hover:bg-emerald-500/15 dark:hover:text-emerald-400 cursor-pointer"
           aria-label={`Edit address ${index + 1}`}
           title="Edit"
         >
@@ -229,7 +229,7 @@ function AddAddressCard({ label, onClick, disabled }: { label: string; onClick: 
       type="button"
       onClick={onClick}
       disabled={disabled}
-      className="flex w-full items-center justify-center gap-2 rounded-xl border border-dashed border-cyan-500/40 bg-cyan-500/5 py-4 text-sm font-bold text-cyan-600 transition-all hover:border-cyan-500 hover:bg-cyan-500/10 disabled:opacity-50 disabled:cursor-not-allowed dark:text-cyan-400 cursor-pointer"
+      className="flex w-full items-center justify-center gap-2 rounded-xl border border-dashed border-emerald-500/40 bg-emerald-500/5 py-4 text-sm font-bold text-emerald-600 transition-all hover:border-emerald-500 hover:bg-emerald-500/10 disabled:opacity-50 disabled:cursor-not-allowed dark:text-emerald-400 cursor-pointer"
     >
       <Plus className="h-4 w-4" /> {label}
     </button>
@@ -463,7 +463,7 @@ export function AddressMasterScreen({ onNavigate }: AddressMasterScreenProps = {
             onNavigate?.("company-info");
           }}
           disabled={isSaving}
-          className="inline-flex items-center gap-2 rounded-xl bg-cyan-500 px-6 py-3 text-sm font-bold text-slate-950 transition-all hover:bg-cyan-400 hover:shadow-lg hover:shadow-cyan-500/25 disabled:opacity-50 cursor-pointer"
+          className="inline-flex items-center gap-2 rounded-xl bg-emerald-500 px-6 py-3 text-sm font-bold text-slate-950 transition-all hover:bg-emerald-400 hover:shadow-lg hover:shadow-emerald-500/25 disabled:opacity-50 cursor-pointer"
         >
           {isSaving ? "Saving..." : "Save Address Master"}
           <Save className="h-4 w-4" />

@@ -27,7 +27,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       if (!isAuthed) {
         if (typeof window !== "undefined") {
           try {
-            sessionStorage.setItem("jobsonn_redirect_portal", portal);
+            sessionStorage.setItem("jobson_id_redirect_portal", portal);
           } catch {}
         }
         toast.error(`Please sign in to access the ${portal.charAt(0).toUpperCase() + portal.slice(1)} Portal.`);

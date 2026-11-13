@@ -14,14 +14,14 @@ interface Log {
 }
 
 const LOGS: Log[] = [
-  { id: "log_001", ts: "2024-09-21T09:55:42Z", actor: "aarav@jobsonn.com", action: "login", portal: "admin", target: "—", ip: "203.0.113.42", outcome: "success" },
+  { id: "log_001", ts: "2024-09-21T09:55:42Z", actor: "aarav@jobson.id", action: "login", portal: "admin", target: "—", ip: "203.0.113.42", outcome: "success" },
   { id: "log_002", ts: "2024-09-21T09:42:18Z", actor: "rohan@techcorp.com", action: "invoice.download", portal: "employer", target: "INV-2024-0912", ip: "203.0.113.50", outcome: "success" },
   { id: "log_003", ts: "2024-09-21T09:30:04Z", actor: "unknown@x.com", action: "login.mfa_failed", portal: "candidate", target: "—", ip: "198.51.100.7", outcome: "failure" },
   { id: "log_004", ts: "2024-09-21T09:12:32Z", actor: "sneha@talentbridge.in", action: "payout.approve", portal: "recruiter", target: "PO-8817", ip: "203.0.113.88", outcome: "success" },
   { id: "log_005", ts: "2024-09-21T09:00:00Z", actor: "system", action: "cron.daily_gst", portal: "system", target: "—", ip: "127.0.0.1", outcome: "success" },
   { id: "log_006", ts: "2024-09-21T08:48:20Z", actor: "platform_admin", action: "api_key.rotate", portal: "admin", target: "key_internal_ro", ip: "203.0.113.42", outcome: "success" },
   { id: "log_007", ts: "2024-09-21T08:30:14Z", actor: "meera@southzone.in", action: "partner.apply", portal: "partner", target: "app_8821", ip: "203.0.113.110", outcome: "success" },
-  { id: "log_008", ts: "2024-09-21T08:12:02Z", actor: "aarav@jobsonn.com", action: "impersonation.start", portal: "admin", target: "u_002 (Rohan Mehta)", ip: "203.0.113.42", outcome: "success" },
+  { id: "log_008", ts: "2024-09-21T08:12:02Z", actor: "aarav@jobson.id", action: "impersonation.start", portal: "admin", target: "u_002 (Rohan Mehta)", ip: "203.0.113.42", outcome: "success" },
   { id: "log_009", ts: "2024-09-21T07:55:48Z", actor: "unknown@y.com", action: "login.brute_force", portal: "employer", target: "—", ip: "198.51.100.22", outcome: "failure" },
   { id: "log_010", ts: "2024-09-21T07:42:30Z", actor: "anika@techcorp.com", action: "candidate.view", portal: "employer", target: "c_001", ip: "203.0.113.60", outcome: "success" },
 ];

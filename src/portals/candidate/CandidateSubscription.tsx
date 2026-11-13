@@ -209,7 +209,7 @@ export function CandidateSubscription() {
     <div className="space-y-6">
       <PageHeader
         title="My Subscription"
-        description="Manage your JOBSONN plan, add-ons, billing, and auto-renew preferences."
+        description="Manage your jobson.id plan, add-ons, billing, and auto-renew preferences."
         icon={<Crown className="h-6 w-6" />}
         actions={
           cancelled

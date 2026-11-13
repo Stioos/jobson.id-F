@@ -397,7 +397,7 @@ export function EmployerSkillGaps() {
         <div className="flex items-start gap-2">
           <Info className="h-4 w-4 text-muted-foreground mt-0.5 shrink-0" />
           <p className="text-xs text-muted-foreground">
-            AI-assisted analysis is for planning purposes only. SkillForge Academy and JOBSONN do not warrant
+            AI-assisted analysis is for planning purposes only. SkillForge Academy and jobson.id do not warrant
             that gaps identified here represent an exhaustive or perfectly accurate picture of workforce skills.
             Always validate via direct assessment and manager input before making hiring or training decisions.
           </p>

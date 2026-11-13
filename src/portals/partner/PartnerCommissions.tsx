@@ -71,7 +71,7 @@ export function PartnerCommissions() {
     <div className="space-y-6">
       <PageHeader
         title="Commission Tracking"
-        description={`${partner.name} — track commissions earned across deals, payouts released by JOBSONN, clawbacks and pending settlements.`}
+        description={`${partner.name} — track commissions earned across deals, payouts released by jobson.id, clawbacks and pending settlements.`}
         icon={<Icon name="Percent" className="h-6 w-6" />}
         actions={[
           { label: "Export Statement", icon: "Download", variant: "outline", onClick: handleExport },

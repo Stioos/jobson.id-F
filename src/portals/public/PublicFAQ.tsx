@@ -27,7 +27,7 @@ const DEFAULT_FAQS: FAQ[] = [
   {
     id: "faq-1",
     category: "Programs",
-    q: "What programs does JOBSONN Academy offer?",
+    q: "What programs does jobson.id Academy offer?",
     a: "We offer six tracks: Forward Deployment Engineer (FDE), Data Science & AI Engineer (DSAI), Forward Deployed Data Engineer (FDE-FWD), Corporate Leadership Track, Corporate Upskilling Bootcamp, and Engineering Foundations. Each is mentor-led with a Pay-After-Placement option.",
   },
   {
@@ -106,7 +106,7 @@ const DEFAULT_FAQS: FAQ[] = [
     id: "faq-14",
     category: "General",
     q: "Do you provide a certificate on completion?",
-    a: "Yes. Every learner who completes a program receives a verifiable JOBSONN Academy certificate with a unique ID. We also help you build a portfolio of 3–5 production-grade projects to showcase to employers.",
+    a: "Yes. Every learner who completes a program receives a verifiable jobson.id Academy certificate with a unique ID. We also help you build a portfolio of 3–5 production-grade projects to showcase to employers.",
   },
 ];
 
@@ -137,7 +137,7 @@ export function PublicFAQ() {
           </div>
           <Badge className="mb-4 gap-1">Frequently asked questions</Badge>
           <h1 className="text-3xl font-bold tracking-tight text-balance sm:text-4xl lg:text-5xl">
-            Everything you need to know about <span className="text-brand">JOBSONN</span>
+            Everything you need to know about <span className="text-brand">jobson.id</span>
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-base text-muted-foreground sm:text-lg">
             Browse common questions across programs, admissions, payments, scholarships, placements,
@@ -278,7 +278,7 @@ export function PublicFAQ() {
               </p>
               <div className="mt-5 space-y-2 text-sm">
                 <p className="flex items-center gap-2 text-muted-foreground">
-                  <Mail className="h-4 w-4 text-brand" /> support@jobsonn.com
+                  <Mail className="h-4 w-4 text-brand" /> support@jobson.id
                 </p>
                 <p className="flex items-center gap-2 text-muted-foreground">
                   <Phone className="h-4 w-4 text-brand" /> +91 80 4567 8901

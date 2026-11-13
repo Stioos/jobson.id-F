@@ -66,7 +66,7 @@ export function PublicJobs() {
   // Hydrate from sessionStorage (set by home page search or header dropdown filters)
   React.useEffect(() => {
     try {
-      const raw = sessionStorage.getItem("jobsonn_job_search");
+      const raw = sessionStorage.getItem("jobson_id_job_search");
       if (raw) {
         const data = JSON.parse(raw) as Partial<FilterState> & {
           keyword?: string;
@@ -89,7 +89,7 @@ export function PublicJobs() {
           workArrangements: data.workArrangements ?? f.workArrangements,
           employmentTypes: data.employmentTypes ?? f.employmentTypes,
         }));
-        sessionStorage.removeItem("jobsonn_job_search");
+        sessionStorage.removeItem("jobson_id_job_search");
       }
     } catch {
       /* ignore */

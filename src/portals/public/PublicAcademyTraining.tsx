@@ -207,7 +207,7 @@ export function PublicAcademyTraining() {
         <div className="absolute inset-0 bg-grid opacity-50" aria-hidden />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background" aria-hidden />
         <div className="relative mx-auto max-w-4xl px-4 py-16 text-center sm:px-6 sm:py-20 lg:px-8">
-          <Badge className="mb-4 gap-1"><GraduationCap className="h-3 w-3" /> JOBSONN Academy</Badge>
+          <Badge className="mb-4 gap-1"><GraduationCap className="h-3 w-3" /> jobson.id Academy</Badge>
           <h1 className="text-3xl font-bold tracking-tight text-balance sm:text-4xl lg:text-5xl">
             Train for high-growth tech careers — <span className="text-brand">pay only after placement</span>
           </h1>
@@ -414,7 +414,7 @@ export function PublicAcademyTraining() {
       {/* Why us */}
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <div className="mb-10 text-center">
-          <Badge className="mb-3 gap-1"><Lightbulb className="h-3 w-3" /> Why JOBSONN Academy</Badge>
+          <Badge className="mb-3 gap-1"><Lightbulb className="h-3 w-3" /> Why jobson.id Academy</Badge>
           <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Six reasons candidates choose us</h2>
         </div>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

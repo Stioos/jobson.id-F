@@ -100,7 +100,7 @@ export function RecruiterPartnerNetwork() {
     <div className="space-y-6">
       <PageHeader
         title="Partner Network"
-        description="Connect with JOBSONN franchise partners — centres, colleges, and recruitment partners — to source candidates and share mandates."
+        description="Connect with jobson.id franchise partners — centres, colleges, and recruitment partners — to source candidates and share mandates."
         icon={<Network className="h-6 w-6" />}
         breadcrumbs={[{ label: "Talent & Sourcing" }, { label: "Partner Network" }]}
       />

@@ -298,7 +298,7 @@ export function ProjectsPortfolioScreen({ onNavigate }: ProjectsPortfolioScreenP
               </p>
             </div>
           </div>
-          <Button type="button" onClick={showForm ? closeForm : openAdd} className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-cyan-500 px-4 py-2.5 text-xs font-bold text-slate-950 transition-all hover:bg-cyan-400 hover:shadow-lg hover:shadow-cyan-500/20">
+          <Button type="button" onClick={showForm ? closeForm : openAdd} className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-emerald-500 px-4 py-2.5 text-xs font-bold text-slate-950 transition-all hover:bg-emerald-400 hover:shadow-lg hover:shadow-emerald-500/20">
             {showForm ? <><X className="h-3.5 w-3.5" /> Cancel</> : <><Plus className="h-3.5 w-3.5" /> Add New</>}
           </Button>
         </div>
@@ -313,7 +313,7 @@ export function ProjectsPortfolioScreen({ onNavigate }: ProjectsPortfolioScreenP
             onClick={() => { setActiveTab(t.id); setSearch(""); setFilterCategory("all"); setFilterStatus("all"); setShowFeaturedOnly(false); }}
             className={cn(
               "inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer",
-              activeTab === t.id ? "bg-cyan-500 text-slate-950" : "text-muted-foreground hover:text-foreground dark:text-slate-400 dark:hover:text-white"
+              activeTab === t.id ? "bg-emerald-500 text-slate-950" : "text-muted-foreground hover:text-foreground dark:text-slate-400 dark:hover:text-white"
             )}
           >
             {t.label} <span className={cn("rounded-full px-1.5 text-[10px]", activeTab === t.id ? "bg-slate-950/20" : "bg-muted dark:bg-white/10")}>{t.count}</span>
@@ -383,8 +383,8 @@ export function ProjectsPortfolioScreen({ onNavigate }: ProjectsPortfolioScreenP
           </button>
           {activeTab === "projects" && (
             <div className="inline-flex shrink-0 overflow-hidden rounded-lg border border-border dark:border-white/10">
-              <button type="button" onClick={() => setView("grid")} className={cn("inline-flex h-9 w-9 items-center justify-center cursor-pointer", view === "grid" ? "bg-cyan-500 text-slate-950" : "text-muted-foreground hover:bg-muted dark:hover:bg-white/5")} aria-label="Grid view"><LayoutGrid className="h-4 w-4" /></button>
-              <button type="button" onClick={() => setView("list")} className={cn("inline-flex h-9 w-9 items-center justify-center cursor-pointer", view === "list" ? "bg-cyan-500 text-slate-950" : "text-muted-foreground hover:bg-muted dark:hover:bg-white/5")} aria-label="List view"><List className="h-4 w-4" /></button>
+              <button type="button" onClick={() => setView("grid")} className={cn("inline-flex h-9 w-9 items-center justify-center cursor-pointer", view === "grid" ? "bg-emerald-500 text-slate-950" : "text-muted-foreground hover:bg-muted dark:hover:bg-white/5")} aria-label="Grid view"><LayoutGrid className="h-4 w-4" /></button>
+              <button type="button" onClick={() => setView("list")} className={cn("inline-flex h-9 w-9 items-center justify-center cursor-pointer", view === "list" ? "bg-emerald-500 text-slate-950" : "text-muted-foreground hover:bg-muted dark:hover:bg-white/5")} aria-label="List view"><List className="h-4 w-4" /></button>
             </div>
           )}
         </div>

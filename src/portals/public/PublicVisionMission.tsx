@@ -23,11 +23,11 @@ const VALUES = [
 ];
 
 const MILESTONES = [
-  { year: "2023 Q1", title: "JOBSONN founded in Bengaluru", desc: "Three co-founders left their jobs at Google, Stripe, and Naukri to build a hiring platform for India.", icon: Flag },
+  { year: "2023 Q1", title: "jobson.id founded in Bengaluru", desc: "Three co-founders left their jobs at Google, Stripe, and Naukri to build a hiring platform for India.", icon: Flag },
   { year: "2023 Q3", title: "Public beta launched", desc: "Onboarded first 1,000 employers and 50,000 candidates across 6 Indian cities.", icon: Rocket },
   { year: "2024 Q1", title: "AI match scoring introduced", desc: "Launched explainable, transparent AI matching — clearly labelled as simulated while we collected calibration data.", icon: Sparkles },
   { year: "2024 Q3", title: "Series A funding", desc: "Raised $15M led by Stellar Ventures to scale trust & safety, ML, and tier-2/3 city reach.", icon: CheckCircle2 },
-  { year: "2025 Q1", title: "Academy & placement guarantee", desc: "Launched JOBSONN Academy with Pay-After-Placement across 4 specializations and 18 role tracks.", icon: Award },
+  { year: "2025 Q1", title: "Academy & placement guarantee", desc: "Launched jobson.id Academy with Pay-After-Placement across 4 specializations and 18 role tracks.", icon: Award },
 ];
 
 const LEADERSHIP = [
@@ -59,7 +59,7 @@ export function PublicVisionMission() {
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <Button size="lg" onClick={() => navigate("public", "about")} className="gap-1.5">
-              About JOBSONN <ArrowRight className="h-4 w-4" />
+              About jobson.id <ArrowRight className="h-4 w-4" />
             </Button>
             <Button size="lg" variant="outline" onClick={() => navigate("public", "contact")} className="gap-1.5">
               Contact us
@@ -223,7 +223,7 @@ export function PublicVisionMission() {
               table — and never compromise on the candidate&apos;s dignity.&rdquo;
             </p>
             <p className="mt-4 text-sm font-semibold">Aarav Sharma</p>
-            <p className="text-xs text-muted-foreground">Founder &amp; CEO, JOBSONN</p>
+            <p className="text-xs text-muted-foreground">Founder &amp; CEO, jobson.id</p>
           </Card>
         </div>
       </section>
@@ -239,7 +239,7 @@ export function PublicVisionMission() {
               </h2>
               <p className="mt-3 text-sm text-muted-foreground">
                 Whether you&apos;re a candidate looking for your next role, an employer building a team,
-                or a partner who shares our vision — there&apos;s a place for you at JOBSONN.
+                or a partner who shares our vision — there&apos;s a place for you at jobson.id.
               </p>
             </div>
             <div className="flex flex-wrap gap-3 lg:justify-end">

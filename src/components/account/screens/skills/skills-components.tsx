@@ -87,7 +87,7 @@ function Field({ label, required, hint, children, className }: {
 function SectionTitle({ icon, title, subtitle }: { icon: React.ReactNode; title: string; subtitle?: string }) {
   return (
     <div className="mb-4 flex items-center gap-2.5 border-b border-border/60 pb-3 dark:border-white/10">
-      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-cyan-500/10 text-cyan-600 dark:text-cyan-400">{icon}</span>
+      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">{icon}</span>
       <div>
         <h4 className="text-sm font-bold text-foreground dark:text-white">{title}</h4>
         {subtitle && <p className="text-[11px] text-muted-foreground dark:text-slate-400">{subtitle}</p>}
@@ -333,7 +333,7 @@ export function SkillForm({ initial, onSave, onCancel, existingNames, isEditing 
         <Button
           onClick={handleSubmit}
           disabled={isSaving}
-          className="h-9 rounded-lg bg-cyan-500 text-xs font-bold text-slate-950 hover:bg-cyan-400 disabled:opacity-50"
+          className="h-9 rounded-lg bg-emerald-500 text-xs font-bold text-slate-950 hover:bg-emerald-400 disabled:opacity-50"
         >
           {isSaving ? <><Loader2 className="h-3.5 w-3.5 animate-spin" /> Saving…</> : <><Save className="h-3.5 w-3.5" /> {isEditing ? "Update" : "Save"} Skill</>}
         </Button>
@@ -406,7 +406,7 @@ export function SkillCard({ skill, onEdit, onDelete, onTogglePrimary }: SkillCar
           <button
             type="button"
             onClick={onEdit}
-            className="inline-flex h-7 w-7 items-center justify-center rounded-lg text-muted-foreground hover:bg-cyan-500/10 hover:text-cyan-600 dark:hover:bg-cyan-500/15 dark:hover:text-cyan-400 cursor-pointer"
+            className="inline-flex h-7 w-7 items-center justify-center rounded-lg text-muted-foreground hover:bg-emerald-500/10 hover:text-emerald-600 dark:hover:bg-emerald-500/15 dark:hover:text-emerald-400 cursor-pointer"
             aria-label="Edit skill"
             title="Edit"
           >
@@ -496,8 +496,8 @@ export function CertificationForm({ initial, onSave, onCancel, isEditing }: Cert
         </Field>
         <Field label="Never Expires">
           <label className="flex h-9 cursor-pointer items-center gap-2 text-xs font-semibold text-foreground dark:text-slate-200">
-            <input type="checkbox" checked={form.neverExpires} onChange={(e) => set("neverExpires", e.target.checked)} className="h-4 w-4 rounded border-border accent-cyan-500 dark:border-white/20" />
-            <Check className="h-3.5 w-3.5 text-cyan-600 dark:text-cyan-400" /> Never expires
+            <input type="checkbox" checked={form.neverExpires} onChange={(e) => set("neverExpires", e.target.checked)} className="h-4 w-4 rounded border-border accent-emerald-500 dark:border-white/20" />
+            <Check className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" /> Never expires
           </label>
         </Field>
 
@@ -516,7 +516,7 @@ export function CertificationForm({ initial, onSave, onCancel, isEditing }: Cert
 
       <div className="mt-5 flex justify-end gap-2 border-t border-border/60 pt-4 dark:border-white/10">
         <Button variant="outline" onClick={onCancel} className="h-9 rounded-lg text-xs">Cancel</Button>
-        <Button onClick={handleSubmit} disabled={isSaving} className="h-9 rounded-lg bg-cyan-500 text-xs font-bold text-slate-950 hover:bg-cyan-400 disabled:opacity-50">
+        <Button onClick={handleSubmit} disabled={isSaving} className="h-9 rounded-lg bg-emerald-500 text-xs font-bold text-slate-950 hover:bg-emerald-400 disabled:opacity-50">
           {isSaving ? <><Loader2 className="h-3.5 w-3.5 animate-spin" /> Saving…</> : <><Save className="h-3.5 w-3.5" /> {isEditing ? "Update" : "Save"} Certification</>}
         </Button>
       </div>
@@ -550,7 +550,7 @@ export function CertificationCard({ cert, onEdit, onDelete }: { cert: Certificat
                 <span className="inline-flex items-center gap-0.5 rounded bg-muted px-1.5 py-0.5 dark:bg-white/5"><Calendar className="h-2.5 w-2.5" /> Exp {cert.expiryDate}</span>
               )}
               {cert.verificationUrl && (
-                <a href={cert.verificationUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-0.5 rounded bg-cyan-500/10 px-1.5 py-0.5 text-cyan-600 hover:underline dark:text-cyan-400"><ExternalLink className="h-2.5 w-2.5" /> Verify</a>
+                <a href={cert.verificationUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-0.5 rounded bg-emerald-500/10 px-1.5 py-0.5 text-emerald-600 hover:underline dark:text-emerald-400"><ExternalLink className="h-2.5 w-2.5" /> Verify</a>
               )}
             </div>
           </div>
@@ -559,7 +559,7 @@ export function CertificationCard({ cert, onEdit, onDelete }: { cert: Certificat
           <span className={cn("inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold", statusColor)}>
             {cert.status === "Active" ? <Check className="h-2.5 w-2.5" /> : <Award className="h-2.5 w-2.5" />} {cert.status}
           </span>
-          <button type="button" onClick={onEdit} className="inline-flex h-7 w-7 items-center justify-center rounded-lg text-muted-foreground hover:bg-cyan-500/10 hover:text-cyan-600 dark:hover:bg-cyan-500/15 dark:hover:text-cyan-400 cursor-pointer" aria-label="Edit certification"><Pencil className="h-3.5 w-3.5" /></button>
+          <button type="button" onClick={onEdit} className="inline-flex h-7 w-7 items-center justify-center rounded-lg text-muted-foreground hover:bg-emerald-500/10 hover:text-emerald-600 dark:hover:bg-emerald-500/15 dark:hover:text-emerald-400 cursor-pointer" aria-label="Edit certification"><Pencil className="h-3.5 w-3.5" /></button>
           <button type="button" onClick={onDelete} className="inline-flex h-7 w-7 items-center justify-center rounded-lg text-muted-foreground hover:bg-rose-500/10 hover:text-rose-500 dark:hover:bg-rose-500/15 dark:hover:text-rose-400 cursor-pointer" aria-label="Delete certification"><Trash2 className="h-3.5 w-3.5" /></button>
         </div>
       </div>
@@ -642,8 +642,8 @@ export function LicenseForm({ initial, onSave, onCancel, isEditing }: LicenseFor
 
         <Field label="Never Expires">
           <label className="flex h-9 cursor-pointer items-center gap-2 text-xs font-semibold text-foreground dark:text-slate-200">
-            <input type="checkbox" checked={form.neverExpires} onChange={(e) => set("neverExpires", e.target.checked)} className="h-4 w-4 rounded border-border accent-cyan-500 dark:border-white/20" />
-            <Check className="h-3.5 w-3.5 text-cyan-600 dark:text-cyan-400" /> Never expires
+            <input type="checkbox" checked={form.neverExpires} onChange={(e) => set("neverExpires", e.target.checked)} className="h-4 w-4 rounded border-border accent-emerald-500 dark:border-white/20" />
+            <Check className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" /> Never expires
           </label>
         </Field>
 
@@ -659,7 +659,7 @@ export function LicenseForm({ initial, onSave, onCancel, isEditing }: LicenseFor
 
       <div className="mt-5 flex justify-end gap-2 border-t border-border/60 pt-4 dark:border-white/10">
         <Button variant="outline" onClick={onCancel} className="h-9 rounded-lg text-xs">Cancel</Button>
-        <Button onClick={handleSubmit} disabled={isSaving} className="h-9 rounded-lg bg-cyan-500 text-xs font-bold text-slate-950 hover:bg-cyan-400 disabled:opacity-50">
+        <Button onClick={handleSubmit} disabled={isSaving} className="h-9 rounded-lg bg-emerald-500 text-xs font-bold text-slate-950 hover:bg-emerald-400 disabled:opacity-50">
           {isSaving ? <><Loader2 className="h-3.5 w-3.5 animate-spin" /> Saving…</> : <><Save className="h-3.5 w-3.5" /> {isEditing ? "Update" : "Save"} License</>}
         </Button>
       </div>
@@ -700,7 +700,7 @@ export function LicenseCard({ license, onEdit, onDelete }: { license: LicenseRec
           <span className={cn("inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold", statusColor)}>
             {license.status === "Active" ? <Check className="h-2.5 w-2.5" /> : <ShieldCheck className="h-2.5 w-2.5" />} {license.status}
           </span>
-          <button type="button" onClick={onEdit} className="inline-flex h-7 w-7 items-center justify-center rounded-lg text-muted-foreground hover:bg-cyan-500/10 hover:text-cyan-600 dark:hover:bg-cyan-500/15 dark:hover:text-cyan-400 cursor-pointer" aria-label="Edit license"><Pencil className="h-3.5 w-3.5" /></button>
+          <button type="button" onClick={onEdit} className="inline-flex h-7 w-7 items-center justify-center rounded-lg text-muted-foreground hover:bg-emerald-500/10 hover:text-emerald-600 dark:hover:bg-emerald-500/15 dark:hover:text-emerald-400 cursor-pointer" aria-label="Edit license"><Pencil className="h-3.5 w-3.5" /></button>
           <button type="button" onClick={onDelete} className="inline-flex h-7 w-7 items-center justify-center rounded-lg text-muted-foreground hover:bg-rose-500/10 hover:text-rose-500 dark:hover:bg-rose-500/15 dark:hover:text-rose-400 cursor-pointer" aria-label="Delete license"><Trash2 className="h-3.5 w-3.5" /></button>
         </div>
       </div>

@@ -236,7 +236,7 @@ export function TrainingSettings() {
               </div>
               <div>
                 <Label htmlFor="a-webhook">Webhook endpoint</Label>
-                <Input id="a-webhook" defaultValue="https://api.skillforge.academy/v1/webhooks/jobsonn" className="mt-1" />
+                <Input id="a-webhook" defaultValue="https://api.skillforge.academy/v1/webhooks/jobson.id" className="mt-1" />
               </div>
               <div className="rounded-lg border p-3 bg-muted/30">
                 <p className="text-xs text-muted-foreground">Rate limit: <span className="font-medium text-foreground">1000 req/hour</span></p>

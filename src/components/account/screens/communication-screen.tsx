@@ -18,7 +18,7 @@ export function CommunicationScreen({ email, phone }: CommunicationScreenProps) 
   const [marketTrends, setMarketTrends] = useState(false);
   const [autoReply, setAutoReply] = useState(true);
   const [autoReplyText, setAutoReplyText] = useState(
-    "Thank you for contacting JOBSONN Tech. Our team will review your inquiry and respond within 2 business hours."
+    "Thank you for contacting jobson.id Tech. Our team will review your inquiry and respond within 2 business hours."
   );
 
   const handleSaveNotifications = () => {
@@ -47,7 +47,7 @@ export function CommunicationScreen({ email, phone }: CommunicationScreenProps) 
             </span>
             <div>
               <h3 className="text-base font-bold text-foreground dark:text-white">Verified Primary Channels</h3>
-              <p className="text-xs text-muted-foreground dark:text-slate-400">Used for signing in and securing your JOBSONN account</p>
+              <p className="text-xs text-muted-foreground dark:text-slate-400">Used for signing in and securing your jobson.id account</p>
             </div>
           </div>
           <span className="rounded-full bg-emerald-500/15 px-3 py-1 text-xs font-bold text-emerald-600 dark:text-emerald-400">
@@ -60,7 +60,7 @@ export function CommunicationScreen({ email, phone }: CommunicationScreenProps) 
           <div className="rounded-2xl border border-border bg-card/80 p-5 shadow-soft dark:border-white/10 dark:bg-slate-950/60 dark:shadow-none">
             <div className="flex items-start justify-between">
               <div className="flex items-start gap-3">
-                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400">
+                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
                   <Mail className="h-5 w-5" />
                 </span>
                 <div>
@@ -74,7 +74,7 @@ export function CommunicationScreen({ email, phone }: CommunicationScreenProps) 
               <button
                 type="button"
                 onClick={() => toast.info("Email change verification code initiated.")}
-                className="text-xs font-semibold text-cyan-600 hover:underline dark:text-cyan-400"
+                className="text-xs font-semibold text-emerald-600 hover:underline dark:text-emerald-400"
               >
                 Change
               </button>
@@ -99,7 +99,7 @@ export function CommunicationScreen({ email, phone }: CommunicationScreenProps) 
               <button
                 type="button"
                 onClick={() => toast.info("Phone change verification code initiated.")}
-                className="text-xs font-semibold text-cyan-600 hover:underline dark:text-cyan-400"
+                className="text-xs font-semibold text-emerald-600 hover:underline dark:text-emerald-400"
               >
                 Change
               </button>
@@ -113,7 +113,7 @@ export function CommunicationScreen({ email, phone }: CommunicationScreenProps) 
             <button
               type="button"
               onClick={() => setIsAddingBackup(true)}
-              className="inline-flex items-center gap-2 text-xs font-bold text-cyan-600 hover:text-cyan-700 dark:text-cyan-400 dark:hover:text-cyan-300"
+              className="inline-flex items-center gap-2 text-xs font-bold text-emerald-600 hover:text-emerald-700 dark:text-emerald-400 dark:hover:text-emerald-300"
             >
               <Plus className="h-4 w-4" /> Add backup email for emergency recovery
             </button>
@@ -124,13 +124,13 @@ export function CommunicationScreen({ email, phone }: CommunicationScreenProps) 
                 placeholder="Enter recovery email address..."
                 value={backupEmail}
                 onChange={(e) => setBackupEmail(e.target.value)}
-                className="h-10 flex-1 rounded-xl border border-border bg-muted/60 px-4 text-xs text-foreground placeholder:text-muted-foreground focus:border-cyan-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/80 dark:text-white dark:placeholder:text-slate-600"
+                className="h-10 flex-1 rounded-xl border border-border bg-muted/60 px-4 text-xs text-foreground placeholder:text-muted-foreground focus:border-emerald-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/80 dark:text-white dark:placeholder:text-slate-600"
               />
               <div className="flex gap-2">
                 <button
                   type="button"
                   onClick={handleAddBackupEmail}
-                  className="rounded-xl bg-cyan-500 px-4 py-2 text-xs font-bold text-slate-950 hover:bg-cyan-400"
+                  className="rounded-xl bg-emerald-500 px-4 py-2 text-xs font-bold text-slate-950 hover:bg-emerald-400"
                 >
                   Send Verification
                 </button>
@@ -177,7 +177,7 @@ export function CommunicationScreen({ email, phone }: CommunicationScreenProps) 
             },
             {
               id: "trends",
-              title: "JOBSONN Ecosystem Trend Reports",
+              title: "jobson.id Ecosystem Trend Reports",
               desc: "Weekly industrial demand analytics and price trend intelligence reports",
               state: marketTrends,
               setState: setMarketTrends,
@@ -195,7 +195,7 @@ export function CommunicationScreen({ email, phone }: CommunicationScreenProps) 
                 type="button"
                 onClick={() => item.setState(!item.state)}
                 className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
-                  item.state ? "bg-cyan-500" : "bg-muted dark:bg-slate-700"
+                  item.state ? "bg-emerald-500" : "bg-muted dark:bg-slate-700"
                 }`}
               >
                 <span
@@ -220,7 +220,7 @@ export function CommunicationScreen({ email, phone }: CommunicationScreenProps) 
             type="button"
             onClick={() => setAutoReply(!autoReply)}
             className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
-              autoReply ? "bg-cyan-500" : "bg-muted dark:bg-slate-700"
+              autoReply ? "bg-emerald-500" : "bg-muted dark:bg-slate-700"
             }`}
           >
             <span
@@ -237,7 +237,7 @@ export function CommunicationScreen({ email, phone }: CommunicationScreenProps) 
               rows={3}
               value={autoReplyText}
               onChange={(e) => setAutoReplyText(e.target.value)}
-              className="w-full rounded-xl border border-border bg-muted/50 p-4 text-xs text-foreground focus:border-cyan-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white"
+              className="w-full rounded-xl border border-border bg-muted/50 p-4 text-xs text-foreground focus:border-emerald-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white"
             />
             <p className="text-[11px] text-muted-foreground dark:text-slate-500">Variables available: [Buyer Name], [Inquiry Product], [Estimated Time]</p>
           </div>
@@ -249,7 +249,7 @@ export function CommunicationScreen({ email, phone }: CommunicationScreenProps) 
         <button
           type="button"
           onClick={handleSaveNotifications}
-          className="rounded-xl bg-cyan-500 px-6 py-3 text-sm font-bold text-slate-950 transition-all hover:bg-cyan-400 hover:shadow-lg hover:shadow-cyan-500/20"
+          className="rounded-xl bg-emerald-500 px-6 py-3 text-sm font-bold text-slate-950 transition-all hover:bg-emerald-400 hover:shadow-lg hover:shadow-emerald-500/20"
         >
           Save Communication Settings
         </button>

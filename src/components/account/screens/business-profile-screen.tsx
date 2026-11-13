@@ -115,7 +115,7 @@ export function BusinessProfileScreen({ onNavigate }: BusinessProfileScreenProps
           {data.bannerUrl ? (
             <img src={data.bannerUrl} alt="Cover banner" className="h-full w-full object-cover" />
           ) : (
-            <div className="h-full w-full bg-gradient-to-br from-cyan-500/30 via-blue-600/20 to-indigo-600/30 dark:from-cyan-500/20 dark:via-blue-600/10 dark:to-indigo-600/20" />
+            <div className="h-full w-full bg-gradient-to-br from-emerald-500/30 via-blue-600/20 to-indigo-600/30 dark:from-emerald-500/20 dark:via-blue-600/10 dark:to-indigo-600/20" />
           )}
           {/* Cover overlay actions */}
           <div className="absolute right-3 top-3 flex gap-2">
@@ -156,9 +156,9 @@ export function BusinessProfileScreen({ onNavigate }: BusinessProfileScreenProps
             <button
               type="button"
               onClick={() => logoInputRef.current?.click()}
-              className="inline-flex items-center gap-1.5 self-start sm:self-auto rounded-xl border border-border/70 bg-card/60 px-3 py-1.5 text-xs font-semibold text-muted-foreground shadow-xs transition-all hover:border-cyan-500/40 hover:bg-muted hover:text-foreground dark:border-white/10 dark:bg-white/[0.04] dark:text-slate-300 dark:hover:bg-white/[0.08] dark:hover:text-white cursor-pointer"
+              className="inline-flex items-center gap-1.5 self-start sm:self-auto rounded-xl border border-border/70 bg-card/60 px-3 py-1.5 text-xs font-semibold text-muted-foreground shadow-xs transition-all hover:border-emerald-500/40 hover:bg-muted hover:text-foreground dark:border-white/10 dark:bg-white/[0.04] dark:text-slate-300 dark:hover:bg-white/[0.08] dark:hover:text-white cursor-pointer"
             >
-              <Pencil className="h-3.5 w-3.5 text-cyan-600 dark:text-cyan-400" /> Edit Logo
+              <Pencil className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" /> Edit Logo
             </button>
           </div>
 
@@ -169,17 +169,17 @@ export function BusinessProfileScreen({ onNavigate }: BusinessProfileScreenProps
                 <img
                   src={data.logoUrl}
                   alt={data.companyName || "Logo"}
-                  className="h-24 w-24 rounded-2xl object-cover shadow-lg shadow-cyan-500/20 ring-4 ring-card dark:ring-slate-900"
+                  className="h-24 w-24 rounded-2xl object-cover shadow-lg shadow-emerald-500/20 ring-4 ring-card dark:ring-slate-900"
                 />
               ) : (
-                <div className="flex h-24 w-24 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-500 via-blue-600 to-indigo-600 text-2xl font-bold text-white shadow-lg shadow-cyan-500/20 ring-4 ring-card dark:ring-slate-900">
+                <div className="flex h-24 w-24 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500 via-blue-600 to-indigo-600 text-2xl font-bold text-white shadow-lg shadow-emerald-500/20 ring-4 ring-card dark:ring-slate-900">
                   <span suppressHydrationWarning>{getInitials(data.companyName)}</span>
                 </div>
               )}
               <button
                 type="button"
                 onClick={() => logoInputRef.current?.click()}
-                className="absolute -bottom-2 -right-2 flex h-8 w-8 items-center justify-center rounded-full bg-cyan-500 text-slate-950 shadow-md transition-all hover:bg-cyan-400 hover:scale-105 active:scale-95 cursor-pointer ring-2 ring-background dark:ring-[#0c1322]"
+                className="absolute -bottom-2 -right-2 flex h-8 w-8 items-center justify-center rounded-full bg-emerald-500 text-slate-950 shadow-md transition-all hover:bg-emerald-400 hover:scale-105 active:scale-95 cursor-pointer ring-2 ring-background dark:ring-[#0c1322]"
                 title="Edit logo"
                 aria-label="Edit logo"
               >
@@ -192,9 +192,9 @@ export function BusinessProfileScreen({ onNavigate }: BusinessProfileScreenProps
                 <button
                   type="button"
                   onClick={() => logoInputRef.current?.click()}
-                  className="inline-flex items-center gap-1.5 rounded-xl bg-cyan-600/10 px-4 py-2 text-xs font-semibold text-cyan-600 transition-all hover:bg-cyan-600/20 dark:bg-white/10 dark:text-white dark:hover:bg-white/15 cursor-pointer"
+                  className="inline-flex items-center gap-1.5 rounded-xl bg-emerald-600/10 px-4 py-2 text-xs font-semibold text-emerald-600 transition-all hover:bg-emerald-600/20 dark:bg-white/10 dark:text-white dark:hover:bg-white/15 cursor-pointer"
                 >
-                  <Pencil className="h-3.5 w-3.5 text-cyan-500 dark:text-cyan-400" /> Upload new image
+                  <Pencil className="h-3.5 w-3.5 text-emerald-500 dark:text-emerald-400" /> Upload new image
                 </button>
                 <button
                   type="button"
@@ -228,7 +228,7 @@ export function BusinessProfileScreen({ onNavigate }: BusinessProfileScreenProps
                 type="text"
                 value={data.companyName}
                 onChange={(e) => updateCompanyName(e.target.value)}
-                className="h-11 w-full rounded-xl border border-border bg-background/80 pl-10 pr-4 text-sm text-foreground focus:border-cyan-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white"
+                className="h-11 w-full rounded-xl border border-border bg-background/80 pl-10 pr-4 text-sm text-foreground focus:border-emerald-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white"
               />
             </div>
             <p className="text-[11px] text-muted-foreground/80 dark:text-slate-500">Synced to billing, shipping &amp; facility addresses automatically.</p>
@@ -240,7 +240,7 @@ export function BusinessProfileScreen({ onNavigate }: BusinessProfileScreenProps
               type="text"
               value={data.tradeName}
               onChange={(e) => updateData({ tradeName: e.target.value })}
-              className="h-11 w-full rounded-xl border border-border bg-background/80 px-4 text-sm text-foreground focus:border-cyan-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white"
+              className="h-11 w-full rounded-xl border border-border bg-background/80 px-4 text-sm text-foreground focus:border-emerald-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white"
             />
           </div>
 
@@ -249,7 +249,7 @@ export function BusinessProfileScreen({ onNavigate }: BusinessProfileScreenProps
             <select
               value={data.businessType}
               onChange={(e) => updateData({ businessType: e.target.value })}
-              className="h-11 w-full rounded-xl border border-border bg-background/80 px-4 text-sm text-foreground focus:border-cyan-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white"
+              className="h-11 w-full rounded-xl border border-border bg-background/80 px-4 text-sm text-foreground focus:border-emerald-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white"
             >
               <option value="Sole Proprietorship">Sole Proprietorship</option>
               <option value="General Partnership">General Partnership</option>
@@ -275,7 +275,7 @@ export function BusinessProfileScreen({ onNavigate }: BusinessProfileScreenProps
             <select
               value={data.businessSize}
               onChange={(e) => updateData({ businessSize: e.target.value })}
-              className="h-11 w-full rounded-xl border border-border bg-background/80 px-4 text-sm text-foreground focus:border-cyan-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white"
+              className="h-11 w-full rounded-xl border border-border bg-background/80 px-4 text-sm text-foreground focus:border-emerald-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white"
             >
               <option value="Micro">Micro (1-9 employees)</option>
               <option value="Startup">Startup (Pre-revenue / Early stage)</option>
@@ -296,7 +296,7 @@ export function BusinessProfileScreen({ onNavigate }: BusinessProfileScreenProps
             <select
               value={data.country}
               onChange={(e) => updateData({ country: e.target.value })}
-              className="h-11 w-full rounded-xl border border-border bg-background/80 px-4 text-sm text-foreground focus:border-cyan-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white"
+              className="h-11 w-full rounded-xl border border-border bg-background/80 px-4 text-sm text-foreground focus:border-emerald-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white"
             >
                 <option value="IN">🇮🇳 India — INR (₹) +91</option>
                 <option value="US">🇺🇸 United States — USD ($) +1</option>
@@ -377,7 +377,7 @@ export function BusinessProfileScreen({ onNavigate }: BusinessProfileScreenProps
               type="text"
               value={data.tagline}
               onChange={(e) => updateData({ tagline: e.target.value })}
-              className="h-11 w-full rounded-xl border border-border bg-background/80 px-4 text-sm text-foreground focus:border-cyan-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white"
+              className="h-11 w-full rounded-xl border border-border bg-background/80 px-4 text-sm text-foreground focus:border-emerald-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white"
             />
           </div>
 
@@ -388,7 +388,7 @@ export function BusinessProfileScreen({ onNavigate }: BusinessProfileScreenProps
               <select
                 value={data.employeeRange}
                 onChange={(e) => updateData({ employeeRange: e.target.value })}
-                className="h-11 w-full rounded-xl border border-border bg-background/80 pl-10 pr-4 text-sm text-foreground focus:border-cyan-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white"
+                className="h-11 w-full rounded-xl border border-border bg-background/80 pl-10 pr-4 text-sm text-foreground focus:border-emerald-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white"
               >
                 <option value="1-10 Employees">1 – 10 Employees</option>
                 <option value="11-50 Employees">11 – 50 Employees</option>
@@ -409,7 +409,7 @@ export function BusinessProfileScreen({ onNavigate }: BusinessProfileScreenProps
               <select
                 value={data.annualRevenue}
                 onChange={(e) => updateData({ annualRevenue: e.target.value })}
-                className="h-11 w-full rounded-xl border border-border bg-background/80 pl-10 pr-4 text-sm text-foreground focus:border-cyan-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white"
+                className="h-11 w-full rounded-xl border border-border bg-background/80 pl-10 pr-4 text-sm text-foreground focus:border-emerald-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white"
               >
                 <option value="Pre-revenue / Startup">Pre-revenue / Startup</option>
                 <option value="Up to ₹1 Cr ($0 - $120K)">Up to ₹1 Cr ($0 – $120K)</option>
@@ -431,7 +431,7 @@ export function BusinessProfileScreen({ onNavigate }: BusinessProfileScreenProps
                 type="text"
                 value={data.establishedYear}
                 onChange={(e) => updateData({ establishedYear: e.target.value })}
-                className="h-11 w-full rounded-xl border border-border bg-background/80 pl-10 pr-4 text-sm text-foreground focus:border-cyan-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white"
+                className="h-11 w-full rounded-xl border border-border bg-background/80 pl-10 pr-4 text-sm text-foreground focus:border-emerald-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white"
               />
             </div>
           </div>
@@ -444,7 +444,7 @@ export function BusinessProfileScreen({ onNavigate }: BusinessProfileScreenProps
                 type="url"
                 value={data.website}
                 onChange={(e) => updateData({ website: e.target.value })}
-                className="h-11 w-full rounded-xl border border-border bg-background/80 pl-10 pr-4 text-sm text-foreground focus:border-cyan-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white"
+                className="h-11 w-full rounded-xl border border-border bg-background/80 pl-10 pr-4 text-sm text-foreground focus:border-emerald-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white"
               />
             </div>
           </div>
@@ -457,7 +457,7 @@ export function BusinessProfileScreen({ onNavigate }: BusinessProfileScreenProps
               <select
                 value={data.operatingHours}
                 onChange={(e) => updateData({ operatingHours: e.target.value })}
-                className="h-11 w-full rounded-xl border border-border bg-background/80 pl-10 pr-4 text-sm text-foreground focus:border-cyan-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white"
+                className="h-11 w-full rounded-xl border border-border bg-background/80 pl-10 pr-4 text-sm text-foreground focus:border-emerald-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white"
               >
                 <option value="24/7 — Always Open">24/7 — Always Open</option>
                 <option value="Mon - Fri: 09:00 AM - 06:00 PM">Mon – Fri: 09:00 AM – 06:00 PM</option>
@@ -481,7 +481,7 @@ export function BusinessProfileScreen({ onNavigate }: BusinessProfileScreenProps
               <select
                 value={data.timezone}
                 onChange={(e) => updateData({ timezone: e.target.value })}
-                className="h-11 w-full rounded-xl border border-border bg-background/80 pl-10 pr-4 text-sm text-foreground focus:border-cyan-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white"
+                className="h-11 w-full rounded-xl border border-border bg-background/80 pl-10 pr-4 text-sm text-foreground focus:border-emerald-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white"
               >
                 <option value="Asia/Kolkata (IST +05:30)">Asia/Kolkata (IST +05:30) — India</option>
                 <option value="Asia/Dubai (GST +04:00)">Asia/Dubai (GST +04:00) — UAE</option>
@@ -523,7 +523,7 @@ export function BusinessProfileScreen({ onNavigate }: BusinessProfileScreenProps
       {/* ─── Social Media Links ─── */}
       <section className="rounded-3xl border border-border bg-card/80 p-6 shadow-soft backdrop-blur-sm sm:p-8 dark:border-white/10 dark:bg-slate-900/60 dark:shadow-none">
         <div className="flex items-center gap-2.5 pb-4">
-          <Link2 className="h-4.5 w-4.5 text-cyan-600 dark:text-cyan-400" />
+          <Link2 className="h-4.5 w-4.5 text-emerald-600 dark:text-emerald-400" />
           <h3 className="text-base font-bold text-foreground dark:text-white">Social Media Links</h3>
         </div>
         <p className="text-xs text-muted-foreground dark:text-slate-400 mb-4">Add links to your social profiles and online presence.</p>
@@ -539,7 +539,7 @@ export function BusinessProfileScreen({ onNavigate }: BusinessProfileScreenProps
                 type="url"
                 value={link.url}
                 onChange={(e) => updateSocialLinkUrl(link.id, e.target.value)}
-                className="h-11 flex-1 rounded-xl border border-border bg-background/80 px-4 text-sm text-foreground focus:border-cyan-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white"
+                className="h-11 flex-1 rounded-xl border border-border bg-background/80 px-4 text-sm text-foreground focus:border-emerald-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white"
               />
               <button
                 type="button"
@@ -558,7 +558,7 @@ export function BusinessProfileScreen({ onNavigate }: BusinessProfileScreenProps
           <select
             value={newSocialPlatform}
             onChange={(e) => setNewSocialPlatform(e.target.value)}
-            className="h-11 w-full rounded-xl border border-border bg-background/80 px-4 text-sm text-foreground focus:border-cyan-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white sm:w-40"
+            className="h-11 w-full rounded-xl border border-border bg-background/80 px-4 text-sm text-foreground focus:border-emerald-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white sm:w-40"
           >
             {SOCIAL_PLATFORMS.map((p) => (
               <option key={p} value={p}>{p}</option>
@@ -570,12 +570,12 @@ export function BusinessProfileScreen({ onNavigate }: BusinessProfileScreenProps
             onChange={(e) => setNewSocialUrl(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && addSocialLink()}
             placeholder="https://..."
-            className="h-11 flex-1 rounded-xl border border-border bg-background/80 px-4 text-sm text-foreground focus:border-cyan-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white"
+            className="h-11 flex-1 rounded-xl border border-border bg-background/80 px-4 text-sm text-foreground focus:border-emerald-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white"
           />
           <button
             type="button"
             onClick={addSocialLink}
-            className="inline-flex h-11 shrink-0 items-center justify-center gap-1.5 rounded-xl bg-cyan-500 px-4 text-xs font-bold text-slate-950 transition-all hover:bg-cyan-400 cursor-pointer"
+            className="inline-flex h-11 shrink-0 items-center justify-center gap-1.5 rounded-xl bg-emerald-500 px-4 text-xs font-bold text-slate-950 transition-all hover:bg-emerald-400 cursor-pointer"
           >
             <Plus className="h-3.5 w-3.5" /> Add Link
           </button>
@@ -592,7 +592,7 @@ export function BusinessProfileScreen({ onNavigate }: BusinessProfileScreenProps
 
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
           {[
-            { id: "public" as const, title: "Public", desc: "Visible to all visitors on JOBSONN directory" },
+            { id: "public" as const, title: "Public", desc: "Visible to all visitors on jobson.id directory" },
             { id: "network" as const, title: "Verified Network Only", desc: "Only logged-in verified accounts can view" },
             { id: "private" as const, title: "Private / Hidden", desc: "Hidden from public search, only direct links work" },
           ].map((v) => (
@@ -602,7 +602,7 @@ export function BusinessProfileScreen({ onNavigate }: BusinessProfileScreenProps
               className={cn(
                 "flex cursor-pointer flex-col justify-between rounded-2xl border p-4 transition-all",
                 data.profileVisibility === v.id
-                  ? "border-cyan-500 bg-cyan-500/10 ring-1 ring-cyan-500/30"
+                  ? "border-emerald-500 bg-emerald-500/10 ring-1 ring-emerald-500/30"
                   : "border-border bg-background/80 hover:border-border/80 dark:border-white/10 dark:bg-slate-950/40 dark:hover:border-white/20",
               )}
             >
@@ -610,7 +610,7 @@ export function BusinessProfileScreen({ onNavigate }: BusinessProfileScreenProps
                 <p className="text-sm font-bold text-foreground dark:text-white">{v.title}</p>
                 <p className="mt-1 text-xs text-muted-foreground dark:text-slate-400">{v.desc}</p>
               </div>
-              <span className="mt-4 inline-flex items-center gap-1 text-[11px] font-semibold text-cyan-600 dark:text-cyan-400">
+              <span className="mt-4 inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">
                 {data.profileVisibility === v.id && <Check className="h-3.5 w-3.5" />}
                 {data.profileVisibility === v.id ? "Selected" : "Click to select"}
               </span>
@@ -625,7 +625,7 @@ export function BusinessProfileScreen({ onNavigate }: BusinessProfileScreenProps
           type="button"
           onClick={handleSave}
           disabled={isSaving}
-          className="inline-flex items-center gap-2 rounded-xl bg-cyan-500 px-6 py-3 text-sm font-bold text-slate-950 transition-all hover:bg-cyan-400 hover:shadow-lg hover:shadow-cyan-500/25 disabled:opacity-50 cursor-pointer"
+          className="inline-flex items-center gap-2 rounded-xl bg-emerald-500 px-6 py-3 text-sm font-bold text-slate-950 transition-all hover:bg-emerald-400 hover:shadow-lg hover:shadow-emerald-500/25 disabled:opacity-50 cursor-pointer"
         >
           {isSaving ? "Saving profile..." : "Save Business Profile"}
           <Save className="h-4 w-4" />

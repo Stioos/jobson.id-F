@@ -40,7 +40,7 @@ const POPULAR = [
 ];
 
 const ORIGIN = {
-  url: "https://origin.jobsonn.com",
+  url: "https://origin.jobson.id",
   timeout: "30s",
   keepalive: "enabled",
   shield: "Mumbai (BOM)",

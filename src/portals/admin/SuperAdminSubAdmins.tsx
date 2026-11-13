@@ -20,12 +20,12 @@ interface SubAdmin {
 }
 
 const SUB_ADMINS: SubAdmin[] = [
-  { id: "sa_001", name: "Riya Menon", email: "riya@jobsonn.com", parentAdmin: "Neha Kapoor", role: "Sub-Admin (Ops)", scope: { portals: ["admin"], sections: ["users", "tickets"] }, delegated: ["users.create_users", "users.edit_users", "tickets.resolve"], status: "active", expires: "2025-12-31" },
-  { id: "sa_002", name: "Aditya Shah", email: "aditya@jobsonn.com", parentAdmin: "Neha Kapoor", role: "Sub-Admin (Content)", scope: { portals: ["admin"], sections: ["jobs", "courses"] }, delegated: ["content.moderate_jobs", "content.approve_courses"], status: "active", expires: "2025-10-15" },
-  { id: "sa_003", name: "Diya Rao", email: "diya@jobsonn.com", parentAdmin: "Raj Malhotra", role: "Sub-Admin (Billing)", scope: { portals: ["admin", "employer"], sections: ["invoices"] }, delegated: ["finance.view_transactions"], status: "active", expires: "2025-09-30" },
-  { id: "sa_004", name: "Aryan Gupta", email: "aryan@jobsonn.com", parentAdmin: "Pooja Desai", role: "Sub-Admin (Partners)", scope: { portals: ["partner"], sections: ["applications"] }, delegated: ["partners.approve_partners"], status: "expired", expires: "2024-08-15" },
-  { id: "sa_005", name: "Isha Khanna", email: "isha@jobsonn.com", parentAdmin: "Neha Kapoor", role: "Sub-Admin (Analytics)", scope: { portals: ["admin"], sections: ["reports"] }, delegated: ["analytics.view_all_reports", "analytics.export_data"], status: "suspended", expires: "2025-11-20" },
-  { id: "sa_006", name: "Kabir Sinha", email: "kabir@jobsonn.com", parentAdmin: "Raj Malhotra", role: "Sub-Admin (Billing)", scope: { portals: ["admin"], sections: ["refunds"] }, delegated: ["finance.process_refunds"], status: "active", expires: "2026-01-10" },
+  { id: "sa_001", name: "Riya Menon", email: "riya@jobson.id", parentAdmin: "Neha Kapoor", role: "Sub-Admin (Ops)", scope: { portals: ["admin"], sections: ["users", "tickets"] }, delegated: ["users.create_users", "users.edit_users", "tickets.resolve"], status: "active", expires: "2025-12-31" },
+  { id: "sa_002", name: "Aditya Shah", email: "aditya@jobson.id", parentAdmin: "Neha Kapoor", role: "Sub-Admin (Content)", scope: { portals: ["admin"], sections: ["jobs", "courses"] }, delegated: ["content.moderate_jobs", "content.approve_courses"], status: "active", expires: "2025-10-15" },
+  { id: "sa_003", name: "Diya Rao", email: "diya@jobson.id", parentAdmin: "Raj Malhotra", role: "Sub-Admin (Billing)", scope: { portals: ["admin", "employer"], sections: ["invoices"] }, delegated: ["finance.view_transactions"], status: "active", expires: "2025-09-30" },
+  { id: "sa_004", name: "Aryan Gupta", email: "aryan@jobson.id", parentAdmin: "Pooja Desai", role: "Sub-Admin (Partners)", scope: { portals: ["partner"], sections: ["applications"] }, delegated: ["partners.approve_partners"], status: "expired", expires: "2024-08-15" },
+  { id: "sa_005", name: "Isha Khanna", email: "isha@jobson.id", parentAdmin: "Neha Kapoor", role: "Sub-Admin (Analytics)", scope: { portals: ["admin"], sections: ["reports"] }, delegated: ["analytics.view_all_reports", "analytics.export_data"], status: "suspended", expires: "2025-11-20" },
+  { id: "sa_006", name: "Kabir Sinha", email: "kabir@jobson.id", parentAdmin: "Raj Malhotra", role: "Sub-Admin (Billing)", scope: { portals: ["admin"], sections: ["refunds"] }, delegated: ["finance.process_refunds"], status: "active", expires: "2026-01-10" },
 ];
 
 const PORTALS = ["admin", "employer", "recruiter", "training", "partner"];
@@ -162,7 +162,7 @@ export function SuperAdminSubAdmins() {
               </div>
               <div className="space-y-1.5">
                 <Label>Email</Label>
-                <Input placeholder="riya@jobsonn.com" />
+                <Input placeholder="riya@jobson.id" />
               </div>
             </div>
             <div className="grid grid-cols-2 gap-3">

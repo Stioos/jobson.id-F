@@ -188,7 +188,7 @@ export const CERT_ISSUING_ORGS: string[] = [
   "ISC2",
   "SHRM",
   "CFA Institute",
-  "JOBSONN Academy",
+  "jobson.id Academy",
 ];
 
 export const CERT_STATUSES: string[] = [

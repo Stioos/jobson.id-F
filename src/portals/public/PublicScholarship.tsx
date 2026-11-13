@@ -101,7 +101,7 @@ const SUCCESS_STORIES = [
   {
     name: "Lt. Rohan Verma (Retd.)", scholarship: "Defense (80%)", program: "FDE-FWD",
     role: "Platform Engineer @ Zerodha", initials: "RV", ctc: "₹17 LPA",
-    quote: "After 14 years in the Army, I needed a structured path back to civilian tech. The Defense scholarship made it affordable. JOBSONN's discipline matched what I knew — and the placement was incredible.",
+    quote: "After 14 years in the Army, I needed a structured path back to civilian tech. The Defense scholarship made it affordable. jobson.id's discipline matched what I knew — and the placement was incredible.",
   },
   {
     name: "Sana Khan", scholarship: "Women in Tech (50%)", program: "DSAI",

@@ -18,7 +18,7 @@ interface Endpoint {
 }
 
 const ENDPOINTS: Endpoint[] = [
-  { id: "wh_001", url: "https://api.techcorp.com/webhooks/jobsonn", events: ["application.created", "application.status_changed"], status: "active", lastDelivery: "2024-09-21T09:42:00Z", lastStatus: "success", successRate: 99.8 },
+  { id: "wh_001", url: "https://api.techcorp.com/webhooks/jobson.id", events: ["application.created", "application.status_changed"], status: "active", lastDelivery: "2024-09-21T09:42:00Z", lastStatus: "success", successRate: 99.8 },
   { id: "wh_002", url: "https://hooks.talentbridge.in/jobs", events: ["job.published", "job.closed"], status: "active", lastDelivery: "2024-09-21T08:30:00Z", lastStatus: "success", successRate: 100 },
   { id: "wh_003", url: "https://api.naukrix.com/wh/payment", events: ["payment.success", "payment.failed", "refund.processed"], status: "active", lastDelivery: "2024-09-21T09:55:00Z", lastStatus: "success", successRate: 98.4 },
   { id: "wh_004", url: "https://legacy.partner.in/callback", events: ["placement.created"], status: "paused", lastDelivery: "2024-09-18T14:20:00Z", lastStatus: "failed", successRate: 42.0 },

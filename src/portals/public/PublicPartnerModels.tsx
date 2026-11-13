@@ -36,8 +36,8 @@ const MODELS: ModelInfo[] = [
   {
     key: "CENTRE",
     name: "Centre Partner",
-    tagline: "Run a JOBSONN-branded training centre",
-    description: "Operate a physical training facility delivering JOBSONN's certified programs with full marketing, admissions and placement support.",
+    tagline: "Run a jobson.id-branded training centre",
+    description: "Operate a physical training facility delivering jobson.id's certified programs with full marketing, admissions and placement support.",
     icon: Building2,
     idealFor: ["Training companies", "Ed-tech operators", "Entrepreneurs with infrastructure", "Vocational institutes"],
     capabilities: ["Centre setup & inspection", "Curriculum & LMS access", "Local admissions", "Lead generation", "Batch management", "Certification"],
@@ -48,7 +48,7 @@ const MODELS: ModelInfo[] = [
   {
     key: "COLLEGE",
     name: "College Partner",
-    tagline: "Embed JOBSONN inside your campus",
+    tagline: "Embed jobson.id inside your campus",
     description: "Co-brand a training facility, integrate our curriculum as electives, or run placement-only partnerships across 5 flexible MoU models (A–E).",
     icon: GraduationCap,
     idealFor: ["Engineering & degree colleges", "Deemed universities", "Autonomous institutes", "Polytechnics"],
@@ -60,8 +60,8 @@ const MODELS: ModelInfo[] = [
   {
     key: "SERVICE",
     name: "Service Partner",
-    tagline: "Deliver IT services on the JOBSONN stack",
-    description: "Run cloud, DevOps, data engineering, and maintenance engagements for JOBSONN clients with project, retainer, and AMC delivery models.",
+    tagline: "Deliver IT services on the jobson.id stack",
+    description: "Run cloud, DevOps, data engineering, and maintenance engagements for jobson.id clients with project, retainer, and AMC delivery models.",
     icon: Wrench,
     idealFor: ["IT services companies", "Cloud consultants", "System integrators", "Maintenance providers"],
     capabilities: ["Service catalog access", "Project & AMC delivery", "SLA tracking", "Engagement management", "Co-delivery", "Wallet & settlements"],
@@ -72,8 +72,8 @@ const MODELS: ModelInfo[] = [
   {
     key: "TECHNOLOGY",
     name: "Technology Partner",
-    tagline: "Build & deploy JOBSONN-powered tech",
-    description: "Deploy, integrate, and OEM the JOBSONN platform across ERP, CRM, cloud infrastructure, and enterprise implementations.",
+    tagline: "Build & deploy jobson.id-powered tech",
+    description: "Deploy, integrate, and OEM the jobson.id platform across ERP, CRM, cloud infrastructure, and enterprise implementations.",
     icon: Cpu,
     idealFor: ["ERP / CRM integrators", "Cloud infrastructure firms", "OEM partners", "Enterprise consultancies"],
     capabilities: ["Platform deployment", "ERP / CRM integration", "OEM licensing", "Co-branded delivery", "Enterprise SLAs", "Revenue share"],
@@ -84,8 +84,8 @@ const MODELS: ModelInfo[] = [
   {
     key: "AI",
     name: "AI Partner",
-    tagline: "Ship AI products on JOBSONN compute",
-    description: "Build and deploy AI/ML solutions — document AI, NLP, computer vision — with JOBSONN-provided GPU credits and co-sell support.",
+    tagline: "Ship AI products on jobson.id compute",
+    description: "Build and deploy AI/ML solutions — document AI, NLP, computer vision — with jobson.id-provided GPU credits and co-sell support.",
     icon: Brain,
     idealFor: ["AI startups", "ML consultancies", "Research labs", "Generative AI product teams"],
     capabilities: ["GPU compute credits", "Co-sell motion", "AI service delivery", "Model hosting", "Data pipelines", "Certification"],
@@ -97,7 +97,7 @@ const MODELS: ModelInfo[] = [
     key: "RECRUITMENT",
     name: "Recruitment Partner",
     tagline: "Place candidates, earn on every hire",
-    description: "Source, screen and place candidates against JOBSONN job orders. Earn on every placement with transparent split rules and hotlist tooling.",
+    description: "Source, screen and place candidates against jobson.id job orders. Earn on every placement with transparent split rules and hotlist tooling.",
     icon: Users2,
     idealFor: ["Staffing agencies", "RPO providers", "Independent recruiters", "Executive search firms"],
     capabilities: ["Job order access", "Candidate sourcing", "Hotlists", "Submissions & tracking", "Onboarding", "Placement fees"],
@@ -109,7 +109,7 @@ const MODELS: ModelInfo[] = [
 
 const COMPARISON_ROWS: { label: string; cells: Record<PartnerModel, string | boolean> }[] = [
   { label: "Physical infrastructure required", cells: { CENTRE: true, COLLEGE: true, SERVICE: false, TECHNOLOGY: false, AI: false, RECRUITMENT: false } },
-  { label: "Lead generation", cells: { CENTRE: "Partner + JOBSONN", COLLEGE: "Campus + JOBSONN", SERVICE: "Partner-led", TECHNOLOGY: "Partner-led", AI: "Co-sell", RECRUITMENT: "JOBSONN job orders" } },
+  { label: "Lead generation", cells: { CENTRE: "Partner + jobson.id", COLLEGE: "Campus + jobson.id", SERVICE: "Partner-led", TECHNOLOGY: "Partner-led", AI: "Co-sell", RECRUITMENT: "jobson.id job orders" } },
   { label: "Program delivery", cells: { CENTRE: "Physical + hybrid", COLLEGE: "On-campus", SERVICE: "Remote / on-site", TECHNOLOGY: "Project-based", AI: "Project-based", RECRUITMENT: "N/A" } },
   { label: "LMS access", cells: { CENTRE: true, COLLEGE: true, SERVICE: false, TECHNOLOGY: false, AI: false, RECRUITMENT: false } },
   { label: "Certification rights", cells: { CENTRE: true, COLLEGE: true, SERVICE: "Optional", TECHNOLOGY: true, AI: true, RECRUITMENT: "Optional" } },
@@ -155,7 +155,7 @@ export function PublicPartnerModels() {
       description: "Your model selection will be pre-filled in the wizard.",
     });
     if (typeof window !== "undefined") {
-      sessionStorage.setItem("jobsonn_partner_apply_model", model);
+      sessionStorage.setItem("jobson_id_partner_apply_model", model);
     }
     navigate("public", "partner-apply");
   };
@@ -169,7 +169,7 @@ export function PublicPartnerModels() {
         <div className="relative mx-auto max-w-5xl px-4 py-16 text-center sm:px-6 sm:py-20 lg:px-8">
           <Badge className="mb-4 gap-1"><Handshake className="h-3 w-3" /> Franchise & Partner Program</Badge>
           <h1 className="text-3xl font-bold tracking-tight text-balance sm:text-4xl lg:text-5xl">
-            <span className="text-brand">6 ways</span> to partner with JOBSONN
+            <span className="text-brand">6 ways</span> to partner with jobson.id
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-base text-muted-foreground sm:text-lg">
             Whether you run a training centre, lead a college, deliver IT services, integrate enterprise tech,
@@ -359,7 +359,7 @@ export function PublicPartnerModels() {
         <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
           <div className="mb-8 text-center">
             <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Meet a few of our partners</h2>
-            <p className="mt-2 text-sm text-muted-foreground">Operators across India building on JOBSONN.</p>
+            <p className="mt-2 text-sm text-muted-foreground">Operators across India building on jobson.id.</p>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {partners.filter((p) => p.status === "active").slice(0, 4).map((p) => (
@@ -404,7 +404,7 @@ export function PublicPartnerModels() {
         <Card className="overflow-hidden border-brand/30 bg-gradient-to-br from-brand/10 via-background to-background p-8 sm:p-12">
           <div className="grid items-center gap-6 lg:grid-cols-2">
             <div>
-              <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Ready to become a JOBSONN partner?</h2>
+              <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Ready to become a jobson.id partner?</h2>
               <p className="mt-3 text-sm text-muted-foreground">
                 Apply in 8 guided steps. Most applications are reviewed within 7 business days, with a dedicated
                 partnership manager assigned to walk you through agreement, onboarding, and launch.

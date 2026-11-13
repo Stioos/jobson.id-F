@@ -128,7 +128,7 @@ export function RecruiterNetworkSourcing() {
     <div className="space-y-6">
       <PageHeader
         title="Network sourcing"
-        description="AI-powered candidate search across the JOBSONN network. Submit matched candidates to any active mandate."
+        description="AI-powered candidate search across the jobson.id network. Submit matched candidates to any active mandate."
         actions={[]}
       />
 
@@ -236,7 +236,7 @@ export function RecruiterNetworkSourcing() {
         {/* Results */}
         <SectionCard
           title={`${results.length} candidates found`}
-          description={skillFilter.length > 0 || locationFilter !== "all" ? `Filters active: ${[...skillFilter, locationFilter !== "all" ? locationFilter : ""].filter(Boolean).join(", ")}` : "Showing all candidates in the JOBSONN network."}
+          description={skillFilter.length > 0 || locationFilter !== "all" ? `Filters active: ${[...skillFilter, locationFilter !== "all" ? locationFilter : ""].filter(Boolean).join(", ")}` : "Showing all candidates in the jobson.id network."}
           action={
             premiumCount > 0 ? <Badge variant="outline" className="text-[10px] border-amber-500/40 text-amber-600 dark:text-amber-400"><Crown className="h-3 w-3" /> {premiumCount} premium</Badge> : undefined
           }

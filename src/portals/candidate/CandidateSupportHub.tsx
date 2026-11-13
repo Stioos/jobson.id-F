@@ -20,7 +20,7 @@ const FAQS = [
   { q: "How do I apply for a job?", a: "Visit Find Jobs, open a job listing, and click 'Easy Apply'. Your default resume is sent automatically. You can tailor your resume per application in the Resume section." },
   { q: "How do AI recommendations work?", a: "Our simulated AI matches your skills, experience, and preferences against published jobs. Scores are illustrative — always review the full description before applying." },
   { q: "How do I get my skills verified?", a: "Go to Skills → 'Get verified'. We'll send you an assessment link. Once completed with a passing score, a verified badge appears on your profile." },
-  { q: "When do I get paid for referrals?", a: "Referral rewards are credited to your wallet within 7 days of your referred friend accepting a job offer through JOBSONN. Minimum reward: ₹5,000 per placement." },
+  { q: "When do I get paid for referrals?", a: "Referral rewards are credited to your wallet within 7 days of your referred friend accepting a job offer through jobson.id. Minimum reward: ₹5,000 per placement." },
   { q: "Can I hide my profile from my current employer?", a: "Yes. Go to Settings → Privacy and switch profile visibility to 'Private' or 'Employers only'. You can also block specific companies." },
   { q: "How do I withdraw an application?", a: "Go to Applications, expand the application you want to withdraw, and click 'Withdraw'. The employer will be notified automatically." },
   { q: "How do I reset my password?", a: "Visit Settings → Security Center → Password. Enter your current password and a new one. If you've forgotten it, use the 'Forgot password' link on the sign-in page." },
@@ -37,7 +37,7 @@ const ARTICLES = [
 ];
 
 const VIDEOS = [
-  { title: "Getting started with JOBSONN", duration: "2:34", category: "Onboarding" },
+  { title: "Getting started with jobson.id", duration: "2:34", category: "Onboarding" },
   { title: "Setting up your profile", duration: "4:12", category: "Profile" },
   { title: "Finding the right jobs", duration: "3:55", category: "Jobs" },
   { title: "Preparing for interviews", duration: "6:18", category: "Interviews" },
@@ -70,7 +70,7 @@ export function CandidateSupportHub() {
 
       <ContactOptionsSection
         options={[
-          { icon: "Mail", title: "Email support", value: "support@jobsonn.com", hint: "Replies within 24 hours", action: () => toast.info("Opening email client") },
+          { icon: "Mail", title: "Email support", value: "support@jobson.id", hint: "Replies within 24 hours", action: () => toast.info("Opening email client") },
           { icon: "MessagesSquare", title: "Live chat", value: "Mon–Fri, 9 AM – 6 PM IST", hint: "Avg wait: 2 min", action: () => toast.info("Live chat", { description: "Connecting you to an agent…" }) },
           { icon: "Phone", title: "Phone", value: "+91 80 4567 8900", hint: "Toll-free, India", action: () => toast.info("Phone support", { description: "Demo only." }) },
         ]}

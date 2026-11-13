@@ -184,8 +184,8 @@ export function RegistrationsLicencesScreen({ onNavigate }: RegistrationsLicence
                   className={cn(
                     "group flex cursor-pointer items-center gap-2.5 rounded-xl border p-2.5 transition-all",
                     isActive
-                      ? "border-cyan-500 bg-cyan-500/10 shadow-sm ring-1 ring-cyan-500/20 dark:border-cyan-500/60 dark:bg-cyan-500/15"
-                      : "border-border/60 bg-background/60 hover:border-cyan-500/40 hover:bg-muted/30 dark:border-white/5 dark:bg-slate-950/30 dark:hover:border-cyan-500/30"
+                      ? "border-emerald-500 bg-emerald-500/10 shadow-sm ring-1 ring-emerald-500/20 dark:border-emerald-500/60 dark:bg-emerald-500/15"
+                      : "border-border/60 bg-background/60 hover:border-emerald-500/40 hover:bg-muted/30 dark:border-white/5 dark:bg-slate-950/30 dark:hover:border-emerald-500/30"
                   )}
                 >
                   {/* Tri-state checkbox */}
@@ -211,10 +211,10 @@ export function RegistrationsLicencesScreen({ onNavigate }: RegistrationsLicence
                     className={cn(
                       "flex h-4 w-4 shrink-0 items-center justify-center rounded-[5px] border transition-colors cursor-pointer",
                       checkState === "all"
-                        ? "border-cyan-500 bg-cyan-500 text-slate-950"
+                        ? "border-emerald-500 bg-emerald-500 text-slate-950"
                         : checkState === "some"
-                        ? "border-cyan-500 bg-cyan-500/20 text-cyan-600 dark:text-cyan-300"
-                        : "border-border bg-background text-transparent group-hover:border-cyan-500/50 dark:border-white/20 dark:bg-slate-950"
+                        ? "border-emerald-500 bg-emerald-500/20 text-emerald-600 dark:text-emerald-300"
+                        : "border-border bg-background text-transparent group-hover:border-emerald-500/50 dark:border-white/20 dark:bg-slate-950"
                     )}
                   >
                     {checkState === "all" && <Check className="h-3 w-3 stroke-[3]" />}
@@ -226,7 +226,7 @@ export function RegistrationsLicencesScreen({ onNavigate }: RegistrationsLicence
                     className={cn(
                       "flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-colors",
                       isActive
-                        ? "bg-cyan-500/15 text-cyan-600 dark:text-cyan-300"
+                        ? "bg-emerald-500/15 text-emerald-600 dark:text-emerald-300"
                         : "bg-blue-500/10 text-blue-600 dark:text-blue-400"
                     )}
                   >
@@ -238,7 +238,7 @@ export function RegistrationsLicencesScreen({ onNavigate }: RegistrationsLicence
                     <p
                       className={cn(
                         "truncate text-[11.5px] font-semibold leading-tight",
-                        isActive ? "text-cyan-700 dark:text-cyan-200" : "text-foreground dark:text-slate-200"
+                        isActive ? "text-emerald-700 dark:text-emerald-200" : "text-foreground dark:text-slate-200"
                       )}
                     >
                       {cat.title}
@@ -252,7 +252,7 @@ export function RegistrationsLicencesScreen({ onNavigate }: RegistrationsLicence
                   <ChevronRight
                     className={cn(
                       "h-3.5 w-3.5 shrink-0 transition-all",
-                      isActive ? "text-cyan-600 dark:text-cyan-300 translate-x-0 opacity-100" : "text-muted-foreground/40 -translate-x-1 opacity-0 group-hover:opacity-100 group-hover:translate-x-0"
+                      isActive ? "text-emerald-600 dark:text-emerald-300 translate-x-0 opacity-100" : "text-muted-foreground/40 -translate-x-1 opacity-0 group-hover:opacity-100 group-hover:translate-x-0"
                     )}
                   />
                 </div>
@@ -292,7 +292,7 @@ export function RegistrationsLicencesScreen({ onNavigate }: RegistrationsLicence
                   <button
                     type="button"
                     onClick={toggleActiveCategoryAll}
-                    className="text-[11px] font-semibold text-cyan-600 hover:text-cyan-500 dark:text-cyan-400 hover:underline cursor-pointer"
+                    className="text-[11px] font-semibold text-emerald-600 hover:text-emerald-500 dark:text-emerald-400 hover:underline cursor-pointer"
                   >
                     {activeCatCheckState === "all" ? "Clear all" : "Select all"}
                   </button>
@@ -316,20 +316,20 @@ export function RegistrationsLicencesScreen({ onNavigate }: RegistrationsLicence
                           className={cn(
                             "group flex cursor-pointer items-center gap-2 rounded-lg border p-2 transition-all",
                             isSelected
-                              ? "border-cyan-500 bg-cyan-500/10 dark:border-cyan-500/50 dark:bg-cyan-500/15"
-                              : "border-border/60 bg-background/60 hover:border-cyan-500/30 hover:bg-muted/30 dark:border-white/5 dark:bg-slate-950/30"
+                              ? "border-emerald-500 bg-emerald-500/10 dark:border-emerald-500/50 dark:bg-emerald-500/15"
+                              : "border-border/60 bg-background/60 hover:border-emerald-500/30 hover:bg-muted/30 dark:border-white/5 dark:bg-slate-950/30"
                           )}
                         >
                           <Checkbox
                             checked={isSelected}
                             onCheckedChange={() => toggleReg(reg)}
                             onClick={(e) => e.stopPropagation()}
-                            className="h-3.5 w-3.5 shrink-0 border-border data-[state=checked]:bg-cyan-500 data-[state=checked]:border-cyan-500 data-[state=checked]:text-slate-950 dark:border-white/20"
+                            className="h-3.5 w-3.5 shrink-0 border-border data-[state=checked]:bg-emerald-500 data-[state=checked]:border-emerald-500 data-[state=checked]:text-slate-950 dark:border-white/20"
                           />
                           <span
                             className={cn(
                               "flex-1 select-none text-[11px] font-medium leading-tight",
-                              isSelected ? "text-cyan-700 dark:text-cyan-200" : "text-foreground/80 dark:text-slate-300"
+                              isSelected ? "text-emerald-700 dark:text-emerald-200" : "text-foreground/80 dark:text-slate-300"
                             )}
                           >
                             {reg}
@@ -337,7 +337,7 @@ export function RegistrationsLicencesScreen({ onNavigate }: RegistrationsLicence
                           <span className={cn("shrink-0 rounded px-1.5 py-0.5 text-[8px] font-bold", BADGE_STYLES[badge])}>
                             {BADGE_SHORT[badge]}
                           </span>
-                          {isSelected && <Check className="h-3 w-3 shrink-0 text-cyan-600 dark:text-cyan-300" />}
+                          {isSelected && <Check className="h-3 w-3 shrink-0 text-emerald-600 dark:text-emerald-300" />}
                         </label>
                       );
                     })}
@@ -402,7 +402,7 @@ export function RegistrationsLicencesScreen({ onNavigate }: RegistrationsLicence
                   onNavigate?.("documents");
                 }}
                 disabled={isSaving}
-                className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-cyan-500 px-4 py-2.5 text-xs font-bold text-slate-950 transition-all hover:bg-cyan-400 disabled:opacity-50 cursor-pointer"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-emerald-500 px-4 py-2.5 text-xs font-bold text-slate-950 transition-all hover:bg-emerald-400 disabled:opacity-50 cursor-pointer"
               >
                 {isSaving ? "Saving..." : `Save Selections (${selectedRegs.length})`}
               </button>

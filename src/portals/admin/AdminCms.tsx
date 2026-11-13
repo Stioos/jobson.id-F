@@ -196,8 +196,8 @@ function PageEditorDialog({ open, onOpenChange, page, onSave }: { open: boolean;
 }
 
 function SeoDialog({ open, onOpenChange, onSave }: { open: boolean; onOpenChange: (o: boolean) => void; onSave: () => void }) {
-  const [title, setTitle] = React.useState("JOBSONN — Hire smarter. Hire faster.");
-  const [description, setDescription] = React.useState("JOBSONN is India's AI-powered hiring platform connecting employers with verified talent.");
+  const [title, setTitle] = React.useState("jobson.id — Hire smarter. Hire faster.");
+  const [description, setDescription] = React.useState("jobson.id is India's AI-powered hiring platform connecting employers with verified talent.");
   const [keywords, setKeywords] = React.useState("hiring, jobs, recruitment, india");
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>

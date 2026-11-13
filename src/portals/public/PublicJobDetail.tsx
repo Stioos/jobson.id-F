@@ -531,7 +531,7 @@ function ApplyDialog({ job, open, onOpenChange }: { job: Job; open: boolean; onO
       form.reset();
       // Stash the application intent for candidate dashboard
       try {
-        sessionStorage.setItem("jobsonn_last_application", JSON.stringify({ jobId: job.id, answers, at: new Date().toISOString() }));
+        sessionStorage.setItem("jobson_id_last_application", JSON.stringify({ jobId: job.id, answers, at: new Date().toISOString() }));
       } catch { /* ignore */ }
       navigate("candidate", "applications");
     }, 1200);

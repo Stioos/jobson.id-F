@@ -26,11 +26,11 @@ interface TaxDoc {
 const FYS = ["FY 2024-25", "FY 2023-24", "FY 2022-23"];
 
 const DOCS: TaxDoc[] = [
-  { id: "d1", kind: "gst", name: "GST Invoice — Subscription", period: "FY 2024-25", date: "2024-04-12", amount: 20000, vendor: "Jobsonn Technologies" },
-  { id: "d2", kind: "gst", name: "GST Invoice — Credits", period: "FY 2024-25", date: "2024-06-03", amount: 50000, vendor: "Jobsonn Technologies" },
-  { id: "d3", kind: "gst", name: "GST Invoice — Talent Solutions", period: "FY 2024-25", date: "2024-08-21", amount: 150000, vendor: "Jobsonn Technologies" },
-  { id: "d4", kind: "tds", name: "Form 16A — Q1 FY24-25", period: "FY 2024-25", date: "2024-07-15", amount: 2000, vendor: "Jobsonn Technologies" },
-  { id: "d5", kind: "tds", name: "Form 16A — Q2 FY24-25", period: "FY 2024-25", date: "2024-10-20", amount: 2200, vendor: "Jobsonn Technologies" },
+  { id: "d1", kind: "gst", name: "GST Invoice — Subscription", period: "FY 2024-25", date: "2024-04-12", amount: 20000, vendor: "jobson.id Technologies" },
+  { id: "d2", kind: "gst", name: "GST Invoice — Credits", period: "FY 2024-25", date: "2024-06-03", amount: 50000, vendor: "jobson.id Technologies" },
+  { id: "d3", kind: "gst", name: "GST Invoice — Talent Solutions", period: "FY 2024-25", date: "2024-08-21", amount: 150000, vendor: "jobson.id Technologies" },
+  { id: "d4", kind: "tds", name: "Form 16A — Q1 FY24-25", period: "FY 2024-25", date: "2024-07-15", amount: 2000, vendor: "jobson.id Technologies" },
+  { id: "d5", kind: "tds", name: "Form 16A — Q2 FY24-25", period: "FY 2024-25", date: "2024-10-20", amount: 2200, vendor: "jobson.id Technologies" },
   { id: "d6", kind: "form16", name: "Form 16 — Salary FY24-25", period: "FY 2024-25", date: "2024-06-15", amount: 0, vendor: "TechCorp India" },
   { id: "d7", kind: "form16", name: "Form 16 — Salary FY23-24", period: "FY 2023-24", date: "2023-06-12", amount: 0, vendor: "TechCorp India" },
   { id: "d8", kind: "26as", name: "Form 26AS — FY24-25", period: "FY 2024-25", date: "2024-07-30", amount: 18500, vendor: "TRACES" },

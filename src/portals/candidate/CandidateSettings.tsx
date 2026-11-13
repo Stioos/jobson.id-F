@@ -209,7 +209,7 @@ export function CandidateSettings() {
               <ConsentRow
                 icon="BarChart3"
                 title="Analytics"
-                description="Help us improve JOBSONN by sharing usage analytics."
+                description="Help us improve jobson.id by sharing usage analytics."
                 checked={consents.analytics}
                 onToggle={() => toggleConsent("analytics")}
               />
@@ -347,7 +347,7 @@ export function CandidateSettings() {
         <TabsContent value="data" className="space-y-4">
           <SectionCard
             title="Download your data"
-            description="Export a copy of all data JOBSONN holds about you."
+            description="Export a copy of all data jobson.id holds about you."
           >
             <div className="flex flex-col items-start gap-3 rounded-lg border p-4 sm:flex-row sm:items-center sm:justify-between">
               <div>

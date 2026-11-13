@@ -164,15 +164,15 @@ export interface OrganizationData {
 export const DEFAULT_ORGANIZATION_DATA: OrganizationData = {
   logoUrl: null,
   bannerUrl: null,
-  companyName: "JOBSONN Tech & AI Services",
-  tradeName: "JOBSONN Enterprise Solutions",
+  companyName: "jobson.id Tech & AI Services",
+  tradeName: "jobson.id Enterprise Solutions",
   businessType: "Private Limited Company",
   natureOfBusiness: "B2B",
   tagline: "Accelerating Enterprise Digital Transformation & Industrial AI",
   employeeRange: "51-200 Employees",
   annualRevenue: "₹10 Cr - ₹50 Cr ($1.2M - $6M)",
   establishedYear: "2018",
-  website: "https://jobsonn.com",
+  website: "https://jobson.id",
   country: "IN",
   businessSize: "Medium",
   // Nature of Business (multi-select)
@@ -184,7 +184,7 @@ export const DEFAULT_ORGANIZATION_DATA: OrganizationData = {
   // Countries served (multi-select) — default sample
   servedCountries: ["India", "United States", "Singapore", "United Arab Emirates"],
   companyAddress: {
-    companyName: "JOBSONN Tech & AI Services",
+    companyName: "jobson.id Tech & AI Services",
     address: "Brigade Tech Gardens, 4th Floor, Tower B, Whitefield",
     city: "Bengaluru",
     state: "Karnataka",
@@ -194,7 +194,7 @@ export const DEFAULT_ORGANIZATION_DATA: OrganizationData = {
     location: "Bengaluru East, Karnataka, India",
   },
   billingAddress: {
-    companyName: "JOBSONN Tech & AI Services",
+    companyName: "jobson.id Tech & AI Services",
     address: "Brigade Tech Gardens, 4th Floor, Tower B, Whitefield",
     city: "Bengaluru",
     state: "Karnataka",
@@ -210,7 +210,7 @@ export const DEFAULT_ORGANIZATION_DATA: OrganizationData = {
   timezone: "Asia/Kolkata (IST +05:30)",
   isExporting: true,
   facilityAddress: {
-    companyName: "JOBSONN Tech & AI Services",
+    companyName: "jobson.id Tech & AI Services",
     address: "Brigade Tech Gardens, 4th Floor, Tower B, Whitefield",
     city: "Bengaluru",
     state: "Karnataka",
@@ -221,16 +221,16 @@ export const DEFAULT_ORGANIZATION_DATA: OrganizationData = {
   },
   // Social Media Links (business profile) — default sample
   socialLinks: [
-    { id: "sl1", platform: "LinkedIn", url: "https://linkedin.com/company/jobsonn" },
-    { id: "sl2", platform: "X (Twitter)", url: "https://x.com/jobsonn" },
-    { id: "sl3", platform: "GitHub", url: "https://github.com/jobsonn" },
+    { id: "sl1", platform: "LinkedIn", url: "https://linkedin.com/company/jobson.id" },
+    { id: "sl2", platform: "X (Twitter)", url: "https://x.com/jobson.id" },
+    { id: "sl3", platform: "GitHub", url: "https://github.com/jobson.id" },
   ],
   // Profile Visibility
   profileVisibility: "public",
 
   // Address Master — defaults
   registeredAddress: {
-    companyName: "JOBSONN Tech & AI Services",
+    companyName: "jobson.id Tech & AI Services",
     address: "Brigade Tech Gardens, 4th Floor, Tower B, Whitefield",
     city: "Bengaluru",
     state: "Karnataka",
@@ -241,7 +241,7 @@ export const DEFAULT_ORGANIZATION_DATA: OrganizationData = {
   },
   billingAddresses: [
     {
-      companyName: "JOBSONN Tech & AI Services",
+      companyName: "jobson.id Tech & AI Services",
       address: "Brigade Tech Gardens, 4th Floor, Tower B, Whitefield",
       city: "Bengaluru",
       state: "Karnataka",
@@ -253,7 +253,7 @@ export const DEFAULT_ORGANIZATION_DATA: OrganizationData = {
   ],
   shippingAddresses: [
     {
-      companyName: "JOBSONN Tech & AI Services",
+      companyName: "jobson.id Tech & AI Services",
       address: "RMZ Infinity, Old Madras Road, Bennigana Halli",
       city: "Bengaluru",
       state: "Karnataka",
@@ -267,7 +267,7 @@ export const DEFAULT_ORGANIZATION_DATA: OrganizationData = {
   pan: "ABCDE1234F",
   taxpayerType: "Regular",
   taxJurisdiction: "Ward 42, Bengaluru East, Karnataka",
-  gstLegalName: "JOBSONN TECHNOLOGIES PRIVATE LIMITED",
+  gstLegalName: "jobson.id TECHNOLOGIES PRIVATE LIMITED",
   isGstinVerified: false,
   registrationDate: "14-Mar-2018",
   principalAddress: "Brigade Tech Gardens, 4th Floor, Tower B, Whitefield, Bengaluru, Karnataka, 560066",
@@ -313,7 +313,7 @@ export const DEFAULT_ORGANIZATION_DATA: OrganizationData = {
   registrationNumber: "",
 
   // ─── Business Legal Identity defaults (Section A) ───
-  legalBusinessName: "JOBSONN TECHNOLOGIES PRIVATE LIMITED",
+  legalBusinessName: "jobson.id TECHNOLOGIES PRIVATE LIMITED",
   legalEntityType: "Private Limited Company",
   dateOfIncorporation: "14-03-2018",
   businessRegistrationNumber: "U72200KA2018PTC112233",
@@ -321,7 +321,7 @@ export const DEFAULT_ORGANIZATION_DATA: OrganizationData = {
   registrationStatus: "Active",
 
   // ─── Tax Information defaults (Section B) ───
-  panHolderName: "JOBSONN TECHNOLOGIES PRIVATE LIMITED",
+  panHolderName: "jobson.id TECHNOLOGIES PRIVATE LIMITED",
   gstRegistrationStatus: "Registered",
   gstRegistrationState: "Karnataka (29)",
   gstBusinessConstitution: "Private Limited Company",
@@ -343,7 +343,7 @@ export const DEFAULT_ORGANIZATION_DATA: OrganizationData = {
   ],
 
   // ─── Bank Verification defaults (Section E) ───
-  bankAccountHolderName: "JOBSONN TECHNOLOGIES PRIVATE LIMITED",
+  bankAccountHolderName: "jobson.id TECHNOLOGIES PRIVATE LIMITED",
   bankAccountType: "Current Account",
   bankName: "HDFC Bank",
   bankAccountNumber: "50200012345678",
@@ -659,8 +659,8 @@ export function OrganizationProvider({ children }: { children: ReactNode }) {
     // Simulated GST API response payload — populated from the GSTN Master Registry.
     // In production this would be the JSON body returned by the GST search endpoint.
     const gstApiResponse = {
-      legalName: "JOBSONN TECHNOLOGIES PRIVATE LIMITED",
-      tradeName: "JOBSONN Enterprise Solutions",
+      legalName: "jobson.id TECHNOLOGIES PRIVATE LIMITED",
+      tradeName: "jobson.id Enterprise Solutions",
       status: "Active",
       constitution: "Private Limited Company",
       taxpayerType: "Regular",
@@ -726,11 +726,11 @@ export function OrganizationProvider({ children }: { children: ReactNode }) {
 
     // Simulated MCA / CIN API response payload.
     const cinApiResponse = {
-      companyName: "JOBSONN TECHNOLOGIES PRIVATE LIMITED",
+      companyName: "jobson.id TECHNOLOGIES PRIVATE LIMITED",
       registrationNumber: "112233",
       incorporationDate: "14-03-2018",
       cinStatus: "Active",
-      email: "secretarial@jobsonn.com",
+      email: "secretarial@jobson.id",
       incorporationCountry: "India",
       registeredState: "Karnataka",
       rocCode: "RoC-Bangalore",

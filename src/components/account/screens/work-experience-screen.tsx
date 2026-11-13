@@ -233,7 +233,7 @@ export function WorkExperienceScreen({ onNavigate }: WorkExperienceScreenProps) 
               <p className="text-xs text-muted-foreground dark:text-slate-400">{records.length} record{records.length === 1 ? "" : "s"} · {companiesCount} compan{companiesCount === 1 ? "y" : "ies"} · {totalProjects} project{totalProjects === 1 ? "" : "s"}</p>
             </div>
           </div>
-          <Button type="button" onClick={showForm ? closeForm : openAdd} className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-cyan-500 px-4 py-2.5 text-xs font-bold text-slate-950 transition-all hover:bg-cyan-400 hover:shadow-lg hover:shadow-cyan-500/20">
+          <Button type="button" onClick={showForm ? closeForm : openAdd} className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-emerald-500 px-4 py-2.5 text-xs font-bold text-slate-950 transition-all hover:bg-emerald-400 hover:shadow-lg hover:shadow-emerald-500/20">
             {showForm ? <><X className="h-3.5 w-3.5" /> Cancel</> : <><Plus className="h-3.5 w-3.5" /> Add Experience</>}
           </Button>
         </div>
@@ -241,8 +241,8 @@ export function WorkExperienceScreen({ onNavigate }: WorkExperienceScreenProps) 
 
       {/* Summary Stats — auto-calculated */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-        <div className="rounded-2xl border border-cyan-500/30 bg-cyan-500/5 p-4">
-          <div className="flex items-center gap-2 text-cyan-600 dark:text-cyan-400"><TrendingUp className="h-4 w-4" /><span className="text-xs font-semibold">Total Experience</span></div>
+        <div className="rounded-2xl border border-emerald-500/30 bg-emerald-500/5 p-4">
+          <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400"><TrendingUp className="h-4 w-4" /><span className="text-xs font-semibold">Total Experience</span></div>
           <p className="mt-1.5 text-lg font-extrabold text-foreground dark:text-white">{formatDuration(totalExp)}</p>
           <p className="mt-0.5 text-[10px] text-muted-foreground dark:text-slate-400">{totalExp.totalMonths} months · non-overlapping</p>
         </div>
@@ -298,7 +298,7 @@ export function WorkExperienceScreen({ onNavigate }: WorkExperienceScreenProps) 
       <section className="rounded-3xl border border-border bg-card/80 p-6 shadow-soft backdrop-blur-sm dark:border-white/10 dark:bg-slate-900/60 dark:shadow-none">
         <div className="flex items-center justify-between pb-4">
           <div className="flex items-center gap-2.5">
-            <Building2 className="h-4.5 w-4.5 text-cyan-600 dark:text-cyan-400" />
+            <Building2 className="h-4.5 w-4.5 text-emerald-600 dark:text-emerald-400" />
             <h3 className="text-base font-bold text-foreground dark:text-white">Employment History</h3>
           </div>
           <span className="rounded-full bg-muted px-2.5 py-0.5 text-xs font-semibold text-muted-foreground dark:bg-white/5 dark:text-slate-300">{records.length} Record{records.length === 1 ? "" : "s"}</span>

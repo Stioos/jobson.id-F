@@ -18,14 +18,14 @@ interface LogRow {
 }
 
 const LOGS: LogRow[] = [
-  { id: "log_001", user: "aarav@jobsonn.com", portal: "admin", action: "Login", resource: "auth", timestamp: "2024-09-21T09:55:00Z", ip: "103.21.58.42", device: "Chrome / macOS", location: "Bengaluru, IN", status: "success" },
-  { id: "log_002", user: "neha@jobsonn.com", portal: "admin", action: "Edit", resource: "employer/emp_002", timestamp: "2024-09-21T09:42:00Z", ip: "103.21.58.50", device: "Firefox / Windows", location: "Mumbai, IN", status: "success" },
+  { id: "log_001", user: "aarav@jobson.id", portal: "admin", action: "Login", resource: "auth", timestamp: "2024-09-21T09:55:00Z", ip: "103.21.58.42", device: "Chrome / macOS", location: "Bengaluru, IN", status: "success" },
+  { id: "log_002", user: "neha@jobson.id", portal: "admin", action: "Edit", resource: "employer/emp_002", timestamp: "2024-09-21T09:42:00Z", ip: "103.21.58.50", device: "Firefox / Windows", location: "Mumbai, IN", status: "success" },
   { id: "log_003", user: "unknown@temp.com", portal: "admin", action: "Login", resource: "auth", timestamp: "2024-09-21T09:35:00Z", ip: "45.83.21.10", device: "Unknown", location: "Unknown", status: "blocked", flagged: true },
-  { id: "log_004", user: "raj@jobsonn.com", portal: "admin", action: "Export", resource: "transactions.csv", timestamp: "2024-09-21T09:20:00Z", ip: "103.21.58.55", device: "Edge / Windows", location: "Delhi, IN", status: "success" },
-  { id: "log_005", user: "sneha@jobsonn.com", portal: "admin", action: "Delete", resource: "job/job_884", timestamp: "2024-09-21T09:10:00Z", ip: "103.21.58.62", device: "Chrome / macOS", location: "Hyderabad, IN", status: "success" },
-  { id: "log_006", user: "vikram@jobsonn.com", portal: "admin", action: "Impersonate", resource: "user/u_005", timestamp: "2024-09-21T08:55:00Z", ip: "203.0.113.5", device: "Chrome / Linux", location: "Pune, IN", status: "success", flagged: true },
-  { id: "log_007", user: "pooja@jobsonn.com", portal: "partner", action: "Create", resource: "partner/par_021", timestamp: "2024-09-21T08:30:00Z", ip: "103.21.58.70", device: "Safari / iOS", location: "Chennai, IN", status: "success" },
-  { id: "log_008", user: "karan@jobsonn.com", portal: "admin", action: "View", resource: "audit_log", timestamp: "2024-09-21T08:15:00Z", ip: "192.168.1.10", device: "Chrome / Android", location: "Bengaluru, IN", status: "failed" },
+  { id: "log_004", user: "raj@jobson.id", portal: "admin", action: "Export", resource: "transactions.csv", timestamp: "2024-09-21T09:20:00Z", ip: "103.21.58.55", device: "Edge / Windows", location: "Delhi, IN", status: "success" },
+  { id: "log_005", user: "sneha@jobson.id", portal: "admin", action: "Delete", resource: "job/job_884", timestamp: "2024-09-21T09:10:00Z", ip: "103.21.58.62", device: "Chrome / macOS", location: "Hyderabad, IN", status: "success" },
+  { id: "log_006", user: "vikram@jobson.id", portal: "admin", action: "Impersonate", resource: "user/u_005", timestamp: "2024-09-21T08:55:00Z", ip: "203.0.113.5", device: "Chrome / Linux", location: "Pune, IN", status: "success", flagged: true },
+  { id: "log_007", user: "pooja@jobson.id", portal: "partner", action: "Create", resource: "partner/par_021", timestamp: "2024-09-21T08:30:00Z", ip: "103.21.58.70", device: "Safari / iOS", location: "Chennai, IN", status: "success" },
+  { id: "log_008", user: "karan@jobson.id", portal: "admin", action: "View", resource: "audit_log", timestamp: "2024-09-21T08:15:00Z", ip: "192.168.1.10", device: "Chrome / Android", location: "Bengaluru, IN", status: "failed" },
   { id: "log_009", user: "rohan@techcorp.com", portal: "employer", action: "Logout", resource: "auth", timestamp: "2024-09-21T08:00:00Z", ip: "103.21.58.80", device: "Chrome / Windows", location: "Bengaluru, IN", status: "success" },
   { id: "log_010", user: "support@temp.in", portal: "admin", action: "Login", resource: "auth", timestamp: "2024-09-21T07:45:00Z", ip: "198.51.100.22", device: "Unknown", location: "Foreign", status: "blocked", flagged: true },
 ];
@@ -179,14 +179,14 @@ export function SuperAdminUserActivityLog() {
               <Icon name="AlertCircle" className="mt-0.5 h-4 w-4 text-amber-600" />
               <div>
                 <div className="text-sm font-medium">Impersonation outside business hours</div>
-                <div className="text-xs text-muted-foreground">vikram@jobsonn.com impersonated user/u_005 at 08:55 IST</div>
+                <div className="text-xs text-muted-foreground">vikram@jobson.id impersonated user/u_005 at 08:55 IST</div>
               </div>
             </div>
             <div className="flex items-start gap-2 rounded-md border border-amber-500/30 bg-amber-500/5 p-3">
               <Icon name="AlertCircle" className="mt-0.5 h-4 w-4 text-amber-600" />
               <div>
                 <div className="text-sm font-medium">Bulk export by billing admin</div>
-                <div className="text-xs text-muted-foreground">raj@jobsonn.com exported transactions.csv — {failed} failed attempts in window</div>
+                <div className="text-xs text-muted-foreground">raj@jobson.id exported transactions.csv — {failed} failed attempts in window</div>
               </div>
             </div>
           </div>

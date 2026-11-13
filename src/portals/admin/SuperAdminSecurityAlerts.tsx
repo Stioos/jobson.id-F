@@ -15,7 +15,7 @@ interface Alert {
 
 const ALERTS: Alert[] = [
   { id: "alt_001", type: "failed_login_burst", severity: "high", user: "rohan@techcorp.com", ip: "198.51.100.7", detail: "12 failed login attempts in 5 min", at: "2024-09-21T09:42:00Z", status: "open" },
-  { id: "alt_002", type: "mfa_bypass_attempt", severity: "critical", user: "aarav@jobsonn.com", ip: "198.51.100.22", detail: "MFA bypass via support channel attempt", at: "2024-09-21T08:30:00Z", status: "investigating" },
+  { id: "alt_002", type: "mfa_bypass_attempt", severity: "critical", user: "aarav@jobson.id", ip: "198.51.100.22", detail: "MFA bypass via support channel attempt", at: "2024-09-21T08:30:00Z", status: "investigating" },
   { id: "alt_003", type: "suspicious_ip", severity: "medium", user: "sneha@talentbridge.in", ip: "203.0.113.180", detail: "Login from new geolocation (Russia)", at: "2024-09-21T07:15:00Z", status: "open" },
   { id: "alt_004", type: "credential_stuffing", severity: "critical", user: "multiple", ip: "198.51.100.40", detail: "Credential stuffing botnet detected", at: "2024-09-21T06:00:00Z", status: "investigating" },
   { id: "alt_005", type: "api_rate_abuse", severity: "high", user: "key_public_v2", ip: "198.51.100.55", detail: "API rate limit exceeded 40x in 1h", at: "2024-09-21T05:42:00Z", status: "open" },

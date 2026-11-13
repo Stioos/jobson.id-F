@@ -137,7 +137,7 @@ export function AdminPartnerManagement() {
     <div className="space-y-6">
       <PageHeader
         title="Partner Management"
-        description="Govern all JOBSONN franchise partners — centres, colleges, service, technology, AI, and recruitment partners."
+        description="Govern all jobson.id franchise partners — centres, colleges, service, technology, AI, and recruitment partners."
         icon={<Shield className="h-6 w-6" />}
         breadcrumbs={[{ label: "Platform Admin" }, { label: "Partner Management" }]}
         actions={[

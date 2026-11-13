@@ -21,14 +21,14 @@ interface Cert {
 }
 
 const CERTS: Cert[] = [
-  { id: "c_1", domain: "jobsonn.com", issuer: "Let's Encrypt R3", issuedOn: "2024-08-21", expiresOn: "2024-11-19", daysLeft: 59, autoRenew: true, chainValid: true, mixedContent: false },
-  { id: "c_2", domain: "www.jobsonn.com", issuer: "Let's Encrypt R3", issuedOn: "2024-08-21", expiresOn: "2024-11-19", daysLeft: 59, autoRenew: true, chainValid: true, mixedContent: false },
-  { id: "c_3", domain: "mail.jobsonn.com", issuer: "Let's Encrypt R3", issuedOn: "2024-08-10", expiresOn: "2024-11-08", daysLeft: 48, autoRenew: true, chainValid: true, mixedContent: false },
-  { id: "c_4", domain: "promo.jobsonn.com", issuer: "Let's Encrypt R3", issuedOn: "2024-06-14", expiresOn: "2024-09-29", daysLeft: 8, autoRenew: false, chainValid: true, mixedContent: true },
-  { id: "c_5", domain: "alerts.jobsonn.com", issuer: "DigiCert", issuedOn: "2024-04-22", expiresOn: "2024-09-26", daysLeft: 5, autoRenew: false, chainValid: true, mixedContent: false },
-  { id: "c_6", domain: "partner.jobsonn.com", issuer: "Let's Encrypt R3", issuedOn: "2024-09-12", expiresOn: "2024-12-11", daysLeft: 81, autoRenew: true, chainValid: true, mixedContent: false },
-  { id: "c_7", domain: "api.jobsonn.com", issuer: "Cloudflare Origin", issuedOn: "2024-07-04", expiresOn: "2034-07-01", daysLeft: 3650, autoRenew: true, chainValid: true, mixedContent: false },
-  { id: "c_8", domain: "legacy.jobsonn.io", issuer: "Comodo", issuedOn: "2023-09-12", expiresOn: "2024-09-22", daysLeft: 1, autoRenew: false, chainValid: false, mixedContent: true },
+  { id: "c_1", domain: "jobson.id", issuer: "Let's Encrypt R3", issuedOn: "2024-08-21", expiresOn: "2024-11-19", daysLeft: 59, autoRenew: true, chainValid: true, mixedContent: false },
+  { id: "c_2", domain: "www.jobson.id", issuer: "Let's Encrypt R3", issuedOn: "2024-08-21", expiresOn: "2024-11-19", daysLeft: 59, autoRenew: true, chainValid: true, mixedContent: false },
+  { id: "c_3", domain: "mail.jobson.id", issuer: "Let's Encrypt R3", issuedOn: "2024-08-10", expiresOn: "2024-11-08", daysLeft: 48, autoRenew: true, chainValid: true, mixedContent: false },
+  { id: "c_4", domain: "promo.jobson.id", issuer: "Let's Encrypt R3", issuedOn: "2024-06-14", expiresOn: "2024-09-29", daysLeft: 8, autoRenew: false, chainValid: true, mixedContent: true },
+  { id: "c_5", domain: "alerts.jobson.id", issuer: "DigiCert", issuedOn: "2024-04-22", expiresOn: "2024-09-26", daysLeft: 5, autoRenew: false, chainValid: true, mixedContent: false },
+  { id: "c_6", domain: "partner.jobson.id", issuer: "Let's Encrypt R3", issuedOn: "2024-09-12", expiresOn: "2024-12-11", daysLeft: 81, autoRenew: true, chainValid: true, mixedContent: false },
+  { id: "c_7", domain: "api.jobson.id", issuer: "Cloudflare Origin", issuedOn: "2024-07-04", expiresOn: "2034-07-01", daysLeft: 3650, autoRenew: true, chainValid: true, mixedContent: false },
+  { id: "c_8", domain: "legacy.jobson.id", issuer: "Comodo", issuedOn: "2023-09-12", expiresOn: "2024-09-22", daysLeft: 1, autoRenew: false, chainValid: false, mixedContent: true },
 ];
 
 export function SuperAdminSslCertificates() {

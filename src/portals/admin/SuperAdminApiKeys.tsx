@@ -19,9 +19,9 @@ interface ApiKey {
 const KEYS: ApiKey[] = [
   { id: "key_001", name: "internal-ro-service", scopes: ["read:users", "read:billing"], prefix: "jsn_live_a1b2", status: "active", lastUsed: "2024-09-21T09:55:00Z", createdBy: "system" },
   { id: "key_002", name: "billing-cron-job", scopes: ["read:invoices", "write:invoices"], prefix: "jsn_live_c3d4", status: "active", lastUsed: "2024-09-21T09:00:00Z", createdBy: "system" },
-  { id: "key_003", name: "employer-public-api", scopes: ["read:jobs"], prefix: "jsn_pub_e5f6", status: "active", lastUsed: "2024-09-21T09:42:00Z", createdBy: "aarav@jobsonn.com" },
+  { id: "key_003", name: "employer-public-api", scopes: ["read:jobs"], prefix: "jsn_pub_e5f6", status: "active", lastUsed: "2024-09-21T09:42:00Z", createdBy: "aarav@jobson.id" },
   { id: "key_004", name: "recruiter-webhook-signer", scopes: ["write:webhooks"], prefix: "jsn_live_g7h8", status: "active", lastUsed: "2024-09-20T17:18:00Z", createdBy: "platform_admin" },
-  { id: "key_005", name: "legacy-key-2023", scopes: ["read:users"], prefix: "jsn_live_i9j0", status: "rotated", lastUsed: "2024-09-15T11:42:00Z", createdBy: "aarav@jobsonn.com" },
+  { id: "key_005", name: "legacy-key-2023", scopes: ["read:users"], prefix: "jsn_live_i9j0", status: "rotated", lastUsed: "2024-09-15T11:42:00Z", createdBy: "aarav@jobson.id" },
   { id: "key_006", name: "compromised-key", scopes: ["read:billing"], prefix: "jsn_live_k1l2", status: "revoked", lastUsed: "2024-09-12T08:00:00Z", createdBy: "platform_admin" },
 ];
 

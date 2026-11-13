@@ -52,11 +52,11 @@ const MOCK_OFFERS: Offer[] = [
 ];
 
 const AUDIT: AuditEntry[] = [
-  { id: "a1", offerId: "o1", event: "Offer sent for signature", actor: "recruiter@jobsonn.com", timestamp: "2024-10-08T10:00:00Z", ip: "10.0.0.4" },
+  { id: "a1", offerId: "o1", event: "Offer sent for signature", actor: "recruiter@jobson.id", timestamp: "2024-10-08T10:00:00Z", ip: "10.0.0.4" },
   { id: "a2", offerId: "o1", event: "Email opened by candidate", actor: "Arjun Iyer", timestamp: "2024-10-09T08:23:00Z", ip: "203.0.113.42" },
   { id: "a3", offerId: "o1", event: "Document viewed", actor: "Arjun Iyer", timestamp: "2024-10-09T08:24:00Z", ip: "203.0.113.42" },
   { id: "a4", offerId: "o1", event: "Offer signed", actor: "Arjun Iyer", timestamp: "2024-10-11T14:10:00Z", ip: "203.0.113.42" },
-  { id: "a5", offerId: "o2", event: "Offer sent for signature", actor: "recruiter@jobsonn.com", timestamp: "2024-10-12T11:30:00Z", ip: "10.0.0.4" },
+  { id: "a5", offerId: "o2", event: "Offer sent for signature", actor: "recruiter@jobson.id", timestamp: "2024-10-12T11:30:00Z", ip: "10.0.0.4" },
   { id: "a6", offerId: "o2", event: "Document viewed", actor: "Kavya Reddy", timestamp: "2024-10-13T09:05:00Z", ip: "198.51.100.7" },
   { id: "a7", offerId: "o5", event: "Offer declined", actor: "Vikram Nair", timestamp: "2024-10-06T17:42:00Z", ip: "192.0.2.55" },
 ];

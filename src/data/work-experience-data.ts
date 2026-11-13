@@ -190,7 +190,7 @@ export const SKILLS_TECH: string[] = [
 ];
 
 export const KNOWN_COMPANIES: string[] = [
-  "JOBSONN Technologies",
+  "jobson.id Technologies",
   "Tata Consultancy Services (TCS)",
   "Infosys",
   "Wipro",

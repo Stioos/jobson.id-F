@@ -21,22 +21,22 @@ interface Domain {
 }
 
 const DOMAINS: Domain[] = [
-  { domain: "jobsonn.com", spf: "pass", dkim: "pass", dmarc: "pass", bounceRate: 1.2, complaintRate: 0.08, inboxPlacement: 98.4, reputation: "high", volume: 184_000 },
-  { domain: "mail.jobsonn.com", spf: "pass", dkim: "pass", dmarc: "pass", bounceRate: 1.8, complaintRate: 0.12, inboxPlacement: 96.2, reputation: "high", volume: 92_400 },
-  { domain: "alerts.jobsonn.com", spf: "pass", dkim: "pass", dmarc: "quarantine", bounceRate: 3.4, complaintRate: 0.21, inboxPlacement: 92.1, reputation: "medium", volume: 48_200 },
-  { domain: "promo.jobsonn.com", spf: "pass", dkim: "fail", dmarc: "none", bounceRate: 8.4, complaintRate: 0.62, inboxPlacement: 71.8, reputation: "low", volume: 22_400 },
-  { domain: "partner.jobsonn.com", spf: "pass", dkim: "pass", dmarc: "pass", bounceRate: 2.1, complaintRate: 0.14, inboxPlacement: 95.4, reputation: "high", volume: 18_900 },
+  { domain: "jobson.id", spf: "pass", dkim: "pass", dmarc: "pass", bounceRate: 1.2, complaintRate: 0.08, inboxPlacement: 98.4, reputation: "high", volume: 184_000 },
+  { domain: "mail.jobson.id", spf: "pass", dkim: "pass", dmarc: "pass", bounceRate: 1.8, complaintRate: 0.12, inboxPlacement: 96.2, reputation: "high", volume: 92_400 },
+  { domain: "alerts.jobson.id", spf: "pass", dkim: "pass", dmarc: "quarantine", bounceRate: 3.4, complaintRate: 0.21, inboxPlacement: 92.1, reputation: "medium", volume: 48_200 },
+  { domain: "promo.jobson.id", spf: "pass", dkim: "fail", dmarc: "none", bounceRate: 8.4, complaintRate: 0.62, inboxPlacement: 71.8, reputation: "low", volume: 22_400 },
+  { domain: "partner.jobson.id", spf: "pass", dkim: "pass", dmarc: "pass", bounceRate: 2.1, complaintRate: 0.14, inboxPlacement: 95.4, reputation: "high", volume: 18_900 },
 ];
 
 const ISSUES = [
-  { id: "iss_1", domain: "promo.jobsonn.com", severity: "urgent", issue: "DKIM signature failing — emails landing in spam at Gmail (44%) and Outlook (62%).", at: "2024-09-21T06:00:00Z" },
-  { id: "iss_2", domain: "alerts.jobsonn.com", severity: "warning", issue: "DMARC policy set to quarantine — 8% of legitimate mail being quarantined at Yahoo.", at: "2024-09-20T14:00:00Z" },
-  { id: "iss_3", domain: "promo.jobsonn.com", severity: "warning", issue: "Complaint rate 0.62% exceeds 0.5% threshold — sender reputation declining.", at: "2024-09-19T09:00:00Z" },
+  { id: "iss_1", domain: "promo.jobson.id", severity: "urgent", issue: "DKIM signature failing — emails landing in spam at Gmail (44%) and Outlook (62%).", at: "2024-09-21T06:00:00Z" },
+  { id: "iss_2", domain: "alerts.jobson.id", severity: "warning", issue: "DMARC policy set to quarantine — 8% of legitimate mail being quarantined at Yahoo.", at: "2024-09-20T14:00:00Z" },
+  { id: "iss_3", domain: "promo.jobson.id", severity: "warning", issue: "Complaint rate 0.62% exceeds 0.5% threshold — sender reputation declining.", at: "2024-09-19T09:00:00Z" },
 ];
 
 const WARMUP = [
-  { ip: "103.21.x.x", domain: "mail.jobsonn.com", day: 4, dailyVolume: 4200, target: 12000, reputation: "warming" },
-  { ip: "103.21.x.y", domain: "alerts.jobsonn.com", day: 12, dailyVolume: 18000, target: 18000, reputation: "warm" },
+  { ip: "103.21.x.x", domain: "mail.jobson.id", day: 4, dailyVolume: 4200, target: 12000, reputation: "warming" },
+  { ip: "103.21.x.y", domain: "alerts.jobson.id", day: 12, dailyVolume: 18000, target: 18000, reputation: "warm" },
 ];
 
 export function SuperAdminEmailDeliverability() {

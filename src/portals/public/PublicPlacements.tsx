@@ -46,7 +46,7 @@ const SUCCESS_STORIES = [
     company: "Google",
     salary: "₹28 LPA",
     initials: "AS",
-    story: "Coming from a tier-3 college, I never imagined working at Google. JOBSONN's interview prep and mock sessions made the difference — I cleared 5 rounds on the first try.",
+    story: "Coming from a tier-3 college, I never imagined working at Google. jobson.id's interview prep and mock sessions made the difference — I cleared 5 rounds on the first try.",
     color: "#10B981",
   },
   {
@@ -64,7 +64,7 @@ const SUCCESS_STORIES = [
     company: "Flipkart",
     salary: "₹22 LPA",
     initials: "PR",
-    story: "After 2 years at a service company, I wanted product engineering. JOBSONN's resume review and behavioral coaching helped me tell my story right. 3 offers in 6 weeks.",
+    story: "After 2 years at a service company, I wanted product engineering. jobson.id's resume review and behavioral coaching helped me tell my story right. 3 offers in 6 weeks.",
     color: "#0EA5E9",
   },
 ];
@@ -348,7 +348,7 @@ export function PublicPlacements() {
         <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
           <div className="mb-10 text-center">
             <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Free interview resources</h2>
-            <p className="mt-2 text-sm text-muted-foreground">Everything you need to ace your next interview — free for JOBSONN candidates.</p>
+            <p className="mt-2 text-sm text-muted-foreground">Everything you need to ace your next interview — free for jobson.id candidates.</p>
           </div>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {INTERVIEW_RESOURCES.map((r) => (
@@ -412,7 +412,7 @@ export function PublicPlacements() {
             <div>
               <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Ready to land your dream job?</h2>
               <p className="mt-3 text-sm text-muted-foreground">
-                Join 50,000+ candidates using JOBSONN. Free profile, AI matching, interview prep, and 5,000+ active openings.
+                Join 50,000+ candidates using jobson.id. Free profile, AI matching, interview prep, and 5,000+ active openings.
               </p>
             </div>
             <div className="flex flex-wrap gap-3 lg:justify-end">

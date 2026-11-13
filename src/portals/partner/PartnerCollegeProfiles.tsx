@@ -433,7 +433,7 @@ export function PartnerCollegeProfiles() {
               <div className="rounded-lg border p-3">
                 <p className="text-xs uppercase tracking-wide text-muted-foreground">Total Students</p>
                 <p className="mt-1 text-2xl font-semibold text-brand">{formatNumber(selected.totalStudents)}</p>
-                <p className="mt-1 text-xs text-muted-foreground">{formatNumber(selected.studentsEnrolled)} enrolled in JOBSONN programs</p>
+                <p className="mt-1 text-xs text-muted-foreground">{formatNumber(selected.studentsEnrolled)} enrolled in jobson.id programs</p>
               </div>
               <div className="mt-3">
                 <p className="text-xs uppercase tracking-wide text-muted-foreground">Courses Offered ({selected.courses.length})</p>

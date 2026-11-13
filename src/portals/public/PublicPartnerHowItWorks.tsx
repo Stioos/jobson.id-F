@@ -46,7 +46,7 @@ const STEPS = [
     n: 4,
     title: "Training & certification",
     icon: GraduationCap,
-    description: "Your team is trained on the LMS, CRM, delivery standards, and assessment tooling. Faculty/recruiters get certified to deliver JOBSONN programs.",
+    description: "Your team is trained on the LMS, CRM, delivery standards, and assessment tooling. Faculty/recruiters get certified to deliver jobson.id programs.",
     duration: "1–3 weeks",
     color: "bg-violet-500/10 text-violet-600 dark:text-violet-400",
   },
@@ -69,9 +69,9 @@ const STEPS = [
 ];
 
 const WHAT_YOU_GET = [
-  { icon: BookOpen, title: "JOBSONN LMS", desc: "Full LMS with course content, assignments, assessments, and learner analytics." },
+  { icon: BookOpen, title: "jobson.id LMS", desc: "Full LMS with course content, assignments, assessments, and learner analytics." },
   { icon: LifeBuoy, title: "Partner CRM", desc: "Manage leads, counsellors, batches, and admissions — all in one workspace." },
-  { icon: Award, title: "Certification rights", desc: "Issue JOBSONN-branded certificates to graduates who pass assessments." },
+  { icon: Award, title: "Certification rights", desc: "Issue jobson.id-branded certificates to graduates who pass assessments." },
   { icon: Megaphone, title: "Marketing kit", desc: "Co-branded templates, social assets, landing pages, and lead-magnet copy." },
   { icon: Wallet, title: "Wallet & settlements", desc: "Real-time wallet, automated monthly settlements, and downloadable invoices." },
   { icon: Sparkles, title: "Dedicated support", desc: "A named partnership manager + access to a partner-only Slack / support channel." },
@@ -107,8 +107,8 @@ const REQUIREMENTS: { model: PartnerModel; icon: typeof Building2; requirements:
 const FAQ = [
   { q: "How long does the entire onboarding take?", a: "From application submission to your first batch / engagement, the typical timeline is 3–6 weeks. Centre & College partners take slightly longer due to infrastructure inspection and MoU signing." },
   { q: "Is there an upfront fee to become a partner?", a: "Most models have no upfront franchise fee — instead, revenue is shared as per the matched rule. Centre partners may need to invest in infrastructure and a refundable security deposit; College partners sign a MoU. Detailed commercial terms are shared during the agreement stage." },
-  { q: "What training does JOBSONN provide?", a: "All partners receive LMS, CRM, certification, and assessment training. Centre & College partners get faculty-trainer programs; Service & Technology partners get solution-specific onboarding; Recruitment partners get ATS + sourcing tooling training." },
-  { q: "Can I deliver programs not in the JOBSONN catalog?", a: "Yes, with approval. Partners can propose custom programs; our curriculum team reviews and (if approved) co-brands them. Revenue share for custom programs is defined in your agreement." },
+  { q: "What training does jobson.id provide?", a: "All partners receive LMS, CRM, certification, and assessment training. Centre & College partners get faculty-trainer programs; Service & Technology partners get solution-specific onboarding; Recruitment partners get ATS + sourcing tooling training." },
+  { q: "Can I deliver programs not in the jobson.id catalog?", a: "Yes, with approval. Partners can propose custom programs; our curriculum team reviews and (if approved) co-brands them. Revenue share for custom programs is defined in your agreement." },
   { q: "How quickly are settlements processed?", a: "Monthly settlement cycles for recurring models (Centre, College, Service, Technology, AI) — settlement run hits your wallet by the 7th of every month. Recruitment partners get per-placement settlements within 7 business days of candidate joining." },
   { q: "What if my territory overlaps with another partner?", a: "We grant exclusive territories for Centre & College partners based on pin-code or city. For Service, Technology, AI, and Recruitment, exclusivity is by client/account — multiple partners can coexist." },
 ];
@@ -177,7 +177,7 @@ export function PublicPartnerHowItWorks() {
         <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
           <div className="mb-8 text-center">
             <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">What you get</h2>
-            <p className="mt-2 text-sm text-muted-foreground">Every partner gets the full JOBSONN stack — included.</p>
+            <p className="mt-2 text-sm text-muted-foreground">Every partner gets the full jobson.id stack — included.</p>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {WHAT_YOU_GET.map((w) => (

@@ -37,7 +37,7 @@ const ARTICLES = [
 ];
 
 const VIDEOS = [
-  { title: "Your first placement on JOBSONN", duration: "5:21", category: "Onboarding" },
+  { title: "Your first placement on jobson.id", duration: "5:21", category: "Onboarding" },
   { title: "Submitting candidates that get shortlisted", duration: "4:48", category: "Submissions" },
   { title: "Using split desks", duration: "3:15", category: "Team" },
   { title: "Tracking your commissions", duration: "4:33", category: "Finance" },
@@ -70,7 +70,7 @@ export function RecruiterSupportHub() {
 
       <ContactOptionsSection
         options={[
-          { icon: "Mail", title: "Email support", value: "recruiters@jobsonn.com", hint: "Replies within 6 hours", action: () => toast.info("Opening email client") },
+          { icon: "Mail", title: "Email support", value: "recruiters@jobson.id", hint: "Replies within 6 hours", action: () => toast.info("Opening email client") },
           { icon: "MessagesSquare", title: "Live chat", value: "Mon–Sat, 9 AM – 8 PM IST", hint: "Avg wait: 3 min", action: () => toast.info("Live chat", { description: "Connecting you to a recruiter specialist…" }) },
           { icon: "Phone", title: "Phone", value: "+91 80 4567 8902", hint: "Toll-free, India", action: () => toast.info("Phone support", { description: "Demo only." }) },
         ]}

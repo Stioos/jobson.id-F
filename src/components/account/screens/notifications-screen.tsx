@@ -83,7 +83,7 @@ export function NotificationsScreen() {
             onClick={handleMarkAllRead}
             className="inline-flex items-center gap-1.5 rounded-xl border border-border bg-card px-3 py-2 text-xs font-semibold text-foreground hover:bg-muted dark:border-white/10 dark:bg-white/5 dark:text-white dark:hover:bg-white/10"
           >
-            <CheckCheck className="h-3.5 w-3.5 text-cyan-500 dark:text-cyan-400" /> Mark All Read
+            <CheckCheck className="h-3.5 w-3.5 text-emerald-500 dark:text-emerald-400" /> Mark All Read
           </button>
           <button
             type="button"
@@ -109,7 +109,7 @@ export function NotificationsScreen() {
             onClick={() => setFilter(t.id as any)}
             className={`rounded-full px-4 py-1.5 text-xs font-semibold transition-all ${
               filter === t.id
-                ? "bg-cyan-500 text-slate-950 font-bold shadow-soft"
+                ? "bg-emerald-500 text-slate-950 font-bold shadow-soft"
                 : "border border-border bg-background/80 text-muted-foreground hover:border-border/80 hover:text-foreground dark:border-white/10 dark:bg-white/5 dark:text-slate-400 dark:hover:text-white"
             }`}
           >
@@ -133,7 +133,7 @@ export function NotificationsScreen() {
                 key={item.id}
                 className={`flex items-start gap-4 rounded-2xl border p-4 transition-all ${
                   !item.read
-                    ? "border-cyan-500/40 bg-cyan-500/[0.06] shadow-soft"
+                    ? "border-emerald-500/40 bg-emerald-500/[0.06] shadow-soft"
                     : "border-border/80 bg-card/80 shadow-soft dark:border-white/5 dark:bg-slate-900/60 dark:shadow-none"
                 }`}
               >
@@ -143,7 +143,7 @@ export function NotificationsScreen() {
                       ? "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400"
                       : item.type === "security"
                       ? "bg-amber-500/15 text-amber-600 dark:text-amber-400"
-                      : "bg-cyan-500/15 text-cyan-600 dark:text-cyan-400"
+                      : "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400"
                   }`}
                 >
                   {item.type === "inquiry" ? (
@@ -168,7 +168,7 @@ export function NotificationsScreen() {
                 </div>
 
                 {!item.read && (
-                  <span className="h-2 w-2 shrink-0 rounded-full bg-cyan-500 mt-2" title="Unread" />
+                  <span className="h-2 w-2 shrink-0 rounded-full bg-emerald-500 mt-2" title="Unread" />
                 )}
               </div>
             );

@@ -304,7 +304,7 @@ export function PublicCareerResources() {
               <div className="inline-flex items-center gap-2 rounded-full border bg-background px-3 py-1 text-xs font-medium text-muted-foreground">
                 <Mail className="h-3.5 w-3.5 text-brand" /> Weekly newsletter
               </div>
-              <h2 className="mt-3 text-2xl font-bold tracking-tight">Get the JOBSONN weekly, every Tuesday</h2>
+              <h2 className="mt-3 text-2xl font-bold tracking-tight">Get the jobson.id weekly, every Tuesday</h2>
               <p className="mt-2 text-sm text-muted-foreground">
                 One actionable career insight, one hiring trend, one negotiation tactic. No fluff, no spam.
                 Join 28,000+ subscribers.

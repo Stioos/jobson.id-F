@@ -73,7 +73,7 @@ const MOCK_CONVERSATIONS: Conversation[] = [
 ];
 
 const MOCK_TEMPLATES: Template[] = [
-  { id: "t1", name: "Initial outreach", category: "Sourcing", body: "Hi {{name}}, I'm {{recruiter}} from JOBSONN. I came across your profile and have a {{role}} opportunity at {{client}} that fits your background. Are you open to a quick chat this week?", status: "approved", language: "English" },
+  { id: "t1", name: "Initial outreach", category: "Sourcing", body: "Hi {{name}}, I'm {{recruiter}} from jobson.id. I came across your profile and have a {{role}} opportunity at {{client}} that fits your background. Are you open to a quick chat this week?", status: "approved", language: "English" },
   { id: "t2", name: "Interview invite", category: "Interview", body: "Hi {{name}}, great news! {{client}} would like to interview you for the {{role}} position. Please share 2–3 time slots that work for you this week.", status: "approved", language: "English" },
   { id: "t3", name: "Offer follow-up", category: "Offer", body: "Hi {{name}}, just checking in — did you get a chance to review the offer from {{client}}? Happy to walk you through any questions.", status: "approved", language: "English" },
   { id: "t4", name: "Day-1 check-in", category: "Onboarding", body: "Hi {{name}}, wishing you a great first day at {{client}}! Let me know how it goes. I'm here if anything needs escalation.", status: "pending", language: "English" },

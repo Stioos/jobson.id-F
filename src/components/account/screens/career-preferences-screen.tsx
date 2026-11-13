@@ -93,7 +93,7 @@ export function CareerPreferencesScreen({ onNavigate }: CareerPreferencesScreenP
       {/* Desired Job Title & Category */}
       <section className="rounded-3xl border border-border bg-card/80 p-6 shadow-soft backdrop-blur-sm dark:border-white/10 dark:bg-slate-900/60 dark:shadow-none">
         <div className="flex items-center gap-2.5 pb-4">
-          <Briefcase className="h-4.5 w-4.5 text-cyan-600 dark:text-cyan-400" />
+          <Briefcase className="h-4.5 w-4.5 text-emerald-600 dark:text-emerald-400" />
           <h3 className="text-base font-bold text-foreground dark:text-white">Desired Role</h3>
         </div>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -144,7 +144,7 @@ export function CareerPreferencesScreen({ onNavigate }: CareerPreferencesScreenP
         </section>
         <section className="rounded-3xl border border-border bg-card/80 p-6 shadow-soft backdrop-blur-sm dark:border-white/10 dark:bg-slate-900/60 dark:shadow-none">
           <div className="flex items-center gap-2.5 pb-4">
-            <MapPin className="h-4.5 w-4.5 text-cyan-600 dark:text-cyan-400" />
+            <MapPin className="h-4.5 w-4.5 text-emerald-600 dark:text-emerald-400" />
             <h3 className="text-base font-bold text-foreground dark:text-white">Preferred Location</h3>
           </div>
           <div className="space-y-1.5">
@@ -161,7 +161,7 @@ export function CareerPreferencesScreen({ onNavigate }: CareerPreferencesScreenP
             <Laptop className="h-4.5 w-4.5 text-blue-600 dark:text-blue-400" />
             <h3 className="text-base font-bold text-foreground dark:text-white">Work Preferences</h3>
           </div>
-          <Button type="button" onClick={handleSavePreferences} className="h-9 rounded-lg bg-cyan-500 text-xs font-bold text-slate-950 hover:bg-cyan-400">
+          <Button type="button" onClick={handleSavePreferences} className="h-9 rounded-lg bg-emerald-500 text-xs font-bold text-slate-950 hover:bg-emerald-400">
             <Save className="h-3.5 w-3.5 mr-1.5" /> Save Preferences
           </Button>
         </div>
@@ -199,7 +199,7 @@ export function CareerPreferencesScreen({ onNavigate }: CareerPreferencesScreenP
           placeholder="Describe your career goals and objectives..."
         />
         <div className="mt-3 flex justify-end">
-          <Button type="button" onClick={handleSaveObjectives} className="h-9 rounded-lg bg-cyan-500 text-xs font-bold text-slate-950 hover:bg-cyan-400">
+          <Button type="button" onClick={handleSaveObjectives} className="h-9 rounded-lg bg-emerald-500 text-xs font-bold text-slate-950 hover:bg-emerald-400">
             <Save className="h-3.5 w-3.5 mr-1.5" /> Save Objectives
           </Button>
         </div>

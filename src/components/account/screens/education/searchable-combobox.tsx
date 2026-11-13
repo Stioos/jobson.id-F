@@ -125,7 +125,7 @@ export function SearchableCombobox({
                 }
               }}
               placeholder={manualEntryPlaceholder}
-              className="h-9 w-full rounded-md border border-input bg-background px-3 text-xs focus:outline-none focus:ring-1 focus:ring-cyan-500"
+              className="h-9 w-full rounded-md border border-input bg-background px-3 text-xs focus:outline-none focus:ring-1 focus:ring-emerald-500"
             />
             <div className="flex justify-end gap-2">
               <Button
@@ -143,7 +143,7 @@ export function SearchableCombobox({
               <Button
                 type="button"
                 size="sm"
-                className="h-7 rounded-md bg-cyan-500 text-xs font-bold text-slate-950 hover:bg-cyan-400"
+                className="h-7 rounded-md bg-emerald-500 text-xs font-bold text-slate-950 hover:bg-emerald-400"
                 onClick={handleManualSubmit}
               >
                 Use this
@@ -201,7 +201,7 @@ export function SearchableCombobox({
                   <CommandItem
                     value="__manual_entry__"
                     onSelect={() => setManualMode(true)}
-                    className="text-xs text-cyan-600 dark:text-cyan-400"
+                    className="text-xs text-emerald-600 dark:text-emerald-400"
                   >
                     <Plus className="mr-2 h-3.5 w-3.5" />
                     Other / Add manually

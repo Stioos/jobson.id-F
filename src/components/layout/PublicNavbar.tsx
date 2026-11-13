@@ -239,7 +239,7 @@ function useGo() {
         toast.info(`Please sign in to access the ${targetPortal.charAt(0).toUpperCase() + targetPortal.slice(1)} Portal.`);
         if (typeof window !== "undefined") {
           try {
-            sessionStorage.setItem("jobsonn_redirect_portal", targetPortal);
+            sessionStorage.setItem("jobson_id_redirect_portal", targetPortal);
           } catch {}
         }
         setLoginDrawerOpen(true);
@@ -792,7 +792,7 @@ function AppsDropdown() {
       toast.info(`Please sign in to access the ${portal.charAt(0).toUpperCase() + portal.slice(1)} Portal.`);
       if (typeof window !== "undefined") {
         try {
-          sessionStorage.setItem("jobsonn_redirect_portal", portal);
+          sessionStorage.setItem("jobson_id_redirect_portal", portal);
         } catch {}
       }
       setLoginDrawerOpen(true);
@@ -1111,7 +1111,7 @@ function JobsDropdown({ go }: { go: (v: string) => void }) {
 
   // ===================== NAVIGATION HANDLERS =====================
   const applyFilter = (filterData: Record<string, unknown>) => {
-    sessionStorage.setItem("jobsonn_job_search", JSON.stringify(filterData));
+    sessionStorage.setItem("jobson_id_job_search", JSON.stringify(filterData));
     // Use full page navigation so PublicJobs remounts and reads sessionStorage
     window.location.assign("/jobs");
     setOpen(false);
@@ -1515,10 +1515,10 @@ function BlogsDropdown({ go }: { go: (v: string) => void }) {
 function PartnersDropdown({ go }: { go: (v: string) => void }) {
   const [open, setOpen] = React.useState(false);
   const partnerTypes = [
-    { label: "Recruitment Partner", icon: UserCheck, color: "#0EA5E9", desc: "Earn revenue by referring candidates & employers to JOBSONN.", badge: "Revenue Share", route: "partner-with-us/recruitment-partner" },
-    { label: "Physical Centre Partner", icon: Building2, color: "#8B5CF6", desc: "Run a JOBSONN training & assessment centre in your city.", badge: "Franchise", route: "partner-with-us/physical-centre-partner" },
-    { label: "University Partner", icon: GraduationCap, color: "#10B981", desc: "Bring JOBSONN programs, placements & certifications to your campus.", badge: "Campus", route: "partner-with-us/university-partner" },
-    { label: "Training Partner", icon: BookOpen, color: "#EF4444", desc: "Deliver JOBSONN-certified training programs as a certified trainer.", badge: "Certified", route: "partner-with-us/training-partner" },
+    { label: "Recruitment Partner", icon: UserCheck, color: "#0EA5E9", desc: "Earn revenue by referring candidates & employers to jobson.id.", badge: "Revenue Share", route: "partner-with-us/recruitment-partner" },
+    { label: "Physical Centre Partner", icon: Building2, color: "#8B5CF6", desc: "Run a jobson.id training & assessment centre in your city.", badge: "Franchise", route: "partner-with-us/physical-centre-partner" },
+    { label: "University Partner", icon: GraduationCap, color: "#10B981", desc: "Bring jobson.id programs, placements & certifications to your campus.", badge: "Campus", route: "partner-with-us/university-partner" },
+    { label: "Training Partner", icon: BookOpen, color: "#EF4444", desc: "Deliver jobson.id-certified training programs as a certified trainer.", badge: "Certified", route: "partner-with-us/training-partner" },
   ];
 
   return (
@@ -1540,7 +1540,7 @@ function PartnersDropdown({ go }: { go: (v: string) => void }) {
       </button>
       {open && (
         <div className="absolute right-0 top-full z-50 w-[480px] rounded-xl border bg-popover p-4 pt-2" style={{ filter: "drop-shadow(0 25px 50px rgba(0,0,0,0.15))" }}>
-          <span className="mb-2 block text-[10px] font-bold uppercase tracking-widest text-brand">Partner with JOBSONN</span>
+          <span className="mb-2 block text-[10px] font-bold uppercase tracking-widest text-brand">Partner with jobson.id</span>
           <div className="grid grid-cols-1 gap-1">
             {partnerTypes.map((item) => {
               const ItemIcon = item.icon;
@@ -1593,8 +1593,8 @@ function MobileNav({ go }: { go: (v: string) => void }) {
         <SheetHeader>
           <SheetTitle className="flex items-center">
             <Image
-              src="/jobsonn-logo.png"
-              alt="JOBSONN"
+              src="/jobson-id-logo.png"
+              alt="jobson.id"
               width={130}
               height={36}
               className="h-7 w-auto object-contain"
@@ -1758,10 +1758,10 @@ export function PublicNavbar() {
         <MobileNav go={go} />
 
         {/* Logo */}
-        <button onClick={() => go("home")} className="flex items-center" aria-label="JOBSONN home">
+        <button onClick={() => go("home")} className="flex items-center" aria-label="jobson.id home">
           <Image
-            src="/jobsonn-logo.png"
-            alt="JOBSONN"
+            src="/jobson-id-logo.png"
+            alt="jobson.id"
             width={120}
             height={32}
             className="h-6 w-auto object-contain sm:h-7"

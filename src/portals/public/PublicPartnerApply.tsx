@@ -116,9 +116,9 @@ const ORG_TYPES = ["Private Limited", "LLP", "Partnership", "Proprietorship", "T
 const FUNDING_SOURCES = ["Bootstrapped", "Angel / Seed funded", "VC backed", "Bank loan", "Personal investment", "Other"];
 const INDIAN_STATES = ["Andhra Pradesh", "Assam", "Bihar", "Chhattisgarh", "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Odisha", "Punjab", "Rajasthan", "Tamil Nadu", "Telangana", "Uttar Pradesh", "Uttarakhand", "West Bengal", "Other"];
 
-const STORAGE_KEY = "jobsonn_partner_application_draft";
-const MODEL_STORAGE_KEY = "jobsonn_partner_apply_model";
-const PROGRAM_STORAGE_KEY = "jobsonn_partner_apply_program";
+const STORAGE_KEY = "jobson_id_partner_application_draft";
+const MODEL_STORAGE_KEY = "jobson_id_partner_apply_model";
+const PROGRAM_STORAGE_KEY = "jobson_id_partner_apply_program";
 
 const DEFAULT_VALUES: FormValues = {
   model: "CENTRE",
@@ -309,7 +309,7 @@ export function PublicPartnerApply() {
           </div>
           <h1 className="mt-6 text-3xl font-bold tracking-tight">Application submitted!</h1>
           <p className="mt-3 max-w-md text-sm text-muted-foreground">
-            Thank you for applying to become a JOBSONN partner. Your application for the{" "}
+            Thank you for applying to become a jobson.id partner. Your application for the{" "}
             <strong className="text-foreground">{MODEL_LABELS[values.model]}</strong> model has been received.
             We&apos;ll review and respond within 5–10 business days.
           </p>
@@ -608,7 +608,7 @@ export function PublicPartnerApply() {
                           )}
                         >
                           <p className="text-sm font-medium">Exclusive territory</p>
-                          <p className="text-[10px] text-muted-foreground">No other JOBSONN partner in your city/pin-code</p>
+                          <p className="text-[10px] text-muted-foreground">No other jobson.id partner in your city/pin-code</p>
                         </button>
                         <button
                           type="button"
@@ -841,7 +841,7 @@ export function PublicPartnerApply() {
                     render={({ field }) => (
                       <label className={cn("flex items-start gap-2 rounded-lg border p-3 cursor-pointer", form.formState.errors.agreesToTerms ? "border-rose-400" : "hover:bg-muted/40")}>
                         <Checkbox checked={field.value} onCheckedChange={field.onChange} className="mt-0.5" />
-                        <span className="text-sm">I have read and accept the JOBSONN Partner Program <button type="button" onClick={() => toast.info("Terms document opens in a new tab (simulated)")} className="text-brand underline">terms &amp; conditions</button>. *</span>
+                        <span className="text-sm">I have read and accept the jobson.id Partner Program <button type="button" onClick={() => toast.info("Terms document opens in a new tab (simulated)")} className="text-brand underline">terms &amp; conditions</button>. *</span>
                       </label>
                     )}
                   />
@@ -919,7 +919,7 @@ export function PublicPartnerApply() {
                 <div className="flex items-start gap-2 rounded-lg border border-amber-500/30 bg-amber-500/5 p-3 text-xs">
                   <AlertCircle className="mt-0.5 h-3.5 w-3.5 shrink-0 text-amber-600 dark:text-amber-400" />
                   <span className="text-muted-foreground">
-                    Submitting this application does not constitute a binding agreement. JOBSONN will review and respond
+                    Submitting this application does not constitute a binding agreement. jobson.id will review and respond
                     within 5–10 business days. Final terms are governed by the signed partner agreement.
                   </span>
                 </div>

@@ -44,7 +44,7 @@ export const portalConfigs: Record<Portal, PortalConfig> = {
       {
         title: "Company",
         items: [
-          { key: "about", label: "About JOBSONN", icon: "Globe" },
+          { key: "about", label: "About jobson.id", icon: "Globe" },
           { key: "contact", label: "Contact", icon: "Mail" },
         ],
       },

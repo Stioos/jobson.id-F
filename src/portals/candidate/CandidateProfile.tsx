@@ -604,7 +604,7 @@ export function CandidateProfile() {
               <VisibilityOption
                 value="employers_only"
                 title="Employers only"
-                description="Visible only to verified employers and recruiters on JOBSONN."
+                description="Visible only to verified employers and recruiters on jobson.id."
               />
               <VisibilityOption
                 value="private"

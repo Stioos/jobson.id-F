@@ -55,7 +55,7 @@ export function SuperAdminApi() {
         title="API Management"
         description="Public API docs, OAuth client management, rate limits, and usage monitoring."
         icon={<Icon name="Code" className="h-6 w-6" />}
-        actions={[{ label: "View Docs", variant: "outline", onClick: () => toast.info("Opening developer.jobsonn.com") }]}
+        actions={[{ label: "View Docs", variant: "outline", onClick: () => toast.info("Opening developer.jobson.id") }]}
       />
 
       <div className="grid grid-cols-2 gap-3 md:grid-cols-4 sm:gap-4">

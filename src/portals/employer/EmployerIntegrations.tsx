@@ -49,7 +49,7 @@ export function EmployerIntegrations() {
     <div className="space-y-6">
       <PageHeader
         title="API & Integrations"
-        description="Connect JOBSONN with your existing hiring stack"
+        description="Connect jobson.id with your existing hiring stack"
       />
 
       <div className="grid gap-4 grid-cols-2 lg:grid-cols-4">
@@ -117,7 +117,7 @@ export function EmployerIntegrations() {
             </div>
             <div className="space-y-1.5">
               <Label>Webhook URL</Label>
-              <Input readOnly value="https://api.jobsonn.com/v1/webhooks/e_001" />
+              <Input readOnly value="https://api.jobson.id/v1/webhooks/e_001" />
             </div>
             <div className="flex gap-2">
               <Button size="sm" variant="outline" onClick={() => toast.info("Opening API docs…")}>View docs</Button>
@@ -162,7 +162,7 @@ export function EmployerIntegrations() {
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>Disconnect {disconnectTarget?.name}?</AlertDialogTitle>
-            <AlertDialogDescription>This will stop all data sync between JOBSONN and {disconnectTarget?.name}. You can reconnect at any time.</AlertDialogDescription>
+            <AlertDialogDescription>This will stop all data sync between jobson.id and {disconnectTarget?.name}. You can reconnect at any time.</AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>

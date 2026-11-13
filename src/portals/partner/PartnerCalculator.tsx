@@ -22,9 +22,9 @@ interface CalcResult {
   tax: number;
   netAfterFees: number;
   partnerPct: number;
-  jobsonnPct: number;
+  jobsonIdPct: number;
   partnerShare: number;
-  jobsonnShare: number;
+  jobsonIdShare: number;
   ruleName: string;
 }
 
@@ -65,7 +65,7 @@ export function PartnerCalculator() {
       gatewayFeePct,
       taxPct,
       partnerPct: rule.partnerPct,
-      jobsonnPct: rule.jobsonnPct,
+      jobsonIdPct: rule.jobsonIdPct,
       ruleName: rule.ruleName,
     });
     setResult({
@@ -76,9 +76,9 @@ export function PartnerCalculator() {
       tax: r.tax,
       netAfterFees: r.netAfterFees,
       partnerPct: r.partnerPct,
-      jobsonnPct: r.jobsonnPct,
+      jobsonIdPct: r.jobsonIdPct,
       partnerShare: r.partnerShare,
-      jobsonnShare: r.jobsonnShare,
+      jobsonIdShare: r.jobsonIdShare,
       ruleName: r.ruleName,
     });
     toast.success("Calculation complete", { description: `Partner share: ${formatCurrency(r.partnerShare)}` });
@@ -133,7 +133,7 @@ export function PartnerCalculator() {
               </Select>
               {selectedProgram && (
                 <p className="text-xs text-muted-foreground">
-                  {selectedProgram.durationWeeks} weeks · {selectedProgram.category} · Partner {selectedProgram.partnerPct}% / JOBSONN {selectedProgram.jobsonnPct}%
+                  {selectedProgram.durationWeeks} weeks · {selectedProgram.category} · Partner {selectedProgram.partnerPct}% / jobson.id {selectedProgram.jobsonIdPct}%
                 </p>
               )}
             </div>
@@ -148,7 +148,7 @@ export function PartnerCalculator() {
               </Select>
               {matchingRule ? (
                 <p className="text-xs text-emerald-600 dark:text-emerald-400">
-                  ✓ Rule matched: {matchingRule.ruleName} · Partner {matchingRule.partnerPct}% / JOBSONN {matchingRule.jobsonnPct}%
+                  ✓ Rule matched: {matchingRule.ruleName} · Partner {matchingRule.partnerPct}% / jobson.id {matchingRule.jobsonIdPct}%
                 </p>
               ) : (
                 <p className="text-xs text-amber-600 dark:text-amber-400">
@@ -206,7 +206,7 @@ export function PartnerCalculator() {
                 <div className="rounded-lg border-2 border-brand/40 bg-brand/5 p-4">
                   <p className="text-xs uppercase tracking-wide text-muted-foreground">Partner Share ({result.partnerPct}%)</p>
                   <p className="mt-1 text-3xl font-bold text-brand">{formatCurrency(result.partnerShare)}</p>
-                  <p className="mt-1 text-xs text-muted-foreground">JOBSONN share: {formatCurrency(result.jobsonnShare)} ({result.jobsonnPct}%)</p>
+                  <p className="mt-1 text-xs text-muted-foreground">jobson.id share: {formatCurrency(result.jobsonIdShare)} ({result.jobsonIdPct}%)</p>
                 </div>
 
                 {/* Breakdown */}
@@ -226,13 +226,13 @@ export function PartnerCalculator() {
                     <div className="flex items-center justify-center bg-brand text-[10px] font-semibold text-white" style={{ width: `${result.partnerPct}%` }}>
                       {result.partnerPct}%
                     </div>
-                    <div className="flex items-center justify-center bg-teal-500 text-[10px] font-semibold text-white" style={{ width: `${result.jobsonnPct}%` }}>
-                      {result.jobsonnPct}%
+                    <div className="flex items-center justify-center bg-teal-500 text-[10px] font-semibold text-white" style={{ width: `${result.jobsonIdPct}%` }}>
+                      {result.jobsonIdPct}%
                     </div>
                   </div>
                   <div className="mt-2 flex justify-between text-xs">
                     <span className="text-brand font-medium">Partner: {formatCurrency(result.partnerShare)}</span>
-                    <span className="text-teal-600 dark:text-teal-400 font-medium">JOBSONN: {formatCurrency(result.jobsonnShare)}</span>
+                    <span className="text-teal-600 dark:text-teal-400 font-medium">jobson.id: {formatCurrency(result.jobsonIdShare)}</span>
                   </div>
                 </div>
 
@@ -260,7 +260,7 @@ export function PartnerCalculator() {
               <ol className="mt-2 space-y-1 text-muted-foreground list-decimal list-inside">
                 <li>Start with the <strong>Gross Amount</strong> and subtract <strong>Discount + Scholarship</strong> → <strong>Net Collected</strong>.</li>
                 <li>Subtract <strong>Gateway Fee</strong> (% of net collected) and <strong>Tax (GST)</strong> (% of net collected) → <strong>Net After Fees</strong>.</li>
-                <li>Apply the matching <strong>Revenue Share Rule</strong> (by lead source × partner model) → split Net After Fees between Partner &amp; JOBSONN.</li>
+                <li>Apply the matching <strong>Revenue Share Rule</strong> (by lead source × partner model) → split Net After Fees between Partner &amp; jobson.id.</li>
               </ol>
               <p className="mt-2 text-xs">Rules are evaluated by priority — the highest priority active match wins.</p>
             </div>
@@ -278,7 +278,7 @@ export function PartnerCalculator() {
                 <th className="py-2 pr-4">Lead Source</th>
                 <th className="py-2 pr-4">Model</th>
                 <th className="py-2 pr-4">Partner %</th>
-                <th className="py-2 pr-4">JOBSONN %</th>
+                <th className="py-2 pr-4">jobson.id %</th>
                 <th className="py-2 pr-4">Priority</th>
               </tr>
             </thead>
@@ -289,7 +289,7 @@ export function PartnerCalculator() {
                   <td className="py-3 pr-4">{r.leadSource.replace(/_/g, " ")}</td>
                   <td className="py-3 pr-4">{r.partnerModel}</td>
                   <td className="py-3 pr-4"><span className="rounded-md border px-2 py-0.5 text-xs font-semibold text-brand">{r.partnerPct}%</span></td>
-                  <td className="py-3 pr-4"><span className="rounded-md border px-2 py-0.5 text-xs font-semibold">{r.jobsonnPct}%</span></td>
+                  <td className="py-3 pr-4"><span className="rounded-md border px-2 py-0.5 text-xs font-semibold">{r.jobsonIdPct}%</span></td>
                   <td className="py-3 pr-4 text-xs">{r.priority}</td>
                 </tr>
               ))}

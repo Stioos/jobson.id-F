@@ -628,7 +628,7 @@ function NewWebhookDialog({
         <div className="space-y-3">
           <div>
             <Label htmlFor="nw-url">Endpoint URL</Label>
-            <Input id="nw-url" value={url} onChange={(e) => setUrl(e.target.value)} placeholder="https://yourapp.example/hooks/jobsonn" />
+            <Input id="nw-url" value={url} onChange={(e) => setUrl(e.target.value)} placeholder="https://yourapp.example/hooks/jobson.id" />
           </div>
           <div>
             <Label>Events</Label>

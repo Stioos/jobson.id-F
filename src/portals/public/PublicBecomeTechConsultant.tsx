@@ -26,7 +26,7 @@ const TIERS = [
     color: "#94A3B8",
     icon: Award,
     desc: "For early-career consultants and individual contributors shipping scoped work.",
-    benefits: ["Hourly billing", "Project scoping support", "Access to JOBSONN partner network", "Quarterly skill reviews"],
+    benefits: ["Hourly billing", "Project scoping support", "Access to jobson.id partner network", "Quarterly skill reviews"],
   },
   {
     id: "senior",
@@ -45,7 +45,7 @@ const TIERS = [
     color: "#10B981",
     icon: Star,
     desc: "For industry-recognized experts leading enterprise engagements and strategic advisory.",
-    benefits: ["Strategic retainer + hourly", "24/7 partnership manager", "Priority enterprise leads", "Annual bonus up to ₹3L", "Co-marketing budget", "Speaking opportunity at JOBSONN events"],
+    benefits: ["Strategic retainer + hourly", "24/7 partnership manager", "Priority enterprise leads", "Annual bonus up to ₹3L", "Co-marketing budget", "Speaking opportunity at jobson.id events"],
   },
 ];
 
@@ -94,7 +94,7 @@ const EARNINGS_STATS = [
 const STEPS = [
   { step: "01", title: "Apply with your portfolio", desc: "Submit your CV, GitHub/LinkedIn, and 2 client references. Show us what you've shipped." },
   { step: "02", title: "Technical interview", desc: "1-hour call with our principal consultants. We assess depth, not buzzwords." },
-  { step: "03", title: "Onboarding & certification", desc: "Sign the consultant agreement, complete the JOBSONN methodology certification (4 hours)." },
+  { step: "03", title: "Onboarding & certification", desc: "Sign the consultant agreement, complete the jobson.id methodology certification (4 hours)." },
   { step: "04", title: "Receive engagements", desc: "Get matched to client engagements based on your expertise, rate, and availability." },
   { step: "05", title: "Deliver & get paid", desc: "Track hours in the consultant portal. Get paid within 7 days of submitting your invoice." },
 ];
@@ -105,7 +105,7 @@ const TESTIMONIALS = [
     role: "Principal Consultant, AI/ML",
     salary: "₹4.2L / month avg",
     initials: "AK",
-    quote: "I left a Google L5 role to consult independently. JOBSONN brought me enterprise engagements I couldn't have reached alone — and they pay on time, every time.",
+    quote: "I left a Google L5 role to consult independently. jobson.id brought me enterprise engagements I couldn't have reached alone — and they pay on time, every time.",
   },
   {
     name: "Sara Mohammed",
@@ -152,7 +152,7 @@ export function PublicBecomeTechConsultant() {
         <div className="relative mx-auto max-w-4xl px-4 py-16 text-center sm:px-6 sm:py-20 lg:px-8">
           <Badge className="mb-4 gap-1"><Cpu className="h-3 w-3" /> Tech Consultant Program</Badge>
           <h1 className="text-3xl font-bold tracking-tight text-balance sm:text-4xl lg:text-5xl">
-            Become a <span className="text-brand">JOBSONN Tech Consultant</span>
+            Become a <span className="text-brand">jobson.id Tech Consultant</span>
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-base text-muted-foreground sm:text-lg">
             For senior engineers, architects, and AI specialists who want to consult independently —
@@ -187,7 +187,7 @@ export function PublicBecomeTechConsultant() {
           <Badge className="mb-3 gap-1"><Trophy className="h-3 w-3" /> Consultant tiers</Badge>
           <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Three tiers, escalating rates & support</h2>
           <p className="mt-2 text-sm text-muted-foreground">
-            Start where you are. Move up as you build a track record with JOBSONN clients.
+            Start where you are. Move up as you build a track record with jobson.id clients.
           </p>
         </div>
         <div className="grid gap-5 lg:grid-cols-3">
@@ -296,7 +296,7 @@ export function PublicBecomeTechConsultant() {
         <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
           <div className="mb-10 text-center">
             <Badge className="mb-3 gap-1"><Wallet className="h-3 w-3" /> Earnings potential</Badge>
-            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">What consultants earn on JOBSONN</h2>
+            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">What consultants earn on jobson.id</h2>
           </div>
           <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
             <StatCard label="Associate tier avg" value="₹1.1L / mo" icon={<Award className="h-5 w-5" />} tone="brand" />
@@ -420,7 +420,7 @@ export function PublicBecomeTechConsultant() {
             </div>
             <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
               <span className="flex items-center gap-1"><Phone className="h-3.5 w-3.5" /> +91 80 4567 8900</span>
-              <span className="flex items-center gap-1"><Mail className="h-3.5 w-3.5" /> consultants@jobsonn.com</span>
+              <span className="flex items-center gap-1"><Mail className="h-3.5 w-3.5" /> consultants@jobson.id</span>
               <span className="flex items-center gap-1"><Building2 className="h-3.5 w-3.5" /> Bengaluru · Hybrid</span>
             </div>
             <Button type="submit" size="lg" className="w-full gap-1.5">
@@ -440,7 +440,7 @@ export function PublicBecomeTechConsultant() {
                 Ready to consult at the next level?
               </h2>
               <p className="mt-3 text-sm text-muted-foreground">
-                Join 180+ senior engineers and AI specialists who&apos;ve made JOBSONN their consulting
+                Join 180+ senior engineers and AI specialists who&apos;ve made jobson.id their consulting
                 platform of choice.
               </p>
             </div>

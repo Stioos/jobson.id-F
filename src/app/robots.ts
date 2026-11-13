@@ -9,7 +9,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api/", "/_next/"],
       },
     ],
-    sitemap: "https://jobsonn.com/sitemap.xml",
-    host: "https://jobsonn.com",
+    sitemap: "https://jobson.id/sitemap.xml",
+    host: "https://jobson.id",
   };
 }

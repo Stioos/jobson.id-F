@@ -14,7 +14,7 @@ const SECTIONS: LegalSection[] = [
     paragraphs: [
       "Refund eligibility depends on the type of program you enrolled in and the timing of your request. For upfront tuition payments, you may request a full refund within the first 7 days of cohort start, no questions asked. After 7 days, refunds are pro-rated based on the percentage of the program completed.",
       "For Pay-After-Placement (PAP) enrollments, no refund applies because no upfront tuition was charged. Instead, your PAP obligation is waived if you do not secure a qualifying placement within 12 months of cohort end (see the Pay-After-Placement Terms section below).",
-      "Corporate training and custom enterprise programs are governed by the master services agreement (MSA) signed between JOBSONN and the client organization. Refund terms for such engagements are defined in the MSA and may differ from this policy.",
+      "Corporate training and custom enterprise programs are governed by the master services agreement (MSA) signed between jobson.id and the client organization. Refund terms for such engagements are defined in the MSA and may differ from this policy.",
     ],
   },
   {
@@ -22,9 +22,9 @@ const SECTIONS: LegalSection[] = [
     icon: RefreshCcw,
     title: "Refund Process",
     paragraphs: [
-      "To request a refund, email refunds@jobsonn.com with your full name, registered email, cohort/program name, and the reason for your request. Our team will acknowledge your request within 2 business days and provide a decision within 7 business days.",
+      "To request a refund, email refunds@jobson.id with your full name, registered email, cohort/program name, and the reason for your request. Our team will acknowledge your request within 2 business days and provide a decision within 7 business days.",
       "Approved refunds are processed back to the original payment method within 10 business days of approval. If your original payment method is no longer active, we will work with you to identify an alternative bank account or UPI ID for credit.",
-      "If your refund request is denied, you may appeal the decision within 30 days by emailing appeals@jobsonn.com. Appeals are reviewed by our Head of Operations and a decision is provided within 14 days.",
+      "If your refund request is denied, you may appeal the decision within 30 days by emailing appeals@jobson.id. Appeals are reviewed by our Head of Operations and a decision is provided within 14 days.",
     ],
   },
   {
@@ -63,7 +63,7 @@ const SECTIONS: LegalSection[] = [
     icon: Scale,
     title: "Disputes & Exceptions",
     paragraphs: [
-      "JOBSONN reserves the right to make exceptions to this policy in cases of documented medical emergency, family bereavement, or unforeseen relocation. To request an exception, email exceptions@jobsonn.com with supporting documentation (medical certificate, death certificate, relocation letter).",
+      "jobson.id reserves the right to make exceptions to this policy in cases of documented medical emergency, family bereavement, or unforeseen relocation. To request an exception, email exceptions@jobson.id with supporting documentation (medical certificate, death certificate, relocation letter).",
       "All refund disputes are first handled through our internal escalation process. If you are not satisfied with the resolution, you may escalate to the Consumer Disputes Redressal Forum having jurisdiction over your billing address, in accordance with the Consumer Protection Act, 2019.",
       "Governing law: This policy is governed by the laws of India. Any disputes shall be subject to the exclusive jurisdiction of the courts of Bengaluru, Karnataka.",
     ],
@@ -73,9 +73,9 @@ const SECTIONS: LegalSection[] = [
     icon: Mail,
     title: "Contact Us",
     paragraphs: [
-      "For refund requests, email refunds@jobsonn.com. For PAP-related queries, email pap@jobsonn.com. For exception requests, email exceptions@jobsonn.com. Our team responds to all queries within 2 business days.",
-      "You can also reach us by phone at +91 80 4567 8901 (Monday – Friday, 10 AM – 6 PM IST) or by writing to: Refunds Team, JOBSONN Intelligence Pvt. Ltd., 24 Residency Road, Ashok Nagar, Bengaluru 560025, Karnataka, India.",
-      "We are committed to fair, transparent refund practices. If you believe we have not met this commitment, please escalate to our Head of Operations at operations@jobsonn.com.",
+      "For refund requests, email refunds@jobson.id. For PAP-related queries, email pap@jobson.id. For exception requests, email exceptions@jobson.id. Our team responds to all queries within 2 business days.",
+      "You can also reach us by phone at +91 80 4567 8901 (Monday – Friday, 10 AM – 6 PM IST) or by writing to: Refunds Team, jobson.id Intelligence Pvt. Ltd., 24 Residency Road, Ashok Nagar, Bengaluru 560025, Karnataka, India.",
+      "We are committed to fair, transparent refund practices. If you believe we have not met this commitment, please escalate to our Head of Operations at operations@jobson.id.",
     ],
   },
 ];

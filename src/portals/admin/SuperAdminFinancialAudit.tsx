@@ -27,11 +27,11 @@ const FINDINGS: AuditFinding[] = [
 ];
 
 const LOGS: AuditLog[] = [
-  { id: "AL-9012", user: "anita.r@jobsonn.in", action: "approve_payout", resource: "PO-2024-0908", at: "2024-09-22T10:42:00Z", ip: "10.4.2.18" },
-  { id: "AL-9011", user: "rohit.s@jobsonn.in", action: "reverse_txn", resource: "TXN-9905", at: "2024-09-22T09:15:00Z", ip: "10.4.2.22" },
-  { id: "AL-9010", user: "fraud.engine@jobsonn.in", action: "block_wallet", resource: "WLT-9008", at: "2024-09-21T19:30:00Z", ip: "10.4.0.5" },
-  { id: "AL-9009", user: "anita.r@jobsonn.in", action: "modify_plan", resource: "PLAN-PRO-ANNUAL", at: "2024-09-21T16:00:00Z", ip: "10.4.2.18" },
-  { id: "AL-9008", user: "compliance@jobsonn.in", action: "file_gstr", resource: "GSTR-1-Aug-2024", at: "2024-09-21T11:00:00Z", ip: "10.4.2.30" },
+  { id: "AL-9012", user: "anita.r@jobson.id", action: "approve_payout", resource: "PO-2024-0908", at: "2024-09-22T10:42:00Z", ip: "10.4.2.18" },
+  { id: "AL-9011", user: "rohit.s@jobson.id", action: "reverse_txn", resource: "TXN-9905", at: "2024-09-22T09:15:00Z", ip: "10.4.2.22" },
+  { id: "AL-9010", user: "fraud.engine@jobson.id", action: "block_wallet", resource: "WLT-9008", at: "2024-09-21T19:30:00Z", ip: "10.4.0.5" },
+  { id: "AL-9009", user: "anita.r@jobson.id", action: "modify_plan", resource: "PLAN-PRO-ANNUAL", at: "2024-09-21T16:00:00Z", ip: "10.4.2.18" },
+  { id: "AL-9008", user: "compliance@jobson.id", action: "file_gstr", resource: "GSTR-1-Aug-2024", at: "2024-09-21T11:00:00Z", ip: "10.4.2.30" },
 ];
 
 const SOD = [

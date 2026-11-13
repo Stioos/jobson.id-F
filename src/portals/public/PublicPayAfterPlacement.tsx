@@ -50,7 +50,7 @@ const COMPARISON_ROWS = [
   { feature: "Upfront cost", pap: "₹5,000 refundable deposit", traditional: "₹80,000 – ₹4,50,000" },
   { feature: "Payment timing", pap: "After placement, in EMIs", traditional: "Before program starts" },
   { feature: "If you don't get placed", pap: "₹0 tuition", traditional: "Full fee due regardless" },
-  { feature: "Risk", pap: "Borne by JOBSONN", traditional: "Borne by learner" },
+  { feature: "Risk", pap: "Borne by jobson.id", traditional: "Borne by learner" },
   { feature: "Skin in the game", pap: "We win only when you win", traditional: "Institution paid regardless" },
   { feature: "Income-share option", pap: "Yes — 12–24 months", traditional: "Rare" },
 ];
@@ -69,7 +69,7 @@ const TESTIMONIALS = [
   },
   {
     name: "Karthik Iyer", role: "AI Marketing Engineer @ Zoho", initials: "KI", ctc: "₹11 LPA",
-    quote: "The income-share option was perfect — I paid 12% of my salary for 18 months. It felt fair. JOBSONN had skin in the game, and they acted like it.",
+    quote: "The income-share option was perfect — I paid 12% of my salary for 18 months. It felt fair. jobson.id had skin in the game, and they acted like it.",
   },
   {
     name: "Aarav Kulkarni", role: "Forward Deployed Engineer @ Razorpay", initials: "AK", ctc: "₹16 LPA",
@@ -198,7 +198,7 @@ export function PublicPayAfterPlacement() {
         <Card className="overflow-hidden p-0">
           <div className="grid grid-cols-3 bg-muted/50 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
             <div className="p-3">Feature</div>
-            <div className="p-3 text-brand">JOBSONN PAP</div>
+            <div className="p-3 text-brand">jobson.id PAP</div>
             <div className="p-3">Traditional fee</div>
           </div>
           <div className="divide-y">

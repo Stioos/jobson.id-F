@@ -169,13 +169,13 @@ export function OverviewScreen({
     <div className="space-y-8">
       {/* Welcome Banner */}
       <section className="relative overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-card via-card/90 to-blue-500/5 p-6 shadow-soft sm:p-8 dark:border-white/10 dark:bg-gradient-to-br dark:from-slate-900 dark:via-slate-900/90 dark:to-blue-950/40 dark:shadow-none">
-        <div className="absolute right-0 top-0 -mr-16 -mt-16 h-64 w-64 rounded-full bg-cyan-500/10 blur-3xl pointer-events-none" />
+        <div className="absolute right-0 top-0 -mr-16 -mt-16 h-64 w-64 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 right-1/4 -mb-16 h-48 w-48 rounded-full bg-blue-500/10 blur-2xl pointer-events-none" />
 
         <div className="relative z-10 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-start gap-4 sm:gap-6">
             <div className="relative">
-              <div suppressHydrationWarning className="flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-500 via-blue-600 to-indigo-600 text-2xl font-bold text-white shadow-xl shadow-cyan-500/20 ring-4 ring-border dark:ring-white/10">
+              <div suppressHydrationWarning className="flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500 via-blue-600 to-indigo-600 text-2xl font-bold text-white shadow-xl shadow-emerald-500/20 ring-4 ring-border dark:ring-white/10">
                 <span suppressHydrationWarning>{initials || "WT"}</span>
               </div>
               <span className="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full bg-emerald-500 text-white ring-2 ring-background dark:ring-slate-900">
@@ -195,7 +195,7 @@ export function OverviewScreen({
               <p suppressHydrationWarning className="mt-1 text-sm text-muted-foreground dark:text-slate-400">{email} · {phone}</p>
               <div className="mt-3 flex flex-wrap gap-2 text-xs text-muted-foreground dark:text-slate-300">
                 <span className="inline-flex items-center gap-1 rounded-md bg-muted px-2.5 py-1 text-foreground dark:bg-white/5 dark:text-slate-300">
-                  <Building2 className="h-3.5 w-3.5 text-cyan-600 dark:text-cyan-400" /> {isEmployee ? "Employee / Employer" : "B2B Tech Provider"}
+                  <Building2 className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" /> {isEmployee ? "Employee / Employer" : "B2B Tech Provider"}
                 </span>
                 <span className="inline-flex items-center gap-1 rounded-md bg-muted px-2.5 py-1 text-foreground dark:bg-white/5 dark:text-slate-300">
                   <Sparkles className="h-3.5 w-3.5 text-amber-600 dark:text-amber-400" /> {isEmployee ? "Professional Account" : "Enterprise Tier"}
@@ -209,7 +209,7 @@ export function OverviewScreen({
               <button
                 type="button"
                 onClick={() => onNavigate("business")}
-                className="inline-flex items-center gap-2 rounded-xl bg-cyan-500 px-4 py-2.5 text-xs font-bold text-slate-950 transition-all hover:bg-cyan-400 hover:shadow-lg hover:shadow-cyan-500/20"
+                className="inline-flex items-center gap-2 rounded-xl bg-emerald-500 px-4 py-2.5 text-xs font-bold text-slate-950 transition-all hover:bg-emerald-400 hover:shadow-lg hover:shadow-emerald-500/20"
               >
                 Edit Business Profile <ArrowRight className="h-3.5 w-3.5" />
               </button>
@@ -218,7 +218,7 @@ export function OverviewScreen({
               <button
                 type="button"
                 onClick={() => onNavigate("education-qualifications")}
-                className="inline-flex items-center gap-2 rounded-xl bg-cyan-500 px-4 py-2.5 text-xs font-bold text-slate-950 transition-all hover:bg-cyan-400 hover:shadow-lg hover:shadow-cyan-500/20"
+                className="inline-flex items-center gap-2 rounded-xl bg-emerald-500 px-4 py-2.5 text-xs font-bold text-slate-950 transition-all hover:bg-emerald-400 hover:shadow-lg hover:shadow-emerald-500/20"
               >
                 Edit Professional Profile <ArrowRight className="h-3.5 w-3.5" />
               </button>
@@ -300,7 +300,7 @@ export function OverviewScreen({
                 </span>
                 <div className="min-w-0 flex-1">
                   <div className="flex items-center justify-between gap-1">
-                    <p className="truncate text-xs font-bold text-foreground group-hover:text-cyan-600 dark:text-white dark:group-hover:text-cyan-400">{st.title}</p>
+                    <p className="truncate text-xs font-bold text-foreground group-hover:text-emerald-600 dark:text-white dark:group-hover:text-emerald-400">{st.title}</p>
                     {isDone ? (
                       <Check className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
                     ) : (
@@ -337,7 +337,7 @@ export function OverviewScreen({
             <button
               type="button"
               onClick={() => onNavigate("communication")}
-              className="text-xs font-semibold text-cyan-600 hover:underline dark:text-cyan-400"
+              className="text-xs font-semibold text-emerald-600 hover:underline dark:text-emerald-400"
             >
               Manage
             </button>
@@ -386,7 +386,7 @@ export function OverviewScreen({
             <button
               type="button"
               onClick={() => onNavigate("activity")}
-              className="text-xs font-semibold text-cyan-600 hover:underline dark:text-cyan-400"
+              className="text-xs font-semibold text-emerald-600 hover:underline dark:text-emerald-400"
             >
               View all
             </button>

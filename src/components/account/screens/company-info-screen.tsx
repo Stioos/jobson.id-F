@@ -132,26 +132,26 @@ function CheckboxGroupSection({
               className={cn(
                 "group flex cursor-pointer items-start gap-2.5 rounded-xl border p-2.5 transition-all",
                 isChecked
-                  ? "border-cyan-500/60 bg-cyan-500/10 ring-1 ring-cyan-500/30 dark:border-cyan-500/50 dark:bg-cyan-500/15"
-                  : "border-border bg-background/80 hover:border-cyan-500/40 hover:bg-muted/50 dark:border-white/10 dark:bg-slate-950/40 dark:hover:border-cyan-500/40 dark:hover:bg-white/[0.04]"
+                  ? "border-emerald-500/60 bg-emerald-500/10 ring-1 ring-emerald-500/30 dark:border-emerald-500/50 dark:bg-emerald-500/15"
+                  : "border-border bg-background/80 hover:border-emerald-500/40 hover:bg-muted/50 dark:border-white/10 dark:bg-slate-950/40 dark:hover:border-emerald-500/40 dark:hover:bg-white/[0.04]"
               )}
             >
               <input
                 type="checkbox"
                 checked={isChecked}
                 onChange={() => onToggle(opt)}
-                className="mt-0.5 h-4 w-4 shrink-0 rounded border-border accent-cyan-600 focus:ring-cyan-500 dark:border-white/20"
+                className="mt-0.5 h-4 w-4 shrink-0 rounded border-border accent-emerald-600 focus:ring-emerald-500 dark:border-white/20"
               />
               <div className="min-w-0 flex-1">
                 <div className="flex items-center justify-between gap-1.5">
                   <span className={cn(
                     "text-xs font-semibold leading-tight",
-                    isChecked ? "text-cyan-700 dark:text-cyan-300" : "text-foreground/80 dark:text-slate-300"
+                    isChecked ? "text-emerald-700 dark:text-emerald-300" : "text-foreground/80 dark:text-slate-300"
                   )}>
                     {opt}
                   </span>
                   {isChecked && (
-                    <Check className="h-3.5 w-3.5 shrink-0 text-cyan-600 dark:text-cyan-400" />
+                    <Check className="h-3.5 w-3.5 shrink-0 text-emerald-600 dark:text-emerald-400" />
                   )}
                 </div>
                 {desc && (
@@ -243,9 +243,9 @@ export function CompanyInfoScreen({ onNavigate }: CompanyInfoScreenProps = {}) {
 
         {/* Countries Served — multi-select (shown when International or Worldwide is selected) */}
         {(data.geographicalServiceAreas.includes("International") || data.geographicalServiceAreas.includes("Worldwide (Global)")) && (
-          <section className="overflow-hidden rounded-3xl border border-cyan-500/30 bg-gradient-to-br from-cyan-500/5 to-card shadow-soft dark:to-slate-900 dark:shadow-none">
+          <section className="overflow-hidden rounded-3xl border border-emerald-500/30 bg-gradient-to-br from-emerald-500/5 to-card shadow-soft dark:to-slate-900 dark:shadow-none">
             <div className="flex items-center gap-3 border-b border-border/60 px-6 py-4 sm:px-7 dark:border-white/10">
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-cyan-500/15 text-cyan-600 dark:text-cyan-400">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400">
                 <Globe className="h-5 w-5" />
               </span>
               <div className="min-w-0 flex-1">
@@ -267,13 +267,13 @@ export function CompanyInfoScreen({ onNavigate }: CompanyInfoScreenProps = {}) {
                 {data.servedCountries.map((country) => (
                   <span
                     key={country}
-                    className="inline-flex items-center gap-1.5 rounded-lg border border-cyan-500/30 bg-cyan-500/10 px-2.5 py-1.5 text-xs font-medium text-cyan-700 dark:border-cyan-500/30 dark:bg-cyan-500/15 dark:text-cyan-300"
+                    className="inline-flex items-center gap-1.5 rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1.5 text-xs font-medium text-emerald-700 dark:border-emerald-500/30 dark:bg-emerald-500/15 dark:text-emerald-300"
                   >
                     {country}
                     <button
                       type="button"
                       onClick={() => toggleServedCountry(country)}
-                      className="text-cyan-600/60 hover:text-rose-500 dark:text-cyan-400/60 dark:hover:text-rose-400 cursor-pointer"
+                      className="text-emerald-600/60 hover:text-rose-500 dark:text-emerald-400/60 dark:hover:text-rose-400 cursor-pointer"
                       aria-label={`Remove ${country}`}
                     >
                       <X className="h-3 w-3" />
@@ -305,7 +305,7 @@ export function CompanyInfoScreen({ onNavigate }: CompanyInfoScreenProps = {}) {
                     }
                   }}
                   placeholder="Type a country name and press Enter (e.g. Germany)"
-                  className="h-10 flex-1 rounded-xl border border-border bg-background/80 px-4 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500 dark:border-white/10 dark:bg-slate-950/60 dark:text-white dark:placeholder:text-slate-600"
+                  className="h-10 flex-1 rounded-xl border border-border bg-background/80 px-4 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 dark:border-white/10 dark:bg-slate-950/60 dark:text-white dark:placeholder:text-slate-600"
                 />
                 <button
                   type="button"
@@ -320,7 +320,7 @@ export function CompanyInfoScreen({ onNavigate }: CompanyInfoScreenProps = {}) {
                     setNewCountry("");
                     toast.success(`${c} added to countries served.`);
                   }}
-                  className="inline-flex h-10 shrink-0 items-center gap-1.5 rounded-xl bg-cyan-500 px-4 text-xs font-bold text-slate-950 transition-all hover:bg-cyan-400 cursor-pointer"
+                  className="inline-flex h-10 shrink-0 items-center gap-1.5 rounded-xl bg-emerald-500 px-4 text-xs font-bold text-slate-950 transition-all hover:bg-emerald-400 cursor-pointer"
                 >
                   <Plus className="h-3.5 w-3.5" /> Add Country
                 </button>
@@ -341,7 +341,7 @@ export function CompanyInfoScreen({ onNavigate }: CompanyInfoScreenProps = {}) {
                         "rounded-lg border px-2.5 py-1 text-[11px] font-medium transition-all cursor-pointer",
                         already
                           ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 cursor-default"
-                          : "border-border bg-background/80 text-foreground/70 hover:border-cyan-500/40 hover:text-cyan-600 dark:border-white/10 dark:bg-slate-950/40 dark:text-slate-300 dark:hover:border-cyan-500/40 dark:hover:text-cyan-300"
+                          : "border-border bg-background/80 text-foreground/70 hover:border-emerald-500/40 hover:text-emerald-600 dark:border-white/10 dark:bg-slate-950/40 dark:text-slate-300 dark:hover:border-emerald-500/40 dark:hover:text-emerald-300"
                       )}
                     >
                       {already && <Check className="mr-1 inline h-2.5 w-2.5" />}{c}
@@ -385,7 +385,7 @@ export function CompanyInfoScreen({ onNavigate }: CompanyInfoScreenProps = {}) {
           type="button"
           onClick={handleSaveAndContinue}
           disabled={isSaving}
-          className="inline-flex items-center justify-center gap-2 rounded-xl bg-cyan-500 px-7 py-3 text-sm font-bold text-slate-950 transition-all hover:bg-cyan-400 hover:shadow-lg hover:shadow-cyan-500/25 disabled:opacity-50 cursor-pointer"
+          className="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-500 px-7 py-3 text-sm font-bold text-slate-950 transition-all hover:bg-emerald-400 hover:shadow-lg hover:shadow-emerald-500/25 disabled:opacity-50 cursor-pointer"
         >
           {isSaving ? "Saving details..." : "Save & Continue"}
           <ArrowRight className="h-4 w-4" />

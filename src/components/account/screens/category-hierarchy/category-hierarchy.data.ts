@@ -1,5 +1,5 @@
 // ============================================================
-// JOBSONN Category Hierarchy Data
+// jobson.id Category Hierarchy Data
 // Placeholder data - replace with real categories
 // 3-tier taxonomy: Category -> Subcategory -> Item
 // ============================================================
@@ -287,8 +287,8 @@ export const INDUSTRIAL_CATEGORIES: IndustrialCategory[] = [
     shortName: "Automation & Robotics",
     tagline: "PLC · SCADA · Robotics",
     icon: "Bot",
-    color: "text-cyan-600 dark:text-cyan-400",
-    bg: "bg-cyan-500/15",
+    color: "text-emerald-600 dark:text-emerald-400",
+    bg: "bg-emerald-500/15",
   },
   {
     id: "metals-alloys-raw-materials",

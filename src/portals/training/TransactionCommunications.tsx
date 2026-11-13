@@ -43,11 +43,11 @@ const COMM_ICONS: Record<string, React.ReactNode> = {
 };
 
 const TEMPLATES = [
-  { id: "tpl_001", name: "Payment Reminder", subject: "Payment Reminder — {{invoice_number}}", body: "Dear {{client}},\n\nThis is a friendly reminder that invoice {{invoice_number}} for {{amount}} is now overdue. Please process payment at your earliest convenience.\n\nRegards,\nJOBSONN Billing" },
-  { id: "tpl_002", name: "Payment Confirmation", subject: "Payment Received — {{amount}}", body: "Dear {{client}},\n\nWe've received your payment of {{amount}} for invoice {{invoice_number}}. Thank you!\n\nRegards,\nJOBSONN Billing" },
-  { id: "tpl_003", name: "Settlement Notification", subject: "Settlement Processed — {{amount}}", body: "Dear {{partner}},\n\nYour settlement of {{amount}} has been processed and credited to your account.\n\nRegards,\nJOBSONN Team" },
-  { id: "tpl_004", name: "Program Update", subject: "Program Update — {{program_name}}", body: "Dear {{recipient}},\n\nUpdate on {{program_name}}: {{update_details}}.\n\nRegards,\nJOBSONN Team" },
-  { id: "tpl_005", name: "Refund Notification", subject: "Refund Processed — {{amount}}", body: "Dear {{client}},\n\nYour refund of {{amount}} for {{reason}} has been processed. Please allow 5-7 business days for the credit to appear.\n\nRegards,\nJOBSONN Team" },
+  { id: "tpl_001", name: "Payment Reminder", subject: "Payment Reminder — {{invoice_number}}", body: "Dear {{client}},\n\nThis is a friendly reminder that invoice {{invoice_number}} for {{amount}} is now overdue. Please process payment at your earliest convenience.\n\nRegards,\njobson.id Billing" },
+  { id: "tpl_002", name: "Payment Confirmation", subject: "Payment Received — {{amount}}", body: "Dear {{client}},\n\nWe've received your payment of {{amount}} for invoice {{invoice_number}}. Thank you!\n\nRegards,\njobson.id Billing" },
+  { id: "tpl_003", name: "Settlement Notification", subject: "Settlement Processed — {{amount}}", body: "Dear {{partner}},\n\nYour settlement of {{amount}} has been processed and credited to your account.\n\nRegards,\njobson.id Team" },
+  { id: "tpl_004", name: "Program Update", subject: "Program Update — {{program_name}}", body: "Dear {{recipient}},\n\nUpdate on {{program_name}}: {{update_details}}.\n\nRegards,\njobson.id Team" },
+  { id: "tpl_005", name: "Refund Notification", subject: "Refund Processed — {{amount}}", body: "Dear {{client}},\n\nYour refund of {{amount}} for {{reason}} has been processed. Please allow 5-7 business days for the credit to appear.\n\nRegards,\njobson.id Team" },
 ];
 
 export function TransactionCommunications() {

@@ -38,7 +38,7 @@ Your application for {{job_title}} at {{company_name}} has been received.
 Click here to track: {{cta_link}}
 
 Thanks,
-JOBSONN Team`);
+jobson.id Team`);
 
   const channelIcon = (c: string) => c === "Email" ? "Mail" : c === "SMS" ? "Smartphone" : "MessageCircle";
   const channelColor = (c: string) => c === "Email" ? "bg-emerald-500/15 text-emerald-700 border-emerald-500/30"

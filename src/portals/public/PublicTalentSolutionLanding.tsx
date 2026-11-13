@@ -867,7 +867,7 @@ export function PublicTalentSolutionLanding({
                 Real scenarios, verified results
               </h2>
               <p className="mt-2 text-sm text-muted-foreground">
-                How technology leaders solved critical talent bottlenecks using JOBSONN.
+                How technology leaders solved critical talent bottlenecks using jobson.id.
               </p>
             </div>
 
@@ -1321,7 +1321,7 @@ export function PublicTalentSolutionLanding({
               <ClipboardCheck className="h-5 w-5 text-emerald-600" /> AI Technical Assessment Simulator
             </DialogTitle>
             <DialogDescription>
-              Experience the 400+ proctored evaluation environment used by JOBSONN to verify top 5% talent.
+              Experience the 400+ proctored evaluation environment used by jobson.id to verify top 5% talent.
             </DialogDescription>
           </DialogHeader>
 
@@ -1461,7 +1461,7 @@ export function PublicTalentSolutionLanding({
                   Score: {assessmentScore}% — Production Ready
                 </h3>
                 <p className="mt-1 text-xs text-muted-foreground">
-                  Candidate ID: JOBSONN-EVAL-{Math.floor(10000 + Math.random() * 90000)} · Verified on {new Date().toLocaleDateString()}
+                  Candidate ID: jobson.id-EVAL-{Math.floor(10000 + Math.random() * 90000)} · Verified on {new Date().toLocaleDateString()}
                 </p>
               </div>
 

@@ -123,7 +123,7 @@ export function CandidatePartnerCourses() {
     <div className="space-y-6">
       <PageHeader
         title="Partner Training Centres & Courses"
-        description="Browse JOBSONN partner-operated training centres and enroll in industry-aligned certification programs."
+        description="Browse jobson.id partner-operated training centres and enroll in industry-aligned certification programs."
         icon={<GraduationCap className="h-6 w-6" />}
         breadcrumbs={[{ label: "Learning Academy" }, { label: "Partner Courses" }]}
       />

@@ -22,7 +22,7 @@ const PRIVACY_INITIAL = [
   { key: "profile_public", label: "Public profile", description: "Allow employers to find your profile in talent search.", enabled: true },
   { key: "search_indexing", label: "Search engine indexing", description: "Allow Google and others to index your public profile.", enabled: false },
   { key: "data_sharing", label: "Data sharing with partners", description: "Share anonymized data with trusted hiring partners.", enabled: true },
-  { key: "analytics", label: "Usage analytics", description: "Help improve JOBSONN with anonymous usage data.", enabled: true },
+  { key: "analytics", label: "Usage analytics", description: "Help improve jobson.id with anonymous usage data.", enabled: true },
 ];
 
 const INTEGRATIONS = [

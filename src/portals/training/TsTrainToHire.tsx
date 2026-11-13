@@ -483,7 +483,7 @@ function CreateT2HDialog({ open, onOpenChange }: { open: boolean; onOpenChange: 
             <Field label="Curriculum (comma-separated)"><Textarea value={form.curriculum} onChange={(e) => update("curriculum", e.target.value)} placeholder="React 19, Node.js, PostgreSQL, System Design" /></Field>
           </div>
           <div className="sm:col-span-2">
-            <Field label="Certifications (comma-separated)"><Input value={form.certifications} onChange={(e) => update("certifications", e.target.value)} placeholder="JOBSONN Full-Stack Certificate" /></Field>
+            <Field label="Certifications (comma-separated)"><Input value={form.certifications} onChange={(e) => update("certifications", e.target.value)} placeholder="jobson.id Full-Stack Certificate" /></Field>
           </div>
           <div className="sm:col-span-2">
             <Field label="Hiring Roles (comma-separated)"><Input value={form.hiringRoles} onChange={(e) => update("hiringRoles", e.target.value)} placeholder="Junior Full-Stack Engineer, Backend Engineer" /></Field>

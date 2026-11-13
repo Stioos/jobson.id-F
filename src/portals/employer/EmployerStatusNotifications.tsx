@@ -139,7 +139,7 @@ export function EmployerStatusNotifications() {
         >
           <Card className="overflow-hidden">
             <div className="border-b bg-brand/5 p-3 text-xs">
-              <p><span className="text-muted-foreground">From:</span> notifications@jobsonn.com</p>
+              <p><span className="text-muted-foreground">From:</span> notifications@jobson.id</p>
               <p><span className="text-muted-foreground">Subject:</span> {previewStage.template}</p>
             </div>
             <div className="p-4 text-sm leading-relaxed">

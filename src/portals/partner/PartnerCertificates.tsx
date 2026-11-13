@@ -30,14 +30,14 @@ interface IssuedCertificate {
 }
 
 const ISSUED: IssuedCertificate[] = [
-  { id: "cert_001", student: "Aarav Sharma", course: "Full-Stack Engineering Program", issueDate: new Date(Date.now() - 30 * 86400000).toISOString(), certificateId: "JN-FE-2024-001", verifyUrl: "https://verify.jobsonn.com/c/JN-FE-2024-001", status: "active" },
-  { id: "cert_002", student: "Divya Lakshmi", course: "Data Science & Analytics", issueDate: new Date(Date.now() - 25 * 86400000).toISOString(), certificateId: "JN-DS-2024-002", verifyUrl: "https://verify.jobsonn.com/c/JN-DS-2024-002", status: "active" },
-  { id: "cert_003", student: "Karthik Reddy", course: "Cloud & DevOps Engineering", issueDate: new Date(Date.now() - 60 * 86400000).toISOString(), certificateId: "JN-CD-2024-003", verifyUrl: "https://verify.jobsonn.com/c/JN-CD-2024-003", status: "active" },
-  { id: "cert_004", student: "Meera Iyer", course: "UI/UX Design Program", issueDate: new Date(Date.now() - 45 * 86400000).toISOString(), certificateId: "JN-UX-2024-004", verifyUrl: "https://verify.jobsonn.com/c/JN-UX-2024-004", status: "revoked" },
-  { id: "cert_005", student: "Sanjay Gupta", course: "Cybersecurity Essentials", issueDate: new Date(Date.now() - 90 * 86400000).toISOString(), certificateId: "JN-CS-2024-005", verifyUrl: "https://verify.jobsonn.com/c/JN-CS-2024-005", status: "active" },
-  { id: "cert_006", student: "Priya Menon", course: "Digital Marketing Mastery", issueDate: new Date(Date.now() - 15 * 86400000).toISOString(), certificateId: "JN-DM-2024-006", verifyUrl: "https://verify.jobsonn.com/c/JN-DM-2024-006", status: "active" },
-  { id: "cert_007", student: "Rohit Nair", course: "Full-Stack Engineering Program", issueDate: new Date(Date.now() - 120 * 86400000).toISOString(), certificateId: "JN-FE-2024-007", verifyUrl: "https://verify.jobsonn.com/c/JN-FE-2024-007", status: "expired" },
-  { id: "cert_008", student: "Anika Reddy", course: "Data Science & Analytics", issueDate: new Date(Date.now() - 10 * 86400000).toISOString(), certificateId: "JN-DS-2024-008", verifyUrl: "https://verify.jobsonn.com/c/JN-DS-2024-008", status: "active" },
+  { id: "cert_001", student: "Aarav Sharma", course: "Full-Stack Engineering Program", issueDate: new Date(Date.now() - 30 * 86400000).toISOString(), certificateId: "JN-FE-2024-001", verifyUrl: "https://verify.jobson.id/c/JN-FE-2024-001", status: "active" },
+  { id: "cert_002", student: "Divya Lakshmi", course: "Data Science & Analytics", issueDate: new Date(Date.now() - 25 * 86400000).toISOString(), certificateId: "JN-DS-2024-002", verifyUrl: "https://verify.jobson.id/c/JN-DS-2024-002", status: "active" },
+  { id: "cert_003", student: "Karthik Reddy", course: "Cloud & DevOps Engineering", issueDate: new Date(Date.now() - 60 * 86400000).toISOString(), certificateId: "JN-CD-2024-003", verifyUrl: "https://verify.jobson.id/c/JN-CD-2024-003", status: "active" },
+  { id: "cert_004", student: "Meera Iyer", course: "UI/UX Design Program", issueDate: new Date(Date.now() - 45 * 86400000).toISOString(), certificateId: "JN-UX-2024-004", verifyUrl: "https://verify.jobson.id/c/JN-UX-2024-004", status: "revoked" },
+  { id: "cert_005", student: "Sanjay Gupta", course: "Cybersecurity Essentials", issueDate: new Date(Date.now() - 90 * 86400000).toISOString(), certificateId: "JN-CS-2024-005", verifyUrl: "https://verify.jobson.id/c/JN-CS-2024-005", status: "active" },
+  { id: "cert_006", student: "Priya Menon", course: "Digital Marketing Mastery", issueDate: new Date(Date.now() - 15 * 86400000).toISOString(), certificateId: "JN-DM-2024-006", verifyUrl: "https://verify.jobson.id/c/JN-DM-2024-006", status: "active" },
+  { id: "cert_007", student: "Rohit Nair", course: "Full-Stack Engineering Program", issueDate: new Date(Date.now() - 120 * 86400000).toISOString(), certificateId: "JN-FE-2024-007", verifyUrl: "https://verify.jobson.id/c/JN-FE-2024-007", status: "expired" },
+  { id: "cert_008", student: "Anika Reddy", course: "Data Science & Analytics", issueDate: new Date(Date.now() - 10 * 86400000).toISOString(), certificateId: "JN-DS-2024-008", verifyUrl: "https://verify.jobson.id/c/JN-DS-2024-008", status: "active" },
 ];
 
 export function PartnerCertificates() {

@@ -65,7 +65,7 @@ export function PartnerSettlements() {
       period,
       grossAmount: 380000,
       partnerShare: 266000,
-      jobsonnShare: 114000,
+      jobsonIdShare: 114000,
       deductions: 8000,
       netPayable: 258000,
       status: "draft",
@@ -200,8 +200,8 @@ export function PartnerSettlements() {
                     <p className="text-sm font-semibold text-brand">{formatCurrency(selected.partnerShare)}</p>
                   </div>
                   <div className="rounded-lg border p-3">
-                    <p className="text-xs text-muted-foreground">JOBSONN Share</p>
-                    <p className="text-sm font-semibold">{formatCurrency(selected.jobsonnShare)}</p>
+                    <p className="text-xs text-muted-foreground">jobson.id Share</p>
+                    <p className="text-sm font-semibold">{formatCurrency(selected.jobsonIdShare)}</p>
                   </div>
                   <div className="rounded-lg border p-3">
                     <p className="text-xs text-muted-foreground">Deductions</p>

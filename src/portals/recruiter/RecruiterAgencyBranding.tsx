@@ -159,7 +159,7 @@ export function RecruiterAgencyBranding() {
         description="Manage your agency's public brand — logo, colors, descriptions, specialties, team showcase, client logos and case studies."
         icon={<Palette className="h-6 w-6" />}
         actions={[
-          { label: "Preview Public Page", variant: "outline", onClick: () => toast.success("Opening preview", { description: "https://jobsonn.io/agency/talentforge" }) },
+          { label: "Preview Public Page", variant: "outline", onClick: () => toast.success("Opening preview", { description: "https://jobson.id/agency/talentforge" }) },
           { label: "Publish Changes", onClick: () => toast.success("Brand changes published", { description: "Live on your public agency page" }) },
         ]}
       />

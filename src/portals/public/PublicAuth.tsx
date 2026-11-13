@@ -34,7 +34,7 @@ export const AUTH_ROLES: RoleDef[] = [
   { portal: "recruiter", role: "recruiter", label: "Recruiter / Agency", shortLabel: "Recruiter", description: "Source, submit & place talent", icon: Briefcase, color: "#F59E0B", demoUser: { name: "Sneha Reddy", email: "sneha@talentbridge.in", org: "TalentBridge" }, regRoute: "register/recruiter" },
   { portal: "training", role: "platform_admin", label: "Training & Admin", shortLabel: "Training", description: "Corporate training + platform admin", icon: GraduationCap, color: "#EF4444", demoUser: { name: "Divya Sharma", email: "divya@skillforge.academy", org: "SkillForge Academy" }, regRoute: "register/training" },
   { portal: "partner", role: "employer", label: "Franchise Partner", shortLabel: "Partner", description: "Run a centre, college, service, tech, AI or recruitment franchise", icon: Handshake, color: "#10B981", demoUser: { name: "Rajesh Kumar", email: "rajesh@chennaitachacademy.in", org: "Chennai Tech Academy" }, regRoute: "register/partner" },
-  { portal: "admin", role: "platform_admin", label: "Platform Admin", shortLabel: "Admin", description: "Platform administration & super admin", icon: Crown, color: "#D4A017", demoUser: { name: "Admin User", email: "admin@jobsonn.com" }, regRoute: "register/admin" },
+  { portal: "admin", role: "platform_admin", label: "Platform Admin", shortLabel: "Admin", description: "Platform administration & super admin", icon: Crown, color: "#D4A017", demoUser: { name: "Admin User", email: "admin@jobson.id" }, regRoute: "register/admin" },
 ];
 
 export function PublicAuth() {
@@ -50,7 +50,7 @@ export function PublicAuth() {
   React.useEffect(() => {
     if (typeof window !== "undefined") {
       try {
-        const noticeEmail = sessionStorage.getItem("jobsonn_registered_notice");
+        const noticeEmail = sessionStorage.getItem("jobson_id_registered_notice");
         if (noticeEmail) {
           setRegisteredEmailNotice(noticeEmail);
         }
@@ -73,7 +73,7 @@ export function PublicAuth() {
     let redirectPortal: string | null = null;
     if (typeof window !== "undefined") {
       try {
-        redirectPortal = sessionStorage.getItem("jobsonn_redirect_portal");
+        redirectPortal = sessionStorage.getItem("jobson_id_redirect_portal");
       } catch {}
     }
 
@@ -92,8 +92,8 @@ export function PublicAuth() {
     setTimeout(() => {
       if (typeof window !== "undefined") {
         try {
-          sessionStorage.removeItem("jobsonn_redirect_portal");
-          sessionStorage.removeItem("jobsonn_registered_notice");
+          sessionStorage.removeItem("jobson_id_redirect_portal");
+          sessionStorage.removeItem("jobson_id_registered_notice");
         } catch {}
       }
 
@@ -119,9 +119,9 @@ export function PublicAuth() {
             type="button"
             onClick={() => navigate("public", "home")}
             className="flex items-center cursor-pointer transition-opacity hover:opacity-80"
-            aria-label="JOBSONN home"
+            aria-label="jobson.id home"
           >
-            <Image src="/jobsonn-logo.png" alt="JOBSONN" width={120} height={32} className="h-7 w-auto object-contain sm:h-8" priority />
+            <Image src="/jobson-id-logo.png" alt="jobson.id" width={120} height={32} className="h-7 w-auto object-contain sm:h-8" priority />
           </button>
         </header>
 
@@ -229,7 +229,7 @@ export function PublicAuth() {
 
                 {/* Register links — separate page per role */}
                 <div className="mt-4 border-t pt-3">
-                  <p className="mb-2 text-center text-[11px] text-muted-foreground">New to JOBSONN? Create an account:</p>
+                  <p className="mb-2 text-center text-[11px] text-muted-foreground">New to jobson.id? Create an account:</p>
                   <div className="grid grid-cols-3 gap-1.5">
                     {AUTH_ROLES.map(r => (
                       <button key={r.portal} onClick={() => navigate("public", r.regRoute)}

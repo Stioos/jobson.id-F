@@ -65,7 +65,7 @@ const DEFAULT_EVENTS: PublicEvent[] = [
   },
   {
     id: "evt-003",
-    title: "JOBSONN Career Fair 2025 — Bengaluru Edition",
+    title: "jobson.id Career Fair 2025 — Bengaluru Edition",
     description: "Meet recruiters from 40+ top employers including Google, Amazon, Swiggy, Flipkart, Zerodha, and Razorpay. On-the-spot interviews for shortlisted candidates.",
     date: "2025-04-05",
     time: "9:00 AM IST",
@@ -91,8 +91,8 @@ const DEFAULT_EVENTS: PublicEvent[] = [
   },
   {
     id: "evt-005",
-    title: "JOBSONN Hackathon 2024 — Build for Bharat",
-    description: "48-hour hackathon. 200+ teams built solutions for healthcare, agriculture, and education. Winning teams received ₹5L prize and JOBSONN partnership offers.",
+    title: "jobson.id Hackathon 2024 — Build for Bharat",
+    description: "48-hour hackathon. 200+ teams built solutions for healthcare, agriculture, and education. Winning teams received ₹5L prize and jobson.id partnership offers.",
     date: "2024-11-22",
     time: "6:00 PM IST",
     category: "Hackathon",
@@ -117,7 +117,7 @@ const DEFAULT_EVENTS: PublicEvent[] = [
   },
   {
     id: "evt-007",
-    title: "JOBSONN Annual Tech Conference 2024 — Future of Work",
+    title: "jobson.id Annual Tech Conference 2024 — Future of Work",
     description: "1-day conference on AI, hiring, and the future of work. 20+ speakers from Google, Microsoft, Zoho, Zerodha. Tracks for engineers, recruiters, and founders.",
     date: "2024-09-14",
     time: "9:00 AM IST",
@@ -296,7 +296,7 @@ export function PublicEvents() {
             <div>
               <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Host an event with us</h2>
               <p className="mt-3 text-sm text-muted-foreground">
-                Reach 50,000+ candidates and 200+ employers. JOBSONN hosts webinars, career fairs,
+                Reach 50,000+ candidates and 200+ employers. jobson.id hosts webinars, career fairs,
                 and hackathons for partners — fully managed, end-to-end.
               </p>
               <ul className="mt-4 space-y-2 text-sm text-muted-foreground">

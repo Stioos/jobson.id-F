@@ -19,10 +19,10 @@ import {
 } from "@/portals/_settings-support-shared";
 
 const PRIVACY_INITIAL = [
-  { key: "public_academy", label: "Public academy profile", description: "Showcase SkillForge Academy on JOBSONN's training marketplace.", enabled: true },
+  { key: "public_academy", label: "Public academy profile", description: "Showcase SkillForge Academy on jobson.id's training marketplace.", enabled: true },
   { key: "client_data_sharing", label: "Share data with corporate clients", description: "Share learner progress with sponsoring employers.", enabled: true },
   { key: "trainer_indexing", label: "Trainer indexing", description: "Allow trainers to be discoverable for guest sessions.", enabled: false },
-  { key: "analytics", label: "Usage analytics", description: "Help improve JOBSONN with anonymous usage data.", enabled: true },
+  { key: "analytics", label: "Usage analytics", description: "Help improve jobson.id with anonymous usage data.", enabled: true },
 ];
 
 const INTEGRATIONS = [

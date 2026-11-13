@@ -13,7 +13,7 @@ const SECTIONS: LegalSection[] = [
     icon: Trophy,
     title: "Placement Guarantee",
     paragraphs: [
-      "JOBSONN Academy offers a Placement Guarantee to learners enrolled in eligible Pay-After-Placement (PAP) programs. The guarantee means: if you do not secure a qualifying placement within 12 months of cohort end, your PAP obligation is fully waived and you owe nothing.",
+      "jobson.id Academy offers a Placement Guarantee to learners enrolled in eligible Pay-After-Placement (PAP) programs. The guarantee means: if you do not secure a qualifying placement within 12 months of cohort end, your PAP obligation is fully waived and you owe nothing.",
       "A \"qualifying placement\" is defined as a full-time job offer with a CTC at or above the threshold specified in your PAP agreement (typically ₹6 LPA for entry-level programs and ₹12 LPA for senior tracks), from a company on our verified employer list.",
       "The Placement Guarantee applies only to learners who meet the Eligibility Criteria defined below and complete all program requirements (curriculum, capstone, assessments, and career readiness milestones) by cohort end.",
     ],
@@ -34,7 +34,7 @@ const SECTIONS: LegalSection[] = [
     title: "Placement Process",
     paragraphs: [
       "Our placement process begins in week 12 of the cohort (during the Capstone phase) and continues for up to 12 months after cohort end. The process includes: profile review and polish, mock interviews, recruiter introductions, interview scheduling, offer evaluation, and salary negotiation support.",
-      "We work with 200+ hiring partners across India, including product companies, service firms, startups, and unicorns. We match you to opportunities based on your skills, preferences, and location, but you also play an active role by applying to jobs surfaced through the JOBSONN candidate portal.",
+      "We work with 200+ hiring partners across India, including product companies, service firms, startups, and unicorns. We match you to opportunities based on your skills, preferences, and location, but you also play an active role by applying to jobs surfaced through the jobson.id candidate portal.",
       "The 12-month placement window starts on the date of cohort completion (last day of the program). The first 90 days post-cohort are the highest-intensity placement period; placements typically occur within 4–6 months for eligible learners.",
     ],
   },
@@ -43,7 +43,7 @@ const SECTIONS: LegalSection[] = [
     icon: Building2,
     title: "Employer Partnerships",
     paragraphs: [
-      "JOBSONN has direct hiring relationships with 200+ verified employers across India, including Google, Amazon, Microsoft, TCS, Infosys, Wipro, Accenture, Flipkart, Swiggy, Zomato, Razorpay, Zerodha, and many growth-stage startups.",
+      "jobson.id has direct hiring relationships with 200+ verified employers across India, including Google, Amazon, Microsoft, TCS, Infosys, Wipro, Accenture, Flipkart, Swiggy, Zomato, Razorpay, Zerodha, and many growth-stage startups.",
       "All employer partners are vetted for legitimacy, compensation timeliness, and workplace standards. We do not partner with employers who have a documented history of delayed salaries, misleading job descriptions, or unethical hiring practices.",
       "We continuously expand our hiring network based on learner demand, geographic priorities, and emerging sectors. If you have a specific company or sector in mind that isn't currently in our partner network, share it with your career coach — we'll work to add them.",
     ],
@@ -55,7 +55,7 @@ const SECTIONS: LegalSection[] = [
     paragraphs: [
       "Salary commitments are program-specific and disclosed in writing at the time of enrollment. For 2024–2025 cohorts, the commitments are: FDE — average ₹14 LPA, range ₹8–28 LPA; DSAI — average ₹16 LPA, range ₹10–32 LPA; FDE-FWD — average ₹15 LPA, range ₹9–30 LPA; Engineering Foundations — average ₹8 LPA, range ₹6–12 LPA.",
       "These commitments are illustrative based on 2024 placement data. They represent typical outcomes for eligible learners who actively participate in the placement process. They are not guarantees of any individual salary — your actual CTC will depend on your skills, interview performance, employer, and market conditions.",
-      "If your placement falls significantly below the stated range (more than 30% below the floor of the range) and you meet all eligibility criteria, you may request a placement review by emailing placements@jobsonn.com. We will work with you to identify additional opportunities aligned with your target range.",
+      "If your placement falls significantly below the stated range (more than 30% below the floor of the range) and you meet all eligibility criteria, you may request a placement review by emailing placements@jobson.id. We will work with you to identify additional opportunities aligned with your target range.",
     ],
   },
   {
@@ -63,7 +63,7 @@ const SECTIONS: LegalSection[] = [
     icon: AlertTriangle,
     title: "Exclusions & Limitations",
     paragraphs: [
-      "The Placement Guarantee does not apply if: (a) you decline 3 or more qualifying offers without a valid reason; (b) you accept employment outside the JOBSONN placement process without prior notification; (c) you fail to meet the Eligibility Criteria; (d) you relocate outside India for more than 90 days during the placement window; or (e) you are removed from the program for academic or disciplinary reasons.",
+      "The Placement Guarantee does not apply if: (a) you decline 3 or more qualifying offers without a valid reason; (b) you accept employment outside the jobson.id placement process without prior notification; (c) you fail to meet the Eligibility Criteria; (d) you relocate outside India for more than 90 days during the placement window; or (e) you are removed from the program for academic or disciplinary reasons.",
       "\"Valid reason\" for declining an offer includes: compensation more than 30% below your stated target; role mismatch (e.g., backend role offered to a frontend specialist); location mismatch (more than 50km from your stated preference without relocation support); or workplace concerns documented during the interview process.",
       "The Placement Guarantee is a financial guarantee (PAP waiver), not a guarantee of a specific employer, role, or salary. We commit to working with you in good faith to find a qualifying placement — but we cannot guarantee placement at any specific company or at the top of the stated salary range.",
     ],
@@ -73,9 +73,9 @@ const SECTIONS: LegalSection[] = [
     icon: Mail,
     title: "Contact Us",
     paragraphs: [
-      "For questions about the Placement Policy, email placements@jobsonn.com. For PAP-related queries, email pap@jobsonn.com. For career coaching and placement support, contact your assigned career coach through the learner portal.",
-      "You can also reach us by phone at +91 80 4567 8903 (Monday – Friday, 10 AM – 6 PM IST) or by writing to: Placements Team, JOBSONN Intelligence Pvt. Ltd., 24 Residency Road, Ashok Nagar, Bengaluru 560025, Karnataka, India.",
-      "We are committed to transparent, accountable placement practices. If you believe we have not met this commitment, please escalate to our Head of Placements at placements-head@jobsonn.com.",
+      "For questions about the Placement Policy, email placements@jobson.id. For PAP-related queries, email pap@jobson.id. For career coaching and placement support, contact your assigned career coach through the learner portal.",
+      "You can also reach us by phone at +91 80 4567 8903 (Monday – Friday, 10 AM – 6 PM IST) or by writing to: Placements Team, jobson.id Intelligence Pvt. Ltd., 24 Residency Road, Ashok Nagar, Bengaluru 560025, Karnataka, India.",
+      "We are committed to transparent, accountable placement practices. If you believe we have not met this commitment, please escalate to our Head of Placements at placements-head@jobson.id.",
     ],
   },
 ];
@@ -86,7 +86,7 @@ export function PublicPlacementPolicy() {
       title="Placement Policy"
       icon={Trophy}
       badge="Legal"
-      intro="Our commitment to placement outcomes for JOBSONN Academy learners — including the Pay-After-Placement guarantee, eligibility criteria, employer partnerships, salary commitments, and exclusions."
+      intro="Our commitment to placement outcomes for jobson.id Academy learners — including the Pay-After-Placement guarantee, eligibility criteria, employer partnerships, salary commitments, and exclusions."
       lastUpdated="January 15, 2025"
       sections={SECTIONS}
     />

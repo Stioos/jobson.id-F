@@ -51,7 +51,7 @@ export function PartnerPrograms() {
     gatewayFeePct: 2,
     taxPct: 18,
     partnerPct: selected.partnerPct,
-    jobsonnPct: selected.jobsonnPct,
+    jobsonIdPct: selected.jobsonIdPct,
     ruleName: `${selected.name} preview`,
   }) : null;
 
@@ -59,7 +59,7 @@ export function PartnerPrograms() {
     <div className="space-y-6">
       <PageHeader
         title="Programs Catalog"
-        description={`${partner.name} — browse JOBSONN programs you can deliver. Partner share & revenue preview included.`}
+        description={`${partner.name} — browse jobson.id programs you can deliver. Partner share & revenue preview included.`}
         icon={<Icon name="BookOpen" className="h-6 w-6" />}
         actions={[
           { label: "Revenue Calculator", icon: "Calculator", variant: "outline", onClick: () => navigate("partner", "calculator") },
@@ -176,8 +176,8 @@ export function PartnerPrograms() {
                   <p className="text-[10px] text-muted-foreground uppercase">Partner</p>
                 </div>
                 <div className="rounded-lg border p-2 text-center">
-                  <p className="text-xs font-semibold">{selected.jobsonnPct}%</p>
-                  <p className="text-[10px] text-muted-foreground uppercase">JOBSONN</p>
+                  <p className="text-xs font-semibold">{selected.jobsonIdPct}%</p>
+                  <p className="text-[10px] text-muted-foreground uppercase">jobson.id</p>
                 </div>
               </div>
 
@@ -224,7 +224,7 @@ export function PartnerPrograms() {
                   <div className="rounded-lg border-2 border-brand/30 bg-brand/5 p-3">
                     <p className="text-xs text-muted-foreground uppercase">Partner Share</p>
                     <p className="text-2xl font-bold text-brand">{formatCurrency(previewResult.partnerShare)}</p>
-                    <p className="mt-1 text-xs text-muted-foreground">JOBSONN share: {formatCurrency(previewResult.jobsonnShare)} · Net after fees: {formatCurrency(previewResult.netAfterFees)}</p>
+                    <p className="mt-1 text-xs text-muted-foreground">jobson.id share: {formatCurrency(previewResult.jobsonIdShare)} · Net after fees: {formatCurrency(previewResult.netAfterFees)}</p>
                   </div>
                 </CardContent>
               </Card>

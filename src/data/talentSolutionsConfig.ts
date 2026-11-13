@@ -1,6 +1,6 @@
 // ============================================================
 // TALENT SOLUTIONS CONFIG — 9 solutions × 8 sub-pages each
-// Complete configuration matching jobsonn.com and talent_solutions.zip
+// Complete configuration matching jobson.id and talent_solutions.zip
 // ============================================================
 
 export interface TalentSubPageDef {

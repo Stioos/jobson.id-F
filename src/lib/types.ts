@@ -1,5 +1,5 @@
 // ============================================================
-// JOBSONN — Core Domain Types
+// jobson.id — Core Domain Types
 // Centralized typed interfaces for the entire platform.
 // These mirror future backend entities (Django/FastAPI/REST).
 // ============================================================

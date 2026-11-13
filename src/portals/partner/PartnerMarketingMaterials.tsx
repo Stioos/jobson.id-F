@@ -35,7 +35,7 @@ interface Material {
 }
 
 const SEED: Material[] = [
-  { id: "m1", title: "JOBSONN Brand Brochure 2025", category: "Brochures", type: "PDF · 4pp", lang: "English", downloads: 248, lastUpdated: "2025-01-12", thumbColor: "bg-brand/20" },
+  { id: "m1", title: "jobson.id Brand Brochure 2025", category: "Brochures", type: "PDF · 4pp", lang: "English", downloads: 248, lastUpdated: "2025-01-12", thumbColor: "bg-brand/20" },
   { id: "m2", title: "Talent Solutions One-Pager", category: "Brochures", type: "PDF · 1pp", lang: "English", downloads: 312, lastUpdated: "2025-01-10", thumbColor: "bg-amber-500/20" },
   { id: "m3", title: "Hindi Brand Brochure", category: "Brochures", type: "PDF · 4pp", lang: "Hindi", downloads: 96, lastUpdated: "2025-01-05", thumbColor: "bg-teal-500/20" },
   { id: "m4", title: "Campus Drive Poster — A2", category: "Posters", type: "PNG · A2", lang: "Bilingual", downloads: 184, lastUpdated: "2025-01-08", thumbColor: "bg-rose-500/20" },

@@ -15,8 +15,8 @@ export function WebuosLogo({ size = "md", className }: WebuosLogoProps) {
   return (
     <span className={cn("inline-flex items-center gap-2", className)}>
       <Image
-        src="/jobsonn-logo.png"
-        alt="JOBSONN"
+        src="/jobson-id-logo.png"
+        alt="jobson.id"
         width={128}
         height={36}
         className={cn(heightCls, "object-contain")}

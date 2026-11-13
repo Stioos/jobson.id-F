@@ -33,9 +33,9 @@ const SEED_COLLEGES: College[] = [
   {
     id: "col1", name: "VIT Bangalore", location: "Bengaluru, KA",
     documents: [
-      { id: "d1", title: "MoU 2025 — Signed.pdf", uploadedBy: "Priya (JOBSONN)", date: "2025-01-10", size: "248 KB" },
+      { id: "d1", title: "MoU 2025 — Signed.pdf", uploadedBy: "Priya (jobson.id)", date: "2025-01-10", size: "248 KB" },
       { id: "d2", title: "Q4 Placement Report.xlsx", uploadedBy: "Dr. Rao (VIT)", date: "2025-01-08", size: "182 KB" },
-      { id: "d3", title: "Curriculum Mapping.xlsx", uploadedBy: "Karan (JOBSONN)", date: "2025-01-05", size: "96 KB" },
+      { id: "d3", title: "Curriculum Mapping.xlsx", uploadedBy: "Karan (jobson.id)", date: "2025-01-05", size: "96 KB" },
     ],
     minutes: [
       { id: "m1", title: "Kickoff Meeting", date: "2025-01-03", attendees: 8, notes: "Discussed partnership scope, batch sizes, and placement targets for 2025." },
@@ -47,7 +47,7 @@ const SEED_COLLEGES: College[] = [
       { id: "t3", task: "Onboard 2 faculty trainers", assignee: "Priya", due: "2025-01-18", status: "Done" },
     ],
     announcements: [
-      { id: "an1", message: "First batch kicks off Feb 1 — please confirm trainer list by Jan 25.", by: "Priya (JOBSONN)", date: "2025-01-12" },
+      { id: "an1", message: "First batch kicks off Feb 1 — please confirm trainer list by Jan 25.", by: "Priya (jobson.id)", date: "2025-01-12" },
     ],
     activity: [
       { id: "ac1", type: "doc", summary: "MoU 2025 — Signed.pdf uploaded", at: "2025-01-10T10:00:00" },
@@ -58,7 +58,7 @@ const SEED_COLLEGES: College[] = [
   {
     id: "col2", name: "MSRIT Bengaluru", location: "Bengaluru, KA",
     documents: [
-      { id: "d4", title: "MoU 2024 Renewal.pdf", uploadedBy: "Sneha (JOBSONN)", date: "2024-12-15", size: "212 KB" },
+      { id: "d4", title: "MoU 2024 Renewal.pdf", uploadedBy: "Sneha (jobson.id)", date: "2024-12-15", size: "212 KB" },
       { id: "d5", title: "Talent Pool Dec 2024.csv", uploadedBy: "Dr. Iyer (MSRIT)", date: "2024-12-20", size: "44 KB" },
     ],
     minutes: [
@@ -69,7 +69,7 @@ const SEED_COLLEGES: College[] = [
       { id: "t5", task: "Update student roster", assignee: "Dr. Iyer", due: "2025-01-22", status: "Pending" },
     ],
     announcements: [
-      { id: "an2", message: "Renewal complete — welcome back for 2025!", by: "Sneha (JOBSONN)", date: "2024-12-16" },
+      { id: "an2", message: "Renewal complete — welcome back for 2025!", by: "Sneha (jobson.id)", date: "2024-12-16" },
     ],
     activity: [
       { id: "ac4", type: "doc", summary: "MoU 2024 Renewal.pdf uploaded", at: "2024-12-15T12:00:00" },

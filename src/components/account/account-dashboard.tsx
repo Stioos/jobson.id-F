@@ -7,7 +7,8 @@ import {
   Home, Mail, User, Building2, FileText, Network, FolderCheck,
   ShieldCheck, Lock, Bell, Sparkles, Clock,
   Search, HelpCircle, Grid3x3, Check, ChevronDown,
-  Menu, X, BriefcaseBusiness, IdCard, Scale, GraduationCap, FileCheck2, FolderTree, MapPin
+  Menu, X, BriefcaseBusiness, IdCard, Scale, GraduationCap, FileCheck2, FolderTree, MapPin,
+  Award, FileSignature
 } from "lucide-react";
 import { WebuosLogo } from "@/components/brand/webuos-logo";
 import { cn } from "@/lib/utils";
@@ -44,6 +45,13 @@ import { AgentProfileScreen, AGENT_SECTION_LABELS, type AgentRole, type AgentSec
 import { OrganizationProvider } from "./organization-context";
 import { useAuthUser } from "@/lib/auth-store";
 import { useNav } from "@/lib/store";
+import { UniversityInstitutionProfileScreen } from "./screens/university-institution-profile-screen";
+import { UniversityMouAgreementsScreen } from "./screens/university-mou-agreements-screen";
+import { UniversityAccreditationsScreen } from "./screens/university-accreditations-screen";
+import { UniversityLegalTaxScreen } from "./screens/university-legal-tax-screen";
+import { UniversityAddressMasterScreen } from "./screens/university-address-master-screen";
+import { UniversityAcademicHierarchyScreen } from "./screens/university-academic-hierarchy-screen";
+import { UniversityDocumentsVerifyScreen } from "./screens/university-documents-verify-screen";
 
 // ============================================================
 // Types & Nav Item Configuration
@@ -86,7 +94,11 @@ export type NavId =
   | "resume-documents"
   | "address-master"
   | "registrations-licences"
-  | "account-type";
+  | "account-type"
+  | "mou-agreement"
+  | "accreditations"
+  | "academic-hierarchy"
+  | "institution-profile";
 
 export interface NavGroup {
   title: string;
@@ -102,53 +114,63 @@ export interface NavGroup {
   }[];
 }
 
+export const UNIVERSITY_NAV_ITEMS: NavGroup["items"] = [
+  { id: "business", label: "Business profile", title: "Institution Profile & Campus", description: "Define your university / college profile, leadership, campus infrastructure, and academic credentials.", icon: GraduationCap, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300", badge: "Active", badgeType: "verified" },
+  { id: "legal-tax", label: "Legal & Tax Info", title: "Legal, Trust & Tax Information", description: "Manage sponsoring Trust/Society registration, 12A/80G tax exemptions, PAN, GSTIN & signatory KYC.", icon: FileText, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300", badge: "Verified", badgeType: "verified" },
+  { id: "address-master", label: "Address Master", title: "Campus Address & Facilities Master", description: "Manage main university campus, constituent colleges, research centres, and billing addresses.", icon: MapPin, color: "bg-teal-500/15 text-teal-700 dark:text-teal-300" },
+  { id: "company-info", label: "Company Info", title: "MoU & Partnership Agreement", description: "Manage active partnership MoU, model tier (A–E), 17-stage lifecycle, and 60/90-day renewal status.", icon: FileSignature, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300", badge: "55d Renewal", badgeType: "pro" },
+  { id: "industry", label: "Industry hierarchy", title: "Academic & Department Hierarchy", description: "Map academic faculties, degree levels (UG/PG), student intake quotas, and jobson.id career programs.", icon: Network, color: "bg-teal-500/15 text-teal-700 dark:text-teal-300", badge: "6 Depts", badgeType: "verified" },
+  { id: "registrations-licences", label: "Registrations & Licences", title: "Accreditation & Regulatory Approvals", description: "Track NAAC grade, NBA approvals, UGC recognition, AICTE compliance, and NIRF ranking.", icon: Award, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300", badge: "NAAC A++", badgeType: "verified" },
+  { id: "documents", label: "Legal docs & Verify", title: "Institutional Verification Documents", description: "Store, review, and verify statutory charters, accreditation letters, lab audits, and compliance standing.", icon: FolderCheck, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300", badge: "7 Docs", badgeType: "pro" },
+];
+
 export const NAV_GROUPS: NavGroup[] = [
   {
     title: "Overview & Identity",
     items: [
-      { id: "home", label: "Overview", title: "Overview", description: "A snapshot of your account activity, profile completeness, and quick actions.", icon: Home, color: "bg-blue-500/15 text-blue-600 dark:text-blue-400" },
-      { id: "personal", label: "Personal info", title: "Personal Information", description: "Manage your personal details, profile photo, and identity verification.", icon: User, color: "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400" },
-      { id: "communication", label: "Communication", title: "Communication", description: "Manage your email, phone, and verified contact channels.", icon: Mail, color: "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400", badge: "Verified", badgeType: "verified" },
-      { id: "account-type", label: "Account Type", title: "Account Type Selection", description: "Select your account type (Professional / Individual or Organizations / Business) and your role or business intent.", icon: User, color: "bg-cyan-500/15 text-cyan-600 dark:text-cyan-400" },
+      { id: "home", label: "Overview", title: "Overview", description: "A snapshot of your account activity, profile completeness, and quick actions.", icon: Home, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300" },
+      { id: "personal", label: "Personal info", title: "Personal Information", description: "Manage your personal details, profile photo, and identity verification.", icon: User, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300" },
+      { id: "communication", label: "Communication", title: "Communication", description: "Manage your email, phone, and verified contact channels.", icon: Mail, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300", badge: "Verified", badgeType: "verified" },
+      { id: "account-type", label: "Account Type", title: "Account Type Selection", description: "Select your account type (Professional / Individual or Organizations / Business) and your role or business intent.", icon: User, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300" },
     ],
   },
   {
     title: "Business & Verification",
     items: [
-      { id: "business", label: "Business profile", title: "Business Profile", description: "Define how your company, capabilities, and industrial offerings appear to prospective enterprise clients.", icon: Building2, color: "bg-amber-500/15 text-amber-600 dark:text-amber-400", badge: "Active", badgeType: "verified" },
-      { id: "legal-tax", label: "Legal & Tax Info", title: "Legal & Tax Information", description: "Manage GSTN, tax registrations, and statutory identifiers.", icon: FileText, color: "bg-amber-500/15 text-amber-600 dark:text-amber-400", badge: "Verified", badgeType: "verified" },
-      { id: "address-master", label: "Address Master", title: "Address Master", description: "Manage registered, billing and shipping addresses for your organization.", icon: MapPin, color: "bg-cyan-500/15 text-cyan-600 dark:text-cyan-400" },
-      { id: "company-info", label: "Company Info", title: "Company Information", description: "Maintain registered company details, addresses, and operating information.", icon: BriefcaseBusiness, color: "bg-amber-500/15 text-amber-600 dark:text-amber-400" },
-      { id: "industry", label: "Industry hierarchy", title: "Industry Hierarchy", description: "Map your business across industries, sectors, and categories.", icon: Network, color: "bg-amber-500/15 text-amber-600 dark:text-amber-400" },
-      { id: "category-hierarchy", label: "Category hierarchy", title: "Category Hierarchy", description: "Choose the categories and subcategories applicable to your business as registered, industry and operations.", icon: FolderTree, color: "bg-amber-500/15 text-amber-600 dark:text-amber-400" },
-      { id: "registrations-licences", label: "Registrations & Licences", title: "Registrations & Licences", description: "Select applicable government registrations, licences and approvals for your business.", icon: ShieldCheck, color: "bg-blue-500/15 text-blue-600 dark:text-blue-400" },
-      { id: "documents", label: "Legal docs & Verify", title: "Legal Documents & Verification", description: "Store and verify licenses, certificates, and legal documents.", icon: FolderCheck, color: "bg-amber-500/15 text-amber-600 dark:text-amber-400", badge: "5 Docs", badgeType: "pro" },
+      { id: "business", label: "Business profile", title: "Business Profile", description: "Define how your company, capabilities, and industrial offerings appear to prospective enterprise clients.", icon: Building2, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300", badge: "Active", badgeType: "verified" },
+      { id: "legal-tax", label: "Legal & Tax Info", title: "Legal & Tax Information", description: "Manage GSTN, tax registrations, and statutory identifiers.", icon: FileText, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300", badge: "Verified", badgeType: "verified" },
+      { id: "address-master", label: "Address Master", title: "Address Master", description: "Manage registered, billing and shipping addresses for your organization.", icon: MapPin, color: "bg-teal-500/15 text-teal-700 dark:text-teal-300" },
+      { id: "company-info", label: "Company Info", title: "Company Information", description: "Maintain registered company details, addresses, and operating information.", icon: BriefcaseBusiness, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300" },
+      { id: "industry", label: "Industry hierarchy", title: "Industry Hierarchy", description: "Map your business across industries, sectors, and categories.", icon: Network, color: "bg-teal-500/15 text-teal-700 dark:text-teal-300" },
+      { id: "category-hierarchy", label: "Category hierarchy", title: "Category Hierarchy", description: "Choose the categories and subcategories applicable to your business as registered, industry and operations.", icon: FolderTree, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300" },
+      { id: "registrations-licences", label: "Registrations & Licences", title: "Registrations & Licences", description: "Select applicable government registrations, licences and approvals for your business.", icon: ShieldCheck, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300" },
+      { id: "documents", label: "Legal docs & Verify", title: "Legal Documents & Verification", description: "Store and verify licenses, certificates, and legal documents.", icon: FolderCheck, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300", badge: "5 Docs", badgeType: "pro" },
     ],
   },
   {
     title: "Agents",
     items: [
-      { id: "identity", label: "Account & identity", title: "Account & Identity", description: "Verify your identity and account details as an agent.", icon: IdCard, color: "bg-amber-500/15 text-amber-600 dark:text-amber-400" },
-      { id: "experience", label: "Sales experience", title: "Sales Experience", description: "Showcase your sales roles, achievements, and experience.", icon: BriefcaseBusiness, color: "bg-amber-500/15 text-amber-600 dark:text-amber-400" },
-      { id: "commission", label: "Work & commission preferences", title: "Work & Commission Preferences", description: "Define your working terms, commission structure, and preferences.", icon: Scale, color: "bg-amber-500/15 text-amber-600 dark:text-amber-400" },
-      { id: "skills", label: "Skills", title: "Skills", description: "Highlight your key skills, tools, and areas of expertise.", icon: Sparkles, color: "bg-amber-500/15 text-amber-600 dark:text-amber-400" },
-      { id: "education", label: "Education & verification", title: "Education & Verification", description: "Add your education, certifications, and verifications.", icon: GraduationCap, color: "bg-amber-500/15 text-amber-600 dark:text-amber-400" },
-      { id: "consent", label: "Consent & agreement", title: "Consent & Agreement", description: "Review and accept the terms, consent, and agreements.", icon: FileCheck2, color: "bg-amber-500/15 text-amber-600 dark:text-amber-400" },
-      { id: "review", label: "Review", title: "Review & Submit", description: "Review your profile and submit for verification.", icon: ShieldCheck, color: "bg-amber-500/15 text-amber-600 dark:text-amber-400" },
+      { id: "identity", label: "Account & identity", title: "Account & Identity", description: "Verify your identity and account details as an agent.", icon: IdCard, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300" },
+      { id: "experience", label: "Sales experience", title: "Sales Experience", description: "Showcase your sales roles, achievements, and experience.", icon: BriefcaseBusiness, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300" },
+      { id: "commission", label: "Work & commission preferences", title: "Work & Commission Preferences", description: "Define your working terms, commission structure, and preferences.", icon: Scale, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300" },
+      { id: "skills", label: "Skills", title: "Skills", description: "Highlight your key skills, tools, and areas of expertise.", icon: Sparkles, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300" },
+      { id: "education", label: "Education & verification", title: "Education & Verification", description: "Add your education, certifications, and verifications.", icon: GraduationCap, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300" },
+      { id: "consent", label: "Consent & agreement", title: "Consent & Agreement", description: "Review and accept the terms, consent, and agreements.", icon: FileCheck2, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300" },
+      { id: "review", label: "Review", title: "Review & Submit", description: "Review your profile and submit for verification.", icon: ShieldCheck, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300" },
     ],
   },
   {
     title: "Security & Governance",
     items: [
-      { id: "security", label: "Security & sign-in", title: "Security & Sign-in", description: "Manage passwords, two-factor authentication, and active sessions.", icon: Lock, color: "bg-blue-500/15 text-blue-600 dark:text-blue-400", badge: "2FA On", badgeType: "verified" },
-      { id: "privacy", label: "Data & privacy", title: "Data & Privacy", description: "Control how your data is collected, used, and shared.", icon: ShieldCheck, color: "bg-orange-500/15 text-orange-600 dark:text-orange-400" },
+      { id: "security", label: "Security & sign-in", title: "Security & Sign-in", description: "Manage passwords, two-factor authentication, and active sessions.", icon: Lock, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300", badge: "2FA On", badgeType: "verified" },
+      { id: "privacy", label: "Data & privacy", title: "Data & Privacy", description: "Control how your data is collected, used, and shared.", icon: ShieldCheck, color: "bg-teal-500/15 text-teal-700 dark:text-teal-300" },
     ],
   },
   {
     title: "System & Resources",
     items: [
-      { id: "notifications", label: "Notifications", title: "Notifications", description: "Configure email, push, and in-app notification preferences.", icon: Bell, color: "bg-cyan-500/15 text-cyan-600 dark:text-cyan-400", badge: "2 New", badgeType: "pending" },
-      { id: "subscription", label: "Membership plan", title: "Membership Plan", description: "Manage your subscription, billing, and plan features.", icon: Sparkles, color: "bg-amber-500/15 text-amber-600 dark:text-amber-400", badge: "Enterprise", badgeType: "pro" },
+      { id: "notifications", label: "Notifications", title: "Notifications", description: "Configure email, push, and in-app notification preferences.", icon: Bell, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300", badge: "2 New", badgeType: "pending" },
+      { id: "subscription", label: "Membership plan", title: "Membership Plan", description: "Manage your subscription, billing, and plan features.", icon: Sparkles, color: "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300", badge: "Enterprise", badgeType: "pro" },
       { id: "activity", label: "Activity & logs", title: "Activity & Logs", description: "Review recent account activity and audit logs.", icon: Clock, color: "bg-slate-500/15 text-slate-600 dark:text-slate-400" },
     ],
   },
@@ -160,17 +182,20 @@ function normalizeNavId(id: string | null | undefined): NavId | null {
   if (lower === "legal-tax" || lower === "legal-tax-info" || lower === "gstn" || lower === "tax") {
     return "legal-tax";
   }
-  if (lower === "company-info" || lower === "company") {
+  if (lower === "company-info" || lower === "company" || lower === "mou" || lower === "mou-agreement" || lower === "mou-agreements") {
     return "company-info";
   }
-  if (lower === "business" || lower === "business-profile") {
+  if (lower === "business" || lower === "business-profile" || lower === "institution-profile" || lower === "university-profile") {
     return "business";
   }
   if (lower === "account-type" || lower === "account-type-selection" || lower === "accounttype") {
     return "account-type";
   }
-  if (lower === "industry" || lower === "industries" || lower === "industry-hierarchy") {
+  if (lower === "industry" || lower === "industries" || lower === "industry-hierarchy" || lower === "academic-hierarchy" || lower === "departments") {
     return "industry";
+  }
+  if (lower === "registrations-licences" || lower === "accreditations" || lower === "accreditation") {
+    return "registrations-licences";
   }
   if (lower === "category-hierarchy" || lower === "categories" || lower === "category") {
     return "category-hierarchy";
@@ -181,8 +206,10 @@ function normalizeNavId(id: string | null | undefined): NavId | null {
 function isNavActive(itemId: NavId, activeNav: NavId): boolean {
   if (activeNav === itemId) return true;
   if (itemId === "legal-tax" && (activeNav === "gstn" || (activeNav as string) === "tax")) return true;
-  if (itemId === "company-info" && (activeNav as string) === "company") return true;
-  if (itemId === "industry" && ((activeNav as string) === "industries" || (activeNav as string) === "industry-hierarchy")) return true;
+  if (itemId === "company-info" && ((activeNav as string) === "company" || (activeNav as string) === "mou" || (activeNav as string) === "mou-agreement" || (activeNav as string) === "mou-agreements")) return true;
+  if (itemId === "business" && ((activeNav as string) === "institution-profile" || (activeNav as string) === "university-profile")) return true;
+  if (itemId === "industry" && ((activeNav as string) === "industries" || (activeNav as string) === "industry-hierarchy" || (activeNav as string) === "academic-hierarchy" || (activeNav as string) === "departments")) return true;
+  if (itemId === "registrations-licences" && ((activeNav as string) === "accreditations" || (activeNav as string) === "accreditation")) return true;
   if (itemId === "category-hierarchy" && ((activeNav as string) === "categories" || (activeNav as string) === "category")) return true;
   return false;
 }
@@ -280,6 +307,12 @@ export function AccountDashboard() {
     () => ""
   );
   const isEmployerPortal = portalChoice === "employer";
+  const isUniversityPartner = useMemo(() => {
+    if (portalChoice === "universal" || portalChoice === "partner") return true;
+    if (resolvedRole === "university" || resolvedRole === "college" || resolvedRole === "partnerships") return true;
+    if (queryRole === "university" || queryRole === "college" || queryRole === "partnerships") return true;
+    return false;
+  }, [portalChoice, resolvedRole, queryRole]);
 
   const emailParam = searchParams.get("email");
   const phoneParam = searchParams.get("phone");
@@ -288,7 +321,7 @@ export function AccountDashboard() {
 
   const email = emailParam || (authUser.email || "jobson.id@gmail.com");
   const phone = phoneParam || (authUser.phone || "+91 98765 43210");
-  const companyName = companyParam || nameParam || (authUser.companyName || (authUser.fullName || "JOBSONN Career Platform"));
+  const companyName = companyParam || nameParam || (authUser.companyName || (authUser.fullName || "jobson.id Career Platform"));
   const initials = authUser.initials || "JN";
 
   // Initial tab resolution with role-based restriction on legal-tax
@@ -390,6 +423,19 @@ export function AccountDashboard() {
       ];
     }
 
+    // ─── University / College Partner: specialized higher-ed verification flow ───
+    if (isUniversityPartner) {
+      return [
+        identityGroup,
+        {
+          title: "Business & Verification",
+          items: UNIVERSITY_NAV_ITEMS,
+        },
+        securityGroup,
+        systemGroup,
+      ];
+    }
+
     // ─── Organization / Business: all business intents (sell, buy, both, brands) ───
     // All business intents get the full Business & Verification group.
     // The specific intent (sell/buy/both/brands) is stored and can be used
@@ -413,7 +459,7 @@ export function AccountDashboard() {
       securityGroup,
       systemGroup,
     ];
-  }, [agentRole, isEmployeeRole, isEmployerPortal, resolvedRole]);
+  }, [agentRole, isEmployeeRole, isEmployerPortal, isUniversityPartner, resolvedRole]);
 
   // Flattened nav items for searching & matching
   const allNavItems = useMemo(() => {
@@ -499,13 +545,13 @@ export function AccountDashboard() {
 
   return (
     <OrganizationProvider>
-      <div className="min-h-screen bg-background text-foreground dark:bg-[#070b14] dark:text-white">
+      <div className="min-h-screen bg-gradient-to-br from-emerald-500/[0.03] via-background to-teal-500/[0.03] text-foreground dark:bg-[#061811] dark:from-[#061811] dark:via-[#081f16] dark:to-[#04150e] dark:text-white">
         {/* ───────────────────────────────────────────────
             Top Header Bar
         ─────────────────────────────────────────────── */}
-        <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur-md dark:border-white/10 dark:bg-[#070b14]/95">
+        <header className="sticky top-0 z-40 border-b border-emerald-500/15 bg-background/90 backdrop-blur-xl dark:border-emerald-500/15 dark:bg-[#081f16]/95">
           <div className="relative mx-auto flex h-14 max-w-[1440px] items-center gap-4 px-4 sm:px-6 lg:gap-0 lg:px-0">
-            <span className="pointer-events-none absolute inset-y-0 left-72 hidden border-l border-border dark:border-white/10 lg:block" aria-hidden="true" />
+            <span className="pointer-events-none absolute inset-y-0 left-72 hidden border-l border-emerald-500/10 dark:border-emerald-500/10 lg:block" aria-hidden="true" />
             {agentRole ? (
               <span className="pointer-events-none absolute inset-y-0 left-72 hidden items-center pl-4 text-xs font-semibold text-muted-foreground dark:text-slate-400 lg:flex">
                 {activeParentLabel}
@@ -518,7 +564,7 @@ export function AccountDashboard() {
               <button
                 type="button"
                 onClick={() => setMobileDrawerOpen(true)}
-                className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground lg:hidden dark:text-slate-400 dark:hover:bg-white/10 dark:hover:text-white cursor-pointer"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground hover:bg-emerald-500/10 hover:text-emerald-700 lg:hidden dark:text-slate-400 dark:hover:bg-white/10 dark:hover:text-white cursor-pointer"
                 aria-label="Open sidebar menu"
               >
                 <Menu className="h-5 w-5" />
@@ -528,7 +574,7 @@ export function AccountDashboard() {
                 type="button"
                 onClick={() => navigate("public", "home")}
                 className="flex items-center cursor-pointer"
-                aria-label="JOBSONN home"
+                aria-label="jobson.id home"
               >
                 <WebuosLogo size="sm" />
               </button>
@@ -541,7 +587,7 @@ export function AccountDashboard() {
             {!agentRole ? (
               <div className="hidden min-w-0 flex-1 flex-col justify-center gap-0.5 md:flex lg:px-12">
                 <h2 className="flex items-center gap-1.5 truncate text-sm font-bold leading-tight text-foreground dark:text-white">
-                  <activeNavItem.icon className="h-3.5 w-3.5 shrink-0 text-cyan-600 dark:text-cyan-400" />
+                  <activeNavItem.icon className="h-3.5 w-3.5 shrink-0 text-emerald-600 dark:text-emerald-400" />
                   <span className="truncate">{activeNavItem.title ?? activeNavItem.label}</span>
                 </h2>
                 <p className="truncate text-[11px] leading-tight text-muted-foreground dark:text-slate-400">
@@ -557,11 +603,11 @@ export function AccountDashboard() {
               <button
                 type="button"
                 onClick={() => handleNavigate("notifications")}
-                className="relative inline-flex h-9 w-9 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground dark:text-slate-400 dark:hover:bg-white/10 dark:hover:text-white cursor-pointer"
+                className="relative inline-flex h-9 w-9 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-emerald-500/10 hover:text-emerald-700 dark:text-slate-400 dark:hover:bg-white/10 dark:hover:text-white cursor-pointer"
                 aria-label="Notifications"
               >
                 <Bell className="h-4.5 w-4.5" />
-                <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-cyan-500 ring-2 ring-background dark:bg-cyan-400 dark:ring-[#070b14]" />
+                <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-emerald-500 ring-2 ring-background dark:bg-emerald-400 dark:ring-[#081f16]" />
               </button>
 
               {/* Profile Dropdown */}
@@ -575,7 +621,7 @@ export function AccountDashboard() {
         ─────────────────────────────────────────────── */}
         <div className={cn("mx-auto flex", isHierarchyScreen ? "w-full max-w-none" : "max-w-[1440px]")}>
           {/* Desktop Scrollable Sidebar */}
-          <aside className="sticky top-14 hidden h-[calc(100vh-56px)] w-72 shrink-0 flex-col border-r border-border bg-card/60 backdrop-blur-md lg:flex dark:border-white/10 dark:bg-[#070b14]">
+          <aside className="sticky top-14 hidden h-[calc(100vh-56px)] w-72 shrink-0 flex-col border-r border-emerald-500/10 bg-card/80 backdrop-blur-xl lg:flex dark:border-emerald-500/10 dark:bg-[#071912]/95">
             {/* Sidebar Search Bar */}
             <div className="p-3 pb-2">
               <div className="relative">
@@ -585,7 +631,7 @@ export function AccountDashboard() {
                   value={sidebarSearch}
                   onChange={(e) => setSidebarSearch(e.target.value)}
                   placeholder="Search settings..."
-                  className="h-9 w-full rounded-xl border border-border bg-muted/60 pl-8 pr-3 text-xs text-foreground placeholder:text-muted-foreground focus:border-cyan-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white dark:placeholder:text-slate-600"
+                  className="h-9 w-full rounded-xl border border-emerald-500/15 bg-muted/60 pl-8 pr-3 text-xs text-foreground placeholder:text-muted-foreground focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 focus:outline-none dark:border-emerald-500/20 dark:bg-slate-950/60 dark:text-white dark:placeholder:text-slate-500"
                 />
                 {sidebarSearch && (
                   <button
@@ -612,7 +658,6 @@ export function AccountDashboard() {
                 const isAlwaysEnabled = alwaysEnabledGroups.some((g) => group.title.includes(g));
                 const isAccountTypeSpecific = !isAlwaysEnabled;
                 const groupHidden = isAccountTypeSpecific && !hasAccountType;
-                const groupDisabled = false; // No group is "disabled" — either shown or hidden
 
                 if (groupHidden) return null;
 
@@ -633,8 +678,8 @@ export function AccountDashboard() {
                           className={cn(
                             "group flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-xs transition-all cursor-pointer",
                             isActive
-                              ? "bg-cyan-500/10 font-bold text-cyan-600 ring-1 ring-cyan-500/30 dark:text-white"
-                              : "text-muted-foreground hover:bg-muted hover:text-foreground dark:text-slate-400 dark:hover:bg-white/5 dark:hover:text-white",
+                              ? "bg-gradient-to-r from-emerald-500/20 via-emerald-500/10 to-transparent font-bold text-emerald-950 dark:text-emerald-100 border-l-2 border-emerald-500 shadow-xs"
+                              : "text-muted-foreground hover:bg-emerald-500/5 hover:text-emerald-900 dark:text-slate-400 dark:hover:bg-emerald-500/10 dark:hover:text-emerald-200",
                           )}
                         >
                           <span
@@ -648,18 +693,18 @@ export function AccountDashboard() {
 
                           <span className="flex-1 truncate">{item.label}</span>
 
-                          {(item.id === "documents" ? `${docCount} Docs` : item.badge) && (
+                          {(item.id === "documents" ? (isUniversityPartner ? item.badge : `${docCount} Docs`) : item.badge) && (
                             <span
                               className={cn(
                                 "rounded px-1.5 py-0.5 text-[9px] font-bold",
                                 item.badgeType === "verified"
-                                  ? "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400"
+                                  ? "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30"
                                   : item.badgeType === "pending"
-                                    ? "bg-amber-500/15 text-amber-600 dark:text-amber-400"
-                                    : "bg-cyan-500/15 text-cyan-600 dark:bg-cyan-500/10 dark:text-cyan-400",
+                                    ? "bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-500/30"
+                                    : "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30",
                               )}
                             >
-                              {item.id === "documents" ? `${docCount} Docs` : item.badge}
+                              {item.id === "documents" ? (isUniversityPartner ? item.badge : `${docCount} Docs`) : item.badge}
                             </span>
                           )}
                         </button>
@@ -699,7 +744,11 @@ export function AccountDashboard() {
               )}
 
               {activeNav === "business" && (
-                <BusinessProfileScreen onNavigate={handleNavigate} />
+                isUniversityPartner ? (
+                  <UniversityInstitutionProfileScreen onNavigate={handleNavigate} />
+                ) : (
+                  <BusinessProfileScreen onNavigate={handleNavigate} />
+                )
               )}
 
               {activeNav === "account-type" && (
@@ -707,27 +756,55 @@ export function AccountDashboard() {
               )}
 
               {(activeNav === "legal-tax" || activeNav === "gstn") && !isEmployeeRole && (
-                <LegalTaxInfoScreen onNavigate={handleNavigate} />
+                isUniversityPartner ? (
+                  <UniversityLegalTaxScreen onNavigate={handleNavigate} />
+                ) : (
+                  <LegalTaxInfoScreen onNavigate={handleNavigate} />
+                )
               )}
 
-              {(activeNav === "company-info" || (activeNav as string) === "company") && (
-                <CompanyInfoScreen onNavigate={handleNavigate} />
+              {(activeNav === "company-info" || (activeNav as string) === "company" || (activeNav as string) === "mou" || (activeNav as string) === "mou-agreement") && (
+                isUniversityPartner ? (
+                  <UniversityMouAgreementsScreen onNavigate={handleNavigate} />
+                ) : (
+                  <CompanyInfoScreen onNavigate={handleNavigate} />
+                )
               )}
 
-              {activeNav === "industry" && <IndustryHierarchyScreen onNavigate={handleNavigate} />}
+              {(activeNav === "industry" || (activeNav as string) === "academic-hierarchy") && (
+                isUniversityPartner ? (
+                  <UniversityAcademicHierarchyScreen onNavigate={handleNavigate} />
+                ) : (
+                  <IndustryHierarchyScreen onNavigate={handleNavigate} />
+                )
+              )}
 
-              {activeNav === "category-hierarchy" && !isEmployerPortal && (
+              {activeNav === "category-hierarchy" && !isEmployerPortal && !isUniversityPartner && (
                 <CategoryHierarchyScreen onNavigate={handleNavigate} />
               )}
 
-              {activeNav === "documents" && !isEmployerPortal && <LegalDocumentsScreen />}
-
-              {activeNav === "address-master" && (
-                <AddressMasterScreen onNavigate={handleNavigate} />
+              {activeNav === "documents" && !isEmployerPortal && (
+                isUniversityPartner ? (
+                  <UniversityDocumentsVerifyScreen onNavigate={handleNavigate} />
+                ) : (
+                  <LegalDocumentsScreen />
+                )
               )}
 
-              {activeNav === "registrations-licences" && !isEmployerPortal && (
-                <RegistrationsLicencesScreen onNavigate={handleNavigate} />
+              {activeNav === "address-master" && (
+                isUniversityPartner ? (
+                  <UniversityAddressMasterScreen onNavigate={handleNavigate} />
+                ) : (
+                  <AddressMasterScreen onNavigate={handleNavigate} />
+                )
+              )}
+
+              {(activeNav === "registrations-licences" || (activeNav as string) === "accreditations") && !isEmployerPortal && (
+                isUniversityPartner ? (
+                  <UniversityAccreditationsScreen onNavigate={handleNavigate} />
+                ) : (
+                  <RegistrationsLicencesScreen onNavigate={handleNavigate} />
+                )
               )}
 
               {activeNav === "security" && <SecurityScreen />}
@@ -776,7 +853,7 @@ export function AccountDashboard() {
               className="fixed inset-0 bg-black/70 backdrop-blur-sm"
               onClick={() => setMobileDrawerOpen(false)}
             />
-            <div className="fixed inset-y-0 left-0 w-80 max-w-[85vw] border-r border-border bg-background p-4 shadow-2xl flex flex-col dark:border-white/10 dark:bg-[#070b14]">
+            <div className="fixed inset-y-0 left-0 w-80 max-w-[85vw] border-r border-border bg-background p-4 shadow-2xl flex flex-col dark:border-emerald-500/20 dark:bg-[#071912]">
               <div className="flex items-center justify-between pb-3 border-b border-border dark:border-white/10">
                 <div className="flex items-center gap-2">
                   <WebuosLogo size="sm" />
@@ -811,8 +888,8 @@ export function AccountDashboard() {
                             className={cn(
                               "flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-xs transition-all cursor-pointer",
                               isActive
-                                ? "bg-cyan-500/10 font-bold text-cyan-600 ring-1 ring-cyan-500/30 dark:text-white"
-                                : "text-muted-foreground hover:bg-muted hover:text-foreground dark:text-slate-400 dark:hover:bg-white/5 dark:hover:text-white",
+                                ? "bg-gradient-to-r from-emerald-500/20 to-transparent font-bold text-emerald-950 dark:text-emerald-100 border-l-2 border-emerald-500"
+                                : "text-muted-foreground hover:bg-emerald-500/5 hover:text-emerald-900 dark:text-slate-400 dark:hover:bg-white/5 dark:hover:text-white",
                             )}
                           >
                             <span
@@ -824,9 +901,9 @@ export function AccountDashboard() {
                               <Icon className="h-4 w-4" />
                             </span>
                             <span className="flex-1 truncate">{item.label}</span>
-                            {(item.id === "documents" ? `${docCount} Docs` : item.badge) && (
-                              <span className="rounded bg-cyan-500/10 px-1.5 py-0.5 text-[9px] font-bold text-cyan-600 dark:bg-white/10 dark:text-cyan-400">
-                                {item.id === "documents" ? `${docCount} Docs` : item.badge}
+                            {(item.id === "documents" ? (isUniversityPartner ? item.badge : `${docCount} Docs`) : item.badge) && (
+                              <span className="rounded bg-emerald-500/15 border border-emerald-500/30 px-1.5 py-0.5 text-[9px] font-bold text-emerald-800 dark:text-emerald-300">
+                                {item.id === "documents" ? (isUniversityPartner ? item.badge : `${docCount} Docs`) : item.badge}
                               </span>
                             )}
                           </button>

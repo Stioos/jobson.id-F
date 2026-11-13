@@ -82,7 +82,7 @@ export function PartnerAnnouncements() {
     <div className="space-y-6">
       <PageHeader
         title="Announcements"
-        description={`${partner.name} — system, policy, program, event, and compliance announcements from JOBSONN.`}
+        description={`${partner.name} — system, policy, program, event, and compliance announcements from jobson.id.`}
         icon={<Icon name="BellRing" className="h-6 w-6" />}
         actions={[
           { label: "Mark all read", icon: "CheckCircle2", variant: "outline", onClick: markAllRead },

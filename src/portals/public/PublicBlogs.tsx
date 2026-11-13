@@ -117,13 +117,13 @@ export function PublicBlogs() {
         <div className="absolute inset-0 bg-grid opacity-50" aria-hidden />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-background" aria-hidden />
         <div className="relative mx-auto max-w-4xl px-4 py-16 text-center sm:px-6 sm:py-20 lg:px-8">
-          <Badge className="mb-4 gap-1"><Newspaper className="h-3 w-3" /> JOBSONN Blog</Badge>
+          <Badge className="mb-4 gap-1"><Newspaper className="h-3 w-3" /> jobson.id Blog</Badge>
           <h1 className="text-3xl font-bold tracking-tight text-balance sm:text-4xl lg:text-5xl">
             Insights, Guides &amp; <span className="text-brand">Industry Perspectives</span>
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-base text-muted-foreground sm:text-lg">
             Deep dives on AI, technology careers, marketing playbooks, and the future of work in India —
-            written by the JOBSONN team and industry practitioners.
+            written by the jobson.id team and industry practitioners.
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <Button size="lg" onClick={() => navigate("public", "programs")} className="gap-1.5">
@@ -346,7 +346,7 @@ export function PublicBlogs() {
                 Subscribe to our weekly digest
               </h2>
               <p className="mx-auto mt-2 max-w-xl text-sm text-muted-foreground">
-                Get the best of JOBSONN&apos;s insights — articles, industry deep-dives, and career
+                Get the best of jobson.id&apos;s insights — articles, industry deep-dives, and career
                 playbooks — delivered every Saturday. No spam, unsubscribe anytime.
               </p>
               <form

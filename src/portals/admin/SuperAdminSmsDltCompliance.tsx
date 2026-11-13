@@ -19,8 +19,8 @@ interface DltEntity {
 }
 
 const DLT_ENTITIES: DltEntity[] = [
-  { id: "dlt_001", entity: "JOBSONN Technologies Pvt Ltd", type: "PEID", status: "approved", registeredOn: "2022-03-12", expiresOn: "2025-03-11", provider: "Jio" },
-  { id: "dlt_002", entity: "JOBSONN", type: "Header ID", status: "approved", registeredOn: "2022-03-15", expiresOn: "2025-03-14", provider: "Jio" },
+  { id: "dlt_001", entity: "jobson.id Technologies Pvt Ltd", type: "PEID", status: "approved", registeredOn: "2022-03-12", expiresOn: "2025-03-11", provider: "Jio" },
+  { id: "dlt_002", entity: "jobson.id", type: "Header ID", status: "approved", registeredOn: "2022-03-15", expiresOn: "2025-03-14", provider: "Jio" },
   { id: "dlt_003", entity: "JOBSNN", type: "Header ID", status: "approved", registeredOn: "2022-04-02", expiresOn: "2025-04-01", provider: "Airtel" },
   { id: "dlt_004", entity: "OTP Verification", type: "Template ID", status: "approved", registeredOn: "2022-04-10", expiresOn: "2027-04-09", provider: "Jio" },
   { id: "dlt_005", entity: "Interview Reminder", type: "Template ID", status: "approved", registeredOn: "2022-05-22", expiresOn: "2027-05-21", provider: "Jio" },

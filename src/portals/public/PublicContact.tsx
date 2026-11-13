@@ -46,7 +46,7 @@ const CONTACT_CARDS = [
     icon: Briefcase,
     title: "Sales",
     desc: "Pricing, demos, enterprise plans.",
-    email: "sales@jobsonn.com",
+    email: "sales@jobson.id",
     phone: "+91 80 4567 8900",
     tone: "bg-brand/10 text-brand",
   },
@@ -54,7 +54,7 @@ const CONTACT_CARDS = [
     icon: LifeBuoy,
     title: "Support",
     desc: "Account, billing, technical issues.",
-    email: "support@jobsonn.com",
+    email: "support@jobson.id",
     phone: "+91 80 4567 8901",
     tone: "bg-amber-500/10 text-amber-600",
   },
@@ -62,7 +62,7 @@ const CONTACT_CARDS = [
     icon: Newspaper,
     title: "Press",
     desc: "Media, interviews, statements.",
-    email: "press@jobsonn.com",
+    email: "press@jobson.id",
     phone: "+91 80 4567 8902",
     tone: "bg-violet-500/10 text-violet-600",
   },
@@ -76,15 +76,15 @@ const OFFICES = [
 
 const FAQ = [
   {
-    q: "How much does JOBSONN cost for candidates?",
-    a: "JOBSONN is free for candidates — always. Build a profile, apply to unlimited jobs, and access core features at no cost. Premium candidate features (priority screening, advanced AI insights) will be available as an opt-in subscription in the future.",
+    q: "How much does jobson.id cost for candidates?",
+    a: "jobson.id is free for candidates — always. Build a profile, apply to unlimited jobs, and access core features at no cost. Premium candidate features (priority screening, advanced AI insights) will be available as an opt-in subscription in the future.",
   },
   {
     q: "What plans do you offer employers?",
     a: "We have four tiers: Free (1 active job post), Starter, Professional, and Business — plus a custom Enterprise plan with SSO, dedicated CSM, and SLAs. See the employer portal for full pricing, or contact sales for a tailored quote.",
   },
   {
-    q: "Is my data safe with JOBSONN?",
+    q: "Is my data safe with jobson.id?",
     a: "Yes. We're DPDP-ready with granular consent controls. You decide who sees your profile, can withdraw consent anytime, and request full data deletion. We never sell candidate data to third parties.",
   },
   {

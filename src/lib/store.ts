@@ -46,7 +46,7 @@ export const useNav = create<NavState>()(
         if (portal !== "public" && !isAuthed) {
           if (typeof window !== "undefined") {
             try {
-              sessionStorage.setItem("jobsonn_redirect_portal", portal);
+              sessionStorage.setItem("jobson_id_redirect_portal", portal);
             } catch {}
           }
           toast.error(`Please sign in to access the ${portal.charAt(0).toUpperCase() + portal.slice(1)} Portal.`);
@@ -76,7 +76,7 @@ export const useNav = create<NavState>()(
       setSidebarOpen: (sidebarOpen) => set({ sidebarOpen }),
     }),
     {
-      name: "jobsonn-nav-v3",
+      name: "jobson.id-nav-v3",
       partialize: (s) => ({ portal: s.portal, route: s.route, role: s.role }),
       skipHydration: true,
     }
@@ -160,8 +160,8 @@ const roleUsers: Record<UserRole, DemoUser> = {
   interviewer: { id: "pu_10", name: "Anika Verma", email: "anika@techcorp.com", role: "interviewer", avatar: "AV", orgName: "TechCorp India", orgLogo: "TC" },
   billing_manager: { id: "u_003", name: "Rohan Mehta", email: "rohan@techcorp.com", role: "billing_manager", avatar: "RM", orgName: "TechCorp India", orgLogo: "TC" },
   org_admin: { id: "u_003", name: "Rohan Mehta", email: "rohan@techcorp.com", role: "org_admin", avatar: "RM", orgName: "TechCorp India", orgLogo: "TC" },
-  platform_admin: { id: "u_001", name: "Aarav Sharma", email: "aarav@jobsonn.com", role: "platform_admin", avatar: "AS" },
-  support: { id: "u_001", name: "Aarav Sharma", email: "support@jobsonn.com", role: "support", avatar: "AS" },
+  platform_admin: { id: "u_001", name: "Aarav Sharma", email: "aarav@jobson.id", role: "platform_admin", avatar: "AS" },
+  support: { id: "u_001", name: "Aarav Sharma", email: "support@jobson.id", role: "support", avatar: "AS" },
 };
 
 export const useAuth = create<AuthState>()(
@@ -186,7 +186,7 @@ export const useAuth = create<AuthState>()(
       },
       logout: () => set({ user: null, isAuthenticated: false }),
     }),
-    { name: "jobsonn-auth-v3", skipHydration: true }
+    { name: "jobson.id-auth-v3", skipHydration: true }
   )
 );
 

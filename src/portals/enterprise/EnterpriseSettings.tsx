@@ -56,9 +56,9 @@ const REGIONS = [
 ];
 
 const SUPPORT_CONTACTS = [
-  { role: "Account Manager", name: "Aarav Sharma", email: "enterprise@jobsonn.com", phone: "+91 80 1234 5678" },
-  { role: "Technical Lead", name: "Anika Verma", email: "anika@jobsonn.com", phone: "+91 80 1234 5679" },
-  { role: "Billing & Invoices", name: "Finance Desk", email: "billing@jobsonn.com", phone: "+91 80 1234 5680" },
+  { role: "Account Manager", name: "Aarav Sharma", email: "enterprise@jobson.id", phone: "+91 80 1234 5678" },
+  { role: "Technical Lead", name: "Anika Verma", email: "anika@jobson.id", phone: "+91 80 1234 5679" },
+  { role: "Billing & Invoices", name: "Finance Desk", email: "billing@jobson.id", phone: "+91 80 1234 5680" },
 ];
 
 export function EnterpriseSettings() {

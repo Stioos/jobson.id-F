@@ -15,9 +15,9 @@ import { toast } from "sonner";
 import { timeAgo } from "@/lib/format";
 
 const TEMPLATES = [
-  { id: "sms_tpl_001", name: "OTP Verification", body: "Your JOBSONN OTP is {{otp}}. Valid for 10 min. Do not share.", uses: 84_200, dltApproved: true },
+  { id: "sms_tpl_001", name: "OTP Verification", body: "Your jobson.id OTP is {{otp}}. Valid for 10 min. Do not share.", uses: 84_200, dltApproved: true },
   { id: "sms_tpl_002", name: "Interview Reminder", body: "Reminder: Interview for {{job_title}} at {{company_name}} on {{interview_time}}. Reply Y to confirm.", uses: 6_400, dltApproved: true },
-  { id: "sms_tpl_003", name: "Payment Receipt", body: "Payment of ₹{{amount}} received. Txn {{txn_id}}. Thanks for using JOBSONN.", uses: 4_280, dltApproved: true },
+  { id: "sms_tpl_003", name: "Payment Receipt", body: "Payment of ₹{{amount}} received. Txn {{txn_id}}. Thanks for using jobson.id.", uses: 4_280, dltApproved: true },
   { id: "sms_tpl_004", name: "Payout Approved", body: "Payout of ₹{{amount}} approved and credited to your account.", uses: 1_840, dltApproved: true },
   { id: "sms_tpl_005", name: "Promo (Non-DLT)", body: "Get 20% off on premium plans! Use code DIWALI20.", uses: 0, dltApproved: false },
 ];

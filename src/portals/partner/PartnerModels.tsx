@@ -29,7 +29,7 @@ const MODELS: ModelInfo[] = [
     key: "CENTRE",
     label: "Training Centre",
     icon: Building2,
-    description: "Run a physical training centre offering JOBSONN programs to walk-in and online students.",
+    description: "Run a physical training centre offering jobson.id programs to walk-in and online students.",
     capabilities: ["Centre management", "Physical training", "Lead generation", "Admissions", "LMS access", "Certification"],
     idealFor: "Established training companies with physical infrastructure and local marketing.",
     revenueModel: "Revenue share on enrollments (50–70% partner)",
@@ -39,7 +39,7 @@ const MODELS: ModelInfo[] = [
     key: "COLLEGE",
     label: "College / University",
     icon: GraduationCap,
-    description: "Embed JOBSONN curriculum and placements into your college or university.",
+    description: "Embed jobson.id curriculum and placements into your college or university.",
     capabilities: ["Curriculum integration", "Faculty development", "Co-branded centre", "Placement drives", "MoU-based"],
     idealFor: "Autonomous colleges, deemed universities, and large engineering institutions.",
     revenueModel: "Per-student license + revenue share (Models A–E)",
@@ -49,7 +49,7 @@ const MODELS: ModelInfo[] = [
     key: "SERVICE",
     label: "Service Partner",
     icon: Briefcase,
-    description: "Deliver IT services (cloud, devops, maintenance) to JOBSONN clients as a partner.",
+    description: "Deliver IT services (cloud, devops, maintenance) to jobson.id clients as a partner.",
     capabilities: ["Service delivery", "Project / AMC / retainer", "SLA tracking", "Timesheets", "Invoicing"],
     idealFor: "IT services companies with delivery capabilities and SLA discipline.",
     revenueModel: "Revenue share on engagements (60–75% partner)",
@@ -59,7 +59,7 @@ const MODELS: ModelInfo[] = [
     key: "TECHNOLOGY",
     label: "Technology Partner",
     icon: Cpu,
-    description: "Build and deliver technology solutions (ERP, CRM, cloud infra) for JOBSONN clients.",
+    description: "Build and deliver technology solutions (ERP, CRM, cloud infra) for jobson.id clients.",
     capabilities: ["Tech delivery", "OEM partnerships", "Project milestones", "Long-term retainers"],
     idealFor: "Tech consultancies with OEM partnerships (Microsoft, AWS, Google).",
     revenueModel: "Project + retainer revenue share (72% partner)",
@@ -79,7 +79,7 @@ const MODELS: ModelInfo[] = [
     key: "RECRUITMENT",
     label: "Recruitment Partner",
     icon: Users,
-    description: "Source, screen, and place candidates for JOBSONN client mandates on success-fee basis.",
+    description: "Source, screen, and place candidates for jobson.id client mandates on success-fee basis.",
     capabilities: ["Job orders", "Candidate sourcing", "Hotlists", "Onboarding", "Timesheets", "RPO"],
     idealFor: "Recruitment agencies, staffing firms, and RPO providers.",
     revenueModel: "Success fee (8.33–10% of CTC) + retainers",
@@ -95,7 +95,7 @@ export function PartnerModels() {
     <div className="space-y-6">
       <PageHeader
         title="Partnership Models"
-        description="JOBSONN supports 6 distinct partner models. Switch models by contacting the partnership team."
+        description="jobson.id supports 6 distinct partner models. Switch models by contacting the partnership team."
         icon={<Icon name="GitBranch" className="h-6 w-6" />}
       />
 
@@ -109,7 +109,7 @@ export function PartnerModels() {
               <p className="mt-1 text-2xl font-bold text-brand">{currentModel?.label ?? partner.model}</p>
               <p className="mt-1 text-xs text-muted-foreground">{currentModel?.description}</p>
             </div>
-            <Button onClick={() => toast.info("Contact partnership team", { description: "partnerships@jobsonn.com · to switch model" })}>
+            <Button onClick={() => toast.info("Contact partnership team", { description: "partnerships@jobson.id · to switch model" })}>
               <ArrowRight className="h-4 w-4 mr-2" /> Switch Model
             </Button>
           </div>
@@ -185,9 +185,9 @@ export function PartnerModels() {
                 <CardContent className="space-y-3">
                   <div className="grid grid-cols-2 gap-3 text-xs">
                     <div className="rounded-lg border p-2">
-                      <p className="font-medium text-muted-foreground uppercase">JOBSONN Scope</p>
+                      <p className="font-medium text-muted-foreground uppercase">jobson.id Scope</p>
                       <ul className="mt-1 space-y-0.5">
-                        {m.jobsonnScope.map((s) => <li key={s}>• {s}</li>)}
+                        {m.jobsonIdScope.map((s) => <li key={s}>• {s}</li>)}
                       </ul>
                     </div>
                     <div className="rounded-lg border p-2">

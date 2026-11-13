@@ -14,8 +14,8 @@ interface Cookie {
 }
 
 const COOKIES: Cookie[] = [
-  { id: "CK-001", name: "__session", provider: "Jobsonn", category: "Necessary", expiry: "Session", thirdParty: false, consentRequired: false, consentRate: 100, status: "active" },
-  { id: "CK-002", name: "__csrf", provider: "Jobsonn", category: "Necessary", expiry: "1 hour", thirdParty: false, consentRequired: false, consentRate: 100, status: "active" },
+  { id: "CK-001", name: "__session", provider: "jobson.id", category: "Necessary", expiry: "Session", thirdParty: false, consentRequired: false, consentRate: 100, status: "active" },
+  { id: "CK-002", name: "__csrf", provider: "jobson.id", category: "Necessary", expiry: "1 hour", thirdParty: false, consentRequired: false, consentRate: 100, status: "active" },
   { id: "CK-003", name: "_ga", provider: "Google Analytics", category: "Analytics", expiry: "2 years", thirdParty: true, consentRequired: true, consentRate: 78, status: "active" },
   { id: "CK-004", name: "_gid", provider: "Google Analytics", category: "Analytics", expiry: "24 hours", thirdParty: true, consentRequired: true, consentRate: 78, status: "active" },
   { id: "CK-005", name: "_fbp", provider: "Meta Pixel", category: "Marketing", expiry: "90 days", thirdParty: true, consentRequired: true, consentRate: 52, status: "active" },

@@ -1,5 +1,5 @@
 // ============================================================
-// JOBSONN Franchise / Partner Model Domain Types
+// jobson.id Franchise / Partner Model Domain Types
 // 6 partner models: Centre, College, Service, Technology, AI, Recruitment
 // ============================================================
 
@@ -83,7 +83,7 @@ export interface Lead {
   id: string;
   partnerId?: string;
   partnerName?: string;
-  leadSource: "PARTNER_GENERATED" | "JOBSONN_GENERATED" | "JOBSONN_DELIVERY" | "DIGITAL_REFERRAL" | "WALK_IN" | "WEBSITE";
+  leadSource: "PARTNER_GENERATED" | "JOBSON_ID_GENERATED" | "JOBSON_ID_DELIVERY" | "DIGITAL_REFERRAL" | "WALK_IN" | "WEBSITE";
   name: string;
   email: string;
   phone: string;
@@ -101,7 +101,7 @@ export interface RevenueShareRule {
   leadSource: string;
   partnerModel: PartnerModel;
   partnerPct: number;
-  jobsonnPct: number;
+  jobsonIdPct: number;
   priority: number;
   active: boolean;
   ruleName: string;
@@ -121,9 +121,9 @@ export interface RevenueSplit {
   tax: number;
   netAfterFees: number;
   partnerPct: number;
-  jobsonnPct: number;
+  jobsonIdPct: number;
   partnerShare: number;
-  jobsonnShare: number;
+  jobsonIdShare: number;
   ruleApplied: string;
   status: "pending" | "processed" | "settled" | "disputed";
   settledAt?: string;
@@ -139,7 +139,7 @@ export interface Settlement {
   period: string;
   grossAmount: number;
   partnerShare: number;
-  jobsonnShare: number;
+  jobsonIdShare: number;
   deductions: number;
   netPayable: number;
   status: "draft" | "approved" | "paid" | "disputed";
@@ -232,7 +232,7 @@ export interface CollegePartnershipModel {
   id: "A" | "B" | "C" | "D" | "E";
   name: string;
   description: string;
-  jobsonnScope: string[];
+  jobsonIdScope: string[];
   collegeScope: string[];
   revenueModel: string;
   idealFor: string;
@@ -357,7 +357,7 @@ export interface Program {
   durationWeeks: number;
   defaultPrice: number;
   currency: string;
-  jobsonnPct: number;
+  jobsonIdPct: number;
   partnerPct: number;
   deliveryModes: string[];
   certifications: string[];

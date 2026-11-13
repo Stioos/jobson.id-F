@@ -21,14 +21,14 @@ const STAGES = [
 ];
 
 const USERS: OnboardingUser[] = [
-  { id: "o_001", name: "New Admin 1", email: "new.admin@jobsonn.com", role: "Admin", stage: 6, started: "2024-09-15", completed: null },
+  { id: "o_001", name: "New Admin 1", email: "new.admin@jobson.id", role: "Admin", stage: 6, started: "2024-09-15", completed: null },
   { id: "o_002", name: "HR Manager 1", email: "hr@acme.com", role: "HR Manager", stage: 8, started: "2024-09-10", completed: "2024-09-20" },
   { id: "o_003", name: "Recruit Lead", email: "recruit@hirepro.in", role: "Recruiter", stage: 4, started: "2024-09-18", completed: null },
   { id: "o_004", name: "Training Director", email: "ops@edutech.in", role: "Training Provider", stage: 1, started: "2024-09-21", completed: null },
   { id: "o_005", name: "Partner Mgr", email: "partner@southzone.in", role: "Partner", stage: 2, started: "2024-09-19", completed: null },
-  { id: "o_006", name: "Karan M", email: "karan.m@jobsonn.com", role: "Manager", stage: 8, started: "2024-09-15", completed: "2024-09-22" },
+  { id: "o_006", name: "Karan M", email: "karan.m@jobson.id", role: "Manager", stage: 8, started: "2024-09-15", completed: "2024-09-22" },
   { id: "o_007", name: "Abandoned User", email: "ghost@temp.com", role: "Analyst", stage: 3, started: "2024-08-01", completed: null },
-  { id: "o_008", name: "Anjali S", email: "anjali@jobsonn.com", role: "Support", stage: 5, started: "2024-09-17", completed: null },
+  { id: "o_008", name: "Anjali S", email: "anjali@jobson.id", role: "Support", stage: 5, started: "2024-09-17", completed: null },
 ];
 
 export function SuperAdminUserOnboarding() {

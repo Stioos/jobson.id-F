@@ -174,9 +174,9 @@ export function PartnerColleges() {
                   <p className="text-sm text-muted-foreground">{m.description}</p>
                   <div className="grid grid-cols-2 gap-3 text-xs">
                     <div className="rounded-lg border p-2">
-                      <p className="font-medium text-muted-foreground uppercase">JOBSONN Scope</p>
+                      <p className="font-medium text-muted-foreground uppercase">jobson.id Scope</p>
                       <ul className="mt-1 space-y-0.5">
-                        {m.jobsonnScope.map((s) => <li key={s}>• {s}</li>)}
+                        {m.jobsonIdScope.map((s) => <li key={s}>• {s}</li>)}
                       </ul>
                     </div>
                     <div className="rounded-lg border p-2">

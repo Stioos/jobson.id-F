@@ -67,7 +67,7 @@ const FAQS = [
   },
   {
     q: "When do I get paid for referrals?",
-    a: "Referral rewards are credited to your account within 7 days of your referred friend accepting a job offer through JOBSONN. The minimum reward is ₹5,000 per successful placement.",
+    a: "Referral rewards are credited to your account within 7 days of your referred friend accepting a job offer through jobson.id. The minimum reward is ₹5,000 per successful placement.",
   },
   {
     q: "Can I hide my profile from my current employer?",
@@ -154,7 +154,7 @@ export function CandidateSupport() {
         <ContactCard
           icon="Mail"
           title="Email support"
-          value="support@jobsonn.com"
+          value="support@jobson.id"
           hint="Replies within 24 hours"
           onClick={() => toast.info("Opening email client")}
         />

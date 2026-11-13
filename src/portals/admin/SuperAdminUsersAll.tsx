@@ -20,7 +20,7 @@ const USERS: UserRow[] = [
   { id: "u_001", name: "Priya Nair", email: "priya.nair@gmail.com", portal: "candidate", role: "candidate", status: "active", lastActive: "2024-09-21T09:30:00Z", mfa: true },
   { id: "u_002", name: "Rohan Mehta", email: "rohan@techcorp.com", portal: "employer", role: "enterprise_admin", status: "active", lastActive: "2024-09-21T08:42:00Z", mfa: true },
   { id: "u_003", name: "Sneha Reddy", email: "sneha@talentbridge.in", portal: "recruiter", role: "agency", status: "active", lastActive: "2024-09-20T17:15:00Z", mfa: false },
-  { id: "u_004", name: "Aarav Sharma", email: "aarav@jobsonn.com", portal: "admin", role: "platform_admin", status: "active", lastActive: "2024-09-21T09:55:00Z", mfa: true },
+  { id: "u_004", name: "Aarav Sharma", email: "aarav@jobson.id", portal: "admin", role: "platform_admin", status: "active", lastActive: "2024-09-21T09:55:00Z", mfa: true },
   { id: "u_005", name: "Anika Verma", email: "anika@techcorp.com", portal: "employer", role: "hiring_manager", status: "active", lastActive: "2024-09-21T07:20:00Z", mfa: true },
   { id: "u_006", name: "Karthik Iyer", email: "karthik@apexskills.in", portal: "training", role: "training_provider", status: "active", lastActive: "2024-09-19T11:30:00Z", mfa: false },
   { id: "u_007", name: "Meera Joshi", email: "meera@southzone.in", portal: "partner", role: "partner", status: "trialing", lastActive: "2024-09-18T15:08:00Z", mfa: false },

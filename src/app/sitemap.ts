@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { getSitemapRoutes } from "@/lib/routeRegistry";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://jobsonn.com";
+  const baseUrl = "https://jobson.id";
   const routes = getSitemapRoutes();
 
   return routes.map((route) => ({

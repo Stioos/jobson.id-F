@@ -200,7 +200,7 @@ export function SkillsCertificationsScreen({ onNavigate }: SkillsCertificationsS
                   className={cn(
                     "inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer",
                     activeTab === t.id
-                      ? "bg-cyan-500 text-slate-950"
+                      ? "bg-emerald-500 text-slate-950"
                       : "text-muted-foreground hover:text-foreground dark:text-slate-400 dark:hover:text-white"
                   )}
                 >
@@ -244,7 +244,7 @@ export function SkillsCertificationsScreen({ onNavigate }: SkillsCertificationsS
               <Button
                 type="button"
                 onClick={openAddSkill}
-                className="inline-flex h-9 shrink-0 items-center gap-1.5 rounded-lg bg-cyan-500 px-4 text-xs font-bold text-slate-950 hover:bg-cyan-400"
+                className="inline-flex h-9 shrink-0 items-center gap-1.5 rounded-lg bg-emerald-500 px-4 text-xs font-bold text-slate-950 hover:bg-emerald-400"
               >
                 <Plus className="h-3.5 w-3.5" /> Add Skill
               </Button>
@@ -286,7 +286,7 @@ export function SkillsCertificationsScreen({ onNavigate }: SkillsCertificationsS
                         <p className="text-[10px] text-muted-foreground dark:text-slate-400">{catSkills.length} skill{catSkills.length === 1 ? "" : "s"} · {cat.description}</p>
                       </div>
                     </div>
-                    <button type="button" onClick={() => { setSkillDraft(emptySkill(cat.id)); setEditingSkillId(null); setSkillFormOpen(true); }} className="inline-flex items-center gap-1 text-xs font-semibold text-cyan-600 hover:underline dark:text-cyan-400 cursor-pointer">
+                    <button type="button" onClick={() => { setSkillDraft(emptySkill(cat.id)); setEditingSkillId(null); setSkillFormOpen(true); }} className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-600 hover:underline dark:text-emerald-400 cursor-pointer">
                       <Plus className="h-3 w-3" /> Add to {cat.name}
                     </button>
                   </div>
@@ -320,7 +320,7 @@ export function SkillsCertificationsScreen({ onNavigate }: SkillsCertificationsS
                   <p className="text-[11px] text-muted-foreground dark:text-slate-400">{certs.length} certification{certs.length === 1 ? "" : "s"} added</p>
                 </div>
               </div>
-              <Button type="button" onClick={openAddCert} className="inline-flex h-9 items-center gap-1.5 rounded-lg bg-cyan-500 px-4 text-xs font-bold text-slate-950 hover:bg-cyan-400">
+              <Button type="button" onClick={openAddCert} className="inline-flex h-9 items-center gap-1.5 rounded-lg bg-emerald-500 px-4 text-xs font-bold text-slate-950 hover:bg-emerald-400">
                 <Plus className="h-3.5 w-3.5" /> Add Certification
               </Button>
             </div>
@@ -362,7 +362,7 @@ export function SkillsCertificationsScreen({ onNavigate }: SkillsCertificationsS
                   <p className="text-[11px] text-muted-foreground dark:text-slate-400">{licenses.length} license{licenses.length === 1 ? "" : "s"} added</p>
                 </div>
               </div>
-              <Button type="button" onClick={openAddLicense} className="inline-flex h-9 items-center gap-1.5 rounded-lg bg-cyan-500 px-4 text-xs font-bold text-slate-950 hover:bg-cyan-400">
+              <Button type="button" onClick={openAddLicense} className="inline-flex h-9 items-center gap-1.5 rounded-lg bg-emerald-500 px-4 text-xs font-bold text-slate-950 hover:bg-emerald-400">
                 <Plus className="h-3.5 w-3.5" /> Add License
               </Button>
             </div>

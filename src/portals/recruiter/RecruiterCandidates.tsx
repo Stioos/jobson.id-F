@@ -117,7 +117,7 @@ export function RecruiterCandidates() {
     <div className="space-y-6">
       <PageHeader
         title="Candidate sourcing"
-        description="Search the JOBSONN talent database, source with the simulated AI assistant, and submit candidates to your client requisitions."
+        description="Search the jobson.id talent database, source with the simulated AI assistant, and submit candidates to your client requisitions."
       />
 
       <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">

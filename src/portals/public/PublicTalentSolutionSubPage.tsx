@@ -262,13 +262,13 @@ export function PublicTalentSolutionSubPage({
       {/* ===================== 7. COMPARISON ===================== */}
       <section className="border-y bg-muted/30">
         <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6 lg:px-8">
-          <h2 className="mb-6 text-center text-xl font-bold">JOBSONN vs Traditional</h2>
+          <h2 className="mb-6 text-center text-xl font-bold">jobson.id vs Traditional</h2>
           <div className="overflow-hidden rounded-xl border">
             <table className="w-full text-sm">
               <thead>
                 <tr className="bg-muted">
                   <th className="p-3 text-left font-semibold">Feature</th>
-                  <th className="p-3 text-center font-semibold" style={{ color }}>JOBSONN</th>
+                  <th className="p-3 text-center font-semibold" style={{ color }}>jobson.id</th>
                   <th className="p-3 text-center font-semibold text-muted-foreground">Traditional</th>
                 </tr>
               </thead>
@@ -571,7 +571,7 @@ function generateFAQs(sol: any, sp: any) {
     { q: `What does ${sol.label} cost?`, a: `Pricing depends on volume, complexity, and engagement model. We offer Starter, Professional, and Enterprise plans with transparent per-role or per-project pricing. Contact us for a custom quote.` },
     { q: `Do you offer a replacement guarantee?`, a: `Yes. Every engagement includes a 90-day replacement guarantee. If a placement doesn't work out, we'll find a replacement at no additional cost.` },
     { q: `Can ${sp.label} be customized for our specific needs?`, a: `Absolutely. Every engagement is tailored to your tech stack, domain, processes, and goals. Our discovery call will scope your exact requirements.` },
-    { q: `What makes JOBSONN different from other providers?`, a: `Three things: (1) AI-powered matching that's transparent and explainable, (2) pay-after-results pricing that aligns our incentives with yours, and (3) a dedicated team that acts as an extension of your workforce.` },
+    { q: `What makes jobson.id different from other providers?`, a: `Three things: (1) AI-powered matching that's transparent and explainable, (2) pay-after-results pricing that aligns our incentives with yours, and (3) a dedicated team that acts as an extension of your workforce.` },
     { q: `How do we get started?`, a: `Book a free consultation. We'll scope your needs, propose a tailored plan, and deliver a proposal within 24 hours. No obligation, no pressure.` },
   ];
 }

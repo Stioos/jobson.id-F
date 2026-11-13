@@ -149,7 +149,7 @@ export function PublicBlogDetail({ slug }: { slug: string }) {
               <AvatarLogo text={post.author} size="md" />
               <div>
                 <p className="text-sm font-semibold">{post.author}</p>
-                <p className="text-xs text-muted-foreground">JOBSONN Editorial</p>
+                <p className="text-xs text-muted-foreground">jobson.id Editorial</p>
               </div>
             </div>
             <div className="flex items-center gap-4 text-xs text-muted-foreground">
@@ -245,10 +245,10 @@ export function PublicBlogDetail({ slug }: { slug: string }) {
                     <h3 className="text-base font-semibold">{post.author}</h3>
                     <Badge variant="secondary" className="font-normal">Author</Badge>
                   </div>
-                  <p className="mt-1 text-xs text-brand">JOBSONN Editorial Team</p>
+                  <p className="mt-1 text-xs text-brand">jobson.id Editorial Team</p>
                   <p className="mt-3 text-sm text-muted-foreground">
                     {post.author} writes about technology, careers, and the future of work in India.
-                    As part of JOBSONN&apos;s editorial team, they break down complex industry trends into
+                    As part of jobson.id&apos;s editorial team, they break down complex industry trends into
                     practical, actionable insights for working professionals and aspiring technologists.
                   </p>
                   <div className="mt-3 flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
@@ -316,7 +316,7 @@ export function PublicBlogDetail({ slug }: { slug: string }) {
           <div className="mb-6 flex items-end justify-between">
             <div>
               <h2 className="text-2xl font-bold tracking-tight">Related articles</h2>
-              <p className="mt-1 text-sm text-muted-foreground">More from JOBSONN&apos;s blog.</p>
+              <p className="mt-1 text-sm text-muted-foreground">More from jobson.id&apos;s blog.</p>
             </div>
             <Button variant="outline" onClick={() => navigate("public", "blogs")} className="gap-1.5">
               View all <ArrowRight className="h-4 w-4" />
@@ -375,7 +375,7 @@ export function PublicBlogDetail({ slug }: { slug: string }) {
               </h2>
               <p className="mt-3 text-sm text-muted-foreground">
                 Browse our full library of insights, guides, and industry perspectives from the
-                JOBSONN team.
+                jobson.id team.
               </p>
             </div>
             <div className="flex flex-wrap gap-3 lg:justify-end">

@@ -23,8 +23,8 @@ const FAQS = [
   { q: "How does corporate client billing work?", a: "Clients are billed monthly based on enrolled learners and active courses. Invoices are auto-generated with GST. Visit Invoices to view, download, or mark as paid." },
   { q: "Can I bulk-upload learners?", a: "Yes — Enrollments → Import. Upload a CSV with name, email, and course ID. We auto-create accounts and send enrollment emails." },
   { q: "How do I add a new trainer?", a: "Trainers → Add trainer. Enter email and assign courses. Trainers get a separate login and can only see their assigned cohorts and sessions." },
-  { q: "How do contract renewals work?", a: "JOBSONN sends renewal reminders at 60, 30, and 7 days before contract end. Visit Corporate Clients to view upcoming renewals and trigger renewal workflows." },
-  { q: "How does the LMS integration work?", a: "Once connected (Settings → Integrations → Moodle), we sync courses, enrollments, and grades bi-directionally. New courses in Moodle appear in JOBSONN within 1 hour." },
+  { q: "How do contract renewals work?", a: "jobson.id sends renewal reminders at 60, 30, and 7 days before contract end. Visit Corporate Clients to view upcoming renewals and trigger renewal workflows." },
+  { q: "How does the LMS integration work?", a: "Once connected (Settings → Integrations → Moodle), we sync courses, enrollments, and grades bi-directionally. New courses in Moodle appear in jobson.id within 1 hour." },
 ];
 
 const ARTICLES = [
@@ -46,7 +46,7 @@ const VIDEOS = [
 ];
 
 const THREADS = [
-  { title: "Best LMS to pair with JOBSONN for large cohorts?", author: "ops_lead_skillforge", replies: 22, lastActivity: "1h ago" },
+  { title: "Best LMS to pair with jobson.id for large cohorts?", author: "ops_lead_skillforge", replies: 22, lastActivity: "1h ago" },
   { title: "Engagement drops at week 4 — what works for you?", author: "divya_sf", replies: 41, lastActivity: "4h ago" },
   { title: "Compliance: how do you handle expirations?", author: "karthik_nair", replies: 18, lastActivity: "1d ago" },
   { title: "Contract renewal playbook — share yours!", author: "anita_desai", replies: 29, lastActivity: "2d ago" },
@@ -71,7 +71,7 @@ export function TrainingSupportHub() {
 
       <ContactOptionsSection
         options={[
-          { icon: "Mail", title: "Email support", value: "training@jobsonn.com", hint: "Replies within 6 hours", action: () => toast.info("Opening email client") },
+          { icon: "Mail", title: "Email support", value: "training@jobson.id", hint: "Replies within 6 hours", action: () => toast.info("Opening email client") },
           { icon: "MessagesSquare", title: "Live chat", value: "Mon–Sat, 9 AM – 7 PM IST", hint: "Avg wait: 3 min", action: () => toast.info("Live chat", { description: "Connecting you to a training specialist…" }) },
           { icon: "Phone", title: "Phone", value: "+91 80 4567 8903", hint: "Toll-free, India", action: () => toast.info("Phone support", { description: "Demo only." }) },
         ]}

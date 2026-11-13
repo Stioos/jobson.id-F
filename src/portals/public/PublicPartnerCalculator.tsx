@@ -38,9 +38,9 @@ interface CalcResult {
   tax: number;
   netAfterFees: number;
   partnerPct: number;
-  jobsonnPct: number;
+  jobsonIdPct: number;
   partnerShare: number;
-  jobsonnShare: number;
+  jobsonIdShare: number;
   ruleApplied: string | null;
 }
 
@@ -59,18 +59,18 @@ function compute(input: CalcInput): CalcResult {
   const netAfterFees = Math.max(0, netCollected - gatewayFee - tax);
   const rule = findRule(input.model, input.leadSource);
   const partnerPct = rule?.partnerPct ?? 0;
-  const jobsonnPct = rule?.jobsonnPct ?? 0;
+  const jobsonIdPct = rule?.jobsonIdPct ?? 0;
   const partnerShare = netAfterFees * (partnerPct / 100);
-  const jobsonnShare = netAfterFees * (jobsonnPct / 100);
+  const jobsonIdShare = netAfterFees * (jobsonIdPct / 100);
   return {
     netCollected,
     gatewayFee,
     tax,
     netAfterFees,
     partnerPct,
-    jobsonnPct,
+    jobsonIdPct,
     partnerShare,
-    jobsonnShare,
+    jobsonIdShare,
     ruleApplied: rule?.ruleName ?? null,
   };
 }
@@ -80,7 +80,7 @@ const MODEL_OPTIONS: PartnerModel[] = ["CENTRE", "COLLEGE", "SERVICE", "TECHNOLO
 const PRESETS = [
   { label: "Single enrollment — Full-Stack", grossAmount: 45000, discount: 2000, model: "CENTRE" as PartnerModel, leadSource: "PARTNER_GENERATED", programId: "prog_001" },
   { label: "Campus batch — Data Science (10 students)", grossAmount: 380000, discount: 0, model: "COLLEGE" as PartnerModel, leadSource: "PARTNER_GENERATED", programId: "prog_002" },
-  { label: "Cloud migration project", grossAmount: 480000, discount: 0, model: "SERVICE" as PartnerModel, leadSource: "JOBSONN_GENERATED", programId: "prog_005" },
+  { label: "Cloud migration project", grossAmount: 480000, discount: 0, model: "SERVICE" as PartnerModel, leadSource: "JOBSON_ID_GENERATED", programId: "prog_005" },
   { label: "Recruitment — Senior Full-Stack (8.33% fee)", grossAmount: 233240, discount: 0, model: "RECRUITMENT" as PartnerModel, leadSource: "PARTNER_GENERATED", programId: "prog_001" },
 ];
 
@@ -119,7 +119,7 @@ export function PublicPartnerCalculator() {
   // Pie data
   const pieData = [
     { name: "Partner share", value: result.partnerShare, color: "oklch(0.55 0.13 165)" },
-    { name: "JOBSONN share", value: result.jobsonnShare, color: "oklch(0.7 0.05 60)" },
+    { name: "jobson.id share", value: result.jobsonIdShare, color: "oklch(0.7 0.05 60)" },
     { name: "Gateway fee", value: result.gatewayFee, color: "oklch(0.7 0.1 250)" },
     { name: "Tax (GST)", value: result.tax, color: "oklch(0.65 0.15 30)" },
     { name: "Discount", value: input.discount, color: "oklch(0.6 0.05 280)" },
@@ -136,11 +136,11 @@ export function PublicPartnerCalculator() {
         <div className="relative mx-auto max-w-5xl px-4 py-14 text-center sm:px-6 sm:py-16 lg:px-8">
           <Badge className="mb-4 gap-1"><Calculator className="h-3 w-3" /> Revenue Calculator</Badge>
           <h1 className="text-3xl font-bold tracking-tight text-balance sm:text-4xl lg:text-5xl">
-            See <span className="text-brand">how much you can earn</span> as a JOBSONN partner
+            See <span className="text-brand">how much you can earn</span> as a jobson.id partner
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground sm:text-lg">
             Plug in your model, program, lead source and gross revenue — we&apos;ll compute the split using
-            JOBSONN&apos;s live revenue share rules. Real numbers, real transparency.
+            jobson.id&apos;s live revenue share rules. Real numbers, real transparency.
           </p>
         </div>
       </section>
@@ -263,7 +263,7 @@ export function PublicPartnerCalculator() {
                   </p>
                   <p className="mt-1 text-xs text-muted-foreground">{result.ruleApplied}</p>
                   <p className="mt-1 text-[10px] text-muted-foreground">
-                    Partner {result.partnerPct}% · JOBSONN {result.jobsonnPct}%
+                    Partner {result.partnerPct}% · jobson.id {result.jobsonIdPct}%
                   </p>
                 </div>
               ) : (
@@ -293,9 +293,9 @@ export function PublicPartnerCalculator() {
                     <p className="mt-1 text-xs text-muted-foreground">{result.partnerPct}% of net</p>
                   </div>
                   <div className="rounded-xl bg-muted/40 p-4">
-                    <p className="text-xs uppercase tracking-wide text-muted-foreground">JOBSONN</p>
-                    <p className="mt-1 text-3xl font-bold">{formatCurrency(result.jobsonnShare)}</p>
-                    <p className="mt-1 text-xs text-muted-foreground">{result.jobsonnPct}% of net</p>
+                    <p className="text-xs uppercase tracking-wide text-muted-foreground">jobson.id</p>
+                    <p className="mt-1 text-3xl font-bold">{formatCurrency(result.jobsonIdShare)}</p>
+                    <p className="mt-1 text-xs text-muted-foreground">{result.jobsonIdPct}% of net</p>
                   </div>
                 </div>
                 <div className="mt-4 rounded-lg border bg-background/60 p-3 text-xs">
@@ -403,7 +403,7 @@ export function PublicPartnerCalculator() {
               { n: "1", title: "Find matching rule", desc: "We match your partner model + lead source to the highest-priority active revenue share rule.", icon: Sparkles },
               { n: "2", title: "Net collected", desc: "Gross minus discount = what was actually collected from the student / client.", icon: Receipt },
               { n: "3", title: "Deduct fees + tax", desc: "Payment gateway fee and GST are deducted to arrive at the net distributable amount.", icon: Percent },
-              { n: "4", title: "Apply split", desc: "Partner and JOBSONN percentages from the matched rule are applied to the net distributable.", icon: Wallet },
+              { n: "4", title: "Apply split", desc: "Partner and jobson.id percentages from the matched rule are applied to the net distributable.", icon: Wallet },
             ].map((s) => (
               <Card key={s.n} className="p-5">
                 <div className="flex items-center gap-2">

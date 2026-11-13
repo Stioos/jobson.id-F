@@ -109,7 +109,7 @@ export function EmployerNotificationPrefs() {
         />
         <NotificationGroupCard
           title="Push notifications"
-          description="On devices where you've installed the JOBSONN employer app"
+          description="On devices where you've installed the jobson.id employer app"
           items={PUSH_ITEMS}
           state={push}
           onChange={(k, v) => setPush((p) => ({ ...p, [k]: v }))}

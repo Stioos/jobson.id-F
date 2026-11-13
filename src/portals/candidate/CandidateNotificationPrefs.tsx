@@ -81,7 +81,7 @@ export function CandidateNotificationPrefs() {
     <div className="space-y-6">
       <PageHeader
         title="Notification preferences"
-        description="Choose how and when JOBSONN contacts you about candidate activity."
+        description="Choose how and when jobson.id contacts you about candidate activity."
         icon={<Icon name="Bell" className="h-6 w-6" />}
         actions={[
           { label: "Back to settings", variant: "outline", onClick: () => navigate("candidate", "settings-hub") },
@@ -112,7 +112,7 @@ export function CandidateNotificationPrefs() {
         />
         <NotificationGroupCard
           title="Push notifications"
-          description="On devices where you've installed the JOBSONN app"
+          description="On devices where you've installed the jobson.id app"
           items={PUSH_ITEMS}
           state={push}
           onChange={(k, v) => setPush((p) => ({ ...p, [k]: v }))}

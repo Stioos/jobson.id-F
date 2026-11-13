@@ -54,7 +54,7 @@ import { useNav } from "@/lib/store";
 
 // ============================================================
 // Recruiter-facing talent solution transactions.
-// Recruiters earn: placement_fee (paid by client), commission (from JOBSONN), bonus.
+// Recruiters earn: placement_fee (paid by client), commission (from jobson.id), bonus.
 // ============================================================
 interface RecruiterTsTxn extends TalentTransaction {
   candidateName: string;

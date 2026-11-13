@@ -183,7 +183,7 @@ export function RecruiterGstInvoiceGenerator() {
                 <p className="text-xs text-muted-foreground">Date: {formatDate(preview.date)}</p>
               </div>
               <div className="text-right text-xs">
-                <p className="font-semibold">JOBSONN Recruitment Pvt Ltd</p>
+                <p className="font-semibold">jobson.id Recruitment Pvt Ltd</p>
                 <p>29AADCM2321R1Z8 (Karnataka)</p>
                 <p>Bengaluru, KA — 560001</p>
               </div>

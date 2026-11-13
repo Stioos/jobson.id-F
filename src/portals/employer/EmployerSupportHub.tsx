@@ -22,7 +22,7 @@ const FAQS = [
   { q: "What's included in the Enterprise plan?", a: "Unlimited job posts, 50 seats, ATS integrations, SSO, dedicated CSM, audit logs, and 99.9% SLA. See Subscription for current usage." },
   { q: "How do I invite my team?", a: "Go to Recruitment Team → Invite member. Enter email and pick a role (Admin, Hiring Manager, Recruiter, Interviewer, Viewer). They'll get an email invite." },
   { q: "Can I export my applicant data?", a: "Yes — Settings → Danger zone → Export data, or use our API. Data is delivered as CSV/JSON within 48 hours." },
-  { q: "How do refunds work?", a: "Annual plans are refundable pro-rata within 14 days of payment. Monthly plans are non-refundable. Contact billing@jobsonn.com for assistance." },
+  { q: "How do refunds work?", a: "Annual plans are refundable pro-rata within 14 days of payment. Monthly plans are non-refundable. Contact billing@jobson.id for assistance." },
   { q: "How do I set up SSO?", a: "Enterprise customers can configure SAML 2.0 SSO under Settings → Security → SSO. We support Okta, Azure AD, Google Workspace, and custom IdPs." },
   { q: "Can I hide my company name on job posts?", a: "Yes — when creating a job, set 'Confidential employer' to yes. The job appears as 'Confidential Company' in candidate search." },
 ];
@@ -32,7 +32,7 @@ const ARTICLES = [
   { title: "Structured interview best practices", category: "Interviews", readTime: "8 min read", icon: "Users" },
   { title: "Setting up your hiring pipeline", category: "Pipeline", readTime: "5 min read", icon: "KanbanSquare" },
   { title: "Using talent pools effectively", category: "Talent", readTime: "4 min read", icon: "Database" },
-  { title: "Integrating your ATS with JOBSONN", category: "Integrations", readTime: "7 min read", icon: "Plug" },
+  { title: "Integrating your ATS with jobson.id", category: "Integrations", readTime: "7 min read", icon: "Plug" },
   { title: "Understanding hiring analytics", category: "Analytics", readTime: "9 min read", icon: "BarChart3" },
 ];
 
@@ -48,7 +48,7 @@ const VIDEOS = [
 const THREADS = [
   { title: "What's your average time-to-hire in 2024?", author: "talentlead_techcorp", replies: 31, lastActivity: "30m ago" },
   { title: "How do you handle ghosting after offer?", author: "anika_v", replies: 47, lastActivity: "2h ago" },
-  { title: "Best ATS to pair with JOBSONN?", author: "recruiter_sneha", replies: 28, lastActivity: "6h ago" },
+  { title: "Best ATS to pair with jobson.id?", author: "recruiter_sneha", replies: 28, lastActivity: "6h ago" },
   { title: "Structured interview templates — share yours!", author: "hiring_mgr_007", replies: 19, lastActivity: "1d ago" },
 ];
 
@@ -71,7 +71,7 @@ export function EmployerSupportHub() {
 
       <ContactOptionsSection
         options={[
-          { icon: "Mail", title: "Email support", value: "enterprise@jobsonn.com", hint: "Priority replies < 4 hours", action: () => toast.info("Opening email client") },
+          { icon: "Mail", title: "Email support", value: "enterprise@jobson.id", hint: "Priority replies < 4 hours", action: () => toast.info("Opening email client") },
           { icon: "MessagesSquare", title: "Live chat", value: "24/7 for Enterprise", hint: "Avg wait: < 1 min", action: () => toast.info("Live chat", { description: "Connecting you to a priority agent…" }) },
           { icon: "Phone", title: "Dedicated CSM", value: "+91 80 4567 8901", hint: "Riya · Mon–Fri 9–6 IST", action: () => toast.info("Calling your CSM", { description: "Riya · Enterprise CS" }) },
         ]}

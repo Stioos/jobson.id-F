@@ -388,7 +388,7 @@ export function EducationQualificationsScreen({ onNavigate }: EducationQualifica
           <Button
             type="button"
             onClick={showForm ? closeForm : openAddForm}
-            className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-cyan-500 px-4 py-2.5 text-xs font-bold text-slate-950 transition-all hover:bg-cyan-400 hover:shadow-lg hover:shadow-cyan-500/20"
+            className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-emerald-500 px-4 py-2.5 text-xs font-bold text-slate-950 transition-all hover:bg-emerald-400 hover:shadow-lg hover:shadow-emerald-500/20"
           >
             {showForm ? <X className="h-3.5 w-3.5" /> : <Plus className="h-3.5 w-3.5" />}
             {showForm ? "Cancel" : "Add Qualification"}
@@ -405,7 +405,7 @@ export function EducationQualificationsScreen({ onNavigate }: EducationQualifica
 
           {/* ─── Academic Information ─── */}
           <div className="mb-3 mt-5 flex items-center gap-2.5">
-            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-cyan-500/10 text-cyan-600 dark:text-cyan-400"><GraduationCap className="h-4 w-4" /></span>
+            <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"><GraduationCap className="h-4 w-4" /></span>
             <div>
               <h4 className="text-xs font-bold uppercase tracking-wide text-foreground dark:text-white">Academic Information</h4>
               <p className="text-[10px] text-muted-foreground dark:text-slate-400">Core details about your qualification and institution</p>
@@ -841,7 +841,7 @@ export function EducationQualificationsScreen({ onNavigate }: EducationQualifica
                 type="checkbox"
                 checked={form.isHighest}
                 onChange={(e) => setField("isHighest", e.target.checked)}
-                className="h-4 w-4 rounded border-border accent-cyan-500 dark:border-white/20"
+                className="h-4 w-4 rounded border-border accent-emerald-500 dark:border-white/20"
               />
               <Crown className="h-3.5 w-3.5 text-amber-500" />
               Mark as highest qualification
@@ -851,7 +851,7 @@ export function EducationQualificationsScreen({ onNavigate }: EducationQualifica
               <Button
                 onClick={handleSave}
                 disabled={isSaving}
-                className="h-9 rounded-lg bg-cyan-500 text-xs font-bold text-slate-950 hover:bg-cyan-400 disabled:opacity-50"
+                className="h-9 rounded-lg bg-emerald-500 text-xs font-bold text-slate-950 hover:bg-emerald-400 disabled:opacity-50"
               >
                 {isSaving ? (
                   <><Loader2 className="h-3.5 w-3.5 animate-spin" /> Saving…</>
@@ -868,7 +868,7 @@ export function EducationQualificationsScreen({ onNavigate }: EducationQualifica
       <section className="rounded-3xl border border-border bg-card/80 p-6 shadow-soft backdrop-blur-sm dark:border-white/10 dark:bg-slate-900/60 dark:shadow-none">
         <div className="flex items-center justify-between pb-4">
           <div className="flex items-center gap-2.5">
-            <BookOpen className="h-4.5 w-4.5 text-cyan-600 dark:text-cyan-400" />
+            <BookOpen className="h-4.5 w-4.5 text-emerald-600 dark:text-emerald-400" />
             <h3 className="text-base font-bold text-foreground dark:text-white">Academic Qualifications</h3>
           </div>
           <span className="rounded-full bg-emerald-500/15 px-2.5 py-0.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
@@ -950,7 +950,7 @@ export function EducationQualificationsScreen({ onNavigate }: EducationQualifica
                 <button
                   type="button"
                   onClick={() => openEditForm(edu)}
-                  className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground hover:bg-cyan-500/10 hover:text-cyan-600 dark:hover:bg-cyan-500/15 dark:hover:text-cyan-400 cursor-pointer"
+                  className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground hover:bg-emerald-500/10 hover:text-emerald-600 dark:hover:bg-emerald-500/15 dark:hover:text-emerald-400 cursor-pointer"
                   aria-label="Edit qualification"
                   title="Edit"
                 >
@@ -978,7 +978,7 @@ export function EducationQualificationsScreen({ onNavigate }: EducationQualifica
             <Trophy className="h-4.5 w-4.5 text-amber-600 dark:text-amber-400" />
             <h3 className="text-base font-bold text-foreground dark:text-white">Academic Achievements</h3>
           </div>
-          <button type="button" className="inline-flex items-center gap-1 text-xs font-semibold text-cyan-600 hover:underline dark:text-cyan-400 cursor-pointer">
+          <button type="button" className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-600 hover:underline dark:text-emerald-400 cursor-pointer">
             <Plus className="h-3 w-3" /> Add
           </button>
         </div>

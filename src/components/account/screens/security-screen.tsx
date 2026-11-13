@@ -101,7 +101,7 @@ export function SecurityScreen() {
       <section className="rounded-3xl border border-border bg-card/80 p-6 shadow-soft backdrop-blur-sm sm:p-8 dark:border-white/10 dark:bg-slate-900/60 dark:shadow-none">
         <div className="flex items-center justify-between">
           <div className="flex items-start gap-3.5">
-            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400">
+            <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
               <Smartphone className="h-5 w-5" />
             </span>
             <div>
@@ -121,7 +121,7 @@ export function SecurityScreen() {
               );
             }}
             className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out ${
-              twoFactorEnabled ? "bg-cyan-500" : "bg-muted-foreground/30 dark:bg-slate-700"
+              twoFactorEnabled ? "bg-emerald-500" : "bg-muted-foreground/30 dark:bg-slate-700"
             }`}
           >
             <span
@@ -154,7 +154,7 @@ export function SecurityScreen() {
                 value={currentPass}
                 onChange={(e) => setCurrentPass(e.target.value)}
                 placeholder="Enter current password..."
-                className="h-11 w-full rounded-xl border border-border bg-background/80 px-4 pr-10 text-sm text-foreground focus:border-cyan-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white"
+                className="h-11 w-full rounded-xl border border-border bg-background/80 px-4 pr-10 text-sm text-foreground focus:border-emerald-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white"
               />
               <button
                 type="button"
@@ -174,7 +174,7 @@ export function SecurityScreen() {
                 value={newPass}
                 onChange={(e) => setNewPass(e.target.value)}
                 placeholder="Enter new strong password..."
-                className="h-11 w-full rounded-xl border border-border bg-background/80 px-4 pr-10 text-sm text-foreground focus:border-cyan-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white"
+                className="h-11 w-full rounded-xl border border-border bg-background/80 px-4 pr-10 text-sm text-foreground focus:border-emerald-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white"
               />
               <button
                 type="button"
@@ -193,13 +193,13 @@ export function SecurityScreen() {
               value={confirmPass}
               onChange={(e) => setConfirmPass(e.target.value)}
               placeholder="Confirm new password..."
-              className="h-11 w-full rounded-xl border border-border bg-background/80 px-4 text-sm text-foreground focus:border-cyan-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white"
+              className="h-11 w-full rounded-xl border border-border bg-background/80 px-4 text-sm text-foreground focus:border-emerald-500 focus:outline-none dark:border-white/10 dark:bg-slate-950/60 dark:text-white"
             />
           </div>
 
           <button
             type="submit"
-            className="rounded-xl bg-cyan-500 px-5 py-2.5 text-xs font-bold text-slate-950 transition-all hover:bg-cyan-400 hover:shadow-lg hover:shadow-cyan-500/20"
+            className="rounded-xl bg-emerald-500 px-5 py-2.5 text-xs font-bold text-slate-950 transition-all hover:bg-emerald-400 hover:shadow-lg hover:shadow-emerald-500/20"
           >
             Update Password
           </button>
@@ -215,7 +215,7 @@ export function SecurityScreen() {
             </span>
             <div>
               <h3 className="text-base font-bold text-foreground dark:text-white">Active Signed-in Devices</h3>
-              <p className="text-xs text-muted-foreground dark:text-slate-400">Devices currently authenticated with your JOBSONN profile</p>
+              <p className="text-xs text-muted-foreground dark:text-slate-400">Devices currently authenticated with your jobson.id profile</p>
             </div>
           </div>
 
@@ -235,7 +235,7 @@ export function SecurityScreen() {
               className="flex items-center justify-between rounded-2xl border border-border/80 bg-background/80 p-4 dark:border-white/5 dark:bg-slate-950/60"
             >
               <div className="flex items-center gap-3">
-                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400">
+                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
                   <Laptop className="h-5 w-5" />
                 </span>
                 <div>

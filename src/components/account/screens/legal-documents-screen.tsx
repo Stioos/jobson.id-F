@@ -68,7 +68,7 @@ const DEFAULT_DOCUMENTS: DocItem[] = [
   },
   {
     id: "doc-4",
-    name: "Company_PAN_Card_JOBSONN.pdf",
+    name: "Company_PAN_Card_jobson.id.pdf",
     type: "PAN Card",
     size: "650 KB",
     uploadDate: "20-Jan-2025",
@@ -389,11 +389,11 @@ export function LegalDocumentsScreen() {
         onClick={handleBrowseClick}
         className={`group cursor-pointer rounded-3xl border border-dashed p-8 text-center shadow-soft backdrop-blur-sm transition-all ${
           isDragging
-            ? "border-cyan-500 bg-cyan-500/10 ring-2 ring-cyan-500/30"
-            : "border-border bg-card/60 hover:border-cyan-500/50 hover:bg-card dark:border-white/20 dark:bg-slate-900/40 dark:shadow-none dark:hover:bg-slate-900/60"
+            ? "border-emerald-500 bg-emerald-500/10 ring-2 ring-emerald-500/30"
+            : "border-border bg-card/60 hover:border-emerald-500/50 hover:bg-card dark:border-white/20 dark:bg-slate-900/40 dark:shadow-none dark:hover:bg-slate-900/60"
         }`}
       >
-        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-cyan-500/10 text-cyan-600 shadow-md shadow-cyan-500/10 dark:text-cyan-400 group-hover:scale-105 transition-transform">
+        <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-500/10 text-emerald-600 shadow-md shadow-emerald-500/10 dark:text-emerald-400 group-hover:scale-105 transition-transform">
           <Upload className="h-7 w-7" />
         </div>
         <h3 className="mt-4 text-base font-bold text-foreground dark:text-white">Upload Compliance Certificates & Licenses</h3>
@@ -406,7 +406,7 @@ export function LegalDocumentsScreen() {
             e.stopPropagation();
             handleBrowseClick();
           }}
-          className="mt-5 inline-flex items-center gap-2 rounded-xl bg-cyan-500 px-5 py-2.5 text-xs font-bold text-slate-950 transition-all hover:bg-cyan-400 hover:shadow-lg hover:shadow-cyan-500/20 cursor-pointer"
+          className="mt-5 inline-flex items-center gap-2 rounded-xl bg-emerald-500 px-5 py-2.5 text-xs font-bold text-slate-950 transition-all hover:bg-emerald-400 hover:shadow-lg hover:shadow-emerald-500/20 cursor-pointer"
         >
           <Plus className="h-4 w-4" /> Browse & Upload Document
         </button>
@@ -441,26 +441,26 @@ export function LegalDocumentsScreen() {
               <div
                 key={doc.id}
                 onClick={() => handleOpenPreview(doc)}
-                className={`group flex flex-col gap-3 rounded-2xl border p-4 transition-all hover:border-cyan-500/50 hover:bg-card hover:shadow-soft sm:flex-row sm:items-center sm:justify-between dark:hover:border-cyan-500/40 dark:hover:bg-slate-900/60 cursor-pointer ${
+                className={`group flex flex-col gap-3 rounded-2xl border p-4 transition-all hover:border-emerald-500/50 hover:bg-card hover:shadow-soft sm:flex-row sm:items-center sm:justify-between dark:hover:border-emerald-500/40 dark:hover:bg-slate-900/60 cursor-pointer ${
                   doc.isNew
-                    ? "border-cyan-500/80 bg-cyan-500/5 ring-2 ring-cyan-500/30 dark:bg-cyan-500/10"
+                    ? "border-emerald-500/80 bg-emerald-500/5 ring-2 ring-emerald-500/30 dark:bg-emerald-500/10"
                     : "border-border/80 bg-background/80 dark:border-white/5 dark:bg-slate-950/60"
                 }`}
               >
                 <div className="flex items-start gap-3.5 min-w-0">
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-cyan-500/10 text-cyan-600 dark:bg-cyan-500/15 dark:text-cyan-400 group-hover:scale-105 transition-transform">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-600 dark:bg-emerald-500/15 dark:text-emerald-400 group-hover:scale-105 transition-transform">
                     <FileText className="h-6 w-6" />
                   </span>
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-center gap-2">
-                      <p className="text-sm font-bold text-foreground dark:text-white truncate group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
+                      <p className="text-sm font-bold text-foreground dark:text-white truncate group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
                         {doc.name}
                       </p>
                       <span className="rounded bg-muted px-2 py-0.5 text-[10px] font-semibold text-muted-foreground dark:bg-white/5 dark:text-slate-300 shrink-0">
                         {doc.type}
                       </span>
                       {doc.isNew && (
-                        <span className="inline-flex items-center gap-1 rounded bg-cyan-500 px-1.5 py-0.5 text-[9px] font-bold text-slate-950 shadow-xs">
+                        <span className="inline-flex items-center gap-1 rounded bg-emerald-500 px-1.5 py-0.5 text-[9px] font-bold text-slate-950 shadow-xs">
                           <Sparkles className="h-2.5 w-2.5" /> Newly Added
                         </span>
                       )}
@@ -489,7 +489,7 @@ export function LegalDocumentsScreen() {
                         e.stopPropagation();
                         handleOpenPreview(doc);
                       }}
-                      className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground hover:bg-cyan-500/10 hover:text-cyan-600 dark:text-slate-400 dark:hover:bg-cyan-500/15 dark:hover:text-cyan-300 cursor-pointer"
+                      className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground hover:bg-emerald-500/10 hover:text-emerald-600 dark:text-slate-400 dark:hover:bg-emerald-500/15 dark:hover:text-emerald-300 cursor-pointer"
                       title="View document preview"
                     >
                       <Eye className="h-4 w-4" />
@@ -534,7 +534,7 @@ export function LegalDocumentsScreen() {
             {/* Modal Header */}
             <div className="flex items-start justify-between gap-4 pb-4 border-b border-border/80 dark:border-white/10">
               <div className="flex items-start gap-3 min-w-0">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-cyan-500/10 text-cyan-600 dark:bg-cyan-500/15 dark:text-cyan-400">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-600 dark:bg-emerald-500/15 dark:text-emerald-400">
                   <FileCheck2 className="h-5 w-5" />
                 </span>
                 <div className="min-w-0">
@@ -584,10 +584,10 @@ export function LegalDocumentsScreen() {
                 </div>
               ) : (
                 /* High-Fidelity Verified Certificate / Official Compliance Document Preview */
-                <div className="rounded-2xl border-2 border-cyan-500/20 bg-linear-to-b from-card via-background to-card p-6 shadow-inner dark:border-cyan-500/20 dark:from-slate-950 dark:via-slate-900/90 dark:to-slate-950 space-y-6">
+                <div className="rounded-2xl border-2 border-emerald-500/20 bg-linear-to-b from-card via-background to-card p-6 shadow-inner dark:border-emerald-500/20 dark:from-slate-950 dark:via-slate-900/90 dark:to-slate-950 space-y-6">
                   {/* Certificate Top Header */}
                   <div className="text-center pb-4 border-b border-border/60 dark:border-white/10 space-y-1">
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-cyan-500/10 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-cyan-600 dark:text-cyan-400">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
                       <Award className="h-3.5 w-3.5" /> Official Compliance Record
                     </span>
                     <h4 className="text-lg font-bold text-foreground dark:text-white uppercase tracking-tight">
@@ -602,27 +602,27 @@ export function LegalDocumentsScreen() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
                     <div className="rounded-xl border border-border/70 bg-background/60 p-3.5 space-y-1 dark:border-white/5 dark:bg-slate-950/60">
                       <div className="flex items-center gap-1.5 text-muted-foreground dark:text-slate-400">
-                        <Building2 className="h-3.5 w-3.5 text-cyan-600 dark:text-cyan-400" />
+                        <Building2 className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
                         <span className="text-[10px] font-bold uppercase tracking-wider">Entity Name</span>
                       </div>
                       <p className="font-bold text-foreground dark:text-white">
-                        JOBSONN TECHNOLOGIES PRIVATE LIMITED
+                        jobson.id TECHNOLOGIES PRIVATE LIMITED
                       </p>
                     </div>
 
                     <div className="rounded-xl border border-border/70 bg-background/60 p-3.5 space-y-1 dark:border-white/5 dark:bg-slate-950/60">
                       <div className="flex items-center gap-1.5 text-muted-foreground dark:text-slate-400">
-                        <Hash className="h-3.5 w-3.5 text-cyan-600 dark:text-cyan-400" />
+                        <Hash className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
                         <span className="text-[10px] font-bold uppercase tracking-wider">Registration / Doc ID</span>
                       </div>
-                      <p className="font-mono font-bold text-cyan-600 dark:text-cyan-400">
+                      <p className="font-mono font-bold text-emerald-600 dark:text-emerald-400">
                         {previewDoc.certNumber || "VERIFIED-REG-84920"}
                       </p>
                     </div>
 
                     <div className="rounded-xl border border-border/70 bg-background/60 p-3.5 space-y-1 dark:border-white/5 dark:bg-slate-950/60">
                       <div className="flex items-center gap-1.5 text-muted-foreground dark:text-slate-400">
-                        <Calendar className="h-3.5 w-3.5 text-cyan-600 dark:text-cyan-400" />
+                        <Calendar className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
                         <span className="text-[10px] font-bold uppercase tracking-wider">Filing Date</span>
                       </div>
                       <p className="font-semibold text-foreground dark:text-white">
@@ -645,9 +645,9 @@ export function LegalDocumentsScreen() {
                   <div className="flex items-center justify-between rounded-xl bg-muted/40 px-4 py-2.5 text-[11px] text-muted-foreground dark:bg-white/[0.03] dark:text-slate-400">
                     <span className="flex items-center gap-1.5">
                       <ShieldCheck className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
-                      Digital Authenticity Validated via JOBSONN Trust Protocol
+                      Digital Authenticity Validated via jobson.id Trust Protocol
                     </span>
-                    <span className="font-mono text-[10px] font-semibold text-cyan-600 dark:text-cyan-400">
+                    <span className="font-mono text-[10px] font-semibold text-emerald-600 dark:text-emerald-400">
                       SHA256: 9b2d...f4a1
                     </span>
                   </div>
@@ -676,7 +676,7 @@ export function LegalDocumentsScreen() {
                 <button
                   type="button"
                   onClick={() => handleDownload(previewDoc)}
-                  className="inline-flex items-center gap-1.5 rounded-xl bg-cyan-500 px-4 py-2 text-xs font-bold text-slate-950 hover:bg-cyan-400 transition-colors shadow-sm cursor-pointer"
+                  className="inline-flex items-center gap-1.5 rounded-xl bg-emerald-500 px-4 py-2 text-xs font-bold text-slate-950 hover:bg-emerald-400 transition-colors shadow-sm cursor-pointer"
                 >
                   <Download className="h-3.5 w-3.5" /> Download
                 </button>

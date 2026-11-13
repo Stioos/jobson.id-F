@@ -146,7 +146,7 @@ const CANDIDATE_TXNS: CandidateTxn[] = [
     id: "ctx_c_004",
     date: new Date(Date.now() - 5 * 86400000).toISOString(),
     type: "certification_fee",
-    description: "JOBSONN Full-Stack Certificate exam fee",
+    description: "jobson.id Full-Stack Certificate exam fee",
     amount: 2500,
     direction: "debit",
     status: "pending",

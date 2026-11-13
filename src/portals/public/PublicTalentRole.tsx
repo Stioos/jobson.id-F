@@ -167,7 +167,7 @@ const TALENT_ROLES: Record<string, RoleConfig> = {
     ],
     testimonials: [
       {
-        quote: "JOBSONN's train-to-hire cohort delivered 84 production-ready engineers in 5 months — exactly the domain depth we needed for our payments launch.",
+        quote: "jobson.id's train-to-hire cohort delivered 84 production-ready engineers in 5 months — exactly the domain depth we needed for our payments launch.",
         name: "Rajesh Kumar",
         role: "VP Engineering",
         company: "FinEdge",
@@ -404,7 +404,7 @@ const TALENT_ROLES: Record<string, RoleConfig> = {
         initials: "AS",
       },
       {
-        quote: "We filled 312 plant roles in 52 days for a greenfield factory — JOBSONN's pan-India recruiter network made it possible.",
+        quote: "We filled 312 plant roles in 52 days for a greenfield factory — jobson.id's pan-India recruiter network made it possible.",
         name: "Lakshmi Venkat",
         role: "Plant HR Head",
         company: "Bharat Forge",
@@ -512,7 +512,7 @@ const TALENT_ROLES: Record<string, RoleConfig> = {
     ],
     testimonials: [
       {
-        quote: "JOBSONN reskilled 812 engineers from legacy to cloud-native in 9 months — our billable rate uplift was 22% and we promoted 34% more internally.",
+        quote: "jobson.id reskilled 812 engineers from legacy to cloud-native in 9 months — our billable rate uplift was 22% and we promoted 34% more internally.",
         name: "Suresh Krishnan",
         role: "Head of L&D",
         company: "Infosys",
@@ -742,7 +742,7 @@ const TALENT_ROLES: Record<string, RoleConfig> = {
     ],
     testimonials: [
       {
-        quote: "JOBSONN delivered 27 senior engineers in 4 months for our Series B scale-up. Their AI shortlists were spot-on — submittal-to-offer rate of 32%.",
+        quote: "jobson.id delivered 27 senior engineers in 4 months for our Series B scale-up. Their AI shortlists were spot-on — submittal-to-offer rate of 32%.",
         name: "Karan Bhatia",
         role: "VP Engineering",
         company: "FinEdge",
@@ -887,7 +887,7 @@ const TALENT_ROLES: Record<string, RoleConfig> = {
     ],
     faqs: [
       { q: "What's the minimum commitment?", a: "No minimum. You can deploy a single worker for a single day, or 1,000 workers for 12 months. The model is fully elastic — scale up or down weekly." },
-      { q: "Who is the employer of record?", a: "JOBSONN is the employer of record for all contract and on-demand workers. We handle payroll, PF, ESI, gratuity, leave, and all statutory compliance — you receive a single monthly invoice per worker." },
+      { q: "Who is the employer of record?", a: "jobson.id is the employer of record for all contract and on-demand workers. We handle payroll, PF, ESI, gratuity, leave, and all statutory compliance — you receive a single monthly invoice per worker." },
       { q: "How fast can you deploy?", a: "From request to worker on the floor in 5 business days, assuming we have pre-vetted candidates in your geography. For new geographies or specialized roles, allow 7–10 days for first deployment." },
       { q: "What if a worker is underperforming?", a: "We replace underperforming workers within 3 business days at no additional cost. Our ops team manages attendance, performance, and replacements — your team focuses on the work, not the HR admin." },
     ],

@@ -76,7 +76,7 @@ export function LoginDrawer() {
     let redirectPortal: string | null = null;
     if (typeof window !== "undefined") {
       try {
-        redirectPortal = sessionStorage.getItem("jobsonn_redirect_portal");
+        redirectPortal = sessionStorage.getItem("jobson_id_redirect_portal");
       } catch {}
     }
 
@@ -95,8 +95,8 @@ export function LoginDrawer() {
     setTimeout(() => {
       if (typeof window !== "undefined") {
         try {
-          sessionStorage.removeItem("jobsonn_redirect_portal");
-          sessionStorage.removeItem("jobsonn_registered_notice");
+          sessionStorage.removeItem("jobson_id_redirect_portal");
+          sessionStorage.removeItem("jobson_id_registered_notice");
         } catch {}
       }
 
@@ -126,8 +126,8 @@ export function LoginDrawer() {
         <div className="flex items-center justify-between border-b border-border/80 px-6 py-4">
           <div className="flex items-center gap-3">
             <Image
-              src="/jobsonn-logo.png"
-              alt="JOBSONN"
+              src="/jobson-id-logo.png"
+              alt="jobson.id"
               width={110}
               height={28}
               className="h-6 w-auto object-contain"
@@ -252,7 +252,7 @@ export function LoginDrawer() {
                   </span>
                 ) : (
                   <>
-                    Sign in to JOBSONN <ArrowRight className="h-4 w-4" />
+                    Sign in to jobson.id <ArrowRight className="h-4 w-4" />
                   </>
                 )}
               </Button>
@@ -260,7 +260,7 @@ export function LoginDrawer() {
               {/* Register Options Grid (Candidate, Employer, Recruiter, Training, Partner, Admin) */}
               <div className="pt-6 border-t border-border/80 mt-6">
                 <p className="mb-3 text-center text-xs text-muted-foreground font-normal">
-                  New to JOBSONN? Create an account:
+                  New to jobson.id? Create an account:
                 </p>
                 <div className="grid grid-cols-3 gap-2">
                   {REGISTER_ROLES.map((role) => {

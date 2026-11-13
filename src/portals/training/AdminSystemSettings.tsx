@@ -62,8 +62,8 @@ export function AdminSystemSettings() {
         <TabsContent value="general">
           <SectionCard title="General Platform Settings" description="Basic platform configuration">
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <Field label="Platform Name"><Input defaultValue="JOBSONN Talent Solutions" /></Field>
-              <Field label="Support Email"><Input type="email" defaultValue="support@jobsonn.com" /></Field>
+              <Field label="Platform Name"><Input defaultValue="jobson.id Talent Solutions" /></Field>
+              <Field label="Support Email"><Input type="email" defaultValue="support@jobson.id" /></Field>
               <Field label="Timezone">
                 <Select defaultValue="ist">
                   <SelectTrigger><SelectValue /></SelectTrigger>
@@ -118,9 +118,9 @@ export function AdminSystemSettings() {
           <div className="space-y-4">
             <SectionCard title="SMTP Configuration" description="Outbound email server settings">
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <Field label="SMTP Host"><Input defaultValue="smtp.jobsonn.com" /></Field>
+                <Field label="SMTP Host"><Input defaultValue="smtp.jobson.id" /></Field>
                 <Field label="SMTP Port"><Input defaultValue="587" /></Field>
-                <Field label="Username"><Input defaultValue="noreply@jobsonn.com" /></Field>
+                <Field label="Username"><Input defaultValue="noreply@jobson.id" /></Field>
                 <Field label="Password"><Input type="password" defaultValue="****************" /></Field>
                 <Field label="Encryption">
                   <Select defaultValue="tls">
@@ -132,10 +132,10 @@ export function AdminSystemSettings() {
                     </SelectContent>
                   </Select>
                 </Field>
-                <Field label="From Name"><Input defaultValue="JOBSONN Team" /></Field>
+                <Field label="From Name"><Input defaultValue="jobson.id Team" /></Field>
               </div>
               <div className="mt-4 flex justify-end gap-2">
-                <Button variant="outline" onClick={() => toast.success("Test email sent", { description: "Test email sent to support@jobsonn.com. Check inbox in 1-2 minutes." })}>
+                <Button variant="outline" onClick={() => toast.success("Test email sent", { description: "Test email sent to support@jobson.id. Check inbox in 1-2 minutes." })}>
                   <RefreshCw className="mr-1 h-4 w-4" /> Send Test
                 </Button>
                 <Button onClick={() => handleSave("Email")}><Save className="mr-1 h-4 w-4" /> Save</Button>
@@ -145,7 +145,7 @@ export function AdminSystemSettings() {
             <SectionCard title="Email Templates" description="System email templates">
               <div className="space-y-2">
                 {[
-                  { name: "Welcome Email", subject: "Welcome to JOBSONN, {{name}}!", lastEdited: "2 days ago" },
+                  { name: "Welcome Email", subject: "Welcome to jobson.id, {{name}}!", lastEdited: "2 days ago" },
                   { name: "Invoice Generated", subject: "Invoice {{invoice_number}} — {{amount}}", lastEdited: "1 week ago" },
                   { name: "Payment Confirmation", subject: "Payment received — {{amount}}", lastEdited: "3 days ago" },
                   { name: "Program Enrollment", subject: "You're enrolled in {{program_name}}", lastEdited: "5 days ago" },
@@ -300,7 +300,7 @@ export function AdminSystemSettings() {
                   <Select defaultValue="s3">
                     <SelectTrigger><SelectValue /></SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="s3">AWS S3 (jobsonn-backups)</SelectItem>
+                      <SelectItem value="s3">AWS S3 (jobson.id-backups)</SelectItem>
                       <SelectItem value="gcs">Google Cloud Storage</SelectItem>
                       <SelectItem value="azure">Azure Blob Storage</SelectItem>
                       <SelectItem value="local">Local Disk</SelectItem>

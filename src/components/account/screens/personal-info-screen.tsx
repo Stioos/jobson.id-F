@@ -162,8 +162,8 @@ export function PersonalInfoScreen({ email: initialEmail, phone: initialPhone }:
     }, 600);
   };
 
-  const inputCls = "h-11 w-full rounded-xl border border-border bg-background/80 px-4 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500 dark:border-white/10 dark:bg-slate-950/60 dark:text-white dark:placeholder:text-slate-600";
-  const inputIconCls = "h-11 w-full rounded-xl border border-border bg-background/80 pl-10 pr-4 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500 dark:border-white/10 dark:bg-slate-950/60 dark:text-white dark:placeholder:text-slate-600";
+  const inputCls = "h-11 w-full rounded-xl border border-border bg-background/80 px-4 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 dark:border-white/10 dark:bg-slate-950/60 dark:text-white dark:placeholder:text-slate-600";
+  const inputIconCls = "h-11 w-full rounded-xl border border-border bg-background/80 pl-10 pr-4 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 dark:border-white/10 dark:bg-slate-950/60 dark:text-white dark:placeholder:text-slate-600";
 
   return (
     <div className="space-y-8">
@@ -174,7 +174,7 @@ export function PersonalInfoScreen({ email: initialEmail, phone: initialPhone }:
           {coverUrl ? (
             <img src={coverUrl} alt="Profile cover" className="h-full w-full object-cover" />
           ) : (
-            <div className="h-full w-full bg-gradient-to-br from-cyan-500/30 via-blue-600/20 to-indigo-600/30 dark:from-cyan-500/20 dark:via-blue-600/10 dark:to-indigo-600/20" />
+            <div className="h-full w-full bg-gradient-to-br from-emerald-500/30 via-blue-600/20 to-indigo-600/30 dark:from-emerald-500/20 dark:via-blue-600/10 dark:to-indigo-600/20" />
           )}
           {/* Cover overlay actions */}
           <div className="absolute right-3 top-3 flex gap-2">
@@ -205,9 +205,9 @@ export function PersonalInfoScreen({ email: initialEmail, phone: initialPhone }:
             <button
               type="button"
               onClick={() => fileInputRef.current?.click()}
-              className="inline-flex items-center gap-1.5 self-start sm:self-auto rounded-xl border border-border/70 bg-card/60 px-3 py-1.5 text-xs font-semibold text-muted-foreground shadow-xs transition-all hover:border-cyan-500/40 hover:bg-muted hover:text-foreground dark:border-white/10 dark:bg-white/[0.04] dark:text-slate-300 dark:hover:bg-white/[0.08] dark:hover:text-white cursor-pointer"
+              className="inline-flex items-center gap-1.5 self-start sm:self-auto rounded-xl border border-border/70 bg-card/60 px-3 py-1.5 text-xs font-semibold text-muted-foreground shadow-xs transition-all hover:border-emerald-500/40 hover:bg-muted hover:text-foreground dark:border-white/10 dark:bg-white/[0.04] dark:text-slate-300 dark:hover:bg-white/[0.08] dark:hover:text-white cursor-pointer"
             >
-              <Pencil className="h-3.5 w-3.5 text-cyan-600 dark:text-cyan-400" /> Edit Photo
+              <Pencil className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" /> Edit Photo
             </button>
           </div>
 
@@ -217,16 +217,16 @@ export function PersonalInfoScreen({ email: initialEmail, phone: initialPhone }:
           <div className="mt-[-3rem] flex flex-col gap-6 sm:flex-row sm:items-end">
             <div className="relative group">
               {avatarUrl ? (
-                <img src={avatarUrl} alt={fullName || "Profile"} className="h-24 w-24 rounded-2xl object-cover shadow-lg shadow-cyan-500/20 ring-4 ring-card dark:ring-slate-900" />
+                <img src={avatarUrl} alt={fullName || "Profile"} className="h-24 w-24 rounded-2xl object-cover shadow-lg shadow-emerald-500/20 ring-4 ring-card dark:ring-slate-900" />
               ) : (
-                <div className="flex h-24 w-24 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-500 via-blue-600 to-indigo-600 text-2xl font-bold text-white shadow-lg shadow-cyan-500/20 ring-4 ring-card dark:ring-slate-900">
+                <div className="flex h-24 w-24 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-500 via-blue-600 to-indigo-600 text-2xl font-bold text-white shadow-lg shadow-emerald-500/20 ring-4 ring-card dark:ring-slate-900">
                   {getInitials(fullName)}
                 </div>
               )}
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="absolute -bottom-2 -right-2 flex h-8 w-8 items-center justify-center rounded-full bg-cyan-500 text-slate-950 shadow-md transition-all hover:bg-cyan-400 hover:scale-105 active:scale-95 cursor-pointer ring-2 ring-background dark:ring-[#0c1322]"
+                className="absolute -bottom-2 -right-2 flex h-8 w-8 items-center justify-center rounded-full bg-emerald-500 text-slate-950 shadow-md transition-all hover:bg-emerald-400 hover:scale-105 active:scale-95 cursor-pointer ring-2 ring-background dark:ring-[#0c1322]"
                 title="Edit profile photo"
                 aria-label="Edit profile photo"
               >
@@ -239,9 +239,9 @@ export function PersonalInfoScreen({ email: initialEmail, phone: initialPhone }:
                 <button
                   type="button"
                   onClick={() => fileInputRef.current?.click()}
-                  className="inline-flex items-center gap-1.5 rounded-xl bg-cyan-600/10 px-4 py-2 text-xs font-semibold text-cyan-600 transition-all hover:bg-cyan-600/20 dark:bg-white/10 dark:text-white dark:hover:bg-white/15 cursor-pointer"
+                  className="inline-flex items-center gap-1.5 rounded-xl bg-emerald-600/10 px-4 py-2 text-xs font-semibold text-emerald-600 transition-all hover:bg-emerald-600/20 dark:bg-white/10 dark:text-white dark:hover:bg-white/15 cursor-pointer"
                 >
-                  <Pencil className="h-3.5 w-3.5 text-cyan-500 dark:text-cyan-400" /> Upload new image
+                  <Pencil className="h-3.5 w-3.5 text-emerald-500 dark:text-emerald-400" /> Upload new image
                 </button>
                 <button
                   type="button"
@@ -322,7 +322,7 @@ export function PersonalInfoScreen({ email: initialEmail, phone: initialPhone }:
             onChange={(e) => setHeadline(e.target.value)}
             rows={3}
             placeholder="e.g. Transforming Data into Growth | Business Intelligence | Revenue-Driven Sales & Marketing | Procurement & Supply Chains | Product Design & Development | Strategy & Process Excellence | End-to-End Manufacturing Solutions"
-            className="w-full resize-y rounded-xl border border-border bg-background/80 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500 dark:border-white/10 dark:bg-slate-950/60 dark:text-white dark:placeholder:text-slate-600"
+            className="w-full resize-y rounded-xl border border-border bg-background/80 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 dark:border-white/10 dark:bg-slate-950/60 dark:text-white dark:placeholder:text-slate-600"
           />
           <p className="text-[11px] text-muted-foreground/80 dark:text-slate-500">Your professional headline — separate skills, domains, or value props with a pipe (|). Shown prominently on your profile card.</p>
         </div>
@@ -402,7 +402,7 @@ export function PersonalInfoScreen({ email: initialEmail, phone: initialPhone }:
       {/* === 4. Date of Birth & Languages === */}
       <section className="rounded-3xl border border-border bg-card/80 p-6 shadow-soft backdrop-blur-sm sm:p-8 dark:border-white/10 dark:bg-slate-900/60 dark:shadow-none">
         <h3 className="flex items-center gap-2 text-base font-bold text-foreground dark:text-white">
-          <Languages className="h-4.5 w-4.5 text-cyan-600 dark:text-cyan-400" /> Languages Known
+          <Languages className="h-4.5 w-4.5 text-emerald-600 dark:text-emerald-400" /> Languages Known
         </h3>
         <p className="mt-1 text-xs text-muted-foreground dark:text-slate-400">Languages you can speak, read, or write.</p>
         <div className="mt-4 flex flex-wrap gap-2">
@@ -418,7 +418,7 @@ export function PersonalInfoScreen({ email: initialEmail, phone: initialPhone }:
         </div>
         <div className="mt-4 flex gap-2">
           <input type="text" value={newLanguage} onChange={(e) => setNewLanguage(e.target.value)} onKeyDown={(e) => e.key === "Enter" && addLanguage()} placeholder="Add a language e.g. Tamil" className={inputCls} />
-          <button type="button" onClick={addLanguage} className="inline-flex h-11 shrink-0 items-center gap-1.5 rounded-xl bg-cyan-500 px-4 text-xs font-bold text-slate-950 transition-all hover:bg-cyan-400 cursor-pointer">
+          <button type="button" onClick={addLanguage} className="inline-flex h-11 shrink-0 items-center gap-1.5 rounded-xl bg-emerald-500 px-4 text-xs font-bold text-slate-950 transition-all hover:bg-emerald-400 cursor-pointer">
             <Plus className="h-3.5 w-3.5" /> Add
           </button>
         </div>
@@ -427,7 +427,7 @@ export function PersonalInfoScreen({ email: initialEmail, phone: initialPhone }:
       {/* === 5. Social Media Links === */}
       <section className="rounded-3xl border border-border bg-card/80 p-6 shadow-soft backdrop-blur-sm sm:p-8 dark:border-white/10 dark:bg-slate-900/60 dark:shadow-none">
         <h3 className="flex items-center gap-2 text-base font-bold text-foreground dark:text-white">
-          <Link2 className="h-4.5 w-4.5 text-cyan-600 dark:text-cyan-400" /> Social Media Links
+          <Link2 className="h-4.5 w-4.5 text-emerald-600 dark:text-emerald-400" /> Social Media Links
         </h3>
         <p className="mt-1 text-xs text-muted-foreground dark:text-slate-400">Add links to your social profiles and online presence.</p>
 
@@ -459,7 +459,7 @@ export function PersonalInfoScreen({ email: initialEmail, phone: initialPhone }:
             <option value="Website">Personal Website</option>
           </select>
           <input type="url" value={newSocialUrl} onChange={(e) => setNewSocialUrl(e.target.value)} onKeyDown={(e) => e.key === "Enter" && addSocialLink()} placeholder="https://..." className={inputCls} />
-          <button type="button" onClick={addSocialLink} className="inline-flex h-11 shrink-0 items-center gap-1.5 rounded-xl bg-cyan-500 px-4 text-xs font-bold text-slate-950 transition-all hover:bg-cyan-400 cursor-pointer">
+          <button type="button" onClick={addSocialLink} className="inline-flex h-11 shrink-0 items-center gap-1.5 rounded-xl bg-emerald-500 px-4 text-xs font-bold text-slate-950 transition-all hover:bg-emerald-400 cursor-pointer">
             <Plus className="h-3.5 w-3.5" /> Add Link
           </button>
         </div>
@@ -474,7 +474,7 @@ export function PersonalInfoScreen({ email: initialEmail, phone: initialPhone }:
 
         <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
           {[
-            { id: "public", title: "Public", desc: "Visible to all visitors on JOBSONN directory" },
+            { id: "public", title: "Public", desc: "Visible to all visitors on jobson.id directory" },
             { id: "network", title: "Verified Network Only", desc: "Only logged-in verified accounts can view" },
             { id: "private", title: "Private / Hidden", desc: "Hidden from public search; only direct links work" },
           ].map((v) => (
@@ -484,7 +484,7 @@ export function PersonalInfoScreen({ email: initialEmail, phone: initialPhone }:
               className={cn(
                 "flex cursor-pointer flex-col justify-between rounded-2xl border p-4 transition-all",
                 visibility === v.id
-                  ? "border-cyan-500 bg-cyan-500/10 ring-1 ring-cyan-500/30"
+                  ? "border-emerald-500 bg-emerald-500/10 ring-1 ring-emerald-500/30"
                   : "border-border bg-background/80 hover:border-border/80 dark:border-white/10 dark:bg-slate-950/40 dark:hover:border-white/20",
               )}
             >
@@ -492,7 +492,7 @@ export function PersonalInfoScreen({ email: initialEmail, phone: initialPhone }:
                 <p className="text-sm font-bold text-foreground dark:text-white">{v.title}</p>
                 <p className="mt-1 text-xs text-muted-foreground dark:text-slate-400">{v.desc}</p>
               </div>
-              <span className="mt-4 inline-flex items-center gap-1 text-[11px] font-semibold text-cyan-600 dark:text-cyan-400">
+              <span className="mt-4 inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">
                 {visibility === v.id && <Check className="h-3.5 w-3.5" />}
                 {visibility === v.id ? "Selected" : "Click to select"}
               </span>
@@ -539,7 +539,7 @@ export function PersonalInfoScreen({ email: initialEmail, phone: initialPhone }:
             <button
               type="button"
               onClick={() => setAllowSearchIndexing((v) => !v)}
-              className={cn("relative h-6 w-11 shrink-0 rounded-full transition-colors cursor-pointer", allowSearchIndexing ? "bg-cyan-500" : "bg-muted dark:bg-slate-700")}
+              className={cn("relative h-6 w-11 shrink-0 rounded-full transition-colors cursor-pointer", allowSearchIndexing ? "bg-emerald-500" : "bg-muted dark:bg-slate-700")}
               aria-pressed={allowSearchIndexing}
               aria-label="Toggle search indexing"
             >
@@ -551,12 +551,12 @@ export function PersonalInfoScreen({ email: initialEmail, phone: initialPhone }:
           <div className="flex items-center justify-between rounded-2xl border border-border/70 bg-background/80 p-4 dark:border-white/5 dark:bg-slate-950/40">
             <div>
               <p className="text-sm font-bold text-foreground dark:text-white">Allow personal data collection</p>
-              <p className="text-xs text-muted-foreground dark:text-slate-400">Consent to JOBSONN collecting your personal data for profile services.</p>
+              <p className="text-xs text-muted-foreground dark:text-slate-400">Consent to jobson.id collecting your personal data for profile services.</p>
             </div>
             <button
               type="button"
               onClick={() => setAllowDataCollection((v) => !v)}
-              className={cn("relative h-6 w-11 shrink-0 rounded-full transition-colors cursor-pointer", allowDataCollection ? "bg-cyan-500" : "bg-muted dark:bg-slate-700")}
+              className={cn("relative h-6 w-11 shrink-0 rounded-full transition-colors cursor-pointer", allowDataCollection ? "bg-emerald-500" : "bg-muted dark:bg-slate-700")}
               aria-pressed={allowDataCollection}
               aria-label="Toggle data collection"
             >
@@ -572,7 +572,7 @@ export function PersonalInfoScreen({ email: initialEmail, phone: initialPhone }:
           type="button"
           onClick={handleSave}
           disabled={isSaving}
-          className="inline-flex items-center gap-2 rounded-xl bg-cyan-500 px-6 py-3 text-sm font-bold text-slate-950 transition-all hover:bg-cyan-400 hover:shadow-lg hover:shadow-cyan-500/25 disabled:opacity-50 cursor-pointer"
+          className="inline-flex items-center gap-2 rounded-xl bg-emerald-500 px-6 py-3 text-sm font-bold text-slate-950 transition-all hover:bg-emerald-400 hover:shadow-lg hover:shadow-emerald-500/25 disabled:opacity-50 cursor-pointer"
         >
           {isSaving ? "Saving changes..." : "Save Personal Info"}
           <Save className="h-4 w-4" />

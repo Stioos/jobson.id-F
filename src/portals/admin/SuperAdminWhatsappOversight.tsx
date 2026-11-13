@@ -31,7 +31,7 @@ const API_HEALTH = [
   { metric: "WABA API Status", value: "Healthy", tone: "success" as const, detail: "200 OK · 184ms p50" },
   { metric: "Phone Number Quality", value: "High", tone: "success" as const, detail: "Green tier · 99.4% delivery" },
   { metric: "Messaging Limit", value: "Tier 3 (100K/24h)", tone: "success" as const, detail: "Usage: 18.4%" },
-  { metric: "Display Name Status", value: "Approved", tone: "success" as const, detail: "JOBSONN Technologies" },
+  { metric: "Display Name Status", value: "Approved", tone: "success" as const, detail: "jobson.id Technologies" },
   { metric: "Verified Business", value: "Green Tick", tone: "success" as const, detail: "Verified by Meta" },
   { metric: "Webhook Delivery", value: "Healthy", tone: "success" as const, detail: "0 retries in 24h" },
 ];

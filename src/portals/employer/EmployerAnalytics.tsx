@@ -38,7 +38,7 @@ const funnelData = [
 ];
 
 const sourceData = [
-  { name: "JOBSONN Search", value: 142, color: "#10b981" },
+  { name: "jobson.id Search", value: 142, color: "#10b981" },
   { name: "Referrals", value: 68, color: "#14b8a6" },
   { name: "LinkedIn", value: 54, color: "#0ea5e9" },
   { name: "Career page", value: 41, color: "#f59e0b" },

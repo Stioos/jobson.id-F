@@ -393,8 +393,8 @@ export function PublicRegister({ roleKey = "candidate" }: { roleKey?: string }) 
 
       if (typeof window !== "undefined") {
         try {
-          sessionStorage.removeItem("jobsonn_redirect_portal");
-          sessionStorage.setItem("jobsonn_registered_notice", cleanEmail);
+          sessionStorage.removeItem("jobson_id_redirect_portal");
+          sessionStorage.setItem("jobson_id_registered_notice", cleanEmail);
         } catch {}
       }
 
@@ -415,11 +415,11 @@ export function PublicRegister({ roleKey = "candidate" }: { roleKey?: string }) 
             type="button"
             onClick={() => navigate("public", "home")}
             className="flex items-center cursor-pointer transition-opacity hover:opacity-80"
-            aria-label="JOBSONN home"
+            aria-label="jobson.id home"
           >
             <Image
-              src="/jobsonn-logo.png"
-              alt="JOBSONN"
+              src="/jobson-id-logo.png"
+              alt="jobson.id"
               width={120}
               height={32}
               className="h-7 w-auto object-contain"
@@ -448,7 +448,7 @@ export function PublicRegister({ roleKey = "candidate" }: { roleKey?: string }) 
                   Create your account
                 </h1>
                 <p className="mt-1 text-xs sm:text-[13px] text-slate-500 dark:text-muted-foreground">
-                  Fill in your information to join JOBSONN as a {activeAccountType.label}.
+                  Fill in your information to join jobson.id as a {activeAccountType.label}.
                 </p>
               </div>
               <span
@@ -716,7 +716,7 @@ export function PublicRegister({ roleKey = "candidate" }: { roleKey?: string }) 
                   >
                     Privacy Policy
                   </button>{" "}
-                  of JOBSONN.
+                  of jobson.id.
                 </label>
               </div>
 
@@ -766,7 +766,7 @@ export function PublicRegister({ roleKey = "candidate" }: { roleKey?: string }) 
               </h1>
               <p className="mx-auto mt-2 max-w-lg text-xs sm:text-sm text-slate-500 dark:text-muted-foreground leading-relaxed">
                 We sent verification codes to your registered email and phone. Enter the 6-digit codes
-                below to activate your JOBSONN account.
+                below to activate your jobson.id account.
               </p>
             </div>
 
@@ -865,7 +865,7 @@ export function PublicRegister({ roleKey = "candidate" }: { roleKey?: string }) 
 
       {/* Footer */}
       <footer className="py-5 text-center text-[11px] text-slate-400 dark:text-muted-foreground">
-        &copy; {new Date().getFullYear()} JOBSONN. Global Career &amp; Talent Discovery Platform.
+        &copy; {new Date().getFullYear()} jobson.id. Global Career &amp; Talent Discovery Platform.
       </footer>
     </div>
   );

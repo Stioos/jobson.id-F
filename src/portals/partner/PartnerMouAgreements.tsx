@@ -143,12 +143,12 @@ export function PartnerMouAgreements() {
           <div className="max-h-[60vh] overflow-y-auto scroll-thin rounded-lg border bg-muted/30 p-6 text-sm leading-relaxed">
             <div className="text-center mb-4">
               <h3 className="font-semibold text-base">MEMORANDUM OF UNDERSTANDING</h3>
-              <p className="text-xs text-muted-foreground">Between JOBSONN and {previewMou?.collegeName}</p>
+              <p className="text-xs text-muted-foreground">Between jobson.id and {previewMou?.collegeName}</p>
             </div>
             <div className="space-y-3 text-xs text-muted-foreground">
-              <p>This Memorandum of Understanding ("MoU") is made on this day between <span className="font-medium text-foreground">JOBSONN Education Pvt. Ltd.</span> ("JOBSONN") and <span className="font-medium text-foreground">{previewMou?.collegeName}</span> ("the Institution").</p>
+              <p>This Memorandum of Understanding ("MoU") is made on this day between <span className="font-medium text-foreground">jobson.id Education Pvt. Ltd.</span> ("jobson.id") and <span className="font-medium text-foreground">{previewMou?.collegeName}</span> ("the Institution").</p>
               <p><span className="font-semibold text-foreground">1. Objectives:</span> To establish a strategic partnership for delivering industry-aligned training, certification, and placement services to students of the Institution under Model {previewMou?.partnershipModel}.</p>
-              <p><span className="font-semibold text-foreground">2. Scope:</span> JOBSONN shall provide curriculum, faculty training, LMS access, certification, and placement drives. The Institution shall provide infrastructure, student enrollment, and administrative support.</p>
+              <p><span className="font-semibold text-foreground">2. Scope:</span> jobson.id shall provide curriculum, faculty training, LMS access, certification, and placement drives. The Institution shall provide infrastructure, student enrollment, and administrative support.</p>
               <p><span className="font-semibold text-foreground">3. Revenue Model:</span> Revenue share as per Model {previewMou?.partnershipModel} agreement — {collegePartnershipModels.find((x) => x.id === previewMou?.partnershipModel)?.revenueModel ?? "as agreed"}.</p>
               <p><span className="font-semibold text-foreground">4. Term:</span> This MoU shall be valid for a period of 3 years from the date of signing, renewable upon mutual consent.</p>
               <p><span className="font-semibold text-foreground">5. Termination:</span> Either party may terminate this MoU with 90 days written notice.</p>
@@ -224,7 +224,7 @@ function DraftMoUDialog({ open, onOpenChange, colleges, models }: { open: boolea
           </div>
           <div className="space-y-1.5">
             <Label>Revenue Share</Label>
-            <Input value={form.revenueShare} onChange={(e) => setForm({ ...form, revenueShare: e.target.value })} placeholder="e.g. 65% partner / 35% JOBSONN" />
+            <Input value={form.revenueShare} onChange={(e) => setForm({ ...form, revenueShare: e.target.value })} placeholder="e.g. 65% partner / 35% jobson.id" />
           </div>
           <div className="space-y-1.5">
             <Label>Special Terms</Label>

@@ -36,7 +36,7 @@ interface SyncedEvent {
 interface SyncLogEntry { id: string; at: string; status: "success" | "failed"; detail: string; }
 
 const SEED_CALENDARS: Calendar[] = [
-  { id: "c1", name: "Google Calendar", email: "karan.m@jobsonn.com", connected: true, lastSync: "2025-01-17T09:30:00", eventsSynced: 42 },
+  { id: "c1", name: "Google Calendar", email: "karan.m@jobson.id", connected: true, lastSync: "2025-01-17T09:30:00", eventsSynced: 42 },
   { id: "c2", name: "Outlook Calendar", email: "", connected: false },
   { id: "c3", name: "Apple Calendar", email: "", connected: false },
 ];
@@ -143,7 +143,7 @@ export function EmployerCalendarSync() {
             <div className="flex items-center justify-between rounded-lg border p-3">
               <div>
                 <p className="text-sm font-medium">Two-way Sync</p>
-                <p className="text-xs text-muted-foreground">Push JOBSONN interviews to your calendar and vice-versa</p>
+                <p className="text-xs text-muted-foreground">Push jobson.id interviews to your calendar and vice-versa</p>
               </div>
               <Switch checked={twoWay} onCheckedChange={setTwoWay} />
             </div>

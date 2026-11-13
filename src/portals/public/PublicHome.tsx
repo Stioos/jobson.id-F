@@ -103,7 +103,7 @@ export function PublicHome() {
 
   const handleSearch = () => {
     sessionStorage.setItem(
-      "jobsonn_job_search",
+      "jobson_id_job_search",
       JSON.stringify({
         keyword,
         location,
@@ -115,7 +115,7 @@ export function PublicHome() {
 
   const handleQuickCategory = (query: string) => {
     sessionStorage.setItem(
-      "jobsonn_job_search",
+      "jobson_id_job_search",
       JSON.stringify({ keyword: query, location: "", experienceMin: 0 })
     );
     navigate("public", "jobs");
@@ -215,7 +215,7 @@ export function PublicHome() {
                   onClick={() => {
                     setKeyword(t);
                     sessionStorage.setItem(
-                      "jobsonn_job_search",
+                      "jobson_id_job_search",
                       JSON.stringify({ keyword: t, location: "", experienceMin: 0 })
                     );
                     navigate("public", "jobs");
@@ -303,7 +303,7 @@ export function PublicHome() {
               key={c.name}
               onClick={() => {
                 sessionStorage.setItem(
-                  "jobsonn_job_search",
+                  "jobson_id_job_search",
                   JSON.stringify({ keyword: "", location: "", category: c.name })
                 );
                 navigate("public", "jobs");
@@ -328,7 +328,7 @@ export function PublicHome() {
           <div className="mb-8 flex items-end justify-between">
             <div>
               <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">Featured employers</h2>
-              <p className="mt-2 text-sm text-muted-foreground">Trusted organizations actively hiring on JOBSONN.</p>
+              <p className="mt-2 text-sm text-muted-foreground">Trusted organizations actively hiring on jobson.id.</p>
             </div>
             <Button variant="ghost" size="sm" className="gap-1" onClick={() => navigate("public", "companies")}>
               View all <ArrowRight className="h-4 w-4" />
@@ -394,7 +394,7 @@ export function PublicHome() {
         <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
           <div className="mb-10 text-center">
             <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">One platform, three audiences</h2>
-            <p className="mt-2 text-sm text-muted-foreground">Whether you&apos;re hiring, looking, or staffing — JOBSONN works for you.</p>
+            <p className="mt-2 text-sm text-muted-foreground">Whether you&apos;re hiring, looking, or staffing — jobson.id works for you.</p>
           </div>
           <div className="grid gap-5 md:grid-cols-3">
             {steps.map((s, i) => (

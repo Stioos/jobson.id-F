@@ -21,8 +21,8 @@ const PORTALS = [
 ];
 
 const META = [
-  { key: "platform_name", value: "JOBSONN", scope: "global" },
-  { key: "support_email", value: "support@jobsonn.com", scope: "global" },
+  { key: "platform_name", value: "jobson.id", scope: "global" },
+  { key: "support_email", value: "support@jobson.id", scope: "global" },
   { key: "default_currency", value: "INR", scope: "billing" },
   { key: "default_locale", value: "en-IN", scope: "i18n" },
   { key: "max_upload_mb", value: "25", scope: "limits" },

@@ -35,7 +35,7 @@ export function RecruiterSettings() {
 
   const [sessions, setSessions] = React.useState([
     { id: "s1", device: "Chrome on macOS", location: "Bengaluru, IN", ip: "203.0.113.42", lastActive: "Current session", current: true, icon: "monitor" as const },
-    { id: "s2", device: "JOBSONN iOS app", location: "Bengaluru, IN", ip: "203.0.113.88", lastActive: "2 hours ago", current: false, icon: "phone" as const },
+    { id: "s2", device: "jobson.id iOS app", location: "Bengaluru, IN", ip: "203.0.113.88", lastActive: "2 hours ago", current: false, icon: "phone" as const },
     { id: "s3", device: "Edge on Windows", location: "Hyderabad, IN", ip: "198.51.100.10", lastActive: "yesterday", current: false, icon: "monitor" as const },
   ]);
   const [revokeSession, setRevokeSession] = React.useState<typeof sessions[number] | null>(null);
@@ -200,7 +200,7 @@ export function RecruiterSettings() {
         <TabsContent value="api" className="space-y-4">
           <SectionCard
             title="API keys"
-            description="Use API keys to integrate JOBSONN with your ATS, sourcing tools, or automation."
+            description="Use API keys to integrate jobson.id with your ATS, sourcing tools, or automation."
             action={<Button size="sm" onClick={() => toast.success("API key generated", { description: "Copy the key — it won't be shown again." })}><Plus className="mr-1 h-3.5 w-3.5" /> Generate key</Button>}
           >
             <ul className="space-y-2">

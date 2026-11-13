@@ -69,7 +69,7 @@ export function SuperAdminEmailCampaigns() {
             </div>
             <div>
               <Label className="text-xs">Subject</Label>
-              <Input value={subject} onChange={(e) => setSubject(e.target.value)} placeholder="Updates from JOBSONN" className="mt-1" />
+              <Input value={subject} onChange={(e) => setSubject(e.target.value)} placeholder="Updates from jobson.id" className="mt-1" />
             </div>
             <div>
               <Label className="text-xs">Audience</Label>

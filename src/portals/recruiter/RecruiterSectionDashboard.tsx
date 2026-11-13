@@ -232,7 +232,7 @@ const RECRUITER_SECTION_METADATA: Record<string, SectionMeta> = {
       "follow-up-automation": { desc: "Automated client follow-ups for feedback on submitted candidates", badge: "Follow-ups", stat: "12 active" },
       "voip-logging": { desc: "Integrated click-to-call phone dialing, call recording, and call notes", badge: "VoIP Phone", stat: "Call logger" },
       "messages": { desc: "Internal team communications and recruiter collaboration threads", badge: "Team Chat", stat: "Synced" },
-      "support": { desc: "Direct ticket channel to Jobsonn agency operations support team", badge: "Support", stat: "24/7 priority" },
+      "support": { desc: "Direct ticket channel to jobson.id agency operations support team", badge: "Support", stat: "24/7 priority" },
     },
     telemetry: [
       { name: "WhatsApp Business API Cloud", status: "Operational", info: "High throughput" },
@@ -320,7 +320,7 @@ const RECRUITER_SECTION_METADATA: Record<string, SectionMeta> = {
       { name: "Calendar Availability Engine", status: "Operational", info: "Live sync" },
     ],
     auditTrail: [
-      { action: "Updated email signature with verified Jobsonn Agency Partner badge", user: "You", time: "4h ago" },
+      { action: "Updated email signature with verified jobson.id Agency Partner badge", user: "You", time: "4h ago" },
       { action: "Connected Google Calendar for automated candidate interview booking", user: "You", time: "2d ago" },
     ],
   },

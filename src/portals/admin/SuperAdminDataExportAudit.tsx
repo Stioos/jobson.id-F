@@ -15,12 +15,12 @@ interface ExportRow {
 }
 
 const EXPORTS: ExportRow[] = [
-  { id: "EXP-9001", exporter: "anita.r@jobsonn.in", role: "Super Admin", dataType: "user_pii", volume: "18,420 records", destination: "Email (SES)", purpose: "Compliance audit", status: "completed", at: "2024-09-22T08:00:00Z", dlpFlag: false },
-  { id: "EXP-9000", exporter: "rohit.s@jobsonn.in", role: "Finance L2", dataType: "payment_records", volume: "8,400 records", destination: "S3 bucket", purpose: "Reconciliation", status: "completed", at: "2024-09-22T06:00:00Z", dlpFlag: false },
-  { id: "EXP-8999", exporter: "support.l1@jobsonn.in", role: "Support L1", dataType: "user_pii", volume: "124 records", destination: "Email (SES)", purpose: "Support ticket follow-up", status: "pending", at: "2024-09-22T05:00:00Z", dlpFlag: true },
-  { id: "EXP-8998", exporter: "marketing@jobsonn.in", role: "Marketing", dataType: "user_pii", volume: "9,420 records", destination: "Mailchimp", purpose: "Email campaign", status: "blocked", at: "2024-09-21T18:00:00Z", dlpFlag: true },
-  { id: "EXP-8997", exporter: "anita.r@jobsonn.in", role: "Super Admin", dataType: "audit_logs", volume: "1.2M records", destination: "S3 (Glacier)", purpose: "Annual archive", status: "approved", at: "2024-09-21T11:00:00Z", dlpFlag: false },
-  { id: "EXP-8996", exporter: "ops.team@jobsonn.in", role: "Operations", dataType: "kyc_docs", volume: "820 files", destination: "External FTP", purpose: "Partner verification", status: "pending", at: "2024-09-21T09:00:00Z", dlpFlag: true },
+  { id: "EXP-9001", exporter: "anita.r@jobson.id", role: "Super Admin", dataType: "user_pii", volume: "18,420 records", destination: "Email (SES)", purpose: "Compliance audit", status: "completed", at: "2024-09-22T08:00:00Z", dlpFlag: false },
+  { id: "EXP-9000", exporter: "rohit.s@jobson.id", role: "Finance L2", dataType: "payment_records", volume: "8,400 records", destination: "S3 bucket", purpose: "Reconciliation", status: "completed", at: "2024-09-22T06:00:00Z", dlpFlag: false },
+  { id: "EXP-8999", exporter: "support.l1@jobson.id", role: "Support L1", dataType: "user_pii", volume: "124 records", destination: "Email (SES)", purpose: "Support ticket follow-up", status: "pending", at: "2024-09-22T05:00:00Z", dlpFlag: true },
+  { id: "EXP-8998", exporter: "marketing@jobson.id", role: "Marketing", dataType: "user_pii", volume: "9,420 records", destination: "Mailchimp", purpose: "Email campaign", status: "blocked", at: "2024-09-21T18:00:00Z", dlpFlag: true },
+  { id: "EXP-8997", exporter: "anita.r@jobson.id", role: "Super Admin", dataType: "audit_logs", volume: "1.2M records", destination: "S3 (Glacier)", purpose: "Annual archive", status: "approved", at: "2024-09-21T11:00:00Z", dlpFlag: false },
+  { id: "EXP-8996", exporter: "ops.team@jobson.id", role: "Operations", dataType: "kyc_docs", volume: "820 files", destination: "External FTP", purpose: "Partner verification", status: "pending", at: "2024-09-21T09:00:00Z", dlpFlag: true },
 ];
 
 const BY_TYPE = [
@@ -161,19 +161,19 @@ export function SuperAdminDataExportAudit() {
       <SectionCard title="Top Exporters" description="Most active exporters (30d)">
         <ul className="space-y-2 text-sm">
           <li className="flex items-center justify-between rounded-md border bg-card p-3">
-            <span className="flex items-center gap-2"><Icon name="User" className="h-4 w-4 text-brand" />anita.r@jobsonn.in <span className="text-xs text-muted-foreground">(Super Admin)</span></span>
+            <span className="flex items-center gap-2"><Icon name="User" className="h-4 w-4 text-brand" />anita.r@jobson.id <span className="text-xs text-muted-foreground">(Super Admin)</span></span>
             <span className="font-medium">42 exports</span>
           </li>
           <li className="flex items-center justify-between rounded-md border bg-card p-3">
-            <span className="flex items-center gap-2"><Icon name="User" className="h-4 w-4 text-brand" />rohit.s@jobsonn.in <span className="text-xs text-muted-foreground">(Finance L2)</span></span>
+            <span className="flex items-center gap-2"><Icon name="User" className="h-4 w-4 text-brand" />rohit.s@jobson.id <span className="text-xs text-muted-foreground">(Finance L2)</span></span>
             <span className="font-medium">28 exports</span>
           </li>
           <li className="flex items-center justify-between rounded-md border bg-card p-3">
-            <span className="flex items-center gap-2"><Icon name="User" className="h-4 w-4 text-brand" />ops.team@jobsonn.in <span className="text-xs text-muted-foreground">(Operations)</span></span>
+            <span className="flex items-center gap-2"><Icon name="User" className="h-4 w-4 text-brand" />ops.team@jobson.id <span className="text-xs text-muted-foreground">(Operations)</span></span>
             <span className="font-medium">18 exports</span>
           </li>
           <li className="flex items-center justify-between rounded-md border bg-card p-3">
-            <span className="flex items-center gap-2"><Icon name="User" className="h-4 w-4 text-brand" />marketing@jobsonn.in <span className="text-xs text-muted-foreground">(Marketing)</span></span>
+            <span className="flex items-center gap-2"><Icon name="User" className="h-4 w-4 text-brand" />marketing@jobson.id <span className="text-xs text-muted-foreground">(Marketing)</span></span>
             <span className="font-medium">12 exports</span>
           </li>
         </ul>

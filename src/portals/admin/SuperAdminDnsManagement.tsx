@@ -22,30 +22,30 @@ interface DnsRecord {
 }
 
 const RECORDS: DnsRecord[] = [
-  { id: "r_1", domain: "jobsonn.com", type: "A", name: "@", value: "103.21.244.18", ttl: 3600, propagation: "live" },
-  { id: "r_2", domain: "jobsonn.com", type: "A", name: "www", value: "103.21.244.18", ttl: 3600, propagation: "live" },
-  { id: "r_3", domain: "jobsonn.com", type: "MX", name: "@", value: "10 mail.jobsonn.com", ttl: 3600, propagation: "live" },
-  { id: "r_4", domain: "jobsonn.com", type: "TXT", name: "@", value: "v=spf1 include:_spf.google.com include:mail.jobsonn.com ~all", ttl: 3600, propagation: "live" },
-  { id: "r_5", domain: "jobsonn.com", type: "TXT", name: "_dmarc", value: "v=DMARC1; p=quarantine; rua=mailto:dmarc@jobsonn.com", ttl: 3600, propagation: "live" },
-  { id: "r_6", domain: "jobsonn.com", type: "CNAME", name: "mail", value: "jobsonn.com.", ttl: 3600, propagation: "live" },
-  { id: "r_7", domain: "jobsonn.com", type: "CNAME", name: "k1._domainkey", value: "dkim.mta1.net", ttl: 3600, propagation: "pending" },
-  { id: "r_8", domain: "promo.jobsonn.com", type: "TXT", name: "k2._domainkey", value: "dkim.mta2.net", ttl: 3600, propagation: "failed" },
-  { id: "r_9", domain: "alerts.jobsonn.com", type: "A", name: "@", value: "103.21.244.22", ttl: 1800, propagation: "live" },
-  { id: "r_10", domain: "partner.jobsonn.com", type: "CNAME", name: "@", value: "jobsonn.com.", ttl: 3600, propagation: "live" },
+  { id: "r_1", domain: "jobson.id", type: "A", name: "@", value: "103.21.244.18", ttl: 3600, propagation: "live" },
+  { id: "r_2", domain: "jobson.id", type: "A", name: "www", value: "103.21.244.18", ttl: 3600, propagation: "live" },
+  { id: "r_3", domain: "jobson.id", type: "MX", name: "@", value: "10 mail.jobson.id", ttl: 3600, propagation: "live" },
+  { id: "r_4", domain: "jobson.id", type: "TXT", name: "@", value: "v=spf1 include:_spf.google.com include:mail.jobson.id ~all", ttl: 3600, propagation: "live" },
+  { id: "r_5", domain: "jobson.id", type: "TXT", name: "_dmarc", value: "v=DMARC1; p=quarantine; rua=mailto:dmarc@jobson.id", ttl: 3600, propagation: "live" },
+  { id: "r_6", domain: "jobson.id", type: "CNAME", name: "mail", value: "jobson.id.", ttl: 3600, propagation: "live" },
+  { id: "r_7", domain: "jobson.id", type: "CNAME", name: "k1._domainkey", value: "dkim.mta1.net", ttl: 3600, propagation: "pending" },
+  { id: "r_8", domain: "promo.jobson.id", type: "TXT", name: "k2._domainkey", value: "dkim.mta2.net", ttl: 3600, propagation: "failed" },
+  { id: "r_9", domain: "alerts.jobson.id", type: "A", name: "@", value: "103.21.244.22", ttl: 1800, propagation: "live" },
+  { id: "r_10", domain: "partner.jobson.id", type: "CNAME", name: "@", value: "jobson.id.", ttl: 3600, propagation: "live" },
 ];
 
 const DOMAINS = [
-  { domain: "jobsonn.com", registrar: "GoDaddy", expires: "2025-08-12", daysLeft: 324, status: "active" },
-  { domain: "promo.jobsonn.com", registrar: "GoDaddy", expires: "2025-08-12", daysLeft: 324, status: "active" },
-  { domain: "alerts.jobsonn.com", registrar: "GoDaddy", expires: "2025-08-12", daysLeft: 324, status: "active" },
-  { domain: "jobsonn.io", registrar: "Namecheap", expires: "2024-10-04", daysLeft: 12, status: "expiring" },
-  { domain: "jobsonn.in", registrar: "ResellerClub", expires: "2024-09-30", daysLeft: 8, status: "expiring" },
+  { domain: "jobson.id", registrar: "GoDaddy", expires: "2025-08-12", daysLeft: 324, status: "active" },
+  { domain: "promo.jobson.id", registrar: "GoDaddy", expires: "2025-08-12", daysLeft: 324, status: "active" },
+  { domain: "alerts.jobson.id", registrar: "GoDaddy", expires: "2025-08-12", daysLeft: 324, status: "active" },
+  { domain: "jobson.id", registrar: "Namecheap", expires: "2024-10-04", daysLeft: 12, status: "expiring" },
+  { domain: "jobson.id", registrar: "ResellerClub", expires: "2024-09-30", daysLeft: 8, status: "expiring" },
 ];
 
 const CHANGE_HISTORY = [
-  { id: "c_1", action: "Added TXT record", domain: "jobsonn.com", detail: "v=spf1 include:_spf.google.com ~all", user: "ops@jobsonn.com", at: "2024-09-20T14:00:00Z" },
-  { id: "c_2", action: "Updated MX record", domain: "jobsonn.com", detail: "Changed priority 20 → 10", user: "ops@jobsonn.com", at: "2024-09-19T10:00:00Z" },
-  { id: "c_3", action: "Removed CNAME", domain: "promo.jobsonn.com", detail: "Old tracking subdomain", user: "ops@jobsonn.com", at: "2024-09-18T16:00:00Z" },
+  { id: "c_1", action: "Added TXT record", domain: "jobson.id", detail: "v=spf1 include:_spf.google.com ~all", user: "ops@jobson.id", at: "2024-09-20T14:00:00Z" },
+  { id: "c_2", action: "Updated MX record", domain: "jobson.id", detail: "Changed priority 20 → 10", user: "ops@jobson.id", at: "2024-09-19T10:00:00Z" },
+  { id: "c_3", action: "Removed CNAME", domain: "promo.jobson.id", detail: "Old tracking subdomain", user: "ops@jobson.id", at: "2024-09-18T16:00:00Z" },
 ];
 
 export function SuperAdminDnsManagement() {
@@ -122,7 +122,7 @@ export function SuperAdminDnsManagement() {
           <div className="space-y-3">
             <div>
               <Label className="text-xs">Domain</Label>
-              <Input value={domain} onChange={(e) => setDomain(e.target.value)} placeholder="jobsonn.com" className="mt-1" />
+              <Input value={domain} onChange={(e) => setDomain(e.target.value)} placeholder="jobson.id" className="mt-1" />
             </div>
             <div className="grid grid-cols-2 gap-2">
               <div>

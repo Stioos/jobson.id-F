@@ -3,4 +3,4 @@ Allow: /
 Disallow: /api/
 Disallow: /_next/
 
-Sitemap: https://jobsonn.com/sitemap.xml
+Sitemap: https://jobson.id/sitemap.xml

@@ -47,19 +47,19 @@ interface Gateway {
 const GATEWAYS: Gateway[] = [
   {
     id: "razorpay", name: "Razorpay", connected: true, mode: "live",
-    apiKey: "rzp_live_••••••••••3f9a", webhookUrl: "https://jobsonn.com/api/webhooks/razorpay",
+    apiKey: "rzp_live_••••••••••3f9a", webhookUrl: "https://jobson.id/api/webhooks/razorpay",
     successRate: 98.4, lastTransaction: "TTX-2024-5007 (₹84K)", totalProcessed: 8, totalVolume: 2640000,
     color: "oklch(0.55 0.18 0)", supportedMethods: ["UPI", "Cards", "Net Banking", "Wallets"],
   },
   {
     id: "stripe", name: "Stripe", connected: true, mode: "live",
-    apiKey: "sk_live_••••••••••8b2c", webhookUrl: "https://jobsonn.com/api/webhooks/stripe",
+    apiKey: "sk_live_••••••••••8b2c", webhookUrl: "https://jobson.id/api/webhooks/stripe",
     successRate: 99.1, lastTransaction: "TTX-2024-5014 ($380)", totalProcessed: 3, totalVolume: 960000,
     color: "oklch(0.55 0.18 250)", supportedMethods: ["Cards", "Apple Pay", "Google Pay"],
   },
   {
     id: "payu", name: "PayU", connected: true, mode: "test",
-    apiKey: "payu_test_••••••••2d1e", webhookUrl: "https://jobsonn.com/api/webhooks/payu",
+    apiKey: "payu_test_••••••••2d1e", webhookUrl: "https://jobson.id/api/webhooks/payu",
     successRate: 96.8, lastTransaction: "TTX-2024-5004 (₹3.2L)", totalProcessed: 2, totalVolume: 920000,
     color: "oklch(0.55 0.18 145)", supportedMethods: ["UPI", "Cards", "EMI"],
   },
@@ -326,7 +326,7 @@ function GatewayConfigForm({ gateway, state }: { gateway: Gateway; state: { conn
           <Input value={gateway.webhookUrl} readOnly className="font-mono text-xs" />
         </Field>
         <Field label="Merchant ID">
-          <Input defaultValue={gateway.id === "razorpay" ? "JOBSONN_PVT_LTD" : gateway.id === "stripe" ? "acct_1JobsonnXyz" : "—"} className="font-mono text-xs" />
+          <Input defaultValue={gateway.id === "razorpay" ? "JOBSON_ID_PVT_LTD" : gateway.id === "stripe" ? "acct_1jobson.idXyz" : "—"} className="font-mono text-xs" />
         </Field>
         <Field label="Supported Methods">
           <div className="flex flex-wrap gap-1 pt-1">

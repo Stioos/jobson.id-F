@@ -176,7 +176,7 @@ export function RecruiterMarketing() {
               >
                 <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand/10 text-brand"><FileText className="h-4 w-4" /></div>
                 <div className="min-w-0">
-                  <div className="font-medium text-sm">JOBSONN Brand Guide v3</div>
+                  <div className="font-medium text-sm">jobson.id Brand Guide v3</div>
                   <div className="text-xs text-muted-foreground">Logos, colors, fonts</div>
                 </div>
                 <ExternalLink className="h-4 w-4 text-muted-foreground ml-auto" />

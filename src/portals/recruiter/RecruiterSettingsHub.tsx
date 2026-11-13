@@ -20,10 +20,10 @@ import {
 } from "@/portals/_settings-support-shared";
 
 const PRIVACY_INITIAL = [
-  { key: "agency_public", label: "Public agency profile", description: "Showcase your agency to potential clients on JOBSONN.", enabled: true },
+  { key: "agency_public", label: "Public agency profile", description: "Showcase your agency to potential clients on jobson.id.", enabled: true },
   { key: "candidate_visibility", label: "Candidate visibility", description: "Allow clients to view candidate profiles you submit.", enabled: true },
   { key: "commission_transparency", label: "Commission transparency", description: "Share commission splits with sub-vendors and partners.", enabled: false },
-  { key: "analytics", label: "Usage analytics", description: "Help improve JOBSONN with anonymous usage data.", enabled: true },
+  { key: "analytics", label: "Usage analytics", description: "Help improve jobson.id with anonymous usage data.", enabled: true },
 ];
 
 const INTEGRATIONS = [

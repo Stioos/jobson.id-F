@@ -43,7 +43,7 @@ const STORIES: Story[] = [
     city: "Chennai",
     state: "Tamil Nadu",
     logo: "CT",
-    quote: "JOBSONN gave us a turnkey training business — curriculum, LMS, certification, and a steady flow of JOBSONN-generated leads. We scaled from 1 centre to 2 in 14 months.",
+    quote: "jobson.id gave us a turnkey training business — curriculum, LMS, certification, and a steady flow of jobson.id-generated leads. We scaled from 1 centre to 2 in 14 months.",
     rating: 4.7,
     results: [
       { label: "Students enrolled", value: "1,240" },
@@ -77,7 +77,7 @@ const STORIES: Story[] = [
     city: "Hyderabad",
     state: "Telangana",
     logo: "MI",
-    quote: "As a Service Partner, we run cloud migration and DevOps retainers for JOBSONN's enterprise clients. The engagement pipeline stays full and SLAs are transparent.",
+    quote: "As a Service Partner, we run cloud migration and DevOps retainers for jobson.id's enterprise clients. The engagement pipeline stays full and SLAs are transparent.",
     rating: 4.5,
     results: [
       { label: "Active engagements", value: "6" },
@@ -94,7 +94,7 @@ const STORIES: Story[] = [
     city: "Pune",
     state: "Maharashtra",
     logo: "NT",
-    quote: "We deploy JOBSONN-powered ERP/CRM solutions for mid-market clients. The OEM arrangement means we co-brand and earn on every license — predictable recurring revenue.",
+    quote: "We deploy jobson.id-powered ERP/CRM solutions for mid-market clients. The OEM arrangement means we co-brand and earn on every license — predictable recurring revenue.",
     rating: 4.8,
     results: [
       { label: "Enterprise clients", value: "12" },
@@ -111,7 +111,7 @@ const STORIES: Story[] = [
     city: "Bengaluru",
     state: "Karnataka",
     logo: "CA",
-    quote: "JOBSONN's GPU credits let us train document AI models we couldn't have afforded otherwise. The co-sell motion put us in front of enterprise buyers in 90 days.",
+    quote: "jobson.id's GPU credits let us train document AI models we couldn't have afforded otherwise. The co-sell motion put us in front of enterprise buyers in 90 days.",
     rating: 4.6,
     results: [
       { label: "AI products shipped", value: "4" },
@@ -128,7 +128,7 @@ const STORIES: Story[] = [
     city: "Chennai",
     state: "Tamil Nadu",
     logo: "HB",
-    quote: "JOBSONN job orders are the cleanest pipeline we've ever worked. Hotlists, submissions, and onboarding are all in one workspace — and we get paid within 7 days of placement.",
+    quote: "jobson.id job orders are the cleanest pipeline we've ever worked. Hotlists, submissions, and onboarding are all in one workspace — and we get paid within 7 days of placement.",
     rating: 4.5,
     results: [
       { label: "Placements (YTD)", value: "47" },
@@ -145,7 +145,7 @@ const STORIES: Story[] = [
     city: "Bengaluru",
     state: "Karnataka",
     logo: "BS",
-    quote: "We joined as a starter-tier centre 9 months ago. JOBSONN's marketing kit and lead-gen support meant we hit break-even by month 4 — much faster than we expected.",
+    quote: "We joined as a starter-tier centre 9 months ago. jobson.id's marketing kit and lead-gen support meant we hit break-even by month 4 — much faster than we expected.",
     rating: 4.4,
     results: [
       { label: "Students enrolled", value: "680" },
@@ -162,7 +162,7 @@ const STORIES: Story[] = [
     city: "Mumbai",
     state: "Maharashtra",
     logo: "TF",
-    quote: "We were a 2-person boutique when we joined. JOBSONN's RPO-style mandates let us scale to 8 recruiters in 18 months — without losing our boutique culture.",
+    quote: "We were a 2-person boutique when we joined. jobson.id's RPO-style mandates let us scale to 8 recruiters in 18 months — without losing our boutique culture.",
     rating: 4.6,
     results: [
       { label: "Recruiters", value: "8" },
@@ -209,7 +209,7 @@ export function PublicPartnerStories() {
             Real partners. <span className="text-brand">Real outcomes.</span>
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground sm:text-lg">
-            Hear from the operators, educators, integrators, and recruiters building on JOBSONN — across every model,
+            Hear from the operators, educators, integrators, and recruiters building on jobson.id — across every model,
             every region, every stage of growth.
           </p>
         </div>
@@ -306,7 +306,7 @@ export function PublicPartnerStories() {
               <Sparkles className="mx-auto h-8 w-8 text-brand" />
               <h2 className="mt-3 text-2xl font-bold tracking-tight sm:text-3xl">Become a success story</h2>
               <p className="mx-auto mt-3 max-w-xl text-sm text-muted-foreground">
-                Your journey starts with one application. Join 120+ partners earning with JOBSONN across India.
+                Your journey starts with one application. Join 120+ partners earning with jobson.id across India.
               </p>
               <div className="mt-6 flex flex-wrap justify-center gap-3">
                 <Button size="lg" onClick={() => navigate("public", "partner-apply")} className="gap-1.5">

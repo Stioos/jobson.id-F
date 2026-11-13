@@ -114,7 +114,7 @@ export function PublicSalaryInsights() {
         </div>
         <h1 className="mt-3 text-2xl font-bold tracking-tight sm:text-3xl">Salary insights</h1>
         <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
-          Explore compensation bands across roles based on active JOBSONN job postings.
+          Explore compensation bands across roles based on active jobson.id job postings.
           Bands shown are derived from posted salary ranges — not from self-reported candidate data.
         </p>
       </div>
@@ -290,7 +290,7 @@ export function PublicSalaryInsights() {
                 <div className="text-sm">
                   <div className="font-medium">How we calculate</div>
                   <p className="mt-1 text-xs text-muted-foreground">
-                    Bands are derived from <strong>posted salary ranges</strong> on active JOBSONN jobs — not from candidate-reported
+                    Bands are derived from <strong>posted salary ranges</strong> on active jobson.id jobs — not from candidate-reported
                     compensation. Use as a directional guide only.
                   </p>
                   <Tabs defaultValue="what" className="mt-3">

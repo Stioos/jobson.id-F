@@ -53,7 +53,7 @@ export function SuperAdminStatusPage() {
         title="System Status"
         description="Public-facing status page: service uptime, scheduled maintenance, and incident history."
         icon={<Icon name="Activity" className="h-6 w-6" />}
-        actions={[{ label: "View Public Page", variant: "outline", onClick: () => toast.info("Opening status.jobsonn.com") }]}
+        actions={[{ label: "View Public Page", variant: "outline", onClick: () => toast.info("Opening status.jobson.id") }]}
       />
 
       <div className="grid grid-cols-2 gap-3 md:grid-cols-4 sm:gap-4">
